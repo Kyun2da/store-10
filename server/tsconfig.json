@@ -9,6 +9,9 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "sourceMap": true,
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "typeRoots": ["src/types"]
   },
   "include": ["src/**/*"],

@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "munbanggu Server",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "store-10",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "4.3.5",
+    "@types/cors": "2.8.12",
+    "@types/express": "4.17.13",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "16.4.13"
+  },
+  "dependencies": {
+    "cors": "2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "10.0.0",
+    "express": "4.17.1",
+    "morgan": "^1.10.0",
+    "mysql2": "2.3.0",
+    "nodemon": "^2.0.12",
+    "reflect-metadata": "0.1.13",
+    "ts-node": "10.2.0",
+    "typeorm": "0.2.36"
+  }
+}

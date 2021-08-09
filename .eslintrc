@@ -4,11 +4,13 @@
     "es2021": true,
     "node": true
   },
-  "plugins": ["@typescript-eslint", "prettier"],
-  "extends": ["eslint:recommended", 
-    "plugin:@typescript-eslint/recommended", 
-    "prettier", 
-    "prettier/@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 12,

@@ -1,5 +1,5 @@
 import express from 'express';
-import loaders from './loaders';
+import loaders from '@/loaders';
 
 import env from '@/config';
 

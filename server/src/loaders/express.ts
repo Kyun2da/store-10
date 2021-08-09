@@ -1,7 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import apiRouter from '../api/routes';
+import apiRouter from '@/api/routes';
 
 export default ({ app }: { app: Application }) => {
   app.use(express.json());

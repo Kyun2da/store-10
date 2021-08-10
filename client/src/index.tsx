@@ -1,12 +1,15 @@
 import App from '@/layouts/App';
 import React from 'react';
-import { render } from 'react-dom';
+import { hydrate } from 'react-dom';
 import GlobalStyle from './styles/globalStyle';
+import { Router } from '@/core/router';
 
-render(
+hydrate(
   <>
     <GlobalStyle />
-    <App />
+    <Router>
+      <App />
+    </Router>
   </>,
   document.getElementById('app')
 );

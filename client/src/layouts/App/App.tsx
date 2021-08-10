@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from '@/Components/Header';
+import Header from '@/components/Header';
 import { Route } from '@/core/Router';
 import Main from '@/pages/Main';
 import Detail from '@/pages/Detail';
-import Banner from '@/Components/Banner';
-import Footer from '@/Components/Footer';
+import Banner from '@/components/Banner';
+import Footer from '@/components/Footer';
 
 const App = () => {
   return (

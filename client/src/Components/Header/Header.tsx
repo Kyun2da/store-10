@@ -1,4 +1,4 @@
-import { Link } from '@/core/router';
+import { Link } from '@/core/Router';
 import React from 'react';
 import { StyledHeader } from './styles';
 

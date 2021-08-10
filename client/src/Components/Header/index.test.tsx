@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Header from './index';
+import Header from '.';
 
 describe('<Header />', () => {
   it('renders header', () => {

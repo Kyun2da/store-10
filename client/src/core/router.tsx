@@ -1,4 +1,4 @@
-import React, { useState, useContext, MouseEventHandler } from 'react';
+import React, { useState, useContext } from 'react';
 
 interface IRouter {
   children?: React.ReactElement;
@@ -17,7 +17,7 @@ interface IRouterContext {
 }
 
 interface ILink {
-  children: React.ReactElement;
+  children?: React.ReactElement | string;
   to: string;
 }
 

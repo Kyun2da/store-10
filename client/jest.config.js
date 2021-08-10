@@ -1,3 +1,3 @@
 export default {
-  setupFilesAfterEnv: ["./src/setupTest.js"]
+  setupFilesAfterEnv: ['./src/setupTest.js'],
 };

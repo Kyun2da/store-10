@@ -10,6 +10,7 @@ module.exports = {
     'storybook-addon-jsx',
     'storybook-dark-mode',
     'storybook-addon-designs',
+    'storybook-addon-styled-component-theme/dist/preset',
   ],
   webpackFinal: async (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname, '../src');

@@ -2,13 +2,11 @@ import React from 'react';
 import * as S from './styles';
 
 interface ITableProps {
-  headers: Iheader[];
+  headers: {
+    name: string;
+    value: string;
+  }[];
   items: Record<string, string | number>[];
-}
-
-interface Iheader {
-  name: string;
-  value: string;
 }
 
 const Table = ({ headers, items }: ITableProps) => {

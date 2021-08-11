@@ -12,7 +12,7 @@
     "start:server": "ts-node ./src/server/server.ts",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=2ca951af1de1"
+    "chromatic": "chromatic --project-token=2ca951af1de1"
   },
   "author": "",
   "license": "MIT",

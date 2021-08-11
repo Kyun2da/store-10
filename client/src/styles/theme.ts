@@ -40,6 +40,7 @@ const fontWeight = {
 // 추가적으로 styled.d.ts 파일에도 타입 추가해주세요
 // ex. 아마 주로 색깔 관련...?
 export const lightMode: DefaultTheme = {
+  name: 'light-mode',
   color: {
     'text-color': '#1e2222',
     'body': '#f1f1f1',
@@ -58,6 +59,7 @@ export const lightMode: DefaultTheme = {
 };
 
 export const darkMode: DefaultTheme = {
+  name: 'dark-mode',
   color: {
     'text-color': '#fcfcfc',
     'body': '#3c3e3e',

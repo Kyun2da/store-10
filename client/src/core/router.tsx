@@ -142,8 +142,6 @@ export const Link = ({ to, children }: ILink) => {
 export const NavLink = ({ to, children, activeClassName }: INavLink) => {
   const { currentPath, historyPush } = useHistory();
 
-  console.log(currentPath, to);
-
   const onClick = (e: React.MouseEvent) => {
     e.preventDefault();
     historyPush(to);

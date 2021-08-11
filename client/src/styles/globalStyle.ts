@@ -1,10 +1,16 @@
 import { createGlobalStyle, css } from 'styled-components';
 import { normalize } from 'styled-normalize';
 
+const PC_RESOLUTION = 1050;
+const TABLET_RESOLUTION = 768;
+const PHONE_RESOLUTION = 425;
+
+const customMediaQuert = (screen: number) => `@media (min-width: ${screen}px)`;
+
 const mediaScreen = {
-  pc: `@media (min-width: 1050px)`, // 1050px 해상도 위에서만 디스플레이
-  tablet: `@media (min-width: 768px)`, // 768px 해상도 위에서만 디스플레이
-  phone: `@media (min-width: 425px)`, // 425px 해상도 위에서만 디스플레이
+  pc: customMediaQuert(PC_RESOLUTION), // 1050px 해상도 위에서만 디스플레이
+  tablet: customMediaQuert(TABLET_RESOLUTION), // 768px 해상도 위에서만 디스플레이
+  phone: customMediaQuert(PHONE_RESOLUTION), // 425px 해상도 위에서만 디스플레이
 };
 
 const GlobalStyle = createGlobalStyle`

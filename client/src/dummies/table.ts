@@ -1,4 +1,4 @@
-const headers = [
+export const headers = [
   { name: '날짜/주문번호', value: 'date' },
   { name: '상품명', value: 'name' },
   { name: '가격', value: 'price' },
@@ -7,7 +7,7 @@ const headers = [
   { name: '확인/리뷰', value: 'review' },
 ];
 
-const items = [
+export const items = [
   {
     id: 1,
     date: '2021.08.21',

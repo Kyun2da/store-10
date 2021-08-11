@@ -1,0 +1,76 @@
+import { css, DefaultTheme } from 'styled-components';
+
+const fontSize = {
+  s: css`
+    font-size: 1.25rem;
+  `,
+  m: css`
+    font-size: 1.65rem;
+  `,
+  l: css`
+    font-size: 2.15rem;
+  `,
+  xl: css`
+    font-size: 2.75rem;
+  `,
+  xxl: css`
+    font-size: 3.25rem;
+  `,
+};
+
+const fontWeight = {
+  s: css`
+    font-weight: 100;
+  `,
+  m: css`
+    font-weight: 300;
+  `,
+  l: css`
+    font-weight: 500;
+  `,
+  xl: css`
+    font-weight: 700;
+  `,
+  xxl: css`
+    font-weight: 900;
+  `,
+};
+
+// 다크모드-라이트모드에 영향 받는 속성은 이곳에 직접 넣고
+// 추가적으로 styled.d.ts 파일에도 타입 추가해주세요
+// ex. 아마 주로 색깔 관련...?
+export const lightMode: DefaultTheme = {
+  color: {
+    'text-color': '#1e2222',
+    'body': '#f1f1f1',
+    'label': '#8b9999',
+    'placeholder': '#c1c5c5',
+    'line': '#929696',
+    'background': '#f5f5f5',
+    'off-white': '#fcfcfc',
+    'primary': '#2ac1bc',
+    'primary2': '#a0e1e0',
+    'primary3': '#219a95',
+    'error': '#f45452',
+  },
+  fontSize,
+  fontWeight,
+};
+
+export const darkMode: DefaultTheme = {
+  color: {
+    'text-color': '#fcfcfc',
+    'body': '#3c3e3e',
+    'label': '#f5f5f5',
+    'placeholder': ' #f5f5f5',
+    'line': '#ccd3d3',
+    'background': '#1e2222',
+    'off-white': '#fcfcfc',
+    'primary': '#2ac1bc',
+    'primary2': '#a0e1e0',
+    'primary3': '#219a95',
+    'error': '#f45452',
+  },
+  fontSize,
+  fontWeight,
+};

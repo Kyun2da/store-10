@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyledFooter } from './styles';
+import * as S from './styles';
 
 const Footer = () => {
-  return <StyledFooter>이곳은 푸터의 영역</StyledFooter>;
+  return <S.Footer>이곳은 푸터의 영역</S.Footer>;
 };
 
 export default Footer;

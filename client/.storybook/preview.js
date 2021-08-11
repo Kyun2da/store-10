@@ -7,8 +7,8 @@ const { ThemeProvider } = require('styled-components');
 const { lightMode, darkMode } = require('../src/styles/theme');
 
 const themes = [lightMode, darkMode];
-addDecorator(withThemesProvider(themes), ThemeProvider);
 addDecorator(jsxDecorator);
+addDecorator(withThemesProvider(themes), ThemeProvider);
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },

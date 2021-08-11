@@ -1,8 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, {
+  useState,
+  useContext,
+  useCallback,
+  useEffect,
+  useMemo,
+} from 'react';
 
 interface IRouter {
-  children?: React.ReactElement;
+  children: React.ReactElement | React.ReactElement[];
   initialPath?: string;
+}
+
+interface ISwitch {
+  children: React.ReactElement | React.ReactElement[];
+  currentPath: string;
 }
 
 interface IRoute {
@@ -11,9 +22,18 @@ interface IRoute {
   props?: Record<string, unknown>;
 }
 
+interface Route {
+  props: IRoute;
+}
+
 interface IRouterContext {
   currentPath: string;
   historyPush: (pathname: string, data?: Record<string, unknown>) => void;
+}
+
+interface IRouteContext {
+  params: Record<string, unknown>;
+  component: React.FunctionComponent | null;
 }
 
 interface ILink {
@@ -21,34 +41,77 @@ interface ILink {
   to: string;
 }
 
+interface INavLink extends ILink {
+  activeClassName: string;
+}
+
+interface IMatches {
+  route: React.FunctionComponent;
+  params: Record<string, unknown>;
+}
+
 const RouterContext = React.createContext<IRouterContext>({
   currentPath: '',
   historyPush: () => {},
 });
 
+const RouteContext = React.createContext<IRouteContext>({
+  params: {},
+  component: null,
+});
+
 export const Router = ({ children, initialPath }: IRouter) => {
-  const [currentPath, setCurrentPAth] = useState(
+  const [currentPath, setCurrentPath] = useState(
     initialPath || window.location.pathname
   );
 
-  const historyPush = (pathname: string, data = {}) => {
+  const historyPush = useCallback((pathname: string, data = {}) => {
     window.history.pushState(data, pathname, window.location.origin + pathname);
-    setCurrentPAth(pathname);
-  };
+    setCurrentPath(pathname);
+  }, []);
+
+  const handlePathChange = useCallback(() => {
+    setCurrentPath(window.location.pathname);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('popstate', handlePathChange);
+    return () => window.removeEventListener('popstate', handlePathChange);
+  }, [historyPush]);
+
+  const value = useMemo(() => {
+    return { currentPath, historyPush };
+  }, [currentPath, setCurrentPath]);
 
   return (
-    <RouterContext.Provider value={{ currentPath, historyPush }}>
-      {children}
-    </RouterContext.Provider>
+    <RouterContext.Provider value={value}>{children}</RouterContext.Provider>
   );
 };
 
-export const Route = (props: IRoute) => {
+export const Switch = ({ children }: IRouter) => {
   const { currentPath } = useHistory();
+  const match = useMemo(
+    () => matchRoutes({ children, currentPath }),
+    [children, currentPath]
+  );
 
-  //match()
-  if (currentPath === props.path) {
-    return React.createElement(props.component, props.props);
+  const value = useMemo(() => {
+    return { params: match.params, component: match.route };
+  }, [match]);
+
+  if (!match) return null;
+
+  return (
+    <RouteContext.Provider value={value}>{children}</RouteContext.Provider>
+  );
+};
+
+export const Route = ({ path, component, props }: IRoute) => {
+  const { currentPath } = useHistory();
+  const params = useParams();
+
+  if (currentPath === path || component === params.component) {
+    return React.createElement(component, props);
   } else {
     return null;
   }
@@ -56,6 +119,10 @@ export const Route = (props: IRoute) => {
 
 export const useHistory = (): IRouterContext => {
   return useContext<IRouterContext>(RouterContext);
+};
+
+export const useParams = () => {
+  return useContext<IRouteContext>(RouteContext);
 };
 
 export const Link = ({ to, children }: ILink) => {
@@ -70,4 +137,60 @@ export const Link = ({ to, children }: ILink) => {
       {children}
     </a>
   );
+};
+
+export const NavLink = ({ to, children, activeClassName }: INavLink) => {
+  const { currentPath, historyPush } = useHistory();
+
+  console.log(currentPath, to);
+
+  const onClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    historyPush(to);
+  };
+  return (
+    <a
+      href={to}
+      onClick={onClick}
+      className={currentPath === to ? activeClassName : ''}
+    >
+      {children}
+    </a>
+  );
+};
+
+const extractPath = (path: string) => {
+  const keys: string[] = [];
+  path = path.replace(/:(\w+)/g, (_, key: string) => {
+    if (key) keys.push(key);
+    return '([^\\/]+)';
+  });
+
+  const regex = new RegExp(`^(${path})`, 'i');
+  return { regex, keys };
+};
+
+const matchRoutes = ({ children, currentPath }: ISwitch) => {
+  const matches: IMatches[] = [];
+
+  React.Children.forEach(children, (route: Route) => {
+    const { regex, keys } = extractPath(route.props.path);
+    const match = currentPath.match(regex);
+
+    if (match) {
+      const params = match.slice(2);
+      matches.push({
+        route: route.props.component,
+        params: keys.reduce(
+          (collection: Record<string, unknown>, param, index) => {
+            collection[param] = params[index];
+            return collection;
+          },
+          {}
+        ),
+      });
+    }
+  });
+
+  return matches[0];
 };

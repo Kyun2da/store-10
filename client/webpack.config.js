@@ -1,13 +1,11 @@
-import path from 'path';
-import dotenv from 'dotenv-webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import webpack from 'webpack';
+const path = require('path');
+const dotenv = require('dotenv-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const webpack = require('webpack');
 
-const __dirname = path.resolve();
-
-export default (env) => {
+module.exports = (env) => {
   return {
     entry: './src/index.tsx',
     module: {

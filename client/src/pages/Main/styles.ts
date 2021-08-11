@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const Main = styled.div`
-  font-size: 1.5rem;
-  background-color: #fafafa;
+  margin-top: 3rem;
+
+  h1.product-title {
+    color: ${({ theme }) => theme.color['text-color']};
+    ${({ theme }) => theme.fontSize.m};
+    margin: 2rem 0;
+  }
 `;

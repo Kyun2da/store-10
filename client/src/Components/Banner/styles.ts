@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Banner = styled.div`
-  padding: 8rem;
+  padding: 2rem;
   text-align: center;
   ${({ theme }) => theme.fontSize.xxl};
   ${({ theme }) => theme.fontWeight.s};

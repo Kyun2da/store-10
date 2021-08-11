@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import NavLinks from '@/pages/NavLinks';
 import { ThemeProvider } from 'styled-components';
 import { lightMode, darkMode } from '@/styles/theme';
+import * as S from './styles';
 
 const App = () => {
   const [theme, setTheme] = useState('light-mode');
@@ -18,7 +19,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={themeMode}>
-      <div>
+      <S.RootWrapper>
         <button onClick={toggleMode}>모드전환 버튼</button>
         <Header />
         <Banner />
@@ -28,7 +29,7 @@ const App = () => {
           <Route path="/navlink" component={NavLinks} />
         </Switch>
         <Footer />
-      </div>
+      </S.RootWrapper>
     </ThemeProvider>
   );
 };

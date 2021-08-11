@@ -14,6 +14,19 @@ module.exports = {
   ],
   webpackFinal: async (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname, '../src');
+
+    const fileLoaderRule = config.module.rules.find((rule) => {
+      const inRule = Array.isArray(rule.test) ? rule.test[0] : rule.test;
+      return inRule.test('.svg');
+    });
+    fileLoaderRule.exclude = /\.svg$/;
+
+    config.module.rules.push({
+      test: /\.svg$/,
+      enforce: 'pre',
+      loader: require.resolve('@svgr/webpack'),
+    });
+
     return config;
   },
 };

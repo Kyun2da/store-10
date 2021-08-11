@@ -2,6 +2,14 @@ import styled from 'styled-components';
 
 export const Banner = styled.div`
   padding: 8rem;
-  font-size: 3rem;
-  background-color: #ededed;
+  text-align: center;
+  ${({ theme }) => theme.fontSize.xxl};
+  ${({ theme }) => theme.fontWeight.s};
+  background-color: ${({ theme }) => theme.color.body};
+  color: ${({ theme }) => theme.color['text-color']};
+  border: 1px solid ${({ theme }) => theme.color.line};
+
+  p {
+    ${({ theme }) => theme.fontSize.m};
+  }
 `;

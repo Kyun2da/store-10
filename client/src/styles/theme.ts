@@ -1,6 +1,9 @@
 import { css, DefaultTheme } from 'styled-components';
 
 const fontSize = {
+  xs: css`
+    font-size: 1.05rem;
+  `,
   s: css`
     font-size: 1.25rem;
   `,

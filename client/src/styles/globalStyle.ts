@@ -1,5 +1,5 @@
 import { createGlobalStyle, css } from 'styled-components';
-import { normalize } from 'styled-normalize';
+import reset from 'styled-reset';
 
 const PC_RESOLUTION = 1050;
 const TABLET_RESOLUTION = 768;
@@ -14,7 +14,7 @@ const mediaScreen = {
 };
 
 const GlobalStyle = createGlobalStyle`
-  ${normalize}
+  ${reset}
 
   body {
     font-size: 10px;
@@ -28,6 +28,10 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  li {
+    list-style: none;
   }
 
   .pc_resolution {

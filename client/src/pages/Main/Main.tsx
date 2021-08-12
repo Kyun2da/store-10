@@ -1,7 +1,8 @@
 import React from 'react';
-import { stationary } from '@/assets';
 import { useHistory } from '@/core/Router';
 import * as S from './styles';
+import Card from '@/components/Card';
+import CardWrapper from '@/components/CardWrapper';
 
 const Main = () => {
   const history = useHistory();
@@ -9,9 +10,23 @@ const Main = () => {
 
   return (
     <S.Main>
-      <h1>이곳은 메인 영역</h1>
-      <p>React Frontend boilerplate</p>
-      <img src={stationary} alt="default" />
+      <h1 className="product-title">히트상품 (Props: Grid Column 4)</h1>
+      <CardWrapper col={4}>
+        <Card bgColor="primary" discount={50} />
+        <Card bgColor="primary" />
+        <Card bgColor="primary" />
+        <Card bgColor="primary" discount={10} />
+        <Card bgColor="primary" />
+      </CardWrapper>
+
+      <h1 className="product-title">베스트상품 (Props: Grid Column 3)</h1>
+      <CardWrapper col={3}>
+        <Card bgColor="error" />
+        <Card bgColor="error" />
+        <Card bgColor="error" />
+        <Card bgColor="error" discount={25} />
+        <Card bgColor="error" />
+      </CardWrapper>
     </S.Main>
   );
 };

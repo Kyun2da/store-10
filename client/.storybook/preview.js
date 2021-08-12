@@ -1,11 +1,9 @@
 const { addDecorator } = require('@storybook/react');
 const { jsxDecorator } = require('storybook-addon-jsx');
-const {
-  withThemesProvider,
-} = require('storybook-addon-styled-component-theme');
-const { ThemeProvider } = require('styled-components');
+import { withThemesProvider } from 'themeprovider-storybook';
 const { lightMode, darkMode } = require('../src/styles/theme');
 const GlobalStyle = require('../src/styles/globalStyle').default;
+const { ThemeProvider } = require('styled-components');
 
 const themes = [lightMode, darkMode];
 addDecorator(jsxDecorator);

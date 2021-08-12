@@ -36,6 +36,18 @@ export const BottomBar = styled.div`
   background-color: rgba(255, 255, 255, 0.75);
 `;
 
+export const NameTag = styled.div`
+  position: absolute;
+  user-select: none;
+  z-index: 50;
+  top: 0.65rem;
+  right: 0.65rem;
+  padding: 0.4rem;
+  ${({ theme }) => theme.fontSize.xs}
+  color: #fff;
+  background-color: ${({ theme }) => theme.color.error};
+`;
+
 export const ThumbnailWrapper = styled.div`
   position: relative;
   overflow: hidden;

@@ -4,15 +4,17 @@ import HeartButton from '@/assets/like.svg';
 import ShoppingCart from '@/assets/shoppingCart.svg';
 
 interface CardProps {
-  bgColor: 'error' | 'primary';
+  bgColor: 'error' | 'primary'; // category 식으로 리스트화 (enum 등..) 필요
+  discount?: number;
 }
 
-const Card: VFC<CardProps> = ({ bgColor }) => {
+const Card: VFC<CardProps> = ({ bgColor, discount }) => {
   // 나중에 데이터를 가져와서 넣어주는 식으로 바꾸어 봅시다
   return (
     <S.Card>
       <S.Liner bgColor={bgColor} />
       <S.ThumbnailWrapper>
+        {discount && <S.NameTag>{discount}%</S.NameTag>}
         <img
           src="https://lh3.googleusercontent.com/proxy/gbPVfU7suICYMcyEoL5krnKmLW5RgdO_M5Qz4I2QF_mNcHu2r84djyTRwnu9JNMtxr3mfOUcgp9THnAOw6agbRVqXgHhk7BbwYIJw1C4umc1mS2EF_VnosEZqco"
           alt="상품 섬네일 이미지"

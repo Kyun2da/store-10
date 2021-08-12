@@ -19,3 +19,9 @@ export const Another = Template.bind({});
 Another.args = {
   bgColor: 'error',
 };
+
+export const Discount = Template.bind({});
+Discount.args = {
+  bgColor: 'primary',
+  discount: 50,
+};

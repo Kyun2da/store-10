@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
 export const RootWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background-color: ${({ theme }) => theme.color.body};
-`;
-
-export const Container = styled.div`
-  max-width: 1050px;
-  margin: auto;
 `;

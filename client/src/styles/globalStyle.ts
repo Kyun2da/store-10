@@ -5,24 +5,34 @@ const PC_RESOLUTION = 1050;
 const TABLET_RESOLUTION = 768;
 const PHONE_RESOLUTION = 425;
 
-const customMediaQuert = (screen: number) => `@media (min-width: ${screen}px)`;
+const customMediaQuery = (screen: number) => `@media (min-width: ${screen}px)`;
 
 const mediaScreen = {
-  pc: customMediaQuert(PC_RESOLUTION), // 1050px 해상도 위에서만 디스플레이
-  tablet: customMediaQuert(TABLET_RESOLUTION), // 768px 해상도 위에서만 디스플레이
-  phone: customMediaQuert(PHONE_RESOLUTION), // 425px 해상도 위에서만 디스플레이
+  pc: customMediaQuery(PC_RESOLUTION), // 1050px 해상도 위에서만 디스플레이
+  tablet: customMediaQuery(TABLET_RESOLUTION), // 768px 해상도 위에서만 디스플레이
+  phone: customMediaQuery(PHONE_RESOLUTION), // 425px 해상도 위에서만 디스플레이
+};
+
+export const media = {
+  pc: PC_RESOLUTION,
+  tablet: TABLET_RESOLUTION,
+  phone: PHONE_RESOLUTION,
 };
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
-  body {
+  html,body {
     font-size: 10px;
     font-family: 'Noto Sans KR', sans-serif;
   }
 
   * {
     box-sizing: border-box;
+  }
+
+  input:focus {
+    outline : none;
   }
 
   a {

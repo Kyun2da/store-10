@@ -1,7 +1,9 @@
 import React, { VFC } from 'react';
 import * as S from './styles';
-import HeartButton from '@/assets/like.svg';
-import ShoppingCart from '@/assets/shoppingCart.svg';
+import {
+  HeartSVG as HeartButton,
+  CartSVG as ShoppingCart,
+} from '@/assets/svgs';
 
 interface CardProps {
   bgColor: 'error' | 'primary'; // category 식으로 리스트화 (enum 등..) 필요
@@ -30,7 +32,7 @@ const Card: VFC<CardProps> = ({ bgColor, discount }) => {
       </S.ThumbnailWrapper>
       <S.ProductDetails>
         <h1 className="title">반반휴지. 물반휴지반</h1>
-        <p className="price-tag">1,500원</p>
+        <span className="price-tag">1,500원</span>
       </S.ProductDetails>
     </S.Card>
   );

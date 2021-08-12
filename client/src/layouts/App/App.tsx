@@ -12,6 +12,8 @@ import { lightMode, darkMode } from '@/styles/theme';
 import * as S from './styles';
 import Login from '@/pages/Login';
 import NotFound from '@/components/NotFound';
+import SelectAuth from '@/pages/SelectAuth';
+import Approval from '@/pages/Approval';
 
 const App = () => {
   const [theme, setTheme] = useState('light-mode');
@@ -27,6 +29,8 @@ const App = () => {
         <Header />
         <Switch>
           <Route path="/main" component={Main} />
+          <Route path="/select_auth" component={SelectAuth} />
+          <Route path="/approval" component={Approval} />
           <Route path="/login" component={Login} />
           <Route path="/detail/:id" component={Detail} />
           <Route path="/navlink" component={NavLinks} />

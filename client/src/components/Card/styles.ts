@@ -33,6 +33,10 @@ export const BottomBar = styled.div`
   bottom: 0;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.75);
+
+  svg {
+    color: #111 !important;
+  }
 `;
 
 export const NameTag = styled.div`

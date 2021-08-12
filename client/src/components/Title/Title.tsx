@@ -1,5 +1,5 @@
 import React from 'react';
-import * as s from './style';
+import * as S from './style';
 
 interface ITitleProps {
   children: React.ReactNode;
@@ -10,17 +10,17 @@ interface ITitleProps {
 const Title = ({ children, level, className }: ITitleProps) => {
   switch (level) {
     case 1:
-      return <s.H1 className={className}>{children}</s.H1>;
+      return <S.H1 className={className}>{children}</S.H1>;
     case 2:
-      return <s.H2 className={className}>{children}</s.H2>;
+      return <S.H2 className={className}>{children}</S.H2>;
     case 3:
-      return <s.H3 className={className}>{children}</s.H3>;
+      return <S.H3 className={className}>{children}</S.H3>;
     case 4:
-      return <s.H4 className={className}>{children}</s.H4>;
+      return <S.H4 className={className}>{children}</S.H4>;
     case 5:
-      return <s.H5 className={className}>{children}</s.H5>;
+      return <S.H5 className={className}>{children}</S.H5>;
     default:
-      return <s.H1 className={className}>{children}</s.H1>;
+      return <S.H1 className={className}>{children}</S.H1>;
   }
 };
 

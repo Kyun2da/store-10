@@ -19,7 +19,7 @@ interface LinerProps {
 
 export const Liner = styled.div<LinerProps>`
   background-color: ${({ theme, bgColor }) => theme.color[bgColor]};
-  height: 0.3rem;
+  height: 0.5rem;
 `;
 
 export const BottomBar = styled.div`

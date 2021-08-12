@@ -17,6 +17,7 @@ declare module 'styled-components' {
       'error': string;
     };
     fontSize: {
+      xs: FlattenSimpleInterpolation;
       s: FlattenSimpleInterpolation;
       m: FlattenSimpleInterpolation;
       l: FlattenSimpleInterpolation;

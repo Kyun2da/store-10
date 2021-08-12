@@ -6,3 +6,6 @@ export { default as CloseSVG } from '@/assets/svgs/close.svg';
 export { default as CartSVG } from '@/assets/svgs/shoppingCart.svg';
 export { default as UserSVG } from '@/assets/svgs/user.svg';
 export { default as StationerySVG } from '@/assets/svgs/stationery.svg';
+export { default as FaxSVG } from '@/assets/svgs/fax.svg';
+export { default as InstagramSVG } from '@/assets/svgs/instagram.svg';
+export { default as EmailSVG } from '@/assets/svgs/email.svg';

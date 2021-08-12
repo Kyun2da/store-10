@@ -1,4 +1,5 @@
 import { css, DefaultTheme } from 'styled-components';
+import { media } from './globalStyle';
 
 const fontSize = {
   xs: css`
@@ -59,6 +60,7 @@ export const lightMode: DefaultTheme = {
   },
   fontSize,
   fontWeight,
+  media,
 };
 
 export const darkMode: DefaultTheme = {
@@ -78,4 +80,5 @@ export const darkMode: DefaultTheme = {
   },
   fontSize,
   fontWeight,
+  media,
 };

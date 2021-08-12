@@ -5,16 +5,16 @@ import * as S from './styles';
 interface IProps {
   label?: string;
   value?: string | number;
-  onChange?: () => void;
-  checked?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
+  checked?: boolean;
 }
 const Checkbox: FC<IProps> = ({
   label,
   onChange,
   value,
-  checked,
   className,
+  checked,
 }) => {
   return (
     <S.Checkbox className={className}>

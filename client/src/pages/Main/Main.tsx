@@ -12,10 +12,10 @@ const Main = () => {
     <S.Main>
       <h1 className="product-title">히트상품 (Props: Grid Column 4)</h1>
       <CardWrapper col={4}>
+        <Card bgColor="primary" discount={50} />
         <Card bgColor="primary" />
         <Card bgColor="primary" />
-        <Card bgColor="primary" />
-        <Card bgColor="primary" />
+        <Card bgColor="primary" discount={10} />
         <Card bgColor="primary" />
       </CardWrapper>
 
@@ -24,7 +24,7 @@ const Main = () => {
         <Card bgColor="error" />
         <Card bgColor="error" />
         <Card bgColor="error" />
-        <Card bgColor="error" />
+        <Card bgColor="error" discount={25} />
         <Card bgColor="error" />
       </CardWrapper>
     </S.Main>

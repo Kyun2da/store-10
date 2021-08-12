@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import SearchSVG from '@/assets/svgs/search.svg';
+import React, { useCallback, useState } from 'react';
+import { SearchSVG } from '@/assets/svgs';
 import * as S from './styles';
 import useRecentSearch from '@/hooks/useRecentSearch';
 
@@ -8,12 +8,18 @@ const Search = () => {
   const [recentItems, setRecentItems] = useRecentSearch();
 
   // 한글 엔터 2번방지
-  const inputKeypressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.code == 'Enter') setRecentItems(searchValue);
-  };
-  const inputHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    setSearchValue(e.currentTarget.value);
-  };
+  const inputKeypressHandler = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.code == 'Enter') setRecentItems(searchValue);
+    },
+    [searchValue]
+  );
+  const inputHandler = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      setSearchValue(e.currentTarget.value);
+    },
+    [searchValue]
+  );
 
   return (
     <S.Search>

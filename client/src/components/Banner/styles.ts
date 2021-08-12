@@ -1,15 +1,36 @@
 import styled from 'styled-components';
 
-export const Banner = styled.div`
-  padding: 2rem;
-  text-align: center;
-  ${({ theme }) => theme.fontSize.xxl};
-  ${({ theme }) => theme.fontWeight.s};
-  background-color: ${({ theme }) => theme.color.body};
-  color: ${({ theme }) => theme.color['text-color']};
-  border: 1px solid ${({ theme }) => theme.color.line};
+export const Carousel = styled.div`
+  ul.control-dots {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+`;
 
-  p {
-    ${({ theme }) => theme.fontSize.m};
+export const Banner = styled.div`
+  width: 100%;
+  height: 25rem;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+interface IIndicator {
+  isSelected: boolean;
+}
+
+export const Indicator = styled.div<IIndicator>`
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  background-color: ${({ theme, isSelected }) =>
+    isSelected ? theme.color.primary : '#fff'};
+
+  &:hover {
+    opacity: 0.85;
   }
 `;

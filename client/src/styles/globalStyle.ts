@@ -22,7 +22,7 @@ export const media = {
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
-  html,body {
+  html, body {
     font-size: 10px;
     font-family: 'Noto Sans KR', sans-serif;
   }
@@ -40,8 +40,10 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
   }
 
-  li {
-    list-style: none;
+  .container {
+    max-width: ${PC_RESOLUTION}px;
+    margin: auto;
+    flex: 1;
   }
 
   .pc_resolution {

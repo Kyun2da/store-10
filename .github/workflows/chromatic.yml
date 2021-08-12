@@ -4,9 +4,13 @@ name: 'Chromatic'
 
 on:
   push:
+    paths:
+      - client/**
     branches:
       - dev
   pull_request:
+    paths:
+      - client/**
     branches:
       - dev
 

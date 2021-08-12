@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import MenuSVG from '@/assets/svgs/menu.svg';
-import UserSVG from '@/assets/svgs/user.svg';
-import CartSVG from '@/assets/svgs/shoppingCart.svg';
-import HeartSVG from '@/assets/svgs/heart.svg';
+import { MenuSVG, UserSVG, CartSVG, HeartSVG } from '@/assets/svgs';
 import * as S from './styles';
 import { Link } from '@/core/Router';
 import Search from './Search';

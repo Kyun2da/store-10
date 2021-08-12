@@ -1,7 +1,9 @@
 import React, { VFC } from 'react';
 import * as S from './styles';
-import HeartButton from '@/assets/svgs/heart.svg';
-import ShoppingCart from '@/assets/svgs/shoppingCart.svg';
+import {
+  HeartSVG as HeartButton,
+  CartSVG as ShoppingCart,
+} from '@/assets/svgs';
 
 interface CardProps {
   bgColor: 'error' | 'primary'; // category 식으로 리스트화 (enum 등..) 필요

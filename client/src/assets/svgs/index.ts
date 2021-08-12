@@ -6,3 +6,6 @@ export { default as CloseSVG } from '@/assets/svgs/close.svg';
 export { default as CartSVG } from '@/assets/svgs/shoppingCart.svg';
 export { default as UserSVG } from '@/assets/svgs/user.svg';
 export { default as StationerySVG } from '@/assets/svgs/stationery.svg';
+export { default as MinusSVG } from '@/assets/svgs/minus.svg';
+export { default as PlusSVG } from '@/assets/svgs/plus.svg';
+export { default as CheckSVG } from '@/assets/svgs/check.svg';

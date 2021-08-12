@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Check from '@/assets/check.svg';
+import { CheckSVG } from '@/assets/svgs';
 import * as S from './styles';
 
 interface IProps {
@@ -7,10 +7,17 @@ interface IProps {
   value?: string | number;
   onChange?: () => void;
   checked?: boolean;
+  className?: string;
 }
-const Checkbox: FC<IProps> = ({ label, onChange, value, checked }) => {
+const Checkbox: FC<IProps> = ({
+  label,
+  onChange,
+  value,
+  checked,
+  className,
+}) => {
   return (
-    <S.Checkbox>
+    <S.Checkbox className={className}>
       <input
         type="checkbox"
         onChange={onChange}
@@ -18,7 +25,7 @@ const Checkbox: FC<IProps> = ({ label, onChange, value, checked }) => {
         checked={checked}
       />
       <span>
-        <Check width={11} height={11} />
+        <CheckSVG width={16} height={16} />
       </span>
       {label}
     </S.Checkbox>

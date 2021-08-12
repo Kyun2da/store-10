@@ -9,3 +9,6 @@ export { default as StationerySVG } from '@/assets/svgs/stationery.svg';
 export { default as MinusSVG } from '@/assets/svgs/minus.svg';
 export { default as PlusSVG } from '@/assets/svgs/plus.svg';
 export { default as CheckSVG } from '@/assets/svgs/check.svg';
+export { default as FaxSVG } from '@/assets/svgs/fax.svg';
+export { default as InstagramSVG } from '@/assets/svgs/instagram.svg';
+export { default as EmailSVG } from '@/assets/svgs/email.svg';

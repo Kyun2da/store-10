@@ -15,6 +15,10 @@ export const HeaderWrapper = styled.header`
     stroke-width: 1.5px;
     cursor: pointer;
     stroke: ${({ theme }) => theme.color['text-color']};
+
+    &.filled {
+      fill: ${({ theme }) => theme.color['text-color']};
+    }
   }
 `;
 

@@ -6,3 +6,11 @@ export const RootWrapper = styled.div`
   min-height: 100vh;
   background-color: ${({ theme }) => theme.color.body};
 `;
+
+export const ToggleButton = styled.button`
+  position: fixed;
+  top: 5rem;
+  right: 1rem;
+  z-index: 9999999;
+  padding: 1rem;
+`;

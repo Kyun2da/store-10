@@ -15,7 +15,7 @@ export const Links = () => {
         <HeartSVG />
       </Link>
       <Link to="/login">
-        <CartSVG />
+        <CartSVG className="filled" />
       </Link>
     </>
   );

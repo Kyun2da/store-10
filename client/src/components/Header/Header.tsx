@@ -1,19 +1,47 @@
-import { Link, NavLink } from '@/core/Router';
-import React from 'react';
+import React, { useState } from 'react';
+import MenuSVG from '@/assets/svgs/menu.svg';
+import UserSVG from '@/assets/svgs/user.svg';
+import CartSVG from '@/assets/svgs/shoppingCart.svg';
+import HeartSVG from '@/assets/svgs/heart.svg';
 import * as S from './styles';
+import { Link } from '@/core/Router';
+import Search from './Search';
+import Sidebar from './Sidebar';
+
+export const Links = () => {
+  return (
+    <>
+      <Link to="login">
+        <UserSVG />
+      </Link>
+      <Link to="login">
+        <HeartSVG />
+      </Link>
+      <Link to="login">
+        <CartSVG />
+      </Link>
+    </>
+  );
+};
 
 const Header = () => {
+  const [sideBarIsOpen, setSideBarIsOpen] = useState(false);
   return (
-    <S.Header>
-      이것은 헤더헤더
-      <S.FlexBox>
-        <Link to="/main">메인</Link>
-        <Link to="/detail/3">디테일</Link>
-        <NavLink to="/navlink" activeClassName="on">
-          NavLink 테스트
-        </NavLink>
-      </S.FlexBox>
-    </S.Header>
+    <S.HeaderWrapper>
+      <Sidebar isOpen={sideBarIsOpen} setIsOpen={setSideBarIsOpen} />
+      <S.Header>
+        <S.Menu>
+          <S.MenuButton onClick={() => setSideBarIsOpen(!sideBarIsOpen)}>
+            <MenuSVG />
+          </S.MenuButton>
+          <S.Logo>슑과잌붸흐벤</S.Logo>
+        </S.Menu>
+        <Search />
+        <S.StateUl className="tablet_resolution">
+          <Links />
+        </S.StateUl>
+      </S.Header>
+    </S.HeaderWrapper>
   );
 };
 

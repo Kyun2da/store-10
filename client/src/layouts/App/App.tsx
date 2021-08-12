@@ -23,11 +23,13 @@ const App = () => {
         <button onClick={toggleMode}>모드전환 버튼</button>
         <Header />
         <Banner />
-        <Switch>
-          <Route path="/main" component={Main} />
-          <Route path="/detail/:id" component={Detail} />
-          <Route path="/navlink" component={NavLinks} />
-        </Switch>
+        <S.Container>
+          <Switch>
+            <Route path="/main" component={Main} />
+            <Route path="/detail/:id" component={Detail} />
+            <Route path="/navlink" component={NavLinks} />
+          </Switch>
+        </S.Container>
         <Footer />
       </S.RootWrapper>
     </ThemeProvider>

@@ -20,7 +20,7 @@ const App = () => {
   return (
     <ThemeProvider theme={themeMode}>
       <S.RootWrapper>
-        <button onClick={toggleMode}>모드전환 버튼</button>
+        <S.ToggleButton onClick={toggleMode}>라이트/다크모드</S.ToggleButton>
         <Header />
         <Switch>
           <Route path="/main" component={Main} />

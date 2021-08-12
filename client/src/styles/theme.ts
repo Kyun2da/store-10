@@ -48,6 +48,7 @@ export const lightMode: DefaultTheme = {
   color: {
     'text-color': '#1e2222',
     'body': '#f1f1f1',
+    'footer': '#fbfbfb',
     'label': '#8b9999',
     'placeholder': '#c1c5c5',
     'line': '#929696',
@@ -68,6 +69,7 @@ export const darkMode: DefaultTheme = {
   color: {
     'text-color': '#fcfcfc',
     'body': '#3c3e3e',
+    'footer': '#252525',
     'label': '#f5f5f5',
     'placeholder': ' #f5f5f5',
     'line': '#ccd3d3',

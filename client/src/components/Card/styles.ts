@@ -43,6 +43,7 @@ export const NameTag = styled.div`
   top: 0.65rem;
   right: 0.65rem;
   padding: 0.4rem;
+  border-radius: 0.4rem;
   ${({ theme }) => theme.fontSize.xs}
   color: #fff;
   background-color: ${({ theme }) => theme.color.error};

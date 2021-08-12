@@ -16,7 +16,7 @@ const Card: VFC<CardProps> = ({ bgColor, discount }) => {
       <S.ThumbnailWrapper>
         {discount && <S.NameTag>{discount}%</S.NameTag>}
         <img
-          src="https://lh3.googleusercontent.com/proxy/gbPVfU7suICYMcyEoL5krnKmLW5RgdO_M5Qz4I2QF_mNcHu2r84djyTRwnu9JNMtxr3mfOUcgp9THnAOw6agbRVqXgHhk7BbwYIJw1C4umc1mS2EF_VnosEZqco"
+          src="https://store-10.s3.ap-northeast-2.amazonaws.com/test/test.jpeg"
           alt="상품 섬네일 이미지"
         />
         <S.BottomBar>
@@ -30,7 +30,7 @@ const Card: VFC<CardProps> = ({ bgColor, discount }) => {
       </S.ThumbnailWrapper>
       <S.ProductDetails>
         <h1 className="title">반반휴지. 물반휴지반</h1>
-        <text className="price-tag">1,500원</text>
+        <p className="price-tag">1,500원</p>
       </S.ProductDetails>
     </S.Card>
   );

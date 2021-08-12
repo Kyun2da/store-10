@@ -1,3 +1,4 @@
+import Page404 from '@/components/Page404';
 import React, {
   useState,
   useContext,
@@ -95,11 +96,11 @@ export const Switch = ({ children }: IRouter) => {
     [children, currentPath]
   );
 
+  if (!match) return <Page404 />;
+
   const value = useMemo(() => {
     return { params: match.params, component: match.route };
   }, [match]);
-
-  if (!match) return null;
 
   return (
     <RouteContext.Provider value={value}>{children}</RouteContext.Provider>
@@ -109,6 +110,12 @@ export const Switch = ({ children }: IRouter) => {
 export const Route = ({ path, component, props }: IRoute) => {
   const { currentPath } = useHistory();
   const params = useParams();
+
+  // TODO: 현재 경로가 /loginxxx 일때
+  // 라우터에 /login 경로가 있다면
+  // 정상적으로 컴포넌트를 렌더링
+  // 만약 두 경로가 아예 일치하지 않는 경우에
+  // 404 페이지를 리턴해야 할 지 고민중
 
   if (currentPath === path || component === params.component) {
     return React.createElement(component, props);

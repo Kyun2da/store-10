@@ -1,4 +1,5 @@
 import 'styled-components';
+import { CSSProp } from 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -30,6 +31,11 @@ declare module 'styled-components' {
       l: FlattenSimpleInterpolation;
       xl: FlattenSimpleInterpolation;
       xxl: FlattenSimpleInterpolation;
+    };
+    media: {
+      pc: number;
+      tablet: number;
+      phone: number;
     };
   }
 }

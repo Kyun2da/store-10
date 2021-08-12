@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './styles';
-import Stationery from '@/assets/stationery.svg';
+import { StationerySVG as Stationery } from '@/assets/svgs';
 import { useParams } from '@/core/Router';
 
 const Detail = () => {

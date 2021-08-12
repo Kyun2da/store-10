@@ -16,18 +16,18 @@ export const Button = styled.button<IButtonProps>`
   ${(props) => {
     if (props.size === 'Large') {
       return css`
-        font-size: 2rem;
+        font-size: 3rem;
         padding: 1rem 2rem;
       `;
     } else if (props.size === 'Small') {
       return css`
-        font-size: 0.5rem;
-        padding: 0.25rem 0.5rem;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
       `;
     } else {
       return css`
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
+        font-size: 2rem;
+        padding: 1rem 2rem;
       `;
     }
   }}

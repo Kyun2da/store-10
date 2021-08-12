@@ -3,7 +3,7 @@ import githubIcon from '@/assets/github.svg';
 import Title from '@/components/Title';
 
 export const LoginTitle = styled(Title)`
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 `;
 
 export const LoginForm = styled.form`
@@ -15,11 +15,11 @@ export const LoginForm = styled.form`
 
   button,
   input {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   button {
-    height: 3rem;
+    height: 5rem;
   }
 `;
 
@@ -28,13 +28,13 @@ export const GithubIcon = styled(githubIcon)`
 `;
 
 export const LinkContainer = styled.div`
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
 
   a {
-    padding: 0 1rem;
+    padding: 0 2rem;
     border-right: 1px solid gray;
   }
 `;

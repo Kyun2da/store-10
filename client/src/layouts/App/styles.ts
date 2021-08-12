@@ -5,7 +5,6 @@ export const RootWrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  padding: 2rem;
-  max-width: 1200px;
+  max-width: 1050px;
   margin: auto;
 `;

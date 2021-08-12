@@ -28,11 +28,10 @@ export const BottomBar = styled.div`
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  padding: 0 1rem;
+  padding: 1rem;
   box-sizing: border-box;
   bottom: 0;
   width: 100%;
-  height: 3rem;
   background-color: rgba(255, 255, 255, 0.75);
 `;
 
@@ -40,11 +39,12 @@ export const NameTag = styled.div`
   position: absolute;
   user-select: none;
   z-index: 50;
-  top: 0.65rem;
-  right: 0.65rem;
-  padding: 0.4rem;
-  border-radius: 0.4rem;
-  ${({ theme }) => theme.fontSize.xs}
+  top: 1rem;
+  right: 1rem;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+  box-sizing: border-box;
+  ${({ theme }) => theme.fontSize.m}
   color: #fff;
   background-color: ${({ theme }) => theme.color.error};
 `;
@@ -85,13 +85,13 @@ export const ProductDetails = styled.div`
   ${({ theme }) => theme.fontSize.s}
 
   .title {
-    ${({ theme }) => theme.fontSize.s};
+    ${({ theme }) => theme.fontSize.m};
     ${({ theme }) => theme.fontWeight.s};
     margin-bottom: 0.5rem;
   }
 
   .price-tag {
-    ${({ theme }) => theme.fontSize.s};
+    ${({ theme }) => theme.fontSize.m};
     ${({ theme }) => theme.fontWeight.l};
   }
 `;

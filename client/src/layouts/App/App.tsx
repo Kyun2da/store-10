@@ -6,6 +6,7 @@ import Detail from '@/pages/Detail';
 import Footer from '@/components/Footer';
 import NavLinks from '@/pages/NavLinks';
 import ShoppingCart from '@/pages/ShoppingCart';
+import MyPage from '@/pages/mypage';
 import { ThemeProvider } from 'styled-components';
 import { lightMode, darkMode } from '@/styles/theme';
 import * as S from './styles';
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/detail/:id" component={Detail} />
           <Route path="/navlink" component={NavLinks} />
           <Route path="/cart" component={ShoppingCart} />
+          <Route path="/mypage" component={MyPage} />
           <Route path="/*" component={NotFound} />
         </Switch>
         <Footer />

@@ -1,13 +1,13 @@
-import React from 'react';
-import { useHistory } from '@/core/Router';
+import React, { useState } from 'react';
 import * as S from './styles';
 import Card from '@/components/Card';
 import CardWrapper from '@/components/CardWrapper';
 import Banner from '@/components/Banner';
+import PolicyModal from '@/components/Modal/PolicyModal';
 
 const Main = () => {
-  const history = useHistory();
-  console.log(history);
+  const [isOpen, setOpen] = useState(false);
+  const toggleModal = () => setOpen((prev) => !prev);
 
   return (
     <>
@@ -20,6 +20,7 @@ const Main = () => {
           <Card bgColor="primary" />
           <Card bgColor="primary" discount={10} />
           <Card bgColor="primary" />
+          <S.ToggleButton onClick={toggleModal}>모달테스트</S.ToggleButton>
         </CardWrapper>
 
         <h1 className="product-title">베스트상품 (Props: Grid Column 3)</h1>
@@ -30,6 +31,8 @@ const Main = () => {
           <Card bgColor="error" discount={25} />
           <Card bgColor="error" />
         </CardWrapper>
+
+        {isOpen && <PolicyModal toggleModal={toggleModal} />}
       </S.Main>
     </>
   );

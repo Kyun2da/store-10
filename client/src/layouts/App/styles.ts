@@ -9,8 +9,11 @@ export const RootWrapper = styled.div`
 
 export const ToggleButton = styled.button`
   position: fixed;
-  top: 5rem;
+  top: 5.5rem;
   right: 1rem;
   z-index: 9999999;
   padding: 1rem;
+  background-color: #ededed;
+  border-radius: 1rem;
+  border: 1px solid #111;
 `;

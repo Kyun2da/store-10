@@ -52,5 +52,5 @@ jobs: # Job 설정
           --application-name store-10
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name store-10-group
-          --s3-location bucket=store-10,key=s3://store-10/build/build-fe.zip,bundleType=zip
+          --s3-location bucket=store-10,key=build/build-fe.zip,bundleType=zip
         working-directory: ${{ env.working-directory }}

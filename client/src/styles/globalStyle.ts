@@ -34,6 +34,13 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Noto Sans KR', sans-serif;
   }
 
+  button {
+    cursor: pointer;
+    outline: none;
+    background: none;
+    border: none;
+  }
+
   * {
     box-sizing: border-box;
   }

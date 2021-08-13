@@ -12,4 +12,9 @@ const loadEnv = (key: string): string => {
 
 export default {
   PORT: Number(loadEnv('PORT')),
+  DB_PORT: Number(loadEnv('DB_PORT')),
+  DB_USERNAME: loadEnv('DB_USERNAME'),
+  DB_HOST: loadEnv('DB_HOST'),
+  DB_PASSWORD: loadEnv('DB_PASSWORD'),
+  DB_DATABASE: loadEnv('DB_DATABASE'),
 };

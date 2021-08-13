@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ShoppingCart = styled.div`
   display: flex;
   width: 100%;
-  padding-top: 60px;
+  padding-top: 6rem;
   @media (max-width: ${({ theme }) => theme.media.tablet}px) {
     flex-direction: column;
   }
@@ -14,7 +14,7 @@ export const ShoppingCart = styled.div`
 
 export const ShoppingCartAside = styled.aside`
   position: relative;
-  flex: 0 1 385px;
+  flex: 0 1 38.5rem;
   padding-right: 2rem;
   @media (max-width: ${({ theme }) => theme.media.tablet}px) {
     display: none;

@@ -4,7 +4,7 @@ export const ShoppingCartItem = styled.li`
   position: relative;
   border: 1px solid ${({ theme }) => theme.color.body};
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  height: 150px;
+  height: 15rem;
   border-radius: 0.8rem;
   display: flex;
   align-items: center;
@@ -12,7 +12,7 @@ export const ShoppingCartItem = styled.li`
   padding: 0 1rem;
   background: ${({ theme }) => theme.color['off-white']};
   &:not(:first-child) {
-    margin-top: 10px;
+    margin-top: 1rem;
   }
   label {
     padding-right: 1rem;
@@ -21,8 +21,8 @@ export const ShoppingCartItem = styled.li`
 `;
 
 export const ImgWrapper = styled.div`
-  height: 120px;
-  flex: 0 0 120px;
+  height: 12rem;
+  flex: 0 0 12rem;
   border-radius: 0.8rem;
   overflow: hidden;
   img {

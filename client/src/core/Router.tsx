@@ -33,7 +33,7 @@ interface IRouterContext {
 
 interface IRouteContext {
   params: Record<string, unknown>;
-  component: React.FunctionComponent | null;
+  origin: string;
 }
 
 interface ILink {
@@ -46,7 +46,7 @@ interface INavLink extends ILink {
 }
 
 interface IMatches {
-  route: React.FunctionComponent;
+  origin: string;
   params: Record<string, unknown>;
 }
 
@@ -57,7 +57,7 @@ const RouterContext = React.createContext<IRouterContext>({
 
 const RouteContext = React.createContext<IRouteContext>({
   params: {},
-  component: null,
+  origin: '',
 });
 
 export const Router = ({ children, initialPath }: IRouter) => {
@@ -96,10 +96,11 @@ export const Switch = ({ children }: IRouter) => {
   );
 
   const value = useMemo(() => {
-    return { params: match.params, component: match.route };
+    return {
+      params: match.params,
+      origin: match.origin,
+    };
   }, [match]);
-
-  if (!match) return null;
 
   return (
     <RouteContext.Provider value={value}>{children}</RouteContext.Provider>
@@ -110,7 +111,9 @@ export const Route = ({ path, component, props }: IRoute) => {
   const { currentPath } = useHistory();
   const params = useParams();
 
-  if (currentPath === path || component === params.component) {
+  if (currentPath === path || path === params.origin) {
+    return React.createElement(component, props);
+  } else if (path === '/*' && params.origin === '/404') {
     return React.createElement(component, props);
   } else {
     return null;
@@ -164,21 +167,22 @@ const extractPath = (path: string) => {
     return '([^\\/]+)';
   });
 
-  const regex = new RegExp(`^(${path})`, 'i');
+  const regex = new RegExp(`^(${path})$`, 'i');
   return { regex, keys };
 };
 
 const matchRoutes = ({ children, currentPath }: ISwitch) => {
   const matches: IMatches[] = [];
+  const arrayChildren = React.Children.toArray(children) as Route[];
 
-  React.Children.forEach(children, (route: Route) => {
-    const { regex, keys } = extractPath(route.props.path);
+  for (const child of arrayChildren) {
+    const { regex, keys } = extractPath(child.props.path);
     const match = currentPath.match(regex);
 
     if (match) {
       const params = match.slice(2);
       matches.push({
-        route: route.props.component,
+        origin: child.props.path,
         params: keys.reduce(
           (collection: Record<string, unknown>, param, index) => {
             collection[param] = params[index];
@@ -187,8 +191,9 @@ const matchRoutes = ({ children, currentPath }: ISwitch) => {
           {}
         ),
       });
+      break;
     }
-  });
+  }
 
-  return matches[0];
+  return matches[0] ?? { params: {}, origin: '/404' };
 };

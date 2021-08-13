@@ -22,6 +22,13 @@ export const media = {
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
+  @font-face {
+    font-family: 'BMDOHYEON';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   html, body {
     font-size: 10px;
     font-family: 'Noto Sans KR', sans-serif;

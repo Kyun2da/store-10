@@ -10,6 +10,7 @@ import { ThemeProvider } from 'styled-components';
 import { lightMode, darkMode } from '@/styles/theme';
 import * as S from './styles';
 import Login from '@/pages/Login';
+import NotFound from '@/components/NotFound';
 
 const App = () => {
   const [theme, setTheme] = useState('light-mode');
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/detail/:id" component={Detail} />
           <Route path="/navlink" component={NavLinks} />
           <Route path="/cart" component={ShoppingCart} />
+          <Route path="/*" component={NotFound} />
         </Switch>
         <Footer />
       </S.RootWrapper>

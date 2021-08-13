@@ -7,6 +7,7 @@ export const Footer = styled.div`
   padding: 4rem 0;
   margin-top: auto;
   overflow: hidden;
+  border-top: 1px solid ${({ theme }) => theme.color.line};
 
   &::after {
     position: absolute;

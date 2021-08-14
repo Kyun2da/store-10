@@ -1,12 +1,13 @@
 import { Router } from 'express';
-import userRoutes from './user';
+import userRoutes from './user.router';
+import authRoutes from './auth.router';
 
 const router = Router();
-
-router.use('/user', userRoutes);
 
 router.get('/', (req, res) => {
   res.send('슑과잌붸흐벤 서버에 오신것을 환영합니다!!');
 });
+router.use('/user', userRoutes);
+router.use('/auth', authRoutes);
 
 export default router;

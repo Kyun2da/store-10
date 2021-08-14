@@ -1,15 +1,15 @@
 import express from 'express';
 import loaders from '@/loaders';
 
-import env from '@/config';
+import config from '@/config';
 
 async function startServer() {
   const app = express();
 
   await loaders.init({ app });
 
-  app.listen(env.PORT, () => {
-    console.log(`app listening at http://localhost:${env.PORT}`);
+  app.listen(config.PORT, () => {
+    console.log(`app listening at http://localhost:${config.PORT}`);
   });
 }
 

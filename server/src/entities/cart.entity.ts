@@ -9,20 +9,15 @@ import {
   JoinColumn,
   PrimaryColumn,
 } from 'typeorm';
+import { DateEntity } from './base.entity';
 
 import { Product } from './product.entity';
 import { User } from './user.entity';
 
 @Entity('cart')
-export class Cart extends BaseEntity {
+export class Cart extends DateEntity {
   @Column()
   count: number;
-
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
 
   @ManyToOne(() => Product, (type) => type.id, {
     nullable: false,

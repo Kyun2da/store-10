@@ -1,10 +1,6 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  BaseEntity,
   OneToMany,
   ManyToOne,
   JoinColumn,
@@ -16,12 +12,10 @@ import { ProductImage } from './prodectImage.entity';
 import { Purchase } from './purchase.entity';
 import { Review } from './review.entity';
 import { SubCategory } from './subCategory.entity';
+import { InitEntity } from './base.entity';
 
 @Entity()
-export class Product extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Product extends InitEntity {
   @Column()
   title: string;
 
@@ -33,12 +27,6 @@ export class Product extends BaseEntity {
 
   @Column()
   stock: number;
-
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
 
   @ManyToOne(() => SubCategory, (type) => type.id, {
     nullable: false,

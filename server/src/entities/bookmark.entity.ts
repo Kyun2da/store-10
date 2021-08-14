@@ -3,7 +3,6 @@ import {
   BaseEntity,
   ManyToOne,
   JoinColumn,
-  PrimaryColumn,
 } from 'typeorm';
 
 import { User } from './user.entity';

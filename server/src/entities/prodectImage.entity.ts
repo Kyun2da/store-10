@@ -1,32 +1,20 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  BaseEntity,
   ManyToOne,
   JoinColumn,
   Column,
 } from 'typeorm';
+import { InitEntity } from './base.entity';
 
 import { Product } from './product.entity';
 
 @Entity('product_image')
-export class ProductImage extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class ProductImage extends InitEntity {
   @Column({ type: 'text' })
   url: string;
 
   @Column({ type: 'tinyint' })
   type: boolean;
-
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
 
   @ManyToOne(() => Product, (type) => type.id, {
     nullable: false,

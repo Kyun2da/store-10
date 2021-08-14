@@ -7,7 +7,7 @@ class UserController {
     const data = req.body;
 
     await UserRepository().createUser(data);
-    res.status(200).send({ success: true, data });
+    res.status(200).json({ success: true, data });
   }
 }
 

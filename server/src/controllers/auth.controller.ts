@@ -36,7 +36,7 @@ class AuthController {
 
     // TODO respon처리 통합하는 방식 고민
     if (!_user) {
-      res.status(401).send({ ok: false, message: '너..해커냐' }).end();
+      res.status(401).json({ ok: false, message: '너..해커냐' }).end();
       return;
     }
     const { name, id, refreshToken } = _user;
@@ -44,7 +44,7 @@ class AuthController {
 
     res.cookie('refreshToken', refreshToken, { path: '/', httpOnly: true });
     res.cookie('accessToken', jwtAccessToken, { path: '/', httpOnly: true });
-    res.send({ ok: true, message: '어서오세요 동물의 숲' });
+    res.json({ ok: true, message: '어서오세요 동물의 숲' });
   }
 }
 

@@ -8,7 +8,7 @@ const ERROR_ALL_TOKEN_IS_EXPIRED = '모든 토큰의 유효기간이 지났습�
 const ERROR_HEADER_COOKIE_IS_NOT_EXIST = '헤더에 쿠키가 존재하지않습니다.';
 
 const ErrorJWT = (res: Response, message: string) => {
-  res.status(401).send({ success: false, message }).end();
+  res.status(401).json({ success: false, message }).end();
 };
 
 const authJWT = async (req: Request, res: Response, next: NextFunction) => {

@@ -1,44 +1,31 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  BaseEntity,
-  OneToMany,
-} from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
 import { Address } from './address.entity';
 import { Question } from './question.entity';
 import { Bookmark } from './bookmark.entity';
 import { Cart } from './cart.entity';
 import { Purchase } from './purchase.entity';
 import { Review } from './review.entity';
+import { InitEntity } from './base.entity';
 
 @Entity()
-export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class User extends InitEntity {
   @Column({ name: 'user_id', length: '50' })
-  user_id: string;
+  loginId: string;
 
   @Column({ nullable: true })
-  password: string;
+  password?: string;
 
   @Column()
-  name: number;
+  name: string;
 
-  @Column({ type: 'tinyint' })
+  @Column({ type: 'tinyint', default: true })
   coupon: boolean;
 
-  @Column({ type: 'tinyint' })
+  @Column({ type: 'tinyint', default: false })
   is_oauth: boolean;
 
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
+  @Column({ nullable: true })
+  refreshToken: string;
 
   @OneToMany(() => Address, (type) => type.id)
   address!: Address[];

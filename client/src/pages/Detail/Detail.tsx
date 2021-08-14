@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './styles';
-import { StationerySVG as Stationery } from '@/assets/svgs';
 import { useParams } from '@/core/Router';
-import { TabExample, TabExample2 } from '@/components/Tab';
+import { ProductDetailTab } from '@/components/Tab';
+import ProductInfo from '@/components/ProductDetails/ProductInfo';
 
 const Detail = () => {
   const { params } = useParams();
@@ -10,13 +10,9 @@ const Detail = () => {
 
   return (
     <S.Detail>
-      <h1>이곳은 디테일 페이지 영역 #{params.id}</h1>
-      <p>안녕하세요 디테일 입니다</p>
+      <ProductInfo />
 
-      <TabExample />
-      <TabExample2 />
-
-      <Stationery />
+      <ProductDetailTab />
     </S.Detail>
   );
 };

@@ -7,17 +7,16 @@ import {
   BaseEntity,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 import { User } from './user.entity';
 import { Product } from './product.entity';
 import { ReviewImage } from './reviewImage.entity';
+import { InitEntity } from './base.entity';
 
 @Entity()
-export class Review extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Review extends InitEntity {
   @Column({ length: 100 })
   title: string;
 
@@ -27,11 +26,8 @@ export class Review extends BaseEntity {
   @Column()
   rating: number;
 
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
+  @OneToMany(() => ReviewImage, (type) => type.id)
+  reviewImage: ReviewImage[];
 
   @ManyToOne(() => User, (type) => type.id, {
     nullable: false,

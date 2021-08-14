@@ -1,33 +1,21 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  BaseEntity,
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
 
 import { User } from './user.entity';
 import { Product } from './product.entity';
+import { InitEntity } from './base.entity';
 
 @Entity()
-export class Question extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Question extends InitEntity {
   @Column({ length: 100 })
   title: string;
 
   @Column({ type: 'text' })
   content: number;
-
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
 
   @ManyToOne(() => User, (type) => type.id, {
     nullable: false,

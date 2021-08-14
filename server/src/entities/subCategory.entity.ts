@@ -9,15 +9,13 @@ import {
   JoinColumn,
   OneToMany,
 } from 'typeorm';
+import { InitEntity } from './base.entity';
 
 import { MainCategoty } from './mainCategory.entity';
 import { Product } from './product.entity';
 
 @Entity('sub_categoty')
-export class SubCategory extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class SubCategory extends InitEntity {
   @Column()
   address: string;
 
@@ -26,12 +24,6 @@ export class SubCategory extends BaseEntity {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
-
   @ManyToOne(() => MainCategoty, (type) => type.id, {
     nullable: false,
     onUpdate: 'CASCADE',

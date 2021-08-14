@@ -8,22 +8,14 @@ import {
   JoinColumn,
   Column,
 } from 'typeorm';
+import { InitEntity } from './base.entity';
 
 import { Review } from './review.entity';
 
 @Entity('review_image')
-export class ReviewImage extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class ReviewImage extends InitEntity {
   @Column({ type: 'text' })
   url: string;
-
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
 
   @ManyToOne(() => Review, (type) => type.id, {
     nullable: false,

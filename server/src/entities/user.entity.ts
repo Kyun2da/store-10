@@ -1,5 +1,6 @@
-import { Entity, Column, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany, Unique, BeforeInsert } from 'typeorm';
 import { Address } from './address.entity';
+import bcrypt from 'bcrypt';
 import { Question } from './question.entity';
 import { Bookmark } from './bookmark.entity';
 import { Cart } from './cart.entity';
@@ -8,40 +9,54 @@ import { Review } from './review.entity';
 import { InitEntity } from './base.entity';
 
 @Entity()
+@Unique(['loginId'])
+@Unique(['refreshToken'])
 export class User extends InitEntity {
   @Column({ name: 'user_id', length: '50' })
-  loginId: string;
+  loginId!: string;
 
   @Column({ nullable: true })
   password?: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column({ type: 'tinyint', default: true })
-  coupon: boolean;
+  coupon?: boolean;
 
   @Column({ type: 'tinyint', default: false })
-  is_oauth: boolean;
+  is_oauth?: boolean;
 
   @Column({ nullable: true })
-  refreshToken: string;
+  refreshToken?: string;
 
   @OneToMany(() => Address, (type) => type.id)
-  address!: Address[];
+  address?: Address[];
 
   @OneToMany(() => Question, (type) => type.id)
-  question!: Question[];
+  question?: Question[];
 
   @OneToMany(() => Bookmark, (type) => type.user)
-  bookmark!: Bookmark[];
+  bookmark?: Bookmark[];
 
   @OneToMany(() => Cart, (type) => type.user)
-  cart!: Cart[];
+  cart?: Cart[];
 
   @OneToMany(() => Purchase, (type) => type.user)
-  purchase!: Purchase[];
+  purchase?: Purchase[];
 
   @OneToMany(() => Review, (type) => type.id)
-  review!: Review[];
+  review?: Review[];
+
+  @BeforeInsert()
+  async hashPassword?(): Promise<void> {
+    try {
+      if (!!this.password) {
+        this.password = await bcrypt.hash(this.password, 10);
+      }
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
+    }
+  }
 }

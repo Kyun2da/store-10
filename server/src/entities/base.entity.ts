@@ -5,15 +5,15 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-export class DateEntity extends BaseEntity {
+export class DateEntity {
   @CreateDateColumn()
-  createdAt!: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn()
-  updatedAt!: Date;
+  updatedAt?: Date;
 }
 
 export class InitEntity extends DateEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 }

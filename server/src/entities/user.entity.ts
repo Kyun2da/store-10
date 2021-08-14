@@ -1,6 +1,6 @@
 import { Entity, Column, OneToMany, Unique, BeforeInsert } from 'typeorm';
 import { Address } from './address.entity';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt-nodejs';
 import { Question } from './question.entity';
 import { Bookmark } from './bookmark.entity';
 import { Cart } from './cart.entity';
@@ -52,7 +52,7 @@ export class User extends InitEntity {
   async hashPassword?(): Promise<void> {
     try {
       if (!!this.password) {
-        this.password = await bcrypt.hash(this.password, 10);
+        this.password = await bcrypt.hashSync(this.password);
       }
     } catch (error) {
       console.log(error);

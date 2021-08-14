@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { User } from '@/entities/user.entity';
 import JwtService from '@/services/jwt.service';
-import UserService from '@/services/user.service';
 import AuthService from '@/services/auth.service';
 
 const ERROR_USER_IS_NOT_EXIST = '현재 토큰을 가진 유저가 없습니다.';
@@ -37,7 +36,7 @@ const authJWT = async (req: Request, res: Response, next: NextFunction) => {
       return;
     } else {
       // ref 기반으로 유저 조회
-      const _user = await UserService.getUserByRefreshToken(refreshToken);
+      const _user = await AuthService.getUserByRefreshToken(refreshToken);
       if (_user === null) {
         ErrorJWT(res, ERROR_USER_IS_NOT_EXIST);
         return;
@@ -64,10 +63,10 @@ const authJWT = async (req: Request, res: Response, next: NextFunction) => {
     }
   }
 
-  const { id, loginId, name } = user;
+  const { id, user_id, name } = user;
   req.user = {
     id,
-    loginId,
+    user_id,
     name,
   };
   return next();

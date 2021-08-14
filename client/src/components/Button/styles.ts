@@ -45,6 +45,7 @@ export const Button = styled.button<IButtonProps>`
       `;
     } else if (props.color === 'black') {
       return css`
+        background-color: #1e2222;
         &:hover {
           background-color: black;
         }

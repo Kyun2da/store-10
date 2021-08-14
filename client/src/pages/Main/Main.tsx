@@ -3,7 +3,8 @@ import * as S from './styles';
 import Card from '@/components/Card';
 import CardWrapper from '@/components/CardWrapper';
 import Banner from '@/components/Banner';
-import PolicyModal from '@/components/Modal/PolicyModal';
+import { PolicyModal } from '@/components/Modal';
+import { TabExample } from '@/components/Tab';
 
 const Main = () => {
   const [isOpen, setOpen] = useState(false);
@@ -31,6 +32,8 @@ const Main = () => {
           <Card bgColor="error" discount={25} />
           <Card bgColor="error" />
         </CardWrapper>
+
+        <TabExample />
 
         {isOpen && <PolicyModal toggleModal={toggleModal} />}
       </S.Main>

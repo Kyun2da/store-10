@@ -1,9 +1,9 @@
-import React, { useContext, VFC } from 'react';
-import TabContext, { Context, TabContextProps } from './TabContext';
+import React, { VFC } from 'react';
+import { TabContextProps } from './TabContext';
 import * as S from './styles';
 
-const Tabs: VFC<TabContextProps> = ({ children }) => {
-  return <S.TabTitleArea>{children}</S.TabTitleArea>;
+const Tabs: VFC<TabContextProps> = ({ children, sticky }) => {
+  return <S.TabTitleArea sticky={sticky}>{children}</S.TabTitleArea>;
 };
 
 export default Tabs;

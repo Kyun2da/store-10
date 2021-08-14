@@ -9,11 +9,11 @@ import { Review } from './review.entity';
 import { InitEntity } from './base.entity';
 
 @Entity()
-@Unique(['loginId'])
+@Unique(['user_id'])
 @Unique(['refreshToken'])
 export class User extends InitEntity {
   @Column({ name: 'user_id', length: '50' })
-  loginId!: string;
+  user_id!: string;
 
   @Column({ nullable: true })
   password?: string;

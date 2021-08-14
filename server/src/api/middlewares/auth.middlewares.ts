@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { User } from '@/entities/user.entity';
 import JwtService from '@/services/jwt.service';
 import UserService from '@/services/user.service';
+import AuthService from '@/services/auth.service';
 
 const ERROR_USER_IS_NOT_EXIST = '현재 토큰을 가진 유저가 없습니다.';
 const ERROR_ALL_TOKEN_IS_EXPIRED = '모든 토큰의 유효기간이 지났습니다.';
@@ -55,7 +56,7 @@ const authJWT = async (req: Request, res: Response, next: NextFunction) => {
     if (!refresh) {
       //ref 만 유효기간 지남
       const newRefreshToken = JwtService.refresh();
-      await UserService.updateRefresh(user.id, newRefreshToken);
+      await AuthService.updateRefresh(user.id, newRefreshToken);
       res.cookie('refreshToken', newRefreshToken, {
         path: '/',
         httpOnly: true,

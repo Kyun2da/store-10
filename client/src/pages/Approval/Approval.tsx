@@ -1,29 +1,36 @@
 import Button from '@/components/Button';
 import Checkbox from '@/components/Checkbox';
 import Title from '@/components/Title';
-import { useHistory } from '@/core/Router';
+import { useHistory, useParams } from '@/core/Router';
 import {
   PERSONAL_INFO_TEXT,
   TERMS_OF_SERVICE,
 } from '@/utils/constant/approval';
 import { SITE_TITLE } from '@/utils/constant/common';
-import React from 'react';
+import React, { useCallback } from 'react';
 import * as S from './styles';
 
 const Approval = () => {
   const { historyPush } = useHistory();
+  const { params } = useParams();
 
-  const historyChange = (path: string) => {
-    historyPush(path);
-  };
+  const onClickNextPage = useCallback(() => {
+    const { authtype } = params;
+    console.log(authtype);
+    if (authtype === 'github') {
+      // TODO : 깃허브 로그인 로직 넣기
+    } else {
+      historyPush('/signup');
+    }
+  }, [params, historyPush]);
+
   return (
     <S.ApprovalContainer>
       <Title level={2}>약관 동의</Title>
       <S.LabelContainer>
         <Checkbox />
         <Title level={5}>
-          {SITE_TITLE}의 모든 약관을 확인하고 전체 동의합니다. (전체동의,
-          선택항목도 포함됩니다.)
+          {SITE_TITLE}의 모든 약관을 확인하고 전체 동의합니다.
         </Title>
       </S.LabelContainer>
       <S.LabelContainer>
@@ -40,15 +47,11 @@ const Approval = () => {
         <Button
           type="button"
           color="white"
-          onClick={() => historyChange('/select_auth')}
+          onClick={() => historyPush('/select_auth')}
         >
           이전단계
         </Button>
-        <Button
-          type="button"
-          color="primary"
-          onClick={() => historyChange('/signup')}
-        >
+        <Button type="button" color="primary" onClick={onClickNextPage}>
           다음단계
         </Button>
       </S.ButtonContainer>

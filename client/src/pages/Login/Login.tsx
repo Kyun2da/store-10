@@ -8,8 +8,13 @@ const Login = () => {
   return (
     <S.LoginForm>
       <S.LoginTitle level={4}>회원 로그인</S.LoginTitle>
-      <Input type="text" name="email" placeholder="아이디" />
-      <Input type="password" name="password" placeholder="비밀번호" />
+      <Input type="text" label="Standard" name="email" placeholder="아이디" />
+      <Input
+        type="password"
+        label="Standard"
+        name="password"
+        placeholder="비밀번호"
+      />
       <Button type="button" color="primary">
         로그인
       </Button>

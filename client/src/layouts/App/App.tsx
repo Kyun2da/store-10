@@ -14,6 +14,7 @@ import Login from '@/pages/Login';
 import NotFound from '@/components/NotFound';
 import SelectAuth from '@/pages/SelectAuth';
 import Approval from '@/pages/Approval';
+import SignUp from '@/pages/SignUp';
 
 const App = () => {
   const [theme, setTheme] = useState('light-mode');
@@ -30,7 +31,8 @@ const App = () => {
         <Switch>
           <Route path="/main" component={Main} />
           <Route path="/select_auth" component={SelectAuth} />
-          <Route path="/approval" component={Approval} />
+          <Route path="/approval/:authtype" component={Approval} />
+          <Route path="/signup" component={SignUp} />
           <Route path="/login" component={Login} />
           <Route path="/detail/:id" component={Detail} />
           <Route path="/navlink" component={NavLinks} />

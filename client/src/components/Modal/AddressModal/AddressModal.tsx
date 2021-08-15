@@ -38,7 +38,7 @@ const AddresssModal = ({
     modifyAddressData ? modifyAddressData.isDefault : false
   );
 
-  const onCompleteSearchAddress = (data: any) => {
+  const onCompleteSearchAddress = (data: Record<string, string>) => {
     setAddress(data.address);
     setPostcode(data.zonecode);
     setIsPostcodeOpen(false);

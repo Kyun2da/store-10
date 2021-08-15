@@ -3,7 +3,7 @@ import * as S from './styles';
 
 export interface IButtonProps {
   type: 'submit' | 'button';
-  color: 'primary' | 'black';
+  color: 'primary' | 'black' | 'white';
   size?: 'Large' | 'Default' | 'Small';
   children?: React.ReactNode;
   onClick?: () => void;
@@ -12,7 +12,7 @@ export interface IButtonProps {
 const Button = ({
   type = 'button',
   size = 'Default',
-  color,
+  color = 'white',
   children,
   onClick,
 }: IButtonProps) => {

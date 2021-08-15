@@ -45,12 +45,24 @@ export const Button = styled.button<IButtonProps>`
       `;
     } else if (props.color === 'black') {
       return css`
-        background-color: #333333;
+        background-color: #1e2222;
         &:hover {
           background-color: black;
         }
         &:active {
           background: black;
+        }
+      `;
+    } else if (props.color === 'white') {
+      return css`
+        color: black;
+        border: 1px solid black;
+        background-color: white;
+        &:hover {
+          background-color: #ececec;
+        }
+        &:active {
+          background-color: #ececec;
         }
       `;
     }

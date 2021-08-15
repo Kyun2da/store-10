@@ -25,3 +25,11 @@ Black.args = {
   color: 'black',
   size: 'Large',
 };
+
+export const White = Template.bind({});
+White.args = {
+  type: 'button',
+  children: 'Button',
+  color: 'white',
+  size: 'Large',
+};

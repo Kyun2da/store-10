@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import React from 'react';
 import Portal from '@/components/Shared/Modal/Portal';
 import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
@@ -12,14 +12,14 @@ interface CustomModalProps {
   onClick?: () => void;
 }
 
-const CustomModal: VFC<CustomModalProps> = ({
+const CustomModal = ({
   children,
   toggleModal,
   className,
   width,
   height,
   onClick,
-}) => {
+}: CustomModalProps) => {
   return (
     <Portal>
       <S.ModalOverlay className={className} onClick={onClick}>

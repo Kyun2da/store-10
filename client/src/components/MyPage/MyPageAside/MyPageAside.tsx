@@ -12,10 +12,7 @@ interface IMyPageNavigation {
   name: string;
 }
 
-const MyPageAside: FC<IMypageAsideProps> = ({
-  setContentValue,
-  contentValue,
-}) => {
+const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
   const renderNavigations = () => {
     return MY_PAGE_NAVIGATIONS.map((nav: IMyPageNavigation) => (
       <li

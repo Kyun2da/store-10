@@ -3,13 +3,8 @@ import * as S from './styles';
 import Card from '@/components/Card';
 import CardWrapper from '@/components/CardWrapper';
 import Banner from '@/components/Banner';
-import useModal from '@/hooks/useModal';
-import { PolicyModal } from '@/components/Modal';
 
 const Main = () => {
-  const [a, b] = useState(false);
-  const [isOpen, toggleModal] = useModal(false);
-
   return (
     <>
       <Banner />
@@ -21,7 +16,6 @@ const Main = () => {
           <Card bgColor="primary" />
           <Card bgColor="primary" discount={10} />
           <Card bgColor="primary" />
-          <S.ToggleButton onClick={toggleModal}>모달테스트</S.ToggleButton>
         </CardWrapper>
 
         <h1 className="product-title">베스트상품 (Props: Grid Column 3)</h1>
@@ -32,8 +26,6 @@ const Main = () => {
           <Card bgColor="error" discount={25} />
           <Card bgColor="error" />
         </CardWrapper>
-
-        {isOpen && <PolicyModal toggleModal={toggleModal} />}
       </S.Main>
     </>
   );

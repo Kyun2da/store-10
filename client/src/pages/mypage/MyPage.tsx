@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import * as S from './styles';
 import MyPageAside from '@/components/MyPage/MyPageAside';
 import Addresses from '@/components/Addresses';
-import Title from '@/components/Title';
 import { MY_PAGE_NAVIGATIONS } from '@/contstants';
 
 const MyPage = () => {
-  const [contentValue, setContentValue] = useState('orderHistroy');
+  const [contentValue, setContentValue] = useState('addresses');
 
   const contentName = MY_PAGE_NAVIGATIONS.find(
     (nav) => nav.value === contentValue
@@ -37,7 +36,7 @@ const MyPage = () => {
             setContentValue={setContentValue}
           />
           <S.MyPageBody>
-            <Title level={1}>{contentName}</Title>
+            <S.MyPageTitle level={1}>{contentName}</S.MyPageTitle>
             {renderBody()}
           </S.MyPageBody>
         </S.Mypage>

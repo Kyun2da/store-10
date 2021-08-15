@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Title from '@/components/Title';
 
 export const MyPageContainer = styled.div`
   position: relative;
@@ -16,6 +17,10 @@ export const Mypage = styled.div`
   border-radius: 0.8rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+`;
+
+export const MyPageTitle = styled(Title)`
+  padding-bottom: 2rem;
 `;
 
 export const MyPagePointBackground = styled.div`

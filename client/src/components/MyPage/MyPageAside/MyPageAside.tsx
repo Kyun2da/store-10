@@ -7,12 +7,17 @@ interface IMypageAsideProps {
   contentValue: string;
 }
 
+interface IMyPageNavigation {
+  value: string;
+  name: string;
+}
+
 const MyPageAside: FC<IMypageAsideProps> = ({
   setContentValue,
   contentValue,
 }) => {
   const renderNavigations = () => {
-    return MY_PAGE_NAVIGATIONS.map((nav) => (
+    return MY_PAGE_NAVIGATIONS.map((nav: IMyPageNavigation) => (
       <li
         key={nav.value}
         onClick={() => setContentValue(nav.value)}

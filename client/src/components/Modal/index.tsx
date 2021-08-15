@@ -1,3 +1,3 @@
-import PolicyModal from './PolicyModal';
+import ReviewModal from './ReviewModal';
 
-export { PolicyModal };
+export { ReviewModal };

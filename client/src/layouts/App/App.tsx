@@ -29,7 +29,7 @@ const App = () => {
         <S.ToggleButton onClick={toggleMode}>라이트/다크모드</S.ToggleButton>
         <Header />
         <Switch>
-          <Route path="/main" component={Main} />
+          <Route path="/" component={Main} />
           <Route path="/select_auth" component={SelectAuth} />
           <Route path="/approval/:authtype" component={Approval} />
           <Route path="/signup" component={SignUp} />

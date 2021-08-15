@@ -32,7 +32,7 @@ const Header = () => {
             <MenuSVG />
           </S.MenuButton>
           <S.Logo>
-            <Link to="/main">슑과잌붸흐벤</Link>
+            <Link to="/">슑과잌붸흐벤</Link>
           </S.Logo>
         </S.Menu>
         <Search />

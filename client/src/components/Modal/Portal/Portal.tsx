@@ -8,11 +8,16 @@ interface PortalProps {
 const Portal = ({ children }: PortalProps) => {
   // 모달 오픈 시 브라우저 스크롤 제거 및 복구
   useEffect(() => {
-    document.body.style.cssText = `overflow: hidden; top: -${window.scrollY}px`;
+    document.body.style.cssText = `
+      position: fixed;
+      overflow-y: scroll; 
+      top: -${window.scrollY}px;
+      width: 100%;
+    `;
     return () => {
       const scrollY = document.body.style.top;
-      document.body.style.cssText = `position: '', top: ''`;
-      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      document.body.style.cssText = ``;
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
     };
   }, []);
 

@@ -1,5 +1,6 @@
+import Title from '@/components/Title';
 import React from 'react';
-import * as S from './styles';
+import * as S from '../styles';
 
 const ProductExchange = () => {
   // 하드코딩 오졌다리...
@@ -9,8 +10,27 @@ const ProductExchange = () => {
   // 근데 우리 스타일드 컴포넌트 그래서 분리 하나요?? ㅋㅋㅋ
 
   return (
-    <S.ExchangeInfo>
-      <h1 className="title">교환 및 반품 안내</h1>
+    <S.PanelWrapper>
+      <Title level={5} className="title">
+        교환 및 반품 안내
+      </Title>
+
+      <table>
+        <tbody>
+          <tr>
+            <th>교환/반품배송비 </th>
+            <td>5,000원 (단순변심의 경우)</td>
+          </tr>
+          <tr>
+            <th>반송지</th>
+            <td>
+              반송지 : 우)10846 경기 파주시 탄현면 축현리 241-4 배민문방구
+              물류센터
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
       <ul className="exchange-notice">
         <li className="notice-item">
           주문 취소 및 배송지 변경은 “결제완료” 단계에서만 가능합니다.
@@ -28,6 +48,10 @@ const ProductExchange = () => {
           단, 재화 등의 내용이 표시, 광고 내용과 다르거나 계약내용을 다르게
           이행한 경우에는 재화 등을 공급받은 날로부터 3개월 이내, 그 사실을 안
           날 또는 알 수 있었던 날로부터 30일 이내에 교환 및 반품이 가능합니다.
+        </li>
+        <li className="notice-item">
+          상품의 불량/하자 및 표시광고 및 계약 내용이 다른 경우 해당 상품의 회수
+          비용은 무료입니다.
         </li>
         <li className="notice-item">다음의 경우 교환 및 반품이 불가합니다.</li>
         <li className="notice-item">
@@ -48,35 +72,32 @@ const ProductExchange = () => {
         <li className="notice-item">
           - 고객의 주문에 따라 개별 생산되는 상품의 경우
         </li>
+      </ul>
+
+      <Title level={5} className="title">
+        환불안내
+      </Title>
+      <ul className="refund-notice">
         <li className="notice-item">
-          상품의 불량/하자 및 표시광고 및 계약 내용이 다른 경우 해당 상품의 회수
-          비용은 무료입니다.
-        </li>
-        <li className="notice-item">
-          고객님의 단순변심에 의한 교환/반품일 경우에는 교환/반품 배송비(왕복
-          배송비) 5,000원을 고객님께서 부담하셔야 합니다.
-        </li>
-        <li className="notice-item">
-          반송지 : 우)10846 경기 파주시 탄현면 축현리 241-4 배민문방구 물류센터
+          주문취소 및 반품 시 환불은 주문 시 이용하신 결제수단으로 2~7 영업일
+          이내 환불됩니다.
         </li>
       </ul>
 
-      <h1 className="title">환불안내</h1>
-      <p>
-        주문취소 및 반품 시 환불은 주문 시 이용하신 결제수단으로 2~7 영업일 이내
-        환불됩니다.{' '}
-      </p>
-
-      <h1 className="title">AS안내</h1>
-      <p>
-        제품에 문제가 있으신 경우, 배민문방구 고객센터로 접수해주시면 안내
-        도와드리겠습니다.{' '}
-      </p>
-      <p>
-        배민문방구에서 발생한 문제는 소비자분쟁해결 기준(공정거래위원회 고시)에
-        따라 피해를 보상받을 수 있습니다.
-      </p>
-    </S.ExchangeInfo>
+      <Title level={5} className="title">
+        AS안내
+      </Title>
+      <ul className="AS-notice">
+        <li className="notice-item">
+          제품에 문제가 있으신 경우, 배민문방구 고객센터로 접수해주시면 안내
+          도와드리겠습니다.
+        </li>
+        <li className="notice-item">
+          배민문방구에서 발생한 문제는 소비자분쟁해결 기준(공정거래위원회
+          고시)에 따라 피해를 보상받을 수 있습니다.
+        </li>
+      </ul>
+    </S.PanelWrapper>
   );
 };
 

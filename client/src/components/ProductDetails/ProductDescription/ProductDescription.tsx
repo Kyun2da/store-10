@@ -1,6 +1,7 @@
 import React from 'react';
-import * as S from './styles';
+import * as S from '../styles';
 import { useParams } from '@/core/Router';
+import Title from '@/components/Title';
 
 const ProductDescription = () => {
   const { id } = useParams().params;
@@ -17,10 +18,14 @@ const ProductDescription = () => {
   ];
 
   return (
-    <S.Description>
-      <h1 className="title">상품 상세정보</h1>
+    <S.PanelWrapper>
+      <Title level={5} className="title">
+        상품 상세정보
+      </Title>
       {descriptions.map((description) => {
         // 임시로 사용할 고유 key - 콘솔 에러가 불---편해서 임시용입니다
+        // Intersection Observer를 달던 다른 라이브러리를 추가하든 해서
+        // Lazy loading을 추가해도 좋을 거 같으네요~~
         const tempRandomString = Math.random().toString(36).substr(2, 11);
 
         return (
@@ -31,7 +36,7 @@ const ProductDescription = () => {
           />
         );
       })}
-    </S.Description>
+    </S.PanelWrapper>
   );
 };
 

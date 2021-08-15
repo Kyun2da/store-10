@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import githubIcon from '@/assets/github.svg';
 import Title from '@/components/Title';
+import { GitHubSVG } from '@/assets/svgs';
 
 export const LoginTitle = styled(Title)`
   margin-bottom: 4rem;
@@ -23,7 +23,7 @@ export const LoginForm = styled.form`
   }
 `;
 
-export const GithubIcon = styled(githubIcon)`
+export const GithubIcon = styled(GitHubSVG)`
   margin-right: 1rem;
 `;
 

@@ -1,26 +1,11 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  BaseEntity,
-} from 'typeorm';
+import { Entity, Column } from 'typeorm';
+import { InitEntity } from './base.entity';
 
 @Entity('notice')
-export class Notice extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Notice extends InitEntity {
   @Column({ length: 100 })
   title: string;
 
   @Column({ type: 'text' })
   content: number;
-
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
 }

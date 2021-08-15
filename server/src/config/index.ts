@@ -17,4 +17,9 @@ export default {
   DB_HOST: loadEnv('DB_HOST'),
   DB_PASSWORD: loadEnv('DB_PASSWORD'),
   DB_DATABASE: loadEnv('DB_DATABASE'),
+  JWT_SECRET: loadEnv('JWT_SECRET'),
+  GIT_OAUTH_URL: loadEnv('GIT_OAUTH_URL'),
+  GIT_CLIENT_ID: loadEnv('GIT_CLIENT_ID'),
+  GIT_CLIENT_SECRET: loadEnv('GIT_CLIENT_SECRET'),
+  CLIENT_URL: loadEnv('CLIENT_URL'),
 };

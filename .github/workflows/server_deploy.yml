@@ -19,6 +19,8 @@ jobs:
           script: |
             sudo su
             cd store-10/store-10
+            sudo git stash
+            sudo git stash drop
             sudo git pull
             cd server
             sudo npm install

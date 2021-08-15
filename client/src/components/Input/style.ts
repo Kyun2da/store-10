@@ -1,18 +1,53 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { IInput } from './Input';
 
-export const Input = styled.input`
+export const Input = styled.input<IInput>`
   padding: 1rem;
-  font-size: 2rem;
+  font-size: 1.8rem;
   background-color: transparent;
   outline: none;
   border: none;
   border-bottom: 1px solid black;
 
-  ::placeholder {
-    color: #c1c5c5;
-  }
+  ${({ label }) => {
+    if (label === 'Standard') {
+      return css`
+        &:focus {
+          border-bottom: 1px solid #2ac1bc;
+        }
 
-  &:focus {
-    border-bottom: 1px solid #2ac1bc;
-  }
+        ::placeholder {
+          color: #c1c5c5;
+        }
+      `;
+    } else if (label === 'Outlined') {
+      return css`
+        border: 1px solid #c1c5c5;
+        border-radius: 10px;
+        background-color: white;
+        &:focus {
+          border: 1px solid #2ac1bc;
+          outline: none;
+        }
+
+        ::placeholder {
+          color: #c1c5c5;
+        }
+      `;
+    } else if (label === 'Filled') {
+      return css`
+        border: none;
+        border-radius: 10px;
+        background-color: #c1c5c5;
+        &:focus {
+          border: 1px solid #2ac1bc;
+          outline: none;
+        }
+
+        ::placeholder {
+          color: white;
+        }
+      `;
+    }
+  }}
 `;

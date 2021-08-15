@@ -1,28 +1,16 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  BaseEntity,
   OneToMany,
 } from 'typeorm';
+import { InitEntity } from './base.entity';
 
 import { SubCategory } from './subCategory.entity';
 
 @Entity('main_categoty')
-export class MainCategoty extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class MainCategoty extends InitEntity {
   @Column()
   address: string;
-
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
 
   @OneToMany(() => SubCategory, (type) => type.id)
   subCategory!: SubCategory[];

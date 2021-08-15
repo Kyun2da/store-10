@@ -10,10 +10,27 @@ export default {
 
 const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
 
-export const Default = Template.bind({});
+export const Standard = Template.bind({});
 
-Default.args = {
+Standard.args = {
   type: 'text',
   placeholder: '로그인',
   name: '인풋 이름',
+  label: 'Standard',
+};
+
+export const Filled = Template.bind({});
+Filled.args = {
+  type: 'text',
+  placeholder: '로그인',
+  name: '인풋 이름',
+  label: 'Filled',
+};
+
+export const Outlined = Template.bind({});
+Outlined.args = {
+  type: 'text',
+  placeholder: '로그인',
+  name: '인풋 이름',
+  label: 'Outlined',
 };

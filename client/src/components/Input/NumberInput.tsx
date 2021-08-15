@@ -8,6 +8,9 @@ interface IInput {
   min?: number;
   max?: number;
   defaultValue?: number;
+  value: number;
+  handleClickOnMinus: () => void;
+  handleClickOnPlus: () => void;
 }
 
 const NumberInput = ({
@@ -16,23 +19,16 @@ const NumberInput = ({
   placeholder,
   min,
   max,
-  defaultValue,
+  value,
+  handleClickOnMinus,
+  handleClickOnPlus,
 }: IInput) => {
-  const [value, setValue] = useState<number>(defaultValue ?? 0);
-
-  const handleClickOnPlus = useCallback(
-    () => setValue((value) => value + 1),
-    [value]
-  );
-  const handleClickOnMinus = useCallback(() => {
-    if (value === 1) return;
-    setValue((value) => value - 1);
-  }, [value]);
-
   return (
     <S.NumberInputArea>
       <S.AdjustButton onClick={handleClickOnMinus}>-</S.AdjustButton>
       <S.NumberInput
+        // TODO: 지금은 콘솔에러 땜에 readOnly 먹여놨는데 이러면 타이핑으로 직접 수량 입력이 불가합니다
+        // 키보드 입력으로도 수량 입력을 가능하게 해줄지 (대량구매 고려 등..) 논의가 필요할듯??
         readOnly
         value={value}
         type={type}

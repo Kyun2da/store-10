@@ -3,6 +3,7 @@ import ProductDelivery from '@/components/ProductDetails/ProductDelivery';
 import ProductDescription from '@/components/ProductDetails/ProductDescription';
 import { TabWrapper, Tabs, TabPanel, Tab } from './TabUI';
 import ProductExchange from '@/components/ProductDetails/ProductExchange.tsx/ProductExchange';
+import ProductReview from '@/components/ProductDetails/ProductReview';
 
 const ProductDetailTab = () => {
   return (
@@ -23,7 +24,9 @@ const ProductDetailTab = () => {
       <TabPanel index={2}>
         <ProductExchange />
       </TabPanel>
-      <TabPanel index={3}>상품후기 영역</TabPanel>
+      <TabPanel index={3}>
+        <ProductReview totalRating={4.3} />
+      </TabPanel>
       <TabPanel index={4}>상품문의 영역</TabPanel>
     </TabWrapper>
   );

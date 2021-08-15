@@ -15,6 +15,7 @@ export const TabTitleArea = styled.div<TabTitleAreaProps>`
   align-items: center;
   background-color: #fff;
   position: ${({ sticky }) => (sticky ? 'sticky' : 'relative')};
+  z-index: 1000;
   top: 5rem; // 헤더 높이만큼 되어야 합니다 (추후 헤더 디자인 수정시 반영되어야 함)
 `;
 

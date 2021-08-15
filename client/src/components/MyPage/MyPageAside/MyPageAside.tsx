@@ -1,28 +1,22 @@
 import React, { Dispatch, FC } from 'react';
 import * as S from './styles';
+import { MY_PAGE_NAVIGATIONS } from '@/contstants';
 
 interface IMypageAsideProps {
-  setContent: Dispatch<string>;
-  content: string;
+  setContentValue: Dispatch<string>;
+  contentValue: string;
 }
 
-const MyPageAside: FC<IMypageAsideProps> = ({ setContent, content }) => {
-  const navs = [
-    { value: 'orderHistroy', name: '주문 내역' },
-    { value: 'addresses', name: '배송지 관리' },
-    { value: 'coupone', name: '쿠폰' },
-    { value: 'inqurey', name: '상품 문의' },
-    { value: 'review', name: '상품 후기' },
-  ];
-
-  console.log(content);
-
+const MyPageAside: FC<IMypageAsideProps> = ({
+  setContentValue,
+  contentValue,
+}) => {
   const renderNavigations = () => {
-    return navs.map((nav) => (
+    return MY_PAGE_NAVIGATIONS.map((nav) => (
       <li
         key={nav.value}
-        onClick={() => setContent(nav.value)}
-        className={nav.value === content ? 'selected' : undefined}
+        onClick={() => setContentValue(nav.value)}
+        className={nav.value === contentValue ? 'selected' : undefined}
       >
         {nav.name}
       </li>

@@ -5,6 +5,8 @@ export const MyPageContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  min-height: 90vh;
+  padding-bottom: 2rem;
 `;
 
 export const Mypage = styled.div`

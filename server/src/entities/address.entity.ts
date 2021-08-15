@@ -1,9 +1,4 @@
-import {
-  Entity,
-  Column,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { InitEntity } from './base.entity';
 
 import { User } from './user.entity';
@@ -13,8 +8,20 @@ export class Address extends InitEntity {
   @Column()
   address: string;
 
+  @Column()
+  postcode: string;
+
+  @Column()
+  detail_address: string;
+
+  @Column()
+  phone: string;
+
+  @Column()
+  message: string;
+
   @Column({ type: 'tinyint' })
-  type: boolean;
+  is_default: boolean;
 
   @ManyToOne(() => User, (type) => type.id, {
     nullable: false,

@@ -9,7 +9,7 @@ const Detail = () => {
   console.log(params);
 
   return (
-    <S.Detail>
+    <S.Detail className="container">
       <ProductInfo />
 
       <ProductDetailTab />

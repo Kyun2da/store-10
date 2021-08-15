@@ -9,7 +9,8 @@ const ProductDelivery = () => {
       <Title level={5} className="title">
         배송안내
       </Title>
-      <table>
+      {/* Table Outlined 도 만들어주쎄요 징징징 일단을 className으로 해결하게씁니다 */}
+      <table className="custom-table">
         <tbody>
           <tr>
             <th>배송사</th>

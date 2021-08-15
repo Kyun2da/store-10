@@ -15,7 +15,8 @@ const ProductExchange = () => {
         교환 및 반품 안내
       </Title>
 
-      <table>
+      {/* Table Outlined 도 만들어주쎄요 징징징 일단을 className으로 해결하게씁니다 */}
+      <table className="custom-table">
         <tbody>
           <tr>
             <th>교환/반품배송비 </th>

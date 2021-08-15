@@ -122,7 +122,7 @@ export const PanelWrapper = styled.div`
     }
   }
 
-  table {
+  table.custom-table {
     margin-bottom: 2rem;
 
     tr {

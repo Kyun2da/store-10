@@ -4,7 +4,8 @@ import Title from '@/components/Title';
 import React from 'react';
 import * as S from '../styles';
 import Button from '@/components/Button';
-// import useModal from '@/hooks/useModal';
+import useModal from '@/hooks/useModal';
+import { ReviewModal } from '@/components/Modal';
 
 // TODO: 임시 데이터 형식입니다 - 당연히 나중에 바뀌게쬬?
 const dummyDataExample = [
@@ -40,14 +41,19 @@ interface IProductReview {
 }
 
 const ProductReview = ({ totalRating }: IProductReview) => {
-  // const [isOpen, toggleModal] = useModal(false);
+  const [isOpen, toggleModal] = useModal(false);
   return (
     <S.PanelWrapper>
       <S.TopArea>
         <Title className="title" level={5}>
           상품후기 ({dummyDataExample.length})
         </Title>
-        <Button size="Default" color="primary" type="button">
+        <Button
+          size="Default"
+          color="primary"
+          type="button"
+          onClick={toggleModal}
+        >
           작성하기
         </Button>
       </S.TopArea>
@@ -92,6 +98,8 @@ const ProductReview = ({ totalRating }: IProductReview) => {
           );
         })}
       </S.UserReviewArea>
+
+      {isOpen && <ReviewModal toggleModal={toggleModal} />}
     </S.PanelWrapper>
   );
 };

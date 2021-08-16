@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import React from 'react';
 import Portal from '@/components/Shared/Modal/Portal';
 import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
@@ -8,7 +8,7 @@ interface CustomModalProps {
   toggleModal: () => void;
 }
 
-const CustomModal: VFC<CustomModalProps> = ({ children, toggleModal }) => {
+const CustomModal = ({ children, toggleModal }: CustomModalProps) => {
   return (
     <Portal>
       <S.ModalOverlay>

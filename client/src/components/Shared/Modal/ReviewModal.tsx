@@ -1,4 +1,4 @@
-import React, { useRef, useState, VFC } from 'react';
+import React, { useRef, useState } from 'react';
 import Rating from '@/components/Shared/Rating';
 import Title from '@/components/Shared/Title';
 import ModalLayout from './ModalLayout';
@@ -12,7 +12,7 @@ interface ReviewModalProps {
 
 // TODO: Input 타입을 조금 더 만들어야 하겠군뇨 호호호
 
-const ReviewModal: VFC<ReviewModalProps> = ({ toggleModal }) => {
+const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
   const [fileImg, setFileImg] = useState<string[]>([]);
   const [isError, setIsError] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);

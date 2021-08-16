@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import React from 'react';
 import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
 import categoryList from '@/dummies/categorys';
@@ -9,7 +9,7 @@ interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Sidebar: VFC<Props> = ({ ...props }) => {
+const Sidebar = ({ ...props }: Props) => {
   const { isOpen, setIsOpen } = props;
   const closeSidebar = () => setIsOpen(false);
 

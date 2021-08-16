@@ -118,44 +118,6 @@ export const Form = styled.form`
     }
   }
 
-  .preview-wrapper {
-    margin-top: 2rem;
-    display: flex;
-    gap: 2rem;
-
-    img {
-      object-fit: cover;
-      width: 20%;
-    }
-  }
-
-  .input-file-button {
-    border-radius: 2rem;
-    padding: 2rem;
-    background-color: #ededed;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
-    border: 1px dashed #aaa;
-    cursor: pointer;
-
-    .helper-text {
-      color: #adadad;
-    }
-
-    &:hover {
-      opacity: 0.75;
-    }
-  }
-
-  .error-text {
-    margin-top: 1rem;
-    text-align: right;
-    color: ${({ theme }) => theme.color.error};
-  }
-
   & + & {
     margin-top: 3rem;
   }

@@ -5,7 +5,7 @@ import Title from '@/components/Shared/Title';
 import ModalLayout from './ModalLayout';
 import * as S from './styles';
 import { ExchageSVG, GiftSVG, PackageSVG } from '@/assets/svgs';
-import Textarea from '../Input/Textarea';
+import { Textarea } from '@/components/Shared/Input';
 
 interface RequestModalProps {
   toggleModal: () => void;

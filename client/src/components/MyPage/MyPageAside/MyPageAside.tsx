@@ -1,4 +1,4 @@
-import React, { Dispatch, FC } from 'react';
+import React, { Dispatch } from 'react';
 import * as S from './styles';
 import { MY_PAGE_NAVIGATIONS } from '@/contstants';
 

@@ -52,7 +52,7 @@ interface IMatches {
 
 const RouterContext = React.createContext<IRouterContext>({
   currentPath: '',
-  historyPush: () => {},
+  historyPush: () => null,
 });
 
 const RouteContext = React.createContext<IRouteContext>({
@@ -78,11 +78,11 @@ export const Router = ({ children, initialPath }: IRouter) => {
   useEffect(() => {
     window.addEventListener('popstate', handlePathChange);
     return () => window.removeEventListener('popstate', handlePathChange);
-  }, [historyPush]);
+  }, [historyPush, handlePathChange]);
 
   const value = useMemo(() => {
     return { currentPath, historyPush };
-  }, [currentPath, setCurrentPath]);
+  }, [currentPath, historyPush]);
 
   return (
     <RouterContext.Provider value={value}>{children}</RouterContext.Provider>

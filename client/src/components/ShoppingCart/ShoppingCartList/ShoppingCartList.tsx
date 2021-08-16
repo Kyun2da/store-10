@@ -1,4 +1,4 @@
-import React, { FC, Dispatch } from 'react';
+import React, { Dispatch } from 'react';
 import Checkbox from '@/components/Shared/Checkbox';
 import ShoppingCartItem from '@/components/ShoppingCart/ShopingCartItem';
 import { shoppingCartItem } from '@/types';
@@ -11,12 +11,12 @@ interface IShoppingCartListProps {
   removeFromCart: (ids: number[]) => void;
 }
 
-const ShoppingCartList: FC<IShoppingCartListProps> = ({
+const ShoppingCartList = ({
   shoppingCartItems,
   setShoppingCartItems,
   removeFromCart,
   checkedItems,
-}) => {
+}: IShoppingCartListProps) => {
   const setProductState = (index: number, state: Record<string, unknown>) => {
     shoppingCartItems.splice(index, 1, {
       ...shoppingCartItems[index],

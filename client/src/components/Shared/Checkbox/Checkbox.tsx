@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { CheckSVG } from '@/assets/svgs';
 import * as S from './styles';
 

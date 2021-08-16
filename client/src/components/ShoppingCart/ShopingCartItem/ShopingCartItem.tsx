@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from 'react';
+import React from 'react';
 import * as S from './styles';
 import { MinusSVG, PlusSVG, CloseSVG } from '@/assets/svgs';
 import { wonFormat } from '@/helper';
@@ -11,12 +11,12 @@ interface IShoppingCartItemProps {
   setProductState: (index: number, state: Record<string, unknown>) => void;
   removeFromCart: (ids: number[]) => void;
 }
-const ShoppingCartItem: FC<IShoppingCartItemProps> = ({
+const ShoppingCartItem = ({
   item,
   index,
   setProductState,
   removeFromCart,
-}) => {
+}: IShoppingCartItemProps) => {
   const onClickPlus = () => {
     setProductState(index, { count: item.count + 1 });
   };

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { CheckSVG } from '@/assets/svgs';
 import * as S from './styles';
 
@@ -10,14 +10,14 @@ interface IProps {
   className?: string;
   checked?: boolean;
 }
-const Checkbox: FC<IProps> = ({
+const Checkbox = ({
   label,
   onChange,
   value,
   className,
   checked,
   name,
-}) => {
+}: IProps) => {
   return (
     <S.Checkbox className={className}>
       <input

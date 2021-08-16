@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from './styles';
 import Card from '@/components/Card';
 import CardWrapper from '@/components/CardWrapper';

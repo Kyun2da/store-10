@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import React from 'react';
 import { Input } from '@/components/Shared/Input/style';
 import Rating from '@/components/Shared/Rating';
 import Title from '@/components/Shared/Title';
@@ -11,7 +11,7 @@ interface PolicyModalProps {
 
 // TODO: Input 타입을 조금 더 만들어야 하겠군뇨 호호호
 
-const PolicyModal: VFC<PolicyModalProps> = ({ toggleModal }) => {
+const PolicyModal = ({ toggleModal }: PolicyModalProps) => {
   return (
     <ModalLayout toggleModal={toggleModal}>
       <S.ModalHeader>상품후기 작성</S.ModalHeader>

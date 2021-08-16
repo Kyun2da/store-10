@@ -3,7 +3,6 @@ import React, {
   Dispatch,
   SetStateAction,
   useState,
-  VFC,
 } from 'react';
 import * as S from './styles';
 
@@ -19,10 +18,10 @@ export interface TabContextProps {
 
 export const Context = createContext<ContextProps>({
   value: 0,
-  setValue: () => {},
+  setValue: () => null,
 });
 
-const TabContext: VFC<TabContextProps> = ({ children }) => {
+const TabContext = ({ children }: TabContextProps) => {
   const [value, setValue] = useState(0);
 
   return (

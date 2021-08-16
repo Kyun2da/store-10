@@ -14,26 +14,28 @@ const initialItems = shoppingCart.map((item) => ({
   isChekced: true,
 }));
 
-const [shoppingCartItems, setShoppingCartItems] =
-  useState<shoppingCartItem[]>(initialItems);
+const Template: ComponentStory<typeof ShoppingCategoryList> = () => {
+  const [shoppingCartItems, setShoppingCartItems] =
+    useState<shoppingCartItem[]>(initialItems);
 
-const checkedItems = shoppingCartItems.filter((item) => item.isChekced);
+  const checkedItems = shoppingCartItems.filter((item) => item.isChekced);
 
-const removeFromCart = (ids: number[]) => {
-  const filteredItems = shoppingCartItems.filter(
-    (item) => !ids.includes(item.id)
+  const removeFromCart = (ids: number[]) => {
+    const filteredItems = shoppingCartItems.filter(
+      (item) => !ids.includes(item.id)
+    );
+
+    setShoppingCartItems(filteredItems);
+  };
+
+  return (
+    <ShoppingCategoryList
+      shoppingCartItems={shoppingCartItems}
+      checkedItems={checkedItems}
+      setShoppingCartItems={setShoppingCartItems}
+      removeFromCart={removeFromCart}
+    />
   );
-
-  setShoppingCartItems(filteredItems);
 };
-
-const Template: ComponentStory<typeof ShoppingCategoryList> = () => (
-  <ShoppingCategoryList
-    shoppingCartItems={shoppingCartItems}
-    checkedItems={checkedItems}
-    setShoppingCartItems={setShoppingCartItems}
-    removeFromCart={removeFromCart}
-  />
-);
 
 export const Default = Template.bind({});

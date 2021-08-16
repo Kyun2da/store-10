@@ -1,4 +1,4 @@
 import TabExample from './TabExample';
-import TabExample2 from './TabExample2';
+import ProductDetailTab from './ProductDetailTab';
 
-export { TabExample, TabExample2 };
+export { TabExample, ProductDetailTab };

@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from '@/components/Input';
+import { Input } from '@/components/Input';
 import Button from '@/components/Button';
 import * as S from './styles';
 import { Link } from '@/core/Router';

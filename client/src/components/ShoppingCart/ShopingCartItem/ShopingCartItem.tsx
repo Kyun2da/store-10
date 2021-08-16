@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC } from 'react';
 import * as S from './styles';
 import { MinusSVG, PlusSVG, CloseSVG } from '@/assets/svgs';
 import { wonFormat } from '@/helper';
-import Checkbox from '@/components/Checkbox';
+import Checkbox from '@/components/Shared/Checkbox';
 import { shoppingCartItem } from '@/types';
 
 interface IShoppingCartItemProps {

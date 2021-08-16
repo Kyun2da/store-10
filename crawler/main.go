@@ -75,7 +75,7 @@ func main() {
 					//짧은 시간내에 너무 많은 요청을 해서 오류가 발생하여 추가.
 					//쿠팡님 째성합니다...
 					//0.5초 슬립
-					time.Sleep(500000000)
+					time.Sleep(400000000)
 				}
 				mc.Sub[j] = sc
 			}
@@ -153,7 +153,7 @@ func getCategories(firstDepthCategory string) []MainCategory {
 			}
 
 			thirdHref, _ := ss.Attr("href")
-			subCategory = append(subCategory, SubCategory{thirdCategoryIdx, sF.CleanString(ss.Text()), thirdHref + "?eventCategory=breadcrumb&eventLabel=&page=2", new([]Item)})
+			subCategory = append(subCategory, SubCategory{thirdCategoryIdx, sF.CleanString(ss.Text()), thirdHref + "?eventCategory=breadcrumb&eventLabel=&page=1", new([]Item)})
 			thirdCategoryIdx++
 		})
 
@@ -174,8 +174,11 @@ func getSubCategoryItemsURLInfo(href string, items *[]Item) *[]Item {
 	_items := doc.Find(".baby-product-link")
 
 	_items.Each(func(_ int, s *goquery.Selection) {
+		tagImag := s.Find("dt.image img").First()
+		isAdult, _ := tagImag.Attr("src")
+
 		itemHref, _ := s.Attr("href")
-		if itemHref == "" {
+		if itemHref == "" || strings.Contains(isAdult, "adultProduct_plp.png") {
 			return
 		}
 		newItem := new(Item)
@@ -202,7 +205,10 @@ func getItemInfo(href string, item Item) Item {
 		return item
 	}
 	data := strings.Split(itemInfo.Text(), "exports.sdp = ")[1]
-	data = strings.Split(data, ";")[0]
+	data = strings.Split(data, ";\n")[0]
+	// if len(sdp) == 2 {
+	// 	data = strings.Split(data, ";")[0]
+	// }
 
 	var result map[string]interface{}
 	json.Unmarshal([]byte(data), &result)
@@ -210,7 +216,7 @@ func getItemInfo(href string, item Item) Item {
 
 	item.Title = fmt.Sprintf("%v", result["title"])
 
-	price := strings.Replace(doc.Find(".total-price").Text(), "원", "", -1)
+	price := strings.Replace(doc.Find(".total-price").First().Text(), "원", "", -1)
 	price = strings.Replace(sF.CleanString(price), ",", "", -1)
 
 	item.Price = price

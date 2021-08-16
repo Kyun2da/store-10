@@ -1,11 +1,11 @@
-import Rating from '@/components/Rating';
-import RatingChart from '@/components/RatingChart';
-import Title from '@/components/Title';
+import Rating from '@/components/Shared/Rating';
+import RatingChart from '@/components/Shared/RatingChart';
+import Title from '@/components/Shared/Title';
 import React from 'react';
 import * as S from '../styles';
-import Button from '@/components/Button';
+import Button from '@/components/Shared/Button';
 import useModal from '@/hooks/useModal';
-import { ReviewModal } from '@/components/Modal';
+import { ReviewModal } from '@/components/Shared/Modal';
 
 // TODO: 임시 데이터 형식입니다 - 당연히 나중에 바뀌게쬬?
 const dummyDataExample = [

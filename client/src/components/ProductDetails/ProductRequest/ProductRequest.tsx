@@ -1,5 +1,5 @@
-import Table from '@/components/Table';
-import Title from '@/components/Title';
+import Table from '@/components/Shared/Table';
+import Title from '@/components/Shared/Title';
 import React from 'react';
 import * as S from '../styles';
 

@@ -107,3 +107,42 @@ export const Textarea = styled.textarea<ITextarea>`
     font-family: 'Noto Sans', sans-serif;
   }
 `;
+
+export const FileInputButton = styled.div`
+  border-radius: 2rem;
+  padding: 2rem;
+  background-color: #ededed;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed #aaa;
+  cursor: pointer;
+
+  .helper-text {
+    color: #adadad;
+  }
+
+  &:hover {
+    opacity: 0.75;
+  }
+`;
+
+export const PreviewWrapper = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  gap: 2rem;
+
+  img {
+    object-fit: cover;
+    width: 20%;
+    border-radius: 2rem;
+  }
+`;
+
+export const ErrorMessage = styled.p`
+  margin-top: 1rem;
+  text-align: right;
+  color: ${({ theme }) => theme.color.error};
+`;

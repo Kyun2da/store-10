@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './styles';
 
 interface ITableProps {
+  fullWidth?: boolean;
   headers: {
     name: string;
     value: string;
@@ -9,9 +10,9 @@ interface ITableProps {
   items: Record<string, string | number>[];
 }
 
-const Table = ({ headers, items }: ITableProps) => {
+const Table = ({ headers, items, fullWidth }: ITableProps) => {
   return (
-    <S.Table>
+    <S.Table fullWidth>
       <thead>
         <S.TableRow className="table-header">
           {headers.map((col) => (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Input from './';
+import Input from './Input';
 
 export default {
   title: '컴포넌트/인풋',

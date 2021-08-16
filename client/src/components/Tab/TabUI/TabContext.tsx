@@ -14,6 +14,7 @@ interface ContextProps {
 
 export interface TabContextProps {
   children?: React.ReactNode;
+  sticky?: boolean;
 }
 
 export const Context = createContext<ContextProps>({

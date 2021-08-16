@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './styles';
 import { useParams } from '@/core/Router';
-import { ProductDetailTab } from '@/components/Tab';
+import { ProductDetailTab } from '@/components/Shared/Tab';
 import ProductInfo from '@/components/ProductDetails/ProductInfo';
 
 const Detail = () => {

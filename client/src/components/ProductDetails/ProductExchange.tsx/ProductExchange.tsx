@@ -1,4 +1,4 @@
-import Title from '@/components/Title';
+import Title from '@/components/Shared/Title';
 import React from 'react';
 import * as S from '../styles';
 

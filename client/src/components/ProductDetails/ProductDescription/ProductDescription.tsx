@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from '../styles';
 import { useParams } from '@/core/Router';
-import Title from '@/components/Title';
+import Title from '@/components/Shared/Title';
 
 const ProductDescription = () => {
   const { id } = useParams().params;

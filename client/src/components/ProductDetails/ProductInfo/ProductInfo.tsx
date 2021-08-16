@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from '../styles';
 import { HeartSVG, CartSVG } from '@/assets/svgs';
-import { NumberInput } from '@/components/Input';
-import Title from '@/components/Title';
+import { NumberInput } from '@/components/Shared/Input';
+import Title from '@/components/Shared/Title';
 import useNumberInput from '@/hooks/useNumberInput';
 import { wonFormat } from '@/helper';
 

@@ -36,6 +36,9 @@ export class Product extends InitEntity {
   @JoinColumn({ name: 'sub_category_id' })
   subCategory!: SubCategory;
 
+  @Column()
+  sub_category_id: number
+
   @OneToMany(() => Bookmark, (type) => type.product)
   bookmark!: Bookmark[];
 

@@ -12,6 +12,7 @@ export const Button = styled.button<IButtonProps>`
   border-radius: 4px;
   cursor: pointer;
   background-color: black;
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'inherit')};
 
   ${(props) => {
     if (props.size === 'Large') {

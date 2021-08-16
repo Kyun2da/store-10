@@ -7,9 +7,23 @@ export interface IInput {
   name: string;
   placeholder?: string;
   fullWidth?: boolean;
+  attributes?: Record<string, unknown>;
+  value?: string | number;
+  onFocus?: () => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ type, label, name, placeholder, fullWidth }: IInput) => {
+const Input = ({
+  type,
+  label,
+  name,
+  placeholder,
+  value,
+  attributes,
+  fullWidth,
+  onChange,
+  onFocus,
+}: IInput) => {
   return (
     <S.Input
       type={type}
@@ -17,6 +31,10 @@ const Input = ({ type, label, name, placeholder, fullWidth }: IInput) => {
       placeholder={placeholder}
       name={name}
       fullWidth={fullWidth}
+      value={value}
+      onChange={onChange}
+      onFocus={onFocus}
+      {...attributes}
     />
   );
 };

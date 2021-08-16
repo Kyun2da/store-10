@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+interface IModalWrapperProps {
+  width?: string;
+  height?: string;
+}
+
 export const ModalOverlay = styled.div`
   display: flex;
   background-color: rgba(1, 1, 1, 0.55);
@@ -13,15 +18,16 @@ export const ModalOverlay = styled.div`
   z-index: 9999999;
 `;
 
-export const ModalWrapper = styled.div`
+export const ModalWrapper = styled.div<IModalWrapperProps>`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   border-radius: 3rem;
   padding: 3rem;
-  width: 65%;
-  min-height: 55%;
   background-color: #fff;
+  width: ${(props) => props.width || '65%'};
+  height: ${(props) => props.height};
+  min-height: 55%;
 `;
 
 export const ModalInner = styled.div`

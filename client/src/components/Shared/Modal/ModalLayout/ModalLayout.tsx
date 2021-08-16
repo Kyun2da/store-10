@@ -4,15 +4,30 @@ import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
 
 interface CustomModalProps {
-  children: React.ReactElement[] | React.ReactElement | string;
+  children: React.ReactNode;
   toggleModal: () => void;
+  className?: string;
+  width?: string;
+  height?: string;
+  onClick?: () => void;
 }
 
-const CustomModal = ({ children, toggleModal }: CustomModalProps) => {
+const CustomModal = ({
+  children,
+  toggleModal,
+  className,
+  width,
+  height,
+  onClick,
+}: CustomModalProps) => {
   return (
     <Portal>
-      <S.ModalOverlay>
-        <S.ModalWrapper>
+      <S.ModalOverlay className={className} onClick={onClick}>
+        <S.ModalWrapper
+          width={width}
+          height={height}
+          onClick={(e) => e.stopPropagation()}
+        >
           <S.ModalInner>
             <S.ModalCloseButton onClick={toggleModal}>
               <CloseSVG width={25} height={25} stroke="#111" />

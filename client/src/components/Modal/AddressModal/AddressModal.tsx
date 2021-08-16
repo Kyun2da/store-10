@@ -16,31 +16,32 @@ const AddresssModal = ({
   modifyAddressData,
 }: IAddressModalProps) => {
   const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
-  const [name, setName] = useState(
-    modifyAddressData ? modifyAddressData.name : ''
-  );
-  const [postcode, setPostcode] = useState(
-    modifyAddressData ? modifyAddressData.postcode : ''
-  );
-  const [address, setAddress] = useState(
-    modifyAddressData ? modifyAddressData.address : ''
-  );
-  const [detailAddress, setDetailAddress] = useState(
-    modifyAddressData ? modifyAddressData.detailAddress : ''
-  );
-  const [phone, setPhone] = useState(
-    modifyAddressData ? modifyAddressData.phone : ''
-  );
-  const [message, setMessage] = useState(
-    modifyAddressData ? modifyAddressData.message : ''
-  );
-  const [isDefault, setIsDefault] = useState(
-    modifyAddressData ? modifyAddressData.isDefault : false
-  );
+  const [inputs, setInputs] = useState({
+    name: modifyAddressData ? modifyAddressData.name : '',
+    postcode: modifyAddressData ? modifyAddressData.postcode : '',
+    address: modifyAddressData ? modifyAddressData.address : '',
+    detailAddress: modifyAddressData ? modifyAddressData.detailAddress : '',
+    phone: modifyAddressData ? modifyAddressData.phone : '',
+    message: modifyAddressData ? modifyAddressData.message : '',
+    isDefault: modifyAddressData ? modifyAddressData.isDefault : false,
+  });
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setInputs({ ...inputs, [name]: value });
+  };
+
+  const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.currentTarget;
+    setInputs({ ...inputs, [name]: checked });
+  };
 
   const onCompleteSearchAddress = (data: Record<string, string>) => {
-    setAddress(data.address);
-    setPostcode(data.zonecode);
+    setInputs({
+      ...inputs,
+      address: data.address,
+      postcode: data.zonecode,
+    });
     setIsPostcodeOpen(false);
   };
 
@@ -53,7 +54,7 @@ const AddresssModal = ({
   };
 
   const onFocusDetailAddress = () => {
-    if (!postcode || !address) {
+    if (!inputs.postcode || !inputs.address) {
       setIsPostcodeOpen(true);
     }
   };
@@ -73,10 +74,8 @@ const AddresssModal = ({
           label="Outlined"
           name="name"
           placeholder="받는 사람"
-          value={name}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setName(e.currentTarget.value)
-          }
+          value={inputs.name}
+          onChange={onChangeInput}
         />
         <S.PostcodeWrapper>
           <Button
@@ -91,9 +90,9 @@ const AddresssModal = ({
           <Input
             type="text"
             label="Outlined"
-            name="name"
+            name="postcode"
             placeholder="우편번호 검색"
-            value={postcode}
+            value={inputs.postcode}
             onFocus={() => setIsPostcodeOpen(true)}
             attributes={{
               readOnly: true,
@@ -103,9 +102,9 @@ const AddresssModal = ({
         <Input
           type="text"
           label="Outlined"
-          name="name"
+          name="address"
           placeholder="주소"
-          value={address}
+          value={inputs.address}
           onFocus={() => setIsPostcodeOpen(true)}
           attributes={{
             readOnly: true,
@@ -114,39 +113,34 @@ const AddresssModal = ({
         <Input
           type="text"
           label="Outlined"
-          name="name"
+          name="detailAddress"
           placeholder="상세 주소"
-          value={detailAddress}
+          value={inputs.detailAddress}
           onFocus={onFocusDetailAddress}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setDetailAddress(e.currentTarget.value)
-          }
+          onChange={onChangeInput}
         />
         <Input
           type="text"
           label="Outlined"
-          name="name"
+          name="phone"
           placeholder="연락처"
-          value={phone}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setPhone(e.currentTarget.value)
-          }
+          value={inputs.phone}
+          onChange={onChangeInput}
         />
         <Input
           type="text"
           label="Outlined"
-          name="name"
-          value={message}
+          name="message"
+          value={inputs.message}
           placeholder="배송 요청사항"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setMessage(e.currentTarget.value)
-          }
+          onChange={onChangeInput}
         />
 
         <S.DefaultAddrssCheckbox
-          checked={isDefault}
+          name="isDefault"
+          checked={inputs.isDefault}
           label="기본 배송지로 설정"
-          onChange={() => setIsDefault(!isDefault)}
+          onChange={onChangeCheckbox}
         />
         {isPostcodeOpen && (
           <S.DuamPostWrapper>

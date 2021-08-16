@@ -5,6 +5,7 @@ import ModalLayout from './ModalLayout';
 import * as S from './styles';
 import { UploadSVG } from '@/assets/svgs';
 import Button from '@/components/Shared/Button';
+import Textarea from '../Input/Textarea';
 
 interface ReviewModalProps {
   toggleModal: () => void;
@@ -80,7 +81,12 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
 
         <S.Form>
           <Title level={5}>리뷰 남기기</Title>
-          <textarea placeholder="다른 구매자와 판매자에게 도움이 될 수 있도록 자세하고 솔직하게 리뷰 작성 부탁드려요!" />
+          <Textarea
+            placeholder="다른 구매자와 판매자에게 도움이 될 수 있도록 자세하고 솔직하게 리뷰 작성 부탁드려요!"
+            resize="vertical"
+            name="review-content"
+            fullWidth
+          />
         </S.Form>
       </S.ModalBody>
       <S.ModalButtonArea>

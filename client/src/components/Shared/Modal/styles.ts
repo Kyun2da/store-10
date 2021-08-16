@@ -156,18 +156,6 @@ export const Form = styled.form`
     color: ${({ theme }) => theme.color.error};
   }
 
-  textarea {
-    width: 100%;
-    height: 15rem;
-    padding: 2rem;
-    min-height: 6rem;
-    max-height: 20rem;
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-    resize: vertical;
-  }
-
   & + & {
     margin-top: 3rem;
   }

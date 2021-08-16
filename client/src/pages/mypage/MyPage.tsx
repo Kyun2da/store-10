@@ -12,19 +12,14 @@ const MyPage = () => {
   )?.name;
 
   const renderBody = () => {
-    if (contentValue === 'orderHistroy') {
-      return <div></div>;
-    } else if (contentValue === 'addresses') {
-      return <Addresses />;
-    } else if (contentValue === 'coupone') {
-      return <div></div>;
-    } else if (contentValue === 'inqurey') {
-      return <div></div>;
-    } else if (contentValue === 'review') {
-      return <div></div>;
-    } else {
-      return <div>404</div>;
-    }
+    // TODO: router Switch 사용 고민
+    if (contentValue === 'orderHistroy') return <div></div>;
+    if (contentValue === 'addresses') return <Addresses />;
+    if (contentValue === 'coupone') return <div></div>;
+    if (contentValue === 'inqurey') return <div></div>;
+    if (contentValue === 'review') return <div></div>;
+
+    return <div>404</div>;
   };
   return (
     <>

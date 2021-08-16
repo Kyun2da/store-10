@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import userRoutes from './user.router';
 import authRoutes from './auth.router';
-import { initProductData } from '@/loaders/dataInit';
+// import { initProductData } from '@/loaders/dataInit';
 import wrapAsync from '@/utils/wrapAsync';
 
 const router = Router();
@@ -11,6 +11,6 @@ router.get('/', (req, res) => {
 });
 router.use('/user', userRoutes);
 router.use('/auth', authRoutes);
-router.get('/initData', wrapAsync(initProductData));
+// router.get('/initData', wrapAsync(initProductData));
 
 export default router;

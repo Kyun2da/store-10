@@ -35,19 +35,21 @@ type IitemImages = {
 };
 
 export const initProductData = async () => {
-  for (const [_, mainCategory] of Object.entries(
+  for (const [, mainCategory] of Object.entries(
     ProductData as IProductData[] | unknown
   )) {
     const newMainCategory = await getConnection()
       .createQueryBuilder()
       .insert()
       .into(MainCategoty)
-      .values([{ id: mainCategory.id + 1, title: mainCategory.categortTitle.trim() }])
+      .values([
+        { id: mainCategory.id + 1, title: mainCategory.categortTitle.trim() },
+      ])
       .execute();
 
     const newMainId = newMainCategory.identifiers[0].id;
 
-    mainCategory.subCategory.forEach(async (subCategory, _) => {
+    mainCategory.subCategory.forEach(async (subCategory) => {
       const newSubcategory = await getConnection()
         .createQueryBuilder()
         .insert()
@@ -62,7 +64,7 @@ export const initProductData = async () => {
         .execute();
 
       const newSubcategoryId = newSubcategory.identifiers[0].id;
-      subCategory.item?.forEach(async (product, _) => {
+      subCategory.item?.forEach(async (product) => {
         const newProduct = await getConnection()
           .createQueryBuilder()
           .insert()

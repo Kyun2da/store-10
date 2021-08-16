@@ -12,15 +12,15 @@ export default ({ app }: { app: Application }) => {
   app.use('/api', apiRouter);
 
   app.use((req: Request, res: Response, next: NextFunction) => {
-    const err = new Error('Not Found') as any;
+    const err = new Error('Not Found');
     err.status = 404;
     next(err);
   });
 
-  app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  app.use((err: Error, req: Request, res: Response) => {
     console.log(err);
     res.status(err.status || 500).json({
-      error: err.mesage,
+      error: err.message,
     });
   });
 };

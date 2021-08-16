@@ -42,7 +42,7 @@ export const initProductData = async () => {
       .createQueryBuilder()
       .insert()
       .into(MainCategoty)
-      .values([{ id: mainCategory.id + 1, title: mainCategory.categortTitle }])
+      .values([{ id: mainCategory.id + 1, title: mainCategory.categortTitle.trim() }])
       .execute();
 
     const newMainId = newMainCategory.identifiers[0].id;
@@ -106,7 +106,7 @@ export const initProductData = async () => {
             type: 'thumbnail',
           });
         });
-        if (images.length) return;
+        if (!images.length) return;
 
         await getConnection()
           .createQueryBuilder()

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Addresses from './';
+import Addresses from '.';
 
 export default {
   title: '컴포넌트/배송지 관리',

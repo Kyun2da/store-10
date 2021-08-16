@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import * as S from './styles';
-import Button from '@/components/Button';
+import Button from '@/components/Shared/Button';
 import AddresssModal from '../Modal/AddressModal/AddressModal';
 import AddressesDummy from '@/dummies/addresses';
 import useModal from '@/hooks/useModal';
 import { IAddressData } from '@/types';
 import { PlusSVG } from '@/assets/svgs';
 
-interface IAddressesProps {
+interface IAddresseProps {
   className?: string;
 }
 
-const Addresses = ({ className }: IAddressesProps) => {
+const Addresse = ({ className }: IAddresseProps) => {
   const [isOpen, toggleModal] = useModal(false);
   const [modifyAddressData, setModifyAddressData] =
     useState<IAddressData | null>(null);
@@ -78,4 +78,4 @@ const Addresses = ({ className }: IAddressesProps) => {
   );
 };
 
-export default Addresses;
+export default Addresse;

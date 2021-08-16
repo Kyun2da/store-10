@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import ModalLayout from '../ModalLayout';
-import Checkbox from '@/components/Checkbox';
+import ModalLayout from '@/components/Shared/Modal//ModalLayout';
+import Checkbox from '@/components/Shared/Checkbox';
 
 export const ModalWrapper = styled(ModalLayout)`
   width: 100%;

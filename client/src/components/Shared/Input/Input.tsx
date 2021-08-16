@@ -9,7 +9,7 @@ export interface IInput {
   attributes?: Record<string, unknown>;
   value?: string | number;
   onFocus?: () => void;
-  onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = ({

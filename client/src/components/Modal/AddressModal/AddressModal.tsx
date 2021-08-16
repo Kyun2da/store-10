@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
-import ModalLayout from '../ModalLayout';
-import Input from '@/components/Input';
-import Button from '@/components/Button';
+import ModalLayout from '@/components/Shared/Modal/ModalLayout';
+import Input from '@/components/Shared/Input/Input';
+import Button from '@/components/Shared/Button';
 import { IAddressData } from '@/types';
 import * as S from './styles';
 
@@ -74,7 +74,9 @@ const AddresssModal = ({
           name="name"
           placeholder="받는 사람"
           value={name}
-          onChange={(e) => setName(e.currentTarget.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setName(e.currentTarget.value)
+          }
         />
         <S.PostcodeWrapper>
           <Button
@@ -116,7 +118,9 @@ const AddresssModal = ({
           placeholder="상세 주소"
           value={detailAddress}
           onFocus={onFocusDetailAddress}
-          onChange={(e) => setDetailAddress(e.currentTarget.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setDetailAddress(e.currentTarget.value)
+          }
         />
         <Input
           type="text"
@@ -124,7 +128,9 @@ const AddresssModal = ({
           name="name"
           placeholder="연락처"
           value={phone}
-          onChange={(e) => setPhone(e.currentTarget.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPhone(e.currentTarget.value)
+          }
         />
         <Input
           type="text"
@@ -132,7 +138,9 @@ const AddresssModal = ({
           name="name"
           value={message}
           placeholder="배송 요청사항"
-          onChange={(e) => setMessage(e.currentTarget.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setMessage(e.currentTarget.value)
+          }
         />
 
         <S.DefaultAddrssCheckbox

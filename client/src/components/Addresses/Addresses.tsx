@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as S from './styles';
-import Button from '@/components/Button';
+import Button from '@/components/Shared/Button';
 import AddresssModal from '../Modal/AddressModal/AddressModal';
 import AddressesDummy from '@/dummies/addresses';
 import useModal from '@/hooks/useModal';

@@ -1,4 +1,4 @@
-import React, { Dispatch, FC } from 'react';
+import React, { Dispatch } from 'react';
 import * as S from './styles';
 import { MY_PAGE_NAVIGATIONS } from '@/contstants';
 
@@ -12,10 +12,7 @@ interface IMyPageNavigation {
   name: string;
 }
 
-const MyPageAside: FC<IMypageAsideProps> = ({
-  setContentValue,
-  contentValue,
-}) => {
+const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
   const renderNavigations = () => {
     return MY_PAGE_NAVIGATIONS.map((nav: IMyPageNavigation) => (
       <li

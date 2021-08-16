@@ -12,6 +12,7 @@
     "sourceType": "module",
     "project": ["server/tsconfig.json"]
   },
+  "include": ["ormconfig.ts"],
   "ignorePatterns": ["node_modules/"],
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off" // ignore missing return type

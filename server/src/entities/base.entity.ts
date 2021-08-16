@@ -1,5 +1,4 @@
 import {
-  BaseEntity,
   CreateDateColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,

@@ -12,13 +12,14 @@ const Search = () => {
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.code == 'Enter') setRecentItems(searchValue);
     },
-    [searchValue]
+    [searchValue, setRecentItems]
   );
+
   const inputHandler = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       setSearchValue(e.currentTarget.value);
     },
-    [searchValue]
+    [setSearchValue]
   );
 
   return (

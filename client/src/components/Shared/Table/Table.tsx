@@ -12,7 +12,7 @@ interface ITableProps {
 
 const Table = ({ headers, items, fullWidth }: ITableProps) => {
   return (
-    <S.Table fullWidth>
+    <S.Table fullWidth={fullWidth}>
       <thead>
         <S.TableRow className="table-header">
           {headers.map((col) => (

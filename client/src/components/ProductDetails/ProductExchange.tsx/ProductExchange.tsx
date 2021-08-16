@@ -40,7 +40,7 @@ const ProductExchange = () => {
           주문은 마이페이지에서 취소 또는 변경하실 수 있습니다.
         </li>
         <li className="notice-item">
-          "상품준비중" 단계에서는 주문 취소 및 배송지 변경이 불가합니다.
+          “상품준비중“ 단계에서는 주문 취소 및 배송지 변경이 불가합니다.
         </li>
         <li className="notice-item">
           교환 및 반품은 배송완료 후 7일 이내에 가능합니다.

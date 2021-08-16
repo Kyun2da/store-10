@@ -8,6 +8,7 @@ export const Input = styled.input<IInput>`
   outline: none;
   border: none;
   border-bottom: 1px solid black;
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'inherit')};
 
   ${({ label }) => {
     if (label === 'Standard') {

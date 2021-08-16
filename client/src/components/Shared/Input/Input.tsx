@@ -6,11 +6,18 @@ export interface IInput {
   label: 'Standard' | 'Filled' | 'Outlined';
   name: string;
   placeholder?: string;
+  fullWidth?: boolean;
 }
 
-const Input = ({ type, label, name, placeholder }: IInput) => {
+const Input = ({ type, label, name, placeholder, fullWidth }: IInput) => {
   return (
-    <S.Input type={type} label={label} placeholder={placeholder} name={name} />
+    <S.Input
+      type={type}
+      label={label}
+      placeholder={placeholder}
+      name={name}
+      fullWidth={fullWidth}
+    />
   );
 };
 

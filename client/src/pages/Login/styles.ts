@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Title from '@/components/Title';
+import Title from '@/components/Shared/Title';
 import { GitHubSVG } from '@/assets/svgs';
 
 export const LoginTitle = styled(Title)`

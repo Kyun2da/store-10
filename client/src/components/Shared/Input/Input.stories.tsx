@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Input from './Input';
 
 export default {
-  title: '컴포넌트/인풋',
+  title: '컴포넌트/공통/인풋',
   component: Input,
 } as ComponentMeta<typeof Input>;
 

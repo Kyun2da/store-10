@@ -1,5 +1,5 @@
 import React, { FC, Dispatch } from 'react';
-import Checkbox from '@/components/Checkbox';
+import Checkbox from '@/components/Shared/Checkbox';
 import ShoppingCartItem from '@/components/ShoppingCart/ShopingCartItem';
 import { shoppingCartItem } from '@/types';
 import * as S from './styles';

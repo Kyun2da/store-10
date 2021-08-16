@@ -1,6 +1,6 @@
-import Button from '@/components/Button';
-import { Input } from '@/components/Input';
-import Title from '@/components/Title';
+import Button from '@/components/Shared/Button';
+import { Input } from '@/components/Shared/Input';
+import Title from '@/components/Shared/Title';
 import React from 'react';
 import * as S from './styles';
 

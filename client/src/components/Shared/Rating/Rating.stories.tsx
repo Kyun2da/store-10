@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Rating from './';
+import Rating from '.';
 
 export default {
-  title: '컴포넌트/별점평가',
+  title: '컴포넌트/공통/별점평가',
   component: Rating,
 } as ComponentMeta<typeof Rating>;
 

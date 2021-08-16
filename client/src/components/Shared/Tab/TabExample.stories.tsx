@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import TabExample from './TabExample';
 
 export default {
-  title: '컴포넌트/탭예시(1)',
+  title: '컴포넌트/공통/탭예시(1)',
   component: TabExample,
 } as ComponentMeta<typeof TabExample>;
 

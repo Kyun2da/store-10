@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import RatingChart from './';
+import RatingChart from '.';
 
 export default {
-  title: '컴포넌트/별점차트',
+  title: '컴포넌트/공통/별점차트',
   component: RatingChart,
 } as ComponentMeta<typeof RatingChart>;
 

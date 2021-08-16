@@ -1,5 +1,5 @@
 import React, { VFC } from 'react';
-import Portal from '@/components/Modal/Portal';
+import Portal from '@/components/Shared/Modal/Portal';
 import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
 

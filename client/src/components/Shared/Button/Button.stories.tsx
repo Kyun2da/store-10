@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Button from './';
+import Button from '.';
 
 export default {
-  title: '컴포넌트/버튼',
+  title: '컴포넌트/공통/버튼',
   component: Button,
 } as ComponentMeta<typeof Button>;
 
@@ -23,6 +23,7 @@ Black.args = {
   type: 'button',
   children: 'Button',
   color: 'black',
+
   size: 'Large',
 };
 

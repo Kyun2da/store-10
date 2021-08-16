@@ -1,7 +1,7 @@
 import React, { VFC } from 'react';
-import { Input } from '../Input/style';
-import Rating from '../Rating';
-import Title from '../Title';
+import { Input } from '@/components/Shared/Input/style';
+import Rating from '@/components/Shared/Rating';
+import Title from '@/components/Shared/Title';
 import ModalLayout from './ModalLayout';
 import * as S from './styles';
 

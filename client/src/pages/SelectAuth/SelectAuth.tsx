@@ -1,5 +1,5 @@
-import Button from '@/components/Button';
-import Title from '@/components/Title';
+import Button from '@/components/Shared/Button';
+import Title from '@/components/Shared/Title';
 import { Link, useHistory } from '@/core/Router';
 import { SITE_TITLE } from '@/utils/constant/common';
 import React from 'react';

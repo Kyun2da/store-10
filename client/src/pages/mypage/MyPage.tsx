@@ -15,7 +15,7 @@ const MyPage = () => {
     // TODO: router Switch 사용 고민
     if (contentValue === 'orderHistroy') return <div></div>;
     if (contentValue === 'address') return <Address />;
-    if (contentValue === 'coupone') return <div></div>;
+    if (contentValue === 'coupon') return <div></div>;
     if (contentValue === 'inqurey') return <div></div>;
     if (contentValue === 'review') return <div></div>;
 

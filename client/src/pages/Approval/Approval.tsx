@@ -1,6 +1,6 @@
-import Button from '@/components/Button';
-import Checkbox from '@/components/Checkbox';
-import Title from '@/components/Title';
+import Button from '@/components/Shared/Button';
+import Checkbox from '@/components/Shared/Checkbox';
+import Title from '@/components/Shared/Title';
 import { useHistory, useParams } from '@/core/Router';
 import {
   PERSONAL_INFO_TEXT,

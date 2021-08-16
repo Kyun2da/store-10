@@ -67,6 +67,7 @@ export const Router = ({ children, initialPath }: IRouter) => {
 
   const historyPush = useCallback((pathname: string, data = {}) => {
     window.history.pushState(data, pathname, window.location.origin + pathname);
+    window.scrollTo(0, 0);
     setCurrentPath(pathname);
   }, []);
 

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import * as S from './styles';
 import { wonFormat } from '@/helper';
-import Button from '@/components/Button';
+import Button from '@/components/Shared/Button';
 
 interface ISShoppingCartSummaryProps {
   totalPrice: number;

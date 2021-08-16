@@ -11,7 +11,7 @@ export const Links = () => {
       <Link to="/login">
         <UserSVG />
       </Link>
-      <Link to="/login">
+      <Link to="/mypage">
         <HeartSVG />
       </Link>
       <Link to="/cart">

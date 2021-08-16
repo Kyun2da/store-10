@@ -40,6 +40,37 @@ export const Form = styled.form`
     margin-bottom: 1.5rem;
   }
 
+  .category-selection {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+
+    .each-category {
+      padding: 2rem;
+      border-radius: 2rem;
+      background-color: ${({ theme }) => theme.color.primary2};
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      width: 30%;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.85;
+      }
+
+      &.selected {
+        color: #fff;
+        background-color: ${({ theme }) => theme.color.primary};
+
+        svg {
+          stroke: #fff;
+          fill: #fff;
+        }
+      }
+    }
+  }
+
   .preview-wrapper {
     margin-top: 2rem;
     display: flex;

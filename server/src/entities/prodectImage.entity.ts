@@ -1,20 +1,24 @@
-import {
-  Entity,
-  ManyToOne,
-  JoinColumn,
-  Column,
-} from 'typeorm';
+import { Entity, ManyToOne, JoinColumn, Column } from 'typeorm';
 import { InitEntity } from './base.entity';
 
 import { Product } from './product.entity';
 
+enum ImageType {
+  Detail = 'detail',
+  Origin = 'origin',
+  Preload = 'preload',
+  Thumbnail = 'thumbnail',
+}
 @Entity('product_image')
 export class ProductImage extends InitEntity {
   @Column({ type: 'text' })
   url: string;
 
   @Column({ type: 'tinyint' })
-  type: boolean;
+  isThumbnail: boolean;
+
+  @Column({ type: 'enum', enum: ImageType })
+  type: ImageType;
 
   @ManyToOne(() => Product, (type) => type.id, {
     nullable: false,
@@ -23,4 +27,7 @@ export class ProductImage extends InitEntity {
   })
   @JoinColumn({ name: 'product_id' })
   product!: Product;
+
+  @Column()
+  product_id: number;
 }

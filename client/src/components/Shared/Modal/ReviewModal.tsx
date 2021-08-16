@@ -38,8 +38,6 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
     }
   };
 
-  console.log(fileImg);
-
   return (
     <ModalLayout toggleModal={toggleModal}>
       <S.ModalHeader>상품후기 작성</S.ModalHeader>
@@ -87,7 +85,7 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
       </S.ModalBody>
       <S.ModalButtonArea>
         <Button color="primary" type="submit" fullWidth>
-          확인
+          완료
         </Button>
       </S.ModalButtonArea>
     </ModalLayout>

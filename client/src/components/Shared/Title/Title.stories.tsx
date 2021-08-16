@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Title from './';
+import Title from '.';
 
 export default {
-  title: '컴포넌트/타이틀',
+  title: '컴포넌트/공통/타이틀',
   component: Title,
   argTypes: {
     level: {

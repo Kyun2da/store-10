@@ -4,7 +4,7 @@ import ProductDescription from '@/components/ProductDetails/ProductDescription';
 import { TabWrapper, Tabs, TabPanel, Tab } from './TabUI';
 import ProductExchange from '@/components/ProductDetails/ProductExchange.tsx/ProductExchange';
 import ProductReview from '@/components/ProductDetails/ProductReview';
-import ProductRequest from '../ProductDetails/ProductRequest';
+import ProductRequest from '../../ProductDetails/ProductRequest';
 
 const ProductDetailTab = () => {
   return (

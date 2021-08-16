@@ -1,10 +1,13 @@
 import styled from 'styled-components';
+import Title from '@/components/Shared/Title';
 
 export const MyPageContainer = styled.div`
   position: relative;
   display: flex;
   width: 100%;
   height: 100%;
+  min-height: 90vh;
+  padding-bottom: 2rem;
 `;
 
 export const Mypage = styled.div`
@@ -14,6 +17,10 @@ export const Mypage = styled.div`
   border-radius: 0.8rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+`;
+
+export const MyPageTitle = styled(Title)`
+  padding-bottom: 2rem;
 `;
 
 export const MyPagePointBackground = styled.div`

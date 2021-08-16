@@ -7,3 +7,14 @@ export interface shoppingCartItem {
   deliveryFee: number;
   discount: number;
 }
+
+export interface IAddressData {
+  id: number;
+  name: string;
+  postcode: string;
+  address: string;
+  detailAddress: string;
+  phone: string;
+  message: string;
+  isDefault: boolean;
+}

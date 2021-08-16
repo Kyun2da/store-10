@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import React from 'react';
 import * as S from './styles';
 import {
   HeartSVG as HeartButton,
@@ -11,7 +11,7 @@ interface CardProps {
   discount?: number;
 }
 
-const Card: VFC<CardProps> = ({ bgColor, discount }) => {
+const Card = ({ bgColor, discount }: CardProps) => {
   // 나중에 데이터를 가져와서 넣어주는 식으로 바꾸어 봅시다
 
   const handleClick = (e: React.MouseEvent) => {

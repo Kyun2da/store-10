@@ -1,8 +1,8 @@
-import React, { VFC } from 'react';
+import React from 'react';
 import { TabContextProps } from './TabContext';
 import * as S from './styles';
 
-const Tabs: VFC<TabContextProps> = ({ children, sticky }) => {
+const Tabs = ({ children, sticky }: TabContextProps) => {
   return <S.TabTitleArea sticky={sticky}>{children}</S.TabTitleArea>;
 };
 

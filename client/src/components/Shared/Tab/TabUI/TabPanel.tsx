@@ -1,4 +1,4 @@
-import React, { useContext, VFC } from 'react';
+import React, { useContext } from 'react';
 import * as S from './styles';
 import { Context } from './TabContext';
 
@@ -7,7 +7,7 @@ interface TabPanelProps {
   index: number;
 }
 
-const TabPanel: VFC<TabPanelProps> = ({ children, index }) => {
+const TabPanel = ({ children, index }: TabPanelProps) => {
   const { value } = useContext(Context);
 
   return (

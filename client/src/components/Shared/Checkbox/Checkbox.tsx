@@ -10,14 +10,14 @@ interface IProps {
   className?: string;
   checked?: boolean;
 }
-const Checkbox: FC<IProps> = ({
+const Checkbox = ({
   label,
   onChange,
   value,
   className,
   checked,
   name,
-}) => {
+}: IProps) => {
   return (
     <S.Checkbox className={className}>
       <input

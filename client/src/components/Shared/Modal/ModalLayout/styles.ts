@@ -14,17 +14,20 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   border-radius: 3rem;
   padding: 3rem;
   width: 65%;
-  height: 55%;
+  min-height: 55%;
   background-color: #fff;
 `;
 
 export const ModalInner = styled.div`
   position: relative;
   display: flex;
+  flex: 1;
   gap: 2rem;
   flex-direction: column;
   height: 100%;

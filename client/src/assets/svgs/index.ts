@@ -14,3 +14,4 @@ export { default as InstagramSVG } from '@/assets/svgs/instagram.svg';
 export { default as EmailSVG } from '@/assets/svgs/email.svg';
 export { default as AlertSVG } from '@/assets/svgs/alert.svg';
 export { default as GitHubSVG } from '@/assets/svgs/github.svg';
+export { default as UploadSVG } from '@/assets/svgs/upload.svg';

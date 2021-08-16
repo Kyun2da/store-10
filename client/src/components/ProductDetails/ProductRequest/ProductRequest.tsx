@@ -1,7 +1,10 @@
+import Button from '@/components/Shared/Button';
 import Table from '@/components/Shared/Table';
 import Title from '@/components/Shared/Title';
 import React from 'react';
 import * as S from '../styles';
+import useModal from '@/hooks/useModal';
+import { RequestModal } from '@/components/Shared/Modal';
 
 const headers = [
   { name: '번호', value: 'number' },
@@ -47,12 +50,27 @@ const items = [
 ];
 
 const ProductRequest = () => {
+  const [isOpen, toggleModal] = useModal(false);
+
   return (
     <S.PanelWrapper>
-      <Title level={5} className="title">
-        상품문의
-      </Title>
+      <S.TopArea>
+        <Title className="title" level={5}>
+          상품문의 ({items.length})
+        </Title>
+        <Button
+          size="Default"
+          color="primary"
+          type="button"
+          onClick={toggleModal}
+        >
+          작성하기
+        </Button>
+      </S.TopArea>
+
       <Table fullWidth headers={headers} items={items} />
+
+      {isOpen && <RequestModal toggleModal={toggleModal} />}
     </S.PanelWrapper>
   );
 };

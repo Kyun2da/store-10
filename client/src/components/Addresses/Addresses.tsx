@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as S from './styles';
 import Button from '@/components/Shared/Button';
-import AddresssModal from '../Modal/AddressModal/AddressModal';
+import { AddressModal } from '@/components/Shared/Modal';
 import AddressesDummy from '@/dummies/addresses';
 import useModal from '@/hooks/useModal';
 import { IAddressData } from '@/types';
@@ -69,7 +69,7 @@ const Addresses = ({ className }: IAddressesProps) => {
       </S.AddressList>
 
       {isOpen && (
-        <AddresssModal
+        <AddressModal
           modifyAddressData={modifyAddressData}
           toggleModal={toggleModal}
         />

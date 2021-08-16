@@ -6,6 +6,7 @@ export interface IInput {
   label: 'Standard' | 'Filled' | 'Outlined';
   name: string;
   placeholder?: string;
+  fullWidth?: boolean;
   attributes?: Record<string, unknown>;
   value?: string | number;
   onFocus?: () => void;
@@ -19,6 +20,7 @@ const Input = ({
   placeholder,
   value,
   attributes,
+  fullWidth,
   onChange,
   onFocus,
 }: IInput) => {
@@ -28,6 +30,7 @@ const Input = ({
       label={label}
       placeholder={placeholder}
       name={name}
+      fullWidth={fullWidth}
       value={value}
       onChange={onChange}
       onFocus={onFocus}

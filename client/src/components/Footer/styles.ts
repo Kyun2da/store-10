@@ -21,6 +21,10 @@ export const Footer = styled.div`
     background-image: linear-gradient(105deg, #111 10%, #fff 70%);
     opacity: 0.1;
   }
+
+  .container {
+    margin: 0 auto;
+  }
 `;
 
 export const FooterTabs = styled.div`

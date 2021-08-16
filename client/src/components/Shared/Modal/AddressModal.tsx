@@ -11,7 +11,7 @@ interface IAddressModalProps {
   modifyAddressData?: IAddressData | null;
 }
 
-const AddresssModal = ({
+const AddressModal = ({
   toggleModal,
   modifyAddressData,
 }: IAddressModalProps) => {
@@ -157,4 +157,4 @@ const AddresssModal = ({
   );
 };
 
-export default AddresssModal;
+export default AddressModal;

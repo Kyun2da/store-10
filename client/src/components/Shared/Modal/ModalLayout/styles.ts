@@ -19,17 +19,21 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalWrapper = styled.div<IModalWrapperProps>`
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   border-radius: 3rem;
   padding: 3rem;
   background-color: #fff;
   width: ${(props) => props.width || '65%'};
-  height: ${(props) => props.height || '55%'};
+  height: ${(props) => props.height};
+  min-height: 55%;
 `;
 
 export const ModalInner = styled.div`
   position: relative;
   display: flex;
+  flex: 1;
   gap: 2rem;
   flex-direction: column;
   height: 100%;

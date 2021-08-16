@@ -56,7 +56,7 @@ const GlobalStyle = createGlobalStyle`
 
   .container {
     max-width: ${PC_RESOLUTION}px;
-    margin: auto;
+    margin: 5rem auto;
     flex: 1;
   }
 

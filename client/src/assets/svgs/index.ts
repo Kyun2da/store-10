@@ -15,3 +15,6 @@ export { default as EmailSVG } from '@/assets/svgs/email.svg';
 export { default as AlertSVG } from '@/assets/svgs/alert.svg';
 export { default as GitHubSVG } from '@/assets/svgs/github.svg';
 export { default as UploadSVG } from '@/assets/svgs/upload.svg';
+export { default as GiftSVG } from '@/assets/svgs/gift.svg';
+export { default as PackageSVG } from '@/assets/svgs/package.svg';
+export { default as ExchageSVG } from '@/assets/svgs/exchange.svg';

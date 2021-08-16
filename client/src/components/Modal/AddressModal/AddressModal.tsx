@@ -142,7 +142,7 @@ const AddresssModal = ({
         />
         {isPostcodeOpen && (
           <S.DuamPostWrapper>
-            <DaumPostcode onComplete={onCompleteSearchAddress} height={500} />
+            <DaumPostcode onComplete={onCompleteSearchAddress} height="50rem" />
           </S.DuamPostWrapper>
         )}
       </S.ModalBody>

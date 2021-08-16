@@ -4,7 +4,7 @@ import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
 
 interface CustomModalProps {
-  children: React.ReactElement[] | React.ReactElement | string;
+  children: React.ReactNode;
   toggleModal: () => void;
   className?: string;
   width?: string;

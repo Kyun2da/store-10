@@ -43,7 +43,7 @@ export const DuamPostWrapper = styled.div`
   right: 0;
   bottom: 0;
   transform: translate(-50%, -50%);
-  width: 38rem;
+  width: 36rem;
   height: 50rem;
   background-color: rgba(1, 1, 1, 0.55);
 `;

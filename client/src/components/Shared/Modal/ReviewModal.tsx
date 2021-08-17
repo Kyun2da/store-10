@@ -6,6 +6,7 @@ import * as S from './styles';
 import Button from '@/components/Shared/Button';
 import { FileInput, Textarea } from '@/components/Shared/Input';
 import useFileInput from '@/hooks/useFileInput';
+import Form from '@/components/Shared/Form';
 
 interface ReviewModalProps {
   toggleModal: () => void;
@@ -27,34 +28,35 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
       <S.ModalHeader>상품후기 작성</S.ModalHeader>
       <S.ModalDivider />
       <S.ModalBody>
-        <S.Form>
-          <Title level={5}>별점 매기기</Title>
-          <Rating rating={4} uniqueId="thisisuniqueid" />
-        </S.Form>
-
-        <S.Form>
+        <Form gap={3}>
+          <div className="input-wrapper">
+            <Title level={5}>별점 매기기</Title>
+            <Rating rating={4} uniqueId="thisisuniqueid" />
+          </div>
           <Title level={5}>사진 업로드 (최대 3장)</Title>
 
-          <FileInput
-            fileRef={fileRef}
-            name="image-uploader"
-            fileImgs={fileImgs}
-            isError={isError}
-            handleClickOnFileInput={handleClickOnFileInput}
-            handleUploadFile={handleUploadFile}
-            hidden
-          />
-        </S.Form>
+          <div className="input-wrapper">
+            <FileInput
+              fileRef={fileRef}
+              name="image-uploader"
+              fileImgs={fileImgs}
+              isError={isError}
+              handleClickOnFileInput={handleClickOnFileInput}
+              handleUploadFile={handleUploadFile}
+              hidden
+            />
+          </div>
 
-        <S.Form>
-          <Title level={5}>리뷰 남기기</Title>
-          <Textarea
-            placeholder="다른 구매자와 판매자에게 도움이 될 수 있도록 자세하고 솔직하게 리뷰 작성 부탁드려요!"
-            resize="vertical"
-            name="review-content"
-            fullWidth
-          />
-        </S.Form>
+          <div className="input-wrapper">
+            <Title level={5}>리뷰 남기기</Title>
+            <Textarea
+              placeholder="다른 구매자와 판매자에게 도움이 될 수 있도록 자세하고 솔직하게 리뷰 작성 부탁드려요!"
+              resize="vertical"
+              name="review-content"
+              fullWidth
+            />
+          </div>
+        </Form>
       </S.ModalBody>
       <S.ModalButtonArea>
         <Button color="primary" type="submit" fullWidth>

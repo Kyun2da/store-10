@@ -7,6 +7,7 @@ export interface IInputContainer {
 
 export interface IInputLabel {
   label: 'Standard' | 'Filled' | 'Outlined';
+  error?: boolean;
 }
 export interface IInput {
   type: 'text' | 'password' | 'number';
@@ -16,6 +17,8 @@ export interface IInput {
   placeholder?: string;
   attributes?: Record<string, unknown>;
   value?: string | number;
+  error?: boolean;
+  helperText?: string;
   onFocus?: () => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -29,6 +32,8 @@ const Input = ({
   value,
   attributes,
   fullWidth,
+  error,
+  helperText,
   onChange,
   onFocus,
 }: IInput & IInputContainer) => {
@@ -51,6 +56,7 @@ const Input = ({
           className={isFocus ? 'focusing' : ''}
           onClick={onClickLabel}
           label={label}
+          error={error}
         >
           {labelName}
         </S.Label>
@@ -65,6 +71,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         labelName={labelName}
+        error={error}
         onFocus={() => {
           onFocus;
           setFocus(true);
@@ -72,6 +79,7 @@ const Input = ({
         onBlur={onBlurInput}
         {...attributes}
       />
+      {error ? <S.ErrorText>{helperText}</S.ErrorText> : null}
     </S.InputContainer>
   );
 };

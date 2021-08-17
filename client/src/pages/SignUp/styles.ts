@@ -18,7 +18,7 @@ export const FormContainer = styled.form`
 
   input,
   button {
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
   }
 `;
 
@@ -26,7 +26,7 @@ export const EmailContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  input {
+  div {
     flex: 2;
     margin-right: 2rem;
   }

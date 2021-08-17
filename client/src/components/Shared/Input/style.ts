@@ -13,11 +13,12 @@ export const Label = styled.label<IInputLabel>`
     transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
   font-size: 1.8rem;
   cursor: text;
-  ${({ label }) => {
+  ${({ label, error }) => {
     console.log(label);
     if (label === 'Standard' || label === 'Outlined') {
       return css`
-        color: ${({ theme }) => theme.color.placeholder};
+        color: ${({ theme }) =>
+          error ? theme.color.error : theme.color.placeholder};
       `;
     } else if (label === 'Filled') {
       return css`
@@ -26,12 +27,16 @@ export const Label = styled.label<IInputLabel>`
     }
   }}
 
-  transform: translate(12px, 8px) scale(1);
+  transform: translate(12px, 12px) scale(1);
   line-height: 2rem;
   &.focusing {
     transform: translate(6px, -20px) scale(0.75);
     transform-origin: top left;
-    color: #2ac1bc;
+    ${({ error }) => {
+      return css`
+        color: ${({ theme }) => (error ? theme.color.error : '#2ac1bc')};
+      `;
+    }}
   }
 `;
 
@@ -41,14 +46,17 @@ export const Input = styled.input<IInput>`
   background-color: transparent;
   outline: none;
   border: none;
-  border-bottom: 1px solid black;
   width: 100%;
+  height: 46px;
 
-  ${({ label, labelName }) => {
+  ${({ label, labelName, error }) => {
     if (label === 'Standard') {
       return css`
+        border-bottom: ${({ theme }) =>
+          error ? `1px solid ${theme.color.error}` : '1px solid black'};
         &:focus {
-          border-bottom: 1px solid #2ac1bc;
+          border-bottom: ${({ theme }) =>
+            error ? `2px solid ${theme.color.error}` : '1px solid #2ac1bc'};
         }
 
         &::placeholder {
@@ -58,11 +66,13 @@ export const Input = styled.input<IInput>`
       `;
     } else if (label === 'Outlined') {
       return css`
-        border: 1px solid #c1c5c5;
+        border: ${({ theme }) =>
+          error ? `1px solid ${theme.color.error}` : '1px solid #c1c5c5'};
         border-radius: 10px;
         background-color: white;
         &:focus {
-          border: 1px solid #2ac1bc;
+          border: ${({ theme }) =>
+            error ? `2px solid ${theme.color.error}` : '1px solid #2ac1bc'};
           outline: none;
         }
 
@@ -73,11 +83,13 @@ export const Input = styled.input<IInput>`
       `;
     } else if (label === 'Filled') {
       return css`
-        border: none;
+        border: ${({ theme }) =>
+          error ? `1px solid ${theme.color.error}` : 'none'};
         border-radius: 10px;
         background-color: #c1c5c5;
         &:focus {
-          border: 1px solid #2ac1bc;
+          border: ${({ theme }) =>
+            error ? `2px solid ${theme.color.error}` : '1px solid #2ac1bc'};
           outline: none;
         }
 
@@ -88,6 +100,10 @@ export const Input = styled.input<IInput>`
       `;
     }
   }}
+`;
+
+export const ErrorText = styled.span`
+  color: red;
 `;
 
 export const NumberInputArea = styled.div`

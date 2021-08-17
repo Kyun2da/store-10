@@ -6,6 +6,9 @@ import Header from './';
 export default {
   title: '컴포넌트/헤더',
   component: Header,
+  parameters: {
+    layout: 'fullscreen',
+  },
 } as ComponentMeta<typeof Header>;
 
 const Template: ComponentStory<typeof Header> = () => <Header />;

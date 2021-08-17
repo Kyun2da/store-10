@@ -1,6 +1,44 @@
 import styled, { css } from 'styled-components';
-import { IInput } from './Input';
 import { ITextarea } from './Textarea';
+import { IInput, IInputContainer, IInputLabel } from './Input';
+
+export const InputContainer = styled.div<IInputContainer>`
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'inherit')};
+`;
+
+export const Label = styled.label<IInputLabel>`
+  position: absolute;
+  background-color: transparent;
+  transition: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
+    transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  font-size: 1.8rem;
+  cursor: text;
+  transform: translate(12px, 12px) scale(1);
+  line-height: 2rem;
+
+  ${({ label, error }) => {
+    if (label === 'Standard' || label === 'Outlined') {
+      return css`
+        color: ${({ theme }) =>
+          error ? theme.color.error : theme.color.placeholder};
+      `;
+    } else if (label === 'Filled') {
+      return css`
+        color: ${({ theme }) => theme.color['off-white']};
+      `;
+    }
+  }}
+
+  &.focusing {
+    transform: translate(6px, -20px) scale(0.75);
+    transform-origin: top left;
+    ${({ error }) => {
+      return css`
+        color: ${({ theme }) => (error ? theme.color.error : '#2ac1bc')};
+      `;
+    }}
+  }
+`;
 
 export const Input = styled.input<IInput>`
   padding: 1rem;
@@ -8,50 +46,85 @@ export const Input = styled.input<IInput>`
   background-color: transparent;
   outline: none;
   border: none;
-  border-bottom: 1px solid black;
-  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'inherit')};
+  width: 100%;
+  height: 46px;
 
-  ${({ label }) => {
+  ${({ label, labelName, error }) => {
     if (label === 'Standard') {
       return css`
+        border-bottom: ${({ theme }) =>
+          error ? `1px solid ${theme.color.error}` : '1px solid black'};
         &:focus {
-          border-bottom: 1px solid #2ac1bc;
+          border-bottom: ${({ theme }) =>
+            error ? `2px solid ${theme.color.error}` : '1px solid #2ac1bc'};
         }
 
-        ::placeholder {
-          color: #c1c5c5;
+        &::placeholder {
+          color: ${({ theme }) =>
+            labelName ? 'transparent' : theme.color.placeholder};
+        }
+
+        &.focusing {
+          &::placeholder {
+            color: ${({ theme }) => theme.color.placeholder};
+          }
         }
       `;
     } else if (label === 'Outlined') {
       return css`
-        border: 1px solid #c1c5c5;
+        border: ${({ theme }) =>
+          error ? `1px solid ${theme.color.error}` : '1px solid #c1c5c5'};
         border-radius: 10px;
         background-color: white;
         &:focus {
-          border: 1px solid #2ac1bc;
+          border: ${({ theme }) =>
+            error ? `2px solid ${theme.color.error}` : '1px solid #2ac1bc'};
           outline: none;
         }
 
-        ::placeholder {
-          color: #c1c5c5;
+        &::placeholder {
+          color: ${({ theme }) =>
+            labelName ? 'transparent' : theme.color.placeholder};
+        }
+
+        &.focusing {
+          &::placeholder {
+            color: ${({ theme }) => theme.color.placeholder};
+          }
         }
       `;
     } else if (label === 'Filled') {
       return css`
-        border: none;
+        border: ${({ theme }) =>
+          error ? `1px solid ${theme.color.error}` : 'none'};
         border-radius: 10px;
         background-color: #c1c5c5;
         &:focus {
-          border: 1px solid #2ac1bc;
+          border: ${({ theme }) =>
+            error ? `2px solid ${theme.color.error}` : '1px solid #2ac1bc'};
           outline: none;
         }
 
-        ::placeholder {
-          color: white;
+        &::placeholder {
+          color: ${({ theme }) =>
+            labelName ? 'transparent' : theme.color['off-white']};
+        }
+
+        &.focusing {
+          &::placeholder {
+            color: ${({ theme }) => theme.color['off-white']};
+          }
         }
       `;
     }
   }}
+`;
+
+export const ErrorText = styled.div`
+  color: ${({ theme }) => theme.color.error};
+  position: absolute;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
 `;
 
 export const NumberInputArea = styled.div`

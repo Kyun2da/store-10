@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 
+const COUNT_STAR = 5;
+
 const RatingSetter = () => {
   const [isCheck, setIsCheck] = useState<string[]>([]);
   const [rate, setRate] = useState<number>(0);
 
   useEffect(() => {
-    for (let i = 0; i < 5; i++) {
-      setIsCheck(new Array(5).fill('outlined'));
+    for (let i = 0; i < COUNT_STAR; i++) {
+      setIsCheck(new Array(COUNT_STAR).fill('outlined'));
     }
   }, []);
 
   const handleClickOnStar = (idx: number) => {
     const ratings: string[] = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < COUNT_STAR; i++) {
       if (i <= idx) {
         ratings.push('filled');
       } else {
@@ -26,7 +28,7 @@ const RatingSetter = () => {
 
   return (
     <S.Rating>
-      {new Array(5).fill(1).map((star, idx) => (
+      {new Array(COUNT_STAR).fill(1).map((star, idx) => (
         <svg
           key={star + Math.random().toString(30)}
           width="25"

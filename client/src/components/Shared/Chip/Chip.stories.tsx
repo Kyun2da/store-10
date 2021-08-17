@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Chip from './Chip';
+import Chip from './';
 
 export default {
   title: '컴포넌트/공통/칩',
@@ -9,4 +9,6 @@ export default {
 } as ComponentMeta<typeof Chip>;
 
 const Template: ComponentStory<typeof Chip> = (args) => <Chip {...args} />;
-export const Standard = Template.bind({});
+
+export const Default = Template.bind({});
+Default.args = { children: '기본칩' };

@@ -4,6 +4,7 @@ export const MyPageAside = styled.aside`
   flex: 0 0 24rem;
   background: ${({ theme }) => theme.color.body};
   padding: 3.2rem;
+  font-family: BMDOHYEON;
 `;
 
 export const MyPageUserInfo = styled.section`
@@ -33,6 +34,7 @@ export const MyPageUserName = styled.h1`
   margin-top: 1.6rem;
   ${({ theme }) => theme.fontWeight.l};
   ${({ theme }) => theme.fontSize.l};
+  text-align: left;
 `;
 
 export const MyPageNav = styled.nav`

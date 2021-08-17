@@ -30,6 +30,8 @@ export const CollapseHeader = styled.div<ICollapse>`
 export const CollapseBody = styled.div`
   display: flex;
   flex-direction: column;
+  ${({ theme }) => theme.fontSize.m};
+  ${({ theme }) => theme.fontWeight.m};
 `;
 
 export const CollaspeRow = styled.div<ICollapse>`
@@ -47,7 +49,7 @@ export const CollaspeRow = styled.div<ICollapse>`
   }
 
   &:hover {
-    background-color: #fcfcfc;
+    background-color: ${({ theme }) => theme.color.background};
     opacity: 0.85;
   }
 `;
@@ -72,6 +74,7 @@ export const CollapseDetails = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 2rem;
+  color: ${({ theme }) => theme.color['text-color']};
 
   svg {
     stroke: ${({ theme }) => theme.color['text-color']};
@@ -79,6 +82,10 @@ export const CollapseDetails = styled.div`
 
   p {
     flex: 1;
+  }
+
+  pre {
+    white-space: pre-wrap;
   }
 
   & + & {

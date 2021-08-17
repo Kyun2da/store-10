@@ -9,9 +9,10 @@ interface ICollapse {
   }[];
   items: Record<string, string | number>[];
   gaps?: string; // '1fr 2fr 1fr 1fr 1fr'
+  forNotice?: boolean; // only for Notice page
 }
 
-const Collapse = ({ headers, items, gaps }: ICollapse) => {
+const Collapse = ({ headers, items, gaps, forNotice }: ICollapse) => {
   const count = items.length;
   const [isActive, setIsActive] = useState<string[]>([]);
 
@@ -28,8 +29,6 @@ const Collapse = ({ headers, items, gaps }: ICollapse) => {
     });
     setIsActive(initialState);
   }, [count]);
-
-  console.log(isActive);
 
   return (
     <S.Collapse>
@@ -51,24 +50,32 @@ const Collapse = ({ headers, items, gaps }: ICollapse) => {
                 <p key={header.value}>{item[header.value]}</p>
               ))}
             </S.CollaspeRow>
+
             <S.CollapsePanel
               className={
                 isActive[idx] === `collapse-item-${idx}` ? 'active' : ''
               }
             >
-              <S.CollapseDetails>
-                <QuestionSVG />
-                <p>{item.content}</p>
-              </S.CollapseDetails>
-
-              <S.CollapseDetails>
-                <AnswerSVG />
-                <p>
-                  {item.answer
-                    ? item.answer
-                    : '답변 대기중입니다... 조금만 기다려주세요!'}
-                </p>
-              </S.CollapseDetails>
+              {forNotice ? (
+                <S.CollapseDetails>
+                  <pre>{item.content}</pre>
+                </S.CollapseDetails>
+              ) : (
+                <>
+                  <S.CollapseDetails>
+                    <QuestionSVG />
+                    <p>{item.content}</p>
+                  </S.CollapseDetails>
+                  <S.CollapseDetails>
+                    <AnswerSVG />
+                    <p>
+                      {item.answer
+                        ? item.answer
+                        : '답변 대기중입니다... 조금만 기다려주세요!'}
+                    </p>
+                  </S.CollapseDetails>
+                </>
+              )}
             </S.CollapsePanel>
           </>
         ))}

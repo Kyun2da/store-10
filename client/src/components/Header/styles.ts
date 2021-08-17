@@ -4,7 +4,7 @@ export const HeaderWrapper = styled.header`
   width: 100%;
   background: ${({ theme }) => theme.color['background']};
   position: sticky;
-  z-index: 99;
+  z-index: 500;
   top: 0;
   border-bottom: 1px solid ${({ theme }) => theme.color['line']};
   ${({ theme }) => theme.fontSize.m}

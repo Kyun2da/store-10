@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { IInput } from './Input';
+import { ITextarea } from './Textarea';
 
 export const Input = styled.input<IInput>`
   padding: 1rem;
@@ -83,4 +84,65 @@ export const NumberInput = styled.input`
     -webkit-appearance: none;
     margin: 0;
   }
+`;
+
+export const Textarea = styled.textarea<ITextarea>`
+  font-family: 'Noto Sans', sans-serif;
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'inherit')};
+  height: 15rem;
+  padding: 2rem;
+  min-height: 6rem;
+  max-height: 20rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  resize: ${({ resize }) => resize};
+
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.color.primary};
+  }
+
+  &::-webkit-input-placeholder {
+    font-family: 'Noto Sans', sans-serif;
+  }
+`;
+
+export const FileInputButton = styled.div`
+  border-radius: 2rem;
+  padding: 2rem;
+  background-color: #ededed;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed #aaa;
+  cursor: pointer;
+
+  .helper-text {
+    color: #adadad;
+  }
+
+  &:hover {
+    opacity: 0.75;
+  }
+`;
+
+export const PreviewWrapper = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  gap: 2rem;
+
+  img {
+    object-fit: cover;
+    width: 20%;
+    border-radius: 2rem;
+  }
+`;
+
+export const ErrorMessage = styled.p`
+  margin-top: 1rem;
+  text-align: right;
+  color: ${({ theme }) => theme.color.error};
 `;

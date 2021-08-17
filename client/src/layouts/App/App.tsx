@@ -6,7 +6,7 @@ import Detail from '@/pages/Detail';
 import Footer from '@/components/Footer';
 import NavLinks from '@/pages/NavLinks';
 import ShoppingCart from '@/pages/ShoppingCart';
-import MyPage from '@/pages/mypage';
+import MyPage from '@/pages/Mypage';
 import { ThemeProvider } from 'styled-components';
 import { lightMode, darkMode } from '@/styles/theme';
 import * as S from './styles';

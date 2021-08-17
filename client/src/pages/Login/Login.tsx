@@ -2,9 +2,17 @@ import React from 'react';
 import { Input } from '@/components/Shared/Input';
 import Button from '@/components/Shared/Button';
 import * as S from './styles';
-import { Link } from '@/core/Router';
+import { Link, useHistory } from '@/core/Router';
+import axios from 'axios';
 
 const Login = () => {
+  const { historyPush } = useHistory();
+  const GithubLogin = async () => {
+    //const data = await axios.get('api/product');
+    //console.log(data);
+    const data = await axios.get('api/auth');
+    window.location.href = data.data;
+  };
   return (
     <S.LoginForm>
       <S.LoginTitle level={4}>회원 로그인</S.LoginTitle>
@@ -18,7 +26,7 @@ const Login = () => {
       <Button type="button" color="primary">
         로그인
       </Button>
-      <Button type="button" color="black">
+      <Button type="button" color="black" onClick={GithubLogin}>
         <S.GithubIcon fill="white" />
         GitHub 로그인
       </Button>

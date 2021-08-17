@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import userRoutes from './user.router';
 import authRoutes from './auth.router';
+import productRoutes from './product.router';
 // import { initProductData } from '@/loaders/dataInit';
 import wrapAsync from '@/utils/wrapAsync';
 
@@ -11,6 +12,7 @@ router.get('/', (req, res) => {
 });
 router.use('/user', userRoutes);
 router.use('/auth', authRoutes);
+router.use('/product', productRoutes);
 // router.get('/initData', wrapAsync(initProductData));
 
 export default router;

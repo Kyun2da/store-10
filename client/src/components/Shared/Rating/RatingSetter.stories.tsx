@@ -1,14 +1,14 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Rating from '.';
+import RatingSetter from './RatingSetter';
 
 export default {
   title: '컴포넌트/공통/별점평가',
-  component: Rating,
-} as ComponentMeta<typeof Rating>;
+  component: RatingSetter,
+} as ComponentMeta<typeof RatingSetter>;
 
-const Template: ComponentStory<typeof Rating> = (args) => <Rating {...args} />;
+const Template: ComponentStory<typeof RatingSetter> = () => <RatingSetter />;
 
 export const Default = Template.bind({});
 Default.args = {

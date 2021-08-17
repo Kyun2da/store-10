@@ -20,6 +20,7 @@ export const Mypage = styled.div`
 `;
 
 export const MyPageTitle = styled(Title)`
+  font-family: BMDOHYEON;
   padding-bottom: 2rem;
 `;
 

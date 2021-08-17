@@ -5,6 +5,7 @@ import Title from '@/components/Shared/Title';
 import ModalLayout from './ModalLayout';
 import * as S from './styles';
 import { ExchageSVG, GiftSVG, PackageSVG } from '@/assets/svgs';
+import { Textarea } from '@/components/Shared/Input';
 
 interface RequestModalProps {
   toggleModal: () => void;
@@ -73,7 +74,12 @@ const RequestModal = ({ toggleModal }: RequestModalProps) => {
         </S.Form>
         <S.Form>
           <Title level={5}>문의 남기기</Title>
-          <textarea placeholder="문의 내용을 입력해주세요...!" />
+          <Textarea
+            name="request-content"
+            resize="vertical"
+            placeholder="문의 내용을 입력해주세요...!"
+            fullWidth
+          />
         </S.Form>
       </S.ModalBody>
       <S.ModalButtonArea>

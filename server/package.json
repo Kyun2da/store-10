@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon",
     "start": "nodemon",
-    "deploy": "pm2 start ecosystem.config.js --watch"
+    "start:deploy": "NODE_ENV=production nodemon",
+    "deploy": "pm2 start npm --name app -- run start:deploy"
   },
   "author": "store-10",
   "license": "MIT",

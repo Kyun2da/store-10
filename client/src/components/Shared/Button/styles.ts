@@ -10,17 +10,17 @@ export const Button = styled.button<IButtonProps>`
   color: white;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'initial' : 'pointer')};
   background-color: black;
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'inherit')};
 
-  ${(props) => {
-    if (props.size === 'Large') {
+  ${({ size }) => {
+    if (size === 'Large') {
       return css`
         font-size: 3rem;
         padding: 1rem 2rem;
       `;
-    } else if (props.size === 'Small') {
+    } else if (size === 'Small') {
       return css`
         font-size: 1rem;
         padding: 0.5rem 1rem;
@@ -33,18 +33,28 @@ export const Button = styled.button<IButtonProps>`
     }
   }}
 
-  ${(props) => {
-    if (props.color === 'primary') {
+  ${({ color, theme, disabled }) => {
+    if (disabled) {
       return css`
-        background-color: ${props.theme.color.primary};
+        background-color: ${theme.color.line};
         &:hover {
-          background-color: ${props.theme.color.primary3};
+          background-color: ${theme.color.line};
         }
         &:active {
-          background: ${props.theme.color.primary3};
+          background: ${theme.color.line};
         }
       `;
-    } else if (props.color === 'black') {
+    } else if (color === 'primary') {
+      return css`
+        background-color: ${theme.color.primary};
+        &:hover {
+          background-color: ${theme.color.primary3};
+        }
+        &:active {
+          background: ${theme.color.primary3};
+        }
+      `;
+    } else if (color === 'black') {
       return css`
         background-color: #1e2222;
         &:hover {
@@ -54,7 +64,7 @@ export const Button = styled.button<IButtonProps>`
           background: black;
         }
       `;
-    } else if (props.color === 'white') {
+    } else if (color === 'white') {
       return css`
         color: black;
         border: 1px solid black;

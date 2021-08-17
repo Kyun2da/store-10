@@ -8,6 +8,7 @@ export interface IButtonProps {
   fullWidth?: boolean;
   children?: React.ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -17,6 +18,7 @@ const Button = ({
   fullWidth,
   children,
   onClick,
+  disabled = false,
 }: IButtonProps) => {
   return (
     <S.Button
@@ -26,6 +28,7 @@ const Button = ({
       onClick={onClick}
       size={size}
       fullWidth={fullWidth}
+      disabled={disabled}
     >
       {children}
     </S.Button>

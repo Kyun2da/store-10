@@ -6,7 +6,7 @@ interface IRating {
   uniqueId: string;
 }
 
-const Rating = ({ rating, uniqueId }: IRating) => {
+const RatingGetter = ({ rating, uniqueId }: IRating) => {
   const count = rating >> 0;
   const rest = rating - count;
 
@@ -48,4 +48,4 @@ const Rating = ({ rating, uniqueId }: IRating) => {
   );
 };
 
-export default Rating;
+export default RatingGetter;

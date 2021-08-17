@@ -1,4 +1,4 @@
-import Rating from '@/components/Shared/Rating';
+import { RatingGetter } from '@/components/Shared/Rating';
 import RatingChart from '@/components/Shared/RatingChart';
 import Title from '@/components/Shared/Title';
 import React from 'react';
@@ -60,7 +60,7 @@ const ProductReview = ({ totalRating }: IProductReview) => {
       <S.RatingArea>
         <S.StarRates>
           <span className="totalRates">{totalRating}</span>
-          <Rating rating={totalRating} uniqueId="totalRating" />
+          <RatingGetter rating={totalRating} uniqueId="totalRating" />
         </S.StarRates>
         <RatingChart />
       </S.RatingArea>
@@ -76,7 +76,10 @@ const ProductReview = ({ totalRating }: IProductReview) => {
                   {data.username}
                   <span style={{ fontWeight: 100 }}>님</span>
                 </Title>
-                <Rating rating={data.rating} uniqueId={tempRandomString} />
+                <RatingGetter
+                  rating={data.rating}
+                  uniqueId={tempRandomString}
+                />
                 {/* DayJS를 쓸까요? DayJS를 씁시다아아아 */}
                 <p className="date">{data.createdAt}</p>
               </S.UserReviewTitles>

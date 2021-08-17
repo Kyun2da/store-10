@@ -22,7 +22,7 @@ export class Product extends InitEntity {
   @Column({ type: 'decimal' })
   price: number;
 
-  @Column({ type: 'longtext' })
+  @Column({ type: 'json' })
   content: string;
 
   @Column()

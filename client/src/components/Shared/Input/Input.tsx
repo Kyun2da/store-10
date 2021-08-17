@@ -50,7 +50,7 @@ const Input = ({
     }
   };
   return (
-    <S.InputContainer fullWidth={fullWidth}>
+    <S.InputContainer fullWidth={fullWidth} className="input-container">
       {labelName ? (
         <S.Label
           className={isFocus ? 'focusing' : ''}

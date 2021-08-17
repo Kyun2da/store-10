@@ -13,6 +13,9 @@ export const Label = styled.label<IInputLabel>`
     transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
   font-size: 1.8rem;
   cursor: text;
+  transform: translate(12px, 12px) scale(1);
+  line-height: 2rem;
+
   ${({ label, error }) => {
     console.log(label);
     if (label === 'Standard' || label === 'Outlined') {
@@ -27,8 +30,6 @@ export const Label = styled.label<IInputLabel>`
     }
   }}
 
-  transform: translate(12px, 12px) scale(1);
-  line-height: 2rem;
   &.focusing {
     transform: translate(6px, -20px) scale(0.75);
     transform-origin: top left;
@@ -120,8 +121,11 @@ export const Input = styled.input<IInput>`
   }}
 `;
 
-export const ErrorText = styled.span`
+export const ErrorText = styled.div`
   color: red;
+  position: absolute;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
 `;
 
 export const NumberInputArea = styled.div`

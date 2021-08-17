@@ -16,7 +16,7 @@ export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
 
-  input,
+  .input-container,
   button {
     margin-bottom: 4rem;
   }

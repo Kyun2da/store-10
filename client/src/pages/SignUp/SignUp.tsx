@@ -1,10 +1,24 @@
 import Button from '@/components/Shared/Button';
 import { Input } from '@/components/Shared/Input';
 import Title from '@/components/Shared/Title';
-import React from 'react';
+import { validateEmail } from '@/utils/constant/validate/validation';
+import React, { useCallback, useState } from 'react';
 import * as S from './styles';
 
 const SignUp = () => {
+  const [emailError, setEmailError] = useState(false);
+
+  const onChangeEmailInput = useCallback(
+    ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+      if (validateEmail(target.value)) {
+        setEmailError(false);
+      } else {
+        setEmailError(true);
+      }
+    },
+    [setEmailError]
+  );
+
   return (
     <S.SignUpContainer>
       <Title level={2}>회원가입</Title>
@@ -16,6 +30,9 @@ const SignUp = () => {
             label="Outlined"
             labelName="이메일"
             placeholder="이메일을 입력해주세요."
+            onChange={onChangeEmailInput}
+            error={emailError}
+            helperText="올바른 이메일 주소 형식이 아닙니다."
           />
           <Button type="button" color="white">
             중복 확인

@@ -1,5 +1,5 @@
 import React from 'react';
-import Rating from '@/components/Shared/Rating';
+import { RatingSetter } from '@/components/Shared/Rating';
 import Title from '@/components/Shared/Title';
 import ModalLayout from './ModalLayout';
 import * as S from './styles';
@@ -31,7 +31,7 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
         <Form gap={3}>
           <div className="input-wrapper">
             <Title level={5}>별점 매기기</Title>
-            <Rating rating={4} uniqueId="thisisuniqueid" />
+            <RatingSetter />
           </div>
           <Title level={5}>사진 업로드 (최대 3장)</Title>
 

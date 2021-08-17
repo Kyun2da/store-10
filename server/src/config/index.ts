@@ -1,9 +1,20 @@
 import dotenv from 'dotenv';
+import path from 'path';
 
 dotenv.config();
 
+process.env.NODE_ENV = process.env.NODE_ENV || `development`;
+console.log(process.env.NODE_ENV);
+const env = dotenv.config({
+  path: path.resolve(
+    process.cwd(),
+    process.env.NODE_ENV === 'production' ? './.env.prod' : './.env.dev'
+  ),
+}).parsed;
+
 const loadEnv = (key: string): string => {
-  const value = process.env[key];
+  console.log(env);
+  const value = env[key];
   if (value === undefined) {
     throw new Error(`환경변수 ${key}가 정의 되지 않음`);
   }

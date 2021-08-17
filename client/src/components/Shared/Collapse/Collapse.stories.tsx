@@ -1,10 +1,7 @@
-import Button from '@/components/Shared/Button';
-import Title from '@/components/Shared/Title';
 import React from 'react';
-import * as S from '../styles';
-import useModal from '@/hooks/useModal';
-import { RequestModal } from '@/components/Shared/Modal';
-import Collapse from '@/components/Shared/Collapse';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+
+import Collapse from './Collapse';
 
 const headers = [
   { name: '번호', value: 'number' },
@@ -61,30 +58,18 @@ const items = [
   },
 ];
 
-const ProductRequest = () => {
-  const [isOpen, toggleModal] = useModal(false);
+export default {
+  title: '컴포넌트/공통/콜랍스',
+  component: Collapse,
+} as ComponentMeta<typeof Collapse>;
 
-  return (
-    <S.PanelWrapper>
-      <S.TopArea>
-        <Title className="title" level={5}>
-          상품문의 ({items.length})
-        </Title>
-        <Button
-          size="Default"
-          color="primary"
-          type="button"
-          onClick={toggleModal}
-        >
-          작성하기
-        </Button>
-      </S.TopArea>
+const Template: ComponentStory<typeof Collapse> = (args) => (
+  <Collapse {...args} />
+);
 
-      <Collapse headers={headers} items={items} gaps="1fr 3fr 1fr 1fr 1fr" />
-
-      {isOpen && <RequestModal toggleModal={toggleModal} />}
-    </S.PanelWrapper>
-  );
+export const Default = Template.bind({});
+Default.args = {
+  headers,
+  items,
+  gaps: '1fr 3fr 1fr 1fr 1fr',
 };
-
-export default ProductRequest;

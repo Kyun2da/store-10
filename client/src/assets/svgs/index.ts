@@ -18,3 +18,5 @@ export { default as UploadSVG } from '@/assets/svgs/upload.svg';
 export { default as GiftSVG } from '@/assets/svgs/gift.svg';
 export { default as PackageSVG } from '@/assets/svgs/package.svg';
 export { default as ExchageSVG } from '@/assets/svgs/exchange.svg';
+export { default as QuestionSVG } from '@/assets/svgs/question.svg';
+export { default as AnswerSVG } from '@/assets/svgs/answer.svg';

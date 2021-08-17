@@ -14,6 +14,7 @@ const SignUp = () => {
             type="text"
             name="name"
             label="Outlined"
+            labelName="이메일"
             placeholder="이메일을 입력해주세요."
           />
           <Button type="button" color="white">
@@ -24,18 +25,21 @@ const SignUp = () => {
           type="password"
           name="password"
           label="Outlined"
+          labelName="비밀번호"
           placeholder="비밀번호를 입력해주세요."
         />
         <Input
           type="password"
           name="check-password"
           label="Outlined"
+          labelName="비밀번호 재입력"
           placeholder="비밀번호를 한번 더 입력해주세요."
         />
         <Input
           type="text"
           name="name"
           label="Outlined"
+          labelName="이름"
           placeholder="이름을 입력해주세요."
         />
         <Button type="button" color="primary">

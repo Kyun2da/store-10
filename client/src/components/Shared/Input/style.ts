@@ -1,6 +1,39 @@
 import styled, { css } from 'styled-components';
-import { IInput } from './Input';
 import { ITextarea } from './Textarea';
+import { IInput, IInputContainer, IInputLabel } from './Input';
+
+export const InputContainer = styled.div<IInputContainer>`
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'inherit')};
+`;
+
+export const Label = styled.label<IInputLabel>`
+  position: absolute;
+  background-color: transparent;
+  transition: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
+    transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  font-size: 1.8rem;
+  cursor: text;
+  ${({ label }) => {
+    console.log(label);
+    if (label === 'Standard' || label === 'Outlined') {
+      return css`
+        color: ${({ theme }) => theme.color.placeholder};
+      `;
+    } else if (label === 'Filled') {
+      return css`
+        color: ${({ theme }) => theme.color['off-white']};
+      `;
+    }
+  }}
+
+  transform: translate(12px, 8px) scale(1);
+  line-height: 2rem;
+  &.focusing {
+    transform: translate(6px, -20px) scale(0.75);
+    transform-origin: top left;
+    color: #2ac1bc;
+  }
+`;
 
 export const Input = styled.input<IInput>`
   padding: 1rem;
@@ -9,17 +42,18 @@ export const Input = styled.input<IInput>`
   outline: none;
   border: none;
   border-bottom: 1px solid black;
-  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'inherit')};
+  width: 100%;
 
-  ${({ label }) => {
+  ${({ label, labelName }) => {
     if (label === 'Standard') {
       return css`
         &:focus {
           border-bottom: 1px solid #2ac1bc;
         }
 
-        ::placeholder {
-          color: #c1c5c5;
+        &::placeholder {
+          color: ${({ theme }) =>
+            labelName ? 'transparent' : theme.color.placeholder};
         }
       `;
     } else if (label === 'Outlined') {
@@ -32,8 +66,9 @@ export const Input = styled.input<IInput>`
           outline: none;
         }
 
-        ::placeholder {
-          color: #c1c5c5;
+        &::placeholder {
+          color: ${({ theme }) =>
+            labelName ? 'transparent' : theme.color.placeholder};
         }
       `;
     } else if (label === 'Filled') {
@@ -46,8 +81,9 @@ export const Input = styled.input<IInput>`
           outline: none;
         }
 
-        ::placeholder {
-          color: white;
+        &::placeholder {
+          color: ${({ theme }) =>
+            labelName ? 'transparent' : theme.color['off-white']};
         }
       `;
     }

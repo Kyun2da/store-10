@@ -29,7 +29,7 @@ const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
     <S.MyPageAside>
       <S.MyPageUserInfo>
         <S.MyPageGreeting>안녕하세요,</S.MyPageGreeting>
-        <S.MyPageUserName> 슑과잌붸흐벤님!</S.MyPageUserName>
+        <S.MyPageUserName> 동진님!</S.MyPageUserName>
         <footer>
           <button>회원 정보 변경</button>
           <button>로그아웃</button>

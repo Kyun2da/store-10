@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import * as S from './styles';
 import MyPageAside from '@/components/MyPage/MyPageAside';
 import Address from '@/components/Address';
+import OrderHistory from '@/components/MyPage/OrderHistory';
 import { MY_PAGE_NAVIGATIONS } from '@/contstants';
 
 const MyPage = () => {
-  const [contentValue, setContentValue] = useState('address');
+  const [contentValue, setContentValue] = useState('orderHistroy');
 
   const contentName = MY_PAGE_NAVIGATIONS.find(
     (nav) => nav.value === contentValue
@@ -13,7 +14,7 @@ const MyPage = () => {
 
   const renderBody = () => {
     // TODO: router Switch 사용 고민
-    if (contentValue === 'orderHistroy') return <div></div>;
+    if (contentValue === 'orderHistroy') return <OrderHistory />;
     if (contentValue === 'address') return <Address />;
     if (contentValue === 'coupon') return <div></div>;
     if (contentValue === 'inqurey') return <div></div>;

@@ -16,6 +16,7 @@ declare module 'styled-components' {
       'primary2': string;
       'primary3': string;
       'error': string;
+      'border-gray': string;
     };
     fontSize: {
       xs: FlattenSimpleInterpolation;

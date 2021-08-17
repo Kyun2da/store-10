@@ -35,8 +35,12 @@ type Item struct {
 	HrefItem      string      `json:"itemHref"`
 	Title         string      `json:"itemTitle"`
 	Price         string      `json:"price"`
-	ProductDetail string      `json:"contents"`
+	ProductDetail Content     `json:"contents"`
 	Itemimages    interface{} `json:"itemImages"`
+}
+type Content struct {
+	Details    string `json:"details"`
+	Essentials string `json:"essentials"`
 }
 
 const (
@@ -101,6 +105,30 @@ func main() {
 }
 
 func getDocument(url string) (*goquery.Document, *http.Response) {
+	_url := url
+	time.Sleep(300000000)
+	fmt.Println(url)
+	req, err := http.NewRequest("GET", _url, nil)
+	sF.CheckErr(err)
+	req.Header.Add("User-Agent", USER_AGENT)
+	req.Header.Add("Accept-Encoding", "identity")
+	client := &http.Client{}
+
+	res, err2 := client.Do(req)
+	sF.CheckErr(err2)
+	if res.StatusCode != 200 {
+		fmt.Println(res)
+		// sF.CheckCode(res)
+		return nil, res
+	}
+
+	doc, err3 := goquery.NewDocumentFromReader(res.Body)
+	sF.CheckErr(err3)
+
+	return doc, res
+}
+
+func getCoupangDocument(url string) (*goquery.Document, *http.Response) {
 	_url := COUPANG_URL + url
 	req, err := http.NewRequest("GET", _url, nil)
 	sF.CheckErr(err)
@@ -126,7 +154,7 @@ func getDocument(url string) (*goquery.Document, *http.Response) {
 func getCategories(firstDepthCategory string) []MainCategory {
 	mainCategory := new([]MainCategory)
 
-	doc, res := getDocument("")
+	doc, res := getCoupangDocument("")
 	if doc == nil {
 		return nil
 	}
@@ -165,7 +193,7 @@ func getCategories(firstDepthCategory string) []MainCategory {
 
 //각 서브 카테고리별 아이템 url 반환 최대 60개
 func getSubCategoryItemsURLInfo(href string, items *[]Item) *[]Item {
-	doc, res := getDocument(href)
+	doc, res := getCoupangDocument(href)
 	if doc == nil {
 		return nil
 	}
@@ -193,7 +221,7 @@ func getItemInfo(href string, item Item) Item {
 	if href == "" {
 		return item
 	}
-	doc, res := getDocument(href)
+	doc, res := getCoupangDocument(href)
 	defer res.Body.Close()
 	if doc == nil {
 		return item
@@ -206,20 +234,51 @@ func getItemInfo(href string, item Item) Item {
 	}
 	data := strings.Split(itemInfo.Text(), "exports.sdp = ")[1]
 	data = strings.Split(data, ";\n")[0]
-	// if len(sdp) == 2 {
-	// 	data = strings.Split(data, ";")[0]
-	// }
+
+	// Unmarshal 로 진행하면 int형 데이터 값에 오차가 생김
+	d := json.NewDecoder(strings.NewReader(data))
+	d.UseNumber()
 
 	var result map[string]interface{}
-	json.Unmarshal([]byte(data), &result)
-	item.Itemimages = result["images"]
+	if err := d.Decode(&result); err != nil {
+		fmt.Println(err.Error())
+	}
 
+	productId := fmt.Sprintf("%v", result["productId"])
+	itemId := fmt.Sprintf("%v", result["itemId"])
+	vendorItemId := fmt.Sprintf("%v", result["vendorItemId"])
+
+	apiUrl := "https://www.coupang.com/vp/products/" + productId + "/items/" + itemId + "/vendoritems/" + vendorItemId
+
+	item.ProductDetail = getItemContent(apiUrl)
+
+	item.Itemimages = result["images"]
 	item.Title = fmt.Sprintf("%v", result["title"])
 
 	price := strings.Replace(doc.Find(".total-price").First().Text(), "원", "", -1)
 	price = strings.Replace(sF.CleanString(price), ",", "", -1)
-
 	item.Price = price
 
 	return item
+}
+
+func getItemContent(url string) Content {
+	doc2, res := getDocument(url)
+	defer res.Body.Close()
+
+	var _result map[string]interface{}
+	content := doc2.Text()
+
+	json.Unmarshal([]byte(content), &_result)
+
+	details, err := json.Marshal(_result["details"])
+	if err != nil {
+		panic(err)
+	}
+
+	essentials, err := json.Marshal(_result["essentials"])
+	if err != nil {
+		panic(err)
+	}
+	return Content{Details: string(details), Essentials: string(essentials)}
 }

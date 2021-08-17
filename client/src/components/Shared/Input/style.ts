@@ -17,7 +17,6 @@ export const Label = styled.label<IInputLabel>`
   line-height: 2rem;
 
   ${({ label, error }) => {
-    console.log(label);
     if (label === 'Standard' || label === 'Outlined') {
       return css`
         color: ${({ theme }) =>

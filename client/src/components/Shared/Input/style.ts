@@ -121,7 +121,7 @@ export const Input = styled.input<IInput>`
 `;
 
 export const ErrorText = styled.div`
-  color: red;
+  color: ${({ theme }) => theme.color.error};
   position: absolute;
   margin-top: 0.5rem;
   margin-left: 0.5rem;

@@ -1,6 +1,6 @@
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
-import { Link, useHistory } from '@/core/Router';
+import { Link, useHistory } from '@/lib/Router';
 import { SITE_TITLE } from '@/utils/constant/common';
 import React from 'react';
 import { GithubIcon } from '../Login/styles';

@@ -1,7 +1,7 @@
 import Button from '@/components/Shared/Button';
 import Checkbox from '@/components/Shared/Checkbox';
 import Title from '@/components/Shared/Title';
-import { useHistory, useParams } from '@/core/Router';
+import { useHistory, useParams } from '@/lib/Router';
 import {
   PERSONAL_INFO_TEXT,
   TERMS_OF_SERVICE,

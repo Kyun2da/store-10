@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './styles';
 import { FaxSVG, InstagramSVG, EmailSVG } from '@/assets/svgs';
-import { Link } from '@/core/Router';
+import { Link } from '@/lib/Router';
 
 const Footer = () => {
   return (

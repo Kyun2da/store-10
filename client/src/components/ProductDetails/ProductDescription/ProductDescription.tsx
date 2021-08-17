@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from '../styles';
-import { useParams } from '@/core/Router';
+import { useParams } from '@/lib/Router';
 import Title from '@/components/Shared/Title';
 
 const ProductDescription = () => {

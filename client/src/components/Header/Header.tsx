@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MenuSVG, UserSVG, CartSVG, HeartSVG } from '@/assets/svgs';
 import * as S from './styles';
-import { Link } from '@/core/Router';
+import { Link } from '@/lib/Router';
 import Search from './Search';
 import Sidebar from './Sidebar';
 

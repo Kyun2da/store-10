@@ -63,6 +63,12 @@ export const Input = styled.input<IInput>`
           color: ${({ theme }) =>
             labelName ? 'transparent' : theme.color.placeholder};
         }
+
+        &.focusing {
+          &::placeholder {
+            color: ${({ theme }) => theme.color.placeholder};
+          }
+        }
       `;
     } else if (label === 'Outlined') {
       return css`
@@ -80,6 +86,12 @@ export const Input = styled.input<IInput>`
           color: ${({ theme }) =>
             labelName ? 'transparent' : theme.color.placeholder};
         }
+
+        &.focusing {
+          &::placeholder {
+            color: ${({ theme }) => theme.color.placeholder};
+          }
+        }
       `;
     } else if (label === 'Filled') {
       return css`
@@ -96,6 +108,12 @@ export const Input = styled.input<IInput>`
         &::placeholder {
           color: ${({ theme }) =>
             labelName ? 'transparent' : theme.color['off-white']};
+        }
+
+        &.focusing {
+          &::placeholder {
+            color: ${({ theme }) => theme.color['off-white']};
+          }
         }
       `;
     }

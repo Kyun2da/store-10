@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Chip from '@/components/Shared/Chip';
 import * as S from './styles';
-import orderHistory, { orderItemList } from '@/dummies/orderHistory';
+import orderHistory, { orderItemLists } from '@/dummies/orderHistory';
 import { FRUSTRATE_IMG } from '@/contstants';
 import Title from '@/components/Shared/Title';
 import OrderItemList from './OrderItemList';
@@ -18,7 +18,7 @@ const OrderHistory = ({}) => {
   const [selectedPeriod, setSelectedPeriod] = useState<number>(1);
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
 
-  const orderItems = Object.entries(orderItemList);
+  const orderItems = Object.entries(orderItemLists);
   const renderOrderItemList = () => {
     return orderItems.map(([key, value]) => (
       <S.OrderHistoryBody key={key}>

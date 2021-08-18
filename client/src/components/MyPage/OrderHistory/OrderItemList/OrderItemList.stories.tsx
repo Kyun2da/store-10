@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { orderItemList } from '@/dummies/orderHistory';
+import { orderItemLists } from '@/dummies/orderHistory';
 
 import OrderItemList from './';
 
@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof OrderItemList> = (args) => (
   <OrderItemList {...args} />
 );
 
-const [key, value] = Object.entries(orderItemList)[0];
+const [key, value] = Object.entries(orderItemLists)[0];
 
 export const Default = Template.bind({});
 Default.args = {

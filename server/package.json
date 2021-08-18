@@ -31,11 +31,13 @@
   },
   "dependencies": {
     "@types/bcrypt-nodejs": "^0.0.31",
+    "@types/elasticsearch": "^5.0.38",
     "bcrypt-nodejs": "^0.0.3",
     "cookie-parser": "^1.4.5",
     "cors": "2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "10.0.0",
+    "elasticsearch": "^16.7.2",
     "express": "4.17.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",

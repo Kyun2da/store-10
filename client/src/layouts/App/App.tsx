@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import Header from '@/components/Header';
 import { Route, Switch } from '@/lib/Router';
 import Main from '@/pages/Main';
@@ -15,6 +15,10 @@ import SelectAuth from '@/pages/SelectAuth';
 import Approval from '@/pages/Approval';
 import SignUp from '@/pages/SignUp';
 import Notice from '@/pages/Notice';
+import Loading from '@/components/Shared/Loading';
+import { QueryErrorResetBoundary } from 'react-query';
+import { ErrorBoundary } from 'react-error-boundary';
+import Error from '@/components/Shared/Error';
 
 const App = () => {
   const [theme, setTheme] = useState('light-mode');
@@ -25,23 +29,38 @@ const App = () => {
 
   return (
     <ThemeProvider theme={themeMode}>
-      <S.RootWrapper>
-        <S.ToggleButton onClick={toggleMode}>라이트/다크모드</S.ToggleButton>
-        <Header />
-        <Switch>
-          <Route path="/" component={Main} />
-          <Route path="/select_auth" component={SelectAuth} />
-          <Route path="/approval/:authtype" component={Approval} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/login" component={Login} />
-          <Route path="/detail/:id" component={Detail} />
-          <Route path="/notice" component={Notice} />
-          <Route path="/cart" component={ShoppingCart} />
-          <Route path="/mypage" component={MyPage} />
-          <Route path="/*" component={NotFound} />
-        </Switch>
-        <Footer />
-      </S.RootWrapper>
+      <Suspense fallback={<Loading />}>
+        <QueryErrorResetBoundary>
+          {({ reset }) => (
+            <ErrorBoundary
+              onReset={reset}
+              fallbackRender={({ resetErrorBoundary }) => (
+                <Error resetErrorBoundary={resetErrorBoundary} />
+              )}
+            >
+              <S.RootWrapper>
+                <S.ToggleButton onClick={toggleMode}>
+                  라이트/다크모드
+                </S.ToggleButton>
+                <Header />
+                <Switch>
+                  <Route path="/" component={Main} />
+                  <Route path="/select_auth" component={SelectAuth} />
+                  <Route path="/approval/:authtype" component={Approval} />
+                  <Route path="/signup" component={SignUp} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/detail/:id" component={Detail} />
+                  <Route path="/notice" component={Notice} />
+                  <Route path="/cart" component={ShoppingCart} />
+                  <Route path="/mypage" component={MyPage} />
+                  <Route path="/*" component={NotFound} />
+                </Switch>
+                <Footer />
+              </S.RootWrapper>
+            </ErrorBoundary>
+          )}
+        </QueryErrorResetBoundary>
+      </Suspense>
     </ThemeProvider>
   );
 };

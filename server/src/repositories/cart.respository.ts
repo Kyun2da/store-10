@@ -24,7 +24,11 @@ class CartRepository extends Repository<Cart> {
   }
 
   getCarts(userId: number): Promise<Cart[]> {
-    const carts = this.find({ user_id: userId });
+    // TODO: productimage 하나만 가져오기
+    const carts = this.find({
+      where: { user_id: userId },
+      relations: ['product', 'product.productImage'],
+    });
     return carts;
   }
 

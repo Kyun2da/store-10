@@ -20,7 +20,7 @@ export class ProductImage extends InitEntity {
   @Column({ type: 'enum', enum: ImageType })
   type: ImageType;
 
-  @ManyToOne(() => Product, (type) => type.id, {
+  @ManyToOne(() => Product, (type) => type.productImage, {
     nullable: false,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',

@@ -33,4 +33,5 @@ export default {
   GIT_CLIENT_ID: loadEnv('GIT_CLIENT_ID'),
   GIT_CLIENT_SECRET: loadEnv('GIT_CLIENT_SECRET'),
   CLIENT_URL: loadEnv('CLIENT_URL'),
+  ELASTIC_HOST: loadEnv('ELASTIC_HOST'),
 };

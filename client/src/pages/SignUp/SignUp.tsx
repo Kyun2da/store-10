@@ -1,6 +1,7 @@
 import Button from '@/components/Shared/Button';
 import { Input } from '@/components/Shared/Input';
 import Title from '@/components/Shared/Title';
+import useInput from '@/hooks/useInput';
 import {
   validateAll,
   validateEmail,
@@ -35,13 +36,7 @@ const SignUp = () => {
     [error]
   );
 
-  const [password, setPassword] = useState('');
-
-  const onChangePassword = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(target.value);
-  };
+  const [password, , onChangePassword] = useInput('');
 
   const rePasswordCheck = useCallback(
     ({ target }: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,5 +1,6 @@
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
+import { githubLogin } from '@/lib/api/login/githubLogin';
 import { useHistory, useParams } from '@/lib/Router';
 import {
   PERSONAL_INFO_TEXT,
@@ -19,11 +20,16 @@ const Approval = () => {
   const { historyPush } = useHistory();
   const { params } = useParams();
 
+  const GithubLogin = async () => {
+    const oAuthURL = await githubLogin();
+    window.location.href = oAuthURL;
+  };
+
   const onClickNextPage = useCallback(() => {
     const { authtype } = params;
     console.log(authtype);
     if (authtype === 'github') {
-      // TODO : 깃허브 로그인 로직 넣기
+      GithubLogin();
     } else {
       historyPush('/signup');
     }

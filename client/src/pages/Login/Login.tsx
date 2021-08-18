@@ -2,26 +2,16 @@ import React from 'react';
 import { Input } from '@/components/Shared/Input';
 import Button from '@/components/Shared/Button';
 import * as S from './styles';
-import { Link, useHistory } from '@/lib/Router';
-import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
-import axios from 'axios';
-
-import { useQuery } from 'react-query';
+import { Link } from '@/lib/Router';
+import { githubLogin } from '@/lib/api/login/githubLogin';
 
 const Login = () => {
-  const { isLoading, error, data, isFetching } = useQuery(
-    'user',
-    getCurrentUser
-  );
-
-  const { historyPush } = useHistory();
   const GithubLogin = async () => {
-    //const data = await axios.get('api/product');
-    //console.log(data);
-    const data = await axios.get('api/auth');
-    window.location.href = data.data;
+    const oAuthURL = await githubLogin();
+    window.location.href = oAuthURL;
   };
 
+  // TODO : 만약 로그인이 되어있는 유저면 마이페이지로 이동시키기?
   // if (data) return;
 
   return (

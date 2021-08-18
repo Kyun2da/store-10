@@ -8,14 +8,17 @@ class CartController {
     const userId = req.user?.id || 2;
     await CartService.createCart({ productId, userId, count });
 
-    res.sendStatus(204);
+    res.status(204).send({
+      success: true,
+      message: '장바구니에 추가 되었습니다!',
+    });
   }
 
   async getCarts(req: Request, res: Response) {
     const userId = req.user?.id || 2;
     const carts = await CartService.getCarts(userId);
 
-    res.status(201).json(carts);
+    res.status(200).json(carts);
   }
 
   async deleteCart(req: Request, res: Response) {
@@ -23,7 +26,10 @@ class CartController {
     const userId = req.user?.id || 2;
     await CartService.deleteCart({ userId, productId });
 
-    res.sendStatus(204);
+    res.status(204).send({
+      success: true,
+      message: '장바구니에서 삭제 되었습니다!',
+    });
   }
 }
 

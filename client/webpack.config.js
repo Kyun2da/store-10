@@ -64,7 +64,7 @@ module.exports = (env) => {
       new webpack.HotModuleReplacementPlugin(),
       new CleanWebpackPlugin(),
       new dotenv({
-        path: env.production ? '../.env.prod' : '../.env.dev',
+        path: env.production ? './.env.prod' : './.env.dev',
       }),
     ],
     resolve: {

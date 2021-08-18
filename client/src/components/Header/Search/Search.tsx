@@ -10,9 +10,7 @@ const Search = () => {
   const [searchData, setSearchDatas] = useState([]);
 
   const productSearch = async (searchText: string) => {
-    const data = await client.get(
-      `http://localhost:3000/api/product/search?q=${searchText}`
-    );
+    const data = await client.get(`/product/search?q=${searchText}`);
     if (data.data.length) {
       setSearchDatas(data.data);
     }

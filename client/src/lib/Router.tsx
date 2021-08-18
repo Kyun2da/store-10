@@ -7,12 +7,12 @@ import React, {
 } from 'react';
 
 interface IRouter {
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactNode;
   initialPath?: string;
 }
 
 interface ISwitch {
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactNode;
   currentPath: string;
 }
 
@@ -37,7 +37,7 @@ interface IRouteContext {
 }
 
 interface ILink {
-  children?: React.ReactElement | string;
+  children?: React.ReactNode;
   to: string;
 }
 
@@ -159,6 +159,15 @@ export const NavLink = ({ to, children, activeClassName }: INavLink) => {
       {children}
     </a>
   );
+};
+
+export const Redirect = ({ to }: { to: string }) => {
+  const { historyPush } = useHistory();
+  useEffect(() => {
+    historyPush(to);
+  }, [to, historyPush]);
+
+  return null;
 };
 
 const extractPath = (path: string) => {

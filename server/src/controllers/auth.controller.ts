@@ -7,11 +7,9 @@ import JwtService from '@/services/jwt.service';
 class AuthController {
   async callback(req: Request, res: Response) {
     const { code } = req.query;
-    console.log(code);
     const token = await AuthService.getGitAccessToken(code as string);
     const gitUser = await AuthService.getGitUserInfo(token);
     const jwtRefreshToken = JwtService.refresh();
-    // TODO : 가입되어 있는 유저인지 체크하는 로직, 가입이 되있으면? 로그인을 바로 시켜주고, 가입이 안되어 있으면? 약관동의 페이지로 리다이렉트?
     const { user_id, name, id } = await UserService.createUser({
       ...gitUser,
       is_oauth: true,

@@ -10,7 +10,8 @@ class AuthService {
 
   async getGitUserInfo(code: string) {
     const { login: user_id, name } = await GitHubAPI.getUserInfo(code);
-    return { user_id, name };
+
+    return { user_id, name: name ?? user_id };
   }
 
   async Login(userID: string, password: string) {

@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn, PrimaryColumn } from 'typeorm';
 import { DateEntity } from './base.entity';
 
 import { Product } from './product.entity';
@@ -13,7 +13,6 @@ export class Cart extends DateEntity {
     nullable: false,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    primary: true,
   })
   @JoinColumn({ name: 'product_id' })
   product!: Product;
@@ -22,8 +21,13 @@ export class Cart extends DateEntity {
     nullable: false,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    primary: true,
   })
   @JoinColumn({ name: 'user_id' })
   user!: User;
+
+  @PrimaryColumn()
+  user_id: number;
+
+  @PrimaryColumn()
+  product_id: number;
 }

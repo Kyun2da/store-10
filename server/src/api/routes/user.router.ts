@@ -3,7 +3,7 @@ import { Router } from 'express';
 import UserController from '@/controllers/user.controller';
 import wrapAsync from '@/utils/wrapAsync';
 import UserCheckRequest from '@/dtos/user/check';
-import invalidRequest from '../middlewares/invalid-request';
+import invalidRequest from '@/api/middlewares/invalid-request';
 
 const router = Router();
 

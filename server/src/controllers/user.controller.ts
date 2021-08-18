@@ -1,7 +1,7 @@
 import ApiResponse from '@/api/middlewares/response-format';
 import HttpStatusCode from '@/types/statusCode';
 import { Request, Response } from 'express';
-import UserRepository from '../repositories/user.repository';
+import UserRepository from '@/repositories/user.repository';
 
 class UserController {
   async createUser(req: Request, res: Response) {

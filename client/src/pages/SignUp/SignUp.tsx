@@ -13,6 +13,8 @@ import React, { useCallback, useState } from 'react';
 import { postEmailCheck } from '@/lib/api/user/postEmailCheck';
 import * as S from './styles';
 import { CheckSVG } from '@/assets/svgs';
+import { createUser } from '@/lib/api/user/createUser';
+import { useHistory } from '@/lib/Router';
 
 const SignUp = () => {
   const [error, setError] = useState({
@@ -69,8 +71,9 @@ const SignUp = () => {
     [password, error]
   );
 
+  const { historyPush } = useHistory();
   const formSubmit = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent) => {
       e.preventDefault();
       const target = e.target as typeof e.target & {
         email: { value: string };
@@ -87,10 +90,15 @@ const SignUp = () => {
       } else if (!emailCheck) {
         window.alert('이메일 중복확인이 필요합니다.');
       } else {
-        console.log('회원가입 해야지');
+        try {
+          await createUser({ user_id: email, password, rePassword, name });
+          historyPush('/');
+        } catch (err) {
+          window.alert('알수 없는 에러입니다.');
+        }
       }
     },
-    [emailCheck]
+    [emailCheck, historyPush]
   );
 
   return (

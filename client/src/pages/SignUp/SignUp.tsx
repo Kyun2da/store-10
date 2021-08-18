@@ -10,7 +10,9 @@ import {
   validateRePassword,
 } from '@/utils/constant/validate/validation';
 import React, { useCallback, useState } from 'react';
+import { postEmailCheck } from '@/lib/api/user/postEmailCheck';
 import * as S from './styles';
+import { CheckSVG } from '@/assets/svgs';
 
 const SignUp = () => {
   const [error, setError] = useState({
@@ -20,6 +22,24 @@ const SignUp = () => {
     name: false,
     initialError: true,
   });
+
+  const [emailCheck, setEmailCheck] = useState(false);
+  const [email, , onChangeEmail] = useInput('');
+
+  const onClickEmailCheck = useCallback(async () => {
+    if (!validateEmail(email)) {
+      return window.alert('올바른 이메일을 입력하세요.');
+    }
+    try {
+      await postEmailCheck(email);
+      setEmailCheck(true);
+      window.alert('사용할 수 있는 아이디입니다!');
+    } catch (err) {
+      const { status } = err.response.data;
+      if (status === 409) window.alert('이미 존재하는 아이디 입니다.');
+      else window.alert('서버 에러입니다. 관리자에게 문의하세요.');
+    }
+  }, [email, setEmailCheck]);
 
   const errorCheck = useCallback(
     (
@@ -49,24 +69,29 @@ const SignUp = () => {
     [password, error]
   );
 
-  const formSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    const target = e.target as typeof e.target & {
-      email: { value: string };
-      password: { value: string };
-      rePassword: { value: string };
-      name: { value: string };
-    };
-    const email = target.email.value;
-    const password = target.password.value;
-    const rePassword = target.rePassword.value;
-    const name = target.name.value;
-    if (validateAll(email, password, rePassword, name)) {
-      // TODO : 회원가입
-    } else {
-      window.alert('회원가입 폼이 제대로 채워져있는지 다시 한번 확인해보세요!');
-    }
-  }, []);
+  const formSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      const target = e.target as typeof e.target & {
+        email: { value: string };
+        password: { value: string };
+        rePassword: { value: string };
+        name: { value: string };
+      };
+      const email = target.email.value;
+      const password = target.password.value;
+      const rePassword = target.rePassword.value;
+      const name = target.name.value;
+      if (!validateAll(email, password, rePassword, name)) {
+        window.alert('회원가입 폼이 제대로 채워지지 않았습니다.');
+      } else if (!emailCheck) {
+        window.alert('이메일 중복확인이 필요합니다.');
+      } else {
+        console.log('회원가입 해야지');
+      }
+    },
+    [emailCheck]
+  );
 
   return (
     <S.SignUpContainer>
@@ -79,12 +104,24 @@ const SignUp = () => {
             label="Outlined"
             labelName="이메일"
             placeholder="이메일을 입력해주세요."
-            onBlur={(e) => errorCheck(e, validateEmail)}
+            value={email}
+            onChange={(e) => {
+              onChangeEmail(e);
+              setEmailCheck(false);
+            }}
+            onBlur={(e) => {
+              errorCheck(e, validateEmail);
+            }}
             error={error.email}
             helperText="올바른 이메일 주소 형식이 아닙니다. ex) baemin@gmail.com"
           />
-          <Button type="button" color="white">
-            중복 확인
+          <Button
+            type="button"
+            color="white"
+            onClick={onClickEmailCheck}
+            disabled={emailCheck}
+          >
+            {emailCheck ? <CheckSVG width={23} height={23} /> : '중복 확인'}
           </Button>
         </S.EmailContainer>
         <Input

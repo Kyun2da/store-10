@@ -2,19 +2,10 @@ import React from 'react';
 import { Input } from '@/components/Shared/Input';
 import Button from '@/components/Shared/Button';
 import * as S from './styles';
-import { Link, useHistory } from '@/lib/Router';
-import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
-import axios from 'axios';
-
-import { useQuery } from 'react-query';
+import { Link } from '@/lib/Router';
 import { githubLogin } from '@/lib/api/login/githubLogin';
 
 const Login = () => {
-  const { isLoading, error, data, isFetching } = useQuery(
-    'user',
-    getCurrentUser
-  );
-
   const GithubLogin = async () => {
     const oAuthURL = await githubLogin();
     window.location.href = oAuthURL;

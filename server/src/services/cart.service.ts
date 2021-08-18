@@ -29,9 +29,9 @@ class CartService {
     });
   }
 
-  async deleteCart({ userId, productId }) {
+  async deleteCart({ userId, productIds }) {
     const cartRepo = CartRepository();
-    return await cartRepo.deleteCart({ userId, productId });
+    return await cartRepo.deleteCart({ userId, productIds });
   }
 }
 

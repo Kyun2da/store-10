@@ -6,6 +6,6 @@ const router = Router();
 
 router.post('/', wrapAsync(CartController.createCart));
 router.get('/', wrapAsync(CartController.getCarts));
-router.delete('/:productId', wrapAsync(CartController.deleteCart));
+router.delete('/', wrapAsync(CartController.deleteCart));
 
 export default router;

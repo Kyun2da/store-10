@@ -1,14 +1,16 @@
 import React, { Dispatch } from 'react';
 import Checkbox from '@/components/Shared/Checkbox';
 import ShoppingCartItem from '@/components/ShoppingCart/ShopingCartItem';
-import { shoppingCartItem } from '@/types';
+import { ICart } from '@/types';
 import * as S from './styles';
 
 interface IShoppingCartListProps {
-  shoppingCartItems: shoppingCartItem[];
-  checkedItems: shoppingCartItem[];
-  setShoppingCartItems: Dispatch<shoppingCartItem[]>;
+  shoppingCartItems: ICart[];
+  checkedItems: ICart[];
+  setShoppingCartItems: Dispatch<ICart[]>;
   removeFromCart: (ids: number[]) => void;
+  setUnCheckedList: Dispatch<number[]>;
+  unCheckedList: number[];
 }
 
 const ShoppingCartList = ({
@@ -16,6 +18,8 @@ const ShoppingCartList = ({
   setShoppingCartItems,
   removeFromCart,
   checkedItems,
+  setUnCheckedList,
+  unCheckedList,
 }: IShoppingCartListProps) => {
   const setProductState = (index: number, state: Record<string, unknown>) => {
     shoppingCartItems.splice(index, 1, {
@@ -26,22 +30,19 @@ const ShoppingCartList = ({
     setShoppingCartItems([...shoppingCartItems]);
   };
 
-  const isAllchecked =
-    !!shoppingCartItems.length &&
-    shoppingCartItems.every((item) => item.isChekced);
+  const isAllchecked = checkedItems.length === shoppingCartItems.length;
 
   const onChangeAllCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const shouldAllCheck = e.target.checked;
-    const newItems = shoppingCartItems.map((item) => ({
-      ...item,
-      isChekced: shouldAllCheck,
-    }));
-
-    setShoppingCartItems([...newItems]);
+    if (shouldAllCheck) {
+      setUnCheckedList([]);
+    } else {
+      setUnCheckedList(shoppingCartItems.map((item) => item.productId));
+    }
   };
 
   const onClickRemoveSelectedItems = () => {
-    const checkedIds = checkedItems.map((item) => item.id);
+    const checkedIds = checkedItems.map((item) => item.productId);
     removeFromCart(checkedIds);
   };
 
@@ -59,11 +60,13 @@ const ShoppingCartList = ({
       <S.ShoppingCartList>
         {shoppingCartItems.map((item, index) => (
           <ShoppingCartItem
-            key={item.id}
+            key={item.productId}
             item={item}
             index={index}
             setProductState={setProductState}
             removeFromCart={removeFromCart}
+            setUnCheckedList={setUnCheckedList}
+            unCheckedList={unCheckedList}
           />
         ))}
       </S.ShoppingCartList>

@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import * as S from './styles';
 import { MinusSVG, PlusSVG, CloseSVG } from '@/assets/svgs';
 import { wonFormat } from '@/helper';
 import Checkbox from '@/components/Shared/Checkbox';
-import { shoppingCartItem } from '@/types';
+import { ICart } from '@/types';
 
 interface IShoppingCartItemProps {
-  item: shoppingCartItem;
+  item: ICart;
   index: number;
   setProductState: (index: number, state: Record<string, unknown>) => void;
   removeFromCart: (ids: number[]) => void;
+  setUnCheckedList: Dispatch<number[]>;
+  unCheckedList: number[];
 }
 const ShoppingCartItem = ({
   item,
   index,
   setProductState,
   removeFromCart,
+  setUnCheckedList,
+  unCheckedList,
 }: IShoppingCartItemProps) => {
   const onClickPlus = () => {
     setProductState(index, { count: item.count + 1 });
@@ -29,22 +33,30 @@ const ShoppingCartItem = ({
   };
 
   const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProductState(index, { isChekced: e.target.checked });
+    if (e.target.checked) {
+      setUnCheckedList(
+        unCheckedList.filter((unChekcedId) => unChekcedId !== item.productId)
+      );
+    } else {
+      setUnCheckedList([...unCheckedList, item.productId]);
+    }
   };
 
   const onClickClose = () => {
-    removeFromCart([item.id]);
+    removeFromCart([item.productId]);
   };
-
+  const isUnCehcked = !!unCheckedList.find(
+    (uncheckedId) => uncheckedId === item.productId
+  );
   return (
     <S.ShoppingCartItem>
-      <Checkbox checked={item.isChekced} onChange={onChangeCheckbox} />
+      <Checkbox checked={!isUnCehcked} onChange={onChangeCheckbox} />
       <S.ImgWrapper>
-        <img src="https://store-10.s3.ap-northeast-2.amazonaws.com/test/test.jpeg" />
+        <img src={item.image} />
       </S.ImgWrapper>
       <S.ItemInfo>
         <S.ItemInfoName>{item.title}</S.ItemInfoName>
-        <S.ItemInfoPrice>{wonFormat(item.price)}</S.ItemInfoPrice>
+        <S.ItemInfoPrice>{wonFormat(+item.price)}</S.ItemInfoPrice>
       </S.ItemInfo>
       <S.TotalPrice>
         <div>

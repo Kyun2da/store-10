@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from './styles';
 import Button from '@/components/Shared/Button';
 import { wonFormat } from '@/helper';
@@ -18,7 +18,7 @@ interface IProps {
 const OrderItemList = ({ date, items, status, deliveredAt }: IProps) => {
   const renderItems = () =>
     items.map((item) => (
-      <S.OrderItemInfoBody>
+      <S.OrderItemInfoBody key={item.id}>
         <img
           width={64}
           height={64}

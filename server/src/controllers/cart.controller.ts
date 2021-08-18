@@ -8,7 +8,7 @@ class CartController {
     const userId = req.user?.id || 4;
     await CartService.createCart({ productId, userId, count });
 
-    res.status(204).send({
+    res.status(204).json({
       success: true,
       message: '장바구니에 추가 되었습니다!',
     });
@@ -22,11 +22,14 @@ class CartController {
   }
 
   async deleteCart(req: Request, res: Response) {
-    const { productId } = req.params;
+    const { productIds } = req.query;
     const userId = req.user?.id || 4;
-    await CartService.deleteCart({ userId, productId });
+    await CartService.deleteCart({
+      userId,
+      productIds: JSON.parse(productIds as string),
+    });
 
-    res.status(204).send({
+    res.status(204).json({
       success: true,
       message: '장바구니에서 삭제 되었습니다!',
     });

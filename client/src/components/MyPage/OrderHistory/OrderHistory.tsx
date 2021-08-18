@@ -21,7 +21,7 @@ const OrderHistory = ({}) => {
   const orderItems = Object.entries(orderItemList);
   const renderOrderItemList = () => {
     return orderItems.map(([key, value]) => (
-      <S.OrderHistoryBody>
+      <S.OrderHistoryBody key={key}>
         <OrderItemList
           date={key}
           items={value.items}

@@ -5,6 +5,7 @@ import { NumberInput } from '@/components/Shared/Input';
 import Title from '@/components/Shared/Title';
 import useNumberInput from '@/hooks/useNumberInput';
 import { wonFormat } from '@/helper';
+import { usePostCart } from '@/hooks/queries/cart';
 
 // 요런 식으로 데이터가 전달되어야 하려나아아
 const productInfoData = {
@@ -29,7 +30,15 @@ const productInfoData = {
 const ProductInfo = () => {
   const { title, price, details } = productInfoData;
   const [value, handleClickOnMinus, handleClickOnPlus] = useNumberInput(1);
+  const { mutate } = usePostCart();
 
+  const onClickCart = () => {
+    mutate({
+      count: value,
+      // TODO: 데이터 연동 후 임시 ID 삭제
+      productId: 59087,
+    });
+  };
   return (
     <S.ProductInfo>
       <S.ProductThumbnail
@@ -77,7 +86,7 @@ const ProductInfo = () => {
           <button className="heart">
             <HeartSVG width={25} height={25} />
           </button>
-          <button className="cart">
+          <button onClick={onClickCart} className="cart">
             <CartSVG width={25} height={25} />
           </button>
           <button className="purchase">바로구매</button>

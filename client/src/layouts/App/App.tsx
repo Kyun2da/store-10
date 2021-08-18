@@ -4,7 +4,6 @@ import { Route, Switch } from '@/core/Router';
 import Main from '@/pages/Main';
 import Detail from '@/pages/Detail';
 import Footer from '@/components/Footer';
-import NavLinks from '@/pages/NavLinks';
 import ShoppingCart from '@/pages/ShoppingCart';
 import MyPage from '@/pages/Mypage';
 import { ThemeProvider } from 'styled-components';
@@ -15,6 +14,7 @@ import NotFound from '@/components/NotFound';
 import SelectAuth from '@/pages/SelectAuth';
 import Approval from '@/pages/Approval';
 import SignUp from '@/pages/SignUp';
+import Notice from '@/pages/Notice';
 
 const App = () => {
   const [theme, setTheme] = useState('light-mode');
@@ -35,7 +35,7 @@ const App = () => {
           <Route path="/signup" component={SignUp} />
           <Route path="/login" component={Login} />
           <Route path="/detail/:id" component={Detail} />
-          <Route path="/navlink" component={NavLinks} />
+          <Route path="/notice" component={Notice} />
           <Route path="/cart" component={ShoppingCart} />
           <Route path="/mypage" component={MyPage} />
           <Route path="/*" component={NotFound} />

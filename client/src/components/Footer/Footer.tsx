@@ -19,7 +19,7 @@ const Footer = () => {
         <S.FooterTab>
           <S.TabTitle>NOTICE</S.TabTitle>
           <S.TabContent>
-            <Link to="/">공지사항</Link>
+            <Link to="/notice">공지사항</Link>
             <Link to="/">제휴문의</Link>
             <Link to="/">고객센터</Link>
           </S.TabContent>

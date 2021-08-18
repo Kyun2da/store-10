@@ -24,3 +24,34 @@ export interface IUser {
   user_id: string;
   name: string;
 }
+
+export interface IProductImage {
+  createdAt: string;
+  updatedAt: string;
+  id: number;
+  url: string;
+  isThumbnail: number;
+  type: string;
+  product_id: number;
+}
+
+export interface IProduct {
+  createdAt: string;
+  updatedAt: string;
+  id: number;
+  title: string;
+  price: number;
+  content: string | null;
+  stock: number;
+  sub_category_id: number;
+  productImage: IProductImage[];
+}
+
+export interface ICart {
+  count: number;
+  createdAt: string;
+  productId: number;
+  title: string;
+  price: number;
+  image: string;
+}

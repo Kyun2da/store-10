@@ -2,27 +2,24 @@ import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import shoppingCart from '@/dummies/shoppingCart';
 import ShoppingCategoryList from '.';
-import { shoppingCartItem } from '@/types';
+import { ICart } from '@/types';
 
 export default {
   title: '컴포넌트/장바구니 리스트',
   component: ShoppingCategoryList,
 } as ComponentMeta<typeof ShoppingCategoryList>;
 
-const initialItems = shoppingCart.map((item) => ({
-  ...item,
-  isChekced: true,
-}));
-
 const Template: ComponentStory<typeof ShoppingCategoryList> = () => {
-  const [shoppingCartItems, setShoppingCartItems] =
-    useState<shoppingCartItem[]>(initialItems);
-
-  const checkedItems = shoppingCartItems.filter((item) => item.isChekced);
+  const [shoppingCartItems, setShoppingCartItems] = useState<ICart[]>([]);
+  const [unCheckedList, setUnCheckedList] = useState<number[]>([]);
+  const checkedItems = shoppingCartItems.filter(
+    (item) =>
+      !unCheckedList.find((uncheckedId) => item.productId === uncheckedId)
+  );
 
   const removeFromCart = (ids: number[]) => {
     const filteredItems = shoppingCartItems.filter(
-      (item) => !ids.includes(item.id)
+      (item) => !ids.includes(item.productId)
     );
 
     setShoppingCartItems(filteredItems);
@@ -33,6 +30,8 @@ const Template: ComponentStory<typeof ShoppingCategoryList> = () => {
       shoppingCartItems={shoppingCartItems}
       checkedItems={checkedItems}
       setShoppingCartItems={setShoppingCartItems}
+      setUnCheckedList={setUnCheckedList}
+      unCheckedList={unCheckedList}
       removeFromCart={removeFromCart}
     />
   );

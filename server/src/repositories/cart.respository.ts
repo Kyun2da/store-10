@@ -4,6 +4,7 @@ import {
   getCustomRepository,
   Repository,
   DeleteResult,
+  In,
 } from 'typeorm';
 
 interface ICartInfo {
@@ -32,8 +33,14 @@ class CartRepository extends Repository<Cart> {
     return carts;
   }
 
-  deleteCart({ productId, userId }: Partial<ICartInfo>): Promise<DeleteResult> {
-    return this.delete({ user_id: userId, product_id: productId });
+  deleteCart({
+    productIds,
+    userId,
+  }: {
+    productIds: number[];
+    userId: number;
+  }): Promise<DeleteResult> {
+    return this.delete({ user_id: userId, product_id: In(productIds) });
   }
 }
 

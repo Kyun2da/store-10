@@ -1,4 +1,4 @@
-import React, { RefObject, useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import * as S from './style';
 
 export interface IInputContainer {
@@ -22,7 +22,6 @@ export interface IInput {
   onFocus?: () => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  ref?: RefObject<HTMLInputElement>;
 }
 
 const Input = ({

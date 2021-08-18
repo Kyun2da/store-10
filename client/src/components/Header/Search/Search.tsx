@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { SearchSVG } from '@/assets/svgs';
 import * as S from './styles';
 import useRecentSearch from '@/hooks/useRecentSearch';
-import axios from 'axios';
+import client from '@/lib/api/client';
 
 const Search = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -10,7 +10,7 @@ const Search = () => {
   const [searchData, setSearchDatas] = useState([]);
 
   const productSearch = async (searchText: string) => {
-    const data = await axios.get(
+    const data = await client.get(
       `http://localhost:3000/api/product/search?q=${searchText}`
     );
     if (data.data.length) {

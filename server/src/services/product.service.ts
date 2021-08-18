@@ -3,13 +3,13 @@ import ElasticClient from '../loaders/elasticSearch';
 
 class ProductService {
   async getProduct(id: number) {
-    const produvtRepo = ProductRepository();
-    return await produvtRepo.findProductById(id);
+    const productRepo = ProductRepository();
+    return await productRepo.findProductById(id);
   }
 
   async searchProductTitle(searchText: string) {
-    const produvtRepo = ProductRepository();
-    const response = await produvtRepo.searchProduct(searchText);
+    const productRepo = ProductRepository();
+    const response = await productRepo.searchProduct(searchText);
 
     const data = response.hits.hits.map((row) => {
       return {

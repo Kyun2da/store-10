@@ -2,12 +2,14 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import apiRouter from '@/api/routes';
+import morgan from 'morgan';
 
 export default ({ app }: { app: Application }) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cors());
   app.use(cookieParser());
+  app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'));
 
   app.use('/api', apiRouter);
 

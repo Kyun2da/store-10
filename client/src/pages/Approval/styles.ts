@@ -1,3 +1,4 @@
+import Checkbox from '@/components/Shared/Checkbox';
 import styled from 'styled-components';
 
 export const ApprovalContainer = styled.div`
@@ -20,10 +21,7 @@ export const ApprovalContainer = styled.div`
   }
 `;
 
-export const LabelContainer = styled.div`
-  display: flex;
-  align-items: center;
-  height: 30px;
+export const ApprovalCheckBox = styled(Checkbox)`
   margin: 2rem 0;
 `;
 

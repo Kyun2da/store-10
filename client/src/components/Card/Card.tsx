@@ -4,7 +4,7 @@ import {
   HeartSVG as HeartButton,
   CartSVG as ShoppingCart,
 } from '@/assets/svgs';
-import { Link } from '@/core/Router';
+import { Link } from '@/lib/Router';
 
 interface CardProps {
   bgColor: 'error' | 'primary'; // category 식으로 리스트화 (enum 등..) 필요

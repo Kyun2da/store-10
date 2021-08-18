@@ -47,6 +47,12 @@ class AuthController {
     res.cookie('accessToken', jwtAccessToken, { path: '/', httpOnly: true });
     res.json({ ok: true, message: '어서오세요 동물의 숲' });
   }
+
+  async check(req: Request, res: Response) {
+    const { id, user_id, name } = req.user;
+
+    res.json({ id, user_id, name });
+  }
 }
 
 export default new AuthController();

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from '@/components/Header';
-import { Route, Switch } from '@/core/Router';
+import { Route, Switch } from '@/lib/Router';
 import Main from '@/pages/Main';
 import Detail from '@/pages/Detail';
 import Footer from '@/components/Footer';

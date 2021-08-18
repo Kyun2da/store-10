@@ -7,6 +7,14 @@ const ERROR_USER_IS_NOT_EXIST = '현재 토큰을 가진 유저가 없습니다.
 const ERROR_ALL_TOKEN_IS_EXPIRED = '모든 토큰의 유효기간이 지났습니다.';
 const ERROR_HEADER_COOKIE_IS_NOT_EXIST = '헤더에 쿠키가 존재하지않습니다.';
 
+interface TokenInterface {
+  user: {
+    id: number;
+    user_id: string;
+    name: string;
+  };
+}
+
 const ErrorJWT = (res: Response, message: string) => {
   res.status(401).json({ success: false, message }).end();
 };
@@ -51,7 +59,7 @@ const authJWT = async (req: Request, res: Response, next: NextFunction) => {
       });
     }
   } else {
-    user = access as User;
+    user = (access as TokenInterface).user;
     if (!refresh) {
       //ref 만 유효기간 지남
       const newRefreshToken = JwtService.refresh();

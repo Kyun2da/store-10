@@ -18,3 +18,9 @@ export interface IAddressData {
   message: string;
   isDefault: boolean;
 }
+
+export interface IUser {
+  id: number;
+  user_id: string;
+  name: string;
+}

@@ -2,10 +2,21 @@ import React, { useCallback, useState } from 'react';
 import { SearchSVG } from '@/assets/svgs';
 import * as S from './styles';
 import useRecentSearch from '@/hooks/useRecentSearch';
+import client from '@/lib/api/client';
 
 const Search = () => {
   const [searchValue, setSearchValue] = useState('');
   const [recentItems, setRecentItems] = useRecentSearch();
+  const [searchData, setSearchDatas] = useState([]);
+
+  const productSearch = async (searchText: string) => {
+    const data = await client.get(
+      `http://localhost:3000/api/product/search?q=${searchText}`
+    );
+    if (data.data.length) {
+      setSearchDatas(data.data);
+    }
+  };
 
   // 한글 엔터 2번방지
   const inputKeypressHandler = useCallback(
@@ -18,6 +29,7 @@ const Search = () => {
   const inputHandler = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       setSearchValue(e.currentTarget.value);
+      productSearch(e.currentTarget.value);
     },
     [setSearchValue]
   );
@@ -35,7 +47,13 @@ const Search = () => {
         {!!searchValue ? (
           <>
             <S.RecentTitle>Elastic Search</S.RecentTitle>
-            <ul></ul>
+            {searchData && (
+              <ul>
+                {searchData.map((item, _) => (
+                  <li key={item['id']}>{item['title']}</li>
+                ))}
+              </ul>
+            )}
           </>
         ) : (
           <>

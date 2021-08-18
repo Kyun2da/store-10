@@ -3,7 +3,7 @@ import { getConnection } from 'typeorm';
 import { MainCategoty } from '@/entities/mainCategory.entity';
 import { SubCategory } from '@/entities/subCategory.entity';
 import { Product } from '@/entities/product.entity';
-import { ProductImage } from '@/entities/prodectImage.entity';
+import { ProductImage } from '@/entities/productImage.entity';
 
 type IProductData = {
   id: number;

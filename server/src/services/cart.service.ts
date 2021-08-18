@@ -12,7 +12,21 @@ class CartService {
 
   async getCarts(userId) {
     const cartRepo = CartRepository();
-    return await cartRepo.getCarts(userId);
+    const carts = await cartRepo.getCarts(userId);
+
+    return carts.map((cart) => {
+      const img = cart.product.productImage.find(
+        (img) => img.type === 'detail'
+      );
+      return {
+        count: cart.count,
+        createdAt: cart.createdAt,
+        productId: cart.product.id,
+        title: cart.product.title,
+        price: cart.product.price,
+        image: img?.url,
+      };
+    });
   }
 
   async deleteCart({ userId, productId }) {

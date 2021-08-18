@@ -1,14 +1,8 @@
-import {
-  Entity,
-  Column,
-  OneToMany,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { Question } from './question.entity';
 import { Bookmark } from './bookmark.entity';
 import { Cart } from './cart.entity';
-import { ProductImage } from './prodectImage.entity';
+import { ProductImage } from './productImage.entity';
 import { Purchase } from './purchase.entity';
 import { Review } from './review.entity';
 import { SubCategory } from './subCategory.entity';
@@ -37,12 +31,12 @@ export class Product extends InitEntity {
   subCategory!: SubCategory;
 
   @Column()
-  sub_category_id: number
+  sub_category_id: number;
 
   @OneToMany(() => Bookmark, (type) => type.product)
   bookmark!: Bookmark[];
 
-  @OneToMany(() => ProductImage, (type) => type.id)
+  @OneToMany(() => ProductImage, (type) => type.product)
   productImage!: ProductImage[];
 
   @OneToMany(() => Purchase, (type) => type.product)

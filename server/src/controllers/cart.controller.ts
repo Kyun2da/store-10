@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 class CartController {
   async createCart(req: Request, res: Response) {
     const { productId, count } = req.body;
-    const userId = req.user?.id || 2;
+    const userId = req.user?.id || 4;
     await CartService.createCart({ productId, userId, count });
 
     res.status(204).send({
@@ -15,7 +15,7 @@ class CartController {
   }
 
   async getCarts(req: Request, res: Response) {
-    const userId = req.user?.id || 2;
+    const userId = req.user?.id || 4;
     const carts = await CartService.getCarts(userId);
 
     res.status(200).json(carts);
@@ -23,7 +23,7 @@ class CartController {
 
   async deleteCart(req: Request, res: Response) {
     const { productId } = req.params;
-    const userId = req.user?.id || 2;
+    const userId = req.user?.id || 4;
     await CartService.deleteCart({ userId, productId });
 
     res.status(204).send({

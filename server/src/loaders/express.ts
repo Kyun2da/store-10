@@ -3,11 +3,14 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import apiRouter from '@/api/routes';
 import morgan from 'morgan';
+import config from '@/config';
 
 export default ({ app }: { app: Application }) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
-  app.use(cors());
+  app.use(cors({origin: [config.CLIENT_URL], // 접근 권한을 부여하는 도메인
+    credentials: true, // 응답 헤더에 Access-Control-Allow-Credentials 추가 for JWT http access
+  }));
   app.use(cookieParser());
   app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'));
 

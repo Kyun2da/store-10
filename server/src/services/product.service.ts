@@ -1,6 +1,4 @@
 import ProductRepository from '@/repositories/product.repository';
-import ElasticClient from '../loaders/elasticSearch';
-
 class ProductService {
   async getProduct(id: number) {
     const productRepo = ProductRepository();

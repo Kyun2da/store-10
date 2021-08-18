@@ -38,11 +38,13 @@ export const orderItemList = {
 
     items: [
       {
+        id: 1,
         name: '반 반 휴지. 물 반 휴지 반',
         price: 8000,
         count: 2,
       },
       {
+        id: 2,
         name: '반 반 휴지. 물 반 휴지 반',
         price: 8000,
         count: 2,
@@ -54,6 +56,7 @@ export const orderItemList = {
     deliveredAt: '2021.08.15',
     items: [
       {
+        id: 3,
         name: '반 반 휴지. 물 반 휴지 반',
         price: 8000,
         count: 2,

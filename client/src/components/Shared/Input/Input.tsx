@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { RefObject, useCallback, useRef, useState } from 'react';
 import * as S from './style';
 
 export interface IInputContainer {
@@ -21,6 +21,8 @@ export interface IInput {
   helperText?: string;
   onFocus?: () => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  ref?: RefObject<HTMLInputElement>;
 }
 
 const Input = ({
@@ -35,6 +37,7 @@ const Input = ({
   error,
   helperText,
   onChange,
+  onBlur,
   onFocus,
 }: IInput & IInputContainer) => {
   const [isFocus, setFocus] = useState(false);
@@ -43,8 +46,8 @@ const Input = ({
   }, []);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const onBlurInput = () => {
-    console.log(inputRef.current?.value);
+  const onBlurInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onBlur && onBlur(e);
     if (inputRef.current?.value === '') {
       setFocus((value) => !value);
     }

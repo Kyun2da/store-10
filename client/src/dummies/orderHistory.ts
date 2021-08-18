@@ -31,7 +31,7 @@ export default [
   },
 ];
 
-export const orderItemList = {
+export const orderItemLists = {
   '2021.08.13': {
     status: 'delivering',
     deliveredAt: null,

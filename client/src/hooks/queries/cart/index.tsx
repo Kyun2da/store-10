@@ -1,6 +1,7 @@
 import { useQuery, useQueryClient, useMutation } from 'react-query';
 import { getCarts, deleteCart, postCart } from '@/lib/api/cart';
 import { ICart } from '@/types';
+import { notify } from '@/components/Shared/Toastify';
 
 export const useGetCarts = () => {
   return useQuery<ICart[], Error>('carts', getCarts);
@@ -10,7 +11,7 @@ export const useDeleteCart = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation(deleteCart, {
     onSuccess: () => {
-      alert('성공! TODO: Toast');
+      notify('success', '성공! TODO: Toast');
     },
     onError: () => {
       queryClient.invalidateQueries('carts');
@@ -23,10 +24,10 @@ export const useDeleteCart = () => {
 export const usePostCart = () => {
   const mutation = useMutation(postCart, {
     onSuccess: () => {
-      alert('성공! TODO: Toast');
+      notify('success', '성공! TODO: Toast');
     },
     onError: () => {
-      alert('실패!');
+      notify('error', '실패!');
     },
   });
 

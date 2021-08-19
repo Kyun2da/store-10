@@ -137,6 +137,24 @@ export const PanelWrapper = styled.div`
   }
 `;
 
+export const ProductTable = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+`;
+
+export const ProductTableRow = styled.div`
+  display: flex;
+  gap: 2rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid ${({ theme }) => theme.color.line};
+
+  .table-title {
+    ${({ theme }) => theme.fontWeight.m};
+    ${({ theme }) => theme.fontWeight.l};
+  }
+`;
+
 export const AlertArea = styled.div`
   background-color: ${({ theme }) => theme.color.error};
   border-radius: 1rem;

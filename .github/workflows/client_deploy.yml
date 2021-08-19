@@ -11,9 +11,16 @@ jobs: # Job 설정
     runs-on: ubuntu-latest
     env:
       working-directory: client
+      NODE_secrets: ${{ secrets.API_URL }}
     steps:
       - name: Checkout source code. # Repo checkout
         uses: actions/checkout@v2
+        
+      - name: make .env file
+        run : |
+          touch .env.prod
+          echo SERVER_API_HOST="$API_URL" >> .env.prod
+        working-directory: ${{ env.working-directory }}
 
       - name: Check Node v # Node v 확인
         run: node -v

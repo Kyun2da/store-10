@@ -9,6 +9,7 @@ interface IProps {
   status: string;
   deliveredAt: string | null;
   items: {
+    id: number;
     name: string;
     price: number;
     count: number;

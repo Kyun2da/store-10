@@ -1,7 +1,7 @@
 import React, { Dispatch } from 'react';
 import * as S from './styles';
 import { MinusSVG, PlusSVG, CloseSVG } from '@/assets/svgs';
-import { wonFormat } from '@/helper';
+import wonFormat from '@/utils/wonFormat';
 import Checkbox from '@/components/Shared/Checkbox';
 import { ICart } from '@/types';
 

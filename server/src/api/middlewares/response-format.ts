@@ -6,7 +6,7 @@ export default function ApiResponse(
   statusCode: HttpStatusCode,
   success: boolean,
   message?: string,
-  data?: Record<string, any>
+  result?: Record<string, any>
 ) {
-  return res.status(statusCode).json({ success, message, data });
+  return res.status(statusCode).json({ success, message, result });
 }

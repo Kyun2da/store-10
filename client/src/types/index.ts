@@ -1,3 +1,9 @@
+interface BaseResponse {
+  success: boolean;
+  message: string;
+  result: Record<string, unknown>[];
+}
+
 export interface shoppingCartItem {
   id: number;
   title: string;
@@ -55,6 +61,17 @@ export interface ICart {
   price: number;
   image: string;
 }
+
+
+export interface IProductDetail extends Omit<BaseResponse, 'result'> {
+  result: {
+    content: Record<string, unknown>;
+    createdAt: string;
+    id: number;
+    price: string;
+    stock: number;
+    sub_category_id: number;
+    title: string;
 
 export interface ISignUpUser {
   user_id: string;

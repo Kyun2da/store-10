@@ -1,7 +1,7 @@
 import { Product } from '@/entities/product.entity';
 import { Order } from '@/entities/order.entity';
 import ElasticClient from '@/loaders/elasticSearch';
-import { EntityRepository, getCustomRepository, Repository } from 'typeorm';
+import { EntityRepository, getCustomRepository, Repository, In } from 'typeorm';
 import { ProductImage } from '@/entities/productImage.entity';
 
 type IElasticData = {

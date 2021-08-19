@@ -9,13 +9,16 @@ export const HeaderWrapper = styled.header`
   border-bottom: 1px solid ${({ theme }) => theme.color['line']};
   ${({ theme }) => theme.fontSize.m}
 
+  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
+    ${({ theme }) => theme.fontSize.s}
+  }
+
   svg {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2em;
+    height: 2em;
     stroke-width: 1.5px;
     cursor: pointer;
     stroke: ${({ theme }) => theme.color['text-color']};
-
     &.filled {
       fill: ${({ theme }) => theme.color['text-color']};
     }
@@ -23,11 +26,11 @@ export const HeaderWrapper = styled.header`
 `;
 
 export const Header = styled.div`
-  display: grid;
+  display: flex;
   background: ${({ theme }) => theme.color['background']};
-  grid-template-columns: 0.5fr 1fr 0.5fr;
   justify-content: space-between;
   align-items: center;
+  height: 60px;
   width: 95%;
   max-width: 1050px;
   padding: 1rem 0;
@@ -38,16 +41,17 @@ export const Header = styled.div`
 `;
 
 export const Menu = styled.div`
-  display: grid;
+  display: flex;
   align-items: center;
-  grid-template-columns: 2.5rem 1fr;
 `;
 
 export const MenuButton = styled.button`
   display: flex;
   position: relative;
-  padding: 0;
-  border: none;
+  width: fit-content;
+  box-shadow: 0 0 3px ${({ theme }) => theme.color['text-color']}99;
+  border-radius: 100%;
+  padding: 6px;
   cursor: pointer;
   background-color: transparent;
 `;
@@ -55,6 +59,7 @@ export const MenuButton = styled.button`
 export const Logo = styled.div`
   color: ${({ theme }) => theme.color['text-color']};
   justify-self: center;
+  margin-left: 1rem;
 `;
 
 export const StateUl = styled.div`
@@ -70,4 +75,24 @@ export const StateUl = styled.div`
       margin: 0 0.5rem;
     }
   }
+
+  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
+    display: none;
+  }
 `;
+
+export const SearchWrapper = styled.div`
+  border-radius: 0.4em;
+  cursor: pointer;
+  border: 1px solid ${({ theme }) => theme.color['line']};
+  color: ${({ theme }) => theme.color['placeholder']};
+  max-width: 400px;
+  width: 70%;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2em 0.6em 0.3em 0.8em;
+`;
+
+export const SearchText = styled.div``;

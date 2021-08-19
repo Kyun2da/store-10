@@ -1,7 +1,8 @@
 import { Product } from '@/entities/product.entity';
 import { Order } from '@/entities/order.entity';
 import ElasticClient from '@/loaders/elasticSearch';
-import { EntityRepository, getCustomRepository, Repository, In } from 'typeorm';
+import { EntityRepository, getCustomRepository, Repository } from 'typeorm';
+import { ProductImage } from '@/entities/productImage.entity';
 
 type IElasticData = {
   id: number;
@@ -22,14 +23,15 @@ class ProductRepository extends Repository<Product> {
     const Product = this.create(ProductInfo);
     return this.save(Product);
   }
-  findProductById(Product_id: number): Promise<Product | undefined> {
-    return this.findOne({ id: Product_id });
+
+  findProductById(Product_id: string): Promise<Product | undefined> {
+    return this.findOne({ id: +Product_id });
   }
 
   searchProduct(searchText: string) {
     return ElasticClient.search<IElasticData>({
       index: 'store10',
-      size: 15,
+      size: 30,
       body: {
         query: {
           match: {

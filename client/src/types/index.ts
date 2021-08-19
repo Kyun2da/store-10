@@ -68,13 +68,19 @@ export interface ICarts extends Omit<BaseResponse, 'result'> {
 
 export interface IProductDetail extends Omit<BaseResponse, 'result'> {
   result: {
-    content: Record<string, unknown>;
-    createdAt: string;
-    id: number;
-    price: string;
-    stock: number;
-    sub_category_id: number;
-    title: string;
+    details: {
+      content: {
+        details: string;
+        essentials: string;
+      };
+      createdAt: string;
+      id: number;
+      price: string;
+      stock: number;
+      sub_category_id: number;
+      title: string;
+    };
+    thumbnails: Record<string, unknown>[];
   };
 }
 
@@ -92,4 +98,11 @@ export interface ILoginUser {
 
 export interface IProducts extends Omit<BaseResponse, 'result'> {
   result: IProduct[];
+}
+
+export interface ISearchData {
+  id: number;
+  price: number;
+  image: string;
+  title: string;
 }

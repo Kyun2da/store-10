@@ -12,13 +12,15 @@ class ProductController {
 
   async getProductById(req: Request, res: Response) {
     const { id } = req.params;
-    const result = await ProductService.getProductById(+id);
+    const details = await ProductService.getProductById(id);
+    const thumbnails = await ProductService.getProductThumbnails(id);
+    const result = { details, thumbnails };
 
     if (!result) {
       ApiResponse(
         res,
         HttpStatusCode.NO_CONTENT,
-        true,
+        false,
         '해당 상품이 존재하지 않습니다'
       );
     }

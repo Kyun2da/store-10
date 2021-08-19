@@ -1,10 +1,16 @@
 import ProductRepository from '@/repositories/product.repository';
+import productImageRepository from '@/repositories/productImage.repository';
 import OrderRepository from '@/repositories/order.repository';
 import { NoVersionOrUpdateDateColumnError } from 'typeorm';
 class ProductService {
-  async getProductById(id: number) {
+  async getProductById(id: string) {
     const productRepo = ProductRepository();
     return await productRepo.findProductById(id);
+  }
+
+  async getProductThumbnails(id: string) {
+    const productImageRepo = productImageRepository();
+    return await productImageRepo.findProductThumbnailsById(id);
   }
 
   async getProducts({ category, limit }) {

@@ -19,9 +19,11 @@ export interface IInput {
   value?: string | number;
   error?: boolean;
   helperText?: string;
+  _ref?: React.RefObject<HTMLInputElement>;
   onFocus?: () => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const Input = ({
@@ -35,15 +37,18 @@ const Input = ({
   fullWidth,
   error,
   helperText,
+  _ref,
   onChange,
   onBlur,
   onFocus,
+  onKeyPress,
 }: IInput & IInputContainer) => {
   const [isFocus, setFocus] = useState(false);
   const onClickLabel = useCallback(() => {
     inputRef.current?.focus();
   }, []);
-  const inputRef = useRef<HTMLInputElement>(null);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const inputRef = _ref ?? useRef<HTMLInputElement>(null);
 
   const onBlurInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     onBlur && onBlur(e);
@@ -72,6 +77,7 @@ const Input = ({
         ref={inputRef}
         value={value}
         onChange={onChange}
+        onKeyPress={onKeyPress}
         labelName={labelName}
         error={error}
         onFocus={() => {

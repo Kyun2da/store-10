@@ -2,39 +2,48 @@ import React from 'react';
 import * as S from '../styles';
 import { useParams } from '@/lib/Router';
 import Title from '@/components/Shared/Title';
+import { nanoid } from 'nanoid';
+import { useGetProductById } from '@/hooks/queries/product';
+import contentParser from '@/utils/contentParser';
 
 const ProductDescription = () => {
   const { id } = useParams().params;
-  console.log(id);
 
-  // TODO: id로 해당 영역의 세부 정보 이미지 가져오기
+  const { data } = useGetProductById(
+    (id as number) < 60000 ? 66310 : (id as number) // 임시조치입니다 -- 신경 쓰지 마세효
+  );
 
-  const descriptions = [
-    'https://store-10.s3.ap-northeast-2.amazonaws.com/test/details/detail1-1.jpg',
-    'https://store-10.s3.ap-northeast-2.amazonaws.com/test/details/detail1-2.gif',
-    'https://store-10.s3.ap-northeast-2.amazonaws.com/test/details/detail1-3.jpg',
-    'https://store-10.s3.ap-northeast-2.amazonaws.com/test/details/detail1-4.gif',
-    'https://store-10.s3.ap-northeast-2.amazonaws.com/test/details/detail1-5.jpg',
-  ];
+  const { success, message, result } = data ?? {};
+
+  if (!success) {
+    return <div>{message}</div>;
+  }
+
+  if (result === undefined) {
+    return null;
+  }
+
+  const { content } = result.details;
+  const { details, essentials } = content;
+  const [images, tables] = contentParser({ details, essentials });
 
   return (
     <S.PanelWrapper>
       <Title level={5} className="title">
         상품 상세정보
       </Title>
-      {descriptions.map((description) => {
-        // 임시로 사용할 고유 key - 콘솔 에러가 불---편해서 임시용입니다
-        // Intersection Observer를 달던 다른 라이브러리를 추가하든 해서
-        // Lazy loading을 추가해도 좋을 거 같으네요~~
-        const tempRandomString = Math.random().toString(36).substr(2, 11);
 
-        return (
-          <img
-            key={tempRandomString}
-            src={description}
-            alt="상품 상세정보 이미지"
-          />
-        );
+      <S.ProductTable>
+        {tables.map((table) => (
+          <S.ProductTableRow key={nanoid()}>
+            <div className="table-title">{table.title}</div>
+            <span>{table.description}</span>
+          </S.ProductTableRow>
+        ))}
+      </S.ProductTable>
+
+      {images.map((image) => {
+        return <img key={nanoid()} src={image} alt="상품 상세정보 이미지" />;
       })}
     </S.PanelWrapper>
   );

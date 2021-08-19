@@ -6,7 +6,7 @@ import { ICart } from '@/types';
 import { useGetCarts, useDeleteCart } from '@/hooks/queries/cart';
 
 const ShoppingCart = () => {
-  const { status, data } = useGetCarts();
+  const { data } = useGetCarts();
   const { mutate } = useDeleteCart();
   const [unCheckedList, setUnCheckedList] = useState<number[]>([]);
 
@@ -33,10 +33,6 @@ const ShoppingCart = () => {
     setShoppingCartItems(shoppingCartItems.filter(checkNotRemovedItems));
     mutate(ids);
   };
-
-  if (status === 'loading') {
-    return <div>로딩</div>;
-  }
 
   return (
     <S.ShoppingCart className="container">

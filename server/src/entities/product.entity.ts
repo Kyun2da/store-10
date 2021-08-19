@@ -8,7 +8,7 @@ import { Review } from './review.entity';
 import { SubCategory } from './subCategory.entity';
 import { InitEntity } from './base.entity';
 
-@Entity()
+@Entity('product')
 export class Product extends InitEntity {
   @Column()
   title: string;

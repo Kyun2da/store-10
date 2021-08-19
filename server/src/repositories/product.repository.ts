@@ -1,6 +1,7 @@
 import { Product } from '@/entities/product.entity';
+import { Order } from '@/entities/order.entity';
 import ElasticClient from '@/loaders/elasticSearch';
-import { EntityRepository, getCustomRepository, Repository } from 'typeorm';
+import { EntityRepository, getCustomRepository, Repository, In } from 'typeorm';
 
 type IElasticData = {
   id: number;
@@ -9,6 +10,12 @@ type IElasticData = {
   image: string;
   updatedat: number;
 };
+
+interface IProductParams {
+  limit?: number;
+  category?: number;
+  ids?: number[];
+}
 @EntityRepository(Product)
 class ProductRepository extends Repository<Product> {
   createProduct(ProductInfo: Product): Promise<Product> {
@@ -31,6 +38,32 @@ class ProductRepository extends Repository<Product> {
         },
       },
     });
+  }
+
+  getProducts({ limit, category, ids }: IProductParams) {
+    const where = {};
+    const options = {};
+    if (category) where['sub_category_id'] = category;
+    if (ids) where['id'] = In(ids);
+    if (limit) options['take'] = limit;
+    2;
+    return this.find({
+      where,
+      order: {
+        createdAt: 'DESC',
+      },
+      ...options,
+      relations: ['productImage'],
+    });
+  }
+
+  getRandomProducts(limit: number) {
+    return this.createQueryBuilder('product')
+      .orderBy('RAND()')
+      .take(limit)
+      .innerJoinAndSelect('product.productImage', 'productImage')
+      .where('productImage.type = :type', { type: 'detail' })
+      .getMany();
   }
 }
 

@@ -31,6 +31,25 @@ class ProductController {
     const searchData = await ProductService.searchProductTitle(q as string);
     res.json(searchData);
   }
+
+  async getProducts(req: Request, res: Response) {
+    const { category, limit } = req.query;
+    const products = await ProductService.getProducts({ category, limit });
+    res.json(products);
+  }
+
+  async getBestProducts(req: Request, res: Response) {
+    const { limit = 8 } = req.query;
+    const products = await ProductService.getBestProudcts(+limit);
+    res.json(products);
+  }
+
+  async getRecommandProducts(req: Request, res: Response) {
+    const { limit = 8 } = req.query;
+    const products = await ProductService.getRecommandProducts(+limit);
+
+    res.json(products);
+  }
 }
 
 export default new ProductController();

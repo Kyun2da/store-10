@@ -11,7 +11,7 @@ jobs: # Job 설정
     runs-on: ubuntu-latest
     env:
       working-directory: client
-      NODE_secrets: ${{ secrets.API_URL }}
+      API_URL: ${{ secrets.API_URL }}
     steps:
       - name: Checkout source code. # Repo checkout
         uses: actions/checkout@v2

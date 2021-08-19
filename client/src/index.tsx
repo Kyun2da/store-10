@@ -5,6 +5,7 @@ import { Router } from '@/lib/Router';
 import GlobalStyle from '@/styles/globalStyle';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import ToastifyContainer from '@/components/Shared/Toastify';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,6 +22,7 @@ render(
       <Router>
         <App />
       </Router>
+      <ToastifyContainer />
       <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
   </>,

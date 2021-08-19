@@ -79,3 +79,15 @@ export interface IProductDetail extends Omit<BaseResponse, 'result'> {
     thumbnails: Record<string, unknown>[];
   };
 }
+
+export interface ISignUpUser {
+  user_id: string;
+  password: string;
+  rePassword: string;
+  name: string;
+}
+
+export interface ILoginUser {
+  user_id: string;
+  password: string;
+}

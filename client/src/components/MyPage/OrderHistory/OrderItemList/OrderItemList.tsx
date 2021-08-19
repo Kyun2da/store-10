@@ -19,7 +19,7 @@ interface IProps {
 const OrderItemList = ({ date, items, status, deliveredAt }: IProps) => {
   const renderItems = () =>
     items.map((item) => (
-      <S.OrderItemInfoBody key={item.id}>
+      <S.OrderItemInfoBody key={item.name}>
         <img
           width={64}
           height={64}

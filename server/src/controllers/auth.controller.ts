@@ -3,15 +3,15 @@ import config from '../config';
 import AuthService from '../services/auth.service';
 import UserService from '../services/user.service';
 import JwtService from '@/services/jwt.service';
+import ApiResponse from '@/api/middlewares/response-format';
+import HttpStatusCode from '@/types/statusCode';
 
 class AuthController {
   async callback(req: Request, res: Response) {
     const { code } = req.query;
-    console.log(code);
     const token = await AuthService.getGitAccessToken(code as string);
     const gitUser = await AuthService.getGitUserInfo(token);
     const jwtRefreshToken = JwtService.refresh();
-    // TODO : 가입되어 있는 유저인지 체크하는 로직, 가입이 되있으면? 로그인을 바로 시켜주고, 가입이 안되어 있으면? 약관동의 페이지로 리다이렉트?
     const { user_id, name, id } = await UserService.createUser({
       ...gitUser,
       is_oauth: true,
@@ -34,18 +34,28 @@ class AuthController {
   async Login(req: Request, res: Response) {
     const { user_id, password } = req.body;
     const _user = await AuthService.Login(user_id, password);
-
-    // TODO respon처리 통합하는 방식 고민
     if (!_user) {
-      res.status(401).json({ ok: false, message: '너..해커냐' }).end();
+      ApiResponse(
+        res,
+        HttpStatusCode.UNAUTHORIZED,
+        false,
+        '존재하지 않는 유저 입니다.'
+      );
       return;
+    } else if (_user.passwordError) {
+      ApiResponse(
+        res,
+        HttpStatusCode.UNAUTHORIZED,
+        false,
+        '비밀번호가 다릅니다.'
+      );
     }
     const { name, id, refreshToken } = _user;
     const jwtAccessToken = JwtService.generate({ user_id, name, id });
 
     res.cookie('refreshToken', refreshToken, { path: '/', httpOnly: true });
     res.cookie('accessToken', jwtAccessToken, { path: '/', httpOnly: true });
-    res.json({ ok: true, message: '어서오세요 동물의 숲' });
+    ApiResponse(res, HttpStatusCode.OK, true, '로그인 성공');
   }
 
   async check(req: Request, res: Response) {

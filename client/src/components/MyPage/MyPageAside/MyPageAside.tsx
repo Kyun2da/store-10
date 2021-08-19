@@ -13,6 +13,7 @@ interface IMyPageNavigation {
 }
 
 const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
+  const userName = window.localStorage.getItem('userName');
   const renderNavigations = () => {
     return MY_PAGE_NAVIGATIONS.map((nav: IMyPageNavigation) => (
       <li
@@ -29,7 +30,7 @@ const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
     <S.MyPageAside>
       <S.MyPageUserInfo>
         <S.MyPageGreeting>안녕하세요,</S.MyPageGreeting>
-        <S.MyPageUserName> 동진님!</S.MyPageUserName>
+        <S.MyPageUserName>{userName}님!</S.MyPageUserName>
         <footer>
           <button>회원 정보 변경</button>
           <button>로그아웃</button>

@@ -4,31 +4,20 @@ import { HeartSVG, CartSVG } from '@/assets/svgs';
 import { NumberInput } from '@/components/Shared/Input';
 import Title from '@/components/Shared/Title';
 import useNumberInput from '@/hooks/useNumberInput';
-import { wonFormat } from '@/helper';
+import wonFormat from '@/utils/wonFormat';
 import { usePostCart } from '@/hooks/queries/cart';
-
-// 요런 식으로 데이터가 전달되어야 하려나아아
-const productInfoData = {
-  title: '반반휴지. 물반휴지반',
-  price: 1500,
-  details: [
-    {
-      'sub-title': '판매가격',
-      'content': '1,500원',
-    },
-    {
-      'sub-title': '배송정보',
-      'content': '2,500원 (3만원 이상 구매시 무료)',
-    },
-    {
-      'sub-title': '배송마감',
-      'content': '오후 2시 당일배송마감',
-    },
-  ],
-};
+import { useGetProductById } from '@/hooks/queries/product';
+import { useParams } from '@/lib/Router';
 
 const ProductInfo = () => {
-  const { title, price, details } = productInfoData;
+  const { id } = useParams().params;
+
+  const { data } = useGetProductById(
+    (id as number) < 50000 ? 59087 : (id as number) // 임시조치입니다 -- 신경 쓰지 마세효
+  );
+
+  const { success, message, result } = data ?? {};
+
   const [value, handleClickOnMinus, handleClickOnPlus] = useNumberInput(1);
   const { mutate } = usePostCart();
 
@@ -39,6 +28,14 @@ const ProductInfo = () => {
       productId: 59087,
     });
   };
+
+  // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
+  if (!success) {
+    return <div>{message}</div>;
+  }
+
+  const { title, price } = result!;
+
   return (
     <S.ProductInfo>
       <S.ProductThumbnail
@@ -48,17 +45,20 @@ const ProductInfo = () => {
       <S.ProductOrder>
         <Title level={3}>{title}</Title>
         <S.ProductDetailArea>
-          {details.map((detail) => {
-            // 임시로 사용할 고유 key - 콘솔 에러가 불---편해서 임시용입니다
-            // uuid 깔기 귀찮아잉
-            const tempRandomString = Math.random().toString(36).substr(2, 11);
-            return (
-              <S.ProductDetail key={tempRandomString}>
-                <Title level={5}>{detail['sub-title']}</Title>
-                <span className="detail-content">{detail.content}</span>
-              </S.ProductDetail>
-            );
-          })}
+          <S.ProductDetail>
+            <Title level={5}>판매가격</Title>
+            <span className="detail-content">{wonFormat(price)}</span>
+          </S.ProductDetail>
+          <S.ProductDetail>
+            <Title level={5}>배송정보</Title>
+            <span className="detail-content">
+              2,500원 (3만원 이상 구매시 무료)
+            </span>
+          </S.ProductDetail>
+          <S.ProductDetail>
+            <Title level={5}>배송마감</Title>
+            <span className="detail-content">오후 2시 당일배송마감</span>
+          </S.ProductDetail>
         </S.ProductDetailArea>
 
         <S.OrderBar>
@@ -78,7 +78,7 @@ const ProductInfo = () => {
 
         <S.PriceBar>
           <Title level={5}>총 합계금액</Title>
-          <span className="price-sum">{wonFormat(price * value)}</span>
+          <span className="price-sum">{wonFormat(+price * value)}</span>
         </S.PriceBar>
 
         {/* LINK 이동 및 버튼 클릭 핸들러 구현해야함 */}

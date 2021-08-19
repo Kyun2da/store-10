@@ -1,7 +1,7 @@
 import client from '../client';
 
 export const getCarts = async () => {
-  const res = await client.get('/api/cart');
+  const res = await client.get('/cart');
   return res.data;
 };
 

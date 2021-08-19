@@ -1,3 +1,4 @@
+import { ApiError } from '@/core/error';
 import { User } from '@/entities/user.entity';
 import GitHubAPI from '@/repositories/oauth/git.oauth';
 import UserRepository from '@/repositories/user.repository';
@@ -10,7 +11,8 @@ class AuthService {
 
   async getGitUserInfo(code: string) {
     const { login: user_id, name } = await GitHubAPI.getUserInfo(code);
-    return { user_id, name };
+
+    return { user_id, name: name ?? user_id };
   }
 
   async Login(userID: string, password: string) {
@@ -21,6 +23,7 @@ class AuthService {
         const { name, id, refreshToken } = user;
         return { name, id, refreshToken };
       }
+      return { passwordError: true };
     }
     return null;
   }

@@ -1,6 +1,6 @@
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
-import { Link, useHistory } from '@/lib/Router';
+import { Link, Redirect, useHistory } from '@/lib/Router';
 import { SITE_TITLE } from '@/utils/constant/common';
 import React from 'react';
 import { GithubIcon } from '../Login/styles';
@@ -12,6 +12,11 @@ const SelectAuth = () => {
   const goApproval = (path: string) => {
     historyPush(path);
   };
+
+  const userName = window.localStorage.getItem('userName');
+
+  if (userName) return <Redirect to="/" />;
+
   return (
     <S.SelectAuthContainer>
       <Title level={3}>회원가입</Title>

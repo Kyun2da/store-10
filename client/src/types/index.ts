@@ -55,3 +55,15 @@ export interface ICart {
   price: number;
   image: string;
 }
+
+export interface ISignUpUser {
+  user_id: string;
+  password: string;
+  rePassword: string;
+  name: string;
+}
+
+export interface ILoginUser {
+  user_id: string;
+  password: string;
+}

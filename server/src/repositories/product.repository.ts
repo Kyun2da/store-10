@@ -24,7 +24,7 @@ class ProductRepository extends Repository<Product> {
   searchProduct(searchText: string) {
     return ElasticClient.search<IElasticData>({
       index: 'store10',
-      size: 15,
+      size: 30,
       body: {
         query: {
           match: {

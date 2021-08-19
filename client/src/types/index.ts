@@ -91,3 +91,10 @@ export interface ILoginUser {
   user_id: string;
   password: string;
 }
+
+export interface ISearchData {
+  id: number;
+  price: number;
+  image: string;
+  title: string;
+}

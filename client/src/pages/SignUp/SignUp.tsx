@@ -14,7 +14,7 @@ import { postEmailCheck } from '@/lib/api/user/postEmailCheck';
 import * as S from './styles';
 import { CheckSVG } from '@/assets/svgs';
 import { createUser } from '@/lib/api/user/createUser';
-import { useHistory } from '@/lib/Router';
+import { Redirect, useHistory } from '@/lib/Router';
 
 const SignUp = () => {
   const [error, setError] = useState({
@@ -100,6 +100,10 @@ const SignUp = () => {
     },
     [emailCheck, historyPush]
   );
+
+  const userName = window.localStorage.getItem('userName');
+
+  if (userName) return <Redirect to="/" />;
 
   return (
     <S.SignUpContainer>

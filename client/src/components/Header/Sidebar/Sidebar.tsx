@@ -7,17 +7,20 @@ import { Links } from '../Header';
 interface Props {
   isOpen?: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  userName?: string | null;
 }
 
 const Sidebar = ({ ...props }: Props) => {
-  const { isOpen, setIsOpen } = props;
+  const { isOpen, setIsOpen, userName } = props;
   const closeSidebar = () => setIsOpen(false);
 
   return (
     <>
       <S.SideBar className={isOpen ? 'active' : ''}>
         <S.Top>
-          <div>UserName</div>
+          <div>
+            {userName ? `${userName}님 환영합니다!` : '로그인이 필요합니다.'}
+          </div>
           <S.IconsWrapper>
             <Links />
             <CloseSVG onClick={closeSidebar} />

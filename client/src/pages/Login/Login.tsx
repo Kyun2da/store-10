@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Input } from '@/components/Shared/Input';
 import Button from '@/components/Shared/Button';
 import * as S from './styles';
-import { Link, useHistory } from '@/lib/Router';
+import { Link, Redirect, useHistory } from '@/lib/Router';
 import { githubLogin } from '@/lib/api/login/githubLogin';
 import { normalLogin } from '@/lib/api/login/normalLogin';
 import {
@@ -43,8 +43,9 @@ const Login = () => {
     }
   };
 
-  // TODO : 만약 로그인이 되어있는 유저면 마이페이지로 이동시키기?
-  // if (data) return;
+  const userName = window.localStorage.getItem('userName');
+
+  if (userName) return <Redirect to="/" />;
 
   return (
     <S.LoginForm onSubmit={onSubmit}>

@@ -62,3 +62,8 @@ export interface ISignUpUser {
   rePassword: string;
   name: string;
 }
+
+export interface ILoginUser {
+  user_id: string;
+  password: string;
+}

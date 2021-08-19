@@ -42,6 +42,7 @@ export const Label = styled.label<IInputLabel>`
 
 export const Input = styled.input<IInput>`
   padding: 1rem;
+  color: ${({ theme }) => theme.color['text-color']};
   font-size: 1.8rem;
   background-color: transparent;
   outline: none;

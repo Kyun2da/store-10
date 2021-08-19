@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import * as S from './styles';
-import { wonFormat } from '@/helper';
+import wonFormat from '@/utils/wonFormat';
 import Button from '@/components/Shared/Button';
 
 interface ISShoppingCartSummaryProps {

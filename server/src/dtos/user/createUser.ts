@@ -11,7 +11,7 @@ export default class CreateUserRequest {
     body('password')
       .custom((val: string) => validatePassword(val))
       .withMessage(
-        'body: password가 10자 이상 영어 대문자, 소문자, 숫자, 특수문자 중 2종류를 조합한 형식이 아닙니다.'
+        'body: password가 존재하지 않거나 password가 10자 이상 영어 대문자, 소문자, 숫자, 특수문자 중 2종류를 조합한 형식이 아닙니다.'
       ),
     body('rePassword')
       .notEmpty()

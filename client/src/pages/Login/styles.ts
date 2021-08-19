@@ -14,7 +14,7 @@ export const LoginForm = styled.form`
   margin: auto;
 
   button,
-  input {
+  .input-container {
     margin-bottom: 2rem;
   }
 

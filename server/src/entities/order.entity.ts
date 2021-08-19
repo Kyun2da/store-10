@@ -11,8 +11,8 @@ import { Product } from './product.entity';
 import { Address } from './address.entity';
 import { User } from './user.entity';
 
-@Entity('purchase')
-export class Purchase extends BaseEntity {
+@Entity('order')
+export class Order extends BaseEntity {
   @CreateDateColumn()
   createdAt!: Date;
 

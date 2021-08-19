@@ -2,29 +2,32 @@ import ApiResponse from '@/api/middlewares/response-format';
 import HttpStatusCode from '@/types/statusCode';
 import { Request, Response } from 'express';
 import UserRepository from '@/repositories/user.repository';
+import jwtService from '@/services/jwt.service';
 
 class UserController {
   async createUser(req: Request, res: Response) {
-    //TODO 어떤 값들이 받아오는지 확인해야할 필요가 았습니당
     const data = req.body;
 
-    await UserRepository().createUser(data);
-    res.status(200).json({ success: true, data });
+    const refreshToken = jwtService.refresh();
+    const { user_id, name, id } = await UserRepository().createUser({
+      ...data,
+      refreshToken,
+    });
+    const accessToken = jwtService.generate({ user_id, name, id });
+
+    res.cookie('refreshToken', refreshToken, { path: '/', httpOnly: true });
+    res.cookie('accessToken', accessToken, { path: '/', httpOnly: true });
+    ApiResponse(
+      res,
+      HttpStatusCode.OK,
+      true,
+      '성공적으로 아이디를 생성하였습니다.',
+      data
+    );
   }
 
   async checkUserEmail(req: Request, res: Response) {
-    const data = req.body;
-    const user = await UserRepository().findUserById(data.user_id);
-    if (user) {
-      ApiResponse(
-        res,
-        HttpStatusCode.CONFLICT,
-        false,
-        '이미 회원가입이 된 아이디입니다.'
-      );
-    } else {
-      ApiResponse(res, HttpStatusCode.OK, true, '사용할 수 있는 아이디입니다.');
-    }
+    ApiResponse(res, HttpStatusCode.OK, true, '사용할 수 있는 아이디입니다.');
   }
 }
 

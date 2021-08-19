@@ -1,7 +1,7 @@
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
 import { githubLogin } from '@/lib/api/login/githubLogin';
-import { useHistory, useParams } from '@/lib/Router';
+import { Redirect, useHistory, useParams } from '@/lib/Router';
 import {
   PERSONAL_INFO_TEXT,
   TERMS_OF_SERVICE,
@@ -55,6 +55,10 @@ const Approval = () => {
       check1: !isAllchecked,
     });
   };
+
+  const userName = window.localStorage.getItem('userName');
+
+  if (userName) return <Redirect to="/" />;
 
   return (
     <S.ApprovalContainer>

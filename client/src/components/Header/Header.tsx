@@ -5,10 +5,15 @@ import { Link } from '@/lib/Router';
 import Search from './Search';
 import Sidebar from './Sidebar';
 
-export const Links = () => {
+interface Props {
+  userName?: string | null;
+}
+
+export const Links = ({ ...props }: Props) => {
+  const { userName } = props;
   return (
     <>
-      <Link to="/login">
+      <Link to={userName ? '/mypage' : '/login'}>
         <UserSVG />
       </Link>
       <Link to="/mypage">
@@ -22,10 +27,15 @@ export const Links = () => {
 };
 
 const Header = () => {
+  const userName = window.localStorage.getItem('userName');
   const [sideBarIsOpen, setSideBarIsOpen] = useState(false);
   return (
     <S.HeaderWrapper>
-      <Sidebar isOpen={sideBarIsOpen} setIsOpen={setSideBarIsOpen} />
+      <Sidebar
+        isOpen={sideBarIsOpen}
+        setIsOpen={setSideBarIsOpen}
+        userName={userName}
+      />
       <S.Header>
         <S.Menu>
           <S.MenuButton onClick={() => setSideBarIsOpen(!sideBarIsOpen)}>
@@ -37,7 +47,7 @@ const Header = () => {
         </S.Menu>
         <Search />
         <S.StateUl className="tablet_resolution">
-          <Links />
+          <Links userName={userName} />
         </S.StateUl>
       </S.Header>
     </S.HeaderWrapper>

@@ -5,8 +5,8 @@ import wrapAsync from '@/utils/wrapAsync';
 
 const router = Router();
 
+router.get('/search', wrapAsync(ProductController.serchProduct));
 router.get('/', wrapAsync(ProductController.getProduct));
 router.get('/:id', wrapAsync(ProductController.getProductById));
-router.get('/search', wrapAsync(ProductController.serchProduct));
 
 export default router;

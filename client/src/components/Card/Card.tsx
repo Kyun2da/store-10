@@ -5,15 +5,17 @@ import {
   CartSVG as ShoppingCart,
 } from '@/assets/svgs';
 import { Link } from '@/lib/Router';
+import wonFormat from '@/utils/wonFormat';
 
 interface CardProps {
   bgColor: 'error' | 'primary'; // category 식으로 리스트화 (enum 등..) 필요
   discount?: number;
+  src?: string;
+  title: string;
+  price: number;
 }
 
-const Card = ({ bgColor, discount }: CardProps) => {
-  // 나중에 데이터를 가져와서 넣어주는 식으로 바꾸어 봅시다
-
+const Card = ({ bgColor, discount, src, title, price }: CardProps) => {
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
@@ -26,10 +28,7 @@ const Card = ({ bgColor, discount }: CardProps) => {
         <S.Liner bgColor={bgColor} />
         <S.ThumbnailWrapper>
           {discount && <S.NameTag>{discount}%</S.NameTag>}
-          <img
-            src="https://store-10.s3.ap-northeast-2.amazonaws.com/test/test.jpeg"
-            alt="상품 섬네일 이미지"
-          />
+          <img src={src} alt="상품 섬네일 이미지" />
           <S.BottomBar onClick={handleClick}>
             <S.ButtonArea>
               <HeartButton witdh={24} height={24} />
@@ -40,8 +39,8 @@ const Card = ({ bgColor, discount }: CardProps) => {
           </S.BottomBar>
         </S.ThumbnailWrapper>
         <S.ProductDetails>
-          <h1 className="title">반반휴지. 물반휴지반</h1>
-          <span className="price-tag">1,500원</span>
+          <h1 className="title">{title}</h1>
+          <span className="price-tag">{wonFormat(price)}</span>
         </S.ProductDetails>
       </S.Card>
     </Link>

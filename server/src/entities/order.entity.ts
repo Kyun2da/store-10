@@ -2,17 +2,18 @@ import {
   Entity,
   CreateDateColumn,
   UpdateDateColumn,
-  BaseEntity,
   ManyToOne,
   JoinColumn,
+  Column,
 } from 'typeorm';
 
 import { Product } from './product.entity';
 import { Address } from './address.entity';
 import { User } from './user.entity';
+import { InitEntity } from './base.entity';
 
 @Entity('order')
-export class Order extends BaseEntity {
+export class Order extends InitEntity {
   @CreateDateColumn()
   createdAt!: Date;
 
@@ -23,7 +24,6 @@ export class Order extends BaseEntity {
     nullable: false,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    primary: true,
   })
   @JoinColumn({ name: 'user_id' })
   user!: User;
@@ -32,17 +32,19 @@ export class Order extends BaseEntity {
     nullable: false,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    primary: true,
   })
   @JoinColumn({ name: 'product_id' })
   product!: Product;
+  @Column()
+  product_id: number;
 
   @ManyToOne(() => Address, (type) => type.id, {
     nullable: false,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    primary: true,
   })
   @JoinColumn({ name: 'address_id' })
   address!: Address;
+  @Column()
+  address_id: number;
 }

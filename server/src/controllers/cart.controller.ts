@@ -1,5 +1,7 @@
 import CartService from '@/services/cart.service';
 import { Request, Response } from 'express';
+import HttpStatusCode from '@/types/statusCode';
+import ApiResponse from '@/api/middlewares/response-format';
 
 // TODO: 미들웨어 붙이면 테스트 userId 삭제
 class CartController {
@@ -8,17 +10,14 @@ class CartController {
     const userId = req.user?.id || 4;
     await CartService.createCart({ productId, userId, count });
 
-    res.status(204).json({
-      success: true,
-      message: '장바구니에 추가 되었습니다!',
-    });
+    ApiResponse(res, HttpStatusCode.NO_CONTENT, true, '장바구니 추가 성공');
   }
 
   async getCarts(req: Request, res: Response) {
     const userId = req.user?.id || 4;
     const carts = await CartService.getCarts(userId);
 
-    res.status(200).json(carts);
+    ApiResponse(res, HttpStatusCode.OK, true, '해당 상품 조회 성공', carts);
   }
 
   async deleteCart(req: Request, res: Response) {
@@ -29,10 +28,7 @@ class CartController {
       productIds: JSON.parse(productIds as string),
     });
 
-    res.status(204).json({
-      success: true,
-      message: '장바구니에서 삭제 되었습니다!',
-    });
+    ApiResponse(res, HttpStatusCode.NO_CONTENT, true, '장바구니 삭제 성공');
   }
 }
 

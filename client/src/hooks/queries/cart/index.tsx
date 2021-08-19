@@ -1,10 +1,10 @@
 import { useQuery, useQueryClient, useMutation } from 'react-query';
 import { getCarts, deleteCart, postCart } from '@/lib/api/cart';
-import { ICart } from '@/types';
+import { ICarts } from '@/types';
 import { notify } from '@/components/Shared/Toastify';
 
 export const useGetCarts = () => {
-  return useQuery<ICart[], Error>('carts', getCarts);
+  return useQuery<ICarts, Error>('carts', getCarts);
 };
 
 export const useDeleteCart = () => {

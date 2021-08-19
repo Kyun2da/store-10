@@ -14,18 +14,20 @@ const initialItems = shoppingCart.map((item) => ({
   isChekced: true,
 }));
 
-const [shoppingCartItems, setShoppingCartItems] =
-  useState<shoppingCartItem[]>(initialItems);
+const Template: ComponentStory<typeof ShoppingCartSummary> = () => {
+  const [shoppingCartItems, setShoppingCartItems] =
+    useState<shoppingCartItem[]>(initialItems);
 
-const checkedItems = shoppingCartItems.filter((item) => item.isChekced);
-const productCount = checkedItems.length;
-const totalPrice = checkedItems.reduce(
-  (sum, item) => sum + item.price * item.count,
-  0
-);
+  const checkedItems = shoppingCartItems.filter((item) => item.isChekced);
+  const productCount = checkedItems.length;
+  const totalPrice = checkedItems.reduce(
+    (sum, item) => sum + item.price * item.count,
+    0
+  );
 
-const Template: ComponentStory<typeof ShoppingCartSummary> = () => (
-  <ShoppingCartSummary productCount={productCount} totalPrice={totalPrice} />
-);
+  return (
+    <ShoppingCartSummary productCount={productCount} totalPrice={totalPrice} />
+  );
+};
 
 export const Default = Template.bind({});

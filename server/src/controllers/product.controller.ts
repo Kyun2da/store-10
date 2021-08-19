@@ -35,20 +35,47 @@ class ProductController {
   async getProducts(req: Request, res: Response) {
     const { category, limit } = req.query;
     const products = await ProductService.getProducts({ category, limit });
-    res.json(products);
+    if (!products) {
+      ApiResponse(
+        res,
+        HttpStatusCode.NO_CONTENT,
+        false,
+        '상품이 존재하지 않습니다'
+      );
+    }
+
+    ApiResponse(res, HttpStatusCode.OK, true, '상품 조회 성공', products);
   }
 
   async getBestProducts(req: Request, res: Response) {
     const { limit = 8 } = req.query;
     const products = await ProductService.getBestProudcts(+limit);
-    res.json(products);
+    if (!products) {
+      ApiResponse(
+        res,
+        HttpStatusCode.NO_CONTENT,
+        false,
+        '상품이 존재하지 않습니다'
+      );
+    }
+
+    ApiResponse(res, HttpStatusCode.OK, true, '상품 조회 성공', products);
   }
 
   async getRecommandProducts(req: Request, res: Response) {
     const { limit = 8 } = req.query;
     const products = await ProductService.getRecommandProducts(+limit);
 
-    res.json(products);
+    if (!products) {
+      ApiResponse(
+        res,
+        HttpStatusCode.NO_CONTENT,
+        false,
+        '상품이 존재하지 않습니다'
+      );
+    }
+
+    ApiResponse(res, HttpStatusCode.OK, true, '상품 조회 성공', products);
   }
 }
 

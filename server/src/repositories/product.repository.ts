@@ -46,7 +46,7 @@ class ProductRepository extends Repository<Product> {
     if (category) where['sub_category_id'] = category;
     if (ids) where['id'] = In(ids);
     if (limit) options['take'] = limit;
-    2;
+
     return this.find({
       where,
       order: {
@@ -62,7 +62,7 @@ class ProductRepository extends Repository<Product> {
       .orderBy('RAND()')
       .take(limit)
       .innerJoinAndSelect('product.productImage', 'productImage')
-      .where('productImage.type = :type', { type: 'detail' })
+      .where('productImage.isThumbnail = :isThumbnail', { isThumbnail: 1 })
       .getMany();
   }
 }

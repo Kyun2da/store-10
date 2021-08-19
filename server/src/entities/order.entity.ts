@@ -35,6 +35,8 @@ export class Order extends InitEntity {
   })
   @JoinColumn({ name: 'product_id' })
   product!: Product;
+  @Column()
+  product_id: number;
 
   @ManyToOne(() => Address, (type) => type.id, {
     nullable: false,

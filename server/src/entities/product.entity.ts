@@ -3,7 +3,7 @@ import { Question } from './question.entity';
 import { Bookmark } from './bookmark.entity';
 import { Cart } from './cart.entity';
 import { ProductImage } from './productImage.entity';
-import { Purchase } from './purchase.entity';
+import { Order } from './order.entity';
 import { Review } from './review.entity';
 import { SubCategory } from './subCategory.entity';
 import { InitEntity } from './base.entity';
@@ -39,8 +39,8 @@ export class Product extends InitEntity {
   @OneToMany(() => ProductImage, (type) => type.product)
   productImage!: ProductImage[];
 
-  @OneToMany(() => Purchase, (type) => type.product)
-  purchase!: Purchase[];
+  @OneToMany(() => Order, (type) => type.product)
+  order!: Order[];
 
   @OneToMany(() => Cart, (type) => type.product)
   cart!: Cart[];

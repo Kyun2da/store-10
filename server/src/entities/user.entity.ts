@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt-nodejs';
 import { Question } from './question.entity';
 import { Bookmark } from './bookmark.entity';
 import { Cart } from './cart.entity';
-import { Purchase } from './purchase.entity';
+import { Order } from './order.entity';
 import { Review } from './review.entity';
 import { InitEntity } from './base.entity';
 
@@ -42,8 +42,8 @@ export class User extends InitEntity {
   @OneToMany(() => Cart, (type) => type.user)
   cart?: Cart[];
 
-  @OneToMany(() => Purchase, (type) => type.user)
-  purchase?: Purchase[];
+  @OneToMany(() => Order, (type) => type.user)
+  order?: Order[];
 
   @OneToMany(() => Review, (type) => type.id)
   review?: Review[];

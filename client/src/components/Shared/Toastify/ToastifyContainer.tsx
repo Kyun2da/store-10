@@ -7,7 +7,7 @@ const ToastifyContainer = () => {
   return (
     <Portal>
       <ToastContainer
-        position="bottom-center"
+        position="top-right"
         autoClose={3500}
         hideProgressBar={false}
         newestOnTop={false}

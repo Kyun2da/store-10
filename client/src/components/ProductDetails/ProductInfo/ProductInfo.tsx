@@ -13,7 +13,7 @@ const ProductInfo = () => {
   const { id } = useParams().params;
 
   const { data } = useGetProductById(
-    (id as number) < 50000 ? 59087 : (id as number) // 임시조치입니다 -- 신경 쓰지 마세효
+    (id as number) < 60000 ? 66310 : (id as number) // 임시조치입니다 -- 신경 쓰지 마세효
   );
 
   const { success, message, result } = data ?? {};
@@ -25,7 +25,7 @@ const ProductInfo = () => {
     mutate({
       count: value,
       // TODO: 데이터 연동 후 임시 ID 삭제
-      productId: 59087,
+      productId: 66310,
     });
   };
 
@@ -34,12 +34,20 @@ const ProductInfo = () => {
     return <div>{message}</div>;
   }
 
-  const { title, price } = result!;
+  if (result === undefined) {
+    return null;
+  }
+
+  const { title, price } = result.details;
+  const thumbnail = result.thumbnails.filter(
+    (thumb) => thumb.type === 'detail'
+  );
+  console.log(result.thumbnails);
 
   return (
     <S.ProductInfo>
       <S.ProductThumbnail
-        src="https://store-10.s3.ap-northeast-2.amazonaws.com/test/test.jpeg"
+        src={`https:` + thumbnail[0].url}
         alt="상품 섬네일 이미지"
       />
       <S.ProductOrder>

@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import { useEffect } from 'react';
 
 interface PortalProps {
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactNode;
 }
 
 const Portal = ({ children }: PortalProps) => {

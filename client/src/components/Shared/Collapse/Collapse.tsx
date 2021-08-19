@@ -1,5 +1,5 @@
 import { AnswerSVG, QuestionSVG } from '@/assets/svgs';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import * as S from './styles';
 
 interface ICollapse {
@@ -39,7 +39,7 @@ const Collapse = ({ headers, items, gaps, forNotice }: ICollapse) => {
       </S.CollapseHeader>
       <S.CollapseBody>
         {items.map((item, idx) => (
-          <>
+          <Fragment key={item.id}>
             <S.CollaspeRow
               gaps={gaps}
               length={headers.length}
@@ -77,7 +77,7 @@ const Collapse = ({ headers, items, gaps, forNotice }: ICollapse) => {
                 </>
               )}
             </S.CollapsePanel>
-          </>
+          </Fragment>
         ))}
       </S.CollapseBody>
     </S.Collapse>

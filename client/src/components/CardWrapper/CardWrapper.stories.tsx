@@ -16,23 +16,11 @@ const Template: ComponentStory<typeof CardWrapper> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   col: 3,
-  children: [
-    <Card bgColor="primary" key="1" />,
-    <Card bgColor="primary" key="2" />,
-    <Card bgColor="primary" key="3" />,
-    <Card bgColor="primary" key="4" />,
-    <Card bgColor="primary" key="5" />,
-  ],
+  children: [],
 };
 
 export const Col4 = Template.bind({});
 Col4.args = {
   col: 4,
-  children: [
-    <Card bgColor="error" key="1" />,
-    <Card bgColor="error" key="2" />,
-    <Card bgColor="error" key="3" />,
-    <Card bgColor="error" key="4" />,
-    <Card bgColor="error" key="5" />,
-  ],
+  children: [],
 };

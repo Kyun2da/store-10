@@ -11,7 +11,7 @@ const useRecentSearch = (): [string[], (value: string) => void] => {
     (value: string) => {
       //동일한 검색어가 있을경우 return
       if (recentItems.includes(value)) return;
-      const itemsArr = [value, ...recentItems.slice(0, 9)];
+      const itemsArr = [value, ...recentItems.slice(0, 29)];
       localStorage.setItem('recentItems', JSON.stringify(itemsArr));
       setRecentItems(itemsArr);
     },

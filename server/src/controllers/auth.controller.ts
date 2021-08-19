@@ -57,6 +57,13 @@ class AuthController {
 
     res.json({ id, user_id, name });
   }
+
+  async logout(req: Request, res: Response) {
+    res.clearCookie('accessToken', { path: '/' });
+    res.clearCookie('refreshToken', { path: '/' });
+
+    ApiResponse(res, HttpStatusCode.OK, true);
+  }
 }
 
 export default new AuthController();

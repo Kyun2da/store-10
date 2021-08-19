@@ -1,6 +1,6 @@
 import ProductRepository from '@/repositories/product.repository';
 class ProductService {
-  async getProduct(id: number) {
+  async getProductById(id: number) {
     const productRepo = ProductRepository();
     return await productRepo.findProductById(id);
   }
@@ -14,7 +14,7 @@ class ProductService {
         id: row._source.id,
         price: row._source.price,
         title: row._source.title,
-        image: row._source.image
+        image: row._source.image,
       };
     });
 

@@ -1,21 +1,28 @@
-import React, { useCallback, useState } from 'react';
 import { SearchSVG } from '@/assets/svgs';
-import * as S from './styles';
 import useRecentSearch from '@/hooks/useRecentSearch';
 import client from '@/lib/api/client';
+import { searchRealTimeData } from '@/lib/api/product/searchData';
+import { ISearchData } from '@/types';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import SearchItem from './SearchItem';
+import * as S from './styles';
 
-const Search = () => {
+type IProps = {
+  toggleOpen: () => void;
+};
+
+const Search = ({ ...props }: IProps) => {
   const [searchValue, setSearchValue] = useState('');
   const [recentItems, setRecentItems] = useRecentSearch();
-  const [searchData, setSearchDatas] = useState([]);
+  const [searchData, setSearchDatas] = useState<ISearchData[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const productSearch = async (searchText: string) => {
-    const data = await client.get(`/product/search?q=${searchText}`);
-    if (data.data.length) {
-      setSearchDatas(data.data);
+  const productSearch = useCallback(async (searchText: string) => {
+    const data = await searchRealTimeData(searchText);
+    if (data.length) {
+      setSearchDatas(data);
     }
-  };
-
+  }, []);
   // 한글 엔터 2번방지
   const inputKeypressHandler = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -24,49 +31,43 @@ const Search = () => {
     [searchValue, setRecentItems]
   );
 
-  const inputHandler = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const inputChangeHandler = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchValue(e.currentTarget.value);
       productSearch(e.currentTarget.value);
     },
-    [setSearchValue]
+    [productSearch]
   );
 
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
-    <S.Search>
-      <SearchSVG onClick={() => setRecentItems(searchValue)} />
-      <input
-        onInput={inputHandler}
-        onKeyPress={inputKeypressHandler}
-        type="text"
-        placeholder="검색어를 입력해주세요."
-      />
-      <S.SearchList className="search-list">
-        {!!searchValue ? (
-          <>
-            <S.RecentTitle>Elastic Search</S.RecentTitle>
-            {searchData && (
-              <ul>
-                {searchData.map((item, _) => (
-                  <li key={item['id']}>{item['title']}</li>
-                ))}
-              </ul>
-            )}
-          </>
-        ) : (
-          <>
-            <S.RecentTitle>최근 검색어</S.RecentTitle>
-            {recentItems && (
-              <ul>
-                {recentItems.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            )}
-          </>
-        )}
-      </S.SearchList>
-    </S.Search>
+    <>
+      <S.SearchWrapper>
+        <S.SearchBackDrop onClick={props.toggleOpen}></S.SearchBackDrop>
+        <S.SearchContents>
+          <S.SearchInputWrap>
+            <S.SearchInput
+              onChange={inputChangeHandler}
+              onKeyPress={inputKeypressHandler}
+              type="text"
+              label="Standard"
+              name="search"
+              _ref={inputRef}
+              placeholder="검색"
+            />
+            <SearchSVG />
+          </S.SearchInputWrap>
+          <SearchItem
+            searchValue={searchValue}
+            recentItems={recentItems}
+            searchData={searchData}
+          />
+        </S.SearchContents>
+      </S.SearchWrapper>
+    </>
   );
 };
 

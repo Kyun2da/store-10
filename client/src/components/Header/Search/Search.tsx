@@ -1,6 +1,5 @@
 import { SearchSVG } from '@/assets/svgs';
 import useRecentSearch from '@/hooks/useRecentSearch';
-import client from '@/lib/api/client';
 import { searchRealTimeData } from '@/lib/api/product/searchData';
 import { ISearchData } from '@/types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -41,6 +40,17 @@ const Search = ({ ...props }: IProps) => {
 
   useEffect(() => {
     inputRef.current?.focus();
+    document.body.style.cssText = `
+        position: fixed;
+        overflow-y: scroll; 
+        top: -${window.scrollY}px - 100vh;
+        width: 100%;
+      `;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = ``;
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    };
   }, []);
 
   return (

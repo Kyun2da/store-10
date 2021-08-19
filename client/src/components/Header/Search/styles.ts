@@ -14,7 +14,7 @@ export const SearchContents = styled.div`
   overflow: hidden;
   padding: 1rem 2rem;
   background: ${({ theme }) => theme.color['background']};
-  position: absolute;
+  position: fixed;
 `;
 
 export const SearchWrapper = styled.div`
@@ -26,7 +26,7 @@ export const SearchWrapper = styled.div`
       transform: translate(-50%, 0%);
     }
   }
-  position: absolute;
+  position: fixed;
   width: 100%;
   bottom: 0;
   height: 100vh;

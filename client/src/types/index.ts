@@ -62,6 +62,9 @@ export interface ICart {
   image: string;
 }
 
+export interface ICarts extends Omit<BaseResponse, 'result'> {
+  result: ICart[];
+}
 
 export interface IProductDetail extends Omit<BaseResponse, 'result'> {
   result: {
@@ -72,6 +75,8 @@ export interface IProductDetail extends Omit<BaseResponse, 'result'> {
     stock: number;
     sub_category_id: number;
     title: string;
+  };
+}
 
 export interface ISignUpUser {
   user_id: string;
@@ -83,4 +88,8 @@ export interface ISignUpUser {
 export interface ILoginUser {
   user_id: string;
   password: string;
+}
+
+export interface IProducts extends Omit<BaseResponse, 'result'> {
+  result: IProduct[];
 }

@@ -2,8 +2,10 @@ import React from 'react';
 import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
 import categoryList from '@/dummies/categorys';
-import { useGetUser } from '@/hooks/queries/user';
 import { logout } from '@/lib/api/auth/logout';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
+import { useHistory } from '@/lib/Router';
 
 interface Props {
   isOpen?: boolean;
@@ -12,13 +14,14 @@ interface Props {
 
 const Sidebar = ({ ...props }: Props) => {
   const { isOpen, setIsOpen } = props;
-  const { data, remove, refetch } = useGetUser();
+  const [user, setUser] = useRecoilState(userState);
   const closeSidebar = () => setIsOpen(false);
+  const { historyPush } = useHistory();
 
   const onClickLogout = async () => {
     await logout();
-    remove();
-    refetch();
+    setUser(null);
+    historyPush('/');
   };
 
   return (
@@ -26,10 +29,10 @@ const Sidebar = ({ ...props }: Props) => {
       <S.SideBar className={isOpen ? 'active' : ''}>
         <S.Top>
           <div>
-            {data ? `${data.name}님 환영합니다!` : '로그인이 필요합니다.'}
+            {user ? `${user.name}님 환영합니다!` : '로그인이 필요합니다.'}
           </div>
           <S.IconsWrapper>
-            {data ? <button onClick={onClickLogout}>로그아웃</button> : null}
+            {user ? <button onClick={onClickLogout}>로그아웃</button> : null}
             <CloseSVG onClick={closeSidebar} />
           </S.IconsWrapper>
         </S.Top>

@@ -10,7 +10,9 @@ import {
   validateInput,
 } from '@/utils/constant/validate/validation';
 import { notify } from '@/components/Shared/Toastify';
-import { useGetUser } from '@/hooks/queries/user';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
+import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 
 const Login = () => {
   const GithubLogin = async () => {
@@ -24,7 +26,7 @@ const Login = () => {
   });
   const { historyPush } = useHistory();
 
-  const { data, refetch } = useGetUser();
+  const [user, setUser] = useRecoilState(userState);
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
@@ -39,7 +41,8 @@ const Login = () => {
     if (emailValidation && passwordValidation) {
       try {
         await normalLogin({ user_id: email, password });
-        refetch();
+        const user = await getCurrentUser();
+        setUser(user);
         historyPush('/');
       } catch (err) {
         notify('error', err.response.data.message);
@@ -47,7 +50,7 @@ const Login = () => {
     }
   };
 
-  if (data) return <Redirect to="/" />;
+  if (user) return <Redirect to="/" />;
 
   return (
     <S.LoginForm onSubmit={onSubmit}>

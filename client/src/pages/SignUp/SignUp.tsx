@@ -16,7 +16,9 @@ import { CheckSVG } from '@/assets/svgs';
 import { createUser } from '@/lib/api/user/createUser';
 import { Redirect, useHistory } from '@/lib/Router';
 import { notify } from '@/components/Shared/Toastify';
-import { useGetUser } from '@/hooks/queries/user';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
+import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 
 const SignUp = () => {
   const [error, setError] = useState({
@@ -73,7 +75,7 @@ const SignUp = () => {
     [password, error]
   );
 
-  const { data, refetch } = useGetUser();
+  const [user, setUser] = useRecoilState(userState);
 
   const { historyPush } = useHistory();
   const formSubmit = useCallback(
@@ -96,17 +98,18 @@ const SignUp = () => {
       } else {
         try {
           await createUser({ user_id: email, password, rePassword, name });
-          refetch();
+          const user = await getCurrentUser();
+          setUser(user);
           historyPush('/');
         } catch (err) {
           notify('error', '알수 없는 에러입니다.');
         }
       }
     },
-    [emailCheck, historyPush, refetch]
+    [emailCheck, historyPush, setUser]
   );
 
-  if (data) return <Redirect to="/" />;
+  if (user) return <Redirect to="/" />;
 
   return (
     <S.SignUpContainer>

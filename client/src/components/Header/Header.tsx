@@ -6,14 +6,14 @@ import { Link } from '@/lib/Router';
 import Sidebar from './Sidebar';
 import Search from './Search';
 import { SITE_TITLE } from '@/utils/constant/common';
-import { useGetUser } from '@/hooks/queries/user';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
 
 export const Links = () => {
-  const { data } = useGetUser();
-
+  const [user] = useRecoilState(userState);
   return (
     <>
-      <Link to={data ? '/mypage' : '/login'}>
+      <Link to={user ? '/mypage' : '/login'}>
         <UserSVG />
       </Link>
       <Link to="/" /*찜 페이지가 들어가야함 */>

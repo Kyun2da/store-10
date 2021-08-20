@@ -1,9 +1,10 @@
 import React, { Dispatch } from 'react';
 import * as S from './styles';
 import { MY_PAGE_NAVIGATIONS } from '@/contstants';
-import { useGetUser } from '@/hooks/queries/user';
-import { Redirect, useHistory } from '@/lib/Router';
+import { useHistory } from '@/lib/Router';
 import { logout } from '@/lib/api/auth/logout';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
 
 interface IMypageAsideProps {
   setContentValue: Dispatch<string>;
@@ -16,7 +17,7 @@ interface IMyPageNavigation {
 }
 
 const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
-  const { data, remove, refetch } = useGetUser();
+  const [user, setUser] = useRecoilState(userState);
   const renderNavigations = () => {
     return MY_PAGE_NAVIGATIONS.map((nav: IMyPageNavigation) => (
       <li
@@ -28,21 +29,19 @@ const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
       </li>
     ));
   };
+
   const { historyPush } = useHistory();
   const onClickLogout = async () => {
     await logout();
-    remove();
-    refetch();
+    setUser(null);
     historyPush('/');
   };
-
-  if (!data) <Redirect to="/" />;
 
   return (
     <S.MyPageAside>
       <S.MyPageUserInfo>
         <S.MyPageGreeting>안녕하세요,</S.MyPageGreeting>
-        <S.MyPageUserName>{data?.name}님!</S.MyPageUserName>
+        <S.MyPageUserName>{user?.name}님!</S.MyPageUserName>
         <footer>
           <button>회원 정보 변경</button>
           <button onClick={onClickLogout}>로그아웃</button>

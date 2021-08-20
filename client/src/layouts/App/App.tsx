@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import { Route, Switch } from '@/lib/Router';
 import Main from '@/pages/Main';
@@ -18,22 +18,28 @@ import Notice from '@/pages/Notice';
 import { QueryErrorResetBoundary } from 'react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import Error from '@/components/Shared/Error';
-import { useGetUser } from '@/hooks/queries/user';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
+import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 
 const App = () => {
   const [theme, setTheme] = useState('light-mode');
   const themeMode = theme === 'light-mode' ? lightMode : darkMode;
+  const [user, setUser] = useRecoilState(userState);
 
   const toggleMode = () =>
     setTheme(theme === 'light-mode' ? 'dark-mode' : 'light-mode');
 
-  const { data, refetch } = useGetUser();
+  const getInitialUser = useCallback(async () => {
+    if (!user) {
+      const initialUser = await getCurrentUser();
+      setUser(initialUser);
+    }
+  }, [user, setUser]);
 
   useEffect(() => {
-    if (!data) {
-      refetch();
-    }
-  }, [data, refetch]);
+    getInitialUser();
+  }, [getInitialUser]);
 
   return (
     <ThemeProvider theme={themeMode}>

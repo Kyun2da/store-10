@@ -1,9 +1,10 @@
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
-import { useGetUser } from '@/hooks/queries/user';
 import { Link, Redirect, useHistory } from '@/lib/Router';
+import { userState } from '@/recoil/user';
 import { SITE_TITLE } from '@/utils/constant/common';
 import React from 'react';
+import { useRecoilState } from 'recoil';
 import { GithubIcon } from '../Login/styles';
 import * as S from './styles';
 
@@ -14,9 +15,9 @@ const SelectAuth = () => {
     historyPush(path);
   };
 
-  const { data } = useGetUser();
+  const [user] = useRecoilState(userState);
 
-  if (data) return <Redirect to="/" />;
+  if (user) return <Redirect to="/" />;
 
   return (
     <S.SelectAuthContainer>

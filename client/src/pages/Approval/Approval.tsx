@@ -1,14 +1,15 @@
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
-import { useGetUser } from '@/hooks/queries/user';
 import { githubLogin } from '@/lib/api/auth/githubLogin';
 import { Redirect, useHistory, useParams } from '@/lib/Router';
+import { userState } from '@/recoil/user';
 import {
   PERSONAL_INFO_TEXT,
   TERMS_OF_SERVICE,
 } from '@/utils/constant/approval';
 import { SITE_TITLE } from '@/utils/constant/common';
 import React, { useCallback, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import * as S from './styles';
 
 interface ICheck {
@@ -57,9 +58,9 @@ const Approval = () => {
     });
   };
 
-  const { data } = useGetUser();
+  const [user] = useRecoilState(userState);
 
-  if (data) return <Redirect to="/" />;
+  if (user) return <Redirect to="/" />;
 
   return (
     <S.ApprovalContainer>

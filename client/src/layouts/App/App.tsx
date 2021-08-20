@@ -15,7 +15,6 @@ import SelectAuth from '@/pages/SelectAuth';
 import Approval from '@/pages/Approval';
 import SignUp from '@/pages/SignUp';
 import Notice from '@/pages/Notice';
-import Loading from '@/components/Shared/Loading';
 import { QueryErrorResetBoundary } from 'react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import Error from '@/components/Shared/Error';

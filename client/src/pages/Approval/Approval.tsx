@@ -22,8 +22,8 @@ const Approval = () => {
   const { params } = useParams();
 
   const GithubLogin = async () => {
-    const oAuthURL = await githubLogin();
-    window.location.href = oAuthURL;
+    const { githubUrl } = await githubLogin();
+    window.location.href = githubUrl;
   };
 
   const onClickNextPage = useCallback(() => {

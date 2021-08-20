@@ -14,8 +14,8 @@ import { useGetUser } from '@/hooks/queries/user';
 
 const Login = () => {
   const GithubLogin = async () => {
-    const oAuthURL = await githubLogin();
-    window.location.href = oAuthURL;
+    const { githubUrl } = await githubLogin();
+    window.location.href = githubUrl;
   };
 
   const [error, setError] = useState({

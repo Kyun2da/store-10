@@ -7,7 +7,7 @@ const client = axios.create({
 client.defaults.baseURL = process.env.SERVER_API_HOST;
 
 export default {
-  async post<T>(url: string, body: T) {
+  async post<T>(url: string, body?: T) {
     try {
       const res = await client.post(url, body);
       return res.data.result;

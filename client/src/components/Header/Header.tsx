@@ -6,27 +6,17 @@ import { Link } from '@/lib/Router';
 import Sidebar from './Sidebar';
 import Search from './Search';
 import { SITE_TITLE } from '@/utils/constant/common';
-import { logout } from '@/lib/api/auth/logout';
 import { useGetUser } from '@/hooks/queries/user';
 
 export const Links = () => {
-  const { data, remove, refetch } = useGetUser();
-  const onClickLogout = async () => {
-    await logout();
-    remove();
-    refetch();
-  };
+  const { data } = useGetUser();
 
   return (
     <>
-      {data?.name ? (
-        <button onClick={onClickLogout}>로그아웃</button>
-      ) : (
-        <Link to="/login">
-          <UserSVG />
-        </Link>
-      )}
-      <Link to="/mypage">
+      <Link to={data ? '/mypage' : '/login'}>
+        <UserSVG />
+      </Link>
+      <Link to="/" /*찜 페이지가 들어가야함 */>
         <HeartSVG />
       </Link>
       <Link to="/cart">

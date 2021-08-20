@@ -1,6 +1,7 @@
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
-import { githubLogin } from '@/lib/api/login/githubLogin';
+import { useGetUser } from '@/hooks/queries/user';
+import { githubLogin } from '@/lib/api/auth/githubLogin';
 import { Redirect, useHistory, useParams } from '@/lib/Router';
 import {
   PERSONAL_INFO_TEXT,
@@ -56,9 +57,9 @@ const Approval = () => {
     });
   };
 
-  const userName = window.localStorage.getItem('userName');
+  const { data } = useGetUser();
 
-  if (userName) return <Redirect to="/" />;
+  if (data) return <Redirect to="/" />;
 
   return (
     <S.ApprovalContainer>

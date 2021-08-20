@@ -1,5 +1,6 @@
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
+import { useGetUser } from '@/hooks/queries/user';
 import { Link, Redirect, useHistory } from '@/lib/Router';
 import { SITE_TITLE } from '@/utils/constant/common';
 import React from 'react';
@@ -13,9 +14,9 @@ const SelectAuth = () => {
     historyPush(path);
   };
 
-  const userName = window.localStorage.getItem('userName');
+  const { data } = useGetUser();
 
-  if (userName) return <Redirect to="/" />;
+  if (data) return <Redirect to="/" />;
 
   return (
     <S.SelectAuthContainer>

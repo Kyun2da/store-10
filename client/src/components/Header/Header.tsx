@@ -6,18 +6,26 @@ import { Link } from '@/lib/Router';
 import Sidebar from './Sidebar';
 import Search from './Search';
 import { SITE_TITLE } from '@/utils/constant/common';
+import { logout } from '@/lib/api/auth/logout';
+import { useGetUser } from '@/hooks/queries/user';
 
-interface Props {
-  userName?: string | null;
-}
+export const Links = () => {
+  const { data, remove, refetch } = useGetUser();
+  const onClickLogout = async () => {
+    await logout();
+    remove();
+    refetch();
+  };
 
-export const Links = ({ ...props }: Props) => {
-  const { userName } = props;
   return (
     <>
-      <Link to={userName ? '/mypage' : '/login'}>
-        <UserSVG />
-      </Link>
+      {data?.name ? (
+        <button onClick={onClickLogout}>로그아웃</button>
+      ) : (
+        <Link to="/login">
+          <UserSVG />
+        </Link>
+      )}
       <Link to="/mypage">
         <HeartSVG />
       </Link>
@@ -29,7 +37,6 @@ export const Links = ({ ...props }: Props) => {
 };
 
 const Header = () => {
-  const userName = window.localStorage.getItem('userName');
   const [sideBarIsOpen, setSideBarIsOpen] = useState(false);
   const [searchIsOpen, setSearchIsOpen] = useState(false);
 
@@ -41,11 +48,7 @@ const Header = () => {
   return (
     <>
       <S.HeaderWrapper>
-        <Sidebar
-          userName={userName}
-          isOpen={sideBarIsOpen}
-          setIsOpen={setSideBarIsOpen}
-        />
+        <Sidebar isOpen={sideBarIsOpen} setIsOpen={setSideBarIsOpen} />
         <S.Header>
           <S.Menu>
             <S.MenuButton onClick={() => setSideBarIsOpen(!sideBarIsOpen)}>

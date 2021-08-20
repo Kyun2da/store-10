@@ -1,4 +1,4 @@
-import React, { Suspense, useCallback, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import { Route, Switch } from '@/lib/Router';
 import Main from '@/pages/Main';
@@ -19,7 +19,7 @@ import Loading from '@/components/Shared/Loading';
 import { QueryErrorResetBoundary } from 'react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import Error from '@/components/Shared/Error';
-import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
+import { useGetUser } from '@/hooks/queries/user';
 
 const App = () => {
   const [theme, setTheme] = useState('light-mode');
@@ -28,14 +28,13 @@ const App = () => {
   const toggleMode = () =>
     setTheme(theme === 'light-mode' ? 'dark-mode' : 'light-mode');
 
-  const getCurrentUserFunc = useCallback(async () => {
-    const user = await getCurrentUser();
-    window.localStorage.setItem('userName', user.name);
-  }, []);
+  const { data, refetch } = useGetUser();
 
   useEffect(() => {
-    getCurrentUserFunc();
-  }, [getCurrentUserFunc]);
+    if (!data) {
+      refetch();
+    }
+  }, [data, refetch]);
 
   return (
     <ThemeProvider theme={themeMode}>

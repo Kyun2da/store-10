@@ -1,6 +1,8 @@
 import React, { Dispatch } from 'react';
 import * as S from './styles';
 import { MY_PAGE_NAVIGATIONS } from '@/contstants';
+import { useGetUser } from '@/hooks/queries/user';
+import { Redirect } from '@/lib/Router';
 
 interface IMypageAsideProps {
   setContentValue: Dispatch<string>;
@@ -13,7 +15,7 @@ interface IMyPageNavigation {
 }
 
 const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
-  const userName = window.localStorage.getItem('userName');
+  const { data } = useGetUser();
   const renderNavigations = () => {
     return MY_PAGE_NAVIGATIONS.map((nav: IMyPageNavigation) => (
       <li
@@ -26,11 +28,13 @@ const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
     ));
   };
 
+  if (!data) <Redirect to="/" />;
+
   return (
     <S.MyPageAside>
       <S.MyPageUserInfo>
         <S.MyPageGreeting>안녕하세요,</S.MyPageGreeting>
-        <S.MyPageUserName>{userName}님!</S.MyPageUserName>
+        <S.MyPageUserName>{data?.name}님!</S.MyPageUserName>
         <footer>
           <button>회원 정보 변경</button>
           <button>로그아웃</button>

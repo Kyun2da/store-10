@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input } from '@/components/Shared/Input';
 import Button from '@/components/Shared/Button';
 import * as S from './styles';
 import { Link, Redirect, useHistory } from '@/lib/Router';
-import { githubLogin } from '@/lib/api/login/githubLogin';
-import { normalLogin } from '@/lib/api/login/normalLogin';
+import { githubLogin } from '@/lib/api/auth/githubLogin';
+import { normalLogin } from '@/lib/api/auth/normalLogin';
 import {
   validateEmail,
   validateInput,
 } from '@/utils/constant/validate/validation';
+import { notify } from '@/components/Shared/Toastify';
+import { useGetUser } from '@/hooks/queries/user';
 
 const Login = () => {
   const GithubLogin = async () => {
@@ -22,6 +24,7 @@ const Login = () => {
   });
   const { historyPush } = useHistory();
 
+  const { data, refetch } = useGetUser();
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
@@ -36,16 +39,15 @@ const Login = () => {
     if (emailValidation && passwordValidation) {
       try {
         await normalLogin({ user_id: email, password });
+        refetch();
         historyPush('/');
       } catch (err) {
-        window.alert(err.response.data.message);
+        notify('error', err.response.data.message);
       }
     }
   };
 
-  const userName = window.localStorage.getItem('userName');
-
-  if (userName) return <Redirect to="/" />;
+  if (data) return <Redirect to="/" />;
 
   return (
     <S.LoginForm onSubmit={onSubmit}>

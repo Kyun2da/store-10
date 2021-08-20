@@ -2,16 +2,16 @@ import React from 'react';
 import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
 import categoryList from '@/dummies/categorys';
-import { Links } from '../Header';
+import { useGetUser } from '@/hooks/queries/user';
 
 interface Props {
   isOpen?: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  userName?: string | null;
 }
 
 const Sidebar = ({ ...props }: Props) => {
-  const { isOpen, setIsOpen, userName } = props;
+  const { isOpen, setIsOpen } = props;
+  const { data } = useGetUser();
   const closeSidebar = () => setIsOpen(false);
 
   return (
@@ -19,10 +19,9 @@ const Sidebar = ({ ...props }: Props) => {
       <S.SideBar className={isOpen ? 'active' : ''}>
         <S.Top>
           <div>
-            {userName ? `${userName}님 환영합니다!` : '로그인이 필요합니다.'}
+            {data ? `${data.name}님 환영합니다!` : '로그인이 필요합니다.'}
           </div>
           <S.IconsWrapper>
-            <Links />
             <CloseSVG onClick={closeSidebar} />
           </S.IconsWrapper>
         </S.Top>

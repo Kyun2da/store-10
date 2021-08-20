@@ -38,24 +38,18 @@ class AuthController {
       ApiResponse(
         res,
         HttpStatusCode.UNAUTHORIZED,
-        false,
         '존재하지 않는 유저 입니다.'
       );
       return;
     } else if (_user.passwordError) {
-      ApiResponse(
-        res,
-        HttpStatusCode.UNAUTHORIZED,
-        false,
-        '비밀번호가 다릅니다.'
-      );
+      ApiResponse(res, HttpStatusCode.UNAUTHORIZED, '비밀번호가 다릅니다.');
     }
     const { name, id, refreshToken } = _user;
     const jwtAccessToken = JwtService.generate({ user_id, name, id });
 
     res.cookie('refreshToken', refreshToken, { path: '/', httpOnly: true });
     res.cookie('accessToken', jwtAccessToken, { path: '/', httpOnly: true });
-    ApiResponse(res, HttpStatusCode.OK, true, '로그인 성공');
+    ApiResponse(res, HttpStatusCode.OK, '로그인 성공');
   }
 
   async check(req: Request, res: Response) {

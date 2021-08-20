@@ -16,16 +16,15 @@ class ProductController {
     const thumbnails = await ProductService.getProductThumbnails(id);
     const result = { details, thumbnails };
 
-    if (!result) {
+    if (result) {
       ApiResponse(
         res,
-        HttpStatusCode.NO_CONTENT,
-        false,
+        HttpStatusCode.BAD_REQUEST,
         '해당 상품이 존재하지 않습니다'
       );
+    } else {
+      ApiResponse(res, HttpStatusCode.OK, '해당 상품 조회 성공', result);
     }
-
-    ApiResponse(res, HttpStatusCode.OK, true, '해당 상품 조회 성공', result);
   }
 
   async serchProduct(req: Request, res: Response) {
@@ -38,30 +37,20 @@ class ProductController {
     const { category, limit } = req.query;
     const products = await ProductService.getProducts({ category, limit });
     if (!products) {
-      ApiResponse(
-        res,
-        HttpStatusCode.NO_CONTENT,
-        false,
-        '상품이 존재하지 않습니다'
-      );
+      ApiResponse(res, HttpStatusCode.BAD_REQUEST, '상품이 존재하지 않습니다');
+    } else {
+      ApiResponse(res, HttpStatusCode.OK, '상품 조회 성공', products);
     }
-
-    ApiResponse(res, HttpStatusCode.OK, true, '상품 조회 성공', products);
   }
 
   async getBestProducts(req: Request, res: Response) {
     const { limit = 8 } = req.query;
     const products = await ProductService.getBestProudcts(+limit);
     if (!products) {
-      ApiResponse(
-        res,
-        HttpStatusCode.NO_CONTENT,
-        false,
-        '상품이 존재하지 않습니다'
-      );
+      ApiResponse(res, HttpStatusCode.BAD_REQUEST, '상품이 존재하지 않습니다');
+    } else {
+      ApiResponse(res, HttpStatusCode.OK, '상품 조회 성공', products);
     }
-
-    ApiResponse(res, HttpStatusCode.OK, true, '상품 조회 성공', products);
   }
 
   async getRecommandProducts(req: Request, res: Response) {
@@ -69,15 +58,10 @@ class ProductController {
     const products = await ProductService.getRecommandProducts(+limit);
 
     if (!products) {
-      ApiResponse(
-        res,
-        HttpStatusCode.NO_CONTENT,
-        false,
-        '상품이 존재하지 않습니다'
-      );
+      ApiResponse(res, HttpStatusCode.BAD_REQUEST, '상품이 존재하지 않습니다');
+    } else {
+      ApiResponse(res, HttpStatusCode.OK, '상품 조회 성공', products);
     }
-
-    ApiResponse(res, HttpStatusCode.OK, true, '상품 조회 성공', products);
   }
 }
 

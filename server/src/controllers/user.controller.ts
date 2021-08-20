@@ -20,14 +20,13 @@ class UserController {
     ApiResponse(
       res,
       HttpStatusCode.OK,
-      true,
       '성공적으로 아이디를 생성하였습니다.',
       data
     );
   }
 
   async checkUserEmail(req: Request, res: Response) {
-    ApiResponse(res, HttpStatusCode.OK, true, '사용할 수 있는 아이디입니다.');
+    ApiResponse(res, HttpStatusCode.OK, '사용할 수 있는 아이디입니다.');
   }
 }
 

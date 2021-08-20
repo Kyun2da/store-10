@@ -12,11 +12,9 @@ import { useParams } from '@/lib/Router';
 const ProductInfo = () => {
   const { id } = useParams().params;
 
-  const { data } = useGetProductById(
+  const { data, isLoading, error } = useGetProductById(
     (id as number) < 60000 ? 66310 : (id as number) // 임시조치입니다 -- 신경 쓰지 마세효
   );
-
-  const { success, message, result } = data ?? {};
 
   const [value, handleClickOnMinus, handleClickOnPlus] = useNumberInput(1);
   const { mutate } = usePostCart();
@@ -29,20 +27,17 @@ const ProductInfo = () => {
     });
   };
 
-  // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요
-  if (!success) {
-    return <div>{message}</div>;
+  // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
+  if (error) {
+    return <div>{error.message}</div>;
   }
 
-  if (result === undefined) {
-    return null;
+  if (isLoading || !data) {
+    return <div>loading</div>;
   }
 
-  const { title, price } = result.details;
-  const thumbnail = result.thumbnails.filter(
-    (thumb) => thumb.type === 'detail'
-  );
-  console.log(result.thumbnails);
+  const { title, price } = data.details;
+  const thumbnail = data.thumbnails.filter((thumb) => thumb.type === 'detail');
 
   return (
     <S.ProductInfo>

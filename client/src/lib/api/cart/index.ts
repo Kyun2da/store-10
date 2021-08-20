@@ -1,13 +1,12 @@
 import client from '../client';
+import { ICart } from '@/types';
 
 export const getCarts = async () => {
-  const res = await client.get('/cart');
-  return res.data;
+  return await client.get<ICart[]>('/cart');
 };
 
 export const deleteCart = async (ids: number[]) => {
-  const res = await client.delete(`/cart?productIds=${JSON.stringify(ids)}`);
-  return res.data;
+  return await client.delete(`/cart?productIds=${JSON.stringify(ids)}`);
 };
 
 export const postCart = async ({
@@ -17,9 +16,8 @@ export const postCart = async ({
   count: undefined | number;
   productId: number;
 }) => {
-  const res = await client.post('/cart', {
+  return await client.post('/cart', {
     count: count || 1,
     productId,
   });
-  return res.data;
 };

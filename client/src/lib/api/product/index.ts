@@ -1,21 +1,18 @@
 import client from '../client';
+import { IProduct, IProductDetail } from '@/types';
 
 export const getProductById = async (id: number) => {
-  const res = await client.get(`/product/${id}`);
-  return res.data;
+  return await client.get<IProductDetail>(`/product/${id}`);
 };
 
 export const getRecommandProducts = async () => {
-  const res = await client.get(`/product/recommand?limit=8`);
-  return res.data;
+  return await client.get<IProduct[]>(`/product/recommand?limit=8`);
 };
 
 export const getRecentProducts = async () => {
-  const res = await client.get(`/product?limit=8`);
-  return res.data;
+  return await client.get<IProduct[]>(`/product?limit=8`);
 };
 
 export const getBestProducts = async () => {
-  const res = await client.get(`/product/best?limit=8`);
-  return res.data;
+  return await client.get<IProduct[]>(`/product/best?limit=8`);
 };

@@ -7,17 +7,16 @@ import { useGetCarts, useDeleteCart } from '@/hooks/queries/cart';
 
 const ShoppingCart = () => {
   const { data } = useGetCarts();
-  const { result } = data ?? {};
   const { mutate } = useDeleteCart();
   const [unCheckedList, setUnCheckedList] = useState<number[]>([]);
 
   const [shoppingCartItems, setShoppingCartItems] = useState<ICart[]>([]);
 
   useEffect(() => {
-    if (result) {
-      setShoppingCartItems(result);
+    if (data) {
+      setShoppingCartItems(data);
     }
-  }, [result]);
+  }, [data]);
 
   const checkedItems = shoppingCartItems.filter(
     (item) =>

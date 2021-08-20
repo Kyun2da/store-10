@@ -1,9 +1,3 @@
-interface BaseResponse {
-  success: boolean;
-  message: string;
-  result: Record<string, unknown>[];
-}
-
 export interface shoppingCartItem {
   id: number;
   title: string;
@@ -62,26 +56,20 @@ export interface ICart {
   image: string;
 }
 
-export interface ICarts extends Omit<BaseResponse, 'result'> {
-  result: ICart[];
-}
-
-export interface IProductDetail extends Omit<BaseResponse, 'result'> {
-  result: {
-    details: {
-      content: {
-        details: string;
-        essentials: string;
-      };
-      createdAt: string;
-      id: number;
-      price: string;
-      stock: number;
-      sub_category_id: number;
-      title: string;
+export interface IProductDetail {
+  details: {
+    content: {
+      details: string;
+      essentials: string;
     };
-    thumbnails: Record<string, unknown>[];
+    createdAt: string;
+    id: number;
+    price: string;
+    stock: number;
+    sub_category_id: number;
+    title: string;
   };
+  thumbnails: Record<string, unknown>[];
 }
 
 export interface ISignUpUser {
@@ -94,10 +82,6 @@ export interface ISignUpUser {
 export interface ILoginUser {
   user_id: string;
   password: string;
-}
-
-export interface IProducts extends Omit<BaseResponse, 'result'> {
-  result: IProduct[];
 }
 
 export interface ISearchData {

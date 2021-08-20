@@ -27,19 +27,45 @@ const AddressModal = ({
     message: modifyAddressData ? modifyAddressData.message : '',
     isDefault: modifyAddressData ? modifyAddressData.isDefault : false,
   });
+  const [errors, setErros] = useState<Record<string, boolean>>({
+    id: false,
+    name: false,
+    postcode: false,
+    address: false,
+    detailAddress: false,
+    phone: false,
+  });
+  const checkValidation = (): boolean => {
+    let isValid = true;
+    for (const [key, value] of Object.entries(inputs)) {
+      if (!value && errors[key] !== undefined) {
+        console.log(value, key, errors[key]);
+        setErros({ ...errors, [key]: true });
+        isValid = false;
+      }
+    }
+    return isValid;
+  };
   const postMutation = usePostAddress();
   const updateMutation = useUpdateAddress();
 
   const onClickSend = () => {
+    if (!checkValidation()) {
+      return;
+    }
     const { mutate } = modifyAddressData ? updateMutation : postMutation;
     mutate({
       ...inputs,
     });
     toggleModal();
   };
+
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setInputs({ ...inputs, [name]: value });
+    if (value) {
+      setErros({ ...errors, [name]: false });
+    }
   };
 
   const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,6 +113,7 @@ const AddressModal = ({
           placeholder="받는 사람"
           value={inputs.name}
           onChange={onChangeInput}
+          error={errors.name}
         />
         <S.PostcodeWrapper>
           <Button
@@ -108,6 +135,7 @@ const AddressModal = ({
             attributes={{
               readOnly: true,
             }}
+            error={errors.postcode}
           />
         </S.PostcodeWrapper>
         <Input
@@ -120,6 +148,7 @@ const AddressModal = ({
           attributes={{
             readOnly: true,
           }}
+          error={errors.address}
         />
         <Input
           type="text"
@@ -129,6 +158,7 @@ const AddressModal = ({
           value={inputs.detailAddress}
           onFocus={onFocusDetailAddress}
           onChange={onChangeInput}
+          error={errors.detailAddress}
         />
         <Input
           type="text"
@@ -137,6 +167,7 @@ const AddressModal = ({
           placeholder="연락처"
           value={inputs.phone}
           onChange={onChangeInput}
+          error={errors.phone}
         />
         <Input
           type="text"

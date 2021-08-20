@@ -1,9 +1,6 @@
-import { ISearchData } from '@/types';
 import client from '../client';
+import { ISearchData } from '@/types';
 
 export async function searchRealTimeData(searchString: string) {
-  const response = await client.get<ISearchData[]>(
-    `/product/search?q=${searchString}`
-  );
-  return response.data;
+  return await client.get<ISearchData[]>(`/product/search?q=${searchString}`);
 }

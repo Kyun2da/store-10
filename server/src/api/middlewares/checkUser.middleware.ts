@@ -13,7 +13,6 @@ export async function checkUser(
     ApiResponse(
       res,
       HttpStatusCode.CONFLICT,
-      false,
       '이미 회원가입이 된 아이디입니다.'
     );
   }

@@ -3,47 +3,29 @@ import * as S from './styles';
 import Card from '@/components/Card';
 import CardWrapper from '@/components/CardWrapper';
 import Banner from '@/components/Banner';
-import { useGetMainProducts } from '@/hooks/queries/product';
+import {
+  useGetRecommandProducts,
+  useGetBestProducts,
+  useGetRecentProducts,
+} from '@/hooks/queries/product';
 import { IProduct } from '@/types';
 
+interface IProductQuery {
+  data: IProduct[] | undefined;
+  isLoading: boolean;
+}
+
 const Main = () => {
-  const [recommand, best, recent] = useGetMainProducts();
+  const recommandQuery = useGetRecommandProducts();
+  const bestQuery = useGetBestProducts();
+  const recentQuery = useGetRecentProducts();
 
-  const renderNewProducts = () => {
-    if (recent.isLoading) {
-      return <div>Loading</div>;
+  const renderProducts = (qurey: IProductQuery) => {
+    const { data, isLoading } = qurey;
+    if (isLoading || !data) {
+      return <div></div>;
     }
-    return recent.data.result.map((product: IProduct) => (
-      <Card
-        key={product.id}
-        bgColor="primary"
-        src={product.productImage[0].url}
-        price={product.price}
-        title={product.title}
-      />
-    ));
-  };
-
-  const renderRecommandProducts = () => {
-    if (recommand.isLoading) {
-      return <div>Loading</div>;
-    }
-    return recommand.data.result.map((product: IProduct) => (
-      <Card
-        key={product.id}
-        bgColor="primary"
-        src={product.productImage[0].url}
-        price={product.price}
-        title={product.title}
-      />
-    ));
-  };
-
-  const renderBestProducts = () => {
-    if (best.isLoading) {
-      return <div>Loading</div>;
-    }
-    return best.data.result.map((product: IProduct) => (
+    return data.map((product: IProduct) => (
       <Card
         key={product.id}
         bgColor="primary"
@@ -58,13 +40,13 @@ const Main = () => {
       <Banner />
       <S.Main className="container">
         <h1 className="product-title">새로 나왔어요!</h1>
-        <CardWrapper col={4}>{renderNewProducts()}</CardWrapper>
+        <CardWrapper col={4}>{renderProducts(recentQuery)}</CardWrapper>
 
         <h1 className="product-title">이거는 어때요?</h1>
-        <CardWrapper col={4}>{renderRecommandProducts()}</CardWrapper>
+        <CardWrapper col={4}>{renderProducts(recommandQuery)}</CardWrapper>
 
         <h1 className="product-title">제일 잘 나가요!</h1>
-        <CardWrapper col={4}>{renderBestProducts()}</CardWrapper>
+        <CardWrapper col={4}>{renderProducts(bestQuery)}</CardWrapper>
       </S.Main>
     </>
   );

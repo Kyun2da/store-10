@@ -1,6 +1,5 @@
 import client from '../client';
 
 export async function githubLogin() {
-  const response = await client.get('/auth');
-  return response.data;
+  return await client.get<string>('/auth');
 }

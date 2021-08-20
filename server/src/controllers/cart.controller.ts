@@ -10,14 +10,14 @@ class CartController {
     const userId = req.user?.id || 4;
     await CartService.createCart({ productId, userId, count });
 
-    ApiResponse(res, HttpStatusCode.NO_CONTENT, true, '장바구니 추가 성공');
+    ApiResponse(res, HttpStatusCode.NO_CONTENT, '장바구니 추가 성공');
   }
 
   async getCarts(req: Request, res: Response) {
     const userId = req.user?.id || 4;
     const carts = await CartService.getCarts(userId);
 
-    ApiResponse(res, HttpStatusCode.OK, true, '해당 상품 조회 성공', carts);
+    ApiResponse(res, HttpStatusCode.OK, '해당 상품 조회 성공', carts);
   }
 
   async deleteCart(req: Request, res: Response) {
@@ -28,7 +28,7 @@ class CartController {
       productIds: JSON.parse(productIds as string),
     });
 
-    ApiResponse(res, HttpStatusCode.NO_CONTENT, true, '장바구니 삭제 성공');
+    ApiResponse(res, HttpStatusCode.NO_CONTENT, '장바구니 삭제 성공');
   }
 }
 

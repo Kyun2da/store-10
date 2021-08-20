@@ -9,21 +9,19 @@ import contentParser from '@/utils/contentParser';
 const ProductDescription = () => {
   const { id } = useParams().params;
 
-  const { data } = useGetProductById(
+  const { data, isLoading, error } = useGetProductById(
     (id as number) < 60000 ? 66310 : (id as number) // 임시조치입니다 -- 신경 쓰지 마세효
   );
 
-  const { success, message, result } = data ?? {};
-
-  if (!success) {
-    return <div>{message}</div>;
+  if (error) {
+    return <div>{error.message}</div>;
   }
 
-  if (result === undefined) {
+  if (isLoading || !data) {
     return null;
   }
 
-  const { content } = result.details;
+  const { content } = data.details;
   const { details, essentials } = content;
   const [images, tables] = contentParser({ details, essentials });
 

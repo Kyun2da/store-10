@@ -6,13 +6,18 @@ const client = axios.create({
 
 client.defaults.baseURL = process.env.SERVER_API_HOST;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const throwError = (e: any) => {
+  throw new Error(e.response?.data?.message || e.message || e);
+};
+
 export default {
   async post<T>(url: string, body: T) {
     try {
       const res = await client.post(url, body);
       return res.data.result;
     } catch (e) {
-      throw new Error(e.response?.data?.message || e.message || e);
+      return throwError(e);
     }
   },
 
@@ -21,7 +26,7 @@ export default {
       const res = await client.get(url);
       return res.data.result;
     } catch (e) {
-      throw new Error(e.response?.data?.message || e.message || e);
+      return throwError(e);
     }
   },
 
@@ -30,7 +35,7 @@ export default {
       const res = await client.delete(url);
       return res.data.result;
     } catch (e) {
-      throw new Error(e.response?.data?.message || e.message || e);
+      return throwError(e);
     }
   },
 
@@ -39,7 +44,7 @@ export default {
       const res = await client.put(url, body);
       return res.data.result;
     } catch (e) {
-      throw new Error(e.response?.data?.message || e.message || e);
+      return throwError(e);
     }
   },
 };

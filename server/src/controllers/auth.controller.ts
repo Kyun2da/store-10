@@ -60,7 +60,7 @@ class AuthController {
   async check(req: Request, res: Response) {
     const { id, user_id, name } = req.user;
 
-    ApiResponse(res, HttpStatusCode.OK, '로그인이 중입니다.', {
+    ApiResponse(res, HttpStatusCode.OK, '로그인 중입니다.', {
       id,
       user_id,
       name,

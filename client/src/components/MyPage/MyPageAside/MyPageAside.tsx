@@ -2,7 +2,8 @@ import React, { Dispatch } from 'react';
 import * as S from './styles';
 import { MY_PAGE_NAVIGATIONS } from '@/contstants';
 import { useGetUser } from '@/hooks/queries/user';
-import { Redirect } from '@/lib/Router';
+import { Redirect, useHistory } from '@/lib/Router';
+import { logout } from '@/lib/api/auth/logout';
 
 interface IMypageAsideProps {
   setContentValue: Dispatch<string>;
@@ -15,7 +16,7 @@ interface IMyPageNavigation {
 }
 
 const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
-  const { data } = useGetUser();
+  const { data, remove, refetch } = useGetUser();
   const renderNavigations = () => {
     return MY_PAGE_NAVIGATIONS.map((nav: IMyPageNavigation) => (
       <li
@@ -27,6 +28,13 @@ const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
       </li>
     ));
   };
+  const { historyPush } = useHistory();
+  const onClickLogout = async () => {
+    await logout();
+    remove();
+    refetch();
+    historyPush('/');
+  };
 
   if (!data) <Redirect to="/" />;
 
@@ -37,7 +45,7 @@ const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
         <S.MyPageUserName>{data?.name}님!</S.MyPageUserName>
         <footer>
           <button>회원 정보 변경</button>
-          <button>로그아웃</button>
+          <button onClick={onClickLogout}>로그아웃</button>
         </footer>
       </S.MyPageUserInfo>
       <S.MyPageNav>

@@ -9,13 +9,14 @@ import wonFormat from '@/utils/wonFormat';
 
 interface CardProps {
   bgColor: 'error' | 'primary'; // category 식으로 리스트화 (enum 등..) 필요
+  linkId: number;
   discount?: number;
   src?: string;
   title: string;
   price: number;
 }
 
-const Card = ({ bgColor, discount, src, title, price }: CardProps) => {
+const Card = ({ bgColor, linkId, discount, src, title, price }: CardProps) => {
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
@@ -23,7 +24,7 @@ const Card = ({ bgColor, discount, src, title, price }: CardProps) => {
   };
 
   return (
-    <Link to="/detail/1">
+    <Link to={`/detail/${linkId}`}>
       <S.Card>
         <S.Liner bgColor={bgColor} />
         <S.ThumbnailWrapper>

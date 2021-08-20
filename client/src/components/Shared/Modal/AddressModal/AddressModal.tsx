@@ -66,9 +66,9 @@ const AddressModal = ({
       toggleModal={toggleModal}
       onClick={onClickModal}
     >
-      <S.ModalHeader>배송지 추가</S.ModalHeader>
-      <S.ModalDivider />
-      <S.ModalBody>
+      <S.AddressModalHeader>배송지 추가</S.AddressModalHeader>
+      <S.AddressModalDivider />
+      <S.AddressModalBody>
         <Input
           type="text"
           label="Outlined"
@@ -147,12 +147,12 @@ const AddressModal = ({
             <DaumPostcode onComplete={onCompleteSearchAddress} height="50rem" />
           </S.DuamPostWrapper>
         )}
-      </S.ModalBody>
-      <S.ModalButtonArea>
+      </S.AddressModalBody>
+      <S.AddressModalButtonArea>
         <Button type="button" color="primary">
           {modifyAddressData ? '수정하기' : '저장하기'}
         </Button>
-      </S.ModalButtonArea>
+      </S.AddressModalButtonArea>
     </ModalLayout>
   );
 };

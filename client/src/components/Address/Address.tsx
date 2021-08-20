@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import * as S from './styles';
 import Button from '@/components/Shared/Button';
 import { AddressModal } from '@/components/Shared/Modal';
-import AddressesDummy from '@/dummies/addresses';
 import useModal from '@/hooks/useModal';
-import { IAddressData } from '@/types';
+import { IAddress } from '@/types';
 import { PlusSVG } from '@/assets/svgs';
+import { useGetAddresses, useDeleteAddress } from '@/hooks/queries/address';
 
 interface IAddresseProps {
   className?: string;
@@ -13,10 +13,14 @@ interface IAddresseProps {
 
 const Addresse = ({ className }: IAddresseProps) => {
   const [isOpen, toggleModal] = useModal(false);
-  const [modifyAddressData, setModifyAddressData] =
-    useState<IAddressData | null>(null);
+  const [modifyAddressData, setModifyAddressData] = useState<IAddress | null>(
+    null
+  );
 
-  const openAddressModal = (modifyData?: IAddressData) => () => {
+  const { data, isLoading } = useGetAddresses();
+  const { mutate } = useDeleteAddress();
+
+  const openAddressModal = (modifyData?: IAddress) => () => {
     if (modifyData) {
       setModifyAddressData(modifyData);
     } else {
@@ -25,22 +29,33 @@ const Addresse = ({ className }: IAddresseProps) => {
     toggleModal();
   };
 
+  const onClickDelete = (id?: number) => {
+    if (id) {
+      mutate(id);
+    }
+  };
+
+  if (!data || isLoading) {
+    return <div>Loading</div>;
+  }
   return (
     <>
       <S.AddressList className={className}>
-        {AddressesDummy.map((address) => (
+        {data.map((address) => (
           <S.AddressItem
             key={address.id}
-            className={address.isDefault ? 'default-address' : undefined}
+            className={!!address.isDefault ? 'default-address' : undefined}
           >
             <S.AddressItemHeader>
               <S.AddressName>{address.name}</S.AddressName>
-              {address.isDefault && (
+              {!!address.isDefault && (
                 <S.DefaultAddress>기본 배송지</S.DefaultAddress>
               )}
             </S.AddressItemHeader>
             <S.AddressInfo>
+              <S.AddressInfoText>{address.postcode}</S.AddressInfoText>
               <S.AddressInfoText>{address.address}</S.AddressInfoText>
+              <S.AddressInfoText>{address.detailAddress}</S.AddressInfoText>
               <S.AddressInfoText>{address.phone}</S.AddressInfoText>
             </S.AddressInfo>
             <S.DeliveryMessage>{address.message}</S.DeliveryMessage>
@@ -53,7 +68,12 @@ const Addresse = ({ className }: IAddresseProps) => {
               >
                 수정
               </Button>
-              <Button type="button" color="white" size="Small">
+              <Button
+                type="button"
+                color="white"
+                size="Small"
+                onClick={() => onClickDelete(address.id)}
+              >
                 삭제
               </Button>
             </S.AddressItemFooter>

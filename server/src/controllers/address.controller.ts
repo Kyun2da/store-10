@@ -77,8 +77,6 @@ class AddressController {
       is_default: isDefault,
     });
 
-    console.log(result);
-
     if (result?.affected >= 1) {
       ApiResponse(res, HttpStatusCode.CREATED, '배송지 수정 성공!');
     } else {

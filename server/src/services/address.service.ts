@@ -1,9 +1,11 @@
 import AddressRepository from '@/repositories/address.repository';
+import { snakeToCamelObjKey } from '@/utils/snakeToCamelObjKey';
 
 class AddressService {
   async getAddresses(userId) {
     const addressRepo = AddressRepository();
-    return await addressRepo.getAddresses(userId);
+    const addresses = await addressRepo.getAddresses(userId);
+    return addresses.map(snakeToCamelObjKey);
   }
 
   async deleteAddress({ id, userId }) {
@@ -22,6 +24,9 @@ class AddressService {
     is_default,
   }) {
     const addressRepo = AddressRepository();
+    if (is_default) {
+      await addressRepo.removeDefaultAddress(user_id);
+    }
     return await addressRepo.createAddress({
       name,
       postcode,
@@ -46,6 +51,9 @@ class AddressService {
     is_default,
   }) {
     const addressRepo = AddressRepository();
+    if (is_default) {
+      await addressRepo.removeDefaultAddress(user_id);
+    }
     return await addressRepo.updateAddress({
       name,
       postcode,

@@ -36,6 +36,15 @@ class AddressRepository extends Repository<Address> {
   async updateAddress(addressData: IAddress) {
     return this.update(addressData.id, addressData);
   }
+
+  async removeDefaultAddress(user_id: number) {
+    return this.update(
+      { user_id },
+      {
+        is_default: false,
+      }
+    );
+  }
 }
 
 export default () => getCustomRepository(AddressRepository);

@@ -3,12 +3,13 @@ import DaumPostcode from 'react-daum-postcode';
 import ModalLayout from '@/components/Shared/Modal/ModalLayout';
 import Input from '@/components/Shared/Input/Input';
 import Button from '@/components/Shared/Button';
-import { IAddressData } from '@/types';
+import { IAddress } from '@/types';
 import * as S from './styles';
+import { usePostAddress, useUpdateAddress } from '@/hooks/queries/address';
 
 interface IAddressModalProps {
   toggleModal: () => void;
-  modifyAddressData?: IAddressData | null;
+  modifyAddressData?: IAddress | null;
 }
 
 const AddressModal = ({
@@ -16,7 +17,8 @@ const AddressModal = ({
   modifyAddressData,
 }: IAddressModalProps) => {
   const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
-  const [inputs, setInputs] = useState({
+  const [inputs, setInputs] = useState<IAddress>({
+    id: modifyAddressData ? modifyAddressData.id : undefined,
     name: modifyAddressData ? modifyAddressData.name : '',
     postcode: modifyAddressData ? modifyAddressData.postcode : '',
     address: modifyAddressData ? modifyAddressData.address : '',
@@ -25,7 +27,16 @@ const AddressModal = ({
     message: modifyAddressData ? modifyAddressData.message : '',
     isDefault: modifyAddressData ? modifyAddressData.isDefault : false,
   });
+  const postMutation = usePostAddress();
+  const updateMutation = useUpdateAddress();
 
+  const onClickSend = () => {
+    const { mutate } = modifyAddressData ? updateMutation : postMutation;
+    mutate({
+      ...inputs,
+    });
+    toggleModal();
+  };
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setInputs({ ...inputs, [name]: value });
@@ -149,7 +160,7 @@ const AddressModal = ({
         )}
       </S.AddressModalBody>
       <S.AddressModalButtonArea>
-        <Button type="button" color="primary">
+        <Button type="button" color="primary" onClick={onClickSend}>
           {modifyAddressData ? '수정하기' : '저장하기'}
         </Button>
       </S.AddressModalButtonArea>

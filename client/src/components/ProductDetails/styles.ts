@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+interface LenseProps {
+  imgset: string;
+  show: boolean;
+}
+
 export const ProductInfo = styled.div`
   display: flex;
   justify-content: space-between;
@@ -8,9 +13,60 @@ export const ProductInfo = styled.div`
   margin-bottom: 5rem;
 `;
 
-export const ProductThumbnail = styled.img`
+export const ProductThumbnailArea = styled.div`
+  display: flex;
   width: 40%;
+  gap: 2rem;
+  flex-direction: column;
+  position: relative;
+`;
+
+export const ProductThumbnail = styled.img`
+  width: 100%;
+  flex: 1;
   object-fit: cover;
+`;
+
+export const ProductPreviewArea = styled.div`
+  display: flex;
+  gap: 1.5rem;
+`;
+
+export const ProductPreviewThumbnail = styled.img`
+  width: 33%;
+  max-width: 7rem;
+  object-fit: cover;
+  cursor: pointer;
+
+  &:not(.selected) {
+    opacity: 0.2;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+export const ProductLenseSelector = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid #aaa;
+  pointer-events: none;
+  background-color: rgba(255, 255, 255, 0.7);
+`;
+
+export const ProductThumbnailLense = styled.div<LenseProps>`
+  top: 0;
+  position: absolute;
+  border: 1px solid #aaa;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  background-size: inherit;
+  background-image: url(${({ imgset }) => imgset});
+  opacity: ${({ show }) => (show ? 1 : 0)};
 `;
 
 export const ProductOrder = styled.div`

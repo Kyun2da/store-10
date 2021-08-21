@@ -8,7 +8,7 @@ import {
 import { useQuery } from 'react-query';
 import { ICategory, IProduct, IProductDetail } from '@/types/index';
 
-export const useGetProductById = (id: number) => {
+export const useGetProductById = (id: string) => {
   return useQuery<IProductDetail, Error>(
     ['productDetail', id],
     () => getProductById(id),

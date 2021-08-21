@@ -28,6 +28,7 @@ const Main = () => {
     return data.map((product: IProduct) => (
       <Card
         key={product.id}
+        linkId={product.id}
         bgColor="primary"
         src={product.productImage[0].url}
         price={product.price}

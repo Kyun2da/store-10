@@ -1,7 +1,7 @@
 import client from '../client';
 import { ICategory, IProduct, IProductDetail, ISearchData } from '@/types';
 
-export const getProductById = async (id: number) => {
+export const getProductById = async (id: string) => {
   return await client.get<IProductDetail>(`/product/${id}`);
 };
 

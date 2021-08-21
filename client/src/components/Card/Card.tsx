@@ -5,7 +5,7 @@ import {
   CartSVG as ShoppingCart,
 } from '@/assets/svgs';
 import { Link } from '@/lib/Router';
-import wonFormat from '@/utils/wonFormat';
+import { wonFormat } from '@/utils/helper';
 
 interface CardProps {
   bgColor: 'error' | 'primary'; // category 식으로 리스트화 (enum 등..) 필요

@@ -1,4 +1,4 @@
-import wonFormat from '@/utils/wonFormat';
+import { wonFormat } from '@/utils/helper';
 import { ISearchData } from '@/types';
 import * as React from 'react';
 import * as S from './style';

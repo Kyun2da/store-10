@@ -22,7 +22,7 @@ export class Product extends InitEntity {
   @Column()
   stock: number;
 
-  @Column({type: 'float'})
+  @Column({ type: 'float', default: 0 })
   discount: number;
 
   @ManyToOne(() => SubCategory, (type) => type.id, {

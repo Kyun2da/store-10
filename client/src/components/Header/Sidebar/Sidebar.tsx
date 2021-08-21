@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
 import categoryList from '@/dummies/categorys';
@@ -6,12 +6,15 @@ import { logout } from '@/lib/api/auth/logout';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import { useHistory } from '@/lib/Router';
+import { Links } from '../Header';
+import { getCateogries } from '@/lib/api/category';
+import { ICategory } from '@/types';
+
 
 interface Props {
   isOpen?: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
 const Sidebar = ({ ...props }: Props) => {
   const { isOpen, setIsOpen } = props;
   const [user, setUser] = useRecoilState(userState);
@@ -23,6 +26,12 @@ const Sidebar = ({ ...props }: Props) => {
     setUser(null);
     historyPush('/');
   };
+  const [categories, setCategories] = useState<ICategory[]>([]);
+
+  useCallback(async () => {
+    const data = await getCateogries();
+    setCategories(data);
+  }, []);
 
   return (
     <>
@@ -39,12 +48,12 @@ const Sidebar = ({ ...props }: Props) => {
         <S.Contents>
           <S.ContentTitle>카테고리</S.ContentTitle>
           <S.Categories>
-            {Object.keys(categoryList).map((mainCategory, mainIdx) => (
-              <li key={'mainCategory_' + mainIdx} className="active">
-                <div>{mainCategory}</div>
+            {categories.map((main) => (
+              <li key={'mainCategory_' + main.id} className="active">
+                <div>{main.title}</div>
                 <S.SubCategory>
-                  {categoryList[mainCategory].map((subCategory, subIdx) => (
-                    <dd key={'subCategory_' + subIdx}>{subCategory}</dd>
+                  {main.subCategory.map((sub) => (
+                    <dd key={'subCategory_' + sub.id}>{sub.title}</dd>
                   ))}
                 </S.SubCategory>
               </li>

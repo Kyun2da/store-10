@@ -1,6 +1,6 @@
 import { SearchSVG } from '@/assets/svgs';
 import useRecentSearch from '@/hooks/useRecentSearch';
-import { searchRealTimeData } from '@/lib/api/product/searchData';
+import { getElasticData } from '@/lib/api/product';
 import { ISearchData } from '@/types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import SearchItem from './SearchItem';
@@ -17,7 +17,7 @@ const Search = ({ ...props }: IProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const productSearch = useCallback(async (searchText: string) => {
-    const data = await searchRealTimeData(searchText);
+    const data = await getElasticData(searchText);
     if (data.length) {
       setSearchDatas(data);
     }

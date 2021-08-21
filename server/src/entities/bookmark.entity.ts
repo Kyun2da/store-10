@@ -1,20 +1,15 @@
-import {
-  Entity,
-  BaseEntity,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, ManyToOne, JoinColumn, PrimaryColumn } from 'typeorm';
 
 import { User } from './user.entity';
 import { Product } from './product.entity';
+import { DateEntity } from './base.entity';
 
 @Entity('bookmark')
-export class Bookmark extends BaseEntity {
+export class Bookmark extends DateEntity {
   @ManyToOne(() => User, (type) => type.id, {
     nullable: false,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    primary: true,
   })
   @JoinColumn({ name: 'user_id' })
   user!: User;
@@ -23,8 +18,13 @@ export class Bookmark extends BaseEntity {
     nullable: false,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    primary: true,
   })
   @JoinColumn({ name: 'product_id' })
   product!: Product;
+
+  @PrimaryColumn()
+  user_id: number;
+
+  @PrimaryColumn()
+  product_id: number;
 }

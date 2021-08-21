@@ -95,3 +95,13 @@ export interface IAddress {
   userId?: number;
   id?: number;
 }
+export interface ICategory {
+  id: number;
+  title: string;
+  subCategory: ISubCategory[];
+}
+
+export interface ISubCategory {
+  id: number;
+  title: string;
+}

@@ -13,6 +13,7 @@ import Login from '@/pages/Login';
 import NotFound from '@/components/NotFound';
 import SelectAuth from '@/pages/SelectAuth';
 import Approval from '@/pages/Approval';
+import Category from '@/pages/Category';
 import SignUp from '@/pages/SignUp';
 import Notice from '@/pages/Notice';
 import { QueryErrorResetBoundary } from 'react-query';
@@ -61,6 +62,7 @@ const App = () => {
                   <Route path="/" component={Main} />
                   <Route path="/select_auth" component={SelectAuth} />
                   <Route path="/approval/:authtype" component={Approval} />
+                  <Route path="/category/:category_id" component={Category} />
                   <Route path="/signup" component={SignUp} />
                   <Route path="/login" component={Login} />
                   <Route path="/detail/:id" component={Detail} />

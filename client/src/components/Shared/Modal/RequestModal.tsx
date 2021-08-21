@@ -13,12 +13,18 @@ interface RequestModalProps {
 }
 
 const RequestModal = ({ toggleModal }: RequestModalProps) => {
+  const handleOnSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    console.log(1);
+  };
+
   return (
     <ModalLayout toggleModal={toggleModal}>
       <S.ModalHeader>상품문의 작성</S.ModalHeader>
       <S.ModalDivider />
       <S.ModalBody>
-        <Form gap={2}>
+        <Form onSubmit={handleOnSubmit} gap={2}>
           <div className="input-wrapper">
             <Title level={5}>문의 유형</Title>
             <CategorySelector />
@@ -42,13 +48,14 @@ const RequestModal = ({ toggleModal }: RequestModalProps) => {
               fullWidth
             />
           </div>
+
+          <S.ModalButtonArea>
+            <Button color="primary" type="submit" fullWidth>
+              완료
+            </Button>
+          </S.ModalButtonArea>
         </Form>
       </S.ModalBody>
-      <S.ModalButtonArea>
-        <Button color="primary" type="submit" fullWidth>
-          완료
-        </Button>
-      </S.ModalButtonArea>
     </ModalLayout>
   );
 };

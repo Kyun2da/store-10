@@ -27,6 +27,62 @@ class ProductController {
     return ApiResponse(res, HttpStatusCode.OK, '해당 상품 조회 성공', result);
   }
 
+  async getProductReviewsCountById(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const count = await ProductService.getProductReviewsCountById(id);
+
+    if (count === undefined || count === null) {
+      return ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '해당 상품에 대한 리뷰가 없어요'
+      );
+    }
+
+    return ApiResponse(
+      res,
+      HttpStatusCode.OK,
+      '해당 상품 리뷰 개수 조회 성공',
+      { count }
+    );
+  }
+
+  async postProductReviewById(req: Request, res: Response) {
+    const data = req.body;
+    const user_id = req.user.id;
+    const review = {
+      ...data,
+      user_id,
+    };
+
+    console.log('controller : ', review);
+
+    const result = await ProductService.createReview(review);
+
+    console.log(result);
+  }
+
+  async getProductReviewsById(req: Request, res: Response) {
+    const { id, offset } = req.params;
+    const result = await ProductService.getProductReviewsById(id, offset);
+
+    if (!result) {
+      return ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '해당 상품에 대한 리뷰가 없어요'
+      );
+    }
+
+    return ApiResponse(
+      res,
+      HttpStatusCode.OK,
+      '해당 상품 리뷰 조회 성공',
+      result
+    );
+  }
+
   async serchProduct(req: Request, res: Response) {
     const { q } = req.query;
     const searchData = await ProductService.searchProductTitle(q as string);

@@ -1,38 +1,38 @@
 import ProductData from '../../../crawler/data/totalData.json';
 import { getConnection } from 'typeorm';
-import { MainCategoty } from '@/entities/mainCategory.entity';
+import { MainCategory } from '@/entities/mainCategory.entity';
 import { SubCategory } from '@/entities/subCategory.entity';
 import { Product } from '@/entities/product.entity';
 import { ProductImage } from '@/entities/productImage.entity';
 
-type IProductData = {
+interface IProductData {
   id: number;
   categortTitle: string;
   mainCategoryHref: string;
   subCategory: ISubCategory[];
-};
+}
 
-type ISubCategory = {
+interface ISubCategory {
   subCategoryId: number;
   subCategoryTitle: string;
   subCategoryHref: string;
   item: Iitem[];
-};
+}
 
-type Iitem = {
+interface Iitem {
   itemHref: string;
   itemTitle: string;
   price: string;
   contents: string;
   itemImages: IitemImages[];
-};
+}
 
-type IitemImages = {
+interface IitemImages {
   detailImage: string;
   origin: string;
   preloadImage: string;
   thumbnailImage: string;
-};
+}
 
 export const initProductData = async () => {
   for (const [, mainCategory] of Object.entries(
@@ -41,7 +41,7 @@ export const initProductData = async () => {
     const newMainCategory = await getConnection()
       .createQueryBuilder()
       .insert()
-      .into(MainCategoty)
+      .into(MainCategory)
       .values([
         { id: mainCategory.id + 1, title: mainCategory.categortTitle.trim() },
       ])

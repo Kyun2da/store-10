@@ -3,9 +3,10 @@ import {
   getBestProducts,
   getRecentProducts,
   getRecommandProducts,
+  getCateogries,
 } from '@/lib/api/product';
 import { useQuery } from 'react-query';
-import { IProduct, IProductDetail } from '@/types/index';
+import { ICategory, IProduct, IProductDetail } from '@/types/index';
 
 export const useGetProductById = (id: number) => {
   return useQuery<IProductDetail, Error>(
@@ -25,4 +26,10 @@ export const useGetBestProducts = () => {
 
 export const useGetRecentProducts = () => {
   return useQuery<IProduct[], Error>('recentProduct', getRecentProducts);
+};
+
+export const useGetCateogries = () => {
+  return useQuery<ICategory[], Error>('categories', () => getCateogries(), {
+    refetchOnWindowFocus: false,
+  });
 };

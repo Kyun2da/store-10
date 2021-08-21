@@ -76,6 +76,17 @@ export const Button = styled.button<IButtonProps>`
           background-color: #ececec;
         }
       `;
+    } else if (color === 'red') {
+      return css`
+        color: ${theme.color['off-white']};
+        background-color: ${theme.color.error};
+        &:hover {
+          background-color: #ad1111;
+        }
+        &:active {
+          background-color: #ad1111;
+        }
+      `;
     }
   }};
 `;

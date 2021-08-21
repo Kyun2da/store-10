@@ -6,6 +6,9 @@ import { User } from './user.entity';
 @Entity('address')
 export class Address extends InitEntity {
   @Column()
+  name: string;
+
+  @Column()
   address: string;
 
   @Column()
@@ -30,4 +33,6 @@ export class Address extends InitEntity {
   })
   @JoinColumn({ name: 'user_id' })
   user!: User;
+  @Column()
+  user_id: number;
 }

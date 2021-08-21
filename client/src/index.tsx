@@ -6,19 +6,22 @@ import GlobalStyle from '@/styles/globalStyle';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import ToastifyContainer from '@/components/Shared/Toastify';
+import { RecoilRoot } from 'recoil';
 
 const queryClient = new QueryClient();
 
 render(
   <>
     <GlobalStyle />
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <App />
-      </Router>
-      <ToastifyContainer />
-      <ReactQueryDevtools initialIsOpen />
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <App />
+        </Router>
+        <ToastifyContainer />
+        <ReactQueryDevtools initialIsOpen />
+      </QueryClientProvider>
+    </RecoilRoot>
   </>,
   document.getElementById('app')
 );

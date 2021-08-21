@@ -28,7 +28,12 @@ class AuthController {
   }
 
   gitOAuthUrl(_, res: Response) {
-    res.send(config.GIT_OAUTH_URL);
+    ApiResponse(
+      res,
+      HttpStatusCode.OK,
+      '성공적으로 github URL을 가져왔습니다.',
+      { githubUrl: config.GIT_OAUTH_URL }
+    );
   }
 
   async Login(req: Request, res: Response) {
@@ -55,7 +60,18 @@ class AuthController {
   async check(req: Request, res: Response) {
     const { id, user_id, name } = req.user;
 
-    res.json({ id, user_id, name });
+    ApiResponse(res, HttpStatusCode.OK, '로그인 중입니다.', {
+      id,
+      user_id,
+      name,
+    });
+  }
+
+  async logout(req: Request, res: Response) {
+    res.clearCookie('accessToken', { path: '/' });
+    res.clearCookie('refreshToken', { path: '/' });
+
+    ApiResponse(res, HttpStatusCode.NO_CONTENT);
   }
 }
 

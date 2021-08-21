@@ -3,12 +3,13 @@ import DaumPostcode from 'react-daum-postcode';
 import ModalLayout from '@/components/Shared/Modal/ModalLayout';
 import Input from '@/components/Shared/Input/Input';
 import Button from '@/components/Shared/Button';
-import { IAddressData } from '@/types';
+import { IAddress } from '@/types';
 import * as S from './styles';
+import { usePostAddress, useUpdateAddress } from '@/hooks/queries/address';
 
 interface IAddressModalProps {
   toggleModal: () => void;
-  modifyAddressData?: IAddressData | null;
+  modifyAddressData?: IAddress | null;
 }
 
 const AddressModal = ({
@@ -16,7 +17,8 @@ const AddressModal = ({
   modifyAddressData,
 }: IAddressModalProps) => {
   const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
-  const [inputs, setInputs] = useState({
+  const [inputs, setInputs] = useState<IAddress>({
+    id: modifyAddressData ? modifyAddressData.id : undefined,
     name: modifyAddressData ? modifyAddressData.name : '',
     postcode: modifyAddressData ? modifyAddressData.postcode : '',
     address: modifyAddressData ? modifyAddressData.address : '',
@@ -25,10 +27,45 @@ const AddressModal = ({
     message: modifyAddressData ? modifyAddressData.message : '',
     isDefault: modifyAddressData ? modifyAddressData.isDefault : false,
   });
+  const [errors, setErros] = useState<Record<string, boolean>>({
+    id: false,
+    name: false,
+    postcode: false,
+    address: false,
+    detailAddress: false,
+    phone: false,
+  });
+  const checkValidation = (): boolean => {
+    let isValid = true;
+    for (const [key, value] of Object.entries(inputs)) {
+      if (!value && errors[key] !== undefined) {
+        console.log(value, key, errors[key]);
+        setErros({ ...errors, [key]: true });
+        isValid = false;
+      }
+    }
+    return isValid;
+  };
+  const postMutation = usePostAddress();
+  const updateMutation = useUpdateAddress();
+
+  const onClickSend = () => {
+    if (!checkValidation()) {
+      return;
+    }
+    const { mutate } = modifyAddressData ? updateMutation : postMutation;
+    mutate({
+      ...inputs,
+    });
+    toggleModal();
+  };
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setInputs({ ...inputs, [name]: value });
+    if (value) {
+      setErros({ ...errors, [name]: false });
+    }
   };
 
   const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,9 +103,9 @@ const AddressModal = ({
       toggleModal={toggleModal}
       onClick={onClickModal}
     >
-      <S.ModalHeader>배송지 추가</S.ModalHeader>
-      <S.ModalDivider />
-      <S.ModalBody>
+      <S.AddressModalHeader>배송지 추가</S.AddressModalHeader>
+      <S.AddressModalDivider />
+      <S.AddressModalBody>
         <Input
           type="text"
           label="Outlined"
@@ -76,6 +113,7 @@ const AddressModal = ({
           placeholder="받는 사람"
           value={inputs.name}
           onChange={onChangeInput}
+          error={errors.name}
         />
         <S.PostcodeWrapper>
           <Button
@@ -97,6 +135,7 @@ const AddressModal = ({
             attributes={{
               readOnly: true,
             }}
+            error={errors.postcode}
           />
         </S.PostcodeWrapper>
         <Input
@@ -109,6 +148,7 @@ const AddressModal = ({
           attributes={{
             readOnly: true,
           }}
+          error={errors.address}
         />
         <Input
           type="text"
@@ -118,6 +158,7 @@ const AddressModal = ({
           value={inputs.detailAddress}
           onFocus={onFocusDetailAddress}
           onChange={onChangeInput}
+          error={errors.detailAddress}
         />
         <Input
           type="text"
@@ -126,6 +167,7 @@ const AddressModal = ({
           placeholder="연락처"
           value={inputs.phone}
           onChange={onChangeInput}
+          error={errors.phone}
         />
         <Input
           type="text"
@@ -147,12 +189,12 @@ const AddressModal = ({
             <DaumPostcode onComplete={onCompleteSearchAddress} height="50rem" />
           </S.DuamPostWrapper>
         )}
-      </S.ModalBody>
-      <S.ModalButtonArea>
-        <Button type="button" color="primary">
+      </S.AddressModalBody>
+      <S.AddressModalButtonArea>
+        <Button type="button" color="primary" onClick={onClickSend}>
           {modifyAddressData ? '수정하기' : '저장하기'}
         </Button>
-      </S.ModalButtonArea>
+      </S.AddressModalButtonArea>
     </ModalLayout>
   );
 };

@@ -12,7 +12,7 @@ const throwError = (e: any) => {
 };
 
 export default {
-  async post<T>(url: string, body: T) {
+  async post<T>(url: string, body?: T) {
     try {
       const res = await client.post(url, body);
       return res.data.result;

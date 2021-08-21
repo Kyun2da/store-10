@@ -56,20 +56,31 @@ export interface ICart {
   image: string;
 }
 
-export interface IProductDetail {
-  details: {
-    content: {
-      details: string;
-      essentials: string;
-    };
-    createdAt: string;
-    id: number;
-    price: string;
-    stock: number;
-    sub_category_id: number;
-    title: string;
+export interface IDetails {
+  content: {
+    details: string;
+    essentials: string;
   };
-  thumbnails: Record<string, unknown>[];
+  createdAt: string;
+  id: number;
+  price: string;
+  stock: number;
+  sub_category_id: number;
+  title: string;
+}
+
+export interface IThumbnails {
+  id: number;
+  isThumbnail: number;
+  type: string;
+  product_id: number;
+  url: string;
+  targetId: string;
+}
+
+export interface IProductDetail {
+  details: IDetails;
+  thumbnails: IThumbnails[];
 }
 
 export interface ISignUpUser {

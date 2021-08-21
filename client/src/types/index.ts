@@ -98,7 +98,7 @@ export interface IAddress {
 export interface ICategory {
   id: number;
   title: string;
-  subCategory: ISubCategory[];
+  subCategories: ISubCategory[];
 }
 
 export interface ISubCategory {

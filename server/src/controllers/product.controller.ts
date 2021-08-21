@@ -63,6 +63,16 @@ class ProductController {
       ApiResponse(res, HttpStatusCode.OK, '상품 조회 성공', products);
     }
   }
+
+  async getCategories(req: Request, res: Response) {
+    const categories = await ProductService.getCategories();
+
+    if (!categories) {
+      ApiResponse(res, HttpStatusCode.BAD_REQUEST, '카테고리가 없습니다');
+    } else {
+      ApiResponse(res, HttpStatusCode.OK, null, categories);
+    }
+  }
 }
 
 export default new ProductController();

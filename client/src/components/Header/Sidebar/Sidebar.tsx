@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
 import categoryList from '@/dummies/categorys';
@@ -7,31 +7,51 @@ import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import { useHistory } from '@/lib/Router';
 import { Links } from '../Header';
-import { getCateogries } from '@/lib/api/category';
 import { ICategory } from '@/types';
+import { useGetCateogries } from '@/hooks/queries/product';
 
 
 interface Props {
   isOpen?: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+interface ICategoryQuery {
+  data: ICategory[] | undefined;
+  isLoading: boolean;
+}
+
 const Sidebar = ({ ...props }: Props) => {
   const { isOpen, setIsOpen } = props;
   const [user, setUser] = useRecoilState(userState);
   const closeSidebar = () => setIsOpen(false);
   const { historyPush } = useHistory();
+  const categoryQuery = useGetCateogries();
 
   const onClickLogout = async () => {
     await logout();
     setUser(null);
     historyPush('/');
   };
-  const [categories, setCategories] = useState<ICategory[]>([]);
 
-  useCallback(async () => {
-    const data = await getCateogries();
-    setCategories(data);
-  }, []);
+  const renderCategory = (qurey: ICategoryQuery) => {
+    const { data, isLoading } = qurey;
+    if (isLoading || !data) {
+      return <div></div>;
+    }
+    return data.map((main: ICategory) => (
+      <li data-main_category_id={main.id} key={'mainCategory_' + main.id}>
+        <div>{main.title}</div>
+        <S.SubCategory>
+          {main.subCategories.map((sub) => (
+            <dd data-category_id={sub.id} key={'subCategory_' + sub.id}>
+              {sub.title}
+            </dd>
+          ))}
+        </S.SubCategory>
+      </li>
+    ));
+  };
 
   return (
     <>
@@ -47,18 +67,7 @@ const Sidebar = ({ ...props }: Props) => {
         </S.Top>
         <S.Contents>
           <S.ContentTitle>카테고리</S.ContentTitle>
-          <S.Categories>
-            {categories.map((main) => (
-              <li key={'mainCategory_' + main.id} className="active">
-                <div>{main.title}</div>
-                <S.SubCategory>
-                  {main.subCategory.map((sub) => (
-                    <dd key={'subCategory_' + sub.id}>{sub.title}</dd>
-                  ))}
-                </S.SubCategory>
-              </li>
-            ))}
-          </S.Categories>
+          <S.Categories>{renderCategory(categoryQuery)}</S.Categories>
         </S.Contents>
       </S.SideBar>
       <S.Backdrop className="backdorp" onClick={closeSidebar}></S.Backdrop>

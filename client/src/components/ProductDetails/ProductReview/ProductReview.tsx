@@ -1,58 +1,76 @@
 import { RatingGetter } from '@/components/Shared/Rating';
 import RatingChart from '@/components/Shared/RatingChart';
 import Title from '@/components/Shared/Title';
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from '../styles';
 import Button from '@/components/Shared/Button';
 import useModal from '@/hooks/useModal';
 import { ReviewModal } from '@/components/Shared/Modal';
+import { useParams } from '@/lib/Router';
+import {
+  useGetProductReviewsById,
+  useGetProductReviewsCount,
+} from '@/hooks/queries/product';
+import { nanoid } from 'nanoid';
+import { dateFormat } from '@/utils/helper';
+import Pagination from '@/components/Shared/Pagination';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
+import { notify } from '@/components/Shared/Toastify';
+
+// 페이지 당 리뷰 노출 개수
+const LIMIT = 5;
 
 // TODO: 임시 데이터 형식입니다 - 당연히 나중에 바뀌게쬬?
-const dummyDataExample = [
-  {
-    username: '우아하지못한나',
-    review: '흑과백으로 눈에 잘띄고ㅋ 활용도는 좋을꺼같네요',
-    rating: 4.5,
-    createdAt: '2021-08-15',
-    images: [
-      'https://store.baemin.com/data/board/upload/goodsreview/f704b99aa715c362',
-      'https://store.baemin.com/data/board/upload/goodsreview/3bcf6180198fc727',
-    ],
-  },
-  {
-    username: '우아한멍멍이',
-    review: 'ㅋㅋㅋ 귀엽네요. 사이즈가 작아요.',
-    rating: 4,
-    createdAt: '2021-08-14',
-    images: [],
-  },
-  {
-    username: '우아한방랑자',
-    review:
-      '와 진짜 칫솔 유목민이었는데 이제 정착합니다ㅜㅜㅜㅜ 칫솔 크기가 일반 칫솔보다 커서 이 닦는데 넓게 닦여 편합니다. 또 제거 치열이 고르지 못하고 잇몸이 민감한 편인데도 불구하고 잇몸에 전혀 부담없이 개운하게 닦이네요ㅎㅎ 재구매하여 모든 가족들 칫솔 바꿔주려구요!',
-    createdAt: '2021-08-13',
-    rating: 3.5,
-    images: [],
-  },
-];
-
 interface IProductReview {
   totalRating: number;
 }
 
 const ProductReview = ({ totalRating }: IProductReview) => {
+  const { id } = useParams().params;
+  const [offset, setOffset] = useState(0);
   const [isOpen, toggleModal] = useModal(false);
+  const [user] = useRecoilState(userState);
+
+  const {
+    data: reviews,
+    isLoading,
+    error,
+  } = useGetProductReviewsById(id, offset);
+  const { data: count } = useGetProductReviewsCount(id);
+
+  const handleClickReviewButton = () => {
+    if (!user) {
+      return notify('error', '로그인 후 작성 가능합니다.');
+    }
+
+    toggleModal();
+  };
+
+  // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+
+  if (isLoading || !reviews || !count) {
+    return <div>loading</div>;
+  }
+
+  const handleOnClickPage = (idx: number) => {
+    setOffset(+idx * LIMIT);
+  };
+
   return (
     <S.PanelWrapper>
       <S.TopArea>
         <Title className="title" level={5}>
-          상품후기 ({dummyDataExample.length})
+          상품후기 ({count.count})
         </Title>
         <Button
           size="Default"
           color="primary"
           type="button"
-          onClick={toggleModal}
+          onClick={handleClickReviewButton}
         >
           작성하기
         </Button>
@@ -66,41 +84,38 @@ const ProductReview = ({ totalRating }: IProductReview) => {
       </S.RatingArea>
 
       <S.UserReviewArea>
-        {dummyDataExample.map((data) => {
-          // 후... 그냥 uuid 깔까..
-          const tempRandomString = Math.random().toString(30).substr(2, 11);
+        {reviews.map((review) => {
           return (
-            <S.UserReview key={tempRandomString}>
+            <S.UserReview key={review.id}>
               <S.UserReviewTitles>
                 <Title className="username" level={5}>
-                  {data.username}
+                  {review.name}
                   <span style={{ fontWeight: 100 }}>님</span>
                 </Title>
-                <RatingGetter
-                  rating={data.rating}
-                  uniqueId={tempRandomString}
-                />
-                {/* DayJS를 쓸까요? DayJS를 씁시다아아아 */}
-                <p className="date">{data.createdAt}</p>
+                <div className="rating-area">
+                  <RatingGetter rating={review.rating} uniqueId={nanoid()} />
+                  <p className="date">{dateFormat(review.createdAt)}</p>
+                </div>
               </S.UserReviewTitles>
 
-              {data.images.length !== 0 && (
+              {review.url.length !== 0 && (
                 <S.ReviewImages>
-                  {data.images.map((image, idx) => (
-                    <img
-                      key={tempRandomString + idx}
-                      src={image}
-                      alt="유저사진리뷰"
-                    />
+                  {review.url.map((image) => (
+                    <img key={nanoid()} src={image} alt="유저사진리뷰" />
                   ))}
                 </S.ReviewImages>
               )}
 
-              <S.UserDescription>{data.review}</S.UserDescription>
+              <S.UserDescription>{review.content}</S.UserDescription>
             </S.UserReview>
           );
         })}
       </S.UserReviewArea>
+
+      <Pagination
+        handleOnClickPage={handleOnClickPage}
+        count={Math.ceil(count.count / LIMIT)}
+      />
 
       {isOpen && <ReviewModal toggleModal={toggleModal} />}
     </S.PanelWrapper>

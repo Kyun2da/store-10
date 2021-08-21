@@ -62,7 +62,7 @@ const App = () => {
                   <Route path="/" component={Main} />
                   <Route path="/select_auth" component={SelectAuth} />
                   <Route path="/approval/:authtype" component={Approval} />
-                  <Route path="/category/:category_id" component={Category} />
+                  <Route path="/category/:categoryId" component={Category} />
                   <Route path="/signup" component={SignUp} />
                   <Route path="/login" component={Login} />
                   <Route path="/detail/:id" component={Detail} />

@@ -56,11 +56,12 @@ class ProductController {
       user_id,
     };
 
-    console.log('controller : ', review);
-
     const result = await ProductService.createReview(review);
 
-    console.log(result);
+    if (!result) {
+      return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰생성 실패');
+    }
+    return ApiResponse(res, HttpStatusCode.NO_CONTENT, '리뷰생성 성공');
   }
 
   async getProductReviewsById(req: Request, res: Response) {

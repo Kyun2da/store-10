@@ -3,6 +3,7 @@ import userRoutes from './user.router';
 import authRoutes from './auth.router';
 import productRoutes from './product.router';
 import cartRoutes from './cart.router';
+import addressRoutes from './address.router';
 import { handleApiError } from '../middlewares/api';
 // import { initProductData } from '@/loaders/dataInit';
 
@@ -15,6 +16,7 @@ router.use('/user', userRoutes);
 router.use('/auth', authRoutes);
 router.use('/product', productRoutes);
 router.use('/cart', cartRoutes);
+router.use('/address', addressRoutes);
 // router.get('/initData', wrapAsync(initProductData));
 
 router.use(handleApiError);

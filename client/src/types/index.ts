@@ -8,17 +8,6 @@ export interface shoppingCartItem {
   discount: number;
 }
 
-export interface IAddressData {
-  id: number;
-  name: string;
-  postcode: string;
-  address: string;
-  detailAddress: string;
-  phone: string;
-  message: string;
-  isDefault: boolean;
-}
-
 export interface IUser {
   id: number;
   user_id: string;
@@ -89,4 +78,16 @@ export interface ISearchData {
   price: number;
   image: string;
   title: string;
+}
+
+export interface IAddress {
+  name: string | undefined;
+  postcode: string;
+  address: string;
+  detailAddress: string;
+  phone: string;
+  message: string;
+  isDefault: boolean;
+  userId?: number;
+  id?: number;
 }

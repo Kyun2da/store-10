@@ -72,6 +72,25 @@ export interface IProductDetail {
   thumbnails: IThumbnails[];
 }
 
+export interface IReview {
+  content: string;
+  rating: number;
+  product_id: string;
+}
+
+export interface IReviewCount {
+  count: number;
+}
+
+export interface IProductReview {
+  id: number;
+  content: string;
+  rating: number;
+  name: string;
+  createdAt: string;
+  url: string[];
+}
+
 export interface ISignUpUser {
   user_id: string;
   password: string;

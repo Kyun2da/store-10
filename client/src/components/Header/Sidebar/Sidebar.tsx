@@ -1,15 +1,13 @@
 import React from 'react';
 import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
-import categoryList from '@/dummies/categorys';
 import { logout } from '@/lib/api/auth/logout';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
-import { useHistory } from '@/lib/Router';
+import { Link, useHistory } from '@/lib/Router';
 import { Links } from '../Header';
 import { ICategory } from '@/types';
 import { useGetCateogries } from '@/hooks/queries/product';
-
 
 interface Props {
   isOpen?: boolean;
@@ -34,6 +32,11 @@ const Sidebar = ({ ...props }: Props) => {
     historyPush('/');
   };
 
+  const categoryRouterPush = (id: number) => {
+    closeSidebar();
+    historyPush(`/category/${id}`);
+  };
+
   const renderCategory = (qurey: ICategoryQuery) => {
     const { data, isLoading } = qurey;
     if (isLoading || !data) {
@@ -44,7 +47,10 @@ const Sidebar = ({ ...props }: Props) => {
         <div>{main.title}</div>
         <S.SubCategory>
           {main.subCategories.map((sub) => (
-            <dd data-category_id={sub.id} key={'subCategory_' + sub.id}>
+            <dd
+              onClick={() => categoryRouterPush(sub.id)}
+              key={'subCategory_' + sub.id}
+            >
               {sub.title}
             </dd>
           ))}

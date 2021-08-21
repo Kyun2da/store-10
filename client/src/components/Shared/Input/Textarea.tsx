@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import * as S from './style';
 
 export interface ITextarea {
@@ -8,6 +8,8 @@ export interface ITextarea {
   fullWidth?: boolean;
   attributes?: Record<string, unknown>;
   value?: string;
+  helpertext?: string;
+  error?: boolean;
   onFocus?: () => void;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
@@ -19,20 +21,33 @@ const Textarea = ({
   value,
   attributes,
   fullWidth,
+  error,
+  helpertext,
   onChange,
   onFocus,
 }: ITextarea) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  if (error) {
+    textareaRef.current?.focus();
+  }
+
   return (
-    <S.Textarea
-      placeholder={placeholder}
-      resize={resize}
-      name={name}
-      fullWidth={fullWidth}
-      value={value}
-      onChange={onChange}
-      onFocus={onFocus}
-      {...attributes}
-    />
+    <S.TextareaWrapper>
+      <S.Textarea
+        ref={textareaRef}
+        className={error ? 'error-focus' : ''}
+        placeholder={placeholder}
+        resize={resize}
+        name={name}
+        fullWidth={fullWidth}
+        value={value}
+        onChange={onChange}
+        onFocus={onFocus}
+        {...attributes}
+      />
+      {error && <S.ErrorMessage>{helpertext}</S.ErrorMessage>}
+    </S.TextareaWrapper>
   );
 };
 

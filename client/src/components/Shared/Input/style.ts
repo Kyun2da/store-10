@@ -172,6 +172,11 @@ export const Textarea = styled.textarea<ITextarea>`
   border-bottom-left-radius: 2rem;
   resize: ${({ resize }) => resize};
 
+  &.error-focus:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.color.error};
+  }
+
   &:focus {
     outline: none;
     border-color: ${({ theme }) => theme.color.primary};
@@ -210,7 +215,8 @@ export const PreviewWrapper = styled.div`
 
   img {
     object-fit: cover;
-    width: 20%;
+    width: 20rem;
+    height: 15rem;
     border-radius: 2rem;
   }
 `;
@@ -219,4 +225,9 @@ export const ErrorMessage = styled.p`
   margin-top: 1rem;
   text-align: right;
   color: ${({ theme }) => theme.color.error};
+`;
+
+export const TextareaWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

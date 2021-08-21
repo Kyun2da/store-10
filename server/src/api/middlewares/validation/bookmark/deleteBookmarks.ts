@@ -1,9 +1,9 @@
-import { body } from 'express-validator';
+import { query } from 'express-validator';
 
 const deleteBookmarkValidators = [
-  body('productIds')
-    .isArray()
-    .withMessage('body: productIds는 반드시 배열이어야 합니다.'),
+  query('productIds')
+    .notEmpty() // 쿼리 스트링을 배열로 받는 방법?
+    .withMessage('query: productIds는 비어있으면 안됩니다.'),
 ];
 
 export default deleteBookmarkValidators;

@@ -22,9 +22,8 @@ class BookmarkService {
     const bookmarks = await bookmarkRepo.getBookmarksDetail(userId);
 
     return bookmarks.map((bookmark) => {
-      console.log(bookmark);
       const img = bookmark.product.productImage.find(
-        (img) => img.type === 'thumbnail'
+        (img) => img.type === 'detail'
       );
       return {
         createdAt: bookmark.createdAt,

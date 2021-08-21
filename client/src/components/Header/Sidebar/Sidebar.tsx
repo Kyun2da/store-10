@@ -2,27 +2,37 @@ import React from 'react';
 import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
 import categoryList from '@/dummies/categorys';
-import { Links } from '../Header';
+import { logout } from '@/lib/api/auth/logout';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
+import { useHistory } from '@/lib/Router';
 
 interface Props {
   isOpen?: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  userName?: string | null;
 }
 
 const Sidebar = ({ ...props }: Props) => {
-  const { isOpen, setIsOpen, userName } = props;
+  const { isOpen, setIsOpen } = props;
+  const [user, setUser] = useRecoilState(userState);
   const closeSidebar = () => setIsOpen(false);
+  const { historyPush } = useHistory();
+
+  const onClickLogout = async () => {
+    await logout();
+    setUser(null);
+    historyPush('/');
+  };
 
   return (
     <>
       <S.SideBar className={isOpen ? 'active' : ''}>
         <S.Top>
           <div>
-            {userName ? `${userName}님 환영합니다!` : '로그인이 필요합니다.'}
+            {user ? `${user.name}님 환영합니다!` : '로그인이 필요합니다.'}
           </div>
           <S.IconsWrapper>
-            <Links />
+            {user ? <button onClick={onClickLogout}>로그아웃</button> : null}
             <CloseSVG onClick={closeSidebar} />
           </S.IconsWrapper>
         </S.Top>

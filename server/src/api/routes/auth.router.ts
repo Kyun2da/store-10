@@ -16,5 +16,6 @@ router.post(
 );
 router.get('/callback', oauthError, wrapAsync(AuthController.callback));
 router.get('/check', authJWT, wrapAsync(AuthController.check));
+router.post('/logout', authJWT, wrapAsync(AuthController.logout));
 
 export default router;

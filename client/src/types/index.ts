@@ -68,6 +68,10 @@ export interface ISignUpUser {
   name: string;
 }
 
+export interface IGithubUrl {
+  githubUrl: string;
+}
+
 export interface ILoginUser {
   user_id: string;
   password: string;

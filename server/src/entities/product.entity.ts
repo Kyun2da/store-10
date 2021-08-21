@@ -22,6 +22,9 @@ export class Product extends InitEntity {
   @Column()
   stock: number;
 
+  @Column({ type: 'float', default: 0 })
+  discount: number;
+
   @ManyToOne(() => SubCategory, (type) => type.id, {
     nullable: false,
     onDelete: 'CASCADE',

@@ -7,9 +7,6 @@ import { InitEntity } from './base.entity';
 
 @Entity()
 export class Review extends InitEntity {
-  @Column({ length: 100 })
-  title: string;
-
   @Column({ type: 'text' })
   content: number;
 
@@ -17,7 +14,7 @@ export class Review extends InitEntity {
   rating: number;
 
   @OneToMany(() => ReviewImage, (type) => type.id)
-  reviewImage: ReviewImage[];
+  reviewImage?: ReviewImage[];
 
   @ManyToOne(() => User, (type) => type.id, {
     nullable: false,
@@ -34,4 +31,6 @@ export class Review extends InitEntity {
   })
   @JoinColumn({ name: 'product_id' })
   product!: Product;
+  @Column()
+  product_id!: number;
 }

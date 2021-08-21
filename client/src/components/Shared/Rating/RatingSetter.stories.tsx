@@ -8,10 +8,8 @@ export default {
   component: RatingSetter,
 } as ComponentMeta<typeof RatingSetter>;
 
-const Template: ComponentStory<typeof RatingSetter> = () => <RatingSetter />;
+const Template: ComponentStory<typeof RatingSetter> = (args) => (
+  <RatingSetter {...args} />
+);
 
 export const Default = Template.bind({});
-Default.args = {
-  rating: 4.3,
-  uniqueId: 'thisisuniqueId',
-};

@@ -3,7 +3,11 @@ import * as S from './styles';
 
 const COUNT_STAR = 5;
 
-const RatingSetter = () => {
+interface IRatingSetter {
+  handleOnRating: (rating: number) => void;
+}
+
+const RatingSetter = ({ handleOnRating }: IRatingSetter) => {
   const [isCheck, setIsCheck] = useState<string[]>([]);
   const [rate, setRate] = useState<number>(0);
 
@@ -23,6 +27,7 @@ const RatingSetter = () => {
       }
     }
     setRate(idx + 1);
+    handleOnRating(idx + 1);
     setIsCheck(ratings);
   };
 

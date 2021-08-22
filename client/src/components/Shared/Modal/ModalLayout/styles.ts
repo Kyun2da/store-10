@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface IModalWrapperProps {
   width?: string;
   height?: string;
+  fullWidth?: boolean;
 }
 
 export const ModalOverlay = styled.div`
@@ -28,6 +29,33 @@ export const ModalWrapper = styled.div<IModalWrapperProps>`
   width: ${(props) => props.width || '65%'};
   height: ${(props) => props.height};
   min-height: 55%;
+
+  ${({ fullWidth, theme }) =>
+    fullWidth
+      ? css`
+          padding: 0;
+          img {
+            border-radius: 3rem;
+          }
+
+          ${ModalCloseButton} {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            top: 3rem;
+            right: 3rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 3.5rem;
+            background-color: #3a3a3a;
+
+            svg {
+              stroke: #fff;
+            }
+          }
+        `
+      : css``};
 `;
 
 export const ModalInner = styled.div`

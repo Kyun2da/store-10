@@ -4,7 +4,6 @@ import path from 'path';
 dotenv.config();
 
 process.env.NODE_ENV = process.env.NODE_ENV || `development`;
-console.log(process.env.NODE_ENV);
 const env = dotenv.config({
   path: path.resolve(
     process.cwd(),
@@ -13,7 +12,6 @@ const env = dotenv.config({
 }).parsed;
 
 const loadEnv = (key: string): string => {
-  console.log(env);
   const value = env[key];
   if (value === undefined) {
     throw new Error(`환경변수 ${key}가 정의 되지 않음`);

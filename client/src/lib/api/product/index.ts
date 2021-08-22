@@ -38,7 +38,19 @@ export const getElasticProducts = async (searchString: string) => {
 };
 
 export const getCateogries = async () => {
-  return await client.get<ICategory[]>(`/product/category`);
+  return await client.get<ICategory[]>(`/product/category-list`);
+};
+export const getCategoryProducts = async ({
+  pageParam = {
+    start: 0,
+    subCateogry: 1,
+    orderType: 'createdAt',
+  },
+}) => {
+  return await client.get<
+    IProduct[]
+  >(`/product/category?subCategoryId=${pageParam.subCateogry}&start=${pageParam.start}&
+  orderType=${pageParam.orderType}`);
 };
 
 export const postProductReview = async (data: IReview) => {

@@ -3,6 +3,7 @@ import { Order } from '@/entities/order.entity';
 import ElasticClient from '@/loaders/elasticSearch';
 import { EntityRepository, getCustomRepository, Repository, In } from 'typeorm';
 import { ProductImage } from '@/entities/productImage.entity';
+import { ICategoryProductParams } from '@/services/product.service';
 
 type IElasticData = {
   id: number;
@@ -65,6 +66,30 @@ class ProductRepository extends Repository<Product> {
       .take(limit)
       .innerJoinAndSelect('product.productImage', 'productImage')
       .where('productImage.isThumbnail = :isThumbnail', { isThumbnail: 1 })
+      .getMany();
+  }
+
+  getCategoryProducts({
+    subCategoryId,
+    start,
+    orderType,
+  }: ICategoryProductParams) {
+    return this.createQueryBuilder('product')
+      .orderBy('product.' + orderType, 'DESC')
+      .limit(20)
+      .offset(start)
+      .innerJoinAndSelect('product.productImage', 'productImage')
+      .where('product.sub_category_id = :subCategoryId', { subCategoryId })
+      .andWhere('productImage.isThumbnail = :isThumbnail', { isThumbnail: 1 })
+      .select([
+        'product.id',
+        'product.title',
+        'product.price',
+        'product.stock',
+        'product.createdAt',
+        'product.discount',
+        'productImage.url',
+      ])
       .getMany();
   }
 }

@@ -10,16 +10,18 @@ import { useGetProductById } from '@/hooks/queries/product';
 import { useParams } from '@/lib/Router';
 import thumbnailsParser from '@/utils/thumbnailsParser';
 import ProductThumbnails from './../ProductThumbnails/ProductThumbnails';
+import { usePostOrder } from '@/hooks/queries/order';
 
 const ProductInfo = () => {
   const { id } = useParams().params;
 
   const { data, isLoading, error } = useGetProductById(id);
-  const { mutate } = usePostCart();
-  const [value, handleClickOnMinus, handleClickOnPlus] = useNumberInput(1);
+  const { mutate: cartMutate } = usePostCart();
+  const { mutate: orderMutate } = usePostOrder();
 
+  const [value, handleClickOnMinus, handleClickOnPlus] = useNumberInput(1);
   const onClickCart = () => {
-    mutate({
+    cartMutate({
       count: value,
       productId: id,
     });
@@ -93,7 +95,19 @@ const ProductInfo = () => {
           <button onClick={onClickCart} className="cart">
             <CartSVG width={25} height={25} />
           </button>
-          <button className="purchase">바로구매</button>
+          <button
+            className="purchase"
+            onClick={() =>
+              orderMutate({
+                products: [{ id: +id, count: value }],
+                addressId: null,
+                deliveryRequestMessage: '',
+                status: 'created',
+              })
+            }
+          >
+            바로구매
+          </button>
         </S.ButtonArea>
       </S.ProductOrder>
     </S.ProductInfo>

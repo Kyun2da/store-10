@@ -122,3 +122,26 @@ export interface IBookmarkProduct {
   price: number;
   image: string;
 }
+
+export interface IOrderProduct {
+  id: number;
+  title: string;
+  price: number;
+  img: string;
+  count: number;
+}
+
+export interface IOrderPost {
+  products: { id: number; count: number }[];
+  addressId?: string | null;
+  status: string;
+  deliveryRequestMessage?: string;
+}
+
+export interface IOrder {
+  products: IOrderProduct[];
+  status: string;
+  address_id: number;
+  user_id: number;
+  delivery_request_message: string;
+}

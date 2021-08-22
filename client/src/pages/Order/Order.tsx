@@ -6,8 +6,16 @@ import OrderAddress from '@/components/Order/OrderAddress';
 import OrderProducts from '@/components/Order/OrderProducts';
 import OrderCoupon from '@/components/Order/OrderCoupon';
 import OrderPayment from '@/components/Order/OrderPayment';
+import { useParams } from '@/lib/Router';
+import { useGetOrder } from '@/hooks/queries/order';
 
 const Order = () => {
+  const { id } = useParams().params;
+  const { data, isLoading } = useGetOrder(+id);
+
+  if (isLoading || !data) {
+    return <div>Loading...</div>;
+  }
   return (
     <S.OrderContainer className="container">
       <S.Order>
@@ -15,7 +23,7 @@ const Order = () => {
           <Title level={4}>주문/결제</Title>
         </S.OrderHeader>
         <OrderAddress />
-        <OrderProducts />
+        <OrderProducts products={data?.products} />
         <OrderCoupon />
         <OrderPayment />
       </S.Order>

@@ -64,6 +64,11 @@ class ProductService {
     return await productReviewRepo.findProductRatingById(id);
   }
 
+  async getProductReviewRatingCount(id: string) {
+    const productReviewRepo = ProductReviewRepository();
+    return await productReviewRepo.findProductRatingCountById(id);
+  }
+
   async createReview(review: Review) {
     const productReviewRepo = ProductReviewRepository();
     return await productReviewRepo.createProductReview(review);

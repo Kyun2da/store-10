@@ -32,13 +32,17 @@ class ProductController {
     const { id } = req.params;
 
     const count = await ProductService.getProductReviewsCountById(id);
+    const ratings = await ProductService.getProductReviewRatingCount(id);
     const { sum } = await ProductService.getProductReviewRating(id);
 
+    // TODO: validation 처리
     if (
       count === undefined ||
       count === null ||
       sum === undefined ||
-      sum === null
+      sum === null ||
+      ratings === undefined ||
+      ratings === null
     ) {
       return ApiResponse(
         res,
@@ -47,7 +51,7 @@ class ProductController {
       );
     }
 
-    const result = { count, sum };
+    const result = { count, sum, ratings };
     return ApiResponse(
       res,
       HttpStatusCode.OK,

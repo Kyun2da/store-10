@@ -16,6 +16,11 @@ interface ISum {
   sum: string;
 }
 
+interface IRatingCount {
+  rating: number;
+  count: string;
+}
+
 @EntityRepository(Review)
 class ReviewRepository extends Repository<Review> {
   findProductReviewsById(
@@ -49,6 +54,15 @@ class ReviewRepository extends Repository<Review> {
       .where('review.product_id = :product_id', { product_id: +product_id })
       .select('SUM(review.rating)', 'sum')
       .getRawOne();
+  }
+
+  findProductRatingCountById(product_id: string): Promise<IRatingCount[]> {
+    return this.createQueryBuilder('review')
+      .where('review.product_id = :product_id', { product_id: +product_id })
+      .select('review.rating AS rating')
+      .addSelect('COUNT(*) AS count')
+      .groupBy('review.rating')
+      .getRawMany();
   }
 
   createProductReview(reviewInfo: Review): Promise<Review> {

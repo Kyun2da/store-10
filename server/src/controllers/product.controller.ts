@@ -2,6 +2,7 @@ import ProductService from '@/services/product.service';
 import { Request, Response } from 'express';
 import ApiResponse from '@/api/middlewares/response-format';
 import HttpStatusCode from '@/types/statusCode';
+import { ReviewImage } from '@/entities/reviewImage.entity';
 
 class ProductController {
   async getProduct(req: Request, res: Response) {
@@ -49,6 +50,7 @@ class ProductController {
   }
 
   async postProductReviewById(req: Request, res: Response) {
+    const files = req.files as Express.MulterS3.File[];
     const data = req.body;
     const user_id = req.user.id;
     const review = {
@@ -57,6 +59,21 @@ class ProductController {
     };
 
     const result = await ProductService.createReview(review);
+
+    for (const file of files) {
+      const reviewImage = { review_id: result.id, url: file.location };
+      const imageResult = await ProductService.createReviewImage(
+        reviewImage as ReviewImage
+      );
+
+      if (!imageResult) {
+        return ApiResponse(
+          res,
+          HttpStatusCode.BAD_REQUEST,
+          '리뷰 이미지 업로드 실패'
+        );
+      }
+    }
 
     if (!result) {
       return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰생성 실패');

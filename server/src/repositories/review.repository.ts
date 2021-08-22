@@ -4,6 +4,7 @@ import {
   EntityRepository,
   getCustomRepository,
   Repository,
+  UpdateResult,
 } from 'typeorm';
 import { User } from '@/entities/user.entity';
 
@@ -77,6 +78,10 @@ class ReviewRepository extends Repository<Review> {
 
   deleteProductReview(id: string, user_id: number): Promise<DeleteResult> {
     return this.delete({ user_id, id: +id });
+  }
+
+  updateProductReview(newReview: Review): Promise<UpdateResult> {
+    return this.update(newReview.id, newReview);
   }
 }
 

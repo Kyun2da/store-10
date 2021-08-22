@@ -84,6 +84,11 @@ class ProductService {
     return await productReviewRepo.deleteProductReview(id, user_id);
   }
 
+  async updateReviewById(review: Review) {
+    const productReviewRepo = ProductReviewRepository();
+    return await productReviewRepo.updateProductReview(review);
+  }
+
   async getProducts({ category, limit }) {
     const productRepo = ProductRepository();
     const products = await productRepo.getProducts({ category, limit });

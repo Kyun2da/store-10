@@ -103,6 +103,21 @@ class ProductController {
     return ApiResponse(res, HttpStatusCode.NO_CONTENT);
   }
 
+  async updateProductReviewById(req: Request, res: Response) {
+    const user_id = req.user.id;
+    const { id } = req.params;
+    const data = req.body;
+    const review = {
+      id,
+      user_id,
+      ...data,
+    };
+
+    await ProductService.updateReviewById(review);
+
+    // THINK: 업데이트가 필요할 지 급의문..?! 그냥 삭제하고 다시 쓰는게 좋을지도
+  }
+
   async getProductReviewsById(req: Request, res: Response) {
     const { id, offset } = req.params;
     const result = await ProductService.getProductReviewsById(id, offset);

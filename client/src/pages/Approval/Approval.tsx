@@ -29,7 +29,6 @@ const Approval = () => {
 
   const onClickNextPage = useCallback(() => {
     const { authtype } = params;
-    console.log(authtype);
     if (authtype === 'github') {
       GithubLogin();
     } else {

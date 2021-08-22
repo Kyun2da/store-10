@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, useEffect } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import Input from '@/components/Shared/Input/Input';
 import { IAddress } from '@/types';
@@ -9,35 +9,41 @@ import useModal from '@/hooks/useModal';
 import * as S from './styles';
 
 interface IProps {
-  modifyAddressData: IAddress | null;
+  addressToModify: IAddress | null;
   toggleModal: () => void;
+  setAddressToModify: Dispatch<IAddress | null>;
+  setOpenForm: Dispatch<boolean>;
 }
 
-const AddressForm = ({ modifyAddressData, toggleModal }: IProps) => {
+const AddressForm = ({
+  addressToModify,
+  toggleModal,
+  setAddressToModify,
+  setOpenForm,
+}: IProps) => {
   const [isPostcodeOpen, toggleIsPostcodeOpen] = useModal(false);
   const [inputs, setInputs] = useState<IAddress>({
-    id: modifyAddressData ? modifyAddressData.id : undefined,
-    name: modifyAddressData ? modifyAddressData.name : '',
-    postcode: modifyAddressData ? modifyAddressData.postcode : '',
-    address: modifyAddressData ? modifyAddressData.address : '',
-    detailAddress: modifyAddressData ? modifyAddressData.detailAddress : '',
-    phone: modifyAddressData ? modifyAddressData.phone : '',
-    isDefault: modifyAddressData ? modifyAddressData.isDefault : false,
+    id: addressToModify ? addressToModify.id : undefined,
+    name: addressToModify ? addressToModify.name : '',
+    postcode: addressToModify ? addressToModify.postcode : '',
+    address: addressToModify ? addressToModify.address : '',
+    detailAddress: addressToModify ? addressToModify.detailAddress : '',
+    phone: addressToModify ? addressToModify.phone : '',
+    isDefault: addressToModify ? addressToModify.isDefault : false,
   });
-  const [errors, setErros] = useState<Record<string, boolean>>({
-    id: false,
+  const [errors, setErrors] = useState<Record<string, boolean>>({
     name: false,
     postcode: false,
     address: false,
     detailAddress: false,
     phone: false,
   });
+
   const checkValidation = (): boolean => {
     let isValid = true;
     for (const [key, value] of Object.entries(inputs)) {
       if (!value && errors[key] !== undefined) {
-        console.log(value, key, errors[key]);
-        setErros({ ...errors, [key]: true });
+        setErrors((prev) => ({ ...prev, [key]: true }));
         isValid = false;
       }
     }
@@ -46,22 +52,18 @@ const AddressForm = ({ modifyAddressData, toggleModal }: IProps) => {
   const postMutation = usePostAddress();
   const updateMutation = useUpdateAddress();
 
-  const onClickSend = () => {
-    if (!checkValidation()) {
-      return;
-    }
-    const { mutate } = modifyAddressData ? updateMutation : postMutation;
-    mutate({
-      ...inputs,
-    });
-    toggleModal();
-  };
+  useEffect(
+    () => () => {
+      setAddressToModify(null);
+    },
+    [setAddressToModify]
+  );
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setInputs({ ...inputs, [name]: value });
     if (value) {
-      setErros({ ...errors, [name]: false });
+      setErrors({ ...errors, [name]: false });
     }
   };
 
@@ -79,128 +81,140 @@ const AddressForm = ({ modifyAddressData, toggleModal }: IProps) => {
     toggleIsPostcodeOpen();
   };
 
-  const onClickModal = () => {
-    if (isPostcodeOpen) {
-      toggleIsPostcodeOpen();
-    } else {
-      // toggleModal();
-    }
-  };
-
   const onFocusDetailAddress = () => {
     if (!inputs.postcode || !inputs.address) {
       toggleIsPostcodeOpen();
     }
   };
+
+  const onClickSave = () => {
+    if (!checkValidation()) {
+      return;
+    }
+    if (addressToModify) {
+      updateMutation.mutate({ ...inputs });
+      setOpenForm(false);
+    } else {
+      postMutation.mutate({ ...inputs });
+      toggleModal();
+    }
+  };
   return (
-    <Form>
-      <S.FormRow>
-        <S.FormRowName>받는 사람</S.FormRowName>
-        <Input
-          type="text"
-          label="Outlined"
-          name="name"
-          placeholder="받는 사람"
-          fullWidth
-          value={inputs.name}
-          onChange={onChangeInput}
-          error={errors.name}
-        />
-      </S.FormRow>
-
-      <S.FormRow>
-        <S.FormRowName>연락처</S.FormRowName>
-        <Input
-          type="text"
-          label="Outlined"
-          name="phone"
-          fullWidth
-          placeholder="연락처"
-          value={inputs.phone}
-          onChange={onChangeInput}
-          error={errors.phone}
-        />
-      </S.FormRow>
-
-      <S.FormRow>
-        <S.FormRowName>주소</S.FormRowName>
-        <S.PostcodeWrapper>
-          <Button
-            type="button"
-            color="primary"
-            size="Small"
-            onClick={() => toggleIsPostcodeOpen()}
-          >
-            주소 찾기
-          </Button>
-
+    <>
+      <Form>
+        <S.FormRow>
+          <S.FormRowName>받는 사람</S.FormRowName>
           <Input
             type="text"
             label="Outlined"
-            name="postcode"
-            placeholder="우편번호 검색"
+            name="name"
+            placeholder="받는 사람"
             fullWidth
-            value={inputs.postcode}
+            value={inputs.name}
+            onChange={onChangeInput}
+            error={errors.name}
+          />
+        </S.FormRow>
+
+        <S.FormRow>
+          <S.FormRowName>연락처</S.FormRowName>
+          <Input
+            type="text"
+            label="Outlined"
+            name="phone"
+            fullWidth
+            placeholder="연락처"
+            value={inputs.phone}
+            onChange={onChangeInput}
+            error={errors.phone}
+          />
+        </S.FormRow>
+
+        <S.FormRow>
+          <S.FormRowName>주소</S.FormRowName>
+          <S.PostcodeWrapper>
+            <Button
+              type="button"
+              color="primary"
+              size="Small"
+              onClick={toggleIsPostcodeOpen}
+            >
+              주소 찾기
+            </Button>
+
+            <Input
+              type="text"
+              label="Outlined"
+              name="postcode"
+              placeholder="우편번호 검색"
+              fullWidth
+              value={inputs.postcode}
+              onFocus={() => toggleIsPostcodeOpen()}
+              attributes={{
+                readOnly: true,
+              }}
+              error={errors.postcode}
+            />
+          </S.PostcodeWrapper>
+        </S.FormRow>
+
+        <S.FormRow>
+          <S.FormRowName></S.FormRowName>
+          <Input
+            type="text"
+            label="Outlined"
+            name="address"
+            placeholder="주소"
+            value={inputs.address}
+            fullWidth
             onFocus={toggleIsPostcodeOpen}
             attributes={{
               readOnly: true,
             }}
-            error={errors.postcode}
+            error={errors.address}
           />
-        </S.PostcodeWrapper>
-      </S.FormRow>
+        </S.FormRow>
+        <S.FormRow>
+          <S.FormRowName></S.FormRowName>
+          <Input
+            type="text"
+            label="Outlined"
+            name="detailAddress"
+            placeholder="상세 주소"
+            fullWidth
+            value={inputs.detailAddress}
+            onFocus={onFocusDetailAddress}
+            onChange={onChangeInput}
+            error={errors.detailAddress}
+          />
+        </S.FormRow>
 
-      <S.FormRow>
-        <S.FormRowName></S.FormRowName>
-        <Input
-          type="text"
-          label="Outlined"
-          name="address"
-          placeholder="주소"
-          value={inputs.address}
-          fullWidth
-          onFocus={toggleIsPostcodeOpen}
-          attributes={{
-            readOnly: true,
-          }}
-          error={errors.address}
-        />
-      </S.FormRow>
-      <S.FormRow>
-        <S.FormRowName></S.FormRowName>
-        <Input
-          type="text"
-          label="Outlined"
-          name="detailAddress"
-          placeholder="상세 주소"
-          fullWidth
-          value={inputs.detailAddress}
-          onFocus={onFocusDetailAddress}
-          onChange={onChangeInput}
-          error={errors.detailAddress}
-        />
-      </S.FormRow>
+        <S.FormRow>
+          <S.FormRowName></S.FormRowName>
+          <S.DefaultAddrssCheckbox
+            name="isDefault"
+            checked={inputs.isDefault}
+            label="기본 배송지로 설정"
+            onChange={onChangeCheckbox}
+          />
+        </S.FormRow>
 
-      <S.FormRow>
-        <S.FormRowName></S.FormRowName>
-        <S.DefaultAddrssCheckbox
-          name="isDefault"
-          checked={inputs.isDefault}
-          label="기본 배송지로 설정"
-          onChange={onChangeCheckbox}
-        />
-      </S.FormRow>
-
-      {isPostcodeOpen && (
-        <S.DuamPostWrapper
-          width="35rem"
-          toggleModal={toggleIsPostcodeOpen}
-          onClick={toggleIsPostcodeOpen}
-        >
-          <DaumPostcode onComplete={onCompleteSearchAddress} height="50rem" />
-        </S.DuamPostWrapper>
-      )}
-    </Form>
+        {isPostcodeOpen && (
+          <S.DuamPostWrapper
+            width="35rem"
+            toggleModal={toggleIsPostcodeOpen}
+            onClick={toggleIsPostcodeOpen}
+          >
+            <DaumPostcode onComplete={onCompleteSearchAddress} height="50rem" />
+          </S.DuamPostWrapper>
+        )}
+      </Form>
+      <S.FormFooter>
+        <Button type="button" color="primary" onClick={onClickSave}>
+          저장
+        </Button>
+      </S.FormFooter>
+    </>
   );
 };
 

@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
-export const AddressList = styled.ul``;
+export const AddressList = styled.ul`
+  height: 100%;
+  overflow-y: auto;
+`;
 
 export const AddressItem = styled.li`
   margin-top: 1.2rem;
@@ -71,4 +74,11 @@ export const AddressListFooter = styled.footer`
   button {
     width: 100%;
   }
+`;
+
+export const Footer = styled.footer`
+  margin-top: auto;
+  width: 100%;
+  padding-top: 1.2rem;
+  border-top: 1px solid ${({ theme }) => theme.color['border-gray']};
 `;

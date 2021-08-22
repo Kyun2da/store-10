@@ -1,30 +1,48 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import * as S from './styles';
 import Button from '@/components/Shared/Button';
 import { useGetAddresses, useDeleteAddress } from '@/hooks/queries/address';
-import AdderssDummies from '@/dummies/addresses';
+import { IAddress } from '@/types';
 
 interface IAddresseProps {
-  className?: string;
+  selectAddress: Dispatch<IAddress>;
+  setAddressToModify: Dispatch<IAddress>;
+  toggleModal: () => void;
+  setOpenForm: Dispatch<boolean>;
 }
 
-const Addresse = ({ className }: IAddresseProps) => {
-  // const { data, isLoading } = useGetAddresses();
-  const data = AdderssDummies;
+const Addresse = ({
+  selectAddress,
+  toggleModal,
+  setAddressToModify,
+  setOpenForm,
+}: IAddresseProps) => {
+  const { data, isLoading } = useGetAddresses();
   const { mutate } = useDeleteAddress();
 
+  const onClickSelectAddress = (address: IAddress) => () => {
+    selectAddress(address);
+    toggleModal();
+  };
+
+  const onClickModify = (address: IAddress) => () => {
+    setAddressToModify(address);
+    setOpenForm(true);
+  };
+
   const onClickDelete = (id?: number) => {
-    if (id) {
+    if (confirm('정말 삭제하시겠습니까?') && id) {
       mutate(id);
     }
   };
 
-  // if (!data || isLoading) {
-  //   return <div>Loading</div>;
-  // }
+  if (!data || isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <S.AddressList className={className}>
+      <S.AddressList>
         {data.map((address) => (
           <S.AddressItem
             key={address.id}
@@ -46,7 +64,7 @@ const Addresse = ({ className }: IAddresseProps) => {
                 type="button"
                 color="white"
                 size="Small"
-                // onClick={openAddressModal(address)}
+                onClick={onClickModify(address)}
               >
                 수정
               </Button>
@@ -62,7 +80,7 @@ const Addresse = ({ className }: IAddresseProps) => {
                 type="button"
                 color="primary"
                 size="Small"
-                onClick={() => {}}
+                onClick={onClickSelectAddress(address)}
               >
                 선택
               </Button>
@@ -70,6 +88,11 @@ const Addresse = ({ className }: IAddresseProps) => {
           </S.AddressItem>
         ))}
       </S.AddressList>
+      <S.Footer>
+        <Button type="button" color="primary" onClick={() => setOpenForm(true)}>
+          배송지 추가
+        </Button>
+      </S.Footer>
     </>
   );
 };

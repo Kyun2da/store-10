@@ -55,3 +55,10 @@ export const FormRowName = styled.span`
   color: ${({ theme }) => theme.color['text-color']};
   ${({ theme }) => theme.fontWeight.m};
 `;
+
+export const FormFooter = styled.footer`
+  margin-top: auto;
+  width: 100%;
+  padding-top: 1.2rem;
+  border-top: 1px solid ${({ theme }) => theme.color['border-gray']};
+`;

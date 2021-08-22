@@ -32,7 +32,7 @@ interface IRouterContext {
 }
 
 interface IRouteContext {
-  params: Record<string, unknown>;
+  params: Record<string, string>;
   origin: string;
 }
 
@@ -47,7 +47,7 @@ interface INavLink extends ILink {
 
 interface IMatches {
   origin: string;
-  params: Record<string, unknown>;
+  params: Record<string, string>;
 }
 
 const RouterContext = React.createContext<IRouterContext>({
@@ -194,7 +194,7 @@ const matchRoutes = ({ children, currentPath }: ISwitch) => {
       matches.push({
         origin: child.props.path,
         params: keys.reduce(
-          (collection: Record<string, unknown>, param, index) => {
+          (collection: Record<string, string>, param, index) => {
             collection[param] = params[index];
             return collection;
           },

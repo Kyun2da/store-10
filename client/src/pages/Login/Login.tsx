@@ -3,17 +3,21 @@ import { Input } from '@/components/Shared/Input';
 import Button from '@/components/Shared/Button';
 import * as S from './styles';
 import { Link, Redirect, useHistory } from '@/lib/Router';
-import { githubLogin } from '@/lib/api/login/githubLogin';
-import { normalLogin } from '@/lib/api/login/normalLogin';
+import { githubLogin } from '@/lib/api/auth/githubLogin';
+import { normalLogin } from '@/lib/api/auth/normalLogin';
 import {
   validateEmail,
   validateInput,
 } from '@/utils/constant/validate/validation';
+import { notify } from '@/components/Shared/Toastify';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
+import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 
 const Login = () => {
   const GithubLogin = async () => {
-    const oAuthURL = await githubLogin();
-    window.location.href = oAuthURL;
+    const { githubUrl } = await githubLogin();
+    window.location.href = githubUrl;
   };
 
   const [error, setError] = useState({
@@ -22,6 +26,7 @@ const Login = () => {
   });
   const { historyPush } = useHistory();
 
+  const [user, setUser] = useRecoilState(userState);
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
@@ -36,16 +41,16 @@ const Login = () => {
     if (emailValidation && passwordValidation) {
       try {
         await normalLogin({ user_id: email, password });
+        const user = await getCurrentUser();
+        setUser(user);
         historyPush('/');
       } catch (err) {
-        window.alert(err.response.data.message);
+        notify('error', err.response.data.message);
       }
     }
   };
 
-  const userName = window.localStorage.getItem('userName');
-
-  if (userName) return <Redirect to="/" />;
+  if (user) return <Redirect to="/" />;
 
   return (
     <S.LoginForm onSubmit={onSubmit}>

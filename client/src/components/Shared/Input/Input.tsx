@@ -46,11 +46,12 @@ const Input = ({
   className,
 }: IInput & IInputContainer) => {
   const [isFocus, setFocus] = useState(false);
+  const _inputRef = useRef<HTMLInputElement>(null);
   const onClickLabel = useCallback(() => {
     inputRef.current?.focus();
   }, []);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const inputRef = _ref ?? useRef<HTMLInputElement>(null);
+
+  const inputRef = _ref ?? _inputRef
 
   const onBlurInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     onBlur && onBlur(e);

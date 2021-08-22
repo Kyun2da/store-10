@@ -6,6 +6,7 @@ const GlobalStyle = require('../src/styles/globalStyle').default;
 const { ThemeProvider } = require('styled-components');
 const React = require('react');
 const { QueryClient, QueryClientProvider } = require('react-query');
+const { RecoilRoot } = require('recoil');
 
 const themes = [lightMode, darkMode];
 addDecorator(jsxDecorator);
@@ -16,10 +17,12 @@ const queryClient = new QueryClient();
 export const decorators = [
   (Story) => (
     <>
-      <QueryClientProvider client={queryClient}>
-        <GlobalStyle />
-        <Story />
-      </QueryClientProvider>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+          <GlobalStyle />
+          <Story />
+        </QueryClientProvider>
+      </RecoilRoot>
     </>
   ),
 ];

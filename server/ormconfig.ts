@@ -8,7 +8,7 @@ export default {
   username: config.DB_USERNAME,
   password: config.DB_PASSWORD,
   database: config.DB_DATABASE,
-  synchronize: process.env.NODE_ENV === 'production' ? false : true,
+  synchronize: false,
   logging: process.env.NODE_ENV === 'production' ? false : true,
   entities: ['src/entities/**/*.ts'],
   cli: {

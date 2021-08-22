@@ -14,7 +14,7 @@ export const postCart = async ({
   productId,
 }: {
   count: undefined | number;
-  productId: number;
+  productId: string;
 }) => {
   return await client.post('/cart', {
     count: count || 1,

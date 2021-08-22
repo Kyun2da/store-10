@@ -14,17 +14,17 @@ class ProductController {
     const { id } = req.params;
     const details = await ProductService.getProductById(id);
     const thumbnails = await ProductService.getProductThumbnails(id);
-    const result = { details, thumbnails };
 
-    if (result) {
-      ApiResponse(
+    if (!details) {
+      return ApiResponse(
         res,
         HttpStatusCode.BAD_REQUEST,
         '해당 상품이 존재하지 않습니다'
       );
-    } else {
-      ApiResponse(res, HttpStatusCode.OK, '해당 상품 조회 성공', result);
     }
+
+    const result = { details, thumbnails };
+    return ApiResponse(res, HttpStatusCode.OK, '해당 상품 조회 성공', result);
   }
 
   async serchProduct(req: Request, res: Response) {
@@ -61,6 +61,16 @@ class ProductController {
       ApiResponse(res, HttpStatusCode.BAD_REQUEST, '상품이 존재하지 않습니다');
     } else {
       ApiResponse(res, HttpStatusCode.OK, '상품 조회 성공', products);
+    }
+  }
+
+  async getCategories(req: Request, res: Response) {
+    const categories = await ProductService.getCategories();
+
+    if (!categories) {
+      ApiResponse(res, HttpStatusCode.BAD_REQUEST, '카테고리가 없습니다');
+    } else {
+      ApiResponse(res, HttpStatusCode.OK, null, categories);
     }
   }
 }

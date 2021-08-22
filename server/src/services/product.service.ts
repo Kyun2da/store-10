@@ -1,7 +1,11 @@
 import ProductRepository from '@/repositories/product.repository';
-import productImageRepository from '@/repositories/productImage.repository';
+import ProductImageRepository from '@/repositories/productImage.repository';
 import OrderRepository from '@/repositories/order.repository';
-import { NoVersionOrUpdateDateColumnError } from 'typeorm';
+import MainCateogryRepository from '@/repositories/mainCategory.repository';
+import SubCateogryRepository from '@/repositories/subCategory.repository';
+import { MainCategory } from '@/entities/mainCategory.entity';
+import { SubCategory } from '@/entities/subCategory.entity';
+import combineObjectArray from '@/utils/combineObjectArray';
 class ProductService {
   async getProductById(id: string) {
     const productRepo = ProductRepository();
@@ -9,7 +13,7 @@ class ProductService {
   }
 
   async getProductThumbnails(id: string) {
-    const productImageRepo = productImageRepository();
+    const productImageRepo = ProductImageRepository();
     return await productImageRepo.findProductThumbnailsById(id);
   }
 
@@ -60,6 +64,21 @@ class ProductService {
     });
 
     return data;
+  }
+
+  async getCategories() {
+    const mainCategories = await MainCateogryRepository().getMainCategories();
+    const subCategories = await SubCateogryRepository().getSubCategories();
+
+    return combineObjectArray<MainCategory, SubCategory>({
+      parentObjectArr: mainCategories,
+      parentKey: 'id',
+      childrenObjectArr: subCategories,
+      childrenKey: 'main_category_id',
+      childrenName: 'subCategories',
+      parentRemoveColumns: ['createdAt', 'updatedAt'],
+      childrenRemoveColumns: ['createdAt', 'updatedAt'],
+    });
   }
 }
 

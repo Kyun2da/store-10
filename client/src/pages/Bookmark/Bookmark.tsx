@@ -64,16 +64,18 @@ const Bookmark = () => {
       <S.BookmarkTitle level={3}>찜 목록</S.BookmarkTitle>
       <S.ButtonContainer>
         {isEdit ? (
-          <S.EditButton
-            type="button"
-            color="primary"
-            size="Small"
-            onClick={() => {
-              toggleIsEdit(false);
-            }}
-          >
-            편집
-          </S.EditButton>
+          !!data?.length && (
+            <S.EditButton
+              type="button"
+              color="primary"
+              size="Small"
+              onClick={() => {
+                toggleIsEdit(false);
+              }}
+            >
+              편집
+            </S.EditButton>
+          )
         ) : (
           <>
             <S.EditButton

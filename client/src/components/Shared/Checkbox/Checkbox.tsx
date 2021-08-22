@@ -9,6 +9,7 @@ interface IProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   checked?: boolean;
+  onClick?: (e: React.MouseEvent) => void;
 }
 const Checkbox = ({
   label,
@@ -17,13 +18,10 @@ const Checkbox = ({
   className,
   checked,
   name,
+  onClick,
 }: IProps) => {
-  const checkBoxOnClick = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-  }, []);
-
   return (
-    <S.Checkbox className={className} onClick={checkBoxOnClick}>
+    <S.Checkbox className={className} onClick={onClick}>
       <input
         name={name}
         type="checkbox"

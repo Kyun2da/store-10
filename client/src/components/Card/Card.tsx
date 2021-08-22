@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react';
+import React, { Dispatch, useCallback } from 'react';
 import * as S from './styles';
 import {
   HeartSVG as HeartButton,
@@ -48,13 +48,21 @@ const Card = ({
     }
   };
 
+  const checkBoxOnClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+  }, []);
+
   return (
     <Link to={`/detail/${linkId}`}>
       <S.Card>
         <S.Liner bgColor={bgColor} />
         <S.ThumbnailWrapper>
           {!checkBoxDisplay || (
-            <S.CardCheckbox onChange={onChangeCheckbox} checked={isChecked} />
+            <S.CardCheckbox
+              onChange={onChangeCheckbox}
+              checked={isChecked}
+              onClick={checkBoxOnClick}
+            />
           )}
           {discount && <S.NameTag>{discount}%</S.NameTag>}
           <img src={src} alt="상품 섬네일 이미지" />

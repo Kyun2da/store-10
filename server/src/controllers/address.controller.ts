@@ -24,15 +24,8 @@ class AddressController {
   }
 
   async createAddress(req: Request, res: Response) {
-    const {
-      name,
-      postcode,
-      address,
-      detailAddress,
-      phone,
-      message,
-      isDefault,
-    } = req.body;
+    const { name, postcode, address, detailAddress, phone, isDefault } =
+      req.body;
     const userId = req.user?.id || 4;
     const result = await AddressService.createAddress({
       name,
@@ -40,7 +33,6 @@ class AddressController {
       address,
       detail_address: detailAddress,
       phone,
-      message,
       user_id: userId,
       is_default: isDefault,
     });
@@ -53,16 +45,8 @@ class AddressController {
   }
 
   async updateAddress(req: Request, res: Response) {
-    const {
-      name,
-      postcode,
-      address,
-      detailAddress,
-      phone,
-      message,
-      isDefault,
-      id,
-    } = req.body;
+    const { name, postcode, address, detailAddress, phone, isDefault, id } =
+      req.body;
     const userId = req.user?.id || 4;
 
     const result = await AddressService.updateAddress({
@@ -72,7 +56,6 @@ class AddressController {
       address,
       detail_address: detailAddress,
       phone,
-      message,
       user_id: userId,
       is_default: isDefault,
     });
@@ -82,6 +65,13 @@ class AddressController {
     } else {
       ApiResponse(res, HttpStatusCode.BAD_REQUEST, '배송지 수정 실패!');
     }
+  }
+
+  async getDefaultAddress(req: Request, res: Response) {
+    const userId = req.user?.id || 4;
+    const result = await AddressService.getDefaultAddress(userId);
+
+    ApiResponse(res, HttpStatusCode.OK, '기본 배송지 조회 성공', result);
   }
 }
 

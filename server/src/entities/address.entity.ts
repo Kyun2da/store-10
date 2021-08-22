@@ -20,9 +20,6 @@ export class Address extends InitEntity {
   @Column()
   phone: string;
 
-  @Column()
-  message: string;
-
   @Column({ type: 'tinyint' })
   is_default: boolean;
 

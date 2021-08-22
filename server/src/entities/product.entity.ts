@@ -1,4 +1,11 @@
-import { Entity, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  OneToMany,
+  ManyToOne,
+  JoinColumn,
+  ManyToMany,
+} from 'typeorm';
 import { Question } from './question.entity';
 import { Bookmark } from './bookmark.entity';
 import { Cart } from './cart.entity';
@@ -42,7 +49,7 @@ export class Product extends InitEntity {
   @OneToMany(() => ProductImage, (type) => type.product)
   productImage!: ProductImage[];
 
-  @OneToMany(() => Order, (type) => type.product)
+  @ManyToMany(() => Order, (type) => type.id)
   order!: Order[];
 
   @OneToMany(() => Cart, (type) => type.product)

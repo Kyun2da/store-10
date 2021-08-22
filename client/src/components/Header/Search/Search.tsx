@@ -11,6 +11,7 @@ type IProps = {
 };
 
 const Search = ({ ...props }: IProps) => {
+  const { toggleOpen } = props;
   const [searchValue, setSearchValue] = useState('');
   const [recentItems, setRecentItems] = useRecentSearch();
   const [searchData, setSearchDatas] = useState<ISearchData[]>([]);
@@ -18,6 +19,7 @@ const Search = ({ ...props }: IProps) => {
 
   const productSearch = useCallback(async (searchText: string) => {
     const data = await getElasticProducts(searchText);
+
     if (data.length) {
       setSearchDatas(data);
     }
@@ -31,9 +33,9 @@ const Search = ({ ...props }: IProps) => {
   );
 
   const inputChangeHandler = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchValue(e.currentTarget.value);
-      productSearch(e.currentTarget.value);
+      await productSearch(e.currentTarget.value);
     },
     [productSearch]
   );
@@ -56,7 +58,7 @@ const Search = ({ ...props }: IProps) => {
   return (
     <>
       <S.SearchWrapper>
-        <S.SearchBackDrop onClick={props.toggleOpen}></S.SearchBackDrop>
+        <S.SearchBackDrop onClick={toggleOpen}></S.SearchBackDrop>
         <S.SearchContents>
           <S.SearchInputWrap>
             <S.SearchInput
@@ -71,6 +73,8 @@ const Search = ({ ...props }: IProps) => {
             <SearchSVG />
           </S.SearchInputWrap>
           <SearchItem
+            addRecentSearch={setRecentItems}
+            toggleOpen={toggleOpen}
             searchValue={searchValue}
             recentItems={recentItems}
             searchData={searchData}

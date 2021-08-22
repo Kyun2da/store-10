@@ -2,15 +2,30 @@ import { wonFormat } from '@/utils/helper';
 import { ISearchData } from '@/types';
 import * as React from 'react';
 import * as S from './style';
+import { useHistory } from '@/lib/Router';
+import { useCallback } from 'react';
 
 type Prop = {
   searchValue: string;
   recentItems: string[];
   searchData: ISearchData[];
+  toggleOpen: () => void;
+  addRecentSearch: (value: string) => void;
 };
 
 const SearchItem = ({ ...props }: Prop) => {
-  const { searchValue, recentItems, searchData } = props;
+  const { searchValue, toggleOpen, addRecentSearch, recentItems, searchData } =
+    props;
+  const { historyPush } = useHistory();
+  const selectItem = useCallback(
+    (id: number) => {
+      toggleOpen();
+      addRecentSearch(searchValue);
+      historyPush(`/detail/${id}`);
+    },
+    [searchValue]
+  );
+
   return (
     <>
       {!!searchValue ? (
@@ -20,8 +35,8 @@ const SearchItem = ({ ...props }: Prop) => {
             <S.SearchItemWrap>
               <S.SearchItemWrapper>
                 {searchData.map((item, _) => (
-                  <S.SearchItemList key={item['id']}>
-                    <S.SearchItem>
+                  <S.SearchItemList key={'search_' + item['id']}>
+                    <S.SearchItem onClick={() => selectItem(item['id'])}>
                       <img src={item['image']} alt="search_image" />
                       <S.SearchItemInfo>
                         <S.SearchItemTitle>{item['title']}</S.SearchItemTitle>

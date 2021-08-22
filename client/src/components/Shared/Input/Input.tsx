@@ -24,6 +24,7 @@ export interface IInput {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  className?: string;
 }
 
 const Input = ({
@@ -42,6 +43,7 @@ const Input = ({
   onBlur,
   onFocus,
   onKeyPress,
+  className,
 }: IInput & IInputContainer) => {
   const [isFocus, setFocus] = useState(false);
   const onClickLabel = useCallback(() => {
@@ -57,7 +59,10 @@ const Input = ({
     }
   };
   return (
-    <S.InputContainer fullWidth={fullWidth} className="input-container">
+    <S.InputContainer
+      fullWidth={fullWidth}
+      className={'input-container' + className || ''}
+    >
       {labelName ? (
         <S.Label
           className={isFocus ? 'focusing' : ''}

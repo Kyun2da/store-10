@@ -86,7 +86,6 @@ export interface IAddress {
   address: string;
   detailAddress: string;
   phone: string;
-  message: string;
   isDefault: boolean;
   userId?: number;
   id?: number;

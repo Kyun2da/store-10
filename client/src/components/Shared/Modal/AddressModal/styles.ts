@@ -7,12 +7,18 @@ import {
   ModalButtonArea,
 } from '../styles';
 
-export const AddressModalHeader = styled(ModalHeader)``;
+export const AddressModalHeader = styled(ModalHeader)`
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  button {
+    width: 30px;
+  }
+`;
 export const AddressModalDivider = styled(ModalDivider)``;
 export const AddressModalBody = styled(ModalBody)`
-  input {
-    margin-top: 1.2rem;
-  }
+  overflow-y: auto;
 `;
 export const AddressModalButtonArea = styled(ModalButtonArea)`
   margin-top: 1.2rem;

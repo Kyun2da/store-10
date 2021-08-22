@@ -79,6 +79,11 @@ class ProductService {
     return await productReviewImageRepo.createReviewImage(reviewImage);
   }
 
+  async deleteReviewById(id: string, user_id: number) {
+    const productReviewRepo = ProductReviewRepository();
+    return await productReviewRepo.deleteProductReview(id, user_id);
+  }
+
   async getProducts({ category, limit }) {
     const productRepo = ProductRepository();
     const products = await productRepo.getProducts({ category, limit });

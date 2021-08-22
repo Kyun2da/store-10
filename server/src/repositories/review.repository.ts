@@ -1,5 +1,10 @@
 import { Review } from '@/entities/review.entity';
-import { EntityRepository, getCustomRepository, Repository } from 'typeorm';
+import {
+  DeleteResult,
+  EntityRepository,
+  getCustomRepository,
+  Repository,
+} from 'typeorm';
 import { User } from '@/entities/user.entity';
 
 const LIMIT = 5;
@@ -68,6 +73,10 @@ class ReviewRepository extends Repository<Review> {
   createProductReview(reviewInfo: Review): Promise<Review> {
     const review = this.create(reviewInfo);
     return this.save(review);
+  }
+
+  deleteProductReview(id: string, user_id: number): Promise<DeleteResult> {
+    return this.delete({ user_id, id: +id });
   }
 }
 

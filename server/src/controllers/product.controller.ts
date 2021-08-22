@@ -40,7 +40,6 @@ class ProductController {
       count === undefined ||
       count === null ||
       sum === undefined ||
-      sum === null ||
       ratings === undefined ||
       ratings === null
     ) {
@@ -51,7 +50,7 @@ class ProductController {
       );
     }
 
-    const result = { count, sum, ratings };
+    const result = { count, sum: sum ?? '0', ratings };
     return ApiResponse(
       res,
       HttpStatusCode.OK,
@@ -89,7 +88,19 @@ class ProductController {
     if (!result) {
       return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰생성 실패');
     }
-    return ApiResponse(res, HttpStatusCode.NO_CONTENT, '리뷰생성 성공');
+    return ApiResponse(res, HttpStatusCode.NO_CONTENT);
+  }
+
+  async deleteProductReviewById(req: Request, res: Response) {
+    const user_id = req.user.id;
+    const { id } = req.params;
+
+    const result = await ProductService.deleteReviewById(id, user_id);
+
+    if (!result.affected) {
+      return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰삭제 실패');
+    }
+    return ApiResponse(res, HttpStatusCode.NO_CONTENT);
   }
 
   async getProductReviewsById(req: Request, res: Response) {

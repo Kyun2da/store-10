@@ -25,4 +25,10 @@ router.post(
   ProductController.postProductReviewById
 );
 
+router.delete(
+  '/review/:id',
+  authJWT,
+  ProductController.deleteProductReviewById
+);
+
 export default router;

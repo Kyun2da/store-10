@@ -1,7 +1,7 @@
 import Card from '@/components/Card';
 import CardWrapper from '@/components/CardWrapper';
 import {
-  useDeleteBookmark,
+  useDeleteDetailBookmark,
   useGetDetailBookmarkProducts,
 } from '@/hooks/queries/bookmark';
 import { Redirect } from '@/lib/Router';
@@ -41,7 +41,7 @@ const renderProducts = (
 const Bookmark = () => {
   const [isEdit, setIsEdit] = useState(true);
   const { isLoading, data } = useGetDetailBookmarkProducts();
-  const { mutate } = useDeleteBookmark();
+  const { mutate } = useDeleteDetailBookmark();
   const [user] = useRecoilState(userState);
   const [checkedList, setCheckedList] = useState<number[]>([]);
 

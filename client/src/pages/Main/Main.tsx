@@ -9,6 +9,7 @@ import {
   useGetRecentProducts,
 } from '@/hooks/queries/product';
 import { IProduct } from '@/types';
+import { useGetBookmarkIds } from '@/hooks/queries/bookmark';
 
 export interface IProductQuery {
   data: IProduct[] | undefined;
@@ -19,6 +20,8 @@ const Main = () => {
   const recommandQuery = useGetRecommandProducts();
   const bestQuery = useGetBestProducts();
   const recentQuery = useGetRecentProducts();
+  const { data: bookmarkIdList } = useGetBookmarkIds();
+  console.log(bookmarkIdList);
 
   const renderProducts = (qurey: IProductQuery) => {
     const { data, isLoading } = qurey;
@@ -33,6 +36,7 @@ const Main = () => {
         src={product.productImage[0].url}
         price={product.price}
         title={product.title}
+        bookmarkList={bookmarkIdList}
       />
     ));
   };

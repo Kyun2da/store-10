@@ -8,6 +8,7 @@ import {
   IReviewCount,
   IReview,
 } from '@/types';
+import axios from 'axios';
 
 export const getProductById = async (id: string) => {
   return await client.get<IProductDetail>(`/product/${id}`);

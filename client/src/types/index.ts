@@ -72,11 +72,7 @@ export interface IProductDetail {
   thumbnails: IThumbnails[];
 }
 
-export interface IReview {
-  content: string;
-  rating: number;
-  product_id: string;
-}
+export type IReview = FormData;
 
 export interface IReviewCount {
   count: number;

@@ -12,7 +12,7 @@ import {
   useGetProductReviewsCount,
 } from '@/hooks/queries/product';
 import { nanoid } from 'nanoid';
-import { dateFormat } from '@/utils/helper';
+import { calculateRating, dateFormat } from '@/utils/helper';
 import Pagination from '@/components/Shared/Pagination';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
@@ -21,12 +21,7 @@ import { notify } from '@/components/Shared/Toastify';
 // 페이지 당 리뷰 노출 개수
 const LIMIT = 5;
 
-// TODO: 임시 데이터 형식입니다 - 당연히 나중에 바뀌게쬬?
-interface IProductReview {
-  totalRating: number;
-}
-
-const ProductReview = ({ totalRating }: IProductReview) => {
+const ProductReview = () => {
   const { id } = useParams().params;
   const [offset, setOffset] = useState(0);
   const [selectedImage, setSelectedImage] = useState('');
@@ -39,16 +34,19 @@ const ProductReview = ({ totalRating }: IProductReview) => {
     isLoading,
     error,
   } = useGetProductReviewsById(id, offset);
-  const { data: count } = useGetProductReviewsCount(id);
+  const { data: scores } = useGetProductReviewsCount(id);
 
   // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
   if (error) {
     return <div>{error.message}</div>;
   }
 
-  if (isLoading || !reviews || !count) {
+  if (isLoading || !reviews || !scores) {
     return <div>loading</div>;
   }
+
+  const { count, sum, ratings } = scores;
+  const rating = calculateRating({ sum, count });
 
   const handleClickReviewButton = () => {
     if (!user) {
@@ -71,7 +69,7 @@ const ProductReview = ({ totalRating }: IProductReview) => {
     <S.PanelWrapper>
       <S.TopArea>
         <Title className="title" level={5}>
-          상품후기 ({count.count})
+          상품후기 ({count})
         </Title>
         <Button
           size="Default"
@@ -84,10 +82,10 @@ const ProductReview = ({ totalRating }: IProductReview) => {
       </S.TopArea>
       <S.RatingArea>
         <S.StarRates>
-          <span className="totalRates">{totalRating}</span>
-          <RatingGetter rating={totalRating} uniqueId="totalRating" />
+          <span className="totalRates">{rating}</span>
+          <RatingGetter rating={rating} uniqueId="totalRating" />
         </S.StarRates>
-        <RatingChart />
+        <RatingChart ratings={ratings} />
       </S.RatingArea>
 
       <S.UserReviewArea>
@@ -126,7 +124,7 @@ const ProductReview = ({ totalRating }: IProductReview) => {
 
       <Pagination
         handleOnClickPage={handleOnClickPage}
-        count={Math.ceil(count.count / LIMIT)}
+        count={Math.ceil(count / LIMIT)}
       />
 
       {isReviewOpen && <ReviewModal toggleModal={toggleReviewModal} />}

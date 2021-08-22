@@ -1,6 +1,6 @@
 import Card from '@/components/Card';
 import CardWrapper from '@/components/CardWrapper';
-import Thung from '@/components/Thung/Thung';
+import Thung from '@/components/Thung';
 import {
   useDeleteDetailBookmark,
   useGetDetailBookmarkProducts,

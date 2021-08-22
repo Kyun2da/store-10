@@ -8,7 +8,7 @@ import {
 import { Redirect } from '@/lib/Router';
 import { userState } from '@/recoil/user';
 import { IBookmarkProduct } from '@/types';
-import React, { Dispatch, useEffect, useState } from 'react';
+import React, { Dispatch, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import * as S from './style';
 

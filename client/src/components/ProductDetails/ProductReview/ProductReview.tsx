@@ -48,6 +48,8 @@ const ProductReview = () => {
   const { count, sum, ratings } = scores;
   const rating = calculateRating({ sum, count });
 
+  console.log(reviews);
+
   const handleClickReviewButton = () => {
     if (!user) {
       return notify('error', '로그인 후 작성 가능합니다.');
@@ -91,7 +93,7 @@ const ProductReview = () => {
       <S.UserReviewArea>
         {reviews.map((review) => {
           return (
-            <S.UserReview key={review.id}>
+            <S.UserReview data-review-id={review.id} key={review.id}>
               <S.UserReviewTitles>
                 <Title className="username" level={5}>
                   {review.name}

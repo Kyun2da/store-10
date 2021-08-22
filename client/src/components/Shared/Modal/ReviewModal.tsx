@@ -10,6 +10,7 @@ import Form from '@/components/Shared/Form';
 import { useCreateReview } from '@/hooks/queries/product';
 import { useParams } from '@/lib/Router';
 import { validateReview } from '@/utils/constant/validate/validationReview';
+import { compressImageFile } from '@/utils/helper';
 
 interface ReviewModalProps {
   toggleModal: () => void;
@@ -42,7 +43,7 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
     setContent(target.value);
   };
 
-  const handleOnSubmit = (e: React.FormEvent) => {
+  const handleOnSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const isPass = validateReview({
@@ -57,7 +58,7 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
     const files = Object.values(imgFiles);
     const formData = new FormData();
     for (const file of files) {
-      formData.append('images', file);
+      formData.append('images', await compressImageFile(file));
     }
     formData.append('rating', rating.toString());
     formData.append('content', content);

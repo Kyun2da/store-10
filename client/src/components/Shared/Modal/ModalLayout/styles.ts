@@ -30,7 +30,7 @@ export const ModalWrapper = styled.div<IModalWrapperProps>`
   height: ${(props) => props.height};
   min-height: 55%;
 
-  ${({ fullWidth, theme }) =>
+  ${({ fullWidth }) =>
     fullWidth
       ? css`
           padding: 0;

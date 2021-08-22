@@ -7,11 +7,11 @@ import Title from '@/components/Shared/Title';
 import OrderItemList from './OrderItemList';
 
 const PERIOD_FILTER = [
-  { name: '최근 1개월 전', value: 1 },
+  { name: '1개월 전', value: 1 },
   { name: '3개월 전', value: 3 },
   { name: '6개월 전', value: 6 },
-  { name: '2021', value: 12 },
-  { name: '2020', value: 24 },
+  { name: '1년 전', value: 12 },
+  { name: '2년 전', value: 24 },
 ];
 
 const OrderHistory = ({}) => {

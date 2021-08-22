@@ -1,16 +1,34 @@
-import { useParams } from '@/lib/Router';
 import React from 'react';
+import { useParams } from '@/lib/Router';
 import * as S from './styles';
+import CategoryProducts from '@/components/CategoryProducts';
+import { CategoryList } from '@/recoil/category';
+import { useRecoilValue } from 'recoil';
+import { ISubCategory } from '@/types';
 
 const Category = () => {
   const { categoryId } = useParams().params;
+  const categories = useRecoilValue(CategoryList);
 
-
+  const sub: ISubCategory = {
+    id: 0,
+    title: '',
+  };
+  const main = categories.find((_main) => {
+    return _main.subCategories.find((_sub) => {
+      if (_sub.id == +categoryId) {
+        sub.id = _sub.id;
+        sub.title = _sub.title;
+        return true;
+      }
+      return;
+    });
+  });
 
   return (
     <S.CategoryWrapper>
-      <S.CategoryHeader>{categoryId as string}번 카테고리 입니다</S.CategoryHeader>
-      카테고리페이지입니다 이게 써치 페이지일 수 도 있을것 같아요~?
+      <S.CategoryHeader>{main?.title + ' > ' + sub.title}</S.CategoryHeader>
+      <CategoryProducts subCategoryId={+categoryId} />
     </S.CategoryWrapper>
   );
 };

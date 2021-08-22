@@ -26,7 +26,11 @@ const Template: ComponentStory<typeof ShoppingCartSummary> = () => {
   );
 
   return (
-    <ShoppingCartSummary productCount={productCount} totalPrice={totalPrice} />
+    <ShoppingCartSummary
+      productCount={productCount}
+      totalPrice={totalPrice}
+      disabled={false}
+    />
   );
 };
 

@@ -33,6 +33,7 @@ const Template: ComponentStory<typeof ShoppingCategoryList> = () => {
       setUnCheckedList={setUnCheckedList}
       unCheckedList={unCheckedList}
       removeFromCart={removeFromCart}
+      disabled={false}
     />
   );
 };

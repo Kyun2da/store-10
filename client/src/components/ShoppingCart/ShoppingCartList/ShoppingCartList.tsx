@@ -3,6 +3,7 @@ import Checkbox from '@/components/Shared/Checkbox';
 import ShoppingCartItem from '@/components/ShoppingCart/ShopingCartItem';
 import { ICart } from '@/types';
 import * as S from './styles';
+import LabelButton from '@/components/Shared/LabelButton';
 
 interface IShoppingCartListProps {
   shoppingCartItems: ICart[];
@@ -11,6 +12,7 @@ interface IShoppingCartListProps {
   removeFromCart: (ids: number[]) => void;
   setUnCheckedList: Dispatch<number[]>;
   unCheckedList: number[];
+  disabled: boolean;
 }
 
 const ShoppingCartList = ({
@@ -20,6 +22,7 @@ const ShoppingCartList = ({
   checkedItems,
   setUnCheckedList,
   unCheckedList,
+  disabled,
 }: IShoppingCartListProps) => {
   const setProductState = (index: number, state: Record<string, unknown>) => {
     shoppingCartItems.splice(index, 1, {
@@ -49,27 +52,39 @@ const ShoppingCartList = ({
   return (
     <div>
       <S.ShoppingCartHeader>
-        <Checkbox
-          onChange={onChangeAllCheck}
-          checked={isAllchecked}
-          label={'전체 선택'}
-        />
-        <button onClick={onClickRemoveSelectedItems}>선택 삭제</button>
+        {!disabled && (
+          <>
+            <Checkbox
+              onChange={onChangeAllCheck}
+              checked={isAllchecked}
+              label={'전체 선택'}
+            />
+            <LabelButton
+              onClick={onClickRemoveSelectedItems}
+              disabled={!shoppingCartItems.length}
+            >
+              선택 삭제
+            </LabelButton>
+          </>
+        )}
       </S.ShoppingCartHeader>
-
-      <S.ShoppingCartList>
-        {shoppingCartItems.map((item, index) => (
-          <ShoppingCartItem
-            key={item.productId}
-            item={item}
-            index={index}
-            setProductState={setProductState}
-            removeFromCart={removeFromCart}
-            setUnCheckedList={setUnCheckedList}
-            unCheckedList={unCheckedList}
-          />
-        ))}
-      </S.ShoppingCartList>
+      {!disabled ? (
+        <S.ShoppingCartList>
+          {shoppingCartItems.map((item, index) => (
+            <ShoppingCartItem
+              key={item.productId}
+              item={item}
+              index={index}
+              setProductState={setProductState}
+              removeFromCart={removeFromCart}
+              setUnCheckedList={setUnCheckedList}
+              unCheckedList={unCheckedList}
+            />
+          ))}
+        </S.ShoppingCartList>
+      ) : (
+        <S.CartThung title="장바구니가 비어있습니다." />
+      )}
     </div>
   );
 };

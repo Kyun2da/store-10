@@ -4,11 +4,12 @@ import * as S from './styles';
 
 interface IThungProps {
   title: string;
+  className?: string;
 }
 
-const Thung = ({ title }: IThungProps) => {
+const Thung = ({ title, className }: IThungProps) => {
   return (
-    <S.ThungContainer>
+    <S.ThungContainer className={className}>
       <img src={thung} />
       <S.Description>{title}</S.Description>
     </S.ThungContainer>

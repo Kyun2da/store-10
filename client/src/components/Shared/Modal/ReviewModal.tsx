@@ -9,6 +9,7 @@ import useFileInput from '@/hooks/useFileInput';
 import Form from '@/components/Shared/Form';
 import { useCreateReview } from '@/hooks/queries/product';
 import { useParams } from '@/lib/Router';
+import { validateReview } from '@/utils/constant/validate/validationReview';
 
 interface ReviewModalProps {
   toggleModal: () => void;
@@ -20,13 +21,16 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
   const { id } = useParams().params;
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState('');
+  const [contentError, setContentError] = useState(false);
+  const [ratingError, setRatingError] = useState(false);
   const { mutate } = useCreateReview();
   const {
     fileRef,
-    fileImgs,
+    imgFiles,
     isError,
     handleClickOnFileInput,
     handleUploadFile,
+    removeSeletedPreview,
   } = useFileInput();
 
   const handleOnRating = (rating: number) => {
@@ -41,11 +45,25 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    mutate({
-      rating,
-      product_id: id,
+    const isPass = validateReview({
       content,
+      rating,
+      setContentError,
+      setRatingError,
     });
+
+    if (!isPass) return;
+
+    const files = Object.values(imgFiles);
+    const formData = new FormData();
+    for (const file of files) {
+      formData.append('images', file);
+    }
+    formData.append('rating', rating.toString());
+    formData.append('content', content);
+    formData.append('product_id', id);
+
+    mutate(formData);
 
     toggleModal();
   };
@@ -58,7 +76,11 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
         <Form onSubmit={handleOnSubmit} gap={3}>
           <div className="input-wrapper">
             <Title level={5}>별점 매기기</Title>
-            <RatingSetter handleOnRating={handleOnRating} />
+            <RatingSetter
+              helpertext="별점을 매겨주세요!"
+              error={ratingError}
+              handleOnRating={handleOnRating}
+            />
           </div>
           <Title level={5}>사진 업로드 (최대 3장)</Title>
 
@@ -66,10 +88,11 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
             <FileInput
               fileRef={fileRef}
               name="image-uploader"
-              fileImgs={fileImgs}
+              imgFiles={imgFiles}
               isError={isError}
               handleClickOnFileInput={handleClickOnFileInput}
               handleUploadFile={handleUploadFile}
+              removeSeletedPreview={removeSeletedPreview}
               hidden
             />
           </div>
@@ -81,6 +104,8 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
               resize="vertical"
               name="review-content"
               onChange={handleOnTextarea}
+              error={contentError}
+              helpertext="내용을 입력해주세요!"
               fullWidth
             />
           </div>

@@ -14,6 +14,17 @@ export const dateFormat = (date: string) => {
   return dayjs(date).format('YYYY-MM-DD');
 };
 
+export const calculateRating = ({
+  sum,
+  count,
+}: {
+  sum: string;
+  count: number;
+}) => {
+  const value = (+sum / count).toFixed(1);
+  return +value;
+};
+
 export const compressImageFile = (file: File) => {
   return new Promise<File>((resolve) => {
     const fileReader = new FileReader();

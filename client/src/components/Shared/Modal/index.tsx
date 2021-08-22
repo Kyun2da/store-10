@@ -1,6 +1,6 @@
-import ReviewModal from './ReviewModal';
 import RequestModal from './RequestModal';
 import AddressModal from './AddressModal';
-import ReviewImageModal from './ReviewImageModal';
+import ReviewModal from './ReviewModal/ReviewModal';
+import ReviewImageModal from './ReviewModal/ReviewImageModal';
 
 export { ReviewModal, RequestModal, AddressModal, ReviewImageModal };

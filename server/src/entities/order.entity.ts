@@ -5,6 +5,9 @@ import {
   ManyToOne,
   JoinColumn,
   Column,
+  ManyToMany,
+  JoinTable,
+  OneToMany,
 } from 'typeorm';
 
 import { Product } from './product.entity';
@@ -20,31 +23,46 @@ export class Order extends InitEntity {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @ManyToOne(() => User, (type) => type.id, {
+  @OneToMany(() => User, (type) => type.id, {
     nullable: false,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
   @JoinColumn({ name: 'user_id' })
   user!: User;
-
-  @ManyToOne(() => Product, (type) => type.id, {
-    nullable: false,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  @JoinColumn({ name: 'product_id' })
-  product!: Product;
   @Column()
-  product_id: number;
+  user_id!: number;
 
-  @ManyToOne(() => Address, (type) => type.id, {
+  @ManyToMany(() => Product, (Product) => Product.order)
+  @JoinTable({
+    name: 'order_product',
+    joinColumn: {
+      name: 'order_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'product_id',
+      referencedColumnName: 'id',
+    },
+  })
+  products: Product[];
+
+  @OneToMany(() => Address, (type) => type.id, {
     nullable: false,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
   @JoinColumn({ name: 'address_id' })
-  address!: Address;
-  @Column()
+  address: Address;
+  @Column({ nullable: true })
   address_id: number;
+
+  @Column()
+  status: string;
+
+  @Column({ nullable: true })
+  delivery_request_message: string;
+
+  @Column({ nullable: true })
+  payment_id: number;
 }

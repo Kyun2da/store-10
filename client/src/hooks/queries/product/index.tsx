@@ -7,6 +7,7 @@ import {
   getProductReviewsById,
   getProductReviewsCountById,
   postProductReview,
+  deleteProductReview,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
@@ -69,6 +70,21 @@ export const useCreateReview = () => {
     },
     onError: () => {
       notify('error', '에러가 발생했습니다!!');
+    },
+  });
+
+  return mutation;
+};
+
+export const useDeleteReview = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(deleteProductReview, {
+    onSuccess: () => {
+      notify('success', '해당 리뷰를 성공적으로 제거했습니다.');
+      queryClient.invalidateQueries('productReview');
+    },
+    onError: () => {
+      notify('error', '리뷰를 제거하는데 실패했습니다..!');
     },
   });
 

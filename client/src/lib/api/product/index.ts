@@ -44,3 +44,7 @@ export const getCateogries = async () => {
 export const postProductReview = async (data: IReview) => {
   return await client.post<IReview>(`/product/review`, data);
 };
+
+export const deleteProductReview = async (id: number) => {
+  return await client.delete(`/product/review/${id}`);
+};

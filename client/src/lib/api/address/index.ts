@@ -16,3 +16,7 @@ export const updateAddress = async (address: IAddress) => {
 export const deleteAddress = async (id: number) => {
   return await client.delete<IAddress>(`/address/${id}`);
 };
+
+export const getDefaultAddress = async () => {
+  return await client.get<IAddress>('/address/default');
+};

@@ -26,6 +26,8 @@ const AddressInfoText = css`
 `;
 export const AddressNameText = styled.span`
   ${AddressInfoText}
+  display: flex;
+  align-items: center;
   ${({ theme }) => theme.fontWeight.l};
   ${({ theme }) => theme.fontSize.m};
 `;
@@ -58,4 +60,13 @@ export const AddressInput = styled(Input)`
     border: 1px solid ${({ theme }) => theme.color['border-gray']};
     ${({ theme }) => theme.fontSize.m};
   }
+`;
+
+export const DefaultAddress = styled.span`
+  border-radius: 1.2rem;
+  border: 0.1rem solid ${({ theme }) => theme.color.primary};
+  color: ${({ theme }) => theme.color.primary};
+  padding: 0.4rem 0.6rem;
+  ${({ theme }) => theme.fontSize.xs};
+  margin-left: 1.2rem;
 `;

@@ -1,44 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './styles';
 import { DELIVERY_REQUEST_MESSAGES } from '@/contstants';
 import AddressModal from '@/components/Shared/Modal/AddressModal';
 import useModal from '@/hooks/useModal';
+import { useGetDefaultAddress } from '@/hooks/queries/address';
 import { IAddress } from '@/types';
 
-interface IProps {}
-
-const OrderAddress = ({}: IProps) => {
+const OrderAddress = () => {
   const [requestMessage, setRequestMessage] = useState('');
+  const [requestMessageInput, setRequestMessageInput] = useState('');
+  const [address, selectAddress] = useState<IAddress | null>(null);
+  const { data, isLoading } = useGetDefaultAddress();
+
+  useEffect(() => {
+    if (data) {
+      selectAddress(data);
+    }
+  }, [data]);
+
   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRequestMessage(e.currentTarget.value);
   };
-  const [modifyAddressData, setModifyAddressData] = useState<IAddress | null>(
-    null
-  );
-
   const [isOpen, toggleModal] = useModal(false);
 
-  const openAddressModal = (modifyData?: IAddress) => () => {
-    if (modifyData) {
-      setModifyAddressData(modifyData);
-    } else {
-      setModifyAddressData(null);
+  const renderAddressInfo = () => {
+    if (!address) {
+      return <div>empty</div>;
     }
-    toggleModal();
-  };
-
-  return (
-    <article>
-      <S.OrderAddressHeader>
-        <span>배송지</span>
-        <button onClick={() => toggleModal()}>변경</button>
-      </S.OrderAddressHeader>
-
+    return (
       <S.AddressInfo>
-        <S.AddressNameText>김동진</S.AddressNameText>
-        <S.AddressText>서울 특별시 광진구 화양동444, 상세주소</S.AddressText>
-        <S.PhoneText>010-2424-2323</S.PhoneText>
-        <S.AddressCheckbox label="기본 배송지로 저장" />
+        <S.AddressNameText>
+          {address.name}
+          {address.isDefault && (
+            <S.DefaultAddress>기본 배송지</S.DefaultAddress>
+          )}
+        </S.AddressNameText>
+        <S.AddressText>
+          {address.address}, {address.detailAddress}
+        </S.AddressText>
+        <S.PhoneText>{address.phone}</S.PhoneText>
+
+        {!address.isDefault && <S.AddressCheckbox label="기본 배송지로 저장" />}
+
         <S.AddressSelect
           items={DELIVERY_REQUEST_MESSAGES}
           onChange={onChangeSelect}
@@ -49,11 +52,24 @@ const OrderAddress = ({}: IProps) => {
             type="text"
             label="Outlined"
             placeholder="배송시 요청사항을 입력해주세요"
+            onChange={(e) => setRequestMessageInput(e.currentTarget.value)}
           />
         )}
       </S.AddressInfo>
+    );
+  };
 
-      {isOpen && <AddressModal toggleModal={toggleModal} />}
+  return (
+    <article>
+      <S.OrderAddressHeader>
+        <span>배송지</span>
+        <button onClick={() => toggleModal()}>변경</button>
+      </S.OrderAddressHeader>
+      {isLoading || !data ? <div>Loading...</div> : renderAddressInfo()}
+
+      {isOpen && (
+        <AddressModal toggleModal={toggleModal} selectAddress={selectAddress} />
+      )}
     </article>
   );
 };

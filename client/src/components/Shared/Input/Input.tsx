@@ -51,7 +51,7 @@ const Input = ({
     inputRef.current?.focus();
   }, []);
 
-  const inputRef = _ref ?? _inputRef
+  const inputRef = _ref ?? _inputRef;
 
   const onBlurInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     onBlur && onBlur(e);
@@ -87,7 +87,9 @@ const Input = ({
         labelName={labelName}
         error={error}
         onFocus={() => {
-          onFocus;
+          if (onFocus) {
+            onFocus();
+          }
           setFocus(true);
         }}
         onBlur={onBlurInput}

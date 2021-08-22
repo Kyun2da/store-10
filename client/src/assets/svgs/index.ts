@@ -20,3 +20,4 @@ export { default as PackageSVG } from '@/assets/svgs/package.svg';
 export { default as ExchageSVG } from '@/assets/svgs/exchange.svg';
 export { default as QuestionSVG } from '@/assets/svgs/question.svg';
 export { default as AnswerSVG } from '@/assets/svgs/answer.svg';
+export { default as LeftChevron } from '@/assets/svgs/left-chevron.svg';

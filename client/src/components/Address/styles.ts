@@ -1,27 +1,15 @@
 import styled from 'styled-components';
 
-export const AddressList = styled.ul`
-  border-collapse: collapse;
-  li + li {
-    border-top: none;
-  }
-`;
+export const AddressList = styled.ul``;
 
 export const AddressItem = styled.li`
+  margin-top: 1.2rem;
   background: ${({ theme }) => theme.color['off-white']};
   padding: 1.2rem;
-  border: 0.1rem solid ${({ theme }) => theme.color.line};
+  border-radius: 1.2rem;
+  border: 0.1rem solid ${({ theme }) => theme.color['border-gray']};
   &.default-address {
-    border: 0.3rem solid ${({ theme }) => theme.color.primary};
-  }
-
-  &:first-child {
-    border-top-left-radius: 0.8rem;
-    border-top-right-radius: 0.8rem;
-  }
-  &:last-child {
-    border-bottom-left-radius: 0.8rem;
-    border-bottom-right-radius: 0.8rem;
+    border: 0.1rem solid ${({ theme }) => theme.color.primary};
   }
 `;
 
@@ -41,20 +29,21 @@ export const DefaultAddress = styled.span`
   border: 0.1rem solid ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.primary};
   padding: 0.4rem 0.6rem;
+  ${({ theme }) => theme.fontSize.s};
 `;
 
 export const AddressInfoText = styled.span`
   padding: 0.4rem 0;
-  ${({ theme }) => theme.fontWeight.m};
+  ${({ theme }) => theme.fontWeight.l};
   ${({ theme }) => theme.fontSize.m};
   display: block;
 `;
 
-export const AddressInfo = styled.section`
-  margin-top: 1.2rem;
+export const AddressInfoPhone = styled(AddressInfoText)`
+  color: ${({ theme }) => theme.color.label};
 `;
 
-export const DeliveryMessage = styled(AddressInfoText)`
+export const AddressInfo = styled.section`
   margin-top: 1.2rem;
 `;
 
@@ -64,10 +53,15 @@ export const AddressItemFooter = styled.footer`
   button {
     ${({ theme }) => theme.fontSize.m};
     ${({ theme }) => theme.fontWeight.m};
-    border: 1px solid ${({ theme }) => theme.color.line};
+    border: 1px solid ${({ theme }) => theme.color['border-gray']};
 
     &:first-child {
       margin-right: 0.8rem;
+    }
+
+    &:last-child {
+      ${({ theme }) => theme.fontWeight.l};
+      margin-left: auto;
     }
   }
 `;

@@ -22,11 +22,12 @@ const Button = ({
   disabled = false,
   className,
 }: IButtonProps) => {
+  const newClassName = className ? color + ' ' + className : color;
   return (
     <S.Button
       type={type}
       color={color}
-      className={color + ' ' + className}
+      className={newClassName}
       onClick={onClick}
       size={size}
       fullWidth={fullWidth}

@@ -48,8 +48,6 @@ const ProductReview = () => {
   const { count, sum, ratings } = scores;
   const rating = calculateRating({ sum, count });
 
-  console.log(reviews);
-
   const handleClickReviewButton = () => {
     if (!user) {
       return notify('error', '로그인 후 작성 가능합니다.');
@@ -87,7 +85,7 @@ const ProductReview = () => {
           <span className="totalRates">{rating}</span>
           <RatingGetter rating={rating} uniqueId="totalRating" />
         </S.StarRates>
-        <RatingChart ratings={ratings} />
+        <RatingChart total={count} ratings={ratings} />
       </S.RatingArea>
 
       <S.UserReviewArea>

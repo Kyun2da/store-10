@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { CheckSVG } from '@/assets/svgs';
 import * as S from './styles';
 
@@ -18,8 +18,12 @@ const Checkbox = ({
   checked,
   name,
 }: IProps) => {
+  const checkBoxOnClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+  }, []);
+
   return (
-    <S.Checkbox className={className}>
+    <S.Checkbox className={className} onClick={checkBoxOnClick}>
       <input
         name={name}
         type="checkbox"

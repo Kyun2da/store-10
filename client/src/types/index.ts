@@ -116,7 +116,6 @@ export interface IAddress {
   address: string;
   detailAddress: string;
   phone: string;
-  message: string;
   isDefault: boolean;
   userId?: number;
   id?: number;
@@ -130,4 +129,11 @@ export interface ICategory {
 export interface ISubCategory {
   id: number;
   title: string;
+}
+
+export interface IBookmarkProduct {
+  productId: number;
+  title: string;
+  price: number;
+  image: string;
 }

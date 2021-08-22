@@ -16,7 +16,7 @@ export const Links = () => {
       <Link to={user ? '/mypage' : '/login'}>
         <UserSVG />
       </Link>
-      <Link to="/" /*찜 페이지가 들어가야함 */>
+      <Link to="/bookmark">
         <HeartSVG />
       </Link>
       <Link to="/cart">

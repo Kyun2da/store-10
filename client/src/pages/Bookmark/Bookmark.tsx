@@ -1,7 +1,7 @@
 import Card from '@/components/Card';
 import CardWrapper from '@/components/CardWrapper';
 import {
-  useDeleteBookmark,
+  useDeleteDetailBookmark,
   useGetDetailBookmarkProducts,
 } from '@/hooks/queries/bookmark';
 import { Redirect } from '@/lib/Router';
@@ -41,13 +41,9 @@ const renderProducts = (
 const Bookmark = () => {
   const [isEdit, setIsEdit] = useState(true);
   const { isLoading, data } = useGetDetailBookmarkProducts();
-  const { mutate } = useDeleteBookmark();
+  const { mutate } = useDeleteDetailBookmark();
   const [user] = useRecoilState(userState);
   const [checkedList, setCheckedList] = useState<number[]>([]);
-
-  useEffect(() => {
-    console.log(checkedList);
-  }, [checkedList]);
 
   const toggleIsEdit = (val: boolean) => {
     setIsEdit(val);
@@ -64,16 +60,18 @@ const Bookmark = () => {
       <S.BookmarkTitle level={3}>찜 목록</S.BookmarkTitle>
       <S.ButtonContainer>
         {isEdit ? (
-          <S.EditButton
-            type="button"
-            color="primary"
-            size="Small"
-            onClick={() => {
-              toggleIsEdit(false);
-            }}
-          >
-            편집
-          </S.EditButton>
+          !!data?.length && (
+            <S.EditButton
+              type="button"
+              color="primary"
+              size="Small"
+              onClick={() => {
+                toggleIsEdit(false);
+              }}
+            >
+              편집
+            </S.EditButton>
+          )
         ) : (
           <>
             <S.EditButton

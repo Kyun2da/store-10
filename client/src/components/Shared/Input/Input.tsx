@@ -47,11 +47,11 @@ const Input = ({
 }: IInput & IInputContainer) => {
   const [isFocus, setFocus] = useState(false);
   const _inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = _ref ?? _inputRef;
+
   const onClickLabel = useCallback(() => {
     inputRef.current?.focus();
-  }, []);
-
-  const inputRef = _ref ?? _inputRef
+  }, [inputRef]);
 
   const onBlurInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     onBlur && onBlur(e);
@@ -59,10 +59,11 @@ const Input = ({
       setFocus((value) => !value);
     }
   };
+
   return (
     <S.InputContainer
       fullWidth={fullWidth}
-      className={'input-container' + className || ''}
+      className={'input-container' + (className ? className : '')}
     >
       {labelName ? (
         <S.Label

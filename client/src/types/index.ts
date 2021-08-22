@@ -115,3 +115,10 @@ export interface ISubCategory {
   id: number;
   title: string;
 }
+
+export interface IBookmarkProduct {
+  productId: number;
+  title: string;
+  price: number;
+  image: string;
+}

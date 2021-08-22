@@ -27,11 +27,11 @@ class BookmarkController {
   }
 
   async deleteBookmarks(req: Request, res: Response) {
-    const { productIds } = req.body;
+    const { productIds } = req.query;
     const userId = req.user.id;
     await BookmarkService.deleteBookmarks({
       userId,
-      productIds: productIds,
+      productIds: JSON.parse(productIds as string),
     });
 
     ApiResponse(res, HttpStatusCode.NO_CONTENT);

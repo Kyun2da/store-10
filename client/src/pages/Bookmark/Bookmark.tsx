@@ -1,5 +1,6 @@
 import Card from '@/components/Card';
 import CardWrapper from '@/components/CardWrapper';
+import Thung from '@/components/Thung/Thung';
 import {
   useDeleteDetailBookmark,
   useGetDetailBookmarkProducts,
@@ -59,8 +60,8 @@ const Bookmark = () => {
     <S.BookmarkContainer>
       <S.BookmarkTitle level={3}>찜 목록</S.BookmarkTitle>
       <S.ButtonContainer>
-        {isEdit ? (
-          !!data?.length && (
+        {!!data?.length ? (
+          isEdit ? (
             <S.EditButton
               type="button"
               color="primary"
@@ -71,40 +72,44 @@ const Bookmark = () => {
             >
               편집
             </S.EditButton>
+          ) : (
+            <>
+              <S.EditButton
+                type="button"
+                color="red"
+                size="Small"
+                onClick={removeBookmarkItems}
+              >
+                삭제
+              </S.EditButton>
+              <S.EditButton
+                type="button"
+                color="primary"
+                size="Small"
+                onClick={() => {
+                  toggleIsEdit(true);
+                }}
+              >
+                취소
+              </S.EditButton>
+            </>
           )
-        ) : (
-          <>
-            <S.EditButton
-              type="button"
-              color="red"
-              size="Small"
-              onClick={removeBookmarkItems}
-            >
-              삭제
-            </S.EditButton>
-            <S.EditButton
-              type="button"
-              color="primary"
-              size="Small"
-              onClick={() => {
-                toggleIsEdit(true);
-              }}
-            >
-              취소
-            </S.EditButton>
-          </>
-        )}
+        ) : null}
       </S.ButtonContainer>
       <S.CardContainer>
-        <CardWrapper col={4}>
-          {renderProducts(
-            isLoading,
-            data,
-            !isEdit,
-            setCheckedList,
-            checkedList
-          )}
-        </CardWrapper>
+        {!!data?.length ? (
+          <CardWrapper col={4}>
+            {renderProducts(
+              isLoading,
+              data,
+              !isEdit,
+              setCheckedList,
+              checkedList
+            )}
+          </CardWrapper>
+        ) : (
+          <Thung title="찜한 상품이 없습니다! 맘에 드는 상품을 찜해보세요." />
+        )}
       </S.CardContainer>
     </S.BookmarkContainer>
   );

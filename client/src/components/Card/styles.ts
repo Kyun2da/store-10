@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Checkbox from '../Shared/Checkbox';
 
 export const Card = styled.li`
   display: flex;
@@ -20,6 +21,12 @@ interface LinerProps {
 export const Liner = styled.div<LinerProps>`
   background-color: ${({ theme, bgColor }) => theme.color[bgColor]};
   height: 0.5rem;
+`;
+
+export const CardCheckbox = styled(Checkbox)`
+  position: absolute;
+  z-index: 200;
+  margin: 1rem;
 `;
 
 export const BottomBar = styled.div`

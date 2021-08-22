@@ -3,12 +3,13 @@ import * as S from './styles';
 
 export interface IButtonProps {
   type: 'submit' | 'button';
-  color: 'primary' | 'black' | 'white';
+  color: 'primary' | 'black' | 'white' | 'red';
   size?: 'Large' | 'Default' | 'Small';
   fullWidth?: boolean;
   children?: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
+  className?: string;
 }
 
 const Button = ({
@@ -19,12 +20,13 @@ const Button = ({
   children,
   onClick,
   disabled = false,
+  className,
 }: IButtonProps) => {
   return (
     <S.Button
       type={type}
       color={color}
-      className={color}
+      className={color + ' ' + className}
       onClick={onClick}
       size={size}
       fullWidth={fullWidth}

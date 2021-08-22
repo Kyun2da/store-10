@@ -10,7 +10,7 @@ import {
 } from '@/hooks/queries/product';
 import { IProduct } from '@/types';
 
-interface IProductQuery {
+export interface IProductQuery {
   data: IProduct[] | undefined;
   isLoading: boolean;
 }

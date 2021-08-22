@@ -22,6 +22,7 @@ import Error from '@/components/Shared/Error';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
+import Bookmark from '@/pages/Bookmark';
 
 const App = () => {
   const [theme, setTheme] = useState('light-mode');
@@ -62,6 +63,7 @@ const App = () => {
                   <Route path="/" component={Main} />
                   <Route path="/select_auth" component={SelectAuth} />
                   <Route path="/approval/:authtype" component={Approval} />
+                  <Route path="/bookmark" component={Bookmark} />
                   <Route path="/category/:categoryId" component={Category} />
                   <Route path="/signup" component={SignUp} />
                   <Route path="/login" component={Login} />

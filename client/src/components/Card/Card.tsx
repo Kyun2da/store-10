@@ -41,7 +41,6 @@ const Card = ({
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    console.log('a 링크 이동 이벤트를 막자요');
   };
 
   const isChecked = !!checkedList?.find((checkedId) => checkedId === linkId);

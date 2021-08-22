@@ -45,10 +45,6 @@ const Bookmark = () => {
   const [user] = useRecoilState(userState);
   const [checkedList, setCheckedList] = useState<number[]>([]);
 
-  useEffect(() => {
-    console.log(checkedList);
-  }, [checkedList]);
-
   const toggleIsEdit = (val: boolean) => {
     setIsEdit(val);
   };

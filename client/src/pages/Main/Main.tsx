@@ -21,7 +21,6 @@ const Main = () => {
   const bestQuery = useGetBestProducts();
   const recentQuery = useGetRecentProducts();
   const { data: bookmarkIdList } = useGetBookmarkIds();
-  console.log(bookmarkIdList);
 
   const renderProducts = (qurey: IProductQuery) => {
     const { data, isLoading } = qurey;

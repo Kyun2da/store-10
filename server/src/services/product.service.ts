@@ -9,6 +9,7 @@ import { MainCategory } from '@/entities/mainCategory.entity';
 import { SubCategory } from '@/entities/subCategory.entity';
 import combineObjectArray from '@/utils/combineObjectArray';
 import { Review } from '@/entities/review.entity';
+import { ReviewImage } from '@/entities/reviewImage.entity';
 
 interface ICollection {
   name: string;
@@ -61,6 +62,11 @@ class ProductService {
   async createReview(review: Review) {
     const productReviewRepo = ProductReviewRepository();
     return await productReviewRepo.createProductReview(review);
+  }
+
+  async createReviewImage(reviewImage: ReviewImage) {
+    const productReviewImageRepo = ProductReviewImageRepository();
+    return await productReviewImageRepo.createReviewImage(reviewImage);
   }
 
   async getProducts({ category, limit }) {

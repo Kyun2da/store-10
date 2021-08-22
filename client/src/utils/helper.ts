@@ -26,6 +26,17 @@ export const calculateRating = ({
   return +value;
 };
 
+export const calculateRatio = ({
+  total,
+  count,
+}: {
+  total: number;
+  count: string;
+}) => {
+  const portion = +count / total;
+  return +portion.toFixed(2);
+};
+
 export const compressImageFile = (file: File) => {
   return new Promise<File>((resolve) => {
     const fileReader = new FileReader();

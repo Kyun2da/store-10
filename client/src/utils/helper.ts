@@ -21,6 +21,7 @@ export const calculateRating = ({
   sum: string;
   count: number;
 }) => {
+  if (!+sum || !count) return 0;
   const value = (+sum / count).toFixed(1);
   return +value;
 };

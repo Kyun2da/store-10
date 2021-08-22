@@ -6,6 +6,7 @@ import {
 } from '@/assets/svgs';
 import { Link } from '@/lib/Router';
 import wonFormat from '@/utils/wonFormat';
+import { useAddBookmark, useDeleteBookmark } from '@/hooks/queries/bookmark';
 
 interface CardProps {
   bgColor: 'error' | 'primary'; // category 식으로 리스트화 (enum 등..) 필요
@@ -18,6 +19,7 @@ interface CardProps {
   checkBoxDisplay?: boolean;
   setCheckedList?: Dispatch<number[]>;
   checkedList?: number[];
+  bookmarkList?: number[];
 }
 
 const Card = ({
@@ -31,7 +33,11 @@ const Card = ({
   checkBoxDisplay = false,
   setCheckedList,
   checkedList,
+  bookmarkList,
 }: CardProps) => {
+  const { mutate: addMutate } = useAddBookmark();
+  const { mutate: deleteMutate } = useDeleteBookmark();
+
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
@@ -48,9 +54,21 @@ const Card = ({
     }
   };
 
+  const isHeartChecked = !!bookmarkList?.find(
+    (checkedId) => checkedId === linkId
+  );
+
   const checkBoxOnClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
   }, []);
+
+  const heartBtnOnClick = useCallback(() => {
+    if (isHeartChecked) {
+      deleteMutate([linkId]);
+    } else {
+      addMutate(linkId);
+    }
+  }, [addMutate, deleteMutate, isHeartChecked, linkId]);
 
   return (
     <Link to={`/detail/${linkId}`}>
@@ -69,7 +87,12 @@ const Card = ({
           {!bottomDisplay || (
             <S.BottomBar onClick={handleClick}>
               <S.ButtonArea>
-                <HeartButton witdh={24} height={24} />
+                <HeartButton
+                  witdh={24}
+                  height={24}
+                  fill={isHeartChecked ? 'red' : 'none'}
+                  onClick={heartBtnOnClick}
+                />
               </S.ButtonArea>
               <S.ButtonArea>
                 <ShoppingCart witdh={24} height={24} />

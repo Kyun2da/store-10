@@ -14,7 +14,7 @@ import {
   IProduct,
   IProductDetail,
   IProductReview,
-  IReviewCount,
+  IReviewCountAndRating,
 } from '@/types/index';
 import { notify } from '@/components/Shared/Toastify';
 
@@ -35,8 +35,9 @@ export const useGetProductReviewsById = (id: string, offset: number) => {
 };
 
 export const useGetProductReviewsCount = (id: string) => {
-  return useQuery<IReviewCount, Error>(['productReviewCount', id], () =>
-    getProductReviewsCountById(id)
+  return useQuery<IReviewCountAndRating, Error>(
+    ['productReviewCount', id],
+    () => getProductReviewsCountById(id)
   );
 };
 

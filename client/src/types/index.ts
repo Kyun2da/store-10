@@ -74,8 +74,9 @@ export interface IProductDetail {
 
 export type IReview = FormData;
 
-export interface IReviewCount {
+export interface IReviewCountAndRating {
   count: number;
+  sum: string;
 }
 
 export interface IProductReview {

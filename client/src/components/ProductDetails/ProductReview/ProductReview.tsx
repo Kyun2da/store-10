@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import * as S from '../styles';
 import Button from '@/components/Shared/Button';
 import useModal from '@/hooks/useModal';
-import { ReviewModal } from '@/components/Shared/Modal';
+import { ReviewModal, ReviewImageModal } from '@/components/Shared/Modal';
 import { useParams } from '@/lib/Router';
 import {
   useGetProductReviewsById,
@@ -29,7 +29,9 @@ interface IProductReview {
 const ProductReview = ({ totalRating }: IProductReview) => {
   const { id } = useParams().params;
   const [offset, setOffset] = useState(0);
-  const [isOpen, toggleModal] = useModal(false);
+  const [selectedImage, setSelectedImage] = useState('');
+  const [isReviewOpen, toggleReviewModal] = useModal(false);
+  const [isImageOpen, toggleImageModal] = useModal(false);
   const [user] = useRecoilState(userState);
 
   const {
@@ -38,14 +40,6 @@ const ProductReview = ({ totalRating }: IProductReview) => {
     error,
   } = useGetProductReviewsById(id, offset);
   const { data: count } = useGetProductReviewsCount(id);
-
-  const handleClickReviewButton = () => {
-    if (!user) {
-      return notify('error', '로그인 후 작성 가능합니다.');
-    }
-
-    toggleModal();
-  };
 
   // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
   if (error) {
@@ -56,8 +50,21 @@ const ProductReview = ({ totalRating }: IProductReview) => {
     return <div>loading</div>;
   }
 
+  const handleClickReviewButton = () => {
+    if (!user) {
+      return notify('error', '로그인 후 작성 가능합니다.');
+    }
+
+    toggleReviewModal();
+  };
+
   const handleOnClickPage = (idx: number) => {
     setOffset(+idx * LIMIT);
+  };
+
+  const handleOnClickImage = (image: string) => {
+    setSelectedImage(image);
+    toggleImageModal();
   };
 
   return (
@@ -101,7 +108,12 @@ const ProductReview = ({ totalRating }: IProductReview) => {
               {review.url.length !== 0 && (
                 <S.ReviewImages>
                   {review.url.map((image) => (
-                    <img key={nanoid()} src={image} alt="유저사진리뷰" />
+                    <img
+                      onClick={() => handleOnClickImage(image)}
+                      key={nanoid()}
+                      src={image}
+                      alt="유저사진리뷰"
+                    />
                   ))}
                 </S.ReviewImages>
               )}
@@ -117,7 +129,13 @@ const ProductReview = ({ totalRating }: IProductReview) => {
         count={Math.ceil(count.count / LIMIT)}
       />
 
-      {isOpen && <ReviewModal toggleModal={toggleModal} />}
+      {isReviewOpen && <ReviewModal toggleModal={toggleReviewModal} />}
+      {isImageOpen && (
+        <ReviewImageModal
+          selectedImage={selectedImage}
+          toggleModal={toggleImageModal}
+        />
+      )}
     </S.PanelWrapper>
   );
 };

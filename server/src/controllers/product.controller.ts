@@ -32,20 +32,27 @@ class ProductController {
     const { id } = req.params;
 
     const count = await ProductService.getProductReviewsCountById(id);
+    const { sum } = await ProductService.getProductReviewRating(id);
 
-    if (count === undefined || count === null) {
+    if (
+      count === undefined ||
+      count === null ||
+      sum === undefined ||
+      sum === null
+    ) {
       return ApiResponse(
         res,
         HttpStatusCode.BAD_REQUEST,
-        '해당 상품에 대한 리뷰가 없어요'
+        '해당 상품에 대한 리뷰 또는 별점조회 에러'
       );
     }
 
+    const result = { count, sum };
     return ApiResponse(
       res,
       HttpStatusCode.OK,
-      '해당 상품 리뷰 개수 조회 성공',
-      { count }
+      '해당 상품 리뷰 개수 및 별점 조회 성공',
+      result
     );
   }
 

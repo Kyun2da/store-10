@@ -59,6 +59,11 @@ class ProductService {
     return reviews;
   }
 
+  async getProductReviewRating(id: string) {
+    const productReviewRepo = ProductReviewRepository();
+    return await productReviewRepo.findProductRatingById(id);
+  }
+
   async createReview(review: Review) {
     const productReviewRepo = ProductReviewRepository();
     return await productReviewRepo.createProductReview(review);

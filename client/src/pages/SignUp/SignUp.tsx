@@ -15,6 +15,10 @@ import * as S from './styles';
 import { CheckSVG } from '@/assets/svgs';
 import { createUser } from '@/lib/api/user/createUser';
 import { Redirect, useHistory } from '@/lib/Router';
+import { notify } from '@/components/Shared/Toastify';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
+import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 
 const SignUp = () => {
   const [error, setError] = useState({
@@ -30,16 +34,16 @@ const SignUp = () => {
 
   const onClickEmailCheck = useCallback(async () => {
     if (!validateEmail(email)) {
-      return window.alert('올바른 이메일을 입력하세요.');
+      notify('error', '올바른 이메일을 입력하세요.');
     }
     try {
       await postEmailCheck(email);
       setEmailCheck(true);
-      window.alert('사용할 수 있는 아이디입니다!');
+      notify('success', '사용할 수 있는 아이디입니다!');
     } catch (err) {
-      const { status } = err.response.data;
-      if (status === 409) window.alert('이미 존재하는 아이디 입니다.');
-      else window.alert('서버 에러입니다. 관리자에게 문의하세요.');
+      const { status } = err.response;
+      if (status === 409) notify('error', '이미 존재하는 아이디 입니다.');
+      else notify('error', '서버 에러입니다. 관리자에게 문의하세요.');
     }
   }, [email, setEmailCheck]);
 
@@ -71,6 +75,8 @@ const SignUp = () => {
     [password, error]
   );
 
+  const [user, setUser] = useRecoilState(userState);
+
   const { historyPush } = useHistory();
   const formSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -86,24 +92,24 @@ const SignUp = () => {
       const rePassword = target.rePassword.value;
       const name = target.name.value;
       if (!validateAll(email, password, rePassword, name)) {
-        window.alert('회원가입 폼이 제대로 채워지지 않았습니다.');
+        notify('error', '회원가입 폼이 제대로 채워지지 않았습니다.');
       } else if (!emailCheck) {
-        window.alert('이메일 중복확인이 필요합니다.');
+        notify('error', '이메일 중복확인이 필요합니다.');
       } else {
         try {
           await createUser({ user_id: email, password, rePassword, name });
+          const user = await getCurrentUser();
+          setUser(user);
           historyPush('/');
         } catch (err) {
-          window.alert('알수 없는 에러입니다.');
+          notify('error', '알수 없는 에러입니다.');
         }
       }
     },
-    [emailCheck, historyPush]
+    [emailCheck, historyPush, setUser]
   );
 
-  const userName = window.localStorage.getItem('userName');
-
-  if (userName) return <Redirect to="/" />;
+  if (user) return <Redirect to="/" />;
 
   return (
     <S.SignUpContainer>

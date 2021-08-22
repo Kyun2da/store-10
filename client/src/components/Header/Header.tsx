@@ -6,19 +6,17 @@ import { Link } from '@/lib/Router';
 import Sidebar from './Sidebar';
 import Search from './Search';
 import { SITE_TITLE } from '@/utils/constant/common';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
 
-interface Props {
-  userName?: string | null;
-}
-
-export const Links = ({ ...props }: Props) => {
-  const { userName } = props;
+export const Links = () => {
+  const [user] = useRecoilState(userState);
   return (
     <>
-      <Link to={userName ? '/mypage' : '/login'}>
+      <Link to={user ? '/mypage' : '/login'}>
         <UserSVG />
       </Link>
-      <Link to="/mypage">
+      <Link to="/bookmark">
         <HeartSVG />
       </Link>
       <Link to="/cart">
@@ -29,7 +27,6 @@ export const Links = ({ ...props }: Props) => {
 };
 
 const Header = () => {
-  const userName = window.localStorage.getItem('userName');
   const [sideBarIsOpen, setSideBarIsOpen] = useState(false);
   const [searchIsOpen, setSearchIsOpen] = useState(false);
 
@@ -41,11 +38,7 @@ const Header = () => {
   return (
     <>
       <S.HeaderWrapper>
-        <Sidebar
-          userName={userName}
-          isOpen={sideBarIsOpen}
-          setIsOpen={setSideBarIsOpen}
-        />
+        <Sidebar isOpen={sideBarIsOpen} setIsOpen={setSideBarIsOpen} />
         <S.Header>
           <S.Menu>
             <S.MenuButton onClick={() => setSideBarIsOpen(!sideBarIsOpen)}>

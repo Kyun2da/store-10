@@ -10,7 +10,7 @@ import {
 } from '@/hooks/queries/product';
 import { IProduct } from '@/types';
 
-interface IProductQuery {
+export interface IProductQuery {
   data: IProduct[] | undefined;
   isLoading: boolean;
 }
@@ -28,6 +28,7 @@ const Main = () => {
     return data.map((product: IProduct) => (
       <Card
         key={product.id}
+        linkId={product.id}
         bgColor="primary"
         src={product.productImage[0].url}
         price={product.price}

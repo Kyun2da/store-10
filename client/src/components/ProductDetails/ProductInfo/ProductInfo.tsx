@@ -8,22 +8,20 @@ import wonFormat from '@/utils/wonFormat';
 import { usePostCart } from '@/hooks/queries/cart';
 import { useGetProductById } from '@/hooks/queries/product';
 import { useParams } from '@/lib/Router';
+import thumbnailsParser from '@/utils/thumbnailsParser';
+import ProductThumbnails from './../ProductThumbnails/ProductThumbnails';
 
 const ProductInfo = () => {
   const { id } = useParams().params;
 
-  const { data, isLoading, error } = useGetProductById(
-    (id as number) < 60000 ? 66310 : (id as number) // 임시조치입니다 -- 신경 쓰지 마세효
-  );
-
-  const [value, handleClickOnMinus, handleClickOnPlus] = useNumberInput(1);
+  const { data, isLoading, error } = useGetProductById(id);
   const { mutate } = usePostCart();
+  const [value, handleClickOnMinus, handleClickOnPlus] = useNumberInput(1);
 
   const onClickCart = () => {
     mutate({
       count: value,
-      // TODO: 데이터 연동 후 임시 ID 삭제
-      productId: 66310,
+      productId: id,
     });
   };
 
@@ -36,14 +34,17 @@ const ProductInfo = () => {
     return <div>loading</div>;
   }
 
-  const { title, price } = data.details;
-  const thumbnail = data.thumbnails.filter((thumb) => thumb.type === 'detail');
+  const { details, thumbnails } = data;
+  const { title, price } = details;
+  const [thumbDetails, thumbOrigins, thumbThumbnails] =
+    thumbnailsParser(thumbnails);
 
   return (
     <S.ProductInfo>
-      <S.ProductThumbnail
-        src={`https:` + thumbnail[0].url}
-        alt="상품 섬네일 이미지"
+      <ProductThumbnails
+        thumbDetails={thumbDetails}
+        thumbOrigins={thumbOrigins}
+        thumbThumbnails={thumbThumbnails}
       />
       <S.ProductOrder>
         <Title level={3}>{title}</Title>

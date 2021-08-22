@@ -20,7 +20,7 @@ const ErrorJWT = (res: Response, message: string) => {
 };
 
 const authJWT = async (req: Request, res: Response, next: NextFunction) => {
-  if (!req.headers.cookie) {
+  if (!req.cookies.accessToken || !req.cookies.refreshToken) {
     ErrorJWT(res, ERROR_HEADER_COOKIE_IS_NOT_EXIST);
     return;
   }

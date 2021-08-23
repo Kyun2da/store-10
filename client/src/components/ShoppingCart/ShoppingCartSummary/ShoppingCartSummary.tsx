@@ -2,7 +2,8 @@ import React, { useCallback } from 'react';
 import * as S from './styles';
 import { wonFormat } from '@/utils/helper';
 import Button from '@/components/Shared/Button';
-import { useHistory } from '@/lib/Router';
+import { usePostOrder } from '@/hooks/queries/order';
+import { ICart } from '@/types';
 
 interface ISShoppingCartSummaryProps {
   totalPrice: number;
@@ -10,21 +11,28 @@ interface ISShoppingCartSummaryProps {
   discount?: number;
   productCount: number;
   disabled?: boolean;
+  checkedItems: ICart[];
 }
 
 const ShoppingCartSummary = ({
   totalPrice,
-  deliveryFee = 0,
+  deliveryFee = 2500,
   discount = 0,
   productCount,
   disabled,
+  checkedItems,
 }: ISShoppingCartSummaryProps) => {
   const sum = totalPrice + deliveryFee - discount;
-  const { historyPush } = useHistory();
-
+  const { mutate } = usePostOrder();
   const buyButtonOnClick = useCallback(() => {
-    historyPush('/order');
-  }, [historyPush]);
+    mutate({
+      products: checkedItems.map((item) => ({
+        count: item.count,
+        id: item.productId,
+      })),
+      status: 'created',
+    });
+  }, [mutate, checkedItems]);
 
   return (
     <S.ShoppingCartSummaryWrapper>
@@ -39,7 +47,10 @@ const ShoppingCartSummary = ({
         </S.ShoppingCartSummaryRow>
         <S.ShoppingCartSummaryRow>
           <dt>총 할인금액</dt>
-          <dd>+ {wonFormat(discount)}</dd>
+          <dd>
+            {!!discount && '+ '}
+            {wonFormat(discount)}
+          </dd>
         </S.ShoppingCartSummaryRow>
         <S.ShoppingCartSummaryRow>
           <dt>결제 금액</dt>

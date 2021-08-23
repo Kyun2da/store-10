@@ -1,5 +1,6 @@
 import OrderRepository from '@/repositories/order.repository';
 import OrderProductRepository from '@/repositories/orderProduct.repository';
+import AddressRepository from '@/repositories/address.repository';
 
 class OrderService {
   async createOrder({
@@ -71,6 +72,20 @@ class OrderService {
         price: product.price,
       })),
     }));
+  }
+
+  async updateOrder({ user_id, order, updateDefaultAddress }) {
+    if (updateDefaultAddress) {
+      const addressRepo = AddressRepository();
+      await addressRepo.removeDefaultAddress(user_id);
+      await addressRepo.updateAddress({
+        is_default: updateDefaultAddress,
+        id: order.address_id,
+      });
+    }
+
+    const orderRepo = OrderRepository();
+    return await orderRepo.updateOrder({ user_id, ...order });
   }
 }
 

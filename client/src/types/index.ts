@@ -179,10 +179,15 @@ export interface IOrder {
   id: number;
   products: IOrderProduct[];
   status: string;
-  address_id: number;
+  address_id?: number | null;
   user_id: number;
-  delivery_request_message: string;
+  delivery_request_message?: string | null;
   deliveredAt?: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface IOrderUpdate {
+  order: Partial<IOrder>;
+  updateDefaultAddress?: boolean;
 }

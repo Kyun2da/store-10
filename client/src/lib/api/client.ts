@@ -48,4 +48,13 @@ export default {
       return throwError(e);
     }
   },
+
+  async patch<T>(url: string, body: T) {
+    try {
+      const res = await client.patch(url, body);
+      return res.data.result;
+    } catch (e) {
+      return throwError(e);
+    }
+  },
 };

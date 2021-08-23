@@ -4,6 +4,7 @@ import OrderController from '@/controllers/order.controller';
 
 const router = Router();
 
+router.patch('/', wrapAsync(OrderController.updateOrder));
 router.post('/', wrapAsync(OrderController.createOrder));
 router.get('/', wrapAsync(OrderController.getOrders));
 router.get('/:id', wrapAsync(OrderController.getOrder));

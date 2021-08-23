@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import shoppingCart from '@/dummies/shoppingCart';
-import { shoppingCartItem } from '@/types';
+import { ICart } from '@/types';
 import ShoppingCartSummary from '.';
 
 export default {
@@ -9,15 +9,14 @@ export default {
   component: ShoppingCartSummary,
 } as ComponentMeta<typeof ShoppingCartSummary>;
 
-const initialItems = shoppingCart.map((item) => ({
-  ...item,
-  isChekced: true,
-}));
-
 const Template: ComponentStory<typeof ShoppingCartSummary> = () => {
-  const [shoppingCartItems] = useState<shoppingCartItem[]>(initialItems);
+  const [shoppingCartItems] = useState<ICart[]>(shoppingCart);
+  const [unCheckedList, setUnCheckedList] = useState<number[]>([]);
+  const checkedItems = shoppingCartItems.filter(
+    (item) =>
+      !unCheckedList.find((uncheckedId) => item.productId === uncheckedId)
+  );
 
-  const checkedItems = shoppingCartItems.filter((item) => item.isChekced);
   const productCount = checkedItems.length;
   const totalPrice = checkedItems.reduce(
     (sum, item) => sum + item.price * item.count,
@@ -29,6 +28,7 @@ const Template: ComponentStory<typeof ShoppingCartSummary> = () => {
       productCount={productCount}
       totalPrice={totalPrice}
       disabled={false}
+      checkedItems={checkedItems}
     />
   );
 };

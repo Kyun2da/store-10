@@ -38,6 +38,9 @@ export const OrderSummaryRow = styled.div`
   dd {
     ${({ theme }) => theme.fontSize.m}
     ${({ theme }) => theme.fontWeight.l}
+    &.red {
+      color: ${({ theme }) => theme.color.error};
+    }
   }
 
   &:last-child {

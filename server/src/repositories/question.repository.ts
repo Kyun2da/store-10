@@ -28,6 +28,12 @@ class QuestionRepository extends Repository<Question> {
       .offset(+offset)
       .getRawMany();
   }
+
+  findProductQuestionsCountById(product_id: string): Promise<number> {
+    return this.createQueryBuilder('question')
+      .where('question.product_id = :product_id', { product_id: +product_id })
+      .getCount();
+  }
 }
 
 export default () => getCustomRepository(QuestionRepository);

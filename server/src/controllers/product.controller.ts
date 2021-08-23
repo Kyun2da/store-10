@@ -120,9 +120,9 @@ class ProductController {
 
   async getProductQuestionsById(req: Request, res: Response) {
     const { id, offset } = req.params;
-    const result = await ProductService.getProductQuestionsById(id, offset);
+    const questions = await ProductService.getProductQuestionsById(id, offset);
 
-    if (!result) {
+    if (!questions) {
       return ApiResponse(
         res,
         HttpStatusCode.BAD_REQUEST,
@@ -134,8 +134,19 @@ class ProductController {
       res,
       HttpStatusCode.OK,
       '해당 상품 문의 조회 성공',
-      result
+      questions
     );
+  }
+
+  async getProductQuestionsCountById(req: Request, res: Response) {
+    const { id } = req.params;
+    const count = await ProductService.getProductQuestionsCountById(id);
+
+    console.log(count);
+
+    return ApiResponse(res, HttpStatusCode.OK, '해당 상품 문의 조회 성공', {
+      count,
+    });
   }
 
   async getProductReviewsById(req: Request, res: Response) {

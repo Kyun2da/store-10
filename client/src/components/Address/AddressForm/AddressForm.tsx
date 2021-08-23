@@ -7,6 +7,8 @@ import Button from '@/components/Shared/Button';
 import Form from '@/components/Shared/Form';
 import useModal from '@/hooks/useModal';
 import * as S from './styles';
+import { KOREAN_PHONE_PREFIX } from '@/contstants';
+import { validatePhone } from '@/utils/constant/validate/validation';
 
 interface IProps {
   addressToModify: IAddress | null;
@@ -38,11 +40,17 @@ const AddressForm = ({
     detailAddress: false,
     phone: false,
   });
+  const [phonePrefix, setPhonePrefix] = useState('010');
 
   const checkValidation = (): boolean => {
     let isValid = true;
     for (const [key, value] of Object.entries(inputs)) {
-      if (!value && errors[key] !== undefined) {
+      if (key === 'phone') {
+        if (value.length < 8) {
+          setErrors((prev) => ({ ...prev, phone: true }));
+          isValid = false;
+        }
+      } else if (!value && errors[key] !== undefined) {
         setErrors((prev) => ({ ...prev, [key]: true }));
         isValid = false;
       }
@@ -64,6 +72,16 @@ const AddressForm = ({
     setInputs({ ...inputs, [name]: value });
     if (value) {
       setErrors({ ...errors, [name]: false });
+    }
+  };
+
+  const onChangePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = validatePhone(e);
+    if (!value) return;
+
+    setInputs({ ...inputs, phone: value });
+    if (value.length >= 8) {
+      setErrors({ ...errors, phone: false });
     }
   };
 
@@ -92,10 +110,16 @@ const AddressForm = ({
       return;
     }
     if (addressToModify) {
-      updateMutation.mutate({ ...inputs });
+      updateMutation.mutate({
+        ...inputs,
+        phone: `${phonePrefix}-${inputs.phone}`,
+      });
       setOpenForm(false);
     } else {
-      postMutation.mutate({ ...inputs });
+      postMutation.mutate({
+        ...inputs,
+        phone: `${phonePrefix}-${inputs.phone}`,
+      });
       toggleModal();
     }
   };
@@ -125,16 +149,25 @@ const AddressForm = ({
 
         <S.FormRow>
           <S.FormRowName>연락처</S.FormRowName>
-          <Input
-            type="text"
-            label="Outlined"
-            name="phone"
-            fullWidth
-            placeholder="연락처"
-            value={inputs.phone}
-            onChange={onChangeInput}
-            error={errors.phone}
-          />
+          <S.PhoneWrapper>
+            <S.PhoneSelect
+              items={KOREAN_PHONE_PREFIX.map((num) => ({
+                value: num,
+                name: num,
+              }))}
+              onChange={(e) => setPhonePrefix(e.currentTarget.value)}
+            />
+            <Input
+              type="text"
+              label="Outlined"
+              name="phone"
+              fullWidth
+              placeholder="연락처"
+              value={inputs.phone}
+              onChange={onChangePhoneInput}
+              error={errors.phone}
+            />
+          </S.PhoneWrapper>
         </S.FormRow>
 
         <S.FormRow>

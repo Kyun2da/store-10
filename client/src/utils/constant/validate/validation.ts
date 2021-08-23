@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const validateInput = (value: string) => {
   return !!value;
 };
@@ -37,4 +39,19 @@ export const validateAll = (
     return true;
   }
   return false;
+};
+
+export const validatePhone = (
+  e: React.ChangeEvent<HTMLInputElement>
+): string => {
+  if (e.currentTarget.value.length > 9) {
+    return '';
+  }
+  let value = e.currentTarget.value.replace(/[^0-9]/g, '');
+
+  if (value.length >= 5) {
+    value = value.slice(0, value.length - 4) + '-' + value.slice(-4);
+  }
+
+  return value;
 };

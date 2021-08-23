@@ -95,3 +95,34 @@ while (currentYear >= 2016) {
   PERIOD_FILTER.push({ name: currentYear.toString(), value: currentYear });
   currentYear--;
 }
+
+export const KOREAN_PHONE_PREFIX: string[] = [
+  '010',
+  '011',
+  '016',
+  '017',
+  '018',
+  '019',
+  '02',
+  '031',
+  '032',
+  '033',
+  '041',
+  '042',
+  '043',
+  '044',
+  '051',
+  '052',
+  '053',
+  '054',
+  '055',
+  '061',
+  '062',
+  '063',
+  '064',
+  '070',
+  '080',
+  '050',
+  '012',
+  '059',
+];

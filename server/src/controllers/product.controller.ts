@@ -118,6 +118,26 @@ class ProductController {
     // THINK: 업데이트가 필요할 지 급의문..?! 그냥 삭제하고 다시 쓰는게 좋을지도
   }
 
+  async getProductQuestionsById(req: Request, res: Response) {
+    const { id, offset } = req.params;
+    const result = await ProductService.getProductQuestionsById(id, offset);
+
+    if (!result) {
+      return ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '문의 조회에서 유효하지 않은 접근으로 인한 에러가 발생했습니다.'
+      );
+    }
+
+    return ApiResponse(
+      res,
+      HttpStatusCode.OK,
+      '해당 상품 문의 조회 성공',
+      result
+    );
+  }
+
   async getProductReviewsById(req: Request, res: Response) {
     const { id, offset } = req.params;
     const result = await ProductService.getProductReviewsById(id, offset);

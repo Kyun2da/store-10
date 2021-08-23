@@ -2,6 +2,7 @@ import ProductRepository from '@/repositories/product.repository';
 import ProductImageRepository from '@/repositories/productImage.repository';
 import ProductReviewRepository from '@/repositories/review.repository';
 import ProductReviewImageRepository from '@/repositories/reviewImage.repository';
+import ProductQuestionRepository from '@/repositories/question.repository';
 import OrderRepository from '@/repositories/order.repository';
 import OrderProductRepository from '@/repositories/orderProduct.repository';
 import MainCateogryRepository from '@/repositories/mainCategory.repository';
@@ -29,6 +30,11 @@ class ProductService {
   async getProductThumbnails(id: string) {
     const productImageRepo = ProductImageRepository();
     return await productImageRepo.findProductThumbnailsById(id);
+  }
+
+  async getProductQuestionsById(id: string, offset: string) {
+    const productQuestionRepo = ProductQuestionRepository();
+    return await productQuestionRepo.findProductQuestionsById(id, offset);
   }
 
   async getProductReviewsImagesById(id: number) {

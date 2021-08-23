@@ -17,6 +17,7 @@ router.get(
   '/review/:id/:offset',
   wrapAsync(ProductController.getProductReviewsById)
 );
+router.get('/question/:id/:offset', ProductController.getProductQuestionsById);
 
 router.post(
   '/review',

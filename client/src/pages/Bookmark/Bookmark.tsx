@@ -1,5 +1,6 @@
 import Card from '@/components/Card';
 import CardWrapper from '@/components/CardWrapper';
+import { notify } from '@/components/Shared/Toastify';
 import Thung from '@/components/Thung';
 import {
   useDeleteDetailBookmark,
@@ -8,7 +9,7 @@ import {
 import { Redirect } from '@/lib/Router';
 import { userState } from '@/recoil/user';
 import { IBookmarkProduct } from '@/types';
-import React, { Dispatch, useState } from 'react';
+import React, { Dispatch, useCallback, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import * as S from './style';
 
@@ -50,9 +51,14 @@ const Bookmark = () => {
     setIsEdit(val);
   };
 
-  const removeBookmarkItems = () => {
-    mutate(checkedList);
-  };
+  const removeBookmarkItems = useCallback(() => {
+    if (checkedList.length === 0) {
+      notify('error', '삭제할 상품을 한개 이상 선택해주세요!');
+    } else {
+      mutate(checkedList);
+      setCheckedList([]);
+    }
+  }, [checkedList, mutate]);
 
   if (!user) return <Redirect to="/" />;
 

@@ -177,12 +177,14 @@ class ProductController {
 
     ApiResponse(res, HttpStatusCode.OK, null, searchData);
   }
-  
+
   async serchProduct(req: Request, res: Response) {
-    const { search } = req.query;
-    const searchData = await ProductService.searchProductTitle(
-      search as string
-    );
+    const { search: searchText, start } = <Record<string, string>>req.query;
+
+    const searchData = await ProductService.searchProductTitle({
+      searchText,
+      start,
+    });
 
     ApiResponse(res, HttpStatusCode.OK, null, searchData);
   }

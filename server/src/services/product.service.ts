@@ -157,10 +157,14 @@ class ProductService {
     return data;
   }
 
-  async searchProductTitle(searchText: string) {
-    const productRepo = await ProductRepository().getProductsByTitle(
-      searchText
-    );
+  async searchProductTitle({
+    searchText,
+    start,
+  }: Record<string, string>) {
+    const productRepo = await ProductRepository().getProductsByTitle({
+      searchText,
+      start,
+    });
 
     return productRepo;
   }

@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SearchProduct from '.';
 
 export default {
-  title: '컴포넌트/카테고리 프로덕트',
+  title: '컴포넌트/검색 프로덕트',
   component: SearchProduct,
 } as ComponentMeta<typeof SearchProduct>;
 

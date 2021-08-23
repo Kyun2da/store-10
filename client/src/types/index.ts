@@ -99,14 +99,15 @@ export interface IProductReview {
 }
 
 export interface IProductQuestion {
-  name: string;
-  id: number;
+  name?: string;
+  id?: number;
   title: string;
   content: string;
   answer?: string;
   secret: boolean;
+  category: string;
   product_id: number;
-  createdAt: string;
+  createdAt?: string;
 }
 
 export interface ISignUpUser {

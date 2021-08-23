@@ -46,7 +46,9 @@ export const getBestProducts = async () => {
 };
 
 export const getElasticProducts = async (searchString: string) => {
-  return await client.get<ISearchData[]>(`/product/elastic/search?q=${searchString}`);
+  return await client.get<ISearchData[]>(
+    `/product/elastic/search?q=${searchString}`
+  );
 };
 
 export const getSearchProducts = async (searchString: string) => {
@@ -71,6 +73,10 @@ export const getCategoryProducts = async ({
 
 export const postProductReview = async (data: IReview) => {
   return await client.post<IReview>(`/product/review`, data);
+};
+
+export const postProductQuestion = async (data: IProductQuestion) => {
+  return await client.post<IProductQuestion>(`/product/question`, data);
 };
 
 export const deleteProductReview = async (id: number) => {

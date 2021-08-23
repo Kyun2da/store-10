@@ -101,7 +101,7 @@ const Card = ({
         </S.ThumbnailWrapper>
 
         <S.ProductDetails>
-          <h1 className="title">{title}</h1>
+          <p className="title">{title}</p>
           {!bottomDisplay || (
             <span className="price-tag">{wonFormat(price)}</span>
           )}

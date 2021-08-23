@@ -15,6 +15,7 @@ Default.args = {
   bgColor: 'primary',
   price: 30000,
   title: '또토리북 이녀석....!',
+  src: 'https://store-10.s3.ap-northeast-2.amazonaws.com/test/test.jpeg',
 };
 
 export const Another = Template.bind({});
@@ -22,6 +23,7 @@ Another.args = {
   bgColor: 'error',
   price: 30000,
   title: '또토리북 이녀석....!',
+  src: 'https://store-10.s3.ap-northeast-2.amazonaws.com/test/test.jpeg',
 };
 
 export const Discount50 = Template.bind({});
@@ -30,12 +32,14 @@ Discount50.args = {
   discount: 50,
   price: 30000,
   title: '또토리북 이녀석....!',
+  src: 'https://store-10.s3.ap-northeast-2.amazonaws.com/test/test.jpeg',
 };
 
 export const Discount25 = Template.bind({});
-Discount50.args = {
+Discount25.args = {
   bgColor: 'primary',
   discount: 25,
   price: 30000,
   title: '또토리북 이녀석....!',
+  src: 'https://store-10.s3.ap-northeast-2.amazonaws.com/test/test.jpeg',
 };

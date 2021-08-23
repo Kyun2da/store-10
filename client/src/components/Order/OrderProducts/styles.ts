@@ -19,7 +19,7 @@ export const OrderProductsList = styled.ul`
 
 export const OrderProductsItem = styled.li`
   border: 1px solid ${({ theme }) => theme.color['border-gray']};
-  box-shadow: 0 1px 3px 0 #dbdbdb;
+  box-shadow: ${({ theme }) => theme.boxShadow};
   min-height: 15rem;
   border-radius: 0.8rem;
   display: flex;

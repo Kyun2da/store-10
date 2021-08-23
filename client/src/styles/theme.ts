@@ -40,6 +40,9 @@ const fontWeight = {
   `,
 };
 
+const boxShadow =
+  '0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.1)';
+
 // 다크모드-라이트모드에 영향 받는 속성은 이곳에 직접 넣고
 // 추가적으로 styled.d.ts 파일에도 타입 추가해주세요
 // ex. 아마 주로 색깔 관련...?
@@ -47,7 +50,7 @@ export const lightMode: DefaultTheme = {
   name: 'light-mode',
   color: {
     'text-color': '#1e2222',
-    'body': '#f1f1f1',
+    'body': 'white',
     'footer': '#fbfbfb',
     'label': '#8b9999',
     'placeholder': '#c1c5c5',
@@ -63,6 +66,7 @@ export const lightMode: DefaultTheme = {
   fontSize,
   fontWeight,
   media,
+  boxShadow,
 };
 
 export const darkMode: DefaultTheme = {
@@ -85,4 +89,5 @@ export const darkMode: DefaultTheme = {
   fontSize,
   fontWeight,
   media,
+  boxShadow,
 };

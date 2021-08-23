@@ -138,10 +138,22 @@ class ProductController {
     );
   }
 
-  async serchProduct(req: Request, res: Response) {
+  async serchElasticProduct(req: Request, res: Response) {
     const { q } = req.query;
-    const searchData = await ProductService.searchProductTitle(q as string);
-    res.json(searchData);
+    const searchData = await ProductService.searchElasticProductTitle(
+      q as string
+    );
+
+    ApiResponse(res, HttpStatusCode.OK, null, searchData);
+  }
+  
+  async serchProduct(req: Request, res: Response) {
+    const { search } = req.query;
+    const searchData = await ProductService.searchProductTitle(
+      search as string
+    );
+
+    ApiResponse(res, HttpStatusCode.OK, null, searchData);
   }
 
   async getProducts(req: Request, res: Response) {
@@ -180,6 +192,34 @@ class ProductController {
 
     if (!categories) {
       ApiResponse(res, HttpStatusCode.BAD_REQUEST, '카테고리가 없습니다');
+    } else {
+      ApiResponse(res, HttpStatusCode.OK, null, categories);
+    }
+  }
+
+  async getCategoryProducts(req: Request, res: Response) {
+    const { subCategoryId, start, orderType } = req.query;
+
+    if (!+subCategoryId) {
+      ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '정상적인 카테고리가 아닙니다.'
+      );
+    }
+
+    const categories = await ProductService.getCategoryProducts({
+      subCategoryId: +subCategoryId,
+      start: +start,
+      orderType: orderType as string,
+    });
+
+    if (!categories) {
+      ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '카테고리에 아이템이 없습니다.'
+      );
     } else {
       ApiResponse(res, HttpStatusCode.OK, null, categories);
     }

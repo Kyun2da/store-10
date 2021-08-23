@@ -1,5 +1,6 @@
 const { addDecorator } = require('@storybook/react');
 const { jsxDecorator } = require('storybook-addon-jsx');
+const { initialize, mswDecorator } = require('msw-storybook-addon');
 const { withThemesProvider } = require('themeprovider-storybook');
 const { lightMode, darkMode } = require('../src/styles/theme');
 const GlobalStyle = require('../src/styles/globalStyle').default;
@@ -8,7 +9,9 @@ const React = require('react');
 const { QueryClient, QueryClientProvider } = require('react-query');
 const { RecoilRoot } = require('recoil');
 
+initialize()
 const themes = [lightMode, darkMode];
+addDecorator(mswDecorator)
 addDecorator(jsxDecorator);
 addDecorator(withThemesProvider(themes), ThemeProvider);
 

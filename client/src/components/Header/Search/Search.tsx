@@ -1,6 +1,7 @@
 import { SearchSVG } from '@/assets/svgs';
 import useRecentSearch from '@/hooks/useRecentSearch';
 import { getElasticProducts } from '@/lib/api/product';
+import { useHistory } from '@/lib/Router';
 import { ISearchData } from '@/types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import SearchItem from './SearchItem';
@@ -10,14 +11,16 @@ type IProps = {
   toggleOpen: () => void;
 };
 
-const Search = ({ ...props }: IProps) => {
+const Search = ({ toggleOpen }: IProps) => {
   const [searchValue, setSearchValue] = useState('');
   const [recentItems, setRecentItems] = useRecentSearch();
   const [searchData, setSearchDatas] = useState<ISearchData[]>([]);
+  const { historyPush } = useHistory();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const productSearch = useCallback(async (searchText: string) => {
     const data = await getElasticProducts(searchText);
+
     if (data.length) {
       setSearchDatas(data);
     }
@@ -25,9 +28,13 @@ const Search = ({ ...props }: IProps) => {
   // 한글 엔터 2번방지
   const inputKeypressHandler = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.code == 'Enter') setRecentItems(searchValue);
+      if (e.code == 'Enter') {
+        setRecentItems(searchValue);
+        historyPush(`/search/${searchValue}`);
+        toggleOpen();
+      }
     },
-    [searchValue, setRecentItems]
+    [historyPush, searchValue, setRecentItems, toggleOpen]
   );
 
   const inputChangeHandler = useCallback(
@@ -56,7 +63,7 @@ const Search = ({ ...props }: IProps) => {
   return (
     <>
       <S.SearchWrapper>
-        <S.SearchBackDrop onClick={props.toggleOpen}></S.SearchBackDrop>
+        <S.SearchBackDrop onClick={toggleOpen}></S.SearchBackDrop>
         <S.SearchContents>
           <S.SearchInputWrap>
             <S.SearchInput
@@ -71,6 +78,8 @@ const Search = ({ ...props }: IProps) => {
             <SearchSVG />
           </S.SearchInputWrap>
           <SearchItem
+            addRecentSearch={setRecentItems}
+            toggleOpen={toggleOpen}
             searchValue={searchValue}
             recentItems={recentItems}
             searchData={searchData}

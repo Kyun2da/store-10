@@ -11,8 +11,8 @@ export const RecentTitle = styled.div`
   min-height: calc(-50vh + 80px);
 `;
 
-export const SearchItem = styled.a`
-  text-decoration: none;
+export const SearchItem = styled.div`
+  cursor: pointer;
 `;
 
 export const SearchItemWrap = styled.div`
@@ -49,6 +49,7 @@ export const SearchItemList = styled.li`
 
 export const SearchItemTitle = styled.div`
   ${({ theme }) => theme.fontSize.s};
+  color: ${({ theme }) => theme.color['text-color']};
   @media (max-width: ${({ theme }) => theme.media.phone}px) {
     ${({ theme }) => theme.fontSize.xs};
   }
@@ -66,6 +67,7 @@ export const SearchItemPrice = styled.div`
 
 export const RecentSearchUl = styled.ul`
   li {
+    color: ${({ theme }) => theme.color['text-color']};
     margin: 0.6rem 0;
     cursor: pointer;
   }

@@ -19,7 +19,11 @@ interface ICollection {
   id: number;
   url: string[];
 }
-
+export interface ICategoryProductParams {
+  subCategoryId?: number;
+  start?: number;
+  orderType?: string;
+}
 class ProductService {
   async getProductById(id: string) {
     const productRepo = ProductRepository();
@@ -126,9 +130,9 @@ class ProductService {
     return products;
   }
 
-  async searchProductTitle(searchText: string) {
+  async searchElasticProductTitle(searchText: string) {
     const productRepo = ProductRepository();
-    const response = await productRepo.searchProduct(searchText);
+    const response = await productRepo.searchElasticProduct(searchText);
 
     const data = response.hits.hits.map((row) => {
       return {
@@ -140,6 +144,14 @@ class ProductService {
     });
 
     return data;
+  }
+
+  async searchProductTitle(searchText: string) {
+    const productRepo = await ProductRepository().getProductsByTitle(
+      searchText
+    );
+
+    return productRepo;
   }
 
   async getCategories() {
@@ -155,6 +167,20 @@ class ProductService {
       parentRemoveColumns: ['createdAt', 'updatedAt'],
       childrenRemoveColumns: ['createdAt', 'updatedAt'],
     });
+  }
+
+  async getCategoryProducts({
+    subCategoryId,
+    start = 0,
+    orderType = 'createdAt',
+  }: ICategoryProductParams) {
+    const getCategoryProducts = await ProductRepository().getCategoryProducts({
+      subCategoryId,
+      start,
+      orderType,
+    });
+
+    return getCategoryProducts;
   }
 }
 

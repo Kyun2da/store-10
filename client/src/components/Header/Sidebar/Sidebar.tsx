@@ -2,21 +2,15 @@ import React from 'react';
 import { CloseSVG } from '@/assets/svgs';
 import * as S from './styles';
 import { logout } from '@/lib/api/auth/logout';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { userState } from '@/recoil/user';
-import { Link, useHistory } from '@/lib/Router';
-import { Links } from '../Header';
+import { useHistory } from '@/lib/Router';
 import { ICategory } from '@/types';
-import { useGetCateogries } from '@/hooks/queries/product';
+import { CategoryList } from '@/recoil/category';
 
 interface Props {
   isOpen?: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-interface ICategoryQuery {
-  data: ICategory[] | undefined;
-  isLoading: boolean;
 }
 
 const Sidebar = ({ ...props }: Props) => {
@@ -24,7 +18,7 @@ const Sidebar = ({ ...props }: Props) => {
   const [user, setUser] = useRecoilState(userState);
   const closeSidebar = () => setIsOpen(false);
   const { historyPush } = useHistory();
-  const categoryQuery = useGetCateogries();
+  const categories = useRecoilValue(CategoryList);
 
   const onClickLogout = async () => {
     await logout();
@@ -37,12 +31,8 @@ const Sidebar = ({ ...props }: Props) => {
     historyPush(`/category/${id}`);
   };
 
-  const renderCategory = (qurey: ICategoryQuery) => {
-    const { data, isLoading } = qurey;
-    if (isLoading || !data) {
-      return <div></div>;
-    }
-    return data.map((main: ICategory) => (
+  const renderCategory = (categories: ICategory[]) =>
+    categories.map((main: ICategory) => (
       <li data-main_category_id={main.id} key={'mainCategory_' + main.id}>
         <div>{main.title}</div>
         <S.SubCategory>
@@ -57,8 +47,7 @@ const Sidebar = ({ ...props }: Props) => {
         </S.SubCategory>
       </li>
     ));
-  };
-
+    
   return (
     <>
       <S.SideBar className={isOpen ? 'active' : ''}>
@@ -73,7 +62,7 @@ const Sidebar = ({ ...props }: Props) => {
         </S.Top>
         <S.Contents>
           <S.ContentTitle>카테고리</S.ContentTitle>
-          <S.Categories>{renderCategory(categoryQuery)}</S.Categories>
+          <S.Categories>{renderCategory(categories)}</S.Categories>
         </S.Contents>
       </S.SideBar>
       <S.Backdrop className="backdorp" onClick={closeSidebar}></S.Backdrop>

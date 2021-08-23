@@ -8,7 +8,7 @@ export default {
   component: CategorySelector,
 } as ComponentMeta<typeof CategorySelector>;
 
-const Template: ComponentStory<typeof CategorySelector> = () => (
-  <CategorySelector />
+const Template: ComponentStory<typeof CategorySelector> = (args) => (
+  <CategorySelector {...args} />
 );
 export const Default = Template.bind({});

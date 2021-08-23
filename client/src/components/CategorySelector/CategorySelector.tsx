@@ -2,12 +2,22 @@ import { ExchageSVG, GiftSVG, PackageSVG } from '@/assets/svgs';
 import React, { useState } from 'react';
 import * as S from './styles';
 
-const CategorySelector = () => {
+interface ICategorySelector {
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const categories: Record<string, string> = {
+  ['category-gift']: '상품',
+  ['category-package']: '교환',
+  ['category-exchange']: '환불',
+};
+
+const CategorySelector = ({ setCategory }: ICategorySelector) => {
   const [categoryId, setCategoryId] = useState('category-gift');
 
   const handleClickOnCategory = (e: React.MouseEvent) => {
     const target = (e.target as HTMLElement).closest('.each-category');
-    console.log(target?.id);
+    setCategory(categories[target?.id ?? 'category-gift']);
     setCategoryId(target?.id ?? 'category-gift');
   };
 
@@ -35,7 +45,7 @@ const CategorySelector = () => {
         }
       >
         <PackageSVG width={60} height={60} />
-        <span className="category-text">상품관련</span>
+        <span className="category-text">택배관련</span>
       </S.Category>
 
       <S.Category
@@ -47,7 +57,7 @@ const CategorySelector = () => {
         }
       >
         <ExchageSVG width={60} height={60} />
-        <span className="category-text">상품관련</span>
+        <span className="category-text">환불관련</span>
       </S.Category>
     </S.CategorySelector>
   );

@@ -7,6 +7,9 @@ import {
 import { Link } from '@/lib/Router';
 import { wonFormat } from '@/utils/helper';
 import { useAddBookmark, useDeleteBookmark } from '@/hooks/queries/bookmark';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
+import { notify } from '../Shared/Toastify';
 
 interface CardProps {
   bgColor: 'error' | 'primary'; // category 식으로 리스트화 (enum 등..) 필요
@@ -43,6 +46,8 @@ const Card = ({
     e.preventDefault();
   };
 
+  const [user] = useRecoilState(userState);
+
   const isChecked = !!checkedList?.find((checkedId) => checkedId === linkId);
 
   const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,12 +67,13 @@ const Card = ({
   }, []);
 
   const heartBtnOnClick = useCallback(() => {
-    if (isHeartChecked) {
+    if (!user) notify('error', '로그인이 필요합니다!');
+    else if (isHeartChecked) {
       deleteMutate([linkId]);
     } else {
       addMutate(linkId);
     }
-  }, [addMutate, deleteMutate, isHeartChecked, linkId]);
+  }, [addMutate, deleteMutate, isHeartChecked, linkId, user]);
 
   return (
     <Link to={`/detail/${linkId}`}>

@@ -11,6 +11,7 @@ module.exports = {
     'storybook-dark-mode',
     'storybook-addon-designs',
     'themeprovider-storybook/register',
+    'msw-storybook-addon'
   ],
   webpackFinal: async (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname, '../src');

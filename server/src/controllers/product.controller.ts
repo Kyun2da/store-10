@@ -169,6 +169,24 @@ class ProductController {
     );
   }
 
+  async getProductReviewsByUserId(req: Request, res: Response) {
+    const { offset } = req.params;
+    const user_id = req.user.id as number;
+    const result = await ProductService.getProductReviewByUserId(
+      user_id,
+      offset
+    );
+
+    if (!result) {
+      return ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '리뷰조회에서 에러가 발생했습니다.'
+      );
+    }
+    return ApiResponse(res, HttpStatusCode.OK, '리뷰 조회 성공', result);
+  }
+
   async serchElasticProduct(req: Request, res: Response) {
     const { q } = req.query;
     const searchData = await ProductService.searchElasticProductTitle(
@@ -177,7 +195,7 @@ class ProductController {
 
     ApiResponse(res, HttpStatusCode.OK, null, searchData);
   }
-  
+
   async serchProduct(req: Request, res: Response) {
     const { search } = req.query;
     const searchData = await ProductService.searchProductTitle(

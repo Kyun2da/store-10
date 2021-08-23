@@ -49,6 +49,18 @@ class ReviewRepository extends Repository<Review> {
       .getRawMany();
   }
 
+  findProductReviewByUserId(
+    user_id: number,
+    offset: string
+  ): Promise<Review[]> {
+    return this.find({
+      where: { user_id },
+      skip: +offset,
+      take: LIMIT,
+      order: { createdAt: 'DESC' },
+    });
+  }
+
   findProductReviewsCountById(product_id: string): Promise<number> {
     return this.createQueryBuilder('review')
       .where('review.product_id = :product_id', { product_id: +product_id })

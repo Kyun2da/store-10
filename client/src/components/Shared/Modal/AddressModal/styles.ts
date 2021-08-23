@@ -57,3 +57,7 @@ export const DuamPostWrapper = styled.div`
   height: 50rem;
   background-color: rgba(1, 1, 1, 0.55);
 `;
+
+export const HeaderEmptyItem = styled.div`
+  width: 3rem;
+`;

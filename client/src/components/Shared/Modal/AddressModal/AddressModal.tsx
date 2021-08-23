@@ -1,24 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch } from 'react';
 import ModalLayout from '@/components/Shared/Modal/ModalLayout';
-import Button from '@/components/Shared/Button';
 import Address from '@/components/Address';
 import AddressForm from '@/components/Address/AddressForm';
 import { LeftChevron } from '@/assets/svgs';
+import { IAddress } from '@/types';
 
 import * as S from './styles';
 
 interface IProps {
   toggleModal: () => void;
+  selectAddress: Dispatch<IAddress>;
 }
 
-const AddressModal = ({ toggleModal }: IProps) => {
+const AddressModal = ({ toggleModal, selectAddress }: IProps) => {
   const [openForm, setOpenForm] = useState(false);
-  const onClickFooterButton = () => {
-    if (openForm) {
-    } else {
-      setOpenForm(true);
-    }
+  const [addressToModify, setAddressToModify] = useState<IAddress | null>(null);
+
+  const renderHeaderText = () => {
+    if (!openForm) return <span>배송지 선택</span>;
+    if (addressToModify) return <span>배송지 수정</span>;
+    return <span>배송지 추가</span>;
   };
+
   return (
     <ModalLayout width="40rem" height="65rem" toggleModal={toggleModal}>
       <S.AddressModalHeader>
@@ -27,25 +30,27 @@ const AddressModal = ({ toggleModal }: IProps) => {
             <LeftChevron />
           </button>
         ) : (
-          <span></span>
+          <S.HeaderEmptyItem />
         )}
-        <span>배송지 추가</span>
-        <span></span>
+        {renderHeaderText()}
+        <S.HeaderEmptyItem />
       </S.AddressModalHeader>
       <S.AddressModalDivider />
-      <S.AddressModalBody>
-        {openForm ? (
-          <AddressForm toggleModal={toggleModal} modifyAddressData={null} />
-        ) : (
-          <Address />
-        )}
-      </S.AddressModalBody>
-      <S.AddressModalDivider />
-      <S.AddressModalButtonArea>
-        <Button type="button" color="primary" onClick={onClickFooterButton}>
-          {openForm ? '저장' : '배송지 추가'}
-        </Button>
-      </S.AddressModalButtonArea>
+      {openForm ? (
+        <AddressForm
+          toggleModal={toggleModal}
+          addressToModify={addressToModify}
+          setAddressToModify={setAddressToModify}
+          setOpenForm={setOpenForm}
+        />
+      ) : (
+        <Address
+          setOpenForm={setOpenForm}
+          selectAddress={selectAddress}
+          toggleModal={toggleModal}
+          setAddressToModify={setAddressToModify}
+        />
+      )}
     </ModalLayout>
   );
 };

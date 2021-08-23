@@ -8,7 +8,6 @@ interface IAddress {
   address: string;
   detail_address: string;
   phone: string;
-  message: string;
   user_id: number;
   is_default: boolean;
   id?: number;
@@ -44,6 +43,21 @@ class AddressRepository extends Repository<Address> {
         is_default: false,
       }
     );
+  }
+
+  async getDefaultAddress(user_id: number) {
+    return this.findOne({
+      where: { user_id, is_default: true },
+    });
+  }
+
+  async getRecentAddress(user_id: number) {
+    return this.findOne({
+      where: { user_id },
+      order: {
+        createdAt: 'DESC',
+      },
+    });
   }
 }
 

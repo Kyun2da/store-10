@@ -88,7 +88,9 @@ const Input = ({
         labelName={labelName}
         error={error}
         onFocus={() => {
-          onFocus;
+          if (onFocus) {
+            onFocus();
+          }
           setFocus(true);
         }}
         onBlur={onBlurInput}

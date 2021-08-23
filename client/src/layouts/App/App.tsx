@@ -17,7 +17,6 @@ import Category from '@/pages/Category';
 import SignUp from '@/pages/SignUp';
 import Notice from '@/pages/Notice';
 import Order from '@/pages/Order';
-import Loading from '@/components/Shared/Loading';
 import { QueryErrorResetBoundary } from 'react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import Error from '@/components/Shared/Error';
@@ -73,7 +72,7 @@ const App = () => {
                   <Route path="/notice" component={Notice} />
                   <Route path="/cart" component={ShoppingCart} />
                   <Route path="/mypage" component={MyPage} />
-                  <Route path="/order" component={Order} />
+                  <Route path="/order/:id" component={Order} />
                   <Route path="/*" component={NotFound} />
                 </Switch>
                 <Footer />

@@ -1,6 +1,5 @@
 export const MY_PAGE_NAVIGATIONS = [
   { value: 'orderHistroy', name: '주문 내역' },
-  { value: 'address', name: '배송지 관리' },
   { value: 'coupon', name: '쿠폰' },
   { value: 'inqurey', name: '상품 문의' },
   { value: 'review', name: '상품 후기' },
@@ -47,7 +46,7 @@ export const DELIVERY_REQUEST_MESSAGES = [
   },
   {
     value: '부재시 전화주시거나 문자 남겨 주세요.',
-    name: '배송시 요청 사항을 선택해주세요',
+    name: '부재시 전화주시거나 문자 남겨 주세요.',
   },
   {
     value: '직접입력',

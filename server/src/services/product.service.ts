@@ -3,6 +3,7 @@ import ProductImageRepository from '@/repositories/productImage.repository';
 import ProductReviewRepository from '@/repositories/review.repository';
 import ProductReviewImageRepository from '@/repositories/reviewImage.repository';
 import OrderRepository from '@/repositories/order.repository';
+import OrderProductRepository from '@/repositories/orderProduct.repository';
 import MainCateogryRepository from '@/repositories/mainCategory.repository';
 import SubCateogryRepository from '@/repositories/subCategory.repository';
 import { MainCategory } from '@/entities/mainCategory.entity';
@@ -98,9 +99,12 @@ class ProductService {
 
   async getBestProudcts(limit: number) {
     const productRepo = ProductRepository();
-    const orderRepo = OrderRepository();
+    const orderProductRepository = OrderProductRepository();
     // TODO qurey 최적화: image limit
-    const bestProductIdsRaw = await orderRepo.getBestProductIds(limit);
+    const bestProductIdsRaw = await orderProductRepository.getBestProductIds(
+      limit
+    );
+
     const bestProductIds = bestProductIdsRaw.map((raw) => raw.product_id);
 
     const _bestProducts = await productRepo.getProducts({

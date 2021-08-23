@@ -5,6 +5,7 @@ import wrapAsync from '@/utils/wrapAsync';
 
 const router = Router();
 
+router.get('/default', wrapAsync(AddressController.getDefaultAddress));
 router.get('/', wrapAsync(AddressController.getAddreses));
 router.delete('/:id', wrapAsync(AddressController.deleteAddress));
 router.post('/', wrapAsync(AddressController.createAddress));

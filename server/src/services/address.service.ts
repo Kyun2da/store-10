@@ -2,6 +2,15 @@ import AddressRepository from '@/repositories/address.repository';
 import { snakeToCamelObjKey } from '@/utils/snakeToCamelObjKey';
 
 class AddressService {
+  async getDefaultAddress(userId) {
+    const addressRepo = AddressRepository();
+    const defaultAddress = await addressRepo.getDefaultAddress(userId);
+    if (defaultAddress) return snakeToCamelObjKey(defaultAddress);
+
+    const recnetAddress = await addressRepo.getRecentAddress(userId);
+    return snakeToCamelObjKey(recnetAddress);
+  }
+
   async getAddresses(userId) {
     const addressRepo = AddressRepository();
     const addresses = await addressRepo.getAddresses(userId);
@@ -19,7 +28,6 @@ class AddressService {
     address,
     detail_address,
     phone,
-    message,
     user_id,
     is_default,
   }) {
@@ -33,7 +41,6 @@ class AddressService {
       address,
       detail_address,
       phone,
-      message,
       user_id,
       is_default,
     });
@@ -46,7 +53,6 @@ class AddressService {
     address,
     detail_address,
     phone,
-    message,
     user_id,
     is_default,
   }) {
@@ -60,7 +66,6 @@ class AddressService {
       address,
       detail_address,
       phone,
-      message,
       user_id,
       is_default,
       id,

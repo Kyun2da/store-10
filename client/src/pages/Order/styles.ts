@@ -4,7 +4,6 @@ export const OrderContainer = styled.section`
   background-color: ${({ theme }) => theme.color['off-white']};
   display: flex;
   width: 100%;
-  padding-top: 6rem;
   @media (max-width: ${({ theme }) => theme.media.tablet}px) {
     flex-direction: column;
   }

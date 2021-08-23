@@ -31,6 +31,7 @@ router.post(
   multerS3.array('images', 3),
   ProductController.postProductReviewById
 );
+router.post(`/question`, authJWT, ProductController.postProductQuestionById);
 
 router.delete(
   '/review/:id',

@@ -5,6 +5,10 @@ interface ICollapse {
   gaps?: string;
 }
 
+interface ICollapsePanel {
+  height: number;
+}
+
 export const Collapse = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,20 +58,25 @@ export const CollaspeRow = styled.div<ICollapse>`
   }
 `;
 
-export const CollapsePanel = styled.div`
+export const CollapsePanel = styled.div<ICollapsePanel>`
   display: flex;
   height: 0;
   position: relative;
   flex-direction: column;
   background-color: ${({ theme }) => theme.color.background};
   overflow: hidden;
+  transition: height 0.25s ease-in-out;
 
   &.active {
-    display: flex;
-    height: 100%;
-    padding: 2rem;
+    height: ${({ height }) => height ?? 0}px;
     border-bottom: 1px solid ${({ theme }) => theme.color.line};
   }
+`;
+
+export const CollapseContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
 `;
 
 export const CollapseDetails = styled.div`

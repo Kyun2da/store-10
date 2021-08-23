@@ -15,8 +15,6 @@ interface RequestModalProps {
 const RequestModal = ({ toggleModal }: RequestModalProps) => {
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    console.log(1);
   };
 
   return (

@@ -66,7 +66,6 @@ class OrderRepository extends Repository<Order> {
     user_id: number;
     monthAgo: number;
   }) {
-    console.log(user_id, monthAgo);
     return this.find({
       where: {
         user_id,

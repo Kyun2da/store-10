@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './styles';
-import wonFormat from '@/utils/wonFormat';
+import { wonFormat } from '@/utils/helper';
 import { IOrderProduct } from '@/types';
 
 interface IProps {

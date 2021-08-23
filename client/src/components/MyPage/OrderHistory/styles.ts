@@ -6,7 +6,7 @@ interface IOrderStatus {
 
 export const Container = css`
   background-color: ${({ theme }) => theme.color['off-white']};
-  box-shadow: 0 1px 3px 0 #dbdbdb;
+  box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: 0.8rem;
   padding: 3.6rem;
 `;

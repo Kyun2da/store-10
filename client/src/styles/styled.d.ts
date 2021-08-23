@@ -38,5 +38,6 @@ declare module 'styled-components' {
       tablet: number;
       phone: number;
     };
+    boxShadow: string;
   }
 }

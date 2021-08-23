@@ -9,6 +9,6 @@ export const getOrder = async (id: number) => {
   return await client.get<IOrder>(`/order/${id}`);
 };
 
-export const getOrders = async (monthAgo: number) => {
-  return await client.get<IOrder[]>(`/order?month_ago=${monthAgo}`);
+export const getOrders = async (year: number | null) => {
+  return await client.get<IOrder[]>(`/order${year ? `?year=${year}` : ''}`);
 };

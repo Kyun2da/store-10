@@ -7,7 +7,6 @@ const CategorySelector = () => {
 
   const handleClickOnCategory = (e: React.MouseEvent) => {
     const target = (e.target as HTMLElement).closest('.each-category');
-    console.log(target?.id);
     setCategoryId(target?.id ?? 'category-gift');
   };
 

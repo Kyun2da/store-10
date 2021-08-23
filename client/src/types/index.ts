@@ -161,9 +161,13 @@ export interface IOrderPost {
 }
 
 export interface IOrder {
+  id: number;
   products: IOrderProduct[];
   status: string;
   address_id: number;
   user_id: number;
   delivery_request_message: string;
+  deliveredAt?: string;
+  createdAt: string;
+  updatedAt: string;
 }

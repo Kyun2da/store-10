@@ -23,6 +23,9 @@ export class Order extends InitEntity {
   @UpdateDateColumn()
   updatedAt!: Date;
 
+  @Column({ nullable: true })
+  deliveredAt: Date;
+
   @OneToMany(() => User, (type) => type.id, {
     nullable: false,
     onDelete: 'CASCADE',

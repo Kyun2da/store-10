@@ -26,7 +26,7 @@ const Template: ComponentStory<typeof Header> = () => <HeaderComponent />;
 export const Default = Template.bind({});
 Default.parameters = {
   msw: [
-    rest.get('http://localhost:6006/product/category-list', (req, res, ctx) => {
+    rest.get('/product/category-list', (req, res, ctx) => {
       return res(ctx.json(categorylist));
     }),
   ],

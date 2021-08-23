@@ -126,7 +126,7 @@ class ProductController {
       return ApiResponse(
         res,
         HttpStatusCode.BAD_REQUEST,
-        '해당 상품에 대한 리뷰가 없어요'
+        '리뷰조회에서 에러가 발생했습니다.'
       );
     }
 

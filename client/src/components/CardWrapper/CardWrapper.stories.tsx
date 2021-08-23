@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import CardWrapper from './';
-import { Default as Card } from '../Card/Card.stories';
+import Card from '../Card/Card';
 
 export default {
   title: '컴포넌트/카드래퍼',

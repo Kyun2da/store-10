@@ -1,5 +1,5 @@
 import { AnswerSVG, QuestionSVG } from '@/assets/svgs';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { createRef, Fragment, useEffect, useState } from 'react';
 import * as S from './styles';
 
 interface ICollapse {
@@ -14,20 +14,26 @@ interface ICollapse {
 
 const Collapse = ({ headers, items, gaps, forNotice }: ICollapse) => {
   const count = items.length;
-  const [isActive, setIsActive] = useState<string[]>([]);
+  const initialState = new Array(count).fill(1).map(() => ``);
+  const [isActive, setIsActive] = useState<string[]>(initialState);
+  const [height, setHeight] = useState(0);
+  const [refs, setRefs] = useState<React.RefObject<HTMLDivElement>[]>([]);
 
   const handleClickOnItem = (index: number) => {
     const nextState = new Array(count).fill(1).map((_, idx) => {
       return index === idx ? `collapse-item-${idx}` : '';
     });
-    setIsActive(nextState);
+
+    isActive[index] ? setIsActive(initialState) : setIsActive(nextState);
+    setHeight(refs[index].current?.clientHeight ?? 0);
   };
 
   useEffect(() => {
-    const initialState = new Array(count).fill(1).map(() => {
-      return ``;
-    });
-    setIsActive(initialState);
+    setRefs((refs) =>
+      Array(count)
+        .fill(0)
+        .map((_, i) => refs[i] || createRef())
+    );
   }, [count]);
 
   return (
@@ -43,7 +49,6 @@ const Collapse = ({ headers, items, gaps, forNotice }: ICollapse) => {
             <S.CollaspeRow
               gaps={gaps}
               length={headers.length}
-              key={item.id}
               onClick={() => handleClickOnItem(idx)}
             >
               {headers.map((header) => (
@@ -55,13 +60,16 @@ const Collapse = ({ headers, items, gaps, forNotice }: ICollapse) => {
               className={
                 isActive[idx] === `collapse-item-${idx}` ? 'active' : ''
               }
+              height={height}
             >
               {forNotice ? (
-                <S.CollapseDetails>
-                  <pre>{item.content}</pre>
-                </S.CollapseDetails>
+                <S.CollapseContent ref={refs[idx]}>
+                  <S.CollapseDetails>
+                    <pre>{item.content}</pre>
+                  </S.CollapseDetails>
+                </S.CollapseContent>
               ) : (
-                <>
+                <S.CollapseContent ref={refs[idx]}>
                   <S.CollapseDetails>
                     <QuestionSVG />
                     <p>{item.content}</p>
@@ -74,7 +82,7 @@ const Collapse = ({ headers, items, gaps, forNotice }: ICollapse) => {
                         : '답변 대기중입니다... 조금만 기다려주세요!'}
                     </p>
                   </S.CollapseDetails>
-                </>
+                </S.CollapseContent>
               )}
             </S.CollapsePanel>
           </Fragment>

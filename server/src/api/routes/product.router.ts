@@ -6,7 +6,7 @@ import multerS3 from '@/api/middlewares/s3.middleware';
 
 const router = Router();
 
-router.get('/', wrapAsync(ProductController.getProducts));
+router.get('/elastic/search', wrapAsync(ProductController.serchElasticProduct));
 router.get('/search', wrapAsync(ProductController.serchProduct));
 router.get('/recommand', wrapAsync(ProductController.getRecommandProducts));
 router.get('/best', wrapAsync(ProductController.getBestProducts));

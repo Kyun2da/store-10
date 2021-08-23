@@ -1,8 +1,11 @@
 import { Product } from '@/entities/product.entity';
-import { Order } from '@/entities/order.entity';
 import ElasticClient from '@/loaders/elasticSearch';
-import { EntityRepository, getCustomRepository, Repository, In } from 'typeorm';
-import { ProductImage } from '@/entities/productImage.entity';
+import {
+  EntityRepository,
+  getCustomRepository,
+  Repository,
+  In,
+} from 'typeorm';
 import { ICategoryProductParams } from '@/services/product.service';
 
 type IElasticData = {
@@ -29,7 +32,7 @@ class ProductRepository extends Repository<Product> {
     return this.findOne({ id: +Product_id });
   }
 
-  searchProduct(searchText: string) {
+  searchElasticProduct(searchText: string) {
     return ElasticClient.search<IElasticData>({
       index: 'store10',
       size: 30,
@@ -41,6 +44,26 @@ class ProductRepository extends Repository<Product> {
         },
       },
     });
+  }
+
+  getProductsByTitle(searchText: string) {
+    return this.createQueryBuilder('product')
+      .orderBy('product.createdAt', 'DESC')
+      .innerJoinAndSelect('product.productImage', 'productImage')
+      .where('product.title like :searchText', {
+        searchText: `%${searchText}%`,
+      })
+      .andWhere('productImage.isThumbnail=1')
+      .select([
+        'product.id',
+        'product.title',
+        'product.price',
+        'product.stock',
+        'product.createdAt',
+        'product.discount',
+        'productImage.url',
+      ])
+      .getMany();
   }
 
   getProducts({ limit, category, ids }: IProductParams) {

@@ -130,9 +130,9 @@ class ProductService {
     return products;
   }
 
-  async searchProductTitle(searchText: string) {
+  async searchElasticProductTitle(searchText: string) {
     const productRepo = ProductRepository();
-    const response = await productRepo.searchProduct(searchText);
+    const response = await productRepo.searchElasticProduct(searchText);
 
     const data = response.hits.hits.map((row) => {
       return {
@@ -144,6 +144,14 @@ class ProductService {
     });
 
     return data;
+  }
+
+  async searchProductTitle(searchText: string) {
+    const productRepo = await ProductRepository().getProductsByTitle(
+      searchText
+    );
+
+    return productRepo;
   }
 
   async getCategories() {

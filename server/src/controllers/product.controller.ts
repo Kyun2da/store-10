@@ -138,9 +138,20 @@ class ProductController {
     );
   }
 
-  async serchProduct(req: Request, res: Response) {
+  async serchElasticProduct(req: Request, res: Response) {
     const { q } = req.query;
-    const searchData = await ProductService.searchProductTitle(q as string);
+    const searchData = await ProductService.searchElasticProductTitle(
+      q as string
+    );
+
+    ApiResponse(res, HttpStatusCode.OK, null, searchData);
+  }
+  
+  async serchProduct(req: Request, res: Response) {
+    const { search } = req.query;
+    const searchData = await ProductService.searchProductTitle(
+      search as string
+    );
 
     ApiResponse(res, HttpStatusCode.OK, null, searchData);
   }

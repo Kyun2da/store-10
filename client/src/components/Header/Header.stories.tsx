@@ -2,14 +2,11 @@ import React, { Suspense } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Header from './';
 import categorylist from '@/dummies/mockCateogrys';
-import { RecoilRoot } from 'recoil';
 import { rest } from 'msw';
 
 const HeaderComponent = () => (
   <Suspense fallback={<div>loading</div>}>
-    <RecoilRoot>
       <Header />
-    </RecoilRoot>
   </Suspense>
 );
 

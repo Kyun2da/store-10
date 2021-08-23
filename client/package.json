@@ -10,7 +10,7 @@
     "start:prod": "webpack serve --mode=production --host=0.0.0.0 --disable-host-check --env production",
     "build": "webpack --mode=production --env production",
     "start:server": "ts-node ./src/server/server.ts",
-    "storybook": "start-storybook -s src -p 6006",
+    "storybook": "start-storybook -s .storybook -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "chromatic --project-token=2ca951af1de1"
   },

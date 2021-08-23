@@ -94,6 +94,17 @@ export interface IProductReview {
   url: string[];
 }
 
+export interface IProductQuestion {
+  name: string;
+  id: number;
+  title: string;
+  content: string;
+  answer?: string;
+  secret: boolean;
+  product_id: number;
+  createdAt: string;
+}
+
 export interface ISignUpUser {
   user_id: string;
   password: string;

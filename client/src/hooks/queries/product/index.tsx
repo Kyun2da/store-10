@@ -8,12 +8,14 @@ import {
   getProductReviewsCountById,
   postProductReview,
   deleteProductReview,
+  getProductQuestionById,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   ICategory,
   IProduct,
   IProductDetail,
+  IProductQuestion,
   IProductReview,
   IReviewCountAndRating,
 } from '@/types/index';
@@ -31,6 +33,14 @@ export const useGetProductReviewsById = (id: string, offset: number) => {
   return useQuery<IProductReview[], Error>(
     ['productReview', id, offset],
     () => getProductReviewsById(id, offset),
+    { keepPreviousData: true }
+  );
+};
+
+export const useGetProductQuestionById = (id: string, offset: number) => {
+  return useQuery<IProductQuestion[], Error>(
+    ['productQuestion', id, offset],
+    () => getProductQuestionById(id, offset),
     { keepPreviousData: true }
   );
 };

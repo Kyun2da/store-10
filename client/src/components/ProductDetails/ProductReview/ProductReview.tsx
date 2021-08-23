@@ -17,13 +17,14 @@ import Pagination from '@/components/Shared/Pagination';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import { notify } from '@/components/Shared/Toastify';
+import usePagination from '@/hooks/usePagination';
 
 // 페이지 당 리뷰 노출 개수
 const LIMIT = 5;
 
 const ProductReview = () => {
   const { id } = useParams().params;
-  const [offset, setOffset] = useState(0);
+  const [offset, handleOnClickPage] = usePagination(LIMIT);
   const [selectedImage, setSelectedImage] = useState('');
   const [isReviewOpen, toggleReviewModal] = useModal(false);
   const [isImageOpen, toggleImageModal] = useModal(false);
@@ -54,10 +55,6 @@ const ProductReview = () => {
     }
 
     toggleReviewModal();
-  };
-
-  const handleOnClickPage = (idx: number) => {
-    setOffset(+idx * LIMIT);
   };
 
   const handleOnClickImage = (image: string) => {

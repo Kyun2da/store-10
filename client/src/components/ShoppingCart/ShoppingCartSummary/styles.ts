@@ -18,6 +18,7 @@ export const ShoppingCartSummary = styled.dl`
   border-radius: 0.8rem;
   background: ${({ theme }) => theme.color['off-white']};
   padding: 1rem 2rem;
+  box-shadow: ${({ theme }) => theme.boxShadow};
   overflow: hidden;
 `;
 

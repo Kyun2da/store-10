@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ShoppingCartItem = styled.li`
   position: relative;
   border: 1px solid ${({ theme }) => theme.color.body};
-  box-shadow: 0 1px 3px 0 #dbdbdb;
+  box-shadow: ${({ theme }) => theme.boxShadow};
   height: 15rem;
   border-radius: 0.8rem;
   display: flex;

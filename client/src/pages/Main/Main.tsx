@@ -1,7 +1,6 @@
 import React from 'react';
 import * as S from './styles';
 import Card from '@/components/Card';
-import CardWrapper from '@/components/CardWrapper';
 import Banner from '@/components/Banner';
 import {
   useGetRecommandProducts,
@@ -10,6 +9,7 @@ import {
 } from '@/hooks/queries/product';
 import { IProduct } from '@/types';
 import { useGetBookmarkIds } from '@/hooks/queries/bookmark';
+import LoadingCards from '@/components/Skeleton/LoadingCards';
 
 export interface IProductQuery {
   data: IProduct[] | undefined;
@@ -44,13 +44,28 @@ const Main = () => {
       <Banner />
       <S.Main className="container">
         <h1 className="product-title">새로 나왔어요!</h1>
-        <CardWrapper col={4}>{renderProducts(recentQuery)}</CardWrapper>
+        <LoadingCards
+          col={4}
+          skeletonNum={4}
+          showSkeleton={recentQuery.isLoading || recentQuery.isFetching}
+          component={renderProducts(recentQuery)}
+        />
 
         <h1 className="product-title">이거는 어때요?</h1>
-        <CardWrapper col={4}>{renderProducts(recommandQuery)}</CardWrapper>
+        <LoadingCards
+          col={4}
+          skeletonNum={4}
+          showSkeleton={recommandQuery.isLoading || recommandQuery.isFetching}
+          component={renderProducts(recommandQuery)}
+        />
 
         <h1 className="product-title">제일 잘 나가요!</h1>
-        <CardWrapper col={4}>{renderProducts(bestQuery)}</CardWrapper>
+        <LoadingCards
+          col={4}
+          skeletonNum={4}
+          showSkeleton={bestQuery.isLoading || bestQuery.isFetching}
+          component={renderProducts(bestQuery)}
+        />
       </S.Main>
     </>
   );

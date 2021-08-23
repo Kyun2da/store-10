@@ -15,7 +15,7 @@ export const Mypage = styled.div`
   width: 100%;
   margin-top: 6rem;
   border-radius: 0.8rem;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  box-shadow: ${({ theme }) => theme.boxShadow};
   overflow: hidden;
 `;
 

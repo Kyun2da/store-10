@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MyPageAside = styled.aside`
   flex: 0 0 24rem;
-  background: ${({ theme }) => theme.color.body};
+  background: ${({ theme }) => theme.color.background};
   padding: 3.2rem;
   font-family: BMDOHYEON;
 `;

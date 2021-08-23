@@ -11,8 +11,7 @@ type IProps = {
   toggleOpen: () => void;
 };
 
-const Search = ({ ...props }: IProps) => {
-  const { toggleOpen } = props;
+const Search = ({ toggleOpen }: IProps) => {
   const [searchValue, setSearchValue] = useState('');
   const [recentItems, setRecentItems] = useRecentSearch();
   const [searchData, setSearchDatas] = useState<ISearchData[]>([]);
@@ -39,9 +38,9 @@ const Search = ({ ...props }: IProps) => {
   );
 
   const inputChangeHandler = useCallback(
-    async (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchValue(e.currentTarget.value);
-      await productSearch(e.currentTarget.value);
+      productSearch(e.currentTarget.value);
     },
     [productSearch]
   );

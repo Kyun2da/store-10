@@ -9,10 +9,12 @@ import useModal from '@/hooks/useModal';
 import * as S from './styles';
 
 interface IProps {
+  address: IAddress | null;
   addressToModify: IAddress | null;
   toggleModal: () => void;
   setAddressToModify: Dispatch<IAddress | null>;
   setOpenForm: Dispatch<boolean>;
+  selectAddress: Dispatch<IAddress>;
 }
 
 const AddressForm = ({
@@ -20,6 +22,8 @@ const AddressForm = ({
   toggleModal,
   setAddressToModify,
   setOpenForm,
+  address,
+  selectAddress,
 }: IProps) => {
   const [isPostcodeOpen, toggleIsPostcodeOpen] = useModal(false);
   const [inputs, setInputs] = useState<IAddress>({
@@ -94,6 +98,9 @@ const AddressForm = ({
     if (addressToModify) {
       updateMutation.mutate({ ...inputs });
       setOpenForm(false);
+      if (address?.id === addressToModify.id) {
+        selectAddress({ ...inputs });
+      }
     } else {
       postMutation.mutate({ ...inputs });
       toggleModal();

@@ -68,7 +68,11 @@ const OrderAddress = () => {
       {isLoading || !data ? <div>Loading...</div> : renderAddressInfo()}
 
       {isOpen && (
-        <AddressModal toggleModal={toggleModal} selectAddress={selectAddress} />
+        <AddressModal
+          toggleModal={toggleModal}
+          selectAddress={selectAddress}
+          address={address}
+        />
       )}
     </article>
   );

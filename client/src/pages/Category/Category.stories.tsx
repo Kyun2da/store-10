@@ -30,10 +30,10 @@ export const Default = Template.bind({});
 
 Default.parameters = {
   msw: [
-    rest.get('/product/category', (req, res, ctx) => {
+    rest.get('/product/category/', (req, res, ctx) => {
       return res(ctx.json(categoryData));
     }),
-    rest.get('/product/category-list', (req, res, ctx) => {
+    rest.get('/product/category-list/', (req, res, ctx) => {
       return res(ctx.json(categorylist));
     }),
   ],

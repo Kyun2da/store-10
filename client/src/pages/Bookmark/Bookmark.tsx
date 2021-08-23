@@ -60,7 +60,7 @@ const Bookmark = () => {
     <S.BookmarkContainer>
       <S.BookmarkTitle level={3}>찜 목록</S.BookmarkTitle>
       <S.ButtonContainer>
-        {!!data?.length ? (
+        {data?.length ? (
           isEdit ? (
             <S.EditButton
               type="button"
@@ -97,7 +97,7 @@ const Bookmark = () => {
         ) : null}
       </S.ButtonContainer>
       <S.CardContainer>
-        {!!data?.length ? (
+        {data?.length ? (
           <CardWrapper col={4}>
             {renderProducts(
               isLoading,

@@ -6,16 +6,18 @@ import Title from '@/components/Shared/Title';
 
 interface IProps {
   totalPrice: number;
-  deliveryFee?: number;
-  discount?: number;
+  deliveryFee: number;
+  discount: number;
   productCount: number;
+  updateOrder: () => void;
 }
 
 const OrderSummary = ({
   totalPrice,
-  deliveryFee = 0,
-  discount = 0,
+  deliveryFee,
+  discount,
   productCount,
+  updateOrder,
 }: IProps) => {
   const sum = totalPrice + deliveryFee - discount;
   return (
@@ -34,7 +36,7 @@ const OrderSummary = ({
         </S.OrderSummaryRow>
         <S.OrderSummaryRow>
           <dt>쿠폰 사용</dt>
-          <dd>
+          <dd className={discount > 0 ? 'red' : undefined}>
             {discount > 0 ? '-' : ''} {wonFormat(discount)}
           </dd>
         </S.OrderSummaryRow>
@@ -44,7 +46,13 @@ const OrderSummary = ({
           <dd>{wonFormat(sum)}</dd>
         </S.OrderSummaryRow>
       </S.OrderSummary>
-      <Button type="button" color="primary" onClick={() => {}}>
+      <Button
+        type="button"
+        color="primary"
+        onClick={() => {
+          updateOrder();
+        }}
+      >
         {productCount}개 상품 구매하기
       </Button>
     </S.OrderSummaryWrapper>

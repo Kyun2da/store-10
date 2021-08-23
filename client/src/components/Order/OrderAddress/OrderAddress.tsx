@@ -1,12 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Dispatch } from 'react';
 import * as S from './styles';
 import { DELIVERY_REQUEST_MESSAGES } from '@/contstants';
 import AddressModal from '@/components/Shared/Modal/AddressModal';
 import useModal from '@/hooks/useModal';
 import { useGetDefaultAddress } from '@/hooks/queries/address';
-import { IAddress } from '@/types';
+import { IAddress, IOrder } from '@/types';
 
-const OrderAddress = () => {
+interface IProps {
+  setOrder: Dispatch<
+    Partial<IOrder> | ((prev: Partial<IOrder>) => Partial<IOrder>)
+  >;
+  updateDefaultAddress: boolean;
+  setUpdateDefaultAddress: Dispatch<boolean>;
+}
+const OrderAddress = ({
+  setOrder,
+  updateDefaultAddress,
+  setUpdateDefaultAddress,
+}: IProps) => {
   const [requestMessage, setRequestMessage] = useState('');
   const [requestMessageInput, setRequestMessageInput] = useState('');
   const [address, selectAddress] = useState<IAddress | null>(null);
@@ -17,6 +28,25 @@ const OrderAddress = () => {
       selectAddress(data);
     }
   }, [data]);
+
+  useEffect(() => {
+    const delivery_request_message =
+      requestMessage === '직접입력' ? requestMessageInput : requestMessage;
+    setOrder((prev: Partial<IOrder>) => ({
+      ...prev,
+      ...(address ? { address_id: address.id } : {}),
+      ...(delivery_request_message
+        ? { delivery_request_message }
+        : { delivery_request_message: null }),
+    }));
+  }, [
+    data,
+    setOrder,
+    address,
+    requestMessage,
+    requestMessageInput,
+    updateDefaultAddress,
+  ]);
 
   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRequestMessage(e.currentTarget.value);
@@ -40,7 +70,13 @@ const OrderAddress = () => {
         </S.AddressText>
         <S.PhoneText>{address.phone}</S.PhoneText>
 
-        {!address.isDefault && <S.AddressCheckbox label="기본 배송지로 저장" />}
+        {!address.isDefault && (
+          <S.AddressCheckbox
+            label="기본 배송지로 저장"
+            checked={updateDefaultAddress}
+            onChange={(e) => setUpdateDefaultAddress(e.currentTarget.checked)}
+          />
+        )}
 
         <S.AddressSelect
           items={DELIVERY_REQUEST_MESSAGES}

@@ -6,7 +6,7 @@ import { createImportSpecifier } from 'typescript';
 
 class OrderController {
   async createOrder(req: Request, res: Response) {
-    const userId = req.user?.id || 1;
+    const userId = req.user?.id || 4;
     const { status, products, addressId, deliveryRequestMessage } = req.body;
     const result = await OrderService.createOrder({
       user_id: userId,
@@ -25,7 +25,7 @@ class OrderController {
 
   async getOrder(req: Request, res: Response) {
     const { id } = req.params;
-    const userId = req.user?.id || 1;
+    const userId = req.user?.id || 4;
 
     const result = await OrderService.getOrder({
       user_id: userId,
@@ -41,13 +41,36 @@ class OrderController {
 
   async getOrders(req: Request, res: Response) {
     const { month_ago, year } = req.query;
-    const userId = req.user?.id || 1;
+    const userId = req.user?.id || 4;
     const result = await OrderService.getOrders({
       user_id: userId,
       year,
     });
 
     ApiResponse(res, HttpStatusCode.OK, '주문 조회 성공', result);
+  }
+
+  async updateOrder(req: Request, res: Response) {
+    const { order, updateDefaultAddress } = req.body;
+    const userId = req.user?.id || 4;
+    const result = await OrderService.updateOrder({
+      user_id: userId,
+      order,
+      updateDefaultAddress,
+    });
+
+    if (result?.affected >= 1) {
+      ApiResponse(res, HttpStatusCode.OK, '주문 업데이트 성공', {
+        id: order.id,
+      });
+    } else {
+      ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '주문 업데이트 실패',
+        result
+      );
+    }
   }
 }
 

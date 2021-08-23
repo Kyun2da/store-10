@@ -1,13 +1,25 @@
 import CartRepository from '@/repositories/cart.respository';
 
 class CartService {
-  async createCart({ userId, productId, count }) {
+  async createOrUpdateCart({ userId, productId, count }) {
     const cartRepo = CartRepository();
-    return await cartRepo.createCart({
-      userId,
-      productId,
-      count,
+    const cart = await cartRepo.getCart({
+      user_id: userId,
+      product_id: productId,
     });
+    if (cart) {
+      return await cartRepo.updateCart({
+        userId,
+        productId,
+        count: cart.count + count,
+      });
+    } else {
+      return await cartRepo.createCart({
+        userId,
+        productId,
+        count,
+      });
+    }
   }
 
   async getCarts(userId) {

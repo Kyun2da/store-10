@@ -4,7 +4,7 @@ import CartController from '@/controllers/cart.controller';
 
 const router = Router();
 
-router.post('/', wrapAsync(CartController.createCart));
+router.post('/', wrapAsync(CartController.createOrUpdateCart));
 router.get('/', wrapAsync(CartController.getCarts));
 router.delete('/', wrapAsync(CartController.deleteCart));
 

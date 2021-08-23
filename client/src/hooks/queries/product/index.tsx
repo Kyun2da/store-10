@@ -9,6 +9,7 @@ import {
   postProductReview,
   deleteProductReview,
   getProductQuestionById,
+  getProductQuestionCountById,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
@@ -18,6 +19,7 @@ import {
   IProductQuestion,
   IProductReview,
   IReviewCountAndRating,
+  IQuestionCount,
 } from '@/types/index';
 import { notify } from '@/components/Shared/Toastify';
 
@@ -49,6 +51,12 @@ export const useGetProductReviewsCount = (id: string) => {
   return useQuery<IReviewCountAndRating, Error>(
     ['productReviewCount', id],
     () => getProductReviewsCountById(id)
+  );
+};
+
+export const useGetProductQuestionCount = (id: string) => {
+  return useQuery<IQuestionCount, Error>(['productQuestionCount', id], () =>
+    getProductQuestionCountById(id)
   );
 };
 

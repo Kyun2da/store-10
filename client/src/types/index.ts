@@ -85,6 +85,10 @@ export interface IReviewCountAndRating {
   ratings: IRating[];
 }
 
+export interface IQuestionCount {
+  count: number;
+}
+
 export interface IProductReview {
   id: number;
   content: string;

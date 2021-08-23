@@ -99,11 +99,9 @@ class ProductController {
       user_id,
     };
 
-    console.log(user_id);
+    const result = await ProductService.createQuestion(question);
 
-    const qestion = await ProductService.createQuestion(question);
-
-    if (!question) {
+    if (!result) {
       return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '문의 작성 실패');
     }
     return ApiResponse(res, HttpStatusCode.NO_CONTENT);

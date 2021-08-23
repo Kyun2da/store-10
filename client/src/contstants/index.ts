@@ -86,3 +86,12 @@ export const ORDER_STATUS_DATA = [
     count: 0,
   },
 ];
+
+export const PERIOD_FILTER: { name: string; value: null | number }[] = [
+  { name: '6개월 전', value: null },
+];
+let currentYear = new Date().getFullYear();
+while (currentYear >= 2016) {
+  PERIOD_FILTER.push({ name: currentYear.toString(), value: currentYear });
+  currentYear--;
+}

@@ -7,6 +7,7 @@ import {
   Repository,
   getManager,
   Between,
+  Not,
 } from 'typeorm';
 
 interface IOrder {
@@ -59,17 +60,20 @@ class OrderRepository extends Repository<Order> {
     });
   }
 
-  async getOrders({
-    user_id,
-    monthAgo,
-  }: {
-    user_id: number;
-    monthAgo: number;
-  }) {
+  async getOrders({ user_id, year }: { user_id: number; year?: string }) {
+    const DEFAULT_MONTH_AGO = 6;
+
+    const startDate = year
+      ? new Date(`${year}-01-01`)
+      : addMonth(new Date(), -DEFAULT_MONTH_AGO);
+    const endDate = year ? new Date(`${year}-12-31`) : new Date();
+
+    console.log(startDate, endDate);
     return this.find({
       where: {
         user_id,
-        createdAt: Between(addMonth(new Date(), -monthAgo), new Date()),
+        status: Not('created'),
+        createdAt: Between(startDate, endDate),
       },
       relations: ['products', 'products.productImage'],
     });

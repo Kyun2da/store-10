@@ -40,11 +40,11 @@ class OrderController {
   }
 
   async getOrders(req: Request, res: Response) {
-    const monthAgo = req.query['month_ago'];
+    const { month_ago, year } = req.query;
     const userId = req.user?.id || 1;
     const result = await OrderService.getOrders({
-      monthAgo: +monthAgo,
       user_id: userId,
+      year,
     });
 
     ApiResponse(res, HttpStatusCode.OK, '주문 조회 성공', result);

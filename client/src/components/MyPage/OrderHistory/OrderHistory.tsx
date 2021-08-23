@@ -3,23 +3,15 @@ import Chip from '@/components/Shared/Chip';
 import Title from '@/components/Shared/Title';
 import Pagination from '@/components/Shared/Pagination';
 import * as S from './styles';
-import { FRUSTRATE_IMG, ORDER_STATUS_DATA } from '@/contstants';
+import { FRUSTRATE_IMG, ORDER_STATUS_DATA, PERIOD_FILTER } from '@/contstants';
 import OrderItemList from './OrderItemList';
 import { useGetOrders } from '@/hooks/queries/order';
 import { IOrder } from '@/types';
 
-const PERIOD_FILTER = [
-  { name: '1개월 전', value: 1 },
-  { name: '3개월 전', value: 3 },
-  { name: '6개월 전', value: 6 },
-  { name: '1년 전', value: 12 },
-  { name: '2년 전', value: 24 },
-];
-
 const PAGE_LIMIT = 4;
 
 const OrderHistory = ({}) => {
-  const [selectedPeriod, setSelectedPeriod] = useState<number>(1);
+  const [selectedPeriod, setSelectedPeriod] = useState<number | null>(null);
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const [orders, setOrders] = useState<IOrder[]>([]);
   const [page, setPage] = useState<number>(0);
@@ -97,7 +89,7 @@ const OrderHistory = ({}) => {
         </S.OrderStatusContainer>
       </S.OrderHistoryHeader>
       <S.OrderHistoryBody>
-        {data?.length && renderOrderItemList()}
+        {!!data?.length && renderOrderItemList()}
         {data && !data.length && (
           <S.EmptyWrapper>
             <img src={FRUSTRATE_IMG} />

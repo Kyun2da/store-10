@@ -45,9 +45,9 @@ class OrderService {
     };
   }
 
-  async getOrders({ user_id, monthAgo }) {
+  async getOrders({ user_id, year }) {
     const orderRepo = OrderRepository();
-    const orders = await orderRepo.getOrders({ monthAgo, user_id });
+    const orders = await orderRepo.getOrders({ user_id, year });
     const orderIds = orders.map((order) => order.id);
 
     const orderProductRepo = OrderProductRepository();

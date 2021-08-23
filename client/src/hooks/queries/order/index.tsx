@@ -16,10 +16,8 @@ export const usePostOrder = () => {
   });
 };
 
-export const useGetOrders = (monthAgo: number) => {
-  return useQuery<IOrder[], Error>(
-    ['orders', monthAgo],
-    () => getOrders(monthAgo),
-    { keepPreviousData: true }
-  );
+export const useGetOrders = (year: number | null) => {
+  return useQuery<IOrder[], Error>(['orders', year], () => getOrders(year), {
+    keepPreviousData: true,
+  });
 };

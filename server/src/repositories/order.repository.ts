@@ -69,7 +69,7 @@ class OrderRepository extends Repository<Order> {
     return this.find({
       where: {
         user_id,
-        updatedAt: Between(addMonth(new Date(), -monthAgo), new Date()),
+        createdAt: Between(addMonth(new Date(), -monthAgo), new Date()),
       },
       relations: ['products', 'products.productImage'],
     });

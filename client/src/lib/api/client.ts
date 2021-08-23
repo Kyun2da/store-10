@@ -4,7 +4,8 @@ const client = axios.create({
   withCredentials: true,
 });
 
-client.defaults.baseURL = process.env.SERVER_API_HOST;
+client.defaults.baseURL =
+  process.env.SERVER_API_HOST || 'http://localhost:3000/api';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const throwError = (e: any) => {

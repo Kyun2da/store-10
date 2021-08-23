@@ -53,7 +53,7 @@ const Sidebar = ({ ...props }: Props) => {
       <S.SideBar className={isOpen ? 'active' : ''}>
         <S.Top>
           <div>
-            {user ? `${user.name}님 환영합니다!` : '로그인이 필요합니다.'}
+            {user ? `${user.name}님 환영합니다! ` : '로그인이 필요합니다.'}
           </div>
           <S.IconsWrapper>
             {user ? <button onClick={onClickLogout}>로그아웃</button> : null}

@@ -66,7 +66,7 @@ export const ProductThumbnailLense = styled.div<LenseProps>`
   background-color: #fff;
   background-size: inherit;
   background-image: url(${({ imgset }) => imgset});
-  opacity: ${({ show }) => (show ? 1 : 0)};
+  display: ${({ show }) => (show ? 'block' : 'none')};
 `;
 
 export const ProductOrder = styled.div`

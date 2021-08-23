@@ -7,6 +7,8 @@ import {
   IProductReview,
   IReviewCountAndRating,
   IReview,
+  IProductQuestion,
+  IQuestionCount,
 } from '@/types';
 
 export const getProductById = async (id: string) => {
@@ -17,8 +19,18 @@ export const getProductReviewsById = async (id: string, offset: number) => {
   return await client.get<IProductReview[]>(`/product/review/${id}/${offset}`);
 };
 
+export const getProductQuestionById = async (id: string, offset: number) => {
+  return await client.get<IProductQuestion[]>(
+    `/product/question/${id}/${offset}`
+  );
+};
+
 export const getProductReviewsCountById = async (id: string) => {
   return await client.get<IReviewCountAndRating>(`/product/review/count/${id}`);
+};
+
+export const getProductQuestionCountById = async (id: string) => {
+  return await client.get<IQuestionCount>(`/product/question/count/${id}`);
 };
 
 export const getRecommandProducts = async () => {

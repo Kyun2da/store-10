@@ -17,6 +17,8 @@ import Category from '@/pages/Category';
 import SignUp from '@/pages/SignUp';
 import Notice from '@/pages/Notice';
 import Order from '@/pages/Order';
+import Search from '@/pages/Search';
+import Loading from '@/components/Shared/Loading';
 import { QueryErrorResetBoundary } from 'react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import Error from '@/components/Shared/Error';
@@ -66,6 +68,7 @@ const App = () => {
                   <Route path="/approval/:authtype" component={Approval} />
                   <Route path="/bookmark" component={Bookmark} />
                   <Route path="/category/:categoryId" component={Category} />
+                  <Route path="/search/:search" component={Search} />
                   <Route path="/signup" component={SignUp} />
                   <Route path="/login" component={Login} />
                   <Route path="/detail/:id" component={Detail} />

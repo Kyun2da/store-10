@@ -26,11 +26,21 @@ const CategoryProducts = ({ ...props }: IProps) => {
   });
 
   const getMore = useCallback(() => {
-    setStart(start + 20);
-    fetchNextPage({
-      pageParam: {},
-    });
-  }, [fetchNextPage, start]);
+    // 임시 조치
+    if (start < 60) {
+      setStart(start + 20);
+    }
+  }, [start]);
+
+  useEffect(() => {
+    if (start != 0) {
+      fetchNextPage({
+        pageParam: {
+          start: start,
+        },
+      });
+    }
+  }, [start]);
 
   useEffect(() => {
     if (inView) getMore();

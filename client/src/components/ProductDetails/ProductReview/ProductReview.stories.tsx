@@ -8,11 +8,6 @@ export default {
   component: ProductReview,
 } as ComponentMeta<typeof ProductReview>;
 
-const Template: ComponentStory<typeof ProductReview> = (args) => (
-  <ProductReview {...args} />
-);
+const Template: ComponentStory<typeof ProductReview> = () => <ProductReview />;
 
 export const Default = Template.bind({});
-Default.args = {
-  totalRating: 4.3,
-};

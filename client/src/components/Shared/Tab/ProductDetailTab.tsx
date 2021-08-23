@@ -26,7 +26,7 @@ const ProductDetailTab = () => {
         <ProductExchange />
       </TabPanel>
       <TabPanel index={3}>
-        <ProductReview totalRating={4.3} />
+        <ProductReview />
       </TabPanel>
       <TabPanel index={4}>
         <ProductRequest />

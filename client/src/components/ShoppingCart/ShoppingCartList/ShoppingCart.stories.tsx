@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import shoppingCart from '@/dummies/shoppingCart';
 import ShoppingCategoryList from '.';
 import { ICart } from '@/types';
 
@@ -33,6 +32,7 @@ const Template: ComponentStory<typeof ShoppingCategoryList> = () => {
       setUnCheckedList={setUnCheckedList}
       unCheckedList={unCheckedList}
       removeFromCart={removeFromCart}
+      disabled={false}
     />
   );
 };

@@ -4,6 +4,7 @@ import path from 'path';
 dotenv.config();
 
 process.env.NODE_ENV = process.env.NODE_ENV || `development`;
+
 const env = dotenv.config({
   path: path.resolve(
     process.cwd(),
@@ -32,4 +33,8 @@ export default {
   GIT_CLIENT_SECRET: loadEnv('GIT_CLIENT_SECRET'),
   CLIENT_URL: loadEnv('CLIENT_URL'),
   ELASTIC_HOST: loadEnv('ELASTIC_HOST'),
+  S3_ACCESS_KEY_ID: loadEnv('S3_ACCESS_KEY_ID'),
+  S3_SECRET_ACCESS_KEY: loadEnv('S3_SECRET_ACCESS_KEY'),
+  S3_REGION: loadEnv('S3_REGION'),
+  S3_BUCKET: loadEnv('S3_BUCKET'),
 };

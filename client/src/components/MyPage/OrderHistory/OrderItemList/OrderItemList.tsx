@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './styles';
 import Button from '@/components/Shared/Button';
-import wonFormat from '@/utils/wonFormat';
+import { wonFormat } from '@/utils/helper';
 import { ORDER_STATUS } from '@/contstants';
 
 interface IProps {

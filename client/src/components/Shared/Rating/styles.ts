@@ -25,3 +25,8 @@ export const RatingPoint = styled.span`
   color: #ffffff;
   margin-left: 4rem;
 `;
+
+export const RatingWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

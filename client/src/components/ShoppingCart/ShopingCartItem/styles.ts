@@ -29,6 +29,10 @@ export const ImgWrapper = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const ItemInfo = styled.div`
@@ -37,6 +41,10 @@ export const ItemInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   padding-left: 1.2rem;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const TotalPrice = styled.div`

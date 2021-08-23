@@ -1,9 +1,10 @@
 import React, { Dispatch } from 'react';
 import * as S from './styles';
 import { MinusSVG, PlusSVG, CloseSVG } from '@/assets/svgs';
-import wonFormat from '@/utils/wonFormat';
+import { wonFormat } from '@/utils/helper';
 import Checkbox from '@/components/Shared/Checkbox';
 import { ICart } from '@/types';
+import { useHistory } from '@/lib/Router';
 
 interface IShoppingCartItemProps {
   item: ICart;
@@ -21,6 +22,7 @@ const ShoppingCartItem = ({
   setUnCheckedList,
   unCheckedList,
 }: IShoppingCartItemProps) => {
+  const { historyPush } = useHistory();
   const onClickPlus = () => {
     setProductState(index, { count: item.count + 1 });
   };
@@ -42,19 +44,24 @@ const ShoppingCartItem = ({
     }
   };
 
+  const onClickProductPage = () => {
+    historyPush(`/detail/${item.productId}`);
+  };
+
   const onClickClose = () => {
     removeFromCart([item.productId]);
   };
   const isUnCehcked = !!unCheckedList.find(
     (uncheckedId) => uncheckedId === item.productId
   );
+
   return (
     <S.ShoppingCartItem>
       <Checkbox checked={!isUnCehcked} onChange={onChangeCheckbox} />
       <S.ImgWrapper>
-        <img src={item.image} />
+        <img src={item.image} onClick={onClickProductPage} />
       </S.ImgWrapper>
-      <S.ItemInfo>
+      <S.ItemInfo onClick={onClickProductPage}>
         <S.ItemInfoName>{item.title}</S.ItemInfoName>
         <S.ItemInfoPrice>{wonFormat(+item.price)}</S.ItemInfoPrice>
       </S.ItemInfo>

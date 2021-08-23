@@ -28,6 +28,8 @@ const ShoppingCart = () => {
     0
   );
 
+  const disabled = !shoppingCartItems.length;
+
   const removeFromCart = (ids: number[]) => {
     const checkNotRemovedItems = (item: ICart) => !ids.includes(item.productId);
     setShoppingCartItems(shoppingCartItems.filter(checkNotRemovedItems));
@@ -43,17 +45,20 @@ const ShoppingCart = () => {
         setUnCheckedList={setUnCheckedList}
         unCheckedList={unCheckedList}
         removeFromCart={removeFromCart}
+        disabled={disabled}
       />
       <S.ShoppingCartAside>
         <ShoppingCartSummary
           productCount={productCount}
           totalPrice={totalPrice}
+          disabled={disabled}
         />
       </S.ShoppingCartAside>
       <S.ShoppingCartFooter>
         <ShoppingCartSummary
           productCount={productCount}
           totalPrice={totalPrice}
+          disabled={disabled}
         />
       </S.ShoppingCartFooter>
     </S.ShoppingCart>

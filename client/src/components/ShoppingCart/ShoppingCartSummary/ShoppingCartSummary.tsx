@@ -1,22 +1,31 @@
-import React, { FC } from 'react';
+import React, { useCallback } from 'react';
 import * as S from './styles';
-import wonFormat from '@/utils/wonFormat';
+import { wonFormat } from '@/utils/helper';
 import Button from '@/components/Shared/Button';
+import { useHistory } from '@/lib/Router';
 
 interface ISShoppingCartSummaryProps {
   totalPrice: number;
   deliveryFee?: number;
   discount?: number;
   productCount: number;
+  disabled?: boolean;
 }
 
-const ShoppingCartSummary: FC<ISShoppingCartSummaryProps> = ({
+const ShoppingCartSummary = ({
   totalPrice,
   deliveryFee = 0,
   discount = 0,
   productCount,
-}) => {
+  disabled,
+}: ISShoppingCartSummaryProps) => {
   const sum = totalPrice + deliveryFee - discount;
+  const { historyPush } = useHistory();
+
+  const buyButtonOnClick = useCallback(() => {
+    historyPush('/order');
+  }, [historyPush]);
+
   return (
     <S.ShoppingCartSummaryWrapper>
       <S.ShoppingCartSummary>
@@ -37,7 +46,12 @@ const ShoppingCartSummary: FC<ISShoppingCartSummaryProps> = ({
           <dd>{wonFormat(sum)}</dd>
         </S.ShoppingCartSummaryRow>
       </S.ShoppingCartSummary>
-      <Button type="button" color="primary" onClick={() => {}}>
+      <Button
+        type="button"
+        color="primary"
+        disabled={disabled}
+        onClick={buyButtonOnClick}
+      >
         {productCount}개 상품 구매하기
       </Button>
     </S.ShoppingCartSummaryWrapper>

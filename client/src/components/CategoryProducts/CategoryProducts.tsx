@@ -19,7 +19,7 @@ const CategoryProducts = ({ ...props }: IProps) => {
     key: ['category', subCategoryId],
     fetchingFunction: getCategoryProducts,
     fetchParams: {
-      start: start,
+      start,
       subCateogry: subCategoryId,
       orderType: 'createdAt',
     },
@@ -40,10 +40,11 @@ const CategoryProducts = ({ ...props }: IProps) => {
         },
       });
     }
-  }, [start]);
+  }, [fetchNextPage, start]);
 
   useEffect(() => {
     if (inView) getMore();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
   useEffect(() => {

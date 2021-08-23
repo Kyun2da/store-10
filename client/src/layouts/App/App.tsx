@@ -48,7 +48,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={themeMode}>
-      <Suspense fallback={null}>
+      <Suspense fallback={<div>loading</div>}>
         <QueryErrorResetBoundary>
           {({ reset }) => (
             <ErrorBoundary

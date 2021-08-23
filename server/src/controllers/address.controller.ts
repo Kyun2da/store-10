@@ -1,4 +1,4 @@
-import AddressService from '@/services/Address.service';
+import AddressService from '@/services/address.service';
 import { Request, Response } from 'express';
 import ApiResponse from '@/api/middlewares/response-format';
 import HttpStatusCode from '@/types/statusCode';

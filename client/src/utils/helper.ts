@@ -10,8 +10,12 @@ export const wonFormat = (number: number | string) => {
   return price + '원';
 };
 
-export const dateFormat = (date: string) => {
-  return dayjs(date).format('YYYY-MM-DD');
+export const dateFormat = (date: string, seperator = '-') => {
+  if (seperator === '-') {
+    return dayjs(date).format('YYYY-MM-DD');
+  } else if (seperator === '.') {
+    return dayjs(date).format('YYYY.MM.DD');
+  }
 };
 
 export const calculateRating = ({

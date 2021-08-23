@@ -106,7 +106,7 @@ export interface IProductQuestion {
   answer?: string;
   secret: boolean;
   category: string;
-  product_id: number;
+  product_id: string;
   createdAt?: string;
 }
 

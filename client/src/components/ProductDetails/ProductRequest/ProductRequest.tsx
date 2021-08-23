@@ -42,8 +42,6 @@ const ProductRequest = () => {
     return <div>error</div>;
   }
 
-  console.log(questions, count);
-
   return (
     <S.PanelWrapper>
       <S.TopArea>

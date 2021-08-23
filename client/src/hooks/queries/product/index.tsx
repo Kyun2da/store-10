@@ -8,6 +8,7 @@ import {
   getProductReviewsCountById,
   postProductReview,
   deleteProductReview,
+  getSearchProducts,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
@@ -52,6 +53,12 @@ export const useGetBestProducts = () => {
 
 export const useGetRecentProducts = () => {
   return useQuery<IProduct[], Error>('recentProduct', getRecentProducts);
+};
+
+export const useGetSearchProducts = (searchText: string) => {
+  return useQuery<IProduct[], Error>(['searchProducts', searchText], () =>
+    getSearchProducts(searchText)
+  );
 };
 
 export const useGetCateogries = () => {

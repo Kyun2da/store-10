@@ -5,10 +5,10 @@ import ApiResponse from '@/api/middlewares/response-format';
 
 // TODO: 미들웨어 붙이면 테스트 userId 삭제
 class CartController {
-  async createCart(req: Request, res: Response) {
+  async createOrUpdateCart(req: Request, res: Response) {
     const { productId, count } = req.body;
     const userId = req.user?.id || 4;
-    await CartService.createCart({ productId, userId, count });
+    await CartService.createOrUpdateCart({ productId, userId, count });
 
     ApiResponse(res, HttpStatusCode.NO_CONTENT, '장바구니 추가 성공');
   }

@@ -8,7 +8,7 @@ import {
   validateName,
   validatePassword,
   validateRePassword,
-} from '@/utils/constant/validate/validation';
+} from '@/utils/validatior';
 import React, { useCallback, useState } from 'react';
 import { postEmailCheck } from '@/lib/api/user/postEmailCheck';
 import * as S from './styles';

@@ -1,5 +1,5 @@
 import { useQuery, useMutation } from 'react-query';
-import { getOrder, postOrder } from '@/lib/api/order';
+import { getOrder, postOrder, getOrders } from '@/lib/api/order';
 import { IOrder } from '@/types';
 import { useHistory } from '@/lib/Router';
 
@@ -13,5 +13,11 @@ export const usePostOrder = () => {
     onSuccess(data) {
       historyPush(`/order/${data.id}`);
     },
+  });
+};
+
+export const useGetOrders = (year: number | null) => {
+  return useQuery<IOrder[], Error>(['orders', year], () => getOrders(year), {
+    keepPreviousData: true,
   });
 };

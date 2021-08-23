@@ -53,3 +53,45 @@ export const DELIVERY_REQUEST_MESSAGES = [
     name: '직접입력',
   },
 ];
+
+export const ORDER_STATUS_DATA = [
+  {
+    value: 'wait',
+    name: '입금대기',
+    count: 0,
+  },
+  {
+    value: 'paid',
+    name: '결제완료',
+    count: 0,
+  },
+  {
+    value: 'preparing',
+    name: '상품준비중',
+    count: 0,
+  },
+  {
+    value: 'delivering',
+    name: '배송중',
+    count: 0,
+  },
+  {
+    value: 'delivered',
+    name: '배송완료',
+    count: 0,
+  },
+  {
+    value: 'confirmed',
+    name: '구매확정',
+    count: 0,
+  },
+];
+
+export const PERIOD_FILTER: { name: string; value: null | number }[] = [
+  { name: '6개월 전', value: null },
+];
+let currentYear = new Date().getFullYear();
+while (currentYear >= 2016) {
+  PERIOD_FILTER.push({ name: currentYear.toString(), value: currentYear });
+  currentYear--;
+}

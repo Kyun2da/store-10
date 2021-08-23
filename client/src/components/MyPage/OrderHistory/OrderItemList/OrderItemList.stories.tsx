@@ -19,6 +19,5 @@ export const Default = Template.bind({});
 Default.args = {
   date: key,
   status: value.status,
-  deliveredAt: value.deliveredAt,
-  items: value.items,
+  items: value.products,
 };

@@ -48,6 +48,7 @@ const Main = () => {
       />
     ));
   };
+
   return (
     <>
       <Banner />
@@ -55,7 +56,7 @@ const Main = () => {
         <h1 className="product-title">새로 나왔어요!</h1>
         <LoadingCards
           col={4}
-          skeletonNum={4}
+          skeletonNum={8}
           showSkeleton={recentQuery.isLoading || recentQuery.isFetching}
           component={renderProducts(recentQuery)}
         />
@@ -63,7 +64,7 @@ const Main = () => {
         <h1 className="product-title">이거는 어때요?</h1>
         <LoadingCards
           col={4}
-          skeletonNum={4}
+          skeletonNum={8}
           showSkeleton={recommandQuery.isLoading || recommandQuery.isFetching}
           component={renderProducts(recommandQuery)}
         />

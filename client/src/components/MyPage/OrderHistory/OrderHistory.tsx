@@ -6,6 +6,7 @@ import * as S from './styles';
 import { FRUSTRATE_IMG, ORDER_STATUS_DATA, PERIOD_FILTER } from '@/contstants';
 import OrderItemList from './OrderItemList';
 import { useGetOrders } from '@/hooks/queries/order';
+import usePagination from '@/hooks/usePagination';
 import { IOrder } from '@/types';
 
 const PAGE_LIMIT = 4;
@@ -14,7 +15,7 @@ const OrderHistory = ({}) => {
   const [selectedPeriod, setSelectedPeriod] = useState<number | null>(null);
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const [orders, setOrders] = useState<IOrder[]>([]);
-  const [page, setPage] = useState<number>(0);
+  const [offset, handleOnClickPage] = usePagination(PAGE_LIMIT);
   const { data } = useGetOrders(selectedPeriod);
 
   useEffect(() => {
@@ -25,15 +26,10 @@ const OrderHistory = ({}) => {
     } else {
       setOrders(data || []);
     }
-    setPage(0);
-  }, [data, selectedStatus]);
-
-  const onClickPage = (page: number) => {
-    setPage(page);
-  };
+    handleOnClickPage(0);
+  }, [data, selectedStatus, handleOnClickPage]);
 
   const renderOrderItemList = () => {
-    const offset = page * PAGE_LIMIT;
     const ordersOnPage = orders.slice(offset, offset + PAGE_LIMIT);
     return ordersOnPage.map((order) => (
       <S.OrderHistoryBody key={order.id}>
@@ -99,7 +95,7 @@ const OrderHistory = ({}) => {
       </S.OrderHistoryBody>
 
       <Pagination
-        handleOnClickPage={onClickPage}
+        handleOnClickPage={handleOnClickPage}
         count={Math.ceil(orders.length / PAGE_LIMIT)}
       />
     </S.OrerHistory>

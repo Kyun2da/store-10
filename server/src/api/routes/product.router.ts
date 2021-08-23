@@ -6,11 +6,13 @@ import multerS3 from '@/api/middlewares/s3.middleware';
 
 const router = Router();
 
-router.get('/', wrapAsync(ProductController.getProducts));
+router.get('/elastic/search', wrapAsync(ProductController.serchElasticProduct));
 router.get('/search', wrapAsync(ProductController.serchProduct));
 router.get('/recommand', wrapAsync(ProductController.getRecommandProducts));
 router.get('/best', wrapAsync(ProductController.getBestProducts));
-router.get('/category', wrapAsync(ProductController.getCategories));
+router.get('/category-list', wrapAsync(ProductController.getCategories));
+router.get('/category', wrapAsync(ProductController.getCategoryProducts));
+router.get('/', wrapAsync(ProductController.getProducts));
 router.get('/:id', wrapAsync(ProductController.getProductById));
 router.get('/review/count/:id', ProductController.getProductReviewsCountById);
 router.get(

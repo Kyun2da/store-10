@@ -32,7 +32,6 @@ const Header = () => {
 
   const searchWrapToggle = useCallback(() => {
     setSearchIsOpen(!searchIsOpen);
-    console.log(searchIsOpen);
   }, [searchIsOpen]);
 
   return (

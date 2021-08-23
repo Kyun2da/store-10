@@ -290,8 +290,14 @@ export const UserReview = styled.div`
 
 export const UserReviewTitles = styled.div`
   display: flex;
-  align-items: center;
-  gap: 5rem;
+  flex-direction: column;
+  gap: 1rem;
+
+  .rating-area {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
 `;
 
 export const ReviewImages = styled.div`
@@ -301,8 +307,14 @@ export const ReviewImages = styled.div`
 
   img {
     width: 20rem;
+    height: 15rem;
     border-radius: 2rem;
     object-fit: cover;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.75;
+    }
   }
 `;
 

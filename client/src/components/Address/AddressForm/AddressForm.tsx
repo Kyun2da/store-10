@@ -92,8 +92,15 @@ const AddressForm = ({ modifyAddressData, toggleModal }: IProps) => {
       toggleIsPostcodeOpen();
     }
   };
+
+  const handleOnSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // 머지 했는데 오류 나는거 땜에 임시로 넣어둡니다 동진님~
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleOnSubmit}>
       <S.FormRow>
         <S.FormRowName>받는 사람</S.FormRowName>
         <Input

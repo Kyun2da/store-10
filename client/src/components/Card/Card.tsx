@@ -5,7 +5,7 @@ import {
   CartSVG as ShoppingCart,
 } from '@/assets/svgs';
 import { Link } from '@/lib/Router';
-import wonFormat from '@/utils/wonFormat';
+import { wonFormat } from '@/utils/helper';
 import { useAddBookmark, useDeleteBookmark } from '@/hooks/queries/bookmark';
 
 interface CardProps {

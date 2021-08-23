@@ -1,4 +1,5 @@
-import { UploadSVG } from '@/assets/svgs';
+import { UploadSVG, CloseSVG } from '@/assets/svgs';
+import { CustomFile } from '@/hooks/useFileInput';
 import React, { RefObject } from 'react';
 import * as S from './style';
 
@@ -7,11 +8,12 @@ export interface IFileInput {
   attributes?: Record<string, unknown>;
   multiple?: boolean;
   hidden?: boolean;
-  fileImgs: string[];
+  imgFiles: CustomFile;
   isError: boolean;
   fileRef: RefObject<HTMLInputElement>;
   handleClickOnFileInput: () => void;
   handleUploadFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  removeSeletedPreview: (e: React.MouseEvent, selected: string) => void;
 }
 
 const FileInput = ({
@@ -19,34 +21,45 @@ const FileInput = ({
   fileRef,
   attributes,
   hidden,
-  multiple,
-  fileImgs,
+  imgFiles,
   isError,
   handleClickOnFileInput,
   handleUploadFile,
+  removeSeletedPreview,
 }: IFileInput) => {
+  const initInputValue = (e: React.MouseEvent) => {
+    const target = e.target as HTMLInputElement;
+    target.value = '';
+  };
+
   return (
     <>
       <S.FileInputButton onClick={handleClickOnFileInput}>
         <UploadSVG width={100} height={100} />
-        <span className="helper-text">
-          클릭 또는 드래그&드랍으로 파일을 추가하세요!
-        </span>
+        <span className="helper-text">클릭하여 파일을 추가하세요!</span>
         <input
           ref={fileRef}
           type="file"
           hidden={hidden}
-          multiple={multiple}
           name={name}
+          onClick={(e) => initInputValue(e)}
           onChange={handleUploadFile}
           {...attributes}
         />
       </S.FileInputButton>
 
       <S.PreviewWrapper>
-        {fileImgs.map((file) => (
-          <img key={file} src={file} alt="미리보기 이미지" />
-        ))}
+        {Object.entries(imgFiles).map((files) => {
+          const [hash, file] = files;
+          return (
+            <S.ImageWrapper key={hash}>
+              <img src={URL.createObjectURL(file)} alt="미리보기 이미지" />
+              <S.CloseButton onClick={(e) => removeSeletedPreview(e, hash)}>
+                <CloseSVG />
+              </S.CloseButton>
+            </S.ImageWrapper>
+          );
+        })}
       </S.PreviewWrapper>
 
       {isError && (

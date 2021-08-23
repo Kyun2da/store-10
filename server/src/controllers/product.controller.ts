@@ -2,6 +2,7 @@ import ProductService from '@/services/product.service';
 import { Request, Response } from 'express';
 import ApiResponse from '@/api/middlewares/response-format';
 import HttpStatusCode from '@/types/statusCode';
+import { ReviewImage } from '@/entities/reviewImage.entity';
 
 class ProductController {
   async getProduct(req: Request, res: Response) {
@@ -25,6 +26,116 @@ class ProductController {
 
     const result = { details, thumbnails };
     return ApiResponse(res, HttpStatusCode.OK, '해당 상품 조회 성공', result);
+  }
+
+  async getProductReviewsCountById(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const count = await ProductService.getProductReviewsCountById(id);
+    const ratings = await ProductService.getProductReviewRatingCount(id);
+    const { sum } = await ProductService.getProductReviewRating(id);
+
+    // TODO: validation 처리
+    if (
+      count === undefined ||
+      count === null ||
+      sum === undefined ||
+      ratings === undefined ||
+      ratings === null
+    ) {
+      return ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '해당 상품에 대한 리뷰 또는 별점조회 에러'
+      );
+    }
+
+    const result = { count, sum: sum ?? '0', ratings };
+    return ApiResponse(
+      res,
+      HttpStatusCode.OK,
+      '해당 상품 리뷰 개수 및 별점 조회 성공',
+      result
+    );
+  }
+
+  async postProductReviewById(req: Request, res: Response) {
+    const files = req.files as Express.MulterS3.File[];
+    const data = req.body;
+    const user_id = req.user.id;
+    const review = {
+      ...data,
+      user_id,
+    };
+
+    const result = await ProductService.createReview(review);
+
+    for (const file of files) {
+      const reviewImage = { review_id: result.id, url: file.location };
+      const imageResult = await ProductService.createReviewImage(
+        reviewImage as ReviewImage
+      );
+
+      if (!imageResult) {
+        return ApiResponse(
+          res,
+          HttpStatusCode.BAD_REQUEST,
+          '리뷰 이미지 업로드 실패'
+        );
+      }
+    }
+
+    if (!result) {
+      return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰생성 실패');
+    }
+    return ApiResponse(res, HttpStatusCode.NO_CONTENT);
+  }
+
+  async deleteProductReviewById(req: Request, res: Response) {
+    const user_id = req.user.id;
+    const { id } = req.params;
+
+    const result = await ProductService.deleteReviewById(id, user_id);
+
+    if (!result.affected) {
+      return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰삭제 실패');
+    }
+    return ApiResponse(res, HttpStatusCode.NO_CONTENT);
+  }
+
+  async updateProductReviewById(req: Request, res: Response) {
+    const user_id = req.user.id;
+    const { id } = req.params;
+    const data = req.body;
+    const review = {
+      id,
+      user_id,
+      ...data,
+    };
+
+    await ProductService.updateReviewById(review);
+
+    // THINK: 업데이트가 필요할 지 급의문..?! 그냥 삭제하고 다시 쓰는게 좋을지도
+  }
+
+  async getProductReviewsById(req: Request, res: Response) {
+    const { id, offset } = req.params;
+    const result = await ProductService.getProductReviewsById(id, offset);
+
+    if (!result) {
+      return ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '리뷰조회에서 에러가 발생했습니다.'
+      );
+    }
+
+    return ApiResponse(
+      res,
+      HttpStatusCode.OK,
+      '해당 상품 리뷰 조회 성공',
+      result
+    );
   }
 
   async serchProduct(req: Request, res: Response) {

@@ -1,6 +1,5 @@
 import { Entity, ManyToOne, JoinColumn, Column } from 'typeorm';
 import { InitEntity } from './base.entity';
-
 import { Review } from './review.entity';
 
 @Entity('review_image')
@@ -15,4 +14,7 @@ export class ReviewImage extends InitEntity {
   })
   @JoinColumn({ name: 'review_id' })
   review!: Review;
+
+  @Column()
+  review_id!: number;
 }

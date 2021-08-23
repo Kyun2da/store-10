@@ -29,7 +29,7 @@ export const ChartBar = styled.div<IChartBar>`
       bottom: 0;
       width: 100%;
       border-radius: 1rem;
-      height: ${({ count }) => (count ? count * 10 : 0)}%;
+      height: ${({ count }) => (count ? count * 100 : 0)}%;
       background-color: #aaa;
     }
 

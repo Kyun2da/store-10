@@ -1,9 +1,10 @@
 import { useCallback, useRef, useState } from 'react';
+import { nanoid } from 'nanoid';
+
+export type CustomFile = Record<string, File>;
 
 const useFileInput = () => {
-  // TODO: Drag & Drop 구현할지...?
-
-  const [fileImgs, setFileImgs] = useState<string[]>([]);
+  const [imgFiles, setImgFiles] = useState<CustomFile>({});
   const [isError, setIsError] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
 
@@ -17,27 +18,44 @@ const useFileInput = () => {
         target: { files },
       } = e;
 
-      for (let i = 0; i < (files?.length ?? 0); i++) {
-        const file = files?.[i];
-        const preview = URL.createObjectURL(file);
+      if (!files) return;
 
-        if (fileImgs.length === 3) {
+      for (let i = 0; i < (files?.length ?? 0); i++) {
+        const file = files[i];
+        const values = Object.values(imgFiles).length;
+
+        if (values === 3) {
           setIsError(true);
           return;
         }
 
-        setFileImgs([...fileImgs, preview]);
+        if (isError) setIsError(false);
+
+        const hash = nanoid();
+        const customFile = { [hash]: file };
+
+        setImgFiles({ ...imgFiles, ...customFile });
       }
     },
-    [fileImgs]
+    [imgFiles, isError]
   );
+
+  const removeSeletedPreview = (e: React.MouseEvent, selected: string) => {
+    e.preventDefault();
+
+    const duplicated = { ...imgFiles };
+    delete duplicated[selected];
+
+    setImgFiles(duplicated);
+  };
 
   return {
     fileRef: fileInput,
-    fileImgs,
+    imgFiles,
     isError,
     handleClickOnFileInput,
     handleUploadFile,
+    removeSeletedPreview,
   } as const;
 };
 

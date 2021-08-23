@@ -4,15 +4,41 @@ import {
   getRecentProducts,
   getRecommandProducts,
   getCateogries,
+  getProductReviewsById,
+  getProductReviewsCountById,
+  postProductReview,
+  deleteProductReview,
 } from '@/lib/api/product';
-import { useQuery } from 'react-query';
-import { ICategory, IProduct, IProductDetail } from '@/types/index';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import {
+  ICategory,
+  IProduct,
+  IProductDetail,
+  IProductReview,
+  IReviewCountAndRating,
+} from '@/types/index';
+import { notify } from '@/components/Shared/Toastify';
 
 export const useGetProductById = (id: string) => {
   return useQuery<IProductDetail, Error>(
     ['productDetail', id],
     () => getProductById(id),
     { refetchOnWindowFocus: false }
+  );
+};
+
+export const useGetProductReviewsById = (id: string, offset: number) => {
+  return useQuery<IProductReview[], Error>(
+    ['productReview', id, offset],
+    () => getProductReviewsById(id, offset),
+    { keepPreviousData: true }
+  );
+};
+
+export const useGetProductReviewsCount = (id: string) => {
+  return useQuery<IReviewCountAndRating, Error>(
+    ['productReviewCount', id],
+    () => getProductReviewsCountById(id)
   );
 };
 
@@ -32,4 +58,35 @@ export const useGetCateogries = () => {
   return useQuery<ICategory[], Error>('categories', () => getCateogries(), {
     refetchOnWindowFocus: false,
   });
+};
+
+export const useCreateReview = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(postProductReview, {
+    onSuccess: () => {
+      notify('success', '리뷰를 작성했습니다!');
+      queryClient.invalidateQueries('productReview');
+      queryClient.invalidateQueries('productReviewCount');
+    },
+    onError: () => {
+      notify('error', '에러가 발생했습니다!!');
+    },
+  });
+
+  return mutation;
+};
+
+export const useDeleteReview = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(deleteProductReview, {
+    onSuccess: () => {
+      notify('success', '해당 리뷰를 성공적으로 제거했습니다.');
+      queryClient.invalidateQueries('productReview');
+    },
+    onError: () => {
+      notify('error', '리뷰를 제거하는데 실패했습니다..!');
+    },
+  });
+
+  return mutation;
 };

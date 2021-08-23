@@ -172,6 +172,11 @@ export const Textarea = styled.textarea<ITextarea>`
   border-bottom-left-radius: 2rem;
   resize: ${({ resize }) => resize};
 
+  &.error-focus:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.color.error};
+  }
+
   &:focus {
     outline: none;
     border-color: ${({ theme }) => theme.color.primary};
@@ -201,6 +206,10 @@ export const FileInputButton = styled.div`
   &:hover {
     opacity: 0.75;
   }
+
+  svg {
+    fill: #adadad;
+  }
 `;
 
 export const PreviewWrapper = styled.div`
@@ -210,7 +219,8 @@ export const PreviewWrapper = styled.div`
 
   img {
     object-fit: cover;
-    width: 20%;
+    width: 20rem;
+    height: 15rem;
     border-radius: 2rem;
   }
 `;
@@ -219,4 +229,35 @@ export const ErrorMessage = styled.p`
   margin-top: 1rem;
   text-align: right;
   color: ${({ theme }) => theme.color.error};
+`;
+
+export const TextareaWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ImageWrapper = styled.div`
+  position: relative;
+`;
+
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  border-radius: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  box-sizing: border-box;
+  background-color: #3a3a3a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    stroke: #fff;
+  }
+
+  &:hover {
+    opacity: 0.75;
+  }
 `;

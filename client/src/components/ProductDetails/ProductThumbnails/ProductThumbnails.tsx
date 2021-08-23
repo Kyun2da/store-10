@@ -82,6 +82,7 @@ const ProductThumbnails = ({
         imgset={originImg.url}
         show={isLensed}
       ></S.ProductThumbnailLense>
+
       <S.ProductPreviewArea>
         {thumbThumbnails.map((thumb) => (
           <S.ProductPreviewThumbnail

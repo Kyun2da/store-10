@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Thung from '@/components/Thung';
 
 export const SearchWrapper = styled.div`
   width: 95%;

@@ -1,9 +1,4 @@
-import {
-  Entity,
-  Column,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 
 import { User } from './user.entity';
 import { Product } from './product.entity';
@@ -15,7 +10,13 @@ export class Question extends InitEntity {
   title: string;
 
   @Column({ type: 'text' })
-  content: number;
+  content: string;
+
+  @Column({ type: 'text' })
+  answer: string;
+
+  @Column({ type: 'boolean' })
+  secret: boolean;
 
   @ManyToOne(() => User, (type) => type.id, {
     nullable: false,
@@ -32,4 +33,6 @@ export class Question extends InitEntity {
   })
   @JoinColumn({ name: 'product_id' })
   product!: Product;
+  @Column()
+  product_id!: number;
 }

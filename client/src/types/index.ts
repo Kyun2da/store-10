@@ -85,6 +85,10 @@ export interface IReviewCountAndRating {
   ratings: IRating[];
 }
 
+export interface IQuestionCount {
+  count: number;
+}
+
 export interface IProductReview {
   id: number;
   content: string;
@@ -92,6 +96,17 @@ export interface IProductReview {
   name: string;
   createdAt: string;
   url: string[];
+}
+
+export interface IProductQuestion {
+  name: string;
+  id: number;
+  title: string;
+  content: string;
+  answer?: string;
+  secret: boolean;
+  product_id: number;
+  createdAt: string;
 }
 
 export interface ISignUpUser {

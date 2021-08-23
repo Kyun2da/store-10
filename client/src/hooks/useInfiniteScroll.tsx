@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useInView } from 'react-intersection-observer';
 
@@ -20,11 +19,16 @@ const useInfiniteScroll = <T extends unknown>({
 }: IInfinityScroll<T>) => {
   const { ref, inView } = useInView(inViewOption);
 
-  const { data, isLoading, isFetching, fetchNextPage, error, status } =
-    useInfiniteQuery<T>(key, () =>
-      fetchingFunction({
-        pageParam: fetchParams,
-      })
+  const { data, isLoading, isFetching,fetchNextPage, error, status } =
+    useInfiniteQuery<T>(
+      key,
+      () =>
+        fetchingFunction({
+          pageParam: fetchParams,
+        }),
+      {
+        refetchOnWindowFocus: false,
+      }
     );
 
   return {

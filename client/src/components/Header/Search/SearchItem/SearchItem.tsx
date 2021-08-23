@@ -1,6 +1,6 @@
 import { wonFormat } from '@/utils/helper';
 import { ISearchData } from '@/types';
-import * as React from 'react';
+import React from 'react';
 import * as S from './style';
 import { useHistory } from '@/lib/Router';
 import { useCallback } from 'react';

@@ -1,7 +1,8 @@
 import { Question } from '@/entities/question.entity';
+import { User } from '@/entities/user.entity';
 import { EntityRepository, getCustomRepository, Repository } from 'typeorm';
 
-const LIMIT = 5;
+const LIMIT = 10;
 
 @EntityRepository(Question)
 class QuestionRepository extends Repository<Question> {
@@ -9,12 +10,23 @@ class QuestionRepository extends Repository<Question> {
     product_id: string,
     offset: string
   ): Promise<Question[]> {
-    return this.find({
-      where: { product_id: +product_id },
-      take: LIMIT,
-      skip: +offset,
-      order: { createdAt: 'DESC' },
-    });
+    return this.createQueryBuilder('question')
+      .where('question.product_id = :product_id', { product_id: +product_id })
+      .orderBy('question.createdAt', 'DESC')
+      .limit(LIMIT)
+      .leftJoinAndSelect(User, 'user', 'question.user_id=user.id')
+      .select([
+        'name',
+        'title',
+        'content',
+        'answer',
+        'secret',
+        'product_id',
+        'question.id as id',
+        'question.createdAt as createdAt',
+      ])
+      .offset(+offset)
+      .getRawMany();
   }
 }
 

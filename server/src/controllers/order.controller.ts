@@ -40,7 +40,7 @@ class OrderController {
   }
 
   async getOrders(req: Request, res: Response) {
-    const monthAgo = req.query['mont_ago'];
+    const monthAgo = req.query['month_ago'];
     const userId = req.user?.id || 1;
     const result = await OrderService.getOrders({
       monthAgo: +monthAgo,

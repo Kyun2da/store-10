@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as S from './styles';
 import Card from '@/components/Card';
 import Banner from '@/components/Banner';
@@ -10,6 +10,8 @@ import {
 import { IProduct } from '@/types';
 import { useGetBookmarkIds } from '@/hooks/queries/bookmark';
 import LoadingCards from '@/components/Skeleton/LoadingCards';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
 
 export interface IProductQuery {
   data: IProduct[] | undefined;
@@ -20,7 +22,14 @@ const Main = () => {
   const recommandQuery = useGetRecommandProducts();
   const bestQuery = useGetBestProducts();
   const recentQuery = useGetRecentProducts();
-  const { data: bookmarkIdList } = useGetBookmarkIds();
+  const [user] = useRecoilState(userState);
+  const { data: bookmarkIdList, remove } = useGetBookmarkIds(!!user);
+
+  useEffect(() => {
+    if (!user) {
+      remove();
+    }
+  }, [user, remove]);
 
   const renderProducts = (qurey: IProductQuery) => {
     const { data, isLoading } = qurey;

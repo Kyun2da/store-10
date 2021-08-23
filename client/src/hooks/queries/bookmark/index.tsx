@@ -13,8 +13,10 @@ export const useGetDetailBookmarkProducts = () => {
   );
 };
 
-export const useGetBookmarkIds = () => {
-  return useQuery<number[], Error>('bookmarkedProduct', getBookmarkProducts);
+export const useGetBookmarkIds = (enabled: boolean) => {
+  return useQuery<number[], Error>('bookmarkedProduct', getBookmarkProducts, {
+    enabled,
+  });
 };
 
 export const useAddBookmark = () => {

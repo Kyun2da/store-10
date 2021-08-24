@@ -111,6 +111,10 @@ export const deleteProductReview = async (id: number) => {
   return await client.delete(`/product/review/${id}`);
 };
 
+export const deleteProductQuestion = async (id: number) => {
+  return await client.delete(`/product/question/${id}`);
+};
+
 export const deleteProductReviewImage = async ({
   id,
   url,

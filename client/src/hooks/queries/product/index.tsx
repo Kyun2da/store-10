@@ -17,6 +17,7 @@ import {
   getProductSelectedReview,
   putProductReview,
   deleteProductReviewImage,
+  deleteProductQuestion,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
@@ -165,6 +166,21 @@ export const useDeleteReview = () => {
     },
     onError: () => {
       notify('error', '리뷰를 제거하는데 실패했습니다..!');
+    },
+  });
+
+  return mutation;
+};
+
+export const useDeleteQuestion = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(deleteProductQuestion, {
+    onSuccess: () => {
+      notify('success', '해당 문의를 성공적으로 제거했습니다.');
+      queryClient.invalidateQueries('productReviewUser');
+    },
+    onError: () => {
+      notify('error', '문의를 제거하는데 실패했습니다..!');
     },
   });
 

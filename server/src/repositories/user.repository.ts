@@ -23,6 +23,10 @@ class UserRepository extends Repository<User> {
   updateUserNickName(user: User, newNickName: string) {
     return this.update({ id: user.id }, { name: newNickName });
   }
+
+  updateUserPassword(user: User, newPassword: string) {
+    return this.update({ id: user.id }, { password: newPassword });
+  }
 }
 
 export default () => getCustomRepository(UserRepository);

@@ -49,6 +49,26 @@ class UserController {
       );
     }
   }
+
+  async changePassword(req: Request, res: Response) {
+    const { password } = req.body;
+    const user = req.user;
+
+    const result = await userService.changePassword(user, password);
+    if (result?.affected >= 1)
+      ApiResponse(
+        res,
+        HttpStatusCode.OK,
+        '성공적으로 비밀번호를 변경하였습니다.'
+      );
+    else {
+      ApiResponse(
+        res,
+        HttpStatusCode.INTERNAL_SERVER_ERROR,
+        '비밀번호 변경에 실패하였습니다.'
+      );
+    }
+  }
 }
 
 export default new UserController();

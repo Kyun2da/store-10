@@ -1,3 +1,4 @@
+import { ReviewImages } from '@/components/ProductDetails/styles';
 import styled from 'styled-components';
 
 export const MyReviews = styled.div`
@@ -14,6 +15,13 @@ export const MyReviewsItem = styled.div`
 
   & + & {
     margin-top: 3rem;
+  }
+
+  ${ReviewImages} {
+    img {
+      width: 15rem;
+      height: 10rem;
+    }
   }
 `;
 

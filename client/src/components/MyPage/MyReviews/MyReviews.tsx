@@ -5,65 +5,89 @@ import {
   UserReviewArea,
   UserReviewTitles,
 } from '@/components/ProductDetails/styles';
-import React from 'react';
+import React, { useState } from 'react';
+import * as S from './styles';
 import Title from '@/components/Shared/Title';
 import { RatingGetter } from '@/components/Shared/Rating';
 import { dateFormat } from '@/utils/helper';
 import { nanoid } from 'nanoid';
 import { useGetProductReviewsByUser } from '@/hooks/queries/product/index';
 import usePagination from '@/hooks/usePagination';
+import { REVIEW_LIMIT } from '@/utils/constant/offsetLimit';
+import Pagination from '@/components/Shared/Pagination';
+import { ReviewImageModal } from '@/components/Shared/Modal';
+import useModal from '@/hooks/useModal';
 
 const MyReviews = () => {
-  const [offset, handleOnClickPage] = usePagination(LIMIT);
-  const {
-    data: reviews,
-    isLoading,
-    error,
-  } = useGetProductReviewsByUser(offset);
+  const [offset, handleOnClickPage] = usePagination(REVIEW_LIMIT);
+  const { data, isLoading, error } = useGetProductReviewsByUser(offset);
+  const [selectedImage, setSelectedImage] = useState('');
+  const [isImageOpen, toggleImageModal] = useModal(false);
 
   // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
   if (error) {
     return <div>{error.message}</div>;
   }
 
-  if (isLoading || !reviews) {
+  if (isLoading || !data) {
     return <div>loading</div>;
   }
 
+  const handleOnClickImage = (image: string) => {
+    setSelectedImage(image);
+    toggleImageModal();
+  };
+
+  const { reviews, count } = data;
+
   return (
-    <UserReviewArea>
-      {reviews.map((review) => {
-        return (
-          <UserReview data-review-id={review.id} key={review.id}>
-            <UserReviewTitles>
-              <Title className="username" level={5}>
-                {review.name}
-                <span style={{ fontWeight: 100 }}>님</span>
-              </Title>
-              <div className="rating-area">
-                <RatingGetter rating={review.rating} uniqueId={nanoid()} />
-                <p className="date">{dateFormat(review.createdAt)}</p>
-              </div>
-            </UserReviewTitles>
+    <S.MyReviews>
+      <UserReviewArea>
+        {reviews.map((review) => {
+          return (
+            <UserReview data-review-id={review.id} key={review.id}>
+              <UserReviewTitles>
+                <Title className="username" level={5}>
+                  {review.name}
+                  <span style={{ fontWeight: 100 }}>님</span>
+                </Title>
+                <div className="rating-area">
+                  <RatingGetter rating={review.rating} uniqueId={nanoid()} />
+                  <p className="date">{dateFormat(review.createdAt)}</p>
+                </div>
+              </UserReviewTitles>
 
-            {review.url.length !== 0 && (
-              <ReviewImages>
-                {review.url.map((image) => (
-                  <img
-                    onClick={() => handleOnClickImage(image)}
-                    key={nanoid()}
-                    src={image}
-                    alt="유저사진리뷰"
-                  />
-                ))}
-              </ReviewImages>
-            )}
+              {review.url.length !== 0 && (
+                <ReviewImages>
+                  {review.url.map((image) => (
+                    <img
+                      onClick={() => handleOnClickImage(image)}
+                      key={nanoid()}
+                      src={image}
+                      alt="유저사진리뷰"
+                    />
+                  ))}
+                </ReviewImages>
+              )}
 
-            <UserDescription>{review.content}</UserDescription>
-          </UserReview>
-        );
-      })}
-    </UserReviewArea>
+              <UserDescription>{review.content}</UserDescription>
+            </UserReview>
+          );
+        })}
+      </UserReviewArea>
+
+      <Pagination
+        handleOnClickPage={handleOnClickPage}
+        count={Math.ceil(count / REVIEW_LIMIT)}
+      />
+
+      {isImageOpen && (
+        <ReviewImageModal
+          selectedImage={selectedImage}
+          toggleModal={toggleImageModal}
+        />
+      )}
+    </S.MyReviews>
   );
 };
 

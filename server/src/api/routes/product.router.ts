@@ -58,6 +58,11 @@ router.delete(
 );
 
 // @@--- PUT 요청 ---@@ //
-router.put('/review/:id', authJWT, ProductController.updateProductReviewById);
+router.put(
+  '/review/:id',
+  authJWT,
+  multerS3.array('images', 3),
+  ProductController.putProuctReviewById
+);
 
 export default router;

@@ -122,8 +122,8 @@ class ReviewRepository extends Repository<Review> {
     return this.delete({ user_id, id: +id });
   }
 
-  updateProductReview(newReview: Review): Promise<UpdateResult> {
-    return this.update(newReview.id, newReview);
+  updateProductReview(id: number, newReview: Review): Promise<UpdateResult> {
+    return this.update(id, newReview);
   }
 }
 

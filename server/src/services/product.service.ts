@@ -127,9 +127,9 @@ class ProductService {
     return await productReviewRepo.deleteProductReview(id, user_id);
   }
 
-  async updateReviewById(review: Review) {
+  async updateReviewById(id: number, review: Review) {
     const productReviewRepo = ProductReviewRepository();
-    return await productReviewRepo.updateProductReview(review);
+    return await productReviewRepo.updateProductReview(id, review);
   }
 
   async getProducts({ category, limit }) {

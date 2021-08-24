@@ -107,6 +107,38 @@ class ProductController {
     return ApiResponse(res, HttpStatusCode.NO_CONTENT);
   }
 
+  async putProuctReviewById(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const files = req.files as Express.MulterS3.File[];
+    const data = req.body;
+    const newReview = {
+      ...data,
+    };
+
+    const result = await ProductService.updateReviewById(+id, newReview);
+
+    for (const file of files) {
+      const reviewImage = { review_id: +id, url: file.location };
+      const imageResult = await ProductService.createReviewImage(
+        reviewImage as ReviewImage
+      );
+
+      if (!imageResult) {
+        return ApiResponse(
+          res,
+          HttpStatusCode.BAD_REQUEST,
+          '리뷰 이미지 업로드 실패'
+        );
+      }
+    }
+
+    if (!result) {
+      return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰생성 실패');
+    }
+    return ApiResponse(res, HttpStatusCode.NO_CONTENT);
+  }
+
   async postProductQuestionById(req: Request, res: Response) {
     const data = req.body;
     const user_id = req.user.id;
@@ -133,23 +165,6 @@ class ProductController {
       return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰삭제 실패');
     }
     return ApiResponse(res, HttpStatusCode.NO_CONTENT);
-  }
-
-  async updateProductReviewById(req: Request, res: Response) {
-    const user_id = req.user.id;
-    const { id } = req.params;
-    const data = req.body;
-    const review = {
-      id,
-      user_id,
-      ...data,
-    };
-
-    console.log(review);
-
-    // await ProductService.updateReviewById(review);
-
-    // THINK: 업데이트가 필요할 지 급의문..?! 그냥 삭제하고 다시 쓰는게 좋을지도
   }
 
   async getProductQuestionsById(req: Request, res: Response) {

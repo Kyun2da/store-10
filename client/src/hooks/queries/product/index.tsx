@@ -12,6 +12,7 @@ import {
   getProductQuestionCountById,
   getSearchProducts,
   getProductReviewsByUser,
+  postProductQuestion,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
@@ -110,6 +111,22 @@ export const useCreateReview = () => {
       notify('success', '리뷰를 작성했습니다!');
       queryClient.invalidateQueries('productReview');
       queryClient.invalidateQueries('productReviewCount');
+    },
+    onError: () => {
+      notify('error', '에러가 발생했습니다!!');
+    },
+  });
+
+  return mutation;
+};
+
+export const useCreateQuestion = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(postProductQuestion, {
+    onSuccess: () => {
+      notify('success', '문의를 등록했습니다!');
+      queryClient.invalidateQueries('productQuestion');
+      queryClient.invalidateQueries('productQuestionCount');
     },
     onError: () => {
       notify('error', '에러가 발생했습니다!!');

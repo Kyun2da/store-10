@@ -9,7 +9,7 @@ import useFileInput from '@/hooks/useFileInput';
 import Form from '@/components/Shared/Form';
 import { useCreateReview } from '@/hooks/queries/product';
 import { useParams } from '@/lib/Router';
-import { validateReview } from '@/utils/constant/validate/validationReview';
+import { validateReview } from '@/utils/validatior';
 import { compressImageFile } from '@/utils/helper';
 
 interface ReviewModalProps {
@@ -104,6 +104,7 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
               placeholder="다른 구매자와 판매자에게 도움이 될 수 있도록 자세하고 솔직하게 리뷰 작성 부탁드려요!"
               resize="vertical"
               name="review-content"
+              value={content}
               onChange={handleOnTextarea}
               error={contentError}
               helpertext="내용을 입력해주세요!"

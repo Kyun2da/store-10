@@ -18,6 +18,9 @@ export class Question extends InitEntity {
   @Column({ type: 'boolean' })
   secret: boolean;
 
+  @Column({ length: 15 })
+  category: string;
+
   @ManyToOne(() => User, (type) => type.id, {
     nullable: false,
     onDelete: 'CASCADE',

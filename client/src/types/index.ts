@@ -99,14 +99,15 @@ export interface IProductReview {
 }
 
 export interface IProductQuestion {
-  name: string;
-  id: number;
+  name?: string;
+  id?: number;
   title: string;
   content: string;
   answer?: string;
   secret: boolean;
-  product_id: number;
-  createdAt: string;
+  category: string;
+  product_id: string;
+  createdAt?: string;
 }
 
 export interface ISignUpUser {
@@ -179,10 +180,15 @@ export interface IOrder {
   id: number;
   products: IOrderProduct[];
   status: string;
-  address_id: number;
+  address_id?: number | null;
   user_id: number;
-  delivery_request_message: string;
+  delivery_request_message?: string | null;
   deliveredAt?: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface IOrderUpdate {
+  order: Partial<IOrder>;
+  updateDefaultAddress?: boolean;
 }

@@ -91,6 +91,22 @@ class ProductController {
     return ApiResponse(res, HttpStatusCode.NO_CONTENT);
   }
 
+  async postProductQuestionById(req: Request, res: Response) {
+    const data = req.body;
+    const user_id = req.user.id;
+    const question = {
+      ...data,
+      user_id,
+    };
+
+    const result = await ProductService.createQuestion(question);
+
+    if (!result) {
+      return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '문의 작성 실패');
+    }
+    return ApiResponse(res, HttpStatusCode.NO_CONTENT);
+  }
+
   async deleteProductReviewById(req: Request, res: Response) {
     const user_id = req.user.id;
     const { id } = req.params;

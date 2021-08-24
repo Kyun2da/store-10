@@ -47,6 +47,7 @@ router.post(
   multerS3.array('images', 3),
   ProductController.postProductReviewById
 );
+router.post(`/question`, authJWT, ProductController.postProductQuestionById);
 
 // --- DELETE 요청 --- //
 router.delete(

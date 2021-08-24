@@ -24,23 +24,34 @@ import { ErrorBoundary } from 'react-error-boundary';
 import Error from '@/components/Shared/Error';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
-import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 import Bookmark from '@/pages/Bookmark';
+import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 
 const App = () => {
   const [theme, setTheme] = useState('light-mode');
   const themeMode = theme === 'light-mode' ? lightMode : darkMode;
-  const [user, setUser] = useRecoilState(userState);
 
   const toggleMode = () =>
     setTheme(theme === 'light-mode' ? 'dark-mode' : 'light-mode');
 
+  const [user, setUser] = useRecoilState(userState);
+  const [loading, setLoading] = useState(true);
   const getInitialUser = useCallback(async () => {
     if (!user) {
-      const initialUser = await getCurrentUser();
-      setUser(initialUser);
+      try {
+        const data = await getCurrentUser();
+        setUser(data);
+      } catch (e) {
+        setLoading(false);
+      }
     }
   }, [user, setUser]);
+
+  useEffect(() => {
+    if (user) {
+      setLoading(false);
+    }
+  }, [user]);
 
   useEffect(() => {
     getInitialUser();
@@ -57,29 +68,33 @@ const App = () => {
                 <Error resetErrorBoundary={resetErrorBoundary} />
               )}
             >
-              <S.RootWrapper>
-                <S.ToggleButton onClick={toggleMode}>
-                  라이트/다크모드
-                </S.ToggleButton>
-                <Header />
-                <Switch>
-                  <Route path="/" component={Main} />
-                  <Route path="/select_auth" component={SelectAuth} />
-                  <Route path="/approval/:authtype" component={Approval} />
-                  <Route path="/bookmark" component={Bookmark} />
-                  <Route path="/category/:categoryId" component={Category} />
-                  <Route path="/search/:search" component={Search} />
-                  <Route path="/signup" component={SignUp} />
-                  <Route path="/login" component={Login} />
-                  <Route path="/detail/:id" component={Detail} />
-                  <Route path="/notice" component={Notice} />
-                  <Route path="/cart" component={ShoppingCart} />
-                  <Route path="/mypage" component={MyPage} />
-                  <Route path="/order/:id" component={Order} />
-                  <Route path="/*" component={NotFound} />
-                </Switch>
-                <Footer />
-              </S.RootWrapper>
+              {loading ? (
+                <Loading />
+              ) : (
+                <S.RootWrapper>
+                  <S.ToggleButton onClick={toggleMode}>
+                    라이트/다크모드
+                  </S.ToggleButton>
+                  <Header />
+                  <Switch>
+                    <Route path="/" component={Main} />
+                    <Route path="/select_auth" component={SelectAuth} />
+                    <Route path="/approval/:authtype" component={Approval} />
+                    <Route path="/bookmark" component={Bookmark} />
+                    <Route path="/category/:categoryId" component={Category} />
+                    <Route path="/search/:search" component={Search} />
+                    <Route path="/signup" component={SignUp} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/detail/:id" component={Detail} />
+                    <Route path="/notice" component={Notice} />
+                    <Route path="/cart" component={ShoppingCart} />
+                    <Route path="/mypage" component={MyPage} />
+                    <Route path="/order/:id" component={Order} />
+                    <Route path="/*" component={NotFound} />
+                  </Switch>
+                  <Footer />
+                </S.RootWrapper>
+              )}
             </ErrorBoundary>
           )}
         </QueryErrorResetBoundary>

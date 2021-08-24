@@ -28,7 +28,7 @@ import {
   IReviewCountAndRating,
   IQuestionCount,
   IMyReview,
-  IReview,
+  IMyQuestion,
 } from '@/types/index';
 import { notify } from '@/components/Shared/Toastify';
 
@@ -57,7 +57,7 @@ export const useGetProductReviewsByUser = (offset: number) => {
 };
 
 export const useGetProductQuestionsByUser = (offset: number) => {
-  return useQuery<IProductQuestion[], Error>(
+  return useQuery<IMyQuestion, Error>(
     ['productQuestionUser', offset],
     () => getProductQuestionByUser(offset),
     { keepPreviousData: true }

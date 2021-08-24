@@ -105,6 +105,11 @@ export interface IMyReview {
   count: number;
 }
 
+export interface IMyQuestion {
+  questions: IProductQuestion[];
+  count: number;
+}
+
 export interface IProductQuestion {
   name?: string;
   id?: number;

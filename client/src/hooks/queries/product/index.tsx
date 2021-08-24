@@ -15,6 +15,7 @@ import {
   postProductQuestion,
   getProductQuestionByUser,
   getProductSelectedReview,
+  putProductReview,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
@@ -26,6 +27,7 @@ import {
   IReviewCountAndRating,
   IQuestionCount,
   IMyReview,
+  IReview,
 } from '@/types/index';
 import { notify } from '@/components/Shared/Toastify';
 
@@ -132,6 +134,21 @@ export const useCreateQuestion = () => {
     },
     onError: () => {
       notify('error', '에러가 발생했습니다!!');
+    },
+  });
+
+  return mutation;
+};
+
+export const useUpdateReview = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(putProductReview, {
+    onSuccess: () => {
+      notify('success', '해당 리뷰를 성공적으로 수정했습니다.');
+      queryClient.invalidateQueries('productReviewUser');
+    },
+    onError: () => {
+      notify('error', '리뷰를 수정하는데 실패했습니다..!');
     },
   });
 

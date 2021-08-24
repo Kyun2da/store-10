@@ -98,6 +98,16 @@ export const postProductQuestion = async (data: IProductQuestion) => {
   return await client.post<IProductQuestion>(`/product/question`, data);
 };
 
+export const putProductReview = async ({
+  id,
+  data,
+}: {
+  id: number;
+  data: IReview;
+}) => {
+  return await client.put<IReview>(`/product/review/${id}`, data);
+};
+
 export const deleteProductReview = async (id: number) => {
   return await client.delete(`/product/review/${id}`);
 };

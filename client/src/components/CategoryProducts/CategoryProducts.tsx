@@ -24,10 +24,7 @@ const CategoryProducts = ({ subCategoryId }: IProps) => {
   });
 
   const getMore = useCallback(() => {
-    // 임시 조치
-    if (start < 60) {
-      setStart(start + 20);
-    }
+    setStart(start + 20);
   }, [start]);
 
   useEffect(() => {
@@ -55,16 +52,18 @@ const CategoryProducts = ({ subCategoryId }: IProps) => {
   if (!data) return <div>nodata</div>;
 
   const renderCard = () => {
-    return data.pages.flat().map((item) => (
-      <Card
-        linkId={item.id}
-        key={item.id}
-        bgColor="primary"
-        src={item.productImage[0].url}
-        price={item.price}
-        title={item.title}
-      />
-    ));
+    return data.pages
+      .flat()
+      .map((item) => (
+        <Card
+          linkId={item.id}
+          key={item.id}
+          bgColor="primary"
+          src={item.productImage[0].url}
+          price={item.price}
+          title={item.title}
+        />
+      ));
   };
 
   return (

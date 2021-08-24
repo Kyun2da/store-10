@@ -1,10 +1,12 @@
-import { useQuery, useMutation } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { getOrder, postOrder, getOrders, updateOrder } from '@/lib/api/order';
 import { IOrder } from '@/types';
 import { useHistory } from '@/lib/Router';
 
 export const useGetOrder = (id: number) => {
-  return useQuery<IOrder, Error>('order', () => getOrder(id), { retry: false });
+  return useQuery<IOrder, Error>(['order', id], () => getOrder(id), {
+    retry: false,
+  });
 };
 
 export const usePostOrder = () => {
@@ -23,9 +25,11 @@ export const useGetOrders = (year: number | null) => {
 };
 
 export const useUpdateOrder = () => {
+  const queryClient = useQueryClient();
   const { historyPush } = useHistory();
   return useMutation(updateOrder, {
     onSuccess(data) {
+      queryClient.removeQueries(['order', +data.id]);
       historyPush(`/order/${data.id}/paid`);
     },
   });

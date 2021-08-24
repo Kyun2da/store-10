@@ -13,6 +13,7 @@ import {
   getSearchProducts,
   getProductReviewsByUser,
   postProductQuestion,
+  getProductQuestionByUser,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
@@ -26,7 +27,6 @@ import {
   IMyReview,
 } from '@/types/index';
 import { notify } from '@/components/Shared/Toastify';
-import { getProductQuestionByUser } from './../../../lib/api/product/index';
 
 export const useGetProductById = (id: string) => {
   return useQuery<IProductDetail, Error>(
@@ -142,7 +142,7 @@ export const useDeleteReview = () => {
   const mutation = useMutation(deleteProductReview, {
     onSuccess: () => {
       notify('success', '해당 리뷰를 성공적으로 제거했습니다.');
-      queryClient.invalidateQueries('productReview');
+      queryClient.invalidateQueries('productReviewUser');
     },
     onError: () => {
       notify('error', '리뷰를 제거하는데 실패했습니다..!');

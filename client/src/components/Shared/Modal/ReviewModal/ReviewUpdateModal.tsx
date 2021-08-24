@@ -52,8 +52,6 @@ const ReviewUpdateModal = ({ toggleModal, selected }: ReviewModalProps) => {
     return <div>loading</div>;
   }
 
-  console.log(rating, content, S3Preview);
-
   const handleOnRating = (rating: number) => {
     setRating(rating);
   };
@@ -90,8 +88,6 @@ const ReviewUpdateModal = ({ toggleModal, selected }: ReviewModalProps) => {
     }
     formData.append('rating', rating.toString());
     formData.append('content', content);
-
-    formData.forEach((data) => console.log(data));
 
     updateReview({ id: review.id, data: formData });
 

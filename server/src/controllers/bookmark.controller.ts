@@ -21,7 +21,11 @@ class BookmarkController {
 
   async getBookmarksDetail(req: Request, res: Response) {
     const userId = req.user.id;
-    const bookmarks = await BookmarkService.getBookmarksDetail(userId);
+    const { start } = req.query;
+    const bookmarks = await BookmarkService.getBookmarksDetail({
+      userId,
+      start: +start,
+    });
 
     ApiResponse(res, HttpStatusCode.OK, '찜 목록 상세 조회 성공', bookmarks);
   }

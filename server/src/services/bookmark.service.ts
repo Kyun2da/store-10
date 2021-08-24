@@ -17,9 +17,9 @@ class BookmarkService {
     });
   }
 
-  async getBookmarksDetail(userId) {
+  async getBookmarksDetail({ userId, start }) {
     const bookmarkRepo = BookmarkRepository();
-    const bookmarks = await bookmarkRepo.getBookmarksDetail(userId);
+    const bookmarks = await bookmarkRepo.getBookmarksDetail(userId, start);
 
     return bookmarks.map((bookmark) => {
       const img = bookmark.product.productImage.find(

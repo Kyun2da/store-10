@@ -7,5 +7,6 @@ interface CardWrapperProps {
 export const CardWrapper = styled.ul<CardWrapperProps>`
   display: grid;
   gap: 2rem;
+  padding-bottom: 2rem;
   grid-template-columns: repeat(${({ col }) => col}, 1fr);
 `;

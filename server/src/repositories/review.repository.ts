@@ -63,6 +63,7 @@ class ReviewRepository extends Repository<Review> {
       .leftJoinAndSelect('product.productImage', 'productImage')
       .where('productImage.isThumbnail = 1')
       .select([
+        'product.id as product_id',
         'name',
         'review.content as content',
         'rating',

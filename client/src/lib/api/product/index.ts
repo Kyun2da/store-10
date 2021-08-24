@@ -111,3 +111,13 @@ export const putProductReview = async ({
 export const deleteProductReview = async (id: number) => {
   return await client.delete(`/product/review/${id}`);
 };
+
+export const deleteProductReviewImage = async ({
+  id,
+  url,
+}: {
+  id: number;
+  url: string;
+}) => {
+  return await client.delete(`/product/reviewImage/${id}`, { data: { url } });
+};

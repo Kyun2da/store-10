@@ -15,13 +15,12 @@ const Order = () => {
   const { data, isLoading, isError } = useGetOrder(+id);
   const { mutate } = useUpdateOrder();
   const [updateDefaultAddress, setUpdateDefaultAddress] = useState(false);
-  const [order, setOrder] = useState<
-    Partial<IOrder> | ((prev: Partial<IOrder>) => Partial<IOrder>)
-  >({
+  const [order, setOrder] = useState<Partial<IOrder>>({
     id: +id,
     status: 'paid',
     delivery_request_message: null,
     address_id: null,
+    payment_id: 1,
   });
 
   const updateOrder = () => {
@@ -59,7 +58,7 @@ const Order = () => {
         />
         <OrderProducts products={data?.products} />
         <OrderCoupon />
-        <OrderPayment />
+        <OrderPayment setOrder={setOrder} order={order} />
       </S.Order>
       <S.OrderAside>
         <OrderSummary

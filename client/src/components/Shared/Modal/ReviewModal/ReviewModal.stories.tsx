@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ReviewModal from './ReviewModal';
 
 export default {
-  title: '컴포넌트/공통/리뷰모달',
+  title: '컴포넌트/공통/모달/리뷰작성',
   component: ReviewModal,
 } as ComponentMeta<typeof ReviewModal>;
 

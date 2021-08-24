@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import DeleteConfirmModal from './DeleteConfirmModal';
 
 export default {
-  title: '컴포넌트/주소입력 모달',
+  title: '컴포넌트/공통/모달/삭제확인',
   component: DeleteConfirmModal,
 } as ComponentMeta<typeof DeleteConfirmModal>;
 

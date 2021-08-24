@@ -21,6 +21,7 @@ import Pagination from '@/components/Shared/Pagination';
 import {
   DeleteConfirmModal,
   ReviewImageModal,
+  ReviewModal,
 } from '@/components/Shared/Modal';
 import useModal from '@/hooks/useModal';
 import { Link } from '@/lib/Router';
@@ -33,6 +34,7 @@ const MyReviews = () => {
   const [selectedReview, setSelectedReview] = useState(0);
   const [isImageOpen, toggleImageModal] = useModal(false);
   const [isOpen, toggleModal] = useModal(false);
+  const [isUpdateModalOpen, toggleUpdateModal] = useModal(false);
   const { mutate } = useDeleteReview();
 
   // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
@@ -51,6 +53,7 @@ const MyReviews = () => {
 
   const handleUpdateReview = (target: number) => {
     console.log(target);
+    toggleUpdateModal();
   };
 
   const dropdownItems = [
@@ -142,6 +145,8 @@ const MyReviews = () => {
           toggleModal={toggleModal}
         />
       )}
+
+      {isUpdateModalOpen && <ReviewModal toggleModal={toggleUpdateModal} />}
     </S.MyReviews>
   );
 };

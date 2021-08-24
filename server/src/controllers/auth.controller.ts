@@ -38,7 +38,7 @@ class AuthController {
 
   async Login(req: Request, res: Response) {
     const { user_id, password } = req.body;
-    const _user = await AuthService.Login(user_id, password);
+    const _user = await AuthService.checkPassword(user_id, password);
     if (!_user) {
       ApiResponse(
         res,
@@ -71,6 +71,16 @@ class AuthController {
     res.clearCookie('accessToken', { path: '/' });
     res.clearCookie('refreshToken', { path: '/' });
 
+    ApiResponse(res, HttpStatusCode.NO_CONTENT);
+  }
+
+  async checkPassword(req: Request, res: Response) {
+    const user_id = req.user.user_id;
+    const { password } = req.body;
+    const _user = await AuthService.checkPassword(user_id, password);
+    if (_user.passwordError) {
+      ApiResponse(res, HttpStatusCode.UNAUTHORIZED, '비밀번호가 다릅니다.');
+    }
     ApiResponse(res, HttpStatusCode.NO_CONTENT);
   }
 }

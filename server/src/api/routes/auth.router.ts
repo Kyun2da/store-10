@@ -5,6 +5,7 @@ import { oauthError } from '@/api/middlewares/oauth';
 import authJWT from '@/api/middlewares/auth.middleware';
 import LoginUserRequest from '@/dtos/auth/loginUser';
 import invalidRequest from '@/api/middlewares/invalid-request';
+import { checkPasswordValidators } from '../middlewares/validation/auth/checkPassword';
 
 const router = Router();
 
@@ -17,5 +18,11 @@ router.post(
 router.get('/callback', oauthError, wrapAsync(AuthController.callback));
 router.get('/check', authJWT, wrapAsync(AuthController.check));
 router.post('/logout', authJWT, wrapAsync(AuthController.logout));
+router.post(
+  '/passwordcheck',
+  authJWT,
+  invalidRequest(...checkPasswordValidators),
+  wrapAsync(AuthController.checkPassword)
+);
 
 export default router;

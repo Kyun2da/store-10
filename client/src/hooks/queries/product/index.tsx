@@ -14,6 +14,7 @@ import {
   getProductReviewsByUser,
   postProductQuestion,
   getProductQuestionByUser,
+  getProductSelectedReview,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
@@ -57,6 +58,12 @@ export const useGetProductQuestionsByUser = (offset: number) => {
     ['productQuestionUser', offset],
     () => getProductQuestionByUser(offset),
     { keepPreviousData: true }
+  );
+};
+
+export const useGetSelectedReviewById = (id: number) => {
+  return useQuery<IProductReview, Error>(['selectedReview', id], () =>
+    getProductSelectedReview(id)
   );
 };
 

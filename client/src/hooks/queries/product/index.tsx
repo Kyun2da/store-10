@@ -10,11 +10,8 @@ import {
   deleteProductReview,
   getProductQuestionById,
   getProductQuestionCountById,
-<<<<<<< HEAD
   getSearchProducts,
   getProductReviewsByUser,
-=======
->>>>>>> af8634f37a816c9847a111c8798ea9ef3674d0a9
   postProductQuestion,
   getProductQuestionByUser,
 } from '@/lib/api/product';

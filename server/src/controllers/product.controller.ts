@@ -257,19 +257,25 @@ class ProductController {
   async getProductQuestionByUserId(req: Request, res: Response) {
     const { offset } = req.params;
     const user_id = req.user.id as number;
-    const result = await ProductService.getProductQuestionByUserId(
+    const questions = await ProductService.getProductQuestionByUserId(
       user_id,
       offset
     );
+    const count = await ProductService.getProductQuestionsCountByUserId(
+      user_id
+    );
 
-    if (!result) {
+    if (!questions) {
       return ApiResponse(
         res,
         HttpStatusCode.BAD_REQUEST,
         '문의 조회에서 에러가 발생했습니다.'
       );
     }
-    return ApiResponse(res, HttpStatusCode.OK, '문의 조회 성공', result);
+    return ApiResponse(res, HttpStatusCode.OK, '문의 조회 성공', {
+      questions,
+      count,
+    });
   }
 
   async serchElasticProduct(req: Request, res: Response) {

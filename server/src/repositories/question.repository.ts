@@ -42,6 +42,12 @@ class QuestionRepository extends Repository<Question> {
     });
   }
 
+  findProductQuestionCountByUser(user_id: number): Promise<number> {
+    return this.createQueryBuilder('question')
+      .where('question.user_id = :user_id', { user_id })
+      .getCount();
+  }
+
   findProductQuestionsCountById(product_id: string): Promise<number> {
     return this.createQueryBuilder('question')
       .where('question.product_id = :product_id', { product_id: +product_id })

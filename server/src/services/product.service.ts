@@ -79,6 +79,11 @@ class ProductService {
     return await productReviewRepo.findProductReviewsCountByUser(user_id);
   }
 
+  async getProductQuestionsCountByUserId(user_id: number) {
+    const productQuestionRepo = ProductQuestionRepository();
+    return await productQuestionRepo.findProductQuestionCountByUser(user_id);
+  }
+
   async getProductQuestionByUserId(user_id: number, offset: string) {
     const productQuestionRepo = ProductQuestionRepository();
     return await productQuestionRepo.findProductQuestionByUserId(

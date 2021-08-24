@@ -5,10 +5,7 @@ import * as S from './styles';
 import { Link, Redirect, useHistory } from '@/lib/Router';
 import { githubLogin } from '@/lib/api/auth/githubLogin';
 import { normalLogin } from '@/lib/api/auth/normalLogin';
-import {
-  validateEmail,
-  validateInput,
-} from '@/utils/constant/validate/validation';
+import { validateEmail, validateInput } from '@/utils/validator';
 import { notify } from '@/components/Shared/Toastify';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';

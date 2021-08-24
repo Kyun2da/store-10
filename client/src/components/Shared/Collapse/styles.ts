@@ -39,6 +39,7 @@ export const CollapseBody = styled.div`
 `;
 
 export const CollaspeRow = styled.div<ICollapse>`
+  position: relative;
   display: grid;
   gap: 1rem;
   grid-template-columns: ${({ length, gaps }) =>
@@ -47,6 +48,18 @@ export const CollaspeRow = styled.div<ICollapse>`
   padding: 2rem;
   color: ${({ theme }) => theme.color['text-color']};
   cursor: pointer;
+  overflow: hidden;
+
+  &.lock::after {
+    content: '비밀글';
+    filter: blur(2rem);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #eee;
+  }
 
   &:last-child {
     border-bottom: 2px solid ${({ theme }) => theme.color.primary};
@@ -56,6 +69,12 @@ export const CollaspeRow = styled.div<ICollapse>`
     background-color: ${({ theme }) => theme.color.background};
     opacity: 0.85;
   }
+`;
+
+export const CollapseSubTitle = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const CollapsePanel = styled.div<ICollapsePanel>`
@@ -99,5 +118,25 @@ export const CollapseDetails = styled.div`
 
   & + & {
     margin-top: 2rem;
+  }
+`;
+
+export const Status = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+`;
+
+export const StatusPoint = styled.span`
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
+
+  &.pending {
+    background-color: ${({ theme }) => theme.color.placeholder};
+  }
+
+  &.completed {
+    background-color: ${({ theme }) => theme.color.primary3};
   }
 `;

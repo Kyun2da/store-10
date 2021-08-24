@@ -8,13 +8,15 @@ import Form from '@/components/Shared/Form';
 import useModal from '@/hooks/useModal';
 import * as S from './styles';
 import { KOREAN_PHONE_PREFIX } from '@/contstants';
-import { validatePhone } from '@/utils/constant/validate/validation';
+import { validatePhone } from '@/utils/validator';
 
 interface IProps {
+  address: IAddress | null;
   addressToModify: IAddress | null;
   toggleModal: () => void;
   setAddressToModify: Dispatch<IAddress | null>;
   setOpenForm: Dispatch<boolean>;
+  selectAddress: Dispatch<IAddress>;
 }
 
 const AddressForm = ({
@@ -22,6 +24,8 @@ const AddressForm = ({
   toggleModal,
   setAddressToModify,
   setOpenForm,
+  address,
+  selectAddress,
 }: IProps) => {
   const [isPostcodeOpen, toggleIsPostcodeOpen] = useModal(false);
   const [inputs, setInputs] = useState<IAddress>({
@@ -115,6 +119,9 @@ const AddressForm = ({
         phone: `${phonePrefix}-${inputs.phone}`,
       });
       setOpenForm(false);
+      if (address?.id === addressToModify.id) {
+        selectAddress({ ...inputs });
+      }
     } else {
       postMutation.mutate({
         ...inputs,

@@ -32,13 +32,13 @@ class AddressRepository extends Repository<Address> {
     return this.save(address);
   }
 
-  async updateAddress(addressData: IAddress) {
+  async updateAddress(addressData: Partial<IAddress>) {
     return this.update(addressData.id, addressData);
   }
 
   async removeDefaultAddress(user_id: number) {
     return this.update(
-      { user_id },
+      { user_id, is_default: true },
       {
         is_default: false,
       }

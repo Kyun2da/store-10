@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import ModalLayout from '@/components/Shared/Modal//ModalLayout';
-import Checkbox from '@/components/Shared/Checkbox';
 
 export const ModalWrapper = styled(ModalLayout)`
   width: 100%;
@@ -46,4 +45,12 @@ export const ModalButton = styled.button`
   &:hover {
     opacity: 0.75;
   }
+`;
+
+export const CheckboxWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.color.placeholder};
+  ${({ theme }) => theme.fontWeight.m};
+  gap: 2rem;
 `;

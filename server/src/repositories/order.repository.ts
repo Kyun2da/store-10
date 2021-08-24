@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 
 interface IOrder {
+  id?: number;
   products: {
     count: number;
     id: number;
@@ -68,7 +69,6 @@ class OrderRepository extends Repository<Order> {
       : addMonth(new Date(), -DEFAULT_MONTH_AGO);
     const endDate = year ? new Date(`${year}-12-31`) : new Date();
 
-    console.log(startDate, endDate);
     return this.find({
       where: {
         user_id,
@@ -77,6 +77,10 @@ class OrderRepository extends Repository<Order> {
       },
       relations: ['products', 'products.productImage'],
     });
+  }
+
+  async updateOrder(order: Partial<IOrder>) {
+    return this.update(order.id, order);
   }
 }
 

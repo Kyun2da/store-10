@@ -42,6 +42,14 @@ class CartRepository extends Repository<Cart> {
   }): Promise<DeleteResult> {
     return this.delete({ user_id: userId, product_id: In(productIds) });
   }
+
+  getCart({ user_id, product_id }: { user_id: number; product_id: number }) {
+    return this.findOne({ where: { user_id, product_id } });
+  }
+
+  updateCart({ userId, productId, count }: ICartInfo) {
+    return this.update({ user_id: userId, product_id: productId }, { count });
+  }
 }
 
 export default () => getCustomRepository(CartRepository);

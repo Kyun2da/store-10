@@ -12,11 +12,15 @@ import {
 import { useParams } from '@/lib/Router';
 import Pagination from '@/components/Shared/Pagination';
 import usePagination from '@/hooks/usePagination';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
+import { notify } from '@/components/Shared/Toastify';
 
 const LIMIT = 10;
 
 const headers = [
   { name: '번호', value: 'id' },
+  { name: '유형', value: 'category' },
   { name: '제목', value: 'title' },
   { name: '작성자', value: 'name' },
   { name: '작성일', value: 'createdAt' },
@@ -25,6 +29,7 @@ const headers = [
 
 const ProductRequest = () => {
   const { id } = useParams().params;
+  const [user] = useRecoilState(userState);
   const [offset, handleOnClickPage] = usePagination(LIMIT);
   const [isOpen, toggleModal] = useModal(false);
   const {
@@ -42,6 +47,14 @@ const ProductRequest = () => {
     return <div>error</div>;
   }
 
+  const handleClickQuestionButton = () => {
+    if (!user) {
+      return notify('error', '로그인 후 작성 가능합니다.');
+    }
+
+    toggleModal();
+  };
+
   return (
     <S.PanelWrapper>
       <S.TopArea>
@@ -52,7 +65,7 @@ const ProductRequest = () => {
           size="Default"
           color="primary"
           type="button"
-          onClick={toggleModal}
+          onClick={handleClickQuestionButton}
         >
           작성하기
         </Button>
@@ -61,7 +74,7 @@ const ProductRequest = () => {
       <Collapse
         headers={headers}
         items={questions}
-        gaps="1fr 3fr 1fr 1fr 1fr"
+        gaps="1fr 1fr 4fr 1fr 1fr 1fr"
       />
 
       <Pagination

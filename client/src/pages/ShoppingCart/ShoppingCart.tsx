@@ -49,13 +49,16 @@ const ShoppingCart = () => {
       />
       <S.ShoppingCartAside>
         <ShoppingCartSummary
+          checkedItems={checkedItems}
           productCount={productCount}
           totalPrice={totalPrice}
           disabled={disabled}
         />
       </S.ShoppingCartAside>
+
       <S.ShoppingCartFooter>
         <ShoppingCartSummary
+          checkedItems={checkedItems}
           productCount={productCount}
           totalPrice={totalPrice}
           disabled={disabled}

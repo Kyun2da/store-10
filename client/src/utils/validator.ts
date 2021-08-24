@@ -1,4 +1,17 @@
 import React from 'react';
+interface IReviewValidation {
+  content: string;
+  rating: number;
+  setContentError: (value: React.SetStateAction<boolean>) => void;
+  setRatingError: (value: React.SetStateAction<boolean>) => void;
+}
+
+interface IQuestionValidation {
+  content: string;
+  title: string;
+  setContentError: (value: React.SetStateAction<boolean>) => void;
+  setTitleError: (value: React.SetStateAction<boolean>) => void;
+}
 
 export const validateInput = (value: string) => {
   return !!value;
@@ -54,4 +67,47 @@ export const validatePhone = (
   }
 
   return value;
+};
+export const validateReview = ({
+  content,
+  rating,
+  setContentError,
+  setRatingError,
+}: IReviewValidation) => {
+  if (!content) {
+    setContentError(true);
+  } else {
+    setContentError(false);
+  }
+
+  if (!rating) {
+    setRatingError(true);
+  } else {
+    setRatingError(false);
+  }
+
+  if (!content || !rating) return false;
+  return true;
+};
+
+export const validateQuestion = ({
+  content,
+  title,
+  setContentError,
+  setTitleError,
+}: IQuestionValidation) => {
+  if (!content) {
+    setContentError(true);
+  } else {
+    setContentError(false);
+  }
+
+  if (!title) {
+    setTitleError(true);
+  } else {
+    setTitleError(false);
+  }
+
+  if (!content || !title) return false;
+  return true;
 };

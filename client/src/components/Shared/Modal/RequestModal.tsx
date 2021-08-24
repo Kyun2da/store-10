@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import Button from '@/components/Shared/Button';
 import { Input } from '@/components/Shared/Input';
 import Title from '@/components/Shared/Title';
@@ -7,15 +7,74 @@ import * as S from './styles';
 import { Textarea } from '@/components/Shared/Input';
 import Form from '@/components/Shared/Form';
 import CategorySelector from '@/components/CategorySelector';
+import { useParams } from '@/lib/Router';
+import Checkbox from '@/components/Shared/Checkbox';
+import { useCreateQuestion } from '@/hooks/queries/product';
+import { validateQuestion } from '@/utils/validator';
 
 interface RequestModalProps {
   toggleModal: () => void;
 }
 
 const RequestModal = ({ toggleModal }: RequestModalProps) => {
+  const { id } = useParams().params;
+  const [category, setCategory] = useState('상품');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [secret, setSecret] = useState(false);
+  const [contentError, setContentError] = useState(false);
+  const [titleError, setTitleError] = useState(false);
+  const { mutate } = useCreateQuestion();
+
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const isPass = validateQuestion({
+      content,
+      title,
+      setTitleError,
+      setContentError,
+    });
+
+    if (!isPass) return;
+
+    const question = {
+      product_id: id,
+      category,
+      title,
+      content,
+      secret,
+    };
+
+    mutate(question);
+
+    toggleModal();
   };
+
+  const handleOnChangeTitle = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const {
+        target: { value },
+      } = e;
+
+      setTitle(value);
+    },
+    []
+  );
+
+  const handleOnChangeContent = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      const {
+        target: { value },
+      } = e;
+      setContent(value);
+    },
+    []
+  );
+
+  const handleOnChangeSecret = useCallback(() => {
+    setSecret((prev) => !prev);
+  }, []);
 
   return (
     <ModalLayout toggleModal={toggleModal}>
@@ -25,23 +84,44 @@ const RequestModal = ({ toggleModal }: RequestModalProps) => {
         <Form onSubmit={handleOnSubmit} gap={2}>
           <div className="input-wrapper">
             <Title level={5}>문의 유형</Title>
-            <CategorySelector />
+            <CategorySelector setCategory={setCategory} />
           </div>
           <div className="input-wrapper">
-            <Title level={5}>문의 제목</Title>
+            <Title level={5}>비공개 여부</Title>
+            <S.CheckboxWrapper>
+              <Checkbox checked={secret} onChange={handleOnChangeSecret} />
+              {secret
+                ? '관리자와 작성자만 열람 가능합니다.'
+                : '모든 사람이 열람 가능합니다.'}
+            </S.CheckboxWrapper>
+          </div>
+
+          <div className="input-wrapper">
+            <Title level={5}>문의 제목 (최대 50자)</Title>
             <Input
               fullWidth
+              maxLength={50}
+              value={title}
+              onChange={handleOnChangeTitle}
               type="text"
               label="Outlined"
+              error={titleError}
               name="request-title"
+              helperAlign="right"
+              helperText="문의제목을 필수로 입력해주세요..!"
               placeholder="문의 제목을 입력해주세요...!"
             />
           </div>
+
           <div className="input-wrapper">
             <Title level={5}>문의 남기기</Title>
             <Textarea
               name="request-content"
               resize="vertical"
+              value={content}
+              error={contentError}
+              onChange={handleOnChangeContent}
+              helpertext="내용을 필수로 입력하셔야 합니다..!"
               placeholder="문의 내용을 입력해주세요...!"
               fullWidth
             />

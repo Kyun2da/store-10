@@ -18,6 +18,9 @@ export class Question extends InitEntity {
   @Column({ type: 'boolean' })
   secret: boolean;
 
+  @Column({ length: 15 })
+  category: string;
+
   @ManyToOne(() => User, (type) => type.id, {
     nullable: false,
     onDelete: 'CASCADE',
@@ -25,6 +28,8 @@ export class Question extends InitEntity {
   })
   @JoinColumn({ name: 'user_id' })
   user!: User;
+  @Column()
+  user_id!: number;
 
   @ManyToOne(() => Product, (type) => type.id, {
     nullable: false,

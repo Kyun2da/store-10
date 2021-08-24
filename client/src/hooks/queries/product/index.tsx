@@ -11,6 +11,7 @@ import {
   getProductQuestionById,
   getProductQuestionCountById,
   getSearchProducts,
+  getProductReviewsByUser,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
@@ -23,6 +24,7 @@ import {
   IQuestionCount,
 } from '@/types/index';
 import { notify } from '@/components/Shared/Toastify';
+import { getProductQuestionByUser } from './../../../lib/api/product/index';
 
 export const useGetProductById = (id: string) => {
   return useQuery<IProductDetail, Error>(
@@ -36,6 +38,22 @@ export const useGetProductReviewsById = (id: string, offset: number) => {
   return useQuery<IProductReview[], Error>(
     ['productReview', id, offset],
     () => getProductReviewsById(id, offset),
+    { keepPreviousData: true }
+  );
+};
+
+export const useGetProductReviewsByUser = (offset: number) => {
+  return useQuery<IProductReview[], Error>(
+    ['productReviewUser', offset],
+    () => getProductReviewsByUser(offset),
+    { keepPreviousData: true }
+  );
+};
+
+export const useGetProductQuestionsByUser = (offset: number) => {
+  return useQuery<IProductQuestion[], Error>(
+    ['productQuestionUser', offset],
+    () => getProductQuestionByUser(offset),
     { keepPreviousData: true }
   );
 };

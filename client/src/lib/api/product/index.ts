@@ -25,6 +25,16 @@ export const getProductQuestionById = async (id: string, offset: number) => {
   );
 };
 
+export const getProductReviewsByUser = async (offset: number) => {
+  return await client.get<IProductReview[]>(`/product/review/user/${offset}`);
+};
+
+export const getProductQuestionByUser = async (offset: number) => {
+  return await client.get<IProductQuestion[]>(
+    `/product/question/user/${offset}`
+  );
+};
+
 export const getProductReviewsCountById = async (id: string) => {
   return await client.get<IReviewCountAndRating>(`/product/review/count/${id}`);
 };
@@ -46,7 +56,9 @@ export const getBestProducts = async () => {
 };
 
 export const getElasticProducts = async (searchString: string) => {
-  return await client.get<ISearchData[]>(`/product/elastic/search?q=${searchString}`);
+  return await client.get<ISearchData[]>(
+    `/product/elastic/search?q=${searchString}`
+  );
 };
 
 export const getSearchProducts = async (searchString: string) => {

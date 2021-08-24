@@ -98,6 +98,11 @@ export interface IProductReview {
   url: string[];
 }
 
+export interface IMyReview {
+  reviews: IProductReview[];
+  count: number;
+}
+
 export interface IProductQuestion {
   name?: string;
   id?: number;

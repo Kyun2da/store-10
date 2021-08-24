@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { User } from '@/entities/user.entity';
 import { Product } from '@/entities/product.entity';
+import { ProductImage } from '@/entities/productImage.entity';
 
 const LIMIT = 5;
 
@@ -60,8 +61,13 @@ class ReviewRepository extends Repository<Review> {
       .limit(LIMIT)
       .leftJoinAndSelect(User, 'user', 'review.user_id=user.id')
       .leftJoinAndSelect(Product, 'product', 'review.product_id=product.id')
-      .leftJoinAndSelect('product.productImage', 'productImage')
+      .leftJoinAndSelect(
+        ProductImage,
+        'productImage',
+        'productImage.product_id=product.id'
+      )
       .where('productImage.isThumbnail = 1')
+      .andWhere(`user.id = ${user_id}`)
       .select([
         'product.id as product_id',
         'name',

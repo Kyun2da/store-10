@@ -1,7 +1,7 @@
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getSearchProducts } from '@/lib/api/product';
 import { IProduct } from '@/types';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '../Card';
 import CardWrapper from '../CardWrapper';
 import * as S from './styles';

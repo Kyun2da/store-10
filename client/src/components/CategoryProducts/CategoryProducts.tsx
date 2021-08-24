@@ -17,9 +17,9 @@ const CategoryProducts = ({ subCategoryId }: IProps) => {
     key: ['category', subCategoryId],
     fetchingFunction: getCategoryProducts,
     fetchParams: {
-      start,
-      subCateogry: subCategoryId,
-      orderType: 'createdAt',
+        start,
+        subCateogry: subCategoryId,
+        orderType: 'createdAt',
     },
   });
 

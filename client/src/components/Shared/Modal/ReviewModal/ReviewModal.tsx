@@ -9,7 +9,7 @@ import useFileInput from '@/hooks/useFileInput';
 import Form from '@/components/Shared/Form';
 import { useCreateReview } from '@/hooks/queries/product';
 import { useParams } from '@/lib/Router';
-import { validateReview } from '@/utils/validatior';
+import { validateReview } from '@/utils/validator';
 import { compressImageFile } from '@/utils/helper';
 
 interface ReviewModalProps {

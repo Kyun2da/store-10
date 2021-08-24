@@ -10,7 +10,7 @@ import CategorySelector from '@/components/CategorySelector';
 import { useParams } from '@/lib/Router';
 import Checkbox from '@/components/Shared/Checkbox';
 import { useCreateQuestion } from '@/hooks/queries/product';
-import { validateQuestion } from '@/utils/validatior';
+import { validateQuestion } from '@/utils/validator';
 
 interface RequestModalProps {
   toggleModal: () => void;

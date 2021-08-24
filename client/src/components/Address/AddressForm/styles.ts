@@ -1,20 +1,21 @@
 import styled from 'styled-components';
 import Checkbox from '@/components/Shared/Checkbox';
 import ModalLayout from '@/components/Shared/Modal/ModalLayout';
+import Select from '@/components/Shared/Select';
 
 export const PostcodeWrapper = styled.div`
   margin-top: 1.2rem;
   display: flex;
   > div {
     flex: 1;
-    margin-left: 2rem;
+    margin-left: 1.2rem;
     > input {
       margin-top: 0;
     }
   }
 
   button {
-    border-radius: 10px;
+    border-radius: 0.4rem;
     ${({ theme }) => theme.fontSize.m}
   }
 `;
@@ -54,6 +55,7 @@ export const FormRowName = styled.span`
   flex: 0 0 8rem;
   color: ${({ theme }) => theme.color['text-color']};
   ${({ theme }) => theme.fontWeight.m};
+  ${({ theme }) => theme.fontSize.m};
 `;
 
 export const FormFooter = styled.footer`
@@ -61,4 +63,22 @@ export const FormFooter = styled.footer`
   width: 100%;
   padding-top: 1.2rem;
   border-top: 1px solid ${({ theme }) => theme.color['border-gray']};
+`;
+
+export const PhoneSelect = styled(Select)`
+  select {
+    width: 8.6rem;
+    height: 4.5rem;
+    border: 1px solid ${({ theme }) => theme.color.placeholder};
+    border-radius: 0.4rem;
+  }
+`;
+
+export const PhoneWrapper = styled.div`
+  display: flex;
+  > div {
+    &:first-child {
+      margin-right: 0.8rem;
+    }
+  }
 `;

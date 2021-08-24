@@ -96,6 +96,13 @@ export interface IProductReview {
   name: string;
   createdAt: string;
   url: string[];
+  productImage_url?: string;
+  product_id?: number;
+}
+
+export interface IMyReview {
+  reviews: IProductReview[];
+  count: number;
 }
 
 export interface IProductQuestion {

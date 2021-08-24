@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ReviewImageModal from './ReviewImageModal';
 
 export default {
-  title: '컴포넌트/공통/리뷰이미지모달',
+  title: '컴포넌트/공통/모달/리뷰이미지',
   component: ReviewImageModal,
 } as ComponentMeta<typeof ReviewImageModal>;
 

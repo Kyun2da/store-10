@@ -15,8 +15,7 @@ import usePagination from '@/hooks/usePagination';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import { notify } from '@/components/Shared/Toastify';
-
-const LIMIT = 10;
+import { QUESTION_LIMIT } from '@/utils/constant/offsetLimit';
 
 const headers = [
   { name: '번호', value: 'id' },
@@ -30,7 +29,7 @@ const headers = [
 const ProductRequest = () => {
   const { id } = useParams().params;
   const [user] = useRecoilState(userState);
-  const [offset, handleOnClickPage] = usePagination(LIMIT);
+  const [offset, handleOnClickPage] = usePagination(QUESTION_LIMIT);
   const [isOpen, toggleModal] = useModal(false);
   const {
     data: questions,
@@ -79,7 +78,7 @@ const ProductRequest = () => {
 
       <Pagination
         handleOnClickPage={handleOnClickPage}
-        count={Math.ceil(count.count / LIMIT)}
+        count={Math.ceil(count.count / QUESTION_LIMIT)}
       />
 
       {isOpen && <RequestModal toggleModal={toggleModal} />}

@@ -10,6 +10,7 @@ interface CustomModalProps {
   width?: string;
   height?: string;
   fullWidth?: boolean;
+  compact?: boolean;
   onClick?: () => void;
 }
 
@@ -20,6 +21,7 @@ const CustomModal = ({
   width,
   height,
   fullWidth,
+  compact,
   onClick,
 }: CustomModalProps) => {
   return (
@@ -29,6 +31,7 @@ const CustomModal = ({
           width={width}
           height={height}
           fullWidth={fullWidth}
+          compact={compact}
           onClick={(e) => e.stopPropagation()}
         >
           <S.ModalInner>

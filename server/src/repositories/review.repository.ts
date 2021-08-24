@@ -7,10 +7,12 @@ import {
   UpdateResult,
 } from 'typeorm';
 import { User } from '@/entities/user.entity';
+import { Product } from '@/entities/product.entity';
+import { ProductImage } from '@/entities/productImage.entity';
 
 const LIMIT = 5;
 
-interface IReview {
+export interface IReview {
   name: string;
   content: string;
   rating: number;
@@ -49,9 +51,45 @@ class ReviewRepository extends Repository<Review> {
       .getRawMany();
   }
 
+  findProductReviewByUserId(
+    user_id: number,
+    offset: string
+  ): Promise<IReview[]> {
+    return this.createQueryBuilder('review')
+      .where('review.user_id = :user_id', { user_id })
+      .orderBy('review.createdAt', 'DESC')
+      .limit(LIMIT)
+      .leftJoinAndSelect(User, 'user', 'review.user_id=user.id')
+      .leftJoinAndSelect(Product, 'product', 'review.product_id=product.id')
+      .leftJoinAndSelect(
+        ProductImage,
+        'productImage',
+        'productImage.product_id=product.id'
+      )
+      .where('productImage.isThumbnail = 1')
+      .andWhere(`user.id = ${user_id}`)
+      .select([
+        'product.id as product_id',
+        'name',
+        'review.content as content',
+        'rating',
+        'productImage.url',
+        'review.id as id',
+        'review.createdAt as createdAt',
+      ])
+      .offset(+offset)
+      .getRawMany();
+  }
+
   findProductReviewsCountById(product_id: string): Promise<number> {
     return this.createQueryBuilder('review')
       .where('review.product_id = :product_id', { product_id: +product_id })
+      .getCount();
+  }
+
+  findProductReviewsCountByUser(user_id: number): Promise<number> {
+    return this.createQueryBuilder('review')
+      .where('review.user_id = :user_id', { user_id })
       .getCount();
   }
 

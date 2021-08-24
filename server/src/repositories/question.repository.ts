@@ -30,6 +30,18 @@ class QuestionRepository extends Repository<Question> {
       .getRawMany();
   }
 
+  findProductQuestionByUserId(
+    user_id: number,
+    offset: string
+  ): Promise<Question[]> {
+    return this.find({
+      where: { user_id },
+      skip: +offset,
+      take: LIMIT,
+      order: { createdAt: 'DESC' },
+    });
+  }
+
   findProductQuestionsCountById(product_id: string): Promise<number> {
     return this.createQueryBuilder('question')
       .where('question.product_id = :product_id', { product_id: +product_id })

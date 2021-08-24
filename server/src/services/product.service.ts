@@ -1,6 +1,8 @@
 import ProductRepository from '@/repositories/product.repository';
 import ProductImageRepository from '@/repositories/productImage.repository';
-import ProductReviewRepository from '@/repositories/review.repository';
+import ProductReviewRepository, {
+  IReview,
+} from '@/repositories/review.repository';
 import ProductReviewImageRepository from '@/repositories/reviewImage.repository';
 import ProductQuestionRepository from '@/repositories/question.repository';
 import OrderRepository from '@/repositories/order.repository';
@@ -59,21 +61,30 @@ class ProductService {
 
   async getProductReviewsById(id: string, offset: string) {
     const productReviewRepo = ProductReviewRepository();
-    const result = await productReviewRepo.findProductReviewsById(id, offset);
+    const reviews = await productReviewRepo.findProductReviewsById(id, offset);
+    return await this.getProductReviewImages(reviews);
+  }
 
-    const reviews = (
-      await Promise.all(
-        result.map((res) => this.getProductReviewsImagesById(res.id))
-      )
-    ).reduce((collection: ICollection[], reviewImage, idx) => {
-      const review = result[idx];
-      const url = reviewImage.map((img) => img.url);
-      const newReview = { ...review, url };
-      collection.push(newReview);
-      return collection;
-    }, []);
+  async getProductReviewByUserId(user_id: number, offset: string) {
+    const productReviewRepo = ProductReviewRepository();
+    const reviews = await productReviewRepo.findProductReviewByUserId(
+      user_id,
+      offset
+    );
+    return await this.getProductReviewImages(reviews);
+  }
 
-    return reviews;
+  async getProductReviewsCountByUserId(user_id: number) {
+    const productReviewRepo = ProductReviewRepository();
+    return await productReviewRepo.findProductReviewsCountByUser(user_id);
+  }
+
+  async getProductQuestionByUserId(user_id: number, offset: string) {
+    const productQuestionRepo = ProductQuestionRepository();
+    return await productQuestionRepo.findProductQuestionByUserId(
+      user_id,
+      offset
+    );
   }
 
   async getProductReviewRating(id: string) {
@@ -202,6 +213,20 @@ class ProductService {
     });
 
     return getCategoryProducts;
+  }
+
+  async getProductReviewImages(reviews: IReview[]) {
+    return (
+      await Promise.all(
+        reviews.map((res) => this.getProductReviewsImagesById(res.id))
+      )
+    ).reduce((collection: ICollection[], reviewImage, idx) => {
+      const review = reviews[idx];
+      const url = reviewImage.map((img) => img.url);
+      const newReview = { ...review, url };
+      collection.push(newReview);
+      return collection;
+    }, []);
   }
 }
 

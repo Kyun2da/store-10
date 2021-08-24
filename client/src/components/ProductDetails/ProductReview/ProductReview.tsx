@@ -18,13 +18,13 @@ import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import { notify } from '@/components/Shared/Toastify';
 import usePagination from '@/hooks/usePagination';
+import { REVIEW_LIMIT } from '@/utils/constant/offsetLimit';
 
 // 페이지 당 리뷰 노출 개수
-const LIMIT = 5;
 
 const ProductReview = () => {
   const { id } = useParams().params;
-  const [offset, handleOnClickPage] = usePagination(LIMIT);
+  const [offset, handleOnClickPage] = usePagination(REVIEW_LIMIT);
   const [selectedImage, setSelectedImage] = useState('');
   const [isReviewOpen, toggleReviewModal] = useModal(false);
   const [isImageOpen, toggleImageModal] = useModal(false);
@@ -121,7 +121,7 @@ const ProductReview = () => {
 
       <Pagination
         handleOnClickPage={handleOnClickPage}
-        count={Math.ceil(count / LIMIT)}
+        count={Math.ceil(count / REVIEW_LIMIT)}
       />
 
       {isReviewOpen && <ReviewModal toggleModal={toggleReviewModal} />}

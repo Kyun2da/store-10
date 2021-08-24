@@ -10,7 +10,10 @@ import {
   deleteProductReview,
   getProductQuestionById,
   getProductQuestionCountById,
+  getSearchProducts,
+  getProductReviewsByUser,
   postProductQuestion,
+  getProductQuestionByUser,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
@@ -21,6 +24,7 @@ import {
   IProductReview,
   IReviewCountAndRating,
   IQuestionCount,
+  IMyReview,
 } from '@/types/index';
 import { notify } from '@/components/Shared/Toastify';
 
@@ -36,6 +40,22 @@ export const useGetProductReviewsById = (id: string, offset: number) => {
   return useQuery<IProductReview[], Error>(
     ['productReview', id, offset],
     () => getProductReviewsById(id, offset),
+    { keepPreviousData: true }
+  );
+};
+
+export const useGetProductReviewsByUser = (offset: number) => {
+  return useQuery<IMyReview, Error>(
+    ['productReviewUser', offset],
+    () => getProductReviewsByUser(offset),
+    { keepPreviousData: true }
+  );
+};
+
+export const useGetProductQuestionsByUser = (offset: number) => {
+  return useQuery<IProductQuestion[], Error>(
+    ['productQuestionUser', offset],
+    () => getProductQuestionByUser(offset),
     { keepPreviousData: true }
   );
 };
@@ -116,7 +136,7 @@ export const useDeleteReview = () => {
   const mutation = useMutation(deleteProductReview, {
     onSuccess: () => {
       notify('success', '해당 리뷰를 성공적으로 제거했습니다.');
-      queryClient.invalidateQueries('productReview');
+      queryClient.invalidateQueries('productReviewUser');
     },
     onError: () => {
       notify('error', '리뷰를 제거하는데 실패했습니다..!');

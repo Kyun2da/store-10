@@ -22,10 +22,13 @@ class BookmarkRepository extends Repository<Bookmark> {
     return this.save(Bookmark);
   }
 
-  getBookmarksDetail(userId: number): Promise<Bookmark[]> {
+  getBookmarksDetail(userId: number, start: number): Promise<Bookmark[]> {
     // TODO: productimage 하나만 가져오기
+    console.log(start);
     const Bookmarks = this.find({
+      skip: start,
       where: { user_id: userId },
+      take: 8,
       relations: ['product', 'product.productImage'],
     });
     return Bookmarks;

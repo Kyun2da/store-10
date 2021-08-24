@@ -64,7 +64,7 @@ class ReviewRepository extends Repository<Review> {
       .where('productImage.isThumbnail = 1')
       .select([
         'name',
-        'review.content',
+        'review.content as content',
         'rating',
         'productImage.url',
         'review.id as id',

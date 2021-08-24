@@ -3,13 +3,7 @@ import Title from '@/components/Shared/Title';
 import React from 'react';
 import * as S from './styles';
 import { items } from '@/utils/constant/notices';
-
-const headers = [
-  { name: '번호', value: 'number' },
-  { name: '제목', value: 'title' },
-  { name: '작성일', value: 'date' },
-  { name: '작성자', value: 'username' },
-];
+import { NOTICE_HEADER } from '@/utils/constant/CollapseHeaders';
 
 const Notice = () => {
   return (
@@ -19,7 +13,7 @@ const Notice = () => {
       </Title>
       <Collapse
         forNotice
-        headers={headers}
+        headers={NOTICE_HEADER}
         items={items}
         gaps="1fr 3fr 1fr 1fr"
       ></Collapse>

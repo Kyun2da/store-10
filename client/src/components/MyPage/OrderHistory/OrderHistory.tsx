@@ -3,11 +3,12 @@ import Chip from '@/components/Shared/Chip';
 import Title from '@/components/Shared/Title';
 import Pagination from '@/components/Shared/Pagination';
 import * as S from './styles';
-import { FRUSTRATE_IMG, ORDER_STATUS_DATA, PERIOD_FILTER } from '@/contstants';
+import { ORDER_STATUS_DATA, PERIOD_FILTER } from '@/contstants';
 import OrderItemList from './OrderItemList';
 import { useGetOrders } from '@/hooks/queries/order';
 import usePagination from '@/hooks/usePagination';
 import { IOrder } from '@/types';
+import Thung from '@/components/Thung';
 
 const PAGE_LIMIT = 4;
 
@@ -86,12 +87,7 @@ const OrderHistory = ({}) => {
       </S.OrderHistoryHeader>
       <S.OrderHistoryBody>
         {!!data?.length && renderOrderItemList()}
-        {data && !data.length && (
-          <S.EmptyWrapper>
-            <img src={FRUSTRATE_IMG} />
-            <Title level={4}>주문 내역이 없습니다...!</Title>
-          </S.EmptyWrapper>
-        )}
+        {data && !orders.length && <Thung title="" />}
       </S.OrderHistoryBody>
 
       <Pagination

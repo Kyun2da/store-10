@@ -14,7 +14,7 @@ export const OrderSummaryWrapper = styled.section`
 `;
 
 export const OrderSummary = styled.dl`
-  border: 1px solid ${({ theme }) => theme.color.body};
+  border: 1px solid ${({ theme }) => theme.color['border-gray']};
   border-radius: 0.8rem;
   background: ${({ theme }) => theme.color['off-white']};
   padding: 1rem 2rem;
@@ -58,5 +58,22 @@ export const OrderSummaryRow = styled.div`
 `;
 
 export const Divider = styled.div`
-  border-bottom: 1px solid ${({ theme }) => theme.color.line};
+  border-bottom: 1px solid ${({ theme }) => theme.color['border-gray']};
+`;
+
+export const OrderSummaryFooter = styled.footer`
+  padding: 2rem 0;
+`;
+
+export const OrderAgreementWrapper = styled.div`
+  margin-top: 1.2rem;
+  padding: 0.1rem 1.2rem 1.6rem 1.2rem;
+  background-color: ${({ theme }) => theme.color['border-gray']};
+`;
+
+export const OrderAgreement = styled.span`
+  display: block;
+  margin-top: 2rem;
+  ${({ theme }) => theme.fontSize.s}
+  ${({ theme }) => theme.fontWeight.m}
 `;

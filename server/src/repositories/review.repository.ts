@@ -10,7 +10,7 @@ import { User } from '@/entities/user.entity';
 
 const LIMIT = 5;
 
-interface IReview {
+export interface IReview {
   name: string;
   content: string;
   rating: number;
@@ -52,18 +52,32 @@ class ReviewRepository extends Repository<Review> {
   findProductReviewByUserId(
     user_id: number,
     offset: string
-  ): Promise<Review[]> {
-    return this.find({
-      where: { user_id },
-      skip: +offset,
-      take: LIMIT,
-      order: { createdAt: 'DESC' },
-    });
+  ): Promise<IReview[]> {
+    return this.createQueryBuilder('review')
+      .where('review.user_id = :user_id', { user_id })
+      .orderBy('review.createdAt', 'DESC')
+      .limit(LIMIT)
+      .leftJoinAndSelect(User, 'user', 'review.user_id=user.id')
+      .select([
+        'name',
+        'content',
+        'rating',
+        'review.id as id',
+        'review.createdAt as createdAt',
+      ])
+      .offset(+offset)
+      .getRawMany();
   }
 
   findProductReviewsCountById(product_id: string): Promise<number> {
     return this.createQueryBuilder('review')
       .where('review.product_id = :product_id', { product_id: +product_id })
+      .getCount();
+  }
+
+  findProductReviewsCountByUser(user_id: number): Promise<number> {
+    return this.createQueryBuilder('review')
+      .where('review.user_id = :user_id', { user_id })
       .getCount();
   }
 

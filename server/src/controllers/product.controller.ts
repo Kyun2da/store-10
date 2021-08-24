@@ -186,19 +186,23 @@ class ProductController {
   async getProductReviewsByUserId(req: Request, res: Response) {
     const { offset } = req.params;
     const user_id = req.user.id as number;
-    const result = await ProductService.getProductReviewByUserId(
+    const reviews = await ProductService.getProductReviewByUserId(
       user_id,
       offset
     );
+    const count = await ProductService.getProductReviewsCountByUserId(user_id);
 
-    if (!result) {
+    if (!reviews) {
       return ApiResponse(
         res,
         HttpStatusCode.BAD_REQUEST,
         '리뷰 조회에서 에러가 발생했습니다.'
       );
     }
-    return ApiResponse(res, HttpStatusCode.OK, '리뷰 조회 성공', result);
+    return ApiResponse(res, HttpStatusCode.OK, '리뷰 조회 성공', {
+      reviews,
+      count,
+    });
   }
 
   async getProductQuestionByUserId(req: Request, res: Response) {

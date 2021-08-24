@@ -6,7 +6,7 @@ import multerS3 from '@/api/middlewares/s3.middleware';
 
 const router = Router();
 
-// --- GET 요청 --- //
+// @@--- GET 요청 ---@@ //
 router.get('/elastic/search', wrapAsync(ProductController.serchElasticProduct));
 router.get('/search', wrapAsync(ProductController.serchProduct));
 router.get('/recommand', wrapAsync(ProductController.getRecommandProducts));
@@ -16,7 +16,7 @@ router.get('/category', wrapAsync(ProductController.getCategoryProducts));
 router.get('/', wrapAsync(ProductController.getProducts));
 router.get('/:id', wrapAsync(ProductController.getProductById));
 
-// Review 조회 관련
+// Product-Review 조회 관련
 router.get(
   '/review/user/:offset',
   authJWT,
@@ -28,7 +28,7 @@ router.get(
   wrapAsync(ProductController.getProductReviewsById)
 );
 
-// Question 조회 관련
+// Product-Question 조회 관련
 router.get(
   '/question/user/:offset',
   authJWT,
@@ -40,7 +40,7 @@ router.get(
 );
 router.get('/question/:id/:offset', ProductController.getProductQuestionsById);
 
-// --- POST 요청 --- //
+// @@--- POST 요청 ---@@ //
 router.post(
   '/review',
   authJWT,
@@ -49,13 +49,11 @@ router.post(
 );
 router.post(`/question`, authJWT, ProductController.postProductQuestionById);
 
-// --- DELETE 요청 --- //
+// @@--- DELETE 요청 ---@@ //
 router.delete(
   '/review/:id',
   authJWT,
   ProductController.deleteProductReviewById
 );
-
-// --- PUT 요청 --- //
 
 export default router;

@@ -22,7 +22,7 @@ export const SkeletonCard = styled.li`
 `;
 
 export const SkeletonImg = styled.div`
-  width: 100%;
+  width: 24rem;
   height: 24rem;
   border-radius: 10px;
   background: #f2f2f2;

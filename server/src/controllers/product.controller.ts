@@ -134,7 +134,7 @@ class ProductController {
     }
 
     if (!result) {
-      return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰생성 실패');
+      return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰수정 실패');
     }
     return ApiResponse(res, HttpStatusCode.NO_CONTENT);
   }
@@ -151,6 +151,22 @@ class ProductController {
 
     if (!result) {
       return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '문의 작성 실패');
+    }
+    return ApiResponse(res, HttpStatusCode.NO_CONTENT);
+  }
+
+  async deleteProductReviewImageById(req: Request, res: Response) {
+    const { id } = req.params;
+    const { url } = req.body;
+
+    const result = await ProductService.deleteReviewImageById(+id, url);
+
+    if (!result.affected) {
+      return ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '리뷰 이미지 제거 실패'
+      );
     }
     return ApiResponse(res, HttpStatusCode.NO_CONTENT);
   }

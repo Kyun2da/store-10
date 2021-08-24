@@ -281,6 +281,7 @@ export const UserReview = styled.div`
   flex-direction: column;
   border-radius: 3rem;
   padding: 2rem;
+  flex: 1;
   background-color: ${({ theme }) => theme.color.background};
 
   & + & {

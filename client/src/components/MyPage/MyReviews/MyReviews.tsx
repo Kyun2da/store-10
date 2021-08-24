@@ -17,6 +17,7 @@ import { REVIEW_LIMIT } from '@/utils/constant/offsetLimit';
 import Pagination from '@/components/Shared/Pagination';
 import { ReviewImageModal } from '@/components/Shared/Modal';
 import useModal from '@/hooks/useModal';
+import { Link } from '@/lib/Router';
 
 const MyReviews = () => {
   const [offset, handleOnClickPage] = usePagination(REVIEW_LIMIT);
@@ -40,38 +41,51 @@ const MyReviews = () => {
 
   const { reviews, count } = data;
 
+  console.log(reviews);
+
   return (
     <S.MyReviews>
       <UserReviewArea>
         {reviews.map((review) => {
           return (
-            <UserReview data-review-id={review.id} key={review.id}>
-              <UserReviewTitles>
-                <Title className="username" level={5}>
-                  {review.name}
-                  <span style={{ fontWeight: 100 }}>님</span>
-                </Title>
-                <div className="rating-area">
-                  <RatingGetter rating={review.rating} uniqueId={nanoid()} />
-                  <p className="date">{dateFormat(review.createdAt)}</p>
-                </div>
-              </UserReviewTitles>
+            <S.MyReviewsItem key={review.id}>
+              <S.ThumbnailArea>
+                <S.ProductThumbnail
+                  src={review.productImage_url}
+                  alt="상품 섬네일"
+                />
+                <Link to={`/detail/${review.product_id}`}>
+                  <S.LinkButton>이동</S.LinkButton>
+                </Link>
+              </S.ThumbnailArea>
+              <UserReview data-review-id={review.id}>
+                <UserReviewTitles>
+                  <Title className="username" level={5}>
+                    {review.name}
+                    <span style={{ fontWeight: 100 }}>님</span>
+                  </Title>
+                  <div className="rating-area">
+                    <RatingGetter rating={review.rating} uniqueId={nanoid()} />
+                    <p className="date">{dateFormat(review.createdAt)}</p>
+                  </div>
+                </UserReviewTitles>
 
-              {review.url.length !== 0 && (
-                <ReviewImages>
-                  {review.url.map((image) => (
-                    <img
-                      onClick={() => handleOnClickImage(image)}
-                      key={nanoid()}
-                      src={image}
-                      alt="유저사진리뷰"
-                    />
-                  ))}
-                </ReviewImages>
-              )}
+                {review.url.length !== 0 && (
+                  <ReviewImages>
+                    {review.url.map((image) => (
+                      <img
+                        onClick={() => handleOnClickImage(image)}
+                        key={nanoid()}
+                        src={image}
+                        alt="유저사진리뷰"
+                      />
+                    ))}
+                  </ReviewImages>
+                )}
 
-              <UserDescription>{review.content}</UserDescription>
-            </UserReview>
+                <UserDescription>{review.content}</UserDescription>
+              </UserReview>
+            </S.MyReviewsItem>
           );
         })}
       </UserReviewArea>

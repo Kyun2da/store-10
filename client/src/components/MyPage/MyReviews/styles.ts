@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const MyReviews = styled.div`
   display: flex;
   flex-direction: column;
-  ${({ theme }) => theme.fontSize.m}
-  ${({ theme }) => theme.fontWeight.s}
+  ${({ theme }) => theme.fontSize.m};
+  ${({ theme }) => theme.fontWeight.s};
+  color: ${({ theme }) => theme.color['text-color']};
 `;
 
 export const MyReviewsItem = styled.div`
@@ -38,5 +39,18 @@ export const LinkButton = styled.button`
 
   &:hover {
     opacity: 0.75;
+  }
+`;
+
+export const ReviewTitleArea = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  svg {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.55;
+    }
   }
 `;

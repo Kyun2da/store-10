@@ -11,19 +11,29 @@ import Title from '@/components/Shared/Title';
 import { RatingGetter } from '@/components/Shared/Rating';
 import { dateFormat } from '@/utils/helper';
 import { nanoid } from 'nanoid';
-import { useGetProductReviewsByUser } from '@/hooks/queries/product/index';
+import {
+  useDeleteReview,
+  useGetProductReviewsByUser,
+} from '@/hooks/queries/product/index';
 import usePagination from '@/hooks/usePagination';
 import { REVIEW_LIMIT } from '@/utils/constant/offsetLimit';
 import Pagination from '@/components/Shared/Pagination';
-import { ReviewImageModal } from '@/components/Shared/Modal';
+import {
+  DeleteConfirmModal,
+  ReviewImageModal,
+} from '@/components/Shared/Modal';
 import useModal from '@/hooks/useModal';
 import { Link } from '@/lib/Router';
+import Dropdown from '@/components/Shared/Dropdown';
 
 const MyReviews = () => {
   const [offset, handleOnClickPage] = usePagination(REVIEW_LIMIT);
   const { data, isLoading, error } = useGetProductReviewsByUser(offset);
   const [selectedImage, setSelectedImage] = useState('');
+  const [selectedReview, setSelectedReview] = useState(0);
   const [isImageOpen, toggleImageModal] = useModal(false);
+  const [isOpen, toggleModal] = useModal(false);
+  const { mutate } = useDeleteReview();
 
   // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
   if (error) {
@@ -34,14 +44,35 @@ const MyReviews = () => {
     return <div>loading</div>;
   }
 
+  const handleRemoveReview = (target: number) => {
+    setSelectedReview(target);
+    toggleModal();
+  };
+
+  const handleUpdateReview = (target: number) => {
+    console.log(target);
+  };
+
+  const dropdownItems = [
+    { content: '수정하기', color: '#111', onClickListener: handleUpdateReview },
+    {
+      content: '삭제하기',
+      color: '#f45452',
+      onClickListener: handleRemoveReview,
+    },
+  ];
+
   const handleOnClickImage = (image: string) => {
     setSelectedImage(image);
     toggleImageModal();
   };
 
-  const { reviews, count } = data;
+  const removeSelectedReview = () => {
+    mutate(selectedReview);
+    toggleModal();
+  };
 
-  console.log(reviews);
+  const { reviews, count } = data;
 
   return (
     <S.MyReviews>
@@ -60,10 +91,13 @@ const MyReviews = () => {
               </S.ThumbnailArea>
               <UserReview data-review-id={review.id}>
                 <UserReviewTitles>
-                  <Title className="username" level={5}>
-                    {review.name}
-                    <span style={{ fontWeight: 100 }}>님</span>
-                  </Title>
+                  <S.ReviewTitleArea>
+                    <Title className="username" level={5}>
+                      {review.name}
+                      <span style={{ fontWeight: 100 }}>님</span>
+                    </Title>
+                    <Dropdown selectedId={review.id} items={dropdownItems} />
+                  </S.ReviewTitleArea>
                   <div className="rating-area">
                     <RatingGetter rating={review.rating} uniqueId={nanoid()} />
                     <p className="date">{dateFormat(review.createdAt)}</p>
@@ -99,6 +133,13 @@ const MyReviews = () => {
         <ReviewImageModal
           selectedImage={selectedImage}
           toggleModal={toggleImageModal}
+        />
+      )}
+
+      {isOpen && (
+        <DeleteConfirmModal
+          removeSelectedReview={removeSelectedReview}
+          toggleModal={toggleModal}
         />
       )}
     </S.MyReviews>

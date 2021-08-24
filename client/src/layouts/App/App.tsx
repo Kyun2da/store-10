@@ -19,6 +19,7 @@ import Notice from '@/pages/Notice';
 import Order from '@/pages/Order';
 import Search from '@/pages/Search';
 import Paid from '@/pages/Order/Paid';
+import Loading from '@/components/Shared/Loading';
 import { QueryErrorResetBoundary } from 'react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import Error from '@/components/Shared/Error';
@@ -95,7 +96,7 @@ const App = () => {
                   </Switch>
                   <Footer />
                 </S.RootWrapper>
-              )}                  
+              )}
             </ErrorBoundary>
           )}
         </QueryErrorResetBoundary>

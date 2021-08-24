@@ -183,6 +183,18 @@ class ProductController {
     return ApiResponse(res, HttpStatusCode.NO_CONTENT);
   }
 
+  async deleteProductQuestionById(req: Request, res: Response) {
+    const user_id = req.user.id;
+    const { id } = req.params;
+
+    const result = await ProductService.deleteQuestionById(id, user_id);
+
+    if (!result.affected) {
+      return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '문의삭제 실패');
+    }
+    return ApiResponse(res, HttpStatusCode.NO_CONTENT);
+  }
+
   async getProductQuestionsById(req: Request, res: Response) {
     const { id, offset } = req.params;
     const questions = await ProductService.getProductQuestionsById(id, offset);

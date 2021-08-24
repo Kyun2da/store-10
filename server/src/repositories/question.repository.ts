@@ -1,6 +1,11 @@
 import { Question } from '@/entities/question.entity';
 import { User } from '@/entities/user.entity';
-import { EntityRepository, getCustomRepository, Repository } from 'typeorm';
+import {
+  DeleteResult,
+  EntityRepository,
+  getCustomRepository,
+  Repository,
+} from 'typeorm';
 
 const LIMIT = 10;
 
@@ -57,6 +62,10 @@ class QuestionRepository extends Repository<Question> {
   createProductQuestion(questionInfo: Question): Promise<Question> {
     const question = this.create(questionInfo);
     return this.save(question);
+  }
+
+  deleteProductQuestion(id: string, user_id: number): Promise<DeleteResult> {
+    return this.delete({ user_id, id: +id });
   }
 }
 

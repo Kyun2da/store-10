@@ -132,6 +132,11 @@ class ProductService {
     return await productReviewRepo.deleteProductReview(id, user_id);
   }
 
+  async deleteQuestionById(id: string, user_id: number) {
+    const productQuestionRepo = ProductQuestionRepository();
+    return await productQuestionRepo.deleteProductQuestion(id, user_id);
+  }
+
   async updateReviewById(id: number, review: Review) {
     const productReviewRepo = ProductReviewRepository();
     return await productReviewRepo.updateProductReview(id, review);

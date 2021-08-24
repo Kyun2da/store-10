@@ -61,6 +61,11 @@ router.delete(
   authJWT,
   ProductController.deleteProductReviewImageById
 );
+router.delete(
+  `/question/:id`,
+  authJWT,
+  ProductController.deleteProductQuestionById
+);
 
 // @@--- PUT 요청 ---@@ //
 router.put(

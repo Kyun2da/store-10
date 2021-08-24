@@ -21,6 +21,7 @@ class QuestionRepository extends Repository<Question> {
         'content',
         'answer',
         'secret',
+        'category',
         'product_id',
         'question.id as id',
         'question.createdAt as createdAt',
@@ -33,6 +34,11 @@ class QuestionRepository extends Repository<Question> {
     return this.createQueryBuilder('question')
       .where('question.product_id = :product_id', { product_id: +product_id })
       .getCount();
+  }
+
+  createProductQuestion(questionInfo: Question): Promise<Question> {
+    const question = this.create(questionInfo);
+    return this.save(question);
   }
 }
 

@@ -2,6 +2,9 @@ import { AnswerSVG, QuestionSVG } from '@/assets/svgs';
 import React, { createRef, Fragment, useEffect, useState } from 'react';
 import * as S from './styles';
 import { dateFormat } from '@/utils/helper';
+import { notify } from '../Toastify';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/user';
 
 // TODO: ANY 안 쓰고 시퍼용
 
@@ -25,15 +28,21 @@ const Collapse = <T extends ICollapseItem>({
   gaps,
   forNotice,
 }: ICollapse<T>) => {
-  const count = items.length;
-  const initialState = new Array(count).fill(1).map(() => ``);
+  const initialState = items.map(() => ``);
+  const [user] = useRecoilState(userState);
   const [isActive, setIsActive] = useState<string[]>(initialState);
   const [height, setHeight] = useState(0);
   const [refs, setRefs] = useState<React.RefObject<HTMLDivElement>[]>([]);
 
-  const handleClickOnItem = (index: number) => {
-    const nextState = new Array(count).fill(1).map((_, idx) => {
-      return index === idx ? `collapse-item-${idx}` : '';
+  const handleClickOnItem = (id: number, index: number) => {
+    // TODO: user.name 이 고유값이 아니라면 user_id를 받아오도록 변경
+    const seleted = items.filter((item) => item.id === id);
+    if (seleted[0].secret && seleted[0].name !== user?.name) {
+      return notify('error', '작성자와 관리자만 열람할 수 있습니다.');
+    }
+
+    const nextState = items.map((item) => {
+      return id === item.id ? `collapse-item-${item.id}` : '';
     });
 
     isActive[index] ? setIsActive(initialState) : setIsActive(nextState);
@@ -41,12 +50,8 @@ const Collapse = <T extends ICollapseItem>({
   };
 
   useEffect(() => {
-    setRefs((refs) =>
-      Array(count)
-        .fill(0)
-        .map((_, i) => refs[i] || createRef())
-    );
-  }, [count]);
+    setRefs((refs) => items.map((_, i) => refs[i] || createRef()));
+  }, [items]);
 
   return (
     <S.Collapse>
@@ -61,27 +66,38 @@ const Collapse = <T extends ICollapseItem>({
             <S.CollaspeRow
               gaps={gaps}
               length={headers.length}
-              onClick={() => handleClickOnItem(idx)}
+              onClick={() => handleClickOnItem(item.id, idx)}
+              className={item.secret && item.name !== user?.name ? 'lock' : ''}
             >
               {headers.map((header) => {
                 // TODO: 삼항연산자 depth가 너무 깊어 좀 풀고 싶은데 좋은 방법이 떠오르지 않는군뇨..
                 return (
-                  <p key={header.value}>
-                    {header.value === 'createdAt'
-                      ? dateFormat(item[header.value])
-                      : header.value === 'answer'
-                      ? item[header.value]
-                        ? '답변완료'
-                        : '미답변'
-                      : item[header.value]}
-                  </p>
+                  <S.CollapseSubTitle key={header.value}>
+                    {header.value === 'createdAt' ? (
+                      dateFormat(item[header.value])
+                    ) : header.value === 'answer' ? (
+                      item[header.value] ? (
+                        <S.Status>
+                          <S.StatusPoint className="completed" />
+                          완료
+                        </S.Status>
+                      ) : (
+                        <S.Status>
+                          <S.StatusPoint className="pending" />
+                          대기중
+                        </S.Status>
+                      )
+                    ) : (
+                      item[header.value]
+                    )}
+                  </S.CollapseSubTitle>
                 );
               })}
             </S.CollaspeRow>
 
             <S.CollapsePanel
               className={
-                isActive[idx] === `collapse-item-${idx}` ? 'active' : ''
+                isActive[idx] === `collapse-item-${item.id}` ? 'active' : ''
               }
               height={height}
             >

@@ -121,11 +121,19 @@ export const Input = styled.input<IInput>`
   }}
 `;
 
-export const ErrorText = styled.div`
+export const ErrorText = styled.div<{ helperAlign: string | undefined }>`
   color: ${({ theme }) => theme.color.error};
   position: absolute;
   margin-top: 0.5rem;
   margin-left: 0.5rem;
+
+  ${({ helperAlign }) =>
+    helperAlign
+      ? css`
+          width: 100%;
+          text-align: ${helperAlign};
+        `
+      : css``}
 `;
 
 export const NumberInputArea = styled.div`

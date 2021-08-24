@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as S from './style';
 
 export interface ITextarea {
@@ -28,9 +28,11 @@ const Textarea = ({
 }: ITextarea) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  if (error) {
-    textareaRef.current?.focus();
-  }
+  useEffect(() => {
+    if (error) {
+      textareaRef.current?.focus();
+    }
+  }, [error]);
 
   return (
     <S.TextareaWrapper>

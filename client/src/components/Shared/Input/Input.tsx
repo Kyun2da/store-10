@@ -9,6 +9,7 @@ export interface IInputLabel {
   label: 'Standard' | 'Filled' | 'Outlined';
   error?: boolean;
 }
+
 export interface IInput {
   type: 'text' | 'password' | 'number';
   label: 'Standard' | 'Filled' | 'Outlined';
@@ -19,6 +20,8 @@ export interface IInput {
   value?: string | number;
   error?: boolean;
   helperText?: string;
+  helperAlign?: string;
+  maxLength?: number;
   _ref?: React.RefObject<HTMLInputElement>;
   onFocus?: () => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -36,8 +39,10 @@ const Input = ({
   value,
   attributes,
   fullWidth,
+  maxLength,
   error,
   helperText,
+  helperAlign,
   _ref,
   onChange,
   onBlur,
@@ -83,6 +88,7 @@ const Input = ({
         name={name}
         ref={inputRef}
         value={value}
+        maxLength={maxLength}
         onChange={onChange}
         onKeyPress={onKeyPress}
         labelName={labelName}
@@ -96,7 +102,9 @@ const Input = ({
         onBlur={onBlurInput}
         {...attributes}
       />
-      {error ? <S.ErrorText>{helperText}</S.ErrorText> : null}
+      {error ? (
+        <S.ErrorText helperAlign={helperAlign}>{helperText}</S.ErrorText>
+      ) : null}
     </S.InputContainer>
   );
 };

@@ -9,11 +9,18 @@ const React = require('react');
 const { QueryClient, QueryClientProvider } = require('react-query');
 const { RecoilRoot } = require('recoil');
 
-initialize()
+initialize();
 const themes = [lightMode, darkMode];
-addDecorator(mswDecorator)
+addDecorator(mswDecorator);
 addDecorator(jsxDecorator);
 addDecorator(withThemesProvider(themes), ThemeProvider);
+
+import isChromatic from 'chromatic/isChromatic';
+
+if (isChromatic()) {
+  // The exact method to do this will depend on your animation techniques.
+  AnimationLibrary.disable = true;
+}
 
 const queryClient = new QueryClient();
 
@@ -39,4 +46,5 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  chromatic: { pauseAnimationAtEnd: true },
 };

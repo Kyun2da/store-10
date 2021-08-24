@@ -4,7 +4,7 @@ import { IOrder } from '@/types';
 import { useHistory } from '@/lib/Router';
 
 export const useGetOrder = (id: number) => {
-  return useQuery<IOrder, Error>('order', () => getOrder(id));
+  return useQuery<IOrder, Error>('order', () => getOrder(id), { retry: false });
 };
 
 export const usePostOrder = () => {

@@ -10,8 +10,11 @@ import {
   deleteProductReview,
   getProductQuestionById,
   getProductQuestionCountById,
+<<<<<<< HEAD
   getSearchProducts,
   getProductReviewsByUser,
+=======
+>>>>>>> af8634f37a816c9847a111c8798ea9ef3674d0a9
   postProductQuestion,
   getProductQuestionByUser,
 } from '@/lib/api/product';
@@ -91,12 +94,6 @@ export const useGetBestProducts = () => {
 
 export const useGetRecentProducts = () => {
   return useQuery<IProduct[], Error>('recentProduct', getRecentProducts);
-};
-
-export const useGetSearchProducts = (searchText: string) => {
-  return useQuery<IProduct[], Error>(['searchProducts', searchText], () =>
-    getSearchProducts(searchText)
-  );
 };
 
 export const useGetCateogries = () => {

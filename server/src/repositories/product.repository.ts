@@ -41,9 +41,14 @@ class ProductRepository extends Repository<Product> {
     });
   }
 
-  getProductsByTitle(searchText: string) {
+  getProductsByTitle({
+    searchText,
+    start,
+  }: Record<string, string>) {
     return this.createQueryBuilder('product')
       .orderBy('product.createdAt', 'DESC')
+      .limit(20)
+      .offset(+start)
       .innerJoinAndSelect('product.productImage', 'productImage')
       .where('product.title like :searchText', {
         searchText: `%${searchText}%`,

@@ -9,10 +9,8 @@ interface IProps {
   subCategoryId: number;
 }
 
-const CategoryProducts = ({ ...props }: IProps) => {
+const CategoryProducts = ({ subCategoryId }: IProps) => {
   const [start, setStart] = useState(0);
-  const subCategoryId = props.subCategoryId;
-
   const { ref, inView, data, isLoading, fetchNextPage } = useInfiniteScroll<
     IProduct[]
   >({
@@ -25,13 +23,6 @@ const CategoryProducts = ({ ...props }: IProps) => {
     },
   });
 
-  const getMore = useCallback(() => {
-    // 임시 조치
-    if (start < 60) {
-      setStart(start + 20);
-    }
-  }, [start]);
-
   useEffect(() => {
     if (start != 0) {
       fetchNextPage({
@@ -43,8 +34,9 @@ const CategoryProducts = ({ ...props }: IProps) => {
   }, [fetchNextPage, start]);
 
   useEffect(() => {
-    if (inView) getMore();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (inView && data?.pages[data.pages.length - 1].length == 20)
+      setStart(start + 20);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
   useEffect(() => {
@@ -57,18 +49,18 @@ const CategoryProducts = ({ ...props }: IProps) => {
   if (!data) return <div>nodata</div>;
 
   const renderCard = () => {
-    const MapData = new Map();
-    data.pages.flat().forEach((item) => MapData.set(item.id, item));
-    return Array.from(MapData, ([, value]) => value).map((item) => (
-      <Card
-        linkId={item.id}
-        key={item.id}
-        bgColor="primary"
-        src={item.productImage[0].url}
-        price={item.price}
-        title={item.title}
-      />
-    ));
+    return data.pages
+      .flat()
+      .map((item) => (
+        <Card
+          linkId={item.id}
+          key={item.id}
+          bgColor="primary"
+          src={item.productImage[0].url}
+          price={item.price}
+          title={item.title}
+        />
+      ));
   };
 
   return (

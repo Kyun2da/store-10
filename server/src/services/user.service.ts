@@ -8,6 +8,14 @@ class UserService {
     const _user = isUser ? { ...isUser, ...user } : user;
     return await userRepo.createUser(_user);
   }
+
+  async changeNickName(user: User, newNickName) {
+    const userRepo = UserRepository();
+    const foundUser = await userRepo.findUserById(user.user_id);
+    if (foundUser) {
+      return await userRepo.updateUserNickName(user, newNickName);
+    }
+  }
 }
 
 export default new UserService();

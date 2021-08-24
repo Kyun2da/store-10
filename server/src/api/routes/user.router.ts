@@ -6,6 +6,8 @@ import invalidRequest from '@/api/middlewares/invalid-request';
 import { checkUser } from '../middlewares/checkUser.middleware';
 import { createUserValidators } from '../middlewares/validation/user/createUser';
 import { checkUserValidators } from '../middlewares/validation/user/check';
+import authJWT from '../middlewares/auth.middleware';
+import { changeUserNickNameValidators } from '../middlewares/validation/user/changeUserNickName';
 
 const router = Router();
 router.post(
@@ -20,6 +22,13 @@ router.post(
   invalidRequest(...createUserValidators),
   checkUser,
   wrapAsync(UserController.createUser)
+);
+
+router.post(
+  '/nickname',
+  authJWT,
+  invalidRequest(...changeUserNickNameValidators),
+  wrapAsync(UserController.changeNickName)
 );
 
 export default router;

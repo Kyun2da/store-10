@@ -19,7 +19,7 @@ const useInfiniteScroll = <T extends unknown>({
 }: IInfinityScroll<T>) => {
   const { ref, inView } = useInView(inViewOption);
 
-  const { data, isLoading, isFetching,fetchNextPage, error, status } =
+  const { data, isLoading, isFetching, fetchNextPage, error, status, remove } =
     useInfiniteQuery<T>(
       key,
       () =>
@@ -40,6 +40,7 @@ const useInfiniteScroll = <T extends unknown>({
     error,
     status,
     ref,
+    remove,
   };
 };
 

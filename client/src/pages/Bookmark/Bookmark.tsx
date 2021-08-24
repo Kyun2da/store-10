@@ -2,14 +2,13 @@ import Card from '@/components/Card';
 import CardWrapper from '@/components/CardWrapper';
 import { notify } from '@/components/Shared/Toastify';
 import Thung from '@/components/Thung';
-import {
-  useDeleteDetailBookmark,
-  useGetDetailBookmarkProducts,
-} from '@/hooks/queries/bookmark';
+import { useDeleteDetailBookmark } from '@/hooks/queries/bookmark';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import { getDetailBookmarkProducts } from '@/lib/api/bookmark/getDetailBookmarkProducts';
 import { Redirect } from '@/lib/Router';
 import { userState } from '@/recoil/user';
 import { IBookmarkProduct } from '@/types';
-import React, { Dispatch, useCallback, useState } from 'react';
+import React, { Dispatch, useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import * as S from './style';
 
@@ -42,10 +41,46 @@ const renderProducts = (
 
 const Bookmark = () => {
   const [isEdit, setIsEdit] = useState(true);
-  const { isLoading, data } = useGetDetailBookmarkProducts();
   const { mutate } = useDeleteDetailBookmark();
   const [user] = useRecoilState(userState);
   const [checkedList, setCheckedList] = useState<number[]>([]);
+
+  const [start, setStart] = useState(0);
+
+  const { ref, inView, data, isLoading, fetchNextPage, remove } =
+    useInfiniteScroll<IBookmarkProduct[]>({
+      key: 'detailBookmarkedProduct',
+      fetchingFunction: getDetailBookmarkProducts,
+      fetchParams: {
+        start,
+        orderType: 'createdAt',
+      },
+    });
+
+  // unmount 됬을 때 데이터 초기화
+  useEffect(() => {
+    return () => {
+      remove();
+    };
+  }, [remove]);
+
+  // 다음 페이지
+  useEffect(() => {
+    if (start >= 8) {
+      fetchNextPage({
+        pageParam: {
+          start: start,
+        },
+      });
+    }
+  }, [fetchNextPage, start]);
+
+  useEffect(() => {
+    if (inView && data?.pages[data.pages.length - 1].length === 8) {
+      setStart(start + 8);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
 
   const toggleIsEdit = (val: boolean) => {
     setIsEdit(val);
@@ -60,13 +95,19 @@ const Bookmark = () => {
     }
   }, [checkedList, mutate]);
 
+  if (isLoading) {
+    return <div>loading</div>;
+  }
+
+  if (!data) return <div>nodata</div>;
+
   if (!user) return <Redirect to="/" />;
 
   return (
     <S.BookmarkContainer>
       <S.BookmarkTitle level={3}>찜 목록</S.BookmarkTitle>
       <S.ButtonContainer>
-        {data?.length ? (
+        {data?.pages[0].length ? (
           isEdit ? (
             <S.EditButton
               type="button"
@@ -103,16 +144,19 @@ const Bookmark = () => {
         ) : null}
       </S.ButtonContainer>
       <S.CardContainer>
-        {data?.length ? (
-          <CardWrapper col={4}>
-            {renderProducts(
-              isLoading,
-              data,
-              !isEdit,
-              setCheckedList,
-              checkedList
-            )}
-          </CardWrapper>
+        {data?.pages[0].length ? (
+          <>
+            <CardWrapper col={4}>
+              {renderProducts(
+                isLoading,
+                data.pages.flat(),
+                !isEdit,
+                setCheckedList,
+                checkedList
+              )}
+            </CardWrapper>
+            <div ref={ref}></div>
+          </>
         ) : (
           <Thung title="찜한 상품이 없습니다! 맘에 드는 상품을 찜해보세요." />
         )}

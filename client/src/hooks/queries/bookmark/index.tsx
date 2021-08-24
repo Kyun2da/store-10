@@ -4,10 +4,16 @@ import { deleteBookmark } from '@/lib/api/bookmark/deleteBookmark';
 import { getBookmarkProducts } from '@/lib/api/bookmark/getBookmarkProducts';
 import { getDetailBookmarkProducts } from '@/lib/api/bookmark/getDetailBookmarkProducts';
 import { IBookmarkProduct } from '@/types';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import {
+  InfiniteData,
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from 'react-query';
 
 export const useGetDetailBookmarkProducts = () => {
-  return useQuery<IBookmarkProduct[], Error>(
+  return useInfiniteQuery<IBookmarkProduct[], Error>(
     'detailBookmarkedProduct',
     getDetailBookmarkProducts
   );
@@ -55,9 +61,27 @@ export const useDeleteBookmark = () => {
 export const useDeleteDetailBookmark = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation(deleteBookmark, {
+    onMutate: async (deleteBookmark) => {
+      await queryClient.cancelQueries('detailBookmarkedProduct');
+      const previousBookmarks = queryClient.getQueryData(
+        'detailBookmarkedProduct'
+      );
+
+      queryClient.setQueryData<InfiniteData<IBookmarkProduct[]> | undefined>(
+        'detailBookmarkedProduct',
+        (old) => {
+          if (!old) return;
+          const { pages } = old;
+          const data = pages.map((page) =>
+            page.filter((pg) => !deleteBookmark.includes(pg.productId))
+          );
+          return { ...old, pages: data };
+        }
+      );
+      return { previousBookmarks };
+    },
     onSuccess: () => {
       notify('success', '해당 상품을 찜목록에서 삭제하였습니다.');
-      queryClient.invalidateQueries('detailBookmarkedProduct');
     },
     onError: () => {
       notify(

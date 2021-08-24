@@ -4,6 +4,7 @@ interface IModalWrapperProps {
   width?: string;
   height?: string;
   fullWidth?: boolean;
+  compact?: boolean;
 }
 
 export const ModalOverlay = styled.div`
@@ -19,6 +20,15 @@ export const ModalOverlay = styled.div`
   z-index: 9999999;
 `;
 
+export const ModalInner = styled.div`
+  position: relative;
+  display: flex;
+  flex: 1;
+  gap: 2rem;
+  flex-direction: column;
+  height: 100%;
+`;
+
 export const ModalWrapper = styled.div<IModalWrapperProps>`
   display: flex;
   flex-direction: column;
@@ -29,6 +39,24 @@ export const ModalWrapper = styled.div<IModalWrapperProps>`
   width: ${(props) => props.width || '65%'};
   height: ${(props) => props.height};
   min-height: 55%;
+
+  ${({ compact }) =>
+    compact
+      ? css`
+          padding: 0;
+          width: auto;
+          height: auto;
+          min-height: auto;
+          border-radius: 1rem;
+
+          ${ModalInner} {
+            gap: 0;
+            svg {
+              display: none;
+            }
+          }
+        `
+      : css``}
 
   ${({ fullWidth }) =>
     fullWidth
@@ -56,15 +84,6 @@ export const ModalWrapper = styled.div<IModalWrapperProps>`
           }
         `
       : css``};
-`;
-
-export const ModalInner = styled.div`
-  position: relative;
-  display: flex;
-  flex: 1;
-  gap: 2rem;
-  flex-direction: column;
-  height: 100%;
 `;
 
 export const ModalCloseButton = styled.button`

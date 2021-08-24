@@ -54,3 +54,33 @@ export const CheckboxWrapper = styled.div`
   ${({ theme }) => theme.fontWeight.m};
   gap: 2rem;
 `;
+
+export const DeleteModalHeader = styled.div`
+  padding: 1.5rem 3rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-color: ${({ theme }) => theme.color.error};
+  color: #fff;
+  ${({ theme }) => theme.fontSize.l};
+  ${({ theme }) => theme.fontWeight.l};
+`;
+
+export const DeleteModalButtonArea = styled.div`
+  display: flex;
+`;
+
+export const DeleteModalButton = styled.button`
+  padding: 2rem 0;
+  width: 50%;
+  cursor: pointer;
+  ${({ theme }) => theme.fontSize.m};
+  ${({ theme }) => theme.fontWeight.m};
+
+  & + & {
+    border-left: 1px solid ${({ theme }) => theme.color['border-gray']};
+  }
+
+  &:hover {
+    opacity: 0.75;
+  }
+`;

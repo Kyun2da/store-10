@@ -23,10 +23,6 @@ const CategoryProducts = ({ subCategoryId }: IProps) => {
     },
   });
 
-  const getMore = useCallback(() => {
-    setStart(start + 20);
-  }, [start]);
-
   useEffect(() => {
     if (start != 0) {
       fetchNextPage({
@@ -38,7 +34,8 @@ const CategoryProducts = ({ subCategoryId }: IProps) => {
   }, [fetchNextPage, start]);
 
   useEffect(() => {
-    if (inView && data?.pages[data.pages.length - 1].length == 20) getMore();
+    if (inView && data?.pages[data.pages.length - 1].length == 20)
+      setStart(start + 20);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 

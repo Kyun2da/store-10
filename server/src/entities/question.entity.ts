@@ -25,6 +25,8 @@ export class Question extends InitEntity {
   })
   @JoinColumn({ name: 'user_id' })
   user!: User;
+  @Column()
+  user_id!: number;
 
   @ManyToOne(() => Product, (type) => type.id, {
     nullable: false,

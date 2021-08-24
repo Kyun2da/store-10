@@ -30,6 +30,11 @@ router.get(
 
 // Question 조회 관련
 router.get(
+  '/question/user/:offset',
+  authJWT,
+  ProductController.getProductQuestionByUserId
+);
+router.get(
   '/question/count/:id',
   ProductController.getProductQuestionsCountById
 );

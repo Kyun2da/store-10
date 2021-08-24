@@ -142,8 +142,6 @@ class ProductController {
     const { id } = req.params;
     const count = await ProductService.getProductQuestionsCountById(id);
 
-    console.log(count);
-
     return ApiResponse(res, HttpStatusCode.OK, '해당 상품 문의 조회 성공', {
       count,
     });
@@ -181,10 +179,28 @@ class ProductController {
       return ApiResponse(
         res,
         HttpStatusCode.BAD_REQUEST,
-        '리뷰조회에서 에러가 발생했습니다.'
+        '리뷰 조회에서 에러가 발생했습니다.'
       );
     }
     return ApiResponse(res, HttpStatusCode.OK, '리뷰 조회 성공', result);
+  }
+
+  async getProductQuestionByUserId(req: Request, res: Response) {
+    const { offset } = req.params;
+    const user_id = req.user.id as number;
+    const result = await ProductService.getProductQuestionByUserId(
+      user_id,
+      offset
+    );
+
+    if (!result) {
+      return ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '문의 조회에서 에러가 발생했습니다.'
+      );
+    }
+    return ApiResponse(res, HttpStatusCode.OK, '문의 조회 성공', result);
   }
 
   async serchElasticProduct(req: Request, res: Response) {

@@ -80,6 +80,14 @@ class ProductService {
     return await productReviewRepo.findProductReviewByUserId(user_id, offset);
   }
 
+  async getProductQuestionByUserId(user_id: number, offset: string) {
+    const productQuestionRepo = ProductQuestionRepository();
+    return await productQuestionRepo.findProductQuestionByUserId(
+      user_id,
+      offset
+    );
+  }
+
   async getProductReviewRating(id: string) {
     const productReviewRepo = ProductReviewRepository();
     return await productReviewRepo.findProductRatingById(id);

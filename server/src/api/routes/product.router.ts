@@ -17,6 +17,7 @@ router.get('/', wrapAsync(ProductController.getProducts));
 router.get('/:id', wrapAsync(ProductController.getProductById));
 
 // Product-Review 조회 관련
+router.get('/review/:id', authJWT, ProductController.getSelectedReviewInfo);
 router.get(
   '/review/user/:offset',
   authJWT,
@@ -55,5 +56,8 @@ router.delete(
   authJWT,
   ProductController.deleteProductReviewById
 );
+
+// @@--- PUT 요청 ---@@ //
+router.put('/review/:id', authJWT, ProductController.updateProductReviewById);
 
 export default router;

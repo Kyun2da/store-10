@@ -97,6 +97,16 @@ class ProductService {
     return await productReviewRepo.findProductRatingCountById(id);
   }
 
+  async getProductReviewById(review_id: string) {
+    const productReviewRepo = ProductReviewRepository();
+    const productReviewImageRepo = ProductReviewImageRepository();
+    const review = await productReviewRepo.findSelectedReview(review_id);
+    const images = await productReviewImageRepo.findReviewImagesById(review.id);
+    const url = images.map((image) => image.url);
+
+    return { ...review, url };
+  }
+
   async createReview(review: Review) {
     const productReviewRepo = ProductReviewRepository();
     return await productReviewRepo.createProductReview(review);
@@ -174,10 +184,7 @@ class ProductService {
     return data;
   }
 
-  async searchProductTitle({
-    searchText,
-    start,
-  }: Record<string, string>) {
+  async searchProductTitle({ searchText, start }: Record<string, string>) {
     const productRepo = await ProductRepository().getProductsByTitle({
       searchText,
       start,

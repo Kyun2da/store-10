@@ -12,7 +12,7 @@ export class Question extends InitEntity {
   @Column({ type: 'text' })
   content: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   answer: string;
 
   @Column({ type: 'boolean' })

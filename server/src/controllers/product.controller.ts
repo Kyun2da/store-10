@@ -59,6 +59,22 @@ class ProductController {
     );
   }
 
+  async getSelectedReviewInfo(req: Request, res: Response) {
+    const { id } = req.params;
+    console.log(id);
+    const review = await ProductService.getProductReviewById(id);
+
+    if (!review) {
+      return ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '선택 상품에 대한 리뷰 조회 에러'
+      );
+    }
+
+    return ApiResponse(res, HttpStatusCode.OK, '선택한 리뷰 조회 성공', review);
+  }
+
   async postProductReviewById(req: Request, res: Response) {
     const files = req.files as Express.MulterS3.File[];
     const data = req.body;
@@ -129,7 +145,9 @@ class ProductController {
       ...data,
     };
 
-    await ProductService.updateReviewById(review);
+    console.log(review);
+
+    // await ProductService.updateReviewById(review);
 
     // THINK: 업데이트가 필요할 지 급의문..?! 그냥 삭제하고 다시 쓰는게 좋을지도
   }

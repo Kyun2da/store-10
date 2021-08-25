@@ -90,15 +90,16 @@ const ChangeUserInfo = () => {
   };
 
   return (
-    <S.AuthContainer>
+    <>
       {user?.is_oauth || isPasswordAuth ? (
         <div>
           <S.NickNameContainer>
+            <S.ContainerTitle>이름 변경</S.ContainerTitle>
             <Input
               type="text"
               label="Outlined"
               name="nickname"
-              labelName="닉네임"
+              labelName="이름"
               value={nickname}
               onChange={onChangeNickName}
             />
@@ -107,11 +108,12 @@ const ChangeUserInfo = () => {
               color="primary"
               onClick={onClickChangeNickName}
             >
-              닉네임 변경
+              이름 변경
             </Button>
           </S.NickNameContainer>
           {!user?.is_oauth && (
             <S.NewPasswordContainer>
+              <S.ContainerTitle>비밀번호 변경</S.ContainerTitle>
               <Input
                 type="password"
                 label="Outlined"
@@ -146,7 +148,7 @@ const ChangeUserInfo = () => {
           )}
         </div>
       ) : (
-        <>
+        <S.AuthContainer>
           <S.Information>
             회원정보 변경을 하려면 비밀번호 인증이 필요합니다.
           </S.Information>
@@ -163,9 +165,9 @@ const ChangeUserInfo = () => {
               확인
             </Button>
           </S.PasswordContainer>
-        </>
+        </S.AuthContainer>
       )}
-    </S.AuthContainer>
+    </>
   );
 };
 

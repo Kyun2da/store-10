@@ -78,39 +78,52 @@ const Card = ({
   return (
     <Link to={`/detail/${linkId}`}>
       <S.Card>
-        <S.Liner bgColor={bgColor} />
-        <S.ThumbnailWrapper>
-          {!checkBoxDisplay || (
-            <S.CardCheckbox
-              onChange={onChangeCheckbox}
-              checked={isChecked}
-              onClick={checkBoxOnClick}
-            />
-          )}
-          {discount && <S.NameTag>{discount}%</S.NameTag>}
-          <img src={src} alt="상품 섬네일 이미지" />
-          {!bottomDisplay || (
-            <S.BottomBar onClick={handleClick}>
-              <S.ButtonArea>
-                <HeartButton
-                  witdh={24}
-                  height={24}
-                  fill={isHeartChecked ? 'red' : 'none'}
-                  onClick={heartBtnOnClick}
-                />
-              </S.ButtonArea>
-              <S.ButtonArea>
-                <ShoppingCart witdh={24} height={24} />
-              </S.ButtonArea>
-            </S.BottomBar>
-          )}
-        </S.ThumbnailWrapper>
-
+        <div>
+          <S.Liner bgColor={bgColor} />
+          <S.ThumbnailWrapper>
+            {!checkBoxDisplay || (
+              <S.CardCheckbox
+                onChange={onChangeCheckbox}
+                checked={isChecked}
+                onClick={checkBoxOnClick}
+              />
+            )}
+            {discount ? <S.NameTag>{discount}%</S.NameTag> : ''}
+            <img src={src} alt="상품 섬네일 이미지" />
+            {!bottomDisplay || (
+              <S.BottomBar onClick={handleClick}>
+                <S.ButtonArea>
+                  <HeartButton
+                    witdh={24}
+                    height={24}
+                    fill={isHeartChecked ? 'red' : 'none'}
+                    onClick={heartBtnOnClick}
+                  />
+                </S.ButtonArea>
+                <S.ButtonArea>
+                  <ShoppingCart witdh={24} height={24} />
+                </S.ButtonArea>
+              </S.BottomBar>
+            )}
+            <p className="title">{title}</p>
+          </S.ThumbnailWrapper>
+        </div>
         <S.ProductDetails>
-          <p className="title">{title}</p>
-          {!bottomDisplay || (
-            <span className="price-tag">{wonFormat(price)}</span>
-          )}
+          {!bottomDisplay ||
+            (discount ? (
+              <>
+                <div className="price-tag strikethrough">
+                  {wonFormat(price)}
+                </div>
+                <div className="price-tag discount">
+                  {wonFormat(
+                    price - Math.floor((price * (discount / 100)) / 10) * 10
+                  )}
+                </div>
+              </>
+            ) : (
+              <div className="price-tag">{wonFormat(price)}</div>
+            ))}
         </S.ProductDetails>
       </S.Card>
     </Link>

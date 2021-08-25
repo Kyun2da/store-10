@@ -3,6 +3,8 @@ import Checkbox from '../Shared/Checkbox';
 
 export const Card = styled.li`
   display: flex;
+  justify-content: space-between;
+  height: 100%;
   flex-direction: column;
   color: ${({ theme }) => theme.color['text-color']};
   overflow: hidden;
@@ -85,6 +87,22 @@ export const ThumbnailWrapper = styled.div`
   &:hover ${BottomBar} {
     display: flex;
   }
+
+  .title {
+    ${({ theme }) => theme.fontSize.m};
+    ${({ theme }) => theme.fontWeight.s};
+    display: inline-block;
+    width: 22rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1em;
+    max-height: 2em;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+  }
 `;
 
 export const ButtonArea = styled.div`
@@ -101,22 +119,18 @@ export const ProductDetails = styled.div`
   cursor: pointer;
   ${({ theme }) => theme.fontSize.s}
 
-  .title {
-    ${({ theme }) => theme.fontSize.m};
-    ${({ theme }) => theme.fontWeight.s};
-    display: inline-block;
-    width: 22rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    margin-bottom: 0.5rem;
-    margin-left: 1rem;
-  }
-
   .price-tag {
     ${({ theme }) => theme.fontSize.m};
     ${({ theme }) => theme.fontWeight.l};
     margin-left: 1rem;
+
+    &.strikethrough {
+      text-decoration: line-through;
+      color: ${({ theme }) => theme.color['text-color']}55;
+      margin-bottom: 0.5rem;
+    }
+    &.discount {
+      color: ${({ theme }) => theme.color['error']};
+    }
   }
 `;

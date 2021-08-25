@@ -3,7 +3,6 @@ import { validatePassword } from '@/utils/validate';
 
 export const createUserValidators = [
   body('user_id')
-    .normalizeEmail()
     .isEmail()
     .withMessage('body: user_id가 이메일 형식이 아닙니다.'),
   body('password')

@@ -101,6 +101,11 @@ export const TotalPrice = styled.div`
 
 export const ItemInfoName = styled.span`
   ${({ theme }) => theme.fontSize.m};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 `;
 export const ItemInfoPrice = styled.span`
   ${({ theme }) => theme.fontSize.s};

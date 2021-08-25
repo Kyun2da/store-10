@@ -52,15 +52,15 @@ export const getProductSelectedQuestion = async (id: number) => {
 };
 
 export const getRecommandProducts = async () => {
-  return await client.get<IProduct[]>(`/product/recommand?limit=8`);
+  return await client.get<IProduct[]>(`/product/recommand?limit=12`);
 };
 
 export const getRecentProducts = async () => {
-  return await client.get<IProduct[]>(`/product?limit=8`);
+  return await client.get<IProduct[]>(`/product?limit=12`);
 };
 
 export const getBestProducts = async () => {
-  return await client.get<IProduct[]>(`/product/best?limit=8`);
+  return await client.get<IProduct[]>(`/product/best?limit=12`);
 };
 
 export const getElasticProducts = async (searchString: string) => {

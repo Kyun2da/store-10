@@ -47,6 +47,10 @@ export const getProductSelectedReview = async (id: number) => {
   return await client.get<IProductReview>(`/product/review/${id}`);
 };
 
+export const getProductSelectedQuestion = async (id: number) => {
+  return await client.get<IProductQuestion>(`/product/question/${id}`);
+};
+
 export const getRecommandProducts = async () => {
   return await client.get<IProduct[]>(`/product/recommand?limit=8`);
 };

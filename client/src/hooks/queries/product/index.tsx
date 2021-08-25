@@ -32,6 +32,7 @@ import {
   IMyQuestion,
 } from '@/types/index';
 import { notify } from '@/components/Shared/Toastify';
+import { getProductSelectedQuestion } from './../../../lib/api/product/index';
 
 export const useGetProductById = (id: string) => {
   return useQuery<IProductDetail, Error>(
@@ -68,6 +69,12 @@ export const useGetProductQuestionsByUser = (offset: number) => {
 export const useGetSelectedReviewById = (id: number) => {
   return useQuery<IProductReview, Error>(['selectedReview', id], () =>
     getProductSelectedReview(id)
+  );
+};
+
+export const useGetSelectedQuestionById = (id: number) => {
+  return useQuery<IProductQuestion, Error>(['selectedQuestion', id], () =>
+    getProductSelectedQuestion(id)
   );
 };
 

@@ -16,12 +16,13 @@ interface ISShoppingCartSummaryProps {
 
 const ShoppingCartSummary = ({
   totalPrice,
-  deliveryFee = 2500,
   discount = 0,
   productCount,
   disabled,
   checkedItems,
 }: ISShoppingCartSummaryProps) => {
+  // TODO: 배송비 동적으로..?
+  const deliveryFee = disabled ? 0 : 2500;
   const sum = totalPrice + deliveryFee - discount;
   const { mutate } = usePostOrder();
   const buyButtonOnClick = useCallback(() => {
@@ -43,7 +44,10 @@ const ShoppingCartSummary = ({
         </S.ShoppingCartSummaryRow>
         <S.ShoppingCartSummaryRow>
           <dt>총 배송비</dt>
-          <dd>+ {wonFormat(deliveryFee)}</dd>
+          <dd>
+            {!disabled && '+'}
+            {disabled ? wonFormat(0) : wonFormat(deliveryFee)}
+          </dd>
         </S.ShoppingCartSummaryRow>
         <S.ShoppingCartSummaryRow>
           <dt>총 할인금액</dt>

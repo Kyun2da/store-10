@@ -5,7 +5,7 @@ import HttpStatusCode from '@/types/statusCode';
 
 class AddressController {
   async getAddreses(req: Request, res: Response) {
-    const userId = req.user?.id || 4;
+    const userId = req.user?.id;
     const result = await AddressService.getAddresses(userId);
 
     return ApiResponse(res, HttpStatusCode.OK, '성공!', result);
@@ -13,7 +13,7 @@ class AddressController {
 
   async deleteAddress(req: Request, res: Response) {
     const { id } = req.params;
-    const userId = req.user?.id || 4;
+    const userId = req.user?.id;
     const result = await AddressService.deleteAddress({ id, userId });
 
     if (result?.affected >= 1) {
@@ -26,7 +26,7 @@ class AddressController {
   async createAddress(req: Request, res: Response) {
     const { name, postcode, address, detailAddress, phone, isDefault } =
       req.body;
-    const userId = req.user?.id || 4;
+    const userId = req.user?.id;
     const result = await AddressService.createAddress({
       name,
       postcode,
@@ -47,7 +47,7 @@ class AddressController {
   async updateAddress(req: Request, res: Response) {
     const { name, postcode, address, detailAddress, phone, isDefault, id } =
       req.body;
-    const userId = req.user?.id || 4;
+    const userId = req.user?.id;
 
     const result = await AddressService.updateAddress({
       id,
@@ -68,7 +68,7 @@ class AddressController {
   }
 
   async getDefaultAddress(req: Request, res: Response) {
-    const userId = req.user?.id || 4;
+    const userId = req.user?.id;
     const result = await AddressService.getDefaultAddress(userId);
 
     ApiResponse(res, HttpStatusCode.OK, '기본 배송지 조회 성공', result);

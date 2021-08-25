@@ -2,11 +2,10 @@ import OrderService from '@/services/order.service';
 import { Request, Response } from 'express';
 import HttpStatusCode from '@/types/statusCode';
 import ApiResponse from '@/api/middlewares/response-format';
-import { createImportSpecifier } from 'typescript';
 
 class OrderController {
   async createOrder(req: Request, res: Response) {
-    const userId = req.user?.id || 4;
+    const userId = req.user?.id;
     const { status, products, addressId, deliveryRequestMessage } = req.body;
     const result = await OrderService.createOrder({
       user_id: userId,
@@ -25,7 +24,7 @@ class OrderController {
 
   async getOrder(req: Request, res: Response) {
     const { id } = req.params;
-    const userId = req.user?.id || 4;
+    const userId = req.user?.id;
 
     const result = await OrderService.getOrder({
       user_id: userId,
@@ -41,7 +40,7 @@ class OrderController {
 
   async getOrders(req: Request, res: Response) {
     const { month_ago, year } = req.query;
-    const userId = req.user?.id || 4;
+    const userId = req.user?.id;
     const result = await OrderService.getOrders({
       user_id: userId,
       year,
@@ -52,7 +51,7 @@ class OrderController {
 
   async updateOrder(req: Request, res: Response) {
     const { order, updateDefaultAddress } = req.body;
-    const userId = req.user?.id || 4;
+    const userId = req.user?.id;
     const result = await OrderService.updateOrder({
       user_id: userId,
       order,

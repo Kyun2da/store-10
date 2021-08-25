@@ -10,6 +10,7 @@ import { userState } from '@/recoil/user';
 import { IBookmarkProduct } from '@/types';
 import React, { Dispatch, useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import Loading from '@/components/Shared/Loading';
 import * as S from './style';
 
 const renderProducts = (
@@ -95,13 +96,13 @@ const Bookmark = () => {
     }
   }, [checkedList, mutate]);
 
+  if (!user) return <Redirect to="/login" />;
+
   if (isLoading) {
-    return <div>loading</div>;
+    return <Loading />;
   }
 
   if (!data) return <div>nodata</div>;
-
-  if (!user) return <Redirect to="/" />;
 
   return (
     <S.BookmarkContainer>
@@ -146,7 +147,7 @@ const Bookmark = () => {
       <S.CardContainer>
         {data?.pages[0].length ? (
           <>
-            <CardWrapper >
+            <CardWrapper>
               {renderProducts(
                 isLoading,
                 data.pages.flat(),

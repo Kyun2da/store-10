@@ -1,7 +1,6 @@
 import { body } from 'express-validator';
 import { validatePhone, validatePostcode } from '@/utils/validate';
 
-// TODO: 폴더명 변경?
 export default [
   body('name').notEmpty().withMessage('body: name이 존재하지 않습니다'),
   body('postcode')

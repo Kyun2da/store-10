@@ -7,6 +7,7 @@ import {
 import { Link } from '@/lib/Router';
 import { calculateDiscount, wonFormat } from '@/utils/helper';
 import { useAddBookmark, useDeleteBookmark } from '@/hooks/queries/bookmark';
+import { usePostCart } from '@/hooks/queries/cart';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import { notify } from '../Shared/Toastify';
@@ -48,6 +49,7 @@ const Card = ({
 }: CardProps) => {
   const { mutate: addMutate } = useAddBookmark();
   const { mutate: deleteMutate } = useDeleteBookmark();
+  const { mutate: addcartMutate } = usePostCart();
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -83,6 +85,17 @@ const Card = ({
     }
   }, [addMutate, deleteMutate, isHeartChecked, linkId, user]);
 
+  const cartBtnOnClick = useCallback(() => {
+    if (!user) {
+      notify('error', '로그인이 필요합니다!');
+      return;
+    }
+    addcartMutate({
+      count: 1,
+      productId: String(linkId),
+    });
+  }, [user, linkId, addcartMutate]);
+
   return (
     <Link to={`/detail/${linkId}`}>
       <S.Card>
@@ -109,7 +122,11 @@ const Card = ({
                   />
                 </S.ButtonArea>
                 <S.ButtonArea>
-                  <ShoppingCart witdh={24} height={24} />
+                  <ShoppingCart
+                    witdh={24}
+                    height={24}
+                    onClick={cartBtnOnClick}
+                  />
                 </S.ButtonArea>
               </S.BottomBar>
             )}

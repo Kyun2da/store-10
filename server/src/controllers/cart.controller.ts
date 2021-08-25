@@ -7,14 +7,14 @@ import ApiResponse from '@/api/middlewares/response-format';
 class CartController {
   async createOrUpdateCart(req: Request, res: Response) {
     const { productId, count } = req.body;
-    const userId = req.user?.id || 4;
+    const userId = req.user?.id;
     await CartService.createOrUpdateCart({ productId, userId, count });
 
     ApiResponse(res, HttpStatusCode.NO_CONTENT, '장바구니 추가 성공');
   }
 
   async getCarts(req: Request, res: Response) {
-    const userId = req.user?.id || 4;
+    const userId = req.user?.id;
     const carts = await CartService.getCarts(userId);
 
     ApiResponse(res, HttpStatusCode.OK, '해당 상품 조회 성공', carts);
@@ -22,7 +22,7 @@ class CartController {
 
   async deleteCart(req: Request, res: Response) {
     const { productIds } = req.query;
-    const userId = req.user?.id || 4;
+    const userId = req.user?.id;
     await CartService.deleteCart({
       userId,
       productIds: JSON.parse(productIds as string),

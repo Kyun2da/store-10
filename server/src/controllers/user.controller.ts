@@ -71,7 +71,7 @@ class UserController {
   }
 
   async getCoupons(req: Request, res: Response) {
-    const user_id = req.user?.id || 4;
+    const user_id = req.user?.id;
     const result = await userService.getCoupons(user_id);
 
     ApiResponse(
@@ -83,7 +83,7 @@ class UserController {
   }
 
   async useCoupon(req: Request, res: Response) {
-    const user_id = req.user?.id || 4;
+    const user_id = req.user?.id;
     const { userCouponId } = req.body;
     const result = await userService.useCoupon({ user_id, id: userCouponId });
 
@@ -95,7 +95,7 @@ class UserController {
   }
 
   async registerCoupon(req: Request, res: Response) {
-    const user_id = req.user?.id || 4;
+    const user_id = req.user?.id;
     const { coupon } = req.body;
     const result = await userService.registerCoupon({
       couponToken: coupon,

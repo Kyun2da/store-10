@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ShoppingCart = styled.div`
+  max-width: ${({ theme }) => theme.media.pc}px;
   display: flex;
   width: 100%;
   padding-top: 6rem;

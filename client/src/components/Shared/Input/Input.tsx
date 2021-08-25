@@ -19,6 +19,7 @@ export interface IInput {
   attributes?: Record<string, unknown>;
   value?: string | number;
   error?: boolean;
+  autoComplete?: string;
   helperText?: string;
   helperAlign?: string;
   maxLength?: number;
@@ -37,6 +38,7 @@ const Input = ({
   name,
   placeholder,
   value,
+  autoComplete,
   attributes,
   fullWidth,
   maxLength,
@@ -64,6 +66,7 @@ const Input = ({
       setFocus((value) => !value);
     }
   };
+  const isLabelFocusing = String(value).length > 0;
 
   return (
     <S.InputContainer
@@ -72,7 +75,7 @@ const Input = ({
     >
       {labelName ? (
         <S.Label
-          className={isFocus ? 'focusing' : ''}
+          className={isLabelFocusing || isFocus ? 'focusing' : ''}
           onClick={onClickLabel}
           label={label}
           error={error}
@@ -81,6 +84,7 @@ const Input = ({
         </S.Label>
       ) : null}
       <S.Input
+        autoComplete={autoComplete}
         type={type}
         label={label}
         className={isFocus ? 'focusing' : ''}

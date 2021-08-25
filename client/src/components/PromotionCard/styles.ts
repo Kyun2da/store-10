@@ -5,6 +5,10 @@ export const PromotionWrap = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
+
+  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const PromotionCard = styled.div`
@@ -12,7 +16,6 @@ export const PromotionCard = styled.div`
   position: relative;
   display: grid;
   align-items: center;
-  max-height: 250px;
   justify-content: flex-end;
   border-radius: 1rem;
   cursor: pointer;
@@ -34,21 +37,25 @@ export const PromotionCard = styled.div`
 `;
 
 export const PromotionText = styled.div`
-  height: 250px;
-  max-width: 200px;
-  width: 200px;
-  margin-right: 2rem;
+  height: 25rem;
+  margin-right: clamp(2rem, 5vw, 6rem);
   position: relative;
   pointer-events: none;
   display: grid;
+  font-size: clamp(10px, 3vw, 2.5rem);
+  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
+    font-size: clamp(10px, 4vw, 3rem);
+    height: 10em;
+    width: 9em;
+  }
 `;
 export const PromotionTitle = styled.div`
-  font-size: 3rem;
+  font-size: 1em;
   font-family: BMDOHYEON;
   align-self: end;
   pointer-events: none;
 `;
 export const PromotionContent = styled.div`
-  font-size: 2rem;
+  font-size: 0.8em;
   pointer-events: none;
 `;

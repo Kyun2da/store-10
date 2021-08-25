@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import MyQuestions from '.';
 
 export default {
-  title: '컴포넌트/마이페이지 리뷰탭',
+  title: '컴포넌트/마이페이지/문의탭',
   component: MyQuestions,
 } as ComponentMeta<typeof MyQuestions>;
 

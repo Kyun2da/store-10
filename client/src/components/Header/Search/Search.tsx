@@ -68,6 +68,7 @@ const Search = ({ toggleOpen }: IProps) => {
           <S.SearchInputWrap>
             <S.SearchInput
               onChange={inputChangeHandler}
+              autoComplete={'off'}
               onKeyPress={inputKeypressHandler}
               type="text"
               label="Standard"

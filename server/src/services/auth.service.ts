@@ -20,8 +20,8 @@ class AuthService {
     if (user && user.password && !user.is_oauth) {
       const passwordCheck = await bcrypt.compareSync(password, user.password);
       if (passwordCheck) {
-        const { name, id, refreshToken } = user;
-        return { name, id, refreshToken };
+        const { name, id, refreshToken, is_oauth } = user;
+        return { name, id, refreshToken, is_oauth };
       }
       return { passwordError: true };
     }

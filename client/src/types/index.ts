@@ -12,6 +12,7 @@ export interface IUser {
   id: number;
   user_id: string;
   name: string;
+  is_oauth: boolean;
 }
 
 export interface IProductImage {
@@ -143,6 +144,7 @@ export interface ILoginUser {
 export interface ISearchData {
   id: number;
   price: number;
+  discount: number;
   image: string;
   title: string;
 }

@@ -1,9 +1,8 @@
-import { wonFormat } from '@/utils/helper';
 import { ISearchData } from '@/types';
 import React from 'react';
 import * as S from './style';
-import { useHistory } from '@/lib/Router';
 import { useCallback } from 'react';
+import Card from '@/components/Card';
 
 type Prop = {
   searchValue: string;
@@ -16,15 +15,25 @@ type Prop = {
 const SearchItem = ({ ...props }: Prop) => {
   const { searchValue, toggleOpen, addRecentSearch, recentItems, searchData } =
     props;
-  const { historyPush } = useHistory();
-  const selectItem = useCallback(
-    (id: number) => {
-      toggleOpen();
-      addRecentSearch(searchValue);
-      historyPush(`/detail/${id}`);
-    },
-    [searchValue]
-  );
+
+  const selectItem = useCallback(() => {
+    toggleOpen();
+    addRecentSearch(searchValue);
+  }, [addRecentSearch, searchValue, toggleOpen]);
+
+  const renderProducts = () =>
+    searchData.map((product: ISearchData) => (
+      <div key={'search_' + product.id} onClick={selectItem}>
+        <Card
+          linkId={product.id}
+          discount={product.discount}
+          bgColor="primary"
+          src={product.image}
+          price={product.price}
+          title={product.title}
+        />
+      </div>
+    ));
 
   return (
     <>
@@ -32,23 +41,7 @@ const SearchItem = ({ ...props }: Prop) => {
         <>
           <S.RecentTitle>Elastic Search</S.RecentTitle>
           {searchData && (
-            <S.SearchItemWrap>
-              <S.SearchItemWrapper>
-                {searchData.map((item, _) => (
-                  <S.SearchItemList key={'search_' + item['id']}>
-                    <S.SearchItem onClick={() => selectItem(item['id'])}>
-                      <img src={item['image']} alt="search_image" />
-                      <S.SearchItemInfo>
-                        <S.SearchItemTitle>{item['title']}</S.SearchItemTitle>
-                        <S.SearchItemPrice>
-                          {wonFormat(item['price'])}
-                        </S.SearchItemPrice>
-                      </S.SearchItemInfo>
-                    </S.SearchItem>
-                  </S.SearchItemList>
-                ))}
-              </S.SearchItemWrapper>
-            </S.SearchItemWrap>
+            <S.SearchItemWrapper>{renderProducts()}</S.SearchItemWrapper>
           )}
         </>
       ) : (

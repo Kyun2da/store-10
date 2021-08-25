@@ -3,6 +3,7 @@ export const MY_PAGE_NAVIGATIONS = [
   { value: 'coupon', name: '쿠폰' },
   { value: 'inqurey', name: '상품 문의' },
   { value: 'review', name: '상품 후기' },
+  { value: 'changeUserInfo', name: '회원정보 변경' },
 ];
 
 export const FRUSTRATE_IMG =

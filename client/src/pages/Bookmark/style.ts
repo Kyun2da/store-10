@@ -3,6 +3,7 @@ import Title from '@/components/Shared/Title';
 import Button from '@/components/Shared/Button';
 
 export const BookmarkContainer = styled.div`
+  max-width: ${({ theme }) => theme.media.pc}px;
   display: flex;
   flex-direction: column;
   max-width: 1050px;

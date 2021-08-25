@@ -2,6 +2,7 @@ import Checkbox from '@/components/Shared/Checkbox';
 import styled from 'styled-components';
 
 export const ApprovalContainer = styled.div`
+  max-width: ${({ theme }) => theme.media.pc}px;
   display: flex;
   width: 60rem;
   flex-direction: column;

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const SearchContents = styled.div`
   z-index: 502;
   width: 100%;
-  max-width: 1050px;
+  max-width: ${({ theme }) => theme.media.pc}px;
   left: 50%;
   bottom: 0%;
   border-top-right-radius: 2rem;

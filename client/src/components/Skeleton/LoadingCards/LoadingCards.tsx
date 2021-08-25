@@ -4,7 +4,6 @@ import CardSkeleton from '../CardSkeleton';
 import { nanoid } from 'nanoid';
 
 interface ILoadingCards {
-  col: number;
   skeletonNum: number;
   showSkeleton: boolean;
   component: React.ReactNode;
@@ -25,13 +24,12 @@ const Skeletons = ({ skeletonNum }: ISkeletons) => {
 };
 
 const LoadingCards = ({
-  col,
   skeletonNum,
   showSkeleton,
   component,
 }: ILoadingCards) => {
   return (
-    <CardWrapper col={col}>
+    <CardWrapper>
       {showSkeleton ? <Skeletons skeletonNum={skeletonNum} /> : component}
     </CardWrapper>
   );

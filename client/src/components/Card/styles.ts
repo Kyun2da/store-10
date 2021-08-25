@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Checkbox from '../Shared/Checkbox';
+import { BG_COLOR } from './Card';
 
 export const Card = styled.li`
   display: flex;
@@ -7,14 +8,14 @@ export const Card = styled.li`
   height: 100%;
   flex-direction: column;
   color: ${({ theme }) => theme.color['text-color']};
+  background: ${({ theme }) => theme.color['background']};
   overflow: hidden;
   border-radius: 0.5rem;
   transition: transform 0.12s ease-in;
 
-  border: 1px solid #ccd3d3;
   /* Elevation1 */
 
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 5px ${({ theme }) => theme.color['label']};
   border-radius: 10px;
 
   &:hover {
@@ -23,7 +24,7 @@ export const Card = styled.li`
 `;
 
 interface LinerProps {
-  bgColor: 'primary' | 'error';
+  bgColor: BG_COLOR;
 }
 
 export const Liner = styled.div<LinerProps>`
@@ -71,6 +72,9 @@ export const NameTag = styled.div`
 export const ThumbnailWrapper = styled.div`
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  ${({ theme }) => theme.fontSize.s};
 
   img {
     width: 100%;
@@ -87,21 +91,15 @@ export const ThumbnailWrapper = styled.div`
   &:hover ${BottomBar} {
     display: flex;
   }
-
   .title {
-    ${({ theme }) => theme.fontSize.m};
+    font-size: clamp(10px, 3vw, 1.2em);
     ${({ theme }) => theme.fontWeight.s};
-    display: inline-block;
-    width: 22rem;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1em;
-    max-height: 2em;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-    margin-top: 0.5rem;
-    margin-left: 1rem;
+    margin: 0.8rem 0.8rem 0 0.8rem;
   }
 `;
 
@@ -115,21 +113,22 @@ export const ButtonArea = styled.div`
 `;
 
 export const ProductDetails = styled.div`
-  padding: 1rem 0;
   cursor: pointer;
-  ${({ theme }) => theme.fontSize.s}
+  ${({ theme }) => theme.fontSize.m};
 
   .price-tag {
-    ${({ theme }) => theme.fontSize.m};
     ${({ theme }) => theme.fontWeight.l};
-    margin-left: 1rem;
+    font-size: clamp(10px, 3vw, 1em);
+    margin: 0.5rem 0.8rem 0.8rem 0.8rem;
 
     &.strikethrough {
+      margin: 0.5rem 0.8rem 0 0.8rem;
+      font-size: clamp(10px, 3vw, 0.9em);
       text-decoration: line-through;
       color: ${({ theme }) => theme.color['text-color']}55;
-      margin-bottom: 0.5rem;
     }
     &.discount {
+      font-size: clamp(10px, 3.5vw, 1em);
       color: ${({ theme }) => theme.color['error']};
     }
   }

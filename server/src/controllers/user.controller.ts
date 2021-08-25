@@ -10,11 +10,11 @@ class UserController {
     const data = req.body;
 
     const refreshToken = jwtService.refresh();
-    const { user_id, name, id } = await UserRepository().createUser({
+    const { user_id, name, id, is_oauth } = await UserRepository().createUser({
       ...data,
       refreshToken,
     });
-    const accessToken = jwtService.generate({ user_id, name, id });
+    const accessToken = jwtService.generate({ user_id, name, id, is_oauth });
 
     res.cookie('refreshToken', refreshToken, { path: '/', httpOnly: true });
     res.cookie('accessToken', accessToken, { path: '/', httpOnly: true });

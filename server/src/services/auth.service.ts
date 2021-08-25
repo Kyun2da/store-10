@@ -15,7 +15,7 @@ class AuthService {
     return { user_id, name: name ?? user_id };
   }
 
-  async Login(userID: string, password: string) {
+  async checkPassword(userID: string, password: string) {
     const user = await UserRepository().findUserById(userID);
     if (user && user.password && !user.is_oauth) {
       const passwordCheck = await bcrypt.compareSync(password, user.password);

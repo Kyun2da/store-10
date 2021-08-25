@@ -2,24 +2,41 @@ import { Router } from 'express';
 
 import UserController from '@/controllers/user.controller';
 import wrapAsync from '@/utils/wrapAsync';
-import UserCheckRequest from '@/dtos/user/check';
 import invalidRequest from '@/api/middlewares/invalid-request';
-import CreateUserRequest from '@/dtos/user/createUser';
 import { checkUser } from '../middlewares/checkUser.middleware';
+import { createUserValidators } from '../middlewares/validation/user/createUser';
+import { checkUserValidators } from '../middlewares/validation/user/check';
+import authJWT from '../middlewares/auth.middleware';
+import { changeUserNickNameValidators } from '../middlewares/validation/user/changeUserNickName';
+import { changeUserPasswordValidators } from '../middlewares/validation/user/changePassword';
 
 const router = Router();
 router.post(
   '/check',
-  invalidRequest(...UserCheckRequest.validators),
+  invalidRequest(...checkUserValidators),
   checkUser,
   wrapAsync(UserController.checkUserEmail)
 );
 
 router.post(
   '/',
-  invalidRequest(...CreateUserRequest.validators),
+  invalidRequest(...createUserValidators),
   checkUser,
   wrapAsync(UserController.createUser)
+);
+
+router.post(
+  '/nickname',
+  authJWT,
+  invalidRequest(...changeUserNickNameValidators),
+  wrapAsync(UserController.changeNickName)
+);
+
+router.post(
+  '/password',
+  authJWT,
+  invalidRequest(...changeUserPasswordValidators),
+  wrapAsync(UserController.changePassword)
 );
 
 export default router;

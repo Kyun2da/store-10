@@ -1,4 +1,11 @@
-import { Entity, Column, OneToMany, Unique, BeforeInsert } from 'typeorm';
+import {
+  Entity,
+  Column,
+  OneToMany,
+  Unique,
+  BeforeInsert,
+  BeforeUpdate,
+} from 'typeorm';
 import { Address } from './address.entity';
 import bcrypt from 'bcrypt-nodejs';
 import { Question } from './question.entity';

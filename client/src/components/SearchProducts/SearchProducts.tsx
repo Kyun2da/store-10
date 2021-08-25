@@ -1,7 +1,7 @@
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getSearchProducts } from '@/lib/api/product';
 import { IProduct } from '@/types';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Card from '../Card';
 import CardWrapper from '../CardWrapper';
 import * as S from './styles';
@@ -60,7 +60,6 @@ const SearchProducts = ({ ...props }: IProps) => {
         <Card
           linkId={item.id}
           key={item.id}
-          discount={item.discount}
           bgColor="primary"
           src={item.productImage[0].url}
           price={item.price}

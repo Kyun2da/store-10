@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './styles';
 import { wonFormat } from '@/utils/helper';
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
+import Checkbox from '@/components/Shared/Checkbox';
 
 interface IProps {
   totalPrice: number;
@@ -19,6 +20,7 @@ const OrderSummary = ({
   productCount,
   updateOrder,
 }: IProps) => {
+  const [agree, setAgree] = useState(false);
   const sum = totalPrice + deliveryFee - discount;
   return (
     <S.OrderSummaryWrapper>
@@ -45,9 +47,26 @@ const OrderSummary = ({
           <dt>최종 결제 금액</dt>
           <dd>{wonFormat(sum)}</dd>
         </S.OrderSummaryRow>
+        <S.Divider />
+        <S.OrderSummaryFooter>
+          <Checkbox
+            label="아래 내용에 모두 동의합니다. (필수)"
+            checked={agree}
+            onChange={(e) => setAgree(e.currentTarget.checked)}
+          />
+          <S.OrderAgreementWrapper>
+            <S.OrderAgreement>
+              · 본인은 만 14세 이상이며, 주문 내용을 확인하였습니다.
+            </S.OrderAgreement>
+            <S.OrderAgreement>
+              · 사실, 개인정보를 수집 및 이용하는 법을 모릅니다.
+            </S.OrderAgreement>
+          </S.OrderAgreementWrapper>
+        </S.OrderSummaryFooter>
       </S.OrderSummary>
       <Button
         type="button"
+        disabled={!agree}
         color="primary"
         onClick={() => {
           updateOrder();

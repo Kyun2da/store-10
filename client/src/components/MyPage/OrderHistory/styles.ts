@@ -80,15 +80,3 @@ export const OrderHistoryBody = styled.div`
   width: 100%;
   height: 100%;
 `;
-
-export const EmptyWrapper = styled.div`
-  width: 80%;
-  height: 80%;
-  font-family: BMDOHYEON;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-  text-align: center;
-  margin: 0 auto;
-`;

@@ -75,6 +75,7 @@ class OrderRepository extends Repository<Order> {
         status: Not('created'),
         createdAt: Between(startDate, endDate),
       },
+      order: { createdAt: 'DESC' },
       relations: ['products', 'products.productImage'],
     });
   }

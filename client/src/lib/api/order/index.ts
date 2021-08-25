@@ -13,6 +13,6 @@ export const getOrders = async (year: number | null) => {
   return await client.get<IOrder[]>(`/order${year ? `?year=${year}` : ''}`);
 };
 
-export const updateOrder = async (updateOrder: IOrderUpdate) => {
-  return await client.patch<IOrderUpdate>('/order', updateOrder);
+export const updateOrder = async (order: IOrderUpdate) => {
+  return await client.patch<IOrderUpdate>('/order', order);
 };

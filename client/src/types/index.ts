@@ -31,6 +31,7 @@ export interface IProduct {
   title: string;
   price: number;
   content: string | null;
+  discount: number;
   stock: number;
   sub_category_id: number;
   productImage: IProductImage[];
@@ -186,6 +187,7 @@ export interface IOrderPost {
   addressId?: string | null;
   status: string;
   deliveryRequestMessage?: string;
+  paymentId?: number;
 }
 
 export interface IOrder {
@@ -198,6 +200,7 @@ export interface IOrder {
   deliveredAt?: string;
   createdAt: string;
   updatedAt: string;
+  payment_id?: number | null;
 }
 
 export interface IOrderUpdate {

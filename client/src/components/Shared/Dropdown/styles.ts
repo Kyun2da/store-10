@@ -3,6 +3,16 @@ import styled from 'styled-components';
 interface IDropDownItem {
   color: string;
 }
+export const DropdownButton = styled.div`
+  position: relative;
+
+  svg {
+    cursor: pointer;
+    fill: ${({ theme }) => theme.color.primary};
+    outline: none;
+    border: none;
+  }
+`;
 
 export const DropDown = styled.div`
   display: flex;
@@ -14,16 +24,7 @@ export const DropDown = styled.div`
     0px 2px 4px rgba(0, 0, 0, 0.25);
   top: 100%;
   right: 0;
-`;
-
-export const DropdownButton = styled.div`
-  position: relative;
-
-  svg {
-    fill: ${({ theme }) => theme.color.primary};
-    outline: none;
-    border: none;
-  }
+  z-index: 100;
 `;
 
 export const DropDownItem = styled.div<IDropDownItem>`

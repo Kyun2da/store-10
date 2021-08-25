@@ -124,20 +124,27 @@ const Collapse = <T extends ICollapseItem>({
                 </S.CollapseContent>
               ) : (
                 <S.CollapseContent ref={refs[idx]}>
-                  <S.CollapseDetails>
-                    <QuestionSVG />
-                    <p>{item.content}</p>
-                    {noSecret && dropdownItems && (
-                      <Dropdown selectedId={item.id} items={dropdownItems} />
-                    )}
-                  </S.CollapseDetails>
-                  <S.CollapseDetails>
-                    <AnswerSVG />
-                    <p>
-                      {item.answer ||
-                        '답변 대기중입니다... 조금만 기다려주세요!'}
-                    </p>
-                  </S.CollapseDetails>
+                  {!item.secret && (
+                    <>
+                      <S.CollapseDetails>
+                        <QuestionSVG />
+                        <p>{item.content}</p>
+                        {noSecret && dropdownItems && (
+                          <Dropdown
+                            selectedId={item.id}
+                            items={dropdownItems}
+                          />
+                        )}
+                      </S.CollapseDetails>
+                      <S.CollapseDetails>
+                        <AnswerSVG />
+                        <p>
+                          {item.answer ||
+                            '답변 대기중입니다... 조금만 기다려주세요!'}
+                        </p>
+                      </S.CollapseDetails>
+                    </>
+                  )}
                 </S.CollapseContent>
               )}
             </S.CollapsePanel>

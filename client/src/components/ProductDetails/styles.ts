@@ -328,3 +328,22 @@ export const TopArea = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const PreparingWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+
+  img {
+    max-width: 50%;
+    max-height: 50%;
+  }
+`;
+
+export const PreparingText = styled.p`
+  font-family: 'BMDOHYEON';
+  ${({ theme }) => theme.fontSize.l};
+  ${({ theme }) => theme.fontWeight.l};
+`;

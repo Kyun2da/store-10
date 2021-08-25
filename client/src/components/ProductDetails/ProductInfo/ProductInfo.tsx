@@ -30,7 +30,8 @@ const ProductInfo = () => {
   const { mutate: addMutate } = useAddBookmark();
   const { mutate: deleteMutate } = useDeleteBookmark();
 
-  const [value, handleClickOnMinus, handleClickOnPlus] = useNumberInput(1);
+  const [value, handleOnChnage, handleClickOnMinus, handleClickOnPlus] =
+    useNumberInput(1);
   const onClickCart = () => {
     cartMutate({
       count: value,
@@ -99,6 +100,7 @@ const ProductInfo = () => {
             type="number"
             name="price-count"
             min={1}
+            handleOnChnage={handleOnChnage}
             value={value}
             handleClickOnMinus={handleClickOnMinus}
             handleClickOnPlus={handleClickOnPlus}

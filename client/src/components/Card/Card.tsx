@@ -5,7 +5,7 @@ import {
   CartSVG as ShoppingCart,
 } from '@/assets/svgs';
 import { Link } from '@/lib/Router';
-import { wonFormat } from '@/utils/helper';
+import { calculateDiscount, wonFormat } from '@/utils/helper';
 import { useAddBookmark, useDeleteBookmark } from '@/hooks/queries/bookmark';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
@@ -116,9 +116,7 @@ const Card = ({
                   {wonFormat(price)}
                 </div>
                 <div className="price-tag discount">
-                  {wonFormat(
-                    price - Math.floor((price * (discount / 100)) / 10) * 10
-                  )}
+                  {wonFormat(calculateDiscount({price, discount}))}
                 </div>
               </>
             ) : (

@@ -4,6 +4,8 @@ import ShoppingCartItem from '@/components/ShoppingCart/ShopingCartItem';
 import { ICart } from '@/types';
 import * as S from './styles';
 import LabelButton from '@/components/Shared/LabelButton';
+import { DeleteConfirmModal } from '@/components/Shared/Modal';
+import useModal from '@/hooks/useModal';
 
 interface IShoppingCartListProps {
   shoppingCartItems: ICart[];
@@ -24,6 +26,8 @@ const ShoppingCartList = ({
   unCheckedList,
   disabled,
 }: IShoppingCartListProps) => {
+  const [modalOpen, toggleModal] = useModal(false);
+
   const setProductState = (index: number, state: Record<string, unknown>) => {
     shoppingCartItems.splice(index, 1, {
       ...shoppingCartItems[index],
@@ -47,6 +51,7 @@ const ShoppingCartList = ({
   const onClickRemoveSelectedItems = () => {
     const checkedIds = checkedItems.map((item) => item.productId);
     removeFromCart(checkedIds);
+    toggleModal();
   };
 
   return (
@@ -60,7 +65,7 @@ const ShoppingCartList = ({
               label={'전체 선택'}
             />
             <LabelButton
-              onClick={onClickRemoveSelectedItems}
+              onClick={toggleModal}
               disabled={!shoppingCartItems.length}
             >
               선택 삭제
@@ -84,6 +89,12 @@ const ShoppingCartList = ({
         </S.ShoppingCartList>
       ) : (
         <S.CartThung title="장바구니가 비어있습니다." />
+      )}
+      {modalOpen && (
+        <DeleteConfirmModal
+          toggleModal={toggleModal}
+          removeSelected={onClickRemoveSelectedItems}
+        />
       )}
     </div>
   );

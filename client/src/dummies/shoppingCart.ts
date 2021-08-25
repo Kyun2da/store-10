@@ -1,5 +1,6 @@
 export default [
   {
+    id: 1,
     productId: 1,
     title: '물 반 휴지 반',
     price: 2000,
@@ -10,6 +11,7 @@ export default [
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
   },
   {
+    id: 2,
     productId: 2,
     title: '물 반 휴지 반',
     price: 2000,
@@ -20,6 +22,7 @@ export default [
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
   },
   {
+    id: 3,
     productId: 3,
     title: '물 반 휴지 반',
     price: 2000,
@@ -30,6 +33,7 @@ export default [
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
   },
   {
+    id: 4,
     productId: 4,
     title: '물 반 휴지 반',
     price: 2000,
@@ -40,6 +44,7 @@ export default [
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
   },
   {
+    id: 5,
     productId: 5,
     title: '물 반 휴지 반',
     price: 2000,
@@ -50,6 +55,7 @@ export default [
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
   },
   {
+    id: 6,
     productId: 6,
     title: '물 반 휴지 반',
     price: 2000,

@@ -39,6 +39,7 @@ export interface IProduct {
 }
 
 export interface ICart {
+  id: number;
   count: number;
   createdAt: string;
   productId: number;

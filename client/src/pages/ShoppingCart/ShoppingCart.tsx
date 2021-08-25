@@ -9,7 +9,6 @@ const ShoppingCart = () => {
   const { data } = useGetCarts();
   const { mutate } = useDeleteCart();
   const [unCheckedList, setUnCheckedList] = useState<number[]>([]);
-
   const [shoppingCartItems, setShoppingCartItems] = useState<ICart[]>([]);
 
   useEffect(() => {

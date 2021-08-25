@@ -10,11 +10,22 @@ export const useGetCarts = () => {
 export const useDeleteCart = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation(deleteCart, {
-    onSuccess: () => {
-      notify('success', '성공! TODO: Toast');
+    onMutate: async (ids) => {
+      await queryClient.cancelQueries('carts');
+      const previousCarts = queryClient.getQueryData('todos');
+
+      queryClient.setQueryData<ICart[] | undefined>('todos', (oldCarts) => {
+        if (!oldCarts) return [];
+        return oldCarts.filter((cart) => !ids.includes(cart.id));
+      });
+      return { previousCarts };
     },
-    onError: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries('carts');
+    },
+    onError: ({ context }) => {
+      notify('error', '실패!');
+      queryClient.setQueryData('carts', context.previousCarts);
     },
   });
 

@@ -12,7 +12,6 @@ import { useGetBookmarkIds } from '@/hooks/queries/bookmark';
 import LoadingCards from '@/components/Skeleton/LoadingCards';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
-import PromotionCard from '@/components/PromotionCard';
 
 export interface IProductQuery {
   data: IProduct[] | undefined;
@@ -41,7 +40,6 @@ const Main = () => {
       <Card
         key={product.id}
         linkId={product.id}
-        discount={product.discount}
         bgColor="primary"
         src={product.productImage[0].url}
         price={product.price}
@@ -55,37 +53,29 @@ const Main = () => {
     <>
       <Banner />
       <S.Main className="container">
-        <section>
-          <h1 className="product-title">새로 나왔어요!</h1>
-          <LoadingCards
-            col={4}
-            skeletonNum={4}
-            showSkeleton={recentQuery.isLoading || recentQuery.isFetching}
-            component={renderProducts(recentQuery)}
-          />
-        </section>
-        <section>
-          <h1 className="product-title">선물하기 딱 좋은 !</h1>
-          <PromotionCard />
-        </section>
-        <section>
-          <h1 className="product-title">이거는 어때요?</h1>
-          <LoadingCards
-            col={4}
-            skeletonNum={4}
-            showSkeleton={recommandQuery.isLoading || recommandQuery.isFetching}
-            component={renderProducts(recommandQuery)}
-          />
-        </section>
-        <section>
-          <h1 className="product-title">제일 잘 나가요!</h1>
-          <LoadingCards
-            col={4}
-            skeletonNum={4}
-            showSkeleton={bestQuery.isLoading || bestQuery.isFetching}
-            component={renderProducts(bestQuery)}
-          />
-        </section>
+        <h1 className="product-title">새로 나왔어요!</h1>
+        <LoadingCards
+          col={4}
+          skeletonNum={8}
+          showSkeleton={recentQuery.isLoading || recentQuery.isFetching}
+          component={renderProducts(recentQuery)}
+        />
+
+        <h1 className="product-title">이거는 어때요?</h1>
+        <LoadingCards
+          col={4}
+          skeletonNum={8}
+          showSkeleton={recommandQuery.isLoading || recommandQuery.isFetching}
+          component={renderProducts(recommandQuery)}
+        />
+
+        <h1 className="product-title">제일 잘 나가요!</h1>
+        <LoadingCards
+          col={4}
+          skeletonNum={4}
+          showSkeleton={bestQuery.isLoading || bestQuery.isFetching}
+          component={renderProducts(bestQuery)}
+        />
       </S.Main>
     </>
   );

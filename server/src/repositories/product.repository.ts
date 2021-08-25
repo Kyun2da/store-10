@@ -8,7 +8,6 @@ type IElasticData = {
   price: number;
   title: string;
   image: string;
-  discount: number;
   updatedat: number;
 };
 
@@ -59,7 +58,6 @@ class ProductRepository extends Repository<Product> {
         'product.id',
         'product.title',
         'product.price',
-        'product.discount',
         'product.stock',
         'product.createdAt',
         'product.discount',
@@ -110,9 +108,9 @@ class ProductRepository extends Repository<Product> {
         'product.id',
         'product.title',
         'product.price',
-        'product.discount',
         'product.stock',
         'product.createdAt',
+        'product.discount',
         'productImage.url',
       ])
       .getMany();

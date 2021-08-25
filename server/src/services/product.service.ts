@@ -181,7 +181,6 @@ class ProductService {
       return {
         id: row._source.id,
         price: row._source.price,
-        discount: row._source.discount,
         title: row._source.title,
         image: row._source.image,
       };

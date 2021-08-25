@@ -23,6 +23,10 @@ class JwtService {
       expiresIn: '7d',
     });
   }
+
+  generateCoupon<T extends object>(coupon: T) {
+    return jwt.sign(coupon, config.JWT_SECRET);
+  }
 }
 
 export default new JwtService();

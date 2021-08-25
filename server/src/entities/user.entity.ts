@@ -4,7 +4,8 @@ import {
   OneToMany,
   Unique,
   BeforeInsert,
-  BeforeUpdate,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { Address } from './address.entity';
 import bcrypt from 'bcrypt-nodejs';
@@ -14,6 +15,7 @@ import { Cart } from './cart.entity';
 import { Order } from './order.entity';
 import { Review } from './review.entity';
 import { InitEntity } from './base.entity';
+import { Coupon } from './coupon.entity';
 
 @Entity()
 @Unique(['user_id'])
@@ -63,4 +65,18 @@ export class User extends InitEntity {
       throw new Error(error);
     }
   }
+
+  @ManyToMany(() => Coupon)
+  @JoinTable({
+    name: 'user_coupon',
+    joinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'coupon_id',
+      referencedColumnName: 'id',
+    },
+  })
+  coupon?: Coupon[];
 }

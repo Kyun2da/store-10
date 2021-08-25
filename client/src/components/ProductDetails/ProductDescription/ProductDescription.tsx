@@ -22,6 +22,7 @@ const ProductDescription = () => {
   const { content } = data.details;
   const { details, essentials } = content;
   const [images, tables] = contentParser({ details, essentials });
+  const imageFiles = images.filter((image) => image !== 'NO-IMAGE');
 
   return (
     <S.PanelWrapper>
@@ -38,9 +39,21 @@ const ProductDescription = () => {
         ))}
       </S.ProductTable>
 
-      {images.map((image) => {
+      {imageFiles.map((image) => {
         return <img key={nanoid()} src={image} alt="상품 상세정보 이미지" />;
       })}
+
+      {!imageFiles.length && (
+        <S.PreparingWrapper>
+          <img
+            src="https://store-10.s3.ap-northeast-2.amazonaws.com/test/baemin_ddam.gif"
+            alt="상품 준비중 이미지"
+          />
+          <S.PreparingText>
+            해당 상품 이미지를 아직 준비중에 있어요...
+          </S.PreparingText>
+        </S.PreparingWrapper>
+      )}
     </S.PanelWrapper>
   );
 };

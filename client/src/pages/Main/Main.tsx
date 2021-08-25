@@ -41,6 +41,7 @@ const Main = () => {
       <Card
         key={product.id}
         linkId={product.id}
+        discount={product.discount}
         bgColor="primary"
         src={product.productImage[0].url}
         price={product.price}

@@ -1,6 +1,7 @@
 import Title from '@/components/Shared/Title';
 import React from 'react';
 import * as S from '../styles';
+import { AlertSVG } from '@/assets/svgs';
 
 const ProductExchange = () => {
   // 하드코딩 오졌다리...
@@ -54,25 +55,35 @@ const ProductExchange = () => {
           상품의 불량/하자 및 표시광고 및 계약 내용이 다른 경우 해당 상품의 회수
           비용은 무료입니다.
         </li>
-        <li className="notice-item">다음의 경우 교환 및 반품이 불가합니다.</li>
-        <li className="notice-item">
-          - 구매자에게 책임 있는 사유로 재화 등이 멸실 또는 훼손된 경우
-        </li>
-        <li className="notice-item">
-          - 구매자의 사용 또는 일부 소비에 의해 재화 등의 가치가 현저히 감소한
-          경우
-        </li>
-        <li className="notice-item">
-          - 복제가 가능한 재화 등의 포장을 훼손한 경우(CD/DVD/GAME/도서의 경우
-          포장 개봉 시)
-        </li>
-        <li className="notice-item">
-          - 시간 경과에 의하여 재판매가 곤란할 정도로 상품의 가치가 현저히
-          감소한 경우
-        </li>
-        <li className="notice-item">
-          - 고객의 주문에 따라 개별 생산되는 상품의 경우
-        </li>
+
+        <S.AlertArea>
+          <S.AlertIcon>
+            <AlertSVG />
+          </S.AlertIcon>
+          <div className="alert-message-wrapper">
+            <S.AlertMessage>
+              단, 다음의 경우 교환 및 반품이 불가합니다.
+            </S.AlertMessage>
+            <S.AlertSmallMessage>
+              - 구매자에게 책임 있는 사유로 재화 등이 멸실 또는 훼손된 경우
+            </S.AlertSmallMessage>
+            <S.AlertSmallMessage>
+              - 구매자의 사용 또는 일부 소비에 의해 재화 등의 가치가 현저히
+              감소한 경우
+            </S.AlertSmallMessage>
+            <S.AlertSmallMessage>
+              - 복제가 가능한 재화 등의 포장을 훼손한 경우(CD/DVD/GAME/도서의
+              경우 포장 개봉 시)
+            </S.AlertSmallMessage>
+            <S.AlertSmallMessage>
+              - 시간 경과에 의하여 재판매가 곤란할 정도로 상품의 가치가 현저히
+              감소한 경우
+            </S.AlertSmallMessage>
+            <S.AlertSmallMessage>
+              - 고객의 주문에 따라 개별 생산되는 상품의 경우
+            </S.AlertSmallMessage>
+          </div>
+        </S.AlertArea>
       </ul>
 
       <Title level={5} className="title">

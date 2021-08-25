@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import invalidRequest from '@/api/middlewares/invalid-request';
-import validators from '@/dtos/address';
+import validators from '@/api/middlewares/validation/address';
 import AddressController from '@/controllers/address.controller';
 import wrapAsync from '@/utils/wrapAsync';
 

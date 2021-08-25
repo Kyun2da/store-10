@@ -141,7 +141,7 @@ const MyReviews = () => {
 
       {isOpen && (
         <DeleteConfirmModal
-          removeSelectedReview={removeSelectedReview}
+          removeSelected={removeSelectedReview}
           toggleModal={toggleModal}
         />
       )}

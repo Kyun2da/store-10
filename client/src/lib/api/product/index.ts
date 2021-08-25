@@ -111,6 +111,16 @@ export const putProductReview = async ({
   return await client.put<IReview>(`/product/review/${id}`, data);
 };
 
+export const putProductQuestion = async ({
+  id,
+  data,
+}: {
+  id: number;
+  data: IProductQuestion;
+}) => {
+  return await client.put<IProductQuestion>(`/product/question/${id}`, data);
+};
+
 export const deleteProductReview = async (id: number) => {
   return await client.delete(`/product/review/${id}`);
 };

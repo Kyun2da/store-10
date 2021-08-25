@@ -10,7 +10,6 @@ import {
   deleteProductReview,
   getProductQuestionById,
   getProductQuestionCountById,
-  getSearchProducts,
   getProductReviewsByUser,
   postProductQuestion,
   getProductQuestionByUser,
@@ -18,6 +17,8 @@ import {
   putProductReview,
   deleteProductReviewImage,
   deleteProductQuestion,
+  putProductQuestion,
+  getProductSelectedQuestion,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
@@ -32,7 +33,6 @@ import {
   IMyQuestion,
 } from '@/types/index';
 import { notify } from '@/components/Shared/Toastify';
-import { getProductSelectedQuestion } from './../../../lib/api/product/index';
 
 export const useGetProductById = (id: string) => {
   return useQuery<IProductDetail, Error>(
@@ -158,6 +158,21 @@ export const useUpdateReview = () => {
     },
     onError: () => {
       notify('error', '리뷰를 수정하는데 실패했습니다..!');
+    },
+  });
+
+  return mutation;
+};
+
+export const useUpdateQuestion = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(putProductQuestion, {
+    onSuccess: () => {
+      notify('success', '해당 문의를 성공적으로 수정했습니다.');
+      queryClient.invalidateQueries('productQuestionUser');
+    },
+    onError: () => {
+      notify('error', '문의를 수정하는데 실패했습니다..!');
     },
   });
 

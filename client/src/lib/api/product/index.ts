@@ -12,6 +12,7 @@ import {
   IMyReview,
   IMyQuestion,
 } from '@/types';
+import { MAIN_IMAGE_LIMIT } from '@/utils/constant/offsetLimit';
 
 export const getProductById = async (id: string) => {
   return await client.get<IProductDetail>(`/product/${id}`);
@@ -52,15 +53,15 @@ export const getProductSelectedQuestion = async (id: number) => {
 };
 
 export const getRecommandProducts = async () => {
-  return await client.get<IProduct[]>(`/product/recommand?limit=12`);
+  return await client.get<IProduct[]>(`/product/recommand?limit=${MAIN_IMAGE_LIMIT}`);
 };
 
 export const getRecentProducts = async () => {
-  return await client.get<IProduct[]>(`/product?limit=12`);
+  return await client.get<IProduct[]>(`/product?limit=${MAIN_IMAGE_LIMIT}`);
 };
 
 export const getBestProducts = async () => {
-  return await client.get<IProduct[]>(`/product/best?limit=12`);
+  return await client.get<IProduct[]>(`/product/best?limit=${MAIN_IMAGE_LIMIT}`);
 };
 
 export const getElasticProducts = async (searchString: string) => {

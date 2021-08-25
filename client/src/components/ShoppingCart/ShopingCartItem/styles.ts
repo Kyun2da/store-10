@@ -67,36 +67,6 @@ export const TotalPrice = styled.div`
   > span {
     ${({ theme }) => theme.fontSize.m};
   }
-
-  div {
-    padding: 0.6rem;
-    display: flex;
-    align-items: center;
-
-    button {
-      outline: none;
-      border: none;
-      background: none;
-      cursor: pointer;
-      ${({ theme }) => theme.fontSize.m};
-      width: 2rem;
-      height: 2rem;
-      border-radius: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: ${({ theme }) => theme.color.primary};
-      color: ${({ theme }) => theme.color['off-white']};
-      &:hover {
-        opacity: 0.4;
-      }
-    }
-
-    span {
-      ${({ theme }) => theme.fontSize.l};
-      padding: 0 1rem;
-    }
-  }
 `;
 
 export const ItemInfoName = styled.span`

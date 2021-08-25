@@ -7,6 +7,7 @@ import { ICart } from '@/types';
 import { useHistory } from '@/lib/Router';
 import { DeleteConfirmModal } from '@/components/Shared/Modal';
 import useModal from '@/hooks/useModal';
+import { NumberInput } from '@/components/Shared/Input';
 
 interface IShoppingCartItemProps {
   item: ICart;
@@ -63,23 +64,26 @@ const ShoppingCartItem = ({
   return (
     <S.ShoppingCartItem>
       <Checkbox checked={!isUnCehcked} onChange={onChangeCheckbox} />
-      <S.ImgWrapper>
+      <S.ImgWrapper onClick={() => historyPush(`/detail/${item.productId}`)}>
         <img src={item.image} onClick={onClickProductPage} />
       </S.ImgWrapper>
       <S.ItemInfo onClick={onClickProductPage}>
-        <S.ItemInfoName>{item.title}</S.ItemInfoName>
+        <S.ItemInfoName
+          onClick={() => historyPush(`/detail/${item.productId}`)}
+        >
+          {item.title}
+        </S.ItemInfoName>
         <S.ItemInfoPrice>{wonFormat(+item.price)}</S.ItemInfoPrice>
       </S.ItemInfo>
       <S.TotalPrice>
-        <div>
-          <button onClick={onClickMinus}>
-            <MinusSVG stroke="#fcfcfc" />
-          </button>
-          <span>{item.count}</span>
-          <button onClick={onClickPlus}>
-            <PlusSVG fill="#fcfcfc" />
-          </button>
-        </div>
+        <NumberInput
+          type="number"
+          name="price-count"
+          min={1}
+          value={item.count}
+          handleClickOnMinus={onClickMinus}
+          handleClickOnPlus={onClickPlus}
+        />
         <span>{wonFormat(item.count * item.price)}</span>
       </S.TotalPrice>
 

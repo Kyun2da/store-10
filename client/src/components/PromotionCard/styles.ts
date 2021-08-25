@@ -38,7 +38,7 @@ export const PromotionCard = styled.div`
 
 export const PromotionText = styled.div`
   height: 25rem;
-  margin-right: 2rem;
+  margin-right: clamp(2rem, 5vw, 6rem);
   position: relative;
   pointer-events: none;
   display: grid;

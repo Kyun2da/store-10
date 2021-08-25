@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
-interface CardWrapperProps {
-  col: number;
-}
-
-export const CardWrapper = styled.ul<CardWrapperProps>`
+export const CardWrapper = styled.ul`
   display: grid;
   gap: 2rem;
   padding-bottom: 2rem;

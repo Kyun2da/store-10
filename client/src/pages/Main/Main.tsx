@@ -62,7 +62,6 @@ const Main = () => {
         <section>
           <h1 className="product-title">새로 나왔어요!</h1>
           <LoadingCards
-            col={4}
             skeletonNum={4}
             showSkeleton={recentQuery.isLoading || recentQuery.isFetching}
             component={renderProducts(recentQuery, 'new')}
@@ -75,7 +74,6 @@ const Main = () => {
         <section>
           <h1 className="product-title">이거는 어때요?</h1>
           <LoadingCards
-            col={4}
             skeletonNum={4}
             showSkeleton={recommandQuery.isLoading || recommandQuery.isFetching}
             component={renderProducts(recommandQuery)}
@@ -84,7 +82,6 @@ const Main = () => {
         <section>
           <h1 className="product-title">제일 잘 나가요!</h1>
           <LoadingCards
-            col={4}
             skeletonNum={4}
             showSkeleton={bestQuery.isLoading || bestQuery.isFetching}
             component={renderProducts(bestQuery, 'best')}

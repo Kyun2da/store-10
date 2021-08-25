@@ -146,7 +146,7 @@ const Bookmark = () => {
       <S.CardContainer>
         {data?.pages[0].length ? (
           <>
-            <CardWrapper col={4}>
+            <CardWrapper >
               {renderProducts(
                 isLoading,
                 data.pages.flat(),

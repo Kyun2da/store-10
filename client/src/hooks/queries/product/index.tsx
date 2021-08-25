@@ -177,7 +177,7 @@ export const useDeleteQuestion = () => {
   const mutation = useMutation(deleteProductQuestion, {
     onSuccess: () => {
       notify('success', '해당 문의를 성공적으로 제거했습니다.');
-      queryClient.invalidateQueries('productReviewUser');
+      queryClient.invalidateQueries('productQuestionUser');
     },
     onError: () => {
       notify('error', '문의를 제거하는데 실패했습니다..!');

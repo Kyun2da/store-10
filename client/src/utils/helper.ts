@@ -10,6 +10,16 @@ export const wonFormat = (number: number | string) => {
   return price + '원';
 };
 
+export const calculateDiscount = ({
+  price,
+  discount,
+}: {
+  price: number;
+  discount: number;
+}) => {
+  return price - Math.floor((price * (discount / 100)) / 10) * 10;
+};
+
 export const dateFormat = (date: string, seperator = '-') => {
   if (seperator === '-') {
     return dayjs(date).format('YYYY-MM-DD');

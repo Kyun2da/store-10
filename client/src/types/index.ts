@@ -31,6 +31,7 @@ export interface IProduct {
   title: string;
   price: number;
   content: string | null;
+  discount: number;
   stock: number;
   sub_category_id: number;
   productImage: IProductImage[];

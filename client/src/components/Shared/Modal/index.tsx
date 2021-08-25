@@ -1,4 +1,4 @@
-import RequestModal from './RequestModal';
+import RequestModal from './RequestModal/RequestModal';
 import AddressModal from './AddressModal';
 import ReviewModal from './ReviewModal/ReviewModal';
 import ReviewImageModal from './ReviewModal/ReviewImageModal';

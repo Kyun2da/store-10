@@ -121,6 +121,7 @@ export interface IProductQuestion {
   secret: boolean;
   category: string;
   product_id: string;
+  user_id?: number;
   createdAt?: string;
 }
 

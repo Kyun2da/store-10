@@ -1,21 +1,24 @@
 import React from 'react';
-import { ToastContainer } from 'react-toastify';
+import { Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import Portal from './Portal';
+import * as S from './styles';
 
 const ToastifyContainer = () => {
   return (
     <Portal>
-      <ToastContainer
-        position="top-right"
-        autoClose={3500}
+      <S.StyledToastContainer
+        position="bottom-center"
+        autoClose={3000}
         hideProgressBar={false}
-        newestOnTop={false}
+        newestOnTop={true}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        closeButton={false}
+        transition={Slide}
       />
     </Portal>
   );

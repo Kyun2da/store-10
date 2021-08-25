@@ -13,7 +13,6 @@ import { useRecoilState } from 'recoil';
 import * as S from './styles';
 
 const ChangeUserInfo = () => {
-  // TODO : 깃허브는 비밀번호 인증없이 닉네임만 바꿀 수 있게 하기
   const [isPasswordAuth, setIsPasswordAuth] = useState(false);
   const [user, setUser] = useRecoilState(userState);
   const [password, , onChangePassword] = useInput('');

@@ -10,11 +10,11 @@ class UserController {
     const data = req.body;
 
     const refreshToken = jwtService.refresh();
-    const { user_id, name, id } = await UserRepository().createUser({
+    const { user_id, name, id, is_oauth } = await UserRepository().createUser({
       ...data,
       refreshToken,
     });
-    const accessToken = jwtService.generate({ user_id, name, id });
+    const accessToken = jwtService.generate({ user_id, name, id, is_oauth });
 
     res.cookie('refreshToken', refreshToken, { path: '/', httpOnly: true });
     res.cookie('accessToken', accessToken, { path: '/', httpOnly: true });
@@ -67,6 +67,44 @@ class UserController {
         HttpStatusCode.INTERNAL_SERVER_ERROR,
         '비밀번호 변경에 실패하였습니다.'
       );
+    }
+  }
+
+  async getCoupons(req: Request, res: Response) {
+    const user_id = req.user?.id || 4;
+    const result = await userService.getCoupons(user_id);
+
+    ApiResponse(
+      res,
+      HttpStatusCode.OK,
+      '성공적으로 쿠폰을 조회하였습니다.',
+      result
+    );
+  }
+
+  async useCoupon(req: Request, res: Response) {
+    const user_id = req.user?.id || 4;
+    const { userCouponId } = req.body;
+    const result = await userService.useCoupon({ user_id, id: userCouponId });
+
+    if (result?.affected >= 1) {
+      ApiResponse(res, HttpStatusCode.NO_CONTENT);
+    } else {
+      ApiResponse(res, HttpStatusCode.BAD_REQUEST, '쿠폰 사용에 실패했습니다');
+    }
+  }
+
+  async registerCoupon(req: Request, res: Response) {
+    const user_id = req.user?.id || 4;
+    const { coupon } = req.body;
+    const result = await userService.registerCoupon({
+      couponToken: coupon,
+      user_id,
+    });
+    if (result) {
+      ApiResponse(res, HttpStatusCode.NO_CONTENT);
+    } else {
+      ApiResponse(res, HttpStatusCode.BAD_REQUEST, '쿠폰 등록에 실패했습니다');
     }
   }
 }

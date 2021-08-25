@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import * as S from '../styles';
 import { HeartSVG, CartSVG } from '@/assets/svgs';
 import { NumberInput } from '@/components/Shared/Input';
@@ -11,6 +11,14 @@ import { useParams } from '@/lib/Router';
 import thumbnailsParser from '@/utils/thumbnailsParser';
 import ProductThumbnails from './../ProductThumbnails/ProductThumbnails';
 import { usePostOrder } from '@/hooks/queries/order';
+import { useRecoilValue } from 'recoil';
+import { userState } from '@/recoil/user';
+import { notify } from '@/components/Shared/Toastify';
+import {
+  useAddBookmark,
+  useDeleteBookmark,
+  useGetBookmarkIds,
+} from '@/hooks/queries/bookmark';
 
 const ProductInfo = () => {
   const { id } = useParams().params;
@@ -18,6 +26,9 @@ const ProductInfo = () => {
   const { data, isLoading, error } = useGetProductById(id);
   const { mutate: cartMutate } = usePostCart();
   const { mutate: orderMutate } = usePostOrder();
+  const user = useRecoilValue(userState);
+  const { mutate: addMutate } = useAddBookmark();
+  const { mutate: deleteMutate } = useDeleteBookmark();
 
   const [value, handleClickOnMinus, handleClickOnPlus] = useNumberInput(1);
   const onClickCart = () => {
@@ -26,6 +37,21 @@ const ProductInfo = () => {
       productId: id,
     });
   };
+
+  const { data: bookmarkIdList } = useGetBookmarkIds(!!user);
+
+  const isHeartChecked = !!bookmarkIdList?.find(
+    (checkedId) => checkedId === Number(id)
+  );
+
+  const heartBtnOnClick = useCallback(() => {
+    if (!user) notify('error', '로그인이 필요합니다!');
+    else if (isHeartChecked) {
+      deleteMutate([Number(id)]);
+    } else {
+      addMutate(Number(id));
+    }
+  }, [addMutate, deleteMutate, isHeartChecked, id, user]);
 
   // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
   if (error) {
@@ -89,8 +115,12 @@ const ProductInfo = () => {
 
         {/* LINK 이동 및 버튼 클릭 핸들러 구현해야함 */}
         <S.ButtonArea>
-          <button className="heart">
-            <HeartSVG width={25} height={25} />
+          <button className="heart" onClick={heartBtnOnClick}>
+            <HeartSVG
+              width={25}
+              height={25}
+              fill={isHeartChecked ? 'red' : 'none'}
+            />
           </button>
           <button onClick={onClickCart} className="cart">
             <CartSVG width={25} height={25} />

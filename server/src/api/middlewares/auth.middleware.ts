@@ -12,6 +12,7 @@ interface TokenInterface {
     id: number;
     user_id: string;
     name: string;
+    is_oauth: boolean;
   };
 }
 
@@ -71,11 +72,12 @@ const authJWT = async (req: Request, res: Response, next: NextFunction) => {
     }
   }
 
-  const { id, user_id, name } = user;
+  const { id, user_id, name, is_oauth } = user;
   req.user = {
     id,
     user_id,
     name,
+    is_oauth,
   };
   return next();
 };

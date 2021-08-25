@@ -10,6 +10,7 @@ import { userState } from '@/recoil/user';
 import MyReviews from '@/components/MyPage/MyReviews';
 import MyQuestions from '@/components/MyPage/MyQuestions';
 import MyCoupon from '@/components/MyPage/MyCoupon';
+import ChangeUserInfo from '@/components/MyPage/ChangeUserInfo';
 
 const renderBody = (contentValue: string) => {
   // TODO: router Switch 사용 고민
@@ -17,6 +18,7 @@ const renderBody = (contentValue: string) => {
   if (contentValue === 'coupon') return <MyCoupon />;
   if (contentValue === 'inqurey') return <MyQuestions />;
   if (contentValue === 'review') return <MyReviews />;
+  if (contentValue === 'changeUserInfo') return <ChangeUserInfo />;
 
   return <div>404</div>;
 };

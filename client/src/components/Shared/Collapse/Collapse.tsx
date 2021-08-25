@@ -43,7 +43,7 @@ const Collapse = <T extends ICollapseItem>({
   const handleClickOnItem = (id: number, index: number) => {
     // TODO: user.name 이 고유값이 아니라면 user_id를 받아오도록 변경
     const seleted = items.filter((item) => item.id === id);
-    if (!noSecret && seleted[0].secret && seleted[0].name !== user?.name) {
+    if (!noSecret && seleted[0].secret && seleted[0].user_id !== user?.id) {
       return notify('error', '작성자와 관리자만 열람할 수 있습니다.');
     }
 
@@ -74,7 +74,7 @@ const Collapse = <T extends ICollapseItem>({
               length={headers.length}
               onClick={() => handleClickOnItem(item.id, idx)}
               className={
-                !noSecret && item.secret && item.name !== user?.name
+                !noSecret && item.secret && item.user_id !== user?.id
                   ? 'lock'
                   : ''
               }

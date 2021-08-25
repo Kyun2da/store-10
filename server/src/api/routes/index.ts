@@ -6,6 +6,7 @@ import cartRoutes from './cart.router';
 import addressRoutes from './address.router';
 import bookmarkRoutes from './bookmark.router';
 import orderRoutes from './order.router';
+import adminRoutes from './admin.router';
 import { handleApiError } from '../middlewares/api';
 // import { initProductData } from '@/loaders/dataInit';
 
@@ -21,6 +22,7 @@ router.use('/cart', cartRoutes);
 router.use('/address', addressRoutes);
 router.use('/bookmark', bookmarkRoutes);
 router.use('/order', orderRoutes);
+router.use('/admin', adminRoutes);
 // router.get('/initData', wrapAsync(initProductData));
 
 router.use(handleApiError);

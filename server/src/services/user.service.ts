@@ -1,6 +1,14 @@
 import bcrypt from 'bcrypt-nodejs';
 import { User } from '@/entities/user.entity';
 import UserRepository from '@/repositories/user.repository';
+import UserCouponRepository from '@/repositories/userCoupon.repository';
+import CouponRepository from '@/repositories/coupon.repository';
+import jwtService from './jwt.service';
+
+interface ICouponJWT {
+  coupon_id: number;
+  iat: number;
+}
 
 class UserService {
   async createUser(user: User) {
@@ -27,6 +35,57 @@ class UserService {
       return await userRepo.updateUserPassword(user, newHashPassword);
     }
     return null;
+  }
+
+  async getCoupons(user_id: number) {
+    const userCouponRepo = UserCouponRepository();
+    const couponRepo = CouponRepository();
+
+    const userCoupons = await userCouponRepo.getUserCoupons(user_id);
+    const couponIds = userCoupons.map((userCoupon) => userCoupon.coupon_id);
+    const coupons = await couponRepo.getCouponsByIds(couponIds);
+
+    return coupons.map((coupon) => ({
+      ...coupon,
+      isValid: userCoupons.find(
+        (userCoupon) => userCoupon.coupon_id === coupon.id
+      ).is_valid,
+    }));
+  }
+
+  async useCoupon({ id, user_id }) {
+    const userCouponRepo = UserCouponRepository();
+    const userCoupon = await userCouponRepo.getUserCoupon({ id, user_id });
+    if (!userCoupon?.is_valid) {
+      return null;
+    }
+    return await userCouponRepo.updateUserCoupon({
+      user_id,
+      id,
+      is_valid: false,
+    });
+  }
+
+  async registerCoupon({ couponToken, user_id }) {
+    const userCouponRepo = UserCouponRepository();
+    const couponRepo = CouponRepository();
+
+    const coupon = <ICouponJWT>jwtService.verify(couponToken);
+
+    if (!coupon) {
+      return null;
+    }
+
+    const isCouponExist = await couponRepo.getCoupon(coupon.coupon_id);
+    if (!isCouponExist) {
+      return null;
+    }
+
+    return await userCouponRepo.createUserCoupon({
+      user_id,
+      coupon_id: coupon.coupon_id,
+      is_valid: true,
+    });
   }
 }
 

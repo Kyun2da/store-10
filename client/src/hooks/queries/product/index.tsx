@@ -50,11 +50,19 @@ export const useGetProductReviewsById = (id: string, offset: number) => {
   );
 };
 
+export const useGetProductQuestionById = (id: string, offset: number) => {
+  return useQuery<IProductQuestion[], Error>(
+    ['productQuestion', id, offset],
+    () => getProductQuestionById(id, offset),
+    { keepPreviousData: true }
+  );
+};
+
 export const useGetProductReviewsByUser = (offset: number) => {
   return useQuery<IMyReview, Error>(
     ['productReviewUser', offset],
     () => getProductReviewsByUser(offset),
-    { keepPreviousData: true }
+    { keepPreviousData: true, refetchOnWindowFocus: false }
   );
 };
 
@@ -62,27 +70,23 @@ export const useGetProductQuestionsByUser = (offset: number) => {
   return useQuery<IMyQuestion, Error>(
     ['productQuestionUser', offset],
     () => getProductQuestionByUser(offset),
-    { keepPreviousData: true }
+    { keepPreviousData: true, refetchOnWindowFocus: false }
   );
 };
 
 export const useGetSelectedReviewById = (id: number) => {
-  return useQuery<IProductReview, Error>(['selectedReview', id], () =>
-    getProductSelectedReview(id)
+  return useQuery<IProductReview, Error>(
+    ['selectedReview', id],
+    () => getProductSelectedReview(id),
+    { refetchOnWindowFocus: false }
   );
 };
 
 export const useGetSelectedQuestionById = (id: number) => {
-  return useQuery<IProductQuestion, Error>(['selectedQuestion', id], () =>
-    getProductSelectedQuestion(id)
-  );
-};
-
-export const useGetProductQuestionById = (id: string, offset: number) => {
-  return useQuery<IProductQuestion[], Error>(
-    ['productQuestion', id, offset],
-    () => getProductQuestionById(id, offset),
-    { keepPreviousData: true }
+  return useQuery<IProductQuestion, Error>(
+    ['selectedQuestion', id],
+    () => getProductSelectedQuestion(id),
+    { refetchOnWindowFocus: false }
   );
 };
 
@@ -100,15 +104,21 @@ export const useGetProductQuestionCount = (id: string) => {
 };
 
 export const useGetRecommandProducts = () => {
-  return useQuery<IProduct[], Error>('recommandProduct', getRecommandProducts);
+  return useQuery<IProduct[], Error>('recommandProduct', getRecommandProducts, {
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useGetBestProducts = () => {
-  return useQuery<IProduct[], Error>('bestProducts', getBestProducts);
+  return useQuery<IProduct[], Error>('bestProducts', getBestProducts, {
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useGetRecentProducts = () => {
-  return useQuery<IProduct[], Error>('recentProduct', getRecentProducts);
+  return useQuery<IProduct[], Error>('recentProduct', getRecentProducts, {
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useGetCateogries = () => {

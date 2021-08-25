@@ -37,4 +37,5 @@ export default {
   S3_SECRET_ACCESS_KEY: loadEnv('S3_SECRET_ACCESS_KEY'),
   S3_REGION: loadEnv('S3_REGION'),
   S3_BUCKET: loadEnv('S3_BUCKET'),
+  ADMIN_PASSWORD: loadEnv('ADMIN_PASSWORD'),
 };

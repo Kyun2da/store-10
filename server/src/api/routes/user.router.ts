@@ -1,5 +1,4 @@
 import { Router } from 'express';
-
 import UserController from '@/controllers/user.controller';
 import wrapAsync from '@/utils/wrapAsync';
 import invalidRequest from '@/api/middlewares/invalid-request';
@@ -39,8 +38,8 @@ router.post(
   wrapAsync(UserController.changePassword)
 );
 
-router.get('/coupon', wrapAsync(UserController.getCoupons));
-router.patch('/coupon', wrapAsync(UserController.useCoupon));
-router.post('/coupon', wrapAsync(UserController.registerCoupon));
+router.get('/coupon', authJWT, wrapAsync(UserController.getCoupons));
+router.patch('/coupon', authJWT, wrapAsync(UserController.useCoupon));
+router.post('/coupon', authJWT, wrapAsync(UserController.registerCoupon));
 
 export default router;

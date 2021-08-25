@@ -11,7 +11,7 @@ interface IProps {
 
 const CategoryProducts = ({ subCategoryId }: IProps) => {
   const [start, setStart] = useState(0);
-  const { ref, inView, data, isLoading, fetchNextPage } = useInfiniteScroll<
+  const { ref, inView, data, fetchNextPage, remove } = useInfiniteScroll<
     IProduct[]
   >({
     key: ['category', subCategoryId],
@@ -40,12 +40,13 @@ const CategoryProducts = ({ subCategoryId }: IProps) => {
   }, [inView]);
 
   useEffect(() => {
-    setStart(0);
+    remove();
+    return () => {
+      setStart(0);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subCategoryId]);
 
-  if (isLoading) {
-    return <div>loading</div>;
-  }
   if (!data) return <div>nodata</div>;
 
   const renderCard = () => {

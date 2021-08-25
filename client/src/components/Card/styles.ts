@@ -72,6 +72,9 @@ export const NameTag = styled.div`
 export const ThumbnailWrapper = styled.div`
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  ${({ theme }) => theme.fontSize.s};
 
   img {
     width: 100%;
@@ -88,20 +91,15 @@ export const ThumbnailWrapper = styled.div`
   &:hover ${BottomBar} {
     display: flex;
   }
-
   .title {
-    ${({ theme }) => theme.fontSize.m};
+    font-size: clamp(10px, 3vw, 1.2em);
     ${({ theme }) => theme.fontWeight.s};
-    display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1em;
-    max-height: 2em;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-    margin-top: 0.5rem;
-    margin-left: 1rem;
+    margin: 0.8rem 0.8rem 0 0.8rem;
   }
 `;
 
@@ -115,22 +113,22 @@ export const ButtonArea = styled.div`
 `;
 
 export const ProductDetails = styled.div`
-  padding: 1rem 0;
   cursor: pointer;
-  ${({ theme }) => theme.fontSize.s}
+  ${({ theme }) => theme.fontSize.m};
 
   .price-tag {
-    ${({ theme }) => theme.fontSize.m};
     ${({ theme }) => theme.fontWeight.l};
-    margin-left: 1rem;
+    font-size: clamp(10px, 3vw, 1em);
+    margin: 0.5rem 0.8rem 0.8rem 0.8rem;
 
     &.strikethrough {
-      ${({ theme }) => theme.fontSize.s};
+      margin: 0.5rem 0.8rem 0 0.8rem;
+      font-size: clamp(10px, 3vw, 0.9em);
       text-decoration: line-through;
       color: ${({ theme }) => theme.color['text-color']}55;
-      margin-bottom: 0.5rem;
     }
     &.discount {
+      font-size: clamp(10px, 3.5vw, 1em);
       color: ${({ theme }) => theme.color['error']};
     }
   }

@@ -14,11 +14,12 @@ import { compressImageFile } from '@/utils/helper';
 
 interface ReviewModalProps {
   toggleModal: () => void;
+  selected?: number;
 }
 
 // TODO: Input 타입을 조금 더 만들어야 하겠군뇨 호호호
 
-const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
+const ReviewModal = ({ toggleModal, selected }: ReviewModalProps) => {
   const { id } = useParams().params;
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState('');
@@ -62,7 +63,7 @@ const ReviewModal = ({ toggleModal }: ReviewModalProps) => {
     }
     formData.append('rating', rating.toString());
     formData.append('content', content);
-    formData.append('product_id', id);
+    formData.append('product_id', id ?? selected);
 
     mutate(formData);
 

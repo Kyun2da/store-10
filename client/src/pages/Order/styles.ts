@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
 export const OrderContainer = styled.section`
+  max-width: ${({ theme }) => theme.media.pc}px;
   background-color: ${({ theme }) => theme.color['off-white']};
   display: flex;
   width: 100%;
+  border-radius: 1.2rem;
   @media (max-width: ${({ theme }) => theme.media.tablet}px) {
     flex-direction: column;
   }
   > div {
     flex: 1;
   }
-  border-radius: 1.2rem;
 `;
 
 export const OrderAside = styled.aside`

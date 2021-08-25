@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Title from '@/components/Shared/Title';
 
 export const MyPageContainer = styled.div`
+  max-width: ${({ theme }) => theme.media.pc}px;
   position: relative;
   display: flex;
   width: 100%;

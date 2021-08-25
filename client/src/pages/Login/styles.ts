@@ -7,6 +7,7 @@ export const LoginTitle = styled(Title)`
 `;
 
 export const LoginForm = styled.form`
+  max-width: ${({ theme }) => theme.media.pc}px;
   display: flex;
   flex-direction: column;
   width: 420px;

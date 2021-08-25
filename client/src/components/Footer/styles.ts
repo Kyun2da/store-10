@@ -29,7 +29,7 @@ export const Footer = styled.div`
 
 export const FooterTabs = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 2rem;
 `;
 

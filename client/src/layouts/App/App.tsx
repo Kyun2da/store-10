@@ -27,6 +27,8 @@ import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import Bookmark from '@/pages/Bookmark';
 import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
+import { TermsOfUse, TermsOfPrivacy } from '@/pages/Terms';
+import Vendor from '@/pages/Vendor';
 
 const App = () => {
   const [theme, setTheme] = useState('light-mode');
@@ -88,6 +90,9 @@ const App = () => {
                     <Route path="/login" component={Login} />
                     <Route path="/detail/:id" component={Detail} />
                     <Route path="/notice" component={Notice} />
+                    <Route path="/privacy" component={TermsOfPrivacy} />
+                    <Route path="/terms" component={TermsOfUse} />
+                    <Route path="/vendor" component={Vendor} />
                     <Route path="/cart" component={ShoppingCart} />
                     <Route path="/mypage" component={MyPage} />
                     <Route path="/order/:id/paid" component={Paid} />

@@ -32,7 +32,7 @@ export const FooterTabs = styled.div`
   margin: 0 auto;
   width: 95%;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 2rem;
 `;
 

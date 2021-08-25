@@ -20,16 +20,9 @@ const Footer = () => {
           <S.TabTitle>NOTICE</S.TabTitle>
           <S.TabContent>
             <Link to="/notice">공지사항</Link>
-            <Link to="/">제휴문의</Link>
-            <Link to="/">고객센터</Link>
-          </S.TabContent>
-        </S.FooterTab>
-        <S.FooterTab>
-          <S.TabTitle>POLICY</S.TabTitle>
-          <S.TabContent>
-            <Link to="/">이용약관</Link>
-            <Link to="/">개인정보</Link>
-            <Link to="/">인재채용</Link>
+            <Link to="/terms">이용약관</Link>
+            <Link to="/privacy">개인정보</Link>
+            <Link to="/vendor">판매처안내</Link>
           </S.TabContent>
         </S.FooterTab>
         <S.FooterTab>

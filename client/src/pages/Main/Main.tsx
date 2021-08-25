@@ -13,6 +13,7 @@ import LoadingCards from '@/components/Skeleton/LoadingCards';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import PromotionCard from '@/components/PromotionCard';
+import { BG_COLOR } from '@/components/Card/Card';
 
 export interface IProductQuery {
   data: IProduct[] | undefined;
@@ -32,7 +33,10 @@ const Main = () => {
     }
   }, [user, remove]);
 
-  const renderProducts = (qurey: IProductQuery) => {
+  const renderProducts = (
+    qurey: IProductQuery,
+    bgColor: BG_COLOR = 'primary'
+  ) => {
     const { data, isLoading } = qurey;
     if (isLoading || !data) {
       return <div></div>;
@@ -42,7 +46,7 @@ const Main = () => {
         key={product.id}
         linkId={product.id}
         discount={product.discount}
-        bgColor="primary"
+        bgColor={bgColor}
         src={product.productImage[0].url}
         price={product.price}
         title={product.title}
@@ -61,7 +65,7 @@ const Main = () => {
             col={4}
             skeletonNum={4}
             showSkeleton={recentQuery.isLoading || recentQuery.isFetching}
-            component={renderProducts(recentQuery)}
+            component={renderProducts(recentQuery, 'new')}
           />
         </section>
         <section>
@@ -83,7 +87,7 @@ const Main = () => {
             col={4}
             skeletonNum={4}
             showSkeleton={bestQuery.isLoading || bestQuery.isFetching}
-            component={renderProducts(bestQuery)}
+            component={renderProducts(bestQuery, 'best')}
           />
         </section>
       </S.Main>

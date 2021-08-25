@@ -15,6 +15,8 @@ declare module 'styled-components' {
       'primary': string;
       'primary2': string;
       'primary3': string;
+      'new': string;
+      'best': string;
       'error': string;
       'border-gray': string;
     };

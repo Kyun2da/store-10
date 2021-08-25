@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Checkbox from '../Shared/Checkbox';
+import { BG_COLOR } from './Card';
 
 export const Card = styled.li`
   display: flex;
@@ -23,7 +24,7 @@ export const Card = styled.li`
 `;
 
 interface LinerProps {
-  bgColor: 'primary' | 'error';
+  bgColor: BG_COLOR;
 }
 
 export const Liner = styled.div<LinerProps>`

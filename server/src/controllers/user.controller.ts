@@ -69,6 +69,44 @@ class UserController {
       );
     }
   }
+
+  async getCoupons(req: Request, res: Response) {
+    const user_id = req.user?.id || 4;
+    const result = await userService.getCoupons(user_id);
+
+    ApiResponse(
+      res,
+      HttpStatusCode.OK,
+      '성공적으로 쿠폰을 조회하였습니다.',
+      result
+    );
+  }
+
+  async useCoupon(req: Request, res: Response) {
+    const user_id = req.user?.id || 4;
+    const { userCouponId } = req.body;
+    const result = await userService.useCoupon({ user_id, id: userCouponId });
+
+    if (result?.affected >= 1) {
+      ApiResponse(res, HttpStatusCode.NO_CONTENT);
+    } else {
+      ApiResponse(res, HttpStatusCode.BAD_REQUEST, '쿠폰 사용에 실패했습니다');
+    }
+  }
+
+  async registerCoupon(req: Request, res: Response) {
+    const user_id = req.user?.id || 4;
+    const { coupon } = req.body;
+    const result = await userService.registerCoupon({
+      couponToken: coupon,
+      user_id,
+    });
+    if (result) {
+      ApiResponse(res, HttpStatusCode.NO_CONTENT);
+    } else {
+      ApiResponse(res, HttpStatusCode.BAD_REQUEST, '쿠폰 등록에 실패했습니다');
+    }
+  }
 }
 
 export default new UserController();

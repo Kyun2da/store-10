@@ -39,4 +39,8 @@ router.post(
   wrapAsync(UserController.changePassword)
 );
 
+router.get('/coupon', wrapAsync(UserController.getCoupons));
+router.patch('/coupon', wrapAsync(UserController.useCoupon));
+router.post('/coupon', wrapAsync(UserController.registerCoupon));
+
 export default router;

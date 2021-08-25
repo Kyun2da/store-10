@@ -13,6 +13,7 @@ import LoadingCards from '@/components/Skeleton/LoadingCards';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import PromotionCard from '@/components/PromotionCard';
+import { BG_COLOR } from '@/components/Card/Card';
 
 export interface IProductQuery {
   data: IProduct[] | undefined;
@@ -32,7 +33,10 @@ const Main = () => {
     }
   }, [user, remove]);
 
-  const renderProducts = (qurey: IProductQuery) => {
+  const renderProducts = (
+    qurey: IProductQuery,
+    bgColor: BG_COLOR = 'primary'
+  ) => {
     const { data, isLoading } = qurey;
     if (isLoading || !data) {
       return <div></div>;
@@ -42,7 +46,7 @@ const Main = () => {
         key={product.id}
         linkId={product.id}
         discount={product.discount}
-        bgColor="primary"
+        bgColor={bgColor}
         src={product.productImage[0].url}
         price={product.price}
         title={product.title}
@@ -54,37 +58,44 @@ const Main = () => {
   return (
     <>
       <Banner />
-      <S.Main className="container">
+      <S.Main>
         <section>
-          <h1 className="product-title">새로 나왔어요!</h1>
-          <LoadingCards
-            col={4}
-            skeletonNum={4}
-            showSkeleton={recentQuery.isLoading || recentQuery.isFetching}
-            component={renderProducts(recentQuery)}
-          />
+          <div>
+            <h1 className="product-title">새로 나왔어요!</h1>
+            <LoadingCards
+              skeletonNum={4}
+              showSkeleton={recentQuery.isLoading || recentQuery.isFetching}
+              component={renderProducts(recentQuery, 'new')}
+            />
+          </div>
         </section>
         <section>
-          <h1 className="product-title">선물하기 딱 좋은 !</h1>
-          <PromotionCard />
+          <div>
+            <h1 className="product-title">이거는 어때요?</h1>
+            <LoadingCards
+              skeletonNum={4}
+              showSkeleton={
+                recommandQuery.isLoading || recommandQuery.isFetching
+              }
+              component={renderProducts(recommandQuery)}
+            />
+          </div>
         </section>
         <section>
-          <h1 className="product-title">이거는 어때요?</h1>
-          <LoadingCards
-            col={4}
-            skeletonNum={4}
-            showSkeleton={recommandQuery.isLoading || recommandQuery.isFetching}
-            component={renderProducts(recommandQuery)}
-          />
+          <div>
+            <h1 className="product-title">선물하기 딱 좋은 !</h1>
+            <PromotionCard />
+          </div>
         </section>
         <section>
-          <h1 className="product-title">제일 잘 나가요!</h1>
-          <LoadingCards
-            col={4}
-            skeletonNum={4}
-            showSkeleton={bestQuery.isLoading || bestQuery.isFetching}
-            component={renderProducts(bestQuery)}
-          />
+          <div>
+            <h1 className="product-title">제일 잘 나가요!</h1>
+            <LoadingCards
+              skeletonNum={4}
+              showSkeleton={bestQuery.isLoading || bestQuery.isFetching}
+              component={renderProducts(bestQuery, 'best')}
+            />
+          </div>
         </section>
       </S.Main>
     </>

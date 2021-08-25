@@ -12,7 +12,7 @@ const PromotionCard = () => {
     {
       img: 'https://store-10.s3.ap-northeast-2.amazonaws.com/banner/promotion-1.png',
       title: '다이어리',
-      content: `2021년 하반기 기록을\n시작해봐요`,
+      content: `2021년 하반기\n기록을 시작해봐요`,
     },
     {
       img: 'https://store-10.s3.ap-northeast-2.amazonaws.com/banner/promotion-2.png',

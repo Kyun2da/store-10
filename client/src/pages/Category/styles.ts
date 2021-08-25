@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const CategoryWrapper = styled.div`
+  max-width: ${({ theme }) => theme.media.pc}px;
   width: 95%;
   max-width: 1050px;
   margin: 0 auto;

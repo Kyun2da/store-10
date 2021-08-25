@@ -66,7 +66,7 @@ const CategoryProducts = ({ subCategoryId }: IProps) => {
 
   return (
     <>
-      <CardWrapper col={4}>{renderCard()}</CardWrapper>
+      <CardWrapper>{renderCard()}</CardWrapper>
       <div ref={ref}></div>
     </>
   );

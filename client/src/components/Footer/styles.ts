@@ -28,6 +28,9 @@ export const Footer = styled.div`
 `;
 
 export const FooterTabs = styled.div`
+  max-width: ${({ theme }) => theme.media.pc}px;
+  margin: 0 auto;
+  width: 95%;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 2rem;
@@ -86,6 +89,9 @@ export const TabContent = styled.div`
 `;
 
 export const FooterBottom = styled.div`
+  max-width: ${({ theme }) => theme.media.pc}px;
+  margin: 0 auto;
+  width: 95%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;

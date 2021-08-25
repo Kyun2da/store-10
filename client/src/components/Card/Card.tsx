@@ -11,8 +11,16 @@ import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import { notify } from '../Shared/Toastify';
 
+const BgColor = {
+  Error: 'error',
+  Primary: 'primary',
+  New: 'new',
+  Best: 'best',
+} as const;
+
+export type BG_COLOR = typeof BgColor[keyof typeof BgColor];
 interface CardProps {
-  bgColor: 'error' | 'primary'; // category 식으로 리스트화 (enum 등..) 필요
+  bgColor: BG_COLOR; // category 식으로 리스트화 (enum 등..) 필요
   linkId: number;
   discount?: number;
   src?: string;
@@ -116,7 +124,7 @@ const Card = ({
                   {wonFormat(price)}
                 </div>
                 <div className="price-tag discount">
-                  {wonFormat(calculateDiscount({price, discount}))}
+                  {wonFormat(calculateDiscount({ price, discount }))}
                 </div>
               </>
             ) : (

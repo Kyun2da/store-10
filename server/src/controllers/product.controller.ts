@@ -351,7 +351,7 @@ class ProductController {
   }
 
   async getBestProducts(req: Request, res: Response) {
-    const { limit = 8 } = req.query;
+    const { limit } = req.query;
     const products = await ProductService.getBestProudcts(+limit);
     if (!products) {
       ApiResponse(res, HttpStatusCode.BAD_REQUEST, '상품이 존재하지 않습니다');
@@ -361,7 +361,7 @@ class ProductController {
   }
 
   async getRecommandProducts(req: Request, res: Response) {
-    const { limit = 8 } = req.query;
+    const { limit } = req.query;
     const products = await ProductService.getRecommandProducts(+limit);
 
     if (!products) {

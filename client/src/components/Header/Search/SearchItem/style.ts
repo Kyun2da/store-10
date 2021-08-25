@@ -34,6 +34,10 @@ export const SearchItemWrapper = styled.ul`
   gap: 1rem;
   padding: 5px;
   overflow: scroll;
+
+  > div {
+    height: 100%;
+  }
 `;
 
 export const SearchItemList = styled.li`

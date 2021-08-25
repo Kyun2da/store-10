@@ -51,14 +51,14 @@ export const CollaspeRow = styled.div<ICollapse>`
   overflow: hidden;
 
   &.lock::after {
-    content: '비밀글';
-    filter: blur(2rem);
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: #eee;
+    opacity: 0.9;
   }
 
   &:last-child {

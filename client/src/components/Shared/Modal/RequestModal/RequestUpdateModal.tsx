@@ -1,55 +1,45 @@
-import React, { useCallback, useState } from 'react';
-import Button from '@/components/Shared/Button';
-import { Input } from '@/components/Shared/Input';
-import Title from '@/components/Shared/Title';
-import ModalLayout from './ModalLayout';
-import * as S from './styles';
-import { Textarea } from '@/components/Shared/Input';
+import React, { useState, useCallback, useEffect } from 'react';
+import * as S from '../styles';
+import ModalLayout from '../ModalLayout';
 import Form from '@/components/Shared/Form';
+import Title from '@/components/Shared/Title';
 import CategorySelector from '@/components/CategorySelector';
-import { useParams } from '@/lib/Router';
 import Checkbox from '@/components/Shared/Checkbox';
-import { useCreateQuestion } from '@/hooks/queries/product';
+import { Input, Textarea } from '@/components/Shared/Input';
+import Button from '@/components/Shared/Button';
 import { validateQuestion } from '@/utils/validator';
+import {
+  useGetSelectedQuestionById,
+  useUpdateQuestion,
+} from '@/hooks/queries/product';
 
-interface RequestModalProps {
+interface RequestUpdateModalProps {
   toggleModal: () => void;
+  selected: number;
 }
 
-const RequestModal = ({ toggleModal }: RequestModalProps) => {
-  const { id } = useParams().params;
-  const [category, setCategory] = useState('상품');
+const RequestUpdateModal = ({
+  toggleModal,
+  selected,
+}: RequestUpdateModalProps) => {
+  const {
+    data: question,
+    isLoading,
+    error,
+  } = useGetSelectedQuestionById(selected);
+  const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [secret, setSecret] = useState(false);
   const [contentError, setContentError] = useState(false);
   const [titleError, setTitleError] = useState(false);
-  const { mutate } = useCreateQuestion();
+  const { mutate } = useUpdateQuestion();
 
-  const handleOnSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const isPass = validateQuestion({
-      content,
-      title,
-      setTitleError,
-      setContentError,
-    });
-
-    if (!isPass) return;
-
-    const question = {
-      product_id: id,
-      category,
-      title,
-      content,
-      secret,
-    };
-
-    mutate(question);
-
-    toggleModal();
-  };
+  useEffect(() => {
+    setCategory(question?.category ?? '상품');
+    setTitle(question?.title ?? '');
+    setContent(question?.content ?? '');
+  }, [question?.category, question?.title, question?.content]);
 
   const handleOnChangeTitle = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +66,40 @@ const RequestModal = ({ toggleModal }: RequestModalProps) => {
     setSecret((prev) => !prev);
   }, []);
 
+  // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+
+  if (isLoading || !question) {
+    return <div>loading</div>;
+  }
+
+  const handleOnSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const isPass = validateQuestion({
+      content,
+      title,
+      setTitleError,
+      setContentError,
+    });
+
+    if (!isPass) return;
+
+    const newQuestion = {
+      product_id: question.product_id,
+      category,
+      title,
+      content,
+      secret,
+    };
+
+    mutate({ id: question?.id ?? 0, data: newQuestion });
+
+    toggleModal();
+  };
+
   return (
     <ModalLayout toggleModal={toggleModal}>
       <S.ModalHeader>상품문의 작성</S.ModalHeader>
@@ -84,7 +108,7 @@ const RequestModal = ({ toggleModal }: RequestModalProps) => {
         <Form onSubmit={handleOnSubmit} gap={2}>
           <div className="input-wrapper">
             <Title level={5}>문의 유형</Title>
-            <CategorySelector setCategory={setCategory} />
+            <CategorySelector selected={category} setCategory={setCategory} />
           </div>
           <div className="input-wrapper">
             <Title level={5}>비공개 여부</Title>
@@ -138,4 +162,4 @@ const RequestModal = ({ toggleModal }: RequestModalProps) => {
   );
 };
 
-export default RequestModal;
+export default RequestUpdateModal;

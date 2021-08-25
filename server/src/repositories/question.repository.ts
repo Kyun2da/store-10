@@ -1,6 +1,12 @@
 import { Question } from '@/entities/question.entity';
 import { User } from '@/entities/user.entity';
-import { EntityRepository, getCustomRepository, Repository } from 'typeorm';
+import {
+  DeleteResult,
+  EntityRepository,
+  getCustomRepository,
+  Repository,
+  UpdateResult,
+} from 'typeorm';
 
 const LIMIT = 10;
 
@@ -42,6 +48,16 @@ class QuestionRepository extends Repository<Question> {
     });
   }
 
+  findSelectedQuestiopn(id: string): Promise<Question> {
+    return this.findOne({ id: +id });
+  }
+
+  findProductQuestionCountByUser(user_id: number): Promise<number> {
+    return this.createQueryBuilder('question')
+      .where('question.user_id = :user_id', { user_id })
+      .getCount();
+  }
+
   findProductQuestionsCountById(product_id: string): Promise<number> {
     return this.createQueryBuilder('question')
       .where('question.product_id = :product_id', { product_id: +product_id })
@@ -51,6 +67,17 @@ class QuestionRepository extends Repository<Question> {
   createProductQuestion(questionInfo: Question): Promise<Question> {
     const question = this.create(questionInfo);
     return this.save(question);
+  }
+
+  deleteProductQuestion(id: string, user_id: number): Promise<DeleteResult> {
+    return this.delete({ user_id, id: +id });
+  }
+
+  updateProductQuestion(
+    id: number,
+    newQuestion: Question
+  ): Promise<UpdateResult> {
+    return this.update(id, newQuestion);
   }
 }
 

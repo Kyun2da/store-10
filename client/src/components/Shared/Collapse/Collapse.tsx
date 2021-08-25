@@ -5,6 +5,8 @@ import { dateFormat } from '@/utils/helper';
 import { notify } from '../Toastify';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
+import Dropdown from '@/components/Shared/Dropdown';
+import { IDropDownItem } from '../Dropdown/Dropdown';
 
 // TODO: ANY 안 쓰고 시퍼용
 
@@ -18,6 +20,8 @@ interface ICollapse<T> {
     value: string;
   }[];
   items: Array<T>;
+  noSecret?: boolean;
+  dropdownItems?: IDropDownItem[];
   gaps?: string; // '1fr 2fr 1fr 1fr 1fr'
   forNotice?: boolean; // only for Notice page
 }
@@ -26,6 +30,8 @@ const Collapse = <T extends ICollapseItem>({
   headers,
   items,
   gaps,
+  noSecret,
+  dropdownItems,
   forNotice,
 }: ICollapse<T>) => {
   const initialState = items.map(() => ``);
@@ -37,7 +43,7 @@ const Collapse = <T extends ICollapseItem>({
   const handleClickOnItem = (id: number, index: number) => {
     // TODO: user.name 이 고유값이 아니라면 user_id를 받아오도록 변경
     const seleted = items.filter((item) => item.id === id);
-    if (seleted[0].secret && seleted[0].name !== user?.name) {
+    if (!noSecret && seleted[0].secret && seleted[0].name !== user?.name) {
       return notify('error', '작성자와 관리자만 열람할 수 있습니다.');
     }
 
@@ -67,7 +73,11 @@ const Collapse = <T extends ICollapseItem>({
               gaps={gaps}
               length={headers.length}
               onClick={() => handleClickOnItem(item.id, idx)}
-              className={item.secret && item.name !== user?.name ? 'lock' : ''}
+              className={
+                !noSecret && item.secret && item.name !== user?.name
+                  ? 'lock'
+                  : ''
+              }
             >
               {headers.map((header) => {
                 // TODO: 삼항연산자 depth가 너무 깊어 좀 풀고 싶은데 좋은 방법이 떠오르지 않는군뇨..
@@ -112,6 +122,9 @@ const Collapse = <T extends ICollapseItem>({
                   <S.CollapseDetails>
                     <QuestionSVG />
                     <p>{item.content}</p>
+                    {noSecret && dropdownItems && (
+                      <Dropdown selectedId={item.id} items={dropdownItems} />
+                    )}
                   </S.CollapseDetails>
                   <S.CollapseDetails>
                     <AnswerSVG />

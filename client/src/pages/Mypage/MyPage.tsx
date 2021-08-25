@@ -8,12 +8,13 @@ import { Redirect } from '@/lib/Router';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import MyReviews from '@/components/MyPage/MyReviews';
+import MyQuestions from '@/components/MyPage/MyQuestions';
 
 const renderBody = (contentValue: string) => {
   // TODO: router Switch 사용 고민
   if (contentValue === 'orderHistroy') return <OrderHistory />;
   if (contentValue === 'coupon') return <div></div>;
-  if (contentValue === 'inqurey') return <div></div>;
+  if (contentValue === 'inqurey') return <MyQuestions />;
   if (contentValue === 'review') return <MyReviews />;
 
   return <div>404</div>;

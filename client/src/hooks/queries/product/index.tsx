@@ -10,13 +10,15 @@ import {
   deleteProductReview,
   getProductQuestionById,
   getProductQuestionCountById,
-  getSearchProducts,
   getProductReviewsByUser,
   postProductQuestion,
   getProductQuestionByUser,
   getProductSelectedReview,
   putProductReview,
   deleteProductReviewImage,
+  deleteProductQuestion,
+  putProductQuestion,
+  getProductSelectedQuestion,
 } from '@/lib/api/product';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
@@ -28,7 +30,7 @@ import {
   IReviewCountAndRating,
   IQuestionCount,
   IMyReview,
-  IReview,
+  IMyQuestion,
 } from '@/types/index';
 import { notify } from '@/components/Shared/Toastify';
 
@@ -57,7 +59,7 @@ export const useGetProductReviewsByUser = (offset: number) => {
 };
 
 export const useGetProductQuestionsByUser = (offset: number) => {
-  return useQuery<IProductQuestion[], Error>(
+  return useQuery<IMyQuestion, Error>(
     ['productQuestionUser', offset],
     () => getProductQuestionByUser(offset),
     { keepPreviousData: true }
@@ -67,6 +69,12 @@ export const useGetProductQuestionsByUser = (offset: number) => {
 export const useGetSelectedReviewById = (id: number) => {
   return useQuery<IProductReview, Error>(['selectedReview', id], () =>
     getProductSelectedReview(id)
+  );
+};
+
+export const useGetSelectedQuestionById = (id: number) => {
+  return useQuery<IProductQuestion, Error>(['selectedQuestion', id], () =>
+    getProductSelectedQuestion(id)
   );
 };
 
@@ -156,6 +164,21 @@ export const useUpdateReview = () => {
   return mutation;
 };
 
+export const useUpdateQuestion = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(putProductQuestion, {
+    onSuccess: () => {
+      notify('success', '해당 문의를 성공적으로 수정했습니다.');
+      queryClient.invalidateQueries('productQuestionUser');
+    },
+    onError: () => {
+      notify('error', '문의를 수정하는데 실패했습니다..!');
+    },
+  });
+
+  return mutation;
+};
+
 export const useDeleteReview = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation(deleteProductReview, {
@@ -165,6 +188,21 @@ export const useDeleteReview = () => {
     },
     onError: () => {
       notify('error', '리뷰를 제거하는데 실패했습니다..!');
+    },
+  });
+
+  return mutation;
+};
+
+export const useDeleteQuestion = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(deleteProductQuestion, {
+    onSuccess: () => {
+      notify('success', '해당 문의를 성공적으로 제거했습니다.');
+      queryClient.invalidateQueries('productQuestionUser');
+    },
+    onError: () => {
+      notify('error', '문의를 제거하는데 실패했습니다..!');
     },
   });
 

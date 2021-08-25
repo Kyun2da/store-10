@@ -16,15 +16,7 @@ import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import { notify } from '@/components/Shared/Toastify';
 import { QUESTION_LIMIT } from '@/utils/constant/offsetLimit';
-
-const headers = [
-  { name: '번호', value: 'id' },
-  { name: '유형', value: 'category' },
-  { name: '제목', value: 'title' },
-  { name: '작성자', value: 'name' },
-  { name: '작성일', value: 'createdAt' },
-  { name: '답변', value: 'answer' },
-];
+import { QUESTION_HEADER } from '@/utils/constant/CollapseHeaders';
 
 const ProductRequest = () => {
   const { id } = useParams().params;
@@ -71,7 +63,7 @@ const ProductRequest = () => {
       </S.TopArea>
 
       <Collapse
-        headers={headers}
+        headers={QUESTION_HEADER}
         items={questions}
         gaps="1fr 1fr 4fr 1fr 1fr 1fr"
       />

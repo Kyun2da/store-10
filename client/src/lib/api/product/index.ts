@@ -10,6 +10,7 @@ import {
   IProductQuestion,
   IQuestionCount,
   IMyReview,
+  IMyQuestion,
 } from '@/types';
 
 export const getProductById = async (id: string) => {
@@ -31,9 +32,7 @@ export const getProductReviewsByUser = async (offset: number) => {
 };
 
 export const getProductQuestionByUser = async (offset: number) => {
-  return await client.get<IProductQuestion[]>(
-    `/product/question/user/${offset}`
-  );
+  return await client.get<IMyQuestion>(`/product/question/user/${offset}`);
 };
 
 export const getProductReviewsCountById = async (id: string) => {
@@ -46,6 +45,10 @@ export const getProductQuestionCountById = async (id: string) => {
 
 export const getProductSelectedReview = async (id: number) => {
   return await client.get<IProductReview>(`/product/review/${id}`);
+};
+
+export const getProductSelectedQuestion = async (id: number) => {
+  return await client.get<IProductQuestion>(`/product/question/${id}`);
 };
 
 export const getRecommandProducts = async () => {
@@ -108,8 +111,22 @@ export const putProductReview = async ({
   return await client.put<IReview>(`/product/review/${id}`, data);
 };
 
+export const putProductQuestion = async ({
+  id,
+  data,
+}: {
+  id: number;
+  data: IProductQuestion;
+}) => {
+  return await client.put<IProductQuestion>(`/product/question/${id}`, data);
+};
+
 export const deleteProductReview = async (id: number) => {
   return await client.delete(`/product/review/${id}`);
+};
+
+export const deleteProductQuestion = async (id: number) => {
+  return await client.delete(`/product/question/${id}`);
 };
 
 export const deleteProductReviewImage = async ({

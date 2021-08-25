@@ -61,7 +61,6 @@ class ProductController {
 
   async getSelectedReviewInfo(req: Request, res: Response) {
     const { id } = req.params;
-    console.log(id);
     const review = await ProductService.getProductReviewById(id);
 
     if (!review) {
@@ -73,6 +72,26 @@ class ProductController {
     }
 
     return ApiResponse(res, HttpStatusCode.OK, '선택한 리뷰 조회 성공', review);
+  }
+
+  async getSelectedQuestionInfo(req: Request, res: Response) {
+    const { id } = req.params;
+    const question = await ProductService.getProductQuestionById(id);
+
+    if (!question) {
+      return ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '선택 상품에 대한 문의 조회 에러'
+      );
+    }
+
+    return ApiResponse(
+      res,
+      HttpStatusCode.OK,
+      '선택한 문의 조회 성공',
+      question
+    );
   }
 
   async postProductReviewById(req: Request, res: Response) {
@@ -112,9 +131,7 @@ class ProductController {
 
     const files = req.files as Express.MulterS3.File[];
     const data = req.body;
-    const newReview = {
-      ...data,
-    };
+    const newReview = { ...data };
 
     const result = await ProductService.updateReviewById(+id, newReview);
 
@@ -133,8 +150,21 @@ class ProductController {
       }
     }
 
-    if (!result) {
+    if (!result.affected) {
       return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰수정 실패');
+    }
+    return ApiResponse(res, HttpStatusCode.NO_CONTENT);
+  }
+
+  async putProductQuestionById(req: Request, res: Response) {
+    const { id } = req.params;
+    const data = req.body;
+    const newQuestion = { ...data };
+
+    const result = await ProductService.updateQuestionById(+id, newQuestion);
+
+    if (!result.affected) {
+      return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '문의수정 실패');
     }
     return ApiResponse(res, HttpStatusCode.NO_CONTENT);
   }
@@ -179,6 +209,18 @@ class ProductController {
 
     if (!result.affected) {
       return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰삭제 실패');
+    }
+    return ApiResponse(res, HttpStatusCode.NO_CONTENT);
+  }
+
+  async deleteProductQuestionById(req: Request, res: Response) {
+    const user_id = req.user.id;
+    const { id } = req.params;
+
+    const result = await ProductService.deleteQuestionById(id, user_id);
+
+    if (!result.affected) {
+      return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '문의삭제 실패');
     }
     return ApiResponse(res, HttpStatusCode.NO_CONTENT);
   }
@@ -257,19 +299,25 @@ class ProductController {
   async getProductQuestionByUserId(req: Request, res: Response) {
     const { offset } = req.params;
     const user_id = req.user.id as number;
-    const result = await ProductService.getProductQuestionByUserId(
+    const questions = await ProductService.getProductQuestionByUserId(
       user_id,
       offset
     );
+    const count = await ProductService.getProductQuestionsCountByUserId(
+      user_id
+    );
 
-    if (!result) {
+    if (!questions) {
       return ApiResponse(
         res,
         HttpStatusCode.BAD_REQUEST,
         '문의 조회에서 에러가 발생했습니다.'
       );
     }
-    return ApiResponse(res, HttpStatusCode.OK, '문의 조회 성공', result);
+    return ApiResponse(res, HttpStatusCode.OK, '문의 조회 성공', {
+      questions,
+      count,
+    });
   }
 
   async serchElasticProduct(req: Request, res: Response) {

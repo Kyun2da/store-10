@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import { MoreButtonSVG } from '@/assets/svgs';
 import useDropdown from '@/hooks/useDropdown';
 
-interface IDropDownItem {
+export interface IDropDownItem {
   content: string;
   color: string;
   onClickListener: (target: number) => void;

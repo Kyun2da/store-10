@@ -79,6 +79,11 @@ class ProductService {
     return await productReviewRepo.findProductReviewsCountByUser(user_id);
   }
 
+  async getProductQuestionsCountByUserId(user_id: number) {
+    const productQuestionRepo = ProductQuestionRepository();
+    return await productQuestionRepo.findProductQuestionCountByUser(user_id);
+  }
+
   async getProductQuestionByUserId(user_id: number, offset: string) {
     const productQuestionRepo = ProductQuestionRepository();
     return await productQuestionRepo.findProductQuestionByUserId(
@@ -107,6 +112,11 @@ class ProductService {
     return { ...review, url };
   }
 
+  async getProductQuestionById(id: string) {
+    const productQuestionRepo = ProductQuestionRepository();
+    return await productQuestionRepo.findSelectedQuestiopn(id);
+  }
+
   async createReview(review: Review) {
     const productReviewRepo = ProductReviewRepository();
     return await productReviewRepo.createProductReview(review);
@@ -127,9 +137,19 @@ class ProductService {
     return await productReviewRepo.deleteProductReview(id, user_id);
   }
 
+  async deleteQuestionById(id: string, user_id: number) {
+    const productQuestionRepo = ProductQuestionRepository();
+    return await productQuestionRepo.deleteProductQuestion(id, user_id);
+  }
+
   async updateReviewById(id: number, review: Review) {
     const productReviewRepo = ProductReviewRepository();
     return await productReviewRepo.updateProductReview(id, review);
+  }
+
+  async updateQuestionById(id: number, question: Question) {
+    const productQuestionRepo = ProductQuestionRepository();
+    return await productQuestionRepo.updateProductQuestion(id, question);
   }
 
   async deleteReviewImageById(review_id: number, url: string) {

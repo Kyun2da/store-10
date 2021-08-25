@@ -30,6 +30,7 @@ router.get(
 );
 
 // Product-Question 조회 관련
+router.get('/question/:id', authJWT, ProductController.getSelectedQuestionInfo);
 router.get(
   '/question/user/:offset',
   authJWT,
@@ -61,6 +62,11 @@ router.delete(
   authJWT,
   ProductController.deleteProductReviewImageById
 );
+router.delete(
+  `/question/:id`,
+  authJWT,
+  ProductController.deleteProductQuestionById
+);
 
 // @@--- PUT 요청 ---@@ //
 router.put(
@@ -69,5 +75,6 @@ router.put(
   multerS3.array('images', 3),
   ProductController.putProuctReviewById
 );
+router.put('/question/:id', authJWT, ProductController.putProductQuestionById);
 
 export default router;

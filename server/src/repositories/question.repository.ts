@@ -5,6 +5,7 @@ import {
   EntityRepository,
   getCustomRepository,
   Repository,
+  UpdateResult,
 } from 'typeorm';
 
 const LIMIT = 10;
@@ -70,6 +71,13 @@ class QuestionRepository extends Repository<Question> {
 
   deleteProductQuestion(id: string, user_id: number): Promise<DeleteResult> {
     return this.delete({ user_id, id: +id });
+  }
+
+  updateProductQuestion(
+    id: number,
+    newQuestion: Question
+  ): Promise<UpdateResult> {
+    return this.update(id, newQuestion);
   }
 }
 

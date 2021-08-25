@@ -75,5 +75,6 @@ router.put(
   multerS3.array('images', 3),
   ProductController.putProuctReviewById
 );
+router.put('/question/:id', authJWT, ProductController.putProductQuestionById);
 
 export default router;

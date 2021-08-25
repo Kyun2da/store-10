@@ -131,9 +131,7 @@ class ProductController {
 
     const files = req.files as Express.MulterS3.File[];
     const data = req.body;
-    const newReview = {
-      ...data,
-    };
+    const newReview = { ...data };
 
     const result = await ProductService.updateReviewById(+id, newReview);
 
@@ -152,8 +150,21 @@ class ProductController {
       }
     }
 
-    if (!result) {
+    if (!result.affected) {
       return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '리뷰수정 실패');
+    }
+    return ApiResponse(res, HttpStatusCode.NO_CONTENT);
+  }
+
+  async putProductQuestionById(req: Request, res: Response) {
+    const { id } = req.params;
+    const data = req.body;
+    const newQuestion = { ...data };
+
+    const result = await ProductService.updateQuestionById(+id, newQuestion);
+
+    if (!result.affected) {
+      return ApiResponse(res, HttpStatusCode.BAD_REQUEST, '문의수정 실패');
     }
     return ApiResponse(res, HttpStatusCode.NO_CONTENT);
   }

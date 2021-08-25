@@ -147,6 +147,11 @@ class ProductService {
     return await productReviewRepo.updateProductReview(id, review);
   }
 
+  async updateQuestionById(id: number, question: Question) {
+    const productQuestionRepo = ProductQuestionRepository();
+    return await productQuestionRepo.updateProductQuestion(id, question);
+  }
+
   async deleteReviewImageById(review_id: number, url: string) {
     const productReviewImageRepo = ProductReviewImageRepository();
     return await productReviewImageRepo.deleteReviewImage(review_id, url);

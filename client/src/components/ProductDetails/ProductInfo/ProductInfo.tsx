@@ -4,7 +4,7 @@ import { HeartSVG, CartSVG } from '@/assets/svgs';
 import { NumberInput } from '@/components/Shared/Input';
 import Title from '@/components/Shared/Title';
 import useNumberInput from '@/hooks/useNumberInput';
-import { wonFormat } from '@/utils/helper';
+import { calculateDiscount, wonFormat } from '@/utils/helper';
 import { usePostCart } from '@/hooks/queries/cart';
 import { useGetProductById } from '@/hooks/queries/product';
 import { useParams } from '@/lib/Router';
@@ -64,9 +64,11 @@ const ProductInfo = () => {
   }
 
   const { details, thumbnails } = data;
-  const { title, price } = details;
+  const { title, price, discount } = details;
   const [thumbDetails, thumbOrigins, thumbThumbnails] =
     thumbnailsParser(thumbnails);
+
+  const realPrice = calculateDiscount({ price, discount });
 
   return (
     <S.ProductInfo>
@@ -80,7 +82,11 @@ const ProductInfo = () => {
         <S.ProductDetailArea>
           <S.ProductDetail>
             <Title level={5}>판매가격</Title>
-            <span className="detail-content">{wonFormat(price)}</span>
+            {!!discount && <span className="price original">{price}원 </span>}
+            <span className="detail-content">{wonFormat(realPrice)}</span>
+            {!!discount && (
+              <span className="price discount">{discount}% 할인</span>
+            )}
           </S.ProductDetail>
           <S.ProductDetail>
             <Title level={5}>배송정보</Title>
@@ -105,14 +111,14 @@ const ProductInfo = () => {
             handleClickOnMinus={handleClickOnMinus}
             handleClickOnPlus={handleClickOnPlus}
           />
-          <p className="price">{wonFormat(price)}</p>
+          <p className="price">{wonFormat(realPrice)}</p>
         </S.OrderBar>
 
         <S.Divider />
 
         <S.PriceBar>
           <Title level={5}>총 합계금액</Title>
-          <span className="price-sum">{wonFormat(+price * value)}</span>
+          <span className="price-sum">{wonFormat(realPrice * value)}</span>
         </S.PriceBar>
 
         {/* LINK 이동 및 버튼 클릭 핸들러 구현해야함 */}

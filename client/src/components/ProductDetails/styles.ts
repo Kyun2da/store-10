@@ -87,6 +87,24 @@ export const ProductDetail = styled.div`
   display: flex;
   gap: 2rem;
 
+  .price {
+    ${({ theme }) => theme.fontSize.m};
+    ${({ theme }) => theme.fontWeight.m};
+
+    &.original {
+      text-decoration: line-through;
+    }
+
+    &.discount {
+      padding: 0 1rem;
+      border-radius: 1rem;
+      line-height: 1.8rem;
+      color: #fff;
+      background-color: ${({ theme }) => theme.color.error};
+      ${({ theme }) => theme.fontWeight.l};
+    }
+  }
+
   .detail-content {
     ${({ theme }) => theme.fontSize.m};
     ${({ theme }) => theme.fontWeight.m};

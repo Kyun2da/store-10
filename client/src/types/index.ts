@@ -144,6 +144,7 @@ export interface ILoginUser {
 export interface ISearchData {
   id: number;
   price: number;
+  discount: number;
   image: string;
   title: string;
 }

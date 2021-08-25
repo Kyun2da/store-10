@@ -8,14 +8,14 @@ export const Card = styled.li`
   height: 100%;
   flex-direction: column;
   color: ${({ theme }) => theme.color['text-color']};
+  background: ${({ theme }) => theme.color['background']};
   overflow: hidden;
   border-radius: 0.5rem;
   transition: transform 0.12s ease-in;
 
-  border: 1px solid #ccd3d3;
   /* Elevation1 */
 
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 5px ${({ theme }) => theme.color['label']};
   border-radius: 10px;
 
   &:hover {

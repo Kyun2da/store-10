@@ -5,7 +5,7 @@ import { orderItemLists } from '@/dummies/orderHistory';
 import OrderItemList from './';
 
 export default {
-  title: '컴포넌트/마이페이지-주문내역아이템',
+  title: '컴포넌트/마이페이지/주문내역/아이템',
   component: OrderItemList,
 } as ComponentMeta<typeof OrderItemList>;
 

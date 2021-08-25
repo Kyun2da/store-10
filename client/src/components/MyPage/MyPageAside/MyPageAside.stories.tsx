@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import MyPageAside from '.';
 
 export default {
-  title: '컴포넌트/마이페이지 aside',
+  title: '컴포넌트/마이페이지/사이드바',
   component: MyPageAside,
 } as ComponentMeta<typeof MyPageAside>;
 

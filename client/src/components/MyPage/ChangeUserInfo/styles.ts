@@ -30,7 +30,7 @@ export const PasswordContainer = styled.form`
   }
 `;
 
-export const NickNameContainer = styled.div`
+export const NickNameContainer = styled.form`
   display: flex;
   position: relative;
   padding: 8rem;
@@ -43,7 +43,7 @@ export const NickNameContainer = styled.div`
   }
 `;
 
-export const NewPasswordContainer = styled.div`
+export const NewPasswordContainer = styled.form`
   display: flex;
   position: relative;
   flex-direction: column;

@@ -12,6 +12,7 @@ export interface IUser {
   id: number;
   user_id: string;
   name: string;
+  is_oauth: boolean;
 }
 
 export interface IProductImage {

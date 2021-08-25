@@ -60,6 +60,7 @@ const SearchProducts = ({ ...props }: IProps) => {
         <Card
           linkId={item.id}
           key={item.id}
+          discount={item.discount}
           bgColor="primary"
           src={item.productImage[0].url}
           price={item.price}

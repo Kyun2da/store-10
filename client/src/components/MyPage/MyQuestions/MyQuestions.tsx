@@ -12,10 +12,13 @@ import {
 } from '@/hooks/queries/product';
 import { MY_QUESTION_HEADER } from '@/utils/constant/CollapseHeaders';
 import { QUESTION_LIMIT } from '@/utils/constant/offsetLimit';
+import { RequestUpdateModal } from '@/components/Shared/Modal';
+import { notify } from '@/components/Shared/Toastify';
 
 const MyQuestions = () => {
   const [offset, handleOnClickPage] = usePagination(QUESTION_LIMIT);
   const [isOpenRemoveModal, toggleRemoveModal] = useModal(false);
+  const [isOpenUpdateModal, toggleUpdateModal] = useModal(false);
   const [seletedQuestion, setSelectedQuestion] = useState(0);
   const { data, isLoading, error } = useGetProductQuestionsByUser(offset);
   const { mutate: removeQuestion } = useDeleteQuestion();
@@ -28,6 +31,8 @@ const MyQuestions = () => {
     return <div>error</div>;
   }
 
+  const { questions, count } = data;
+
   const handleRemoveOnQuestion = () => {
     removeQuestion(seletedQuestion);
     toggleRemoveModal();
@@ -38,11 +43,24 @@ const MyQuestions = () => {
     toggleRemoveModal();
   };
 
+  const handleUpdateQuestion = (target: number) => {
+    const seleted = questions.filter(
+      (question) => question.answer && question.id === target
+    )[0];
+
+    if (seleted) {
+      return notify('error', '완료된 문의는 더 이상 수정하실 수 없습니다.');
+    }
+
+    setSelectedQuestion(target);
+    toggleUpdateModal();
+  };
+
   const dropdownItems = [
     {
       content: '수정하기',
       color: '#111',
-      onClickListener: () => console.log('수정'),
+      onClickListener: handleUpdateQuestion,
     },
     {
       content: '삭제하기',
@@ -50,8 +68,6 @@ const MyQuestions = () => {
       onClickListener: handleRemoveQuestion,
     },
   ];
-
-  const { questions, count } = data;
 
   return (
     <S.MyQuestions>
@@ -74,6 +90,13 @@ const MyQuestions = () => {
         <DeleteConfirmModal
           removeSelected={handleRemoveOnQuestion}
           toggleModal={toggleRemoveModal}
+        />
+      )}
+
+      {isOpenUpdateModal && (
+        <RequestUpdateModal
+          selected={seletedQuestion}
+          toggleModal={toggleUpdateModal}
         />
       )}
     </S.MyQuestions>

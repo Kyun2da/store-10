@@ -5,6 +5,7 @@ import UserService from '../services/user.service';
 import JwtService from '@/services/jwt.service';
 import ApiResponse from '@/api/middlewares/response-format';
 import HttpStatusCode from '@/types/statusCode';
+import userRepository from '@/repositories/user.repository';
 
 class AuthController {
   async callback(req: Request, res: Response) {
@@ -12,16 +13,39 @@ class AuthController {
     const token = await AuthService.getGitAccessToken(code as string);
     const gitUser = await AuthService.getGitUserInfo(token);
     const jwtRefreshToken = JwtService.refresh();
-    const { user_id, name, id } = await UserService.createUser({
-      ...gitUser,
-      is_oauth: true,
-      refreshToken: jwtRefreshToken,
-    });
-    const jwtAccessToken = JwtService.generate({ user_id, name, id });
 
-    res.cookie('refreshToken', jwtRefreshToken, { path: '/', httpOnly: true });
-    res.cookie('accessToken', jwtAccessToken, { path: '/', httpOnly: true });
-    //redirect 호스트 주소와 서버 호스트 주소가 다르면 httpOnly 쿠키값이 저장 안됨. (포트는 상관없음.)
+    const user = await userRepository().findUserById(gitUser.user_id);
+    if (user) {
+      const { user_id, name, id, is_oauth } = user;
+      const jwtAccessToken = JwtService.generate({
+        user_id,
+        name,
+        id,
+        is_oauth,
+      });
+      res.cookie('refreshToken', jwtRefreshToken, {
+        path: '/',
+        httpOnly: true,
+      });
+      res.cookie('accessToken', jwtAccessToken, { path: '/', httpOnly: true });
+    } else {
+      const { user_id, name, id, is_oauth } = await UserService.createUser({
+        ...gitUser,
+        is_oauth: true,
+        refreshToken: jwtRefreshToken,
+      });
+      const jwtAccessToken = JwtService.generate({
+        user_id,
+        name,
+        id,
+        is_oauth,
+      });
+      res.cookie('refreshToken', jwtRefreshToken, {
+        path: '/',
+        httpOnly: true,
+      });
+      res.cookie('accessToken', jwtAccessToken, { path: '/', httpOnly: true });
+    }
 
     res.redirect(config.CLIENT_URL);
     res.end();
@@ -49,8 +73,8 @@ class AuthController {
     } else if (_user.passwordError) {
       ApiResponse(res, HttpStatusCode.UNAUTHORIZED, '비밀번호가 다릅니다.');
     }
-    const { name, id, refreshToken } = _user;
-    const jwtAccessToken = JwtService.generate({ user_id, name, id });
+    const { name, id, refreshToken, is_oauth } = _user;
+    const jwtAccessToken = JwtService.generate({ user_id, name, id, is_oauth });
 
     res.cookie('refreshToken', refreshToken, { path: '/', httpOnly: true });
     res.cookie('accessToken', jwtAccessToken, { path: '/', httpOnly: true });
@@ -58,12 +82,13 @@ class AuthController {
   }
 
   async check(req: Request, res: Response) {
-    const { id, user_id, name } = req.user;
+    const { id, user_id, name, is_oauth } = req.user;
 
     ApiResponse(res, HttpStatusCode.OK, '로그인 중입니다.', {
       id,
       user_id,
       name,
+      is_oauth,
     });
   }
 

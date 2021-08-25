@@ -64,6 +64,7 @@ const Input = ({
       setFocus((value) => !value);
     }
   };
+  const isLabelFocusing = String(value).length > 0;
 
   return (
     <S.InputContainer
@@ -72,7 +73,7 @@ const Input = ({
     >
       {labelName ? (
         <S.Label
-          className={isFocus ? 'focusing' : ''}
+          className={isLabelFocusing || isFocus ? 'focusing' : ''}
           onClick={onClickLabel}
           label={label}
           error={error}

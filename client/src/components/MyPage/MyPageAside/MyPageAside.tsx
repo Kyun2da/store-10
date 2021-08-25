@@ -19,7 +19,9 @@ interface IMyPageNavigation {
 const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
   const [user, setUser] = useRecoilState(userState);
   const renderNavigations = () => {
-    return MY_PAGE_NAVIGATIONS.map((nav: IMyPageNavigation) => (
+    return MY_PAGE_NAVIGATIONS.filter(
+      (item) => item.value !== 'changeUserInfo'
+    ).map((nav: IMyPageNavigation) => (
       <li
         key={nav.value}
         onClick={() => setContentValue(nav.value)}
@@ -31,6 +33,11 @@ const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
   };
 
   const { historyPush } = useHistory();
+
+  const onClickChangeUserInfo = () => {
+    setContentValue('changeUserInfo');
+  };
+
   const onClickLogout = async () => {
     await logout();
     setUser(null);
@@ -43,7 +50,7 @@ const MyPageAside = ({ setContentValue, contentValue }: IMypageAsideProps) => {
         <S.MyPageGreeting>안녕하세요,</S.MyPageGreeting>
         <S.MyPageUserName>{user?.name}님!</S.MyPageUserName>
         <footer>
-          <button>회원 정보 변경</button>
+          <button onClick={onClickChangeUserInfo}>회원 정보 변경</button>
           <button onClick={onClickLogout}>로그아웃</button>
         </footer>
       </S.MyPageUserInfo>

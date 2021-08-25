@@ -28,9 +28,6 @@ export class User extends InitEntity {
   @Column()
   name!: string;
 
-  // @Column({ type: 'tinyint', default: true })
-  // coupon?: boolean;
-
   @Column({ type: 'tinyint', default: false })
   is_oauth?: boolean;
 

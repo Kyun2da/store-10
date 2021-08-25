@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import OrderHistory from './OrderHistory';
 
 export default {
-  title: '페이지/마이페이지-주문내역',
+  title: '페이지/마이페이지/주문내역',
   component: OrderHistory,
 } as ComponentMeta<typeof OrderHistory>;
 

@@ -14,10 +14,11 @@ export const calculateDiscount = ({
   price,
   discount,
 }: {
-  price: number;
+  price: number | string;
   discount: number;
 }) => {
-  return price - Math.floor((price * (discount / 100)) / 10) * 10;
+  const _price = typeof price === 'string' ? +price : price;
+  return _price - Math.floor((_price * (discount / 100)) / 10) * 10;
 };
 
 export const dateFormat = (date: string, seperator = '-') => {

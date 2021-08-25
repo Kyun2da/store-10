@@ -61,7 +61,6 @@ class ProductController {
 
   async getSelectedReviewInfo(req: Request, res: Response) {
     const { id } = req.params;
-    console.log(id);
     const review = await ProductService.getProductReviewById(id);
 
     if (!review) {
@@ -73,6 +72,26 @@ class ProductController {
     }
 
     return ApiResponse(res, HttpStatusCode.OK, '선택한 리뷰 조회 성공', review);
+  }
+
+  async getSelectedQuestionInfo(req: Request, res: Response) {
+    const { id } = req.params;
+    const question = await ProductService.getProductQuestionById(id);
+
+    if (!question) {
+      return ApiResponse(
+        res,
+        HttpStatusCode.BAD_REQUEST,
+        '선택 상품에 대한 문의 조회 에러'
+      );
+    }
+
+    return ApiResponse(
+      res,
+      HttpStatusCode.OK,
+      '선택한 문의 조회 성공',
+      question
+    );
   }
 
   async postProductReviewById(req: Request, res: Response) {

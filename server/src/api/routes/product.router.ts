@@ -30,6 +30,7 @@ router.get(
 );
 
 // Product-Question 조회 관련
+router.get('/question/:id', authJWT, ProductController.getSelectedQuestionInfo);
 router.get(
   '/question/user/:offset',
   authJWT,

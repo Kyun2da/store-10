@@ -112,6 +112,11 @@ class ProductService {
     return { ...review, url };
   }
 
+  async getProductQuestionById(id: string) {
+    const productQuestionRepo = ProductQuestionRepository();
+    return await productQuestionRepo.findSelectedQuestiopn(id);
+  }
+
   async createReview(review: Review) {
     const productReviewRepo = ProductReviewRepository();
     return await productReviewRepo.createProductReview(review);

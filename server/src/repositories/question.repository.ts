@@ -47,6 +47,10 @@ class QuestionRepository extends Repository<Question> {
     });
   }
 
+  findSelectedQuestiopn(id: string): Promise<Question> {
+    return this.findOne({ id: +id });
+  }
+
   findProductQuestionCountByUser(user_id: number): Promise<number> {
     return this.createQueryBuilder('question')
       .where('question.user_id = :user_id', { user_id })

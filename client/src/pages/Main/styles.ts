@@ -7,4 +7,16 @@ export const Main = styled.div`
     ${({ theme }) => theme.fontSize.l};
     margin: 3rem 0 1rem;
   }
+
+  section {
+    > div:first-child {
+      max-width: ${({ theme }) => theme.media.pc}px;
+      margin: 0 auto;
+      padding: 1rem 0;
+      width: 95%;
+    }
+    &:nth-child(2n) {
+      background: ${({ theme }) => theme.color['background']};
+    }
+  }
 `;

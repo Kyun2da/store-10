@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './styles';
 import { FaxSVG, InstagramSVG, EmailSVG } from '@/assets/svgs';
 import { Link } from '@/lib/Router';
+import Logo from '@/components/Shared/Logo';
 
 const Footer = () => {
   return (
@@ -43,10 +44,7 @@ const Footer = () => {
       <S.FooterBottom className="container">
         <p></p>
         <p>© Woowa Brothers Corp. All right Reserved</p>
-        <S.Logo
-          src="https://store-10.s3.ap-northeast-2.amazonaws.com/test/logo.png"
-          alt="로고이미지"
-        />
+        <Logo width={150} />
       </S.FooterBottom>
     </S.Footer>
   );

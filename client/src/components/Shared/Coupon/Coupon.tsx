@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from '../Logo';
 import * as S from './styles';
 
 interface ICoupon {
@@ -23,10 +24,7 @@ const Coupon = ({ name, amount, isValid }: ICoupon) => {
           <span className="usable">{isValid ? '사용가능' : '사용불가'}</span>
         </S.CouponHeader>
         <S.CouponDetail>
-          <S.LogoImage
-            src="https://store-10.s3.ap-northeast-2.amazonaws.com/test/logo.png"
-            alt="홈페이지 로고 이미지"
-          />
+          <Logo width={100} />
           <S.Discount isValid={isValid}>
             {amount}
             <span> %</span>

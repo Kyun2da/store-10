@@ -73,11 +73,6 @@ export const CouponHeader = styled.div<ValidCoupon>`
   }
 `;
 
-export const LogoImage = styled.img`
-  width: 6em;
-  height: 4rem;
-`;
-
 export const CouponDetail = styled.div`
   display: flex;
   justify-content: space-between;

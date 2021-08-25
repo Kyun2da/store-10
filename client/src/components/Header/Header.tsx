@@ -5,9 +5,9 @@ import * as S from './styles';
 import { Link } from '@/lib/Router';
 import Sidebar from './Sidebar';
 import Search from './Search';
-import { SITE_TITLE } from '@/utils/constant/common';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
+import Logo from '@/components/Shared/Logo';
 
 export const Links = () => {
   const [user] = useRecoilState(userState);
@@ -44,7 +44,9 @@ const Header = () => {
               <MenuSVG />
             </S.MenuButton>
             <Link to="/">
-              <S.Logo>{SITE_TITLE}</S.Logo>
+              <S.Logo>
+                <Logo width={150} />
+              </S.Logo>
             </Link>
           </S.Menu>
           <S.SearchWrapper onClick={searchWrapToggle}>

@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import notify from '@/components/Shared/Toastify/notify';
 
 const useNumberInput = (initalValue?: number) => {
   const [value, setValue] = useState(initalValue ?? 0);
@@ -14,7 +15,31 @@ const useNumberInput = (initalValue?: number) => {
     setValue((value) => value - 1);
   }, [value]);
 
-  return [value, handleClickOnMinus, handleClickOnPlus] as const;
+  const handleOnChnage = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const {
+        target: { value },
+      } = e;
+
+      if (+value < 1) {
+        return notify('error', '1보다 작은 값은 입력하실 수 없어요!');
+      }
+
+      if (+value > 100) {
+        return notify('error', '100보다 큰 값은 입력하실 수 없어요!');
+      }
+
+      setValue(+value);
+    },
+    []
+  );
+
+  return [
+    value,
+    handleOnChnage,
+    handleClickOnMinus,
+    handleClickOnPlus,
+  ] as const;
 };
 
 export default useNumberInput;

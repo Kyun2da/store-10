@@ -41,9 +41,7 @@ const SearchItem = ({ ...props }: Prop) => {
         <>
           <S.RecentTitle>Elastic Search</S.RecentTitle>
           {searchData && (
-            <S.RecentSearchUl>
-              <S.SearchItemWrapper>{renderProducts()}</S.SearchItemWrapper>
-            </S.RecentSearchUl>
+            <S.SearchItemWrapper>{renderProducts()}</S.SearchItemWrapper>
           )}
         </>
       ) : (

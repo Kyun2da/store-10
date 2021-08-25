@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const SignUpContainer = styled.div`
-  max-width: 420px;
+  width: 420px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  width: 100%;
   text-align: center;
   margin: auto;
 

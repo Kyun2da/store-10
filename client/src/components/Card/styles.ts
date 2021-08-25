@@ -92,7 +92,6 @@ export const ThumbnailWrapper = styled.div`
     ${({ theme }) => theme.fontSize.m};
     ${({ theme }) => theme.fontWeight.s};
     display: inline-block;
-    width: 22rem;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1em;
@@ -125,6 +124,7 @@ export const ProductDetails = styled.div`
     margin-left: 1rem;
 
     &.strikethrough {
+      ${({ theme }) => theme.fontSize.s};
       text-decoration: line-through;
       color: ${({ theme }) => theme.color['text-color']}55;
       margin-bottom: 0.5rem;

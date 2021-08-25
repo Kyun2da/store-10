@@ -61,13 +61,13 @@ const ChangeUserInfo = () => {
 
   const rePasswordCheck = useCallback(
     ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-      if (validateRePassword(target.value, password)) {
+      if (validateRePassword(target.value, newPw)) {
         setError({ ...error, rePassword: false });
       } else {
         setError({ ...error, rePassword: true });
       }
     },
-    [password, error]
+    [newPw, error]
   );
 
   const onClickChangePassword = async () => {

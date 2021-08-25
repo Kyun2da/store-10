@@ -39,6 +39,8 @@ const ProductThumbnails = ({
     const zoomedBox = zoomedImg.current;
     const target = e.currentTarget;
 
+    !isLensed && handleOnMuseover(zoomedBox, target);
+
     if (lenserBox && zoomedBox) {
       const { posX, posY, ratioX, ratioY } = calculatePos({
         clientX: e.clientX,
@@ -52,10 +54,10 @@ const ProductThumbnails = ({
     }
   };
 
-  const handleOnMuseover = (e: React.MouseEvent) => {
-    const zoomedBox = zoomedImg.current;
-    const target = e.currentTarget;
-
+  const handleOnMuseover = (
+    zoomedBox: HTMLDivElement | null,
+    target: EventTarget & Element
+  ) => {
     const { width, height } = target.getBoundingClientRect();
 
     if (zoomedBox) {
@@ -71,7 +73,6 @@ const ProductThumbnails = ({
         src={selectedThumbnail.url}
         alt="상품 섬네일 이미지"
         onMouseMove={(e) => handleOnMousemove(e)}
-        onMouseOver={(e) => handleOnMuseover(e)}
         onMouseLeave={() => setIsLensed(false)}
       />
       {isLensed && (

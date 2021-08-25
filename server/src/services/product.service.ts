@@ -166,6 +166,7 @@ class ProductService {
       return {
         id: row._source.id,
         price: row._source.price,
+        discount: row._source.discount,
         title: row._source.title,
         image: row._source.image,
       };
@@ -174,10 +175,7 @@ class ProductService {
     return data;
   }
 
-  async searchProductTitle({
-    searchText,
-    start,
-  }: Record<string, string>) {
+  async searchProductTitle({ searchText, start }: Record<string, string>) {
     const productRepo = await ProductRepository().getProductsByTitle({
       searchText,
       start,

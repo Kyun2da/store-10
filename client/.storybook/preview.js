@@ -15,13 +15,6 @@ addDecorator(mswDecorator);
 addDecorator(jsxDecorator);
 addDecorator(withThemesProvider(themes), ThemeProvider);
 
-import isChromatic from 'chromatic/isChromatic';
-
-if (isChromatic()) {
-  // The exact method to do this will depend on your animation techniques.
-  AnimationLibrary.disable = true;
-}
-
 const queryClient = new QueryClient();
 
 export const decorators = [

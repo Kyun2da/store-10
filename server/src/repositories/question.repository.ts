@@ -30,6 +30,7 @@ class QuestionRepository extends Repository<Question> {
         'category',
         'product_id',
         'question.id as id',
+        'question.user_id as user_id',
         'question.createdAt as createdAt',
       ])
       .offset(+offset)

@@ -4,18 +4,18 @@ import * as S from '../styles';
 
 interface IDeleteConfirmModal {
   toggleModal: () => void;
-  removeSelectedReview: () => void;
+  removeSelected: () => void;
 }
 
 const DeleteConfirmModal = ({
   toggleModal,
-  removeSelectedReview,
+  removeSelected,
 }: IDeleteConfirmModal) => {
   return (
     <ModalLayout compact toggleModal={toggleModal}>
       <S.DeleteModalHeader>정말 삭제하시겠어요?</S.DeleteModalHeader>
       <S.DeleteModalButtonArea>
-        <S.DeleteModalButton onClick={() => removeSelectedReview()}>
+        <S.DeleteModalButton onClick={() => removeSelected()}>
           예
         </S.DeleteModalButton>
         <S.DeleteModalButton onClick={toggleModal}>아니오</S.DeleteModalButton>

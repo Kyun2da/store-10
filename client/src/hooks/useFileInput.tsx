@@ -13,7 +13,7 @@ const useFileInput = () => {
   }, [fileInput]);
 
   const handleUploadFile = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: React.ChangeEvent<HTMLInputElement>, additional?: number) => {
       const {
         target: { files },
       } = e;
@@ -24,7 +24,7 @@ const useFileInput = () => {
         const file = files[i];
         const values = Object.values(imgFiles).length;
 
-        if (values === 3) {
+        if (values + (additional ?? 0) === 3) {
           setIsError(true);
           return;
         }

@@ -31,9 +31,9 @@ export default {
     }
   },
 
-  async delete<T>(url: string): Promise<T> {
+  async delete<T>(url: string, body?: T): Promise<T> {
     try {
-      const res = await client.delete(url);
+      const res = await client.delete(url, body);
       return res.data.result;
     } catch (e) {
       return throwError(e);

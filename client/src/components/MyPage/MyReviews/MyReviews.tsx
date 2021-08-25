@@ -21,7 +21,7 @@ import Pagination from '@/components/Shared/Pagination';
 import {
   DeleteConfirmModal,
   ReviewImageModal,
-  ReviewModal,
+  ReviewUpdateModal,
 } from '@/components/Shared/Modal';
 import useModal from '@/hooks/useModal';
 import { Link } from '@/lib/Router';
@@ -52,7 +52,7 @@ const MyReviews = () => {
   };
 
   const handleUpdateReview = (target: number) => {
-    console.log(target);
+    setSelectedReview(target);
     toggleUpdateModal();
   };
 
@@ -146,7 +146,12 @@ const MyReviews = () => {
         />
       )}
 
-      {isUpdateModalOpen && <ReviewModal toggleModal={toggleUpdateModal} />}
+      {isUpdateModalOpen && (
+        <ReviewUpdateModal
+          selected={selectedReview}
+          toggleModal={toggleUpdateModal}
+        />
+      )}
     </S.MyReviews>
   );
 };

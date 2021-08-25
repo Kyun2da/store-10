@@ -7,18 +7,27 @@ const COUNT_STAR = 5;
 interface IRatingSetter {
   handleOnRating: (rating: number) => void;
   error?: boolean;
+  value?: number;
   helpertext?: string;
 }
 
-const RatingSetter = ({ handleOnRating, error, helpertext }: IRatingSetter) => {
+const RatingSetter = ({
+  handleOnRating,
+  error,
+  value,
+  helpertext,
+}: IRatingSetter) => {
   const [isCheck, setIsCheck] = useState<string[]>([]);
-  const [rate, setRate] = useState<number>(0);
+  const [rate, setRate] = useState<number>(value ?? 0);
 
   useEffect(() => {
-    for (let i = 0; i < COUNT_STAR; i++) {
-      setIsCheck(new Array(COUNT_STAR).fill('outlined'));
+    const initialValue = new Array(COUNT_STAR).fill('outlined');
+    for (let i = 0; i < rate; i++) {
+      initialValue[i] = 'filled';
     }
-  }, []);
+    if (value) setRate(value);
+    setIsCheck(initialValue);
+  }, [value, rate]);
 
   const handleClickOnStar = (idx: number) => {
     const ratings: string[] = [];

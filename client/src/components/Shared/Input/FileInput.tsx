@@ -9,11 +9,16 @@ export interface IFileInput {
   multiple?: boolean;
   hidden?: boolean;
   imgFiles: CustomFile;
+  S3Previews?: string[];
   isError: boolean;
   fileRef: RefObject<HTMLInputElement>;
   handleClickOnFileInput: () => void;
-  handleUploadFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleUploadFile: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    additional?: number
+  ) => void;
   removeSeletedPreview: (e: React.MouseEvent, selected: string) => void;
+  removeS3Preview?: (e: React.MouseEvent, selected: string) => void;
 }
 
 const FileInput = ({
@@ -22,10 +27,12 @@ const FileInput = ({
   attributes,
   hidden,
   imgFiles,
+  S3Previews,
   isError,
   handleClickOnFileInput,
   handleUploadFile,
   removeSeletedPreview,
+  removeS3Preview,
 }: IFileInput) => {
   const initInputValue = (e: React.MouseEvent) => {
     const target = e.target as HTMLInputElement;
@@ -43,12 +50,25 @@ const FileInput = ({
           hidden={hidden}
           name={name}
           onClick={(e) => initInputValue(e)}
-          onChange={handleUploadFile}
+          onChange={(e) => handleUploadFile(e, S3Previews?.length ?? 0)}
           {...attributes}
         />
       </S.FileInputButton>
 
       <S.PreviewWrapper>
+        {!!S3Previews &&
+          S3Previews.map((preview) => (
+            <S.ImageWrapper key={preview}>
+              <img src={preview} alt="미리보기 이미지" />
+              <S.CloseButton
+                onClick={(e) =>
+                  !!removeS3Preview && removeS3Preview(e, preview)
+                }
+              >
+                <CloseSVG />
+              </S.CloseButton>
+            </S.ImageWrapper>
+          ))}
         {Object.entries(imgFiles).map((files) => {
           const [hash, file] = files;
           return (

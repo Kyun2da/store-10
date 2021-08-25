@@ -17,6 +17,7 @@ router.get('/', wrapAsync(ProductController.getProducts));
 router.get('/:id', wrapAsync(ProductController.getProductById));
 
 // Product-Review 조회 관련
+router.get('/review/:id', authJWT, ProductController.getSelectedReviewInfo);
 router.get(
   '/review/user/:offset',
   authJWT,
@@ -54,6 +55,19 @@ router.delete(
   '/review/:id',
   authJWT,
   ProductController.deleteProductReviewById
+);
+router.delete(
+  '/reviewImage/:id',
+  authJWT,
+  ProductController.deleteProductReviewImageById
+);
+
+// @@--- PUT 요청 ---@@ //
+router.put(
+  '/review/:id',
+  authJWT,
+  multerS3.array('images', 3),
+  ProductController.putProuctReviewById
 );
 
 export default router;

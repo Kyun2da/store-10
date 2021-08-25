@@ -44,6 +44,10 @@ export const getProductQuestionCountById = async (id: string) => {
   return await client.get<IQuestionCount>(`/product/question/count/${id}`);
 };
 
+export const getProductSelectedReview = async (id: number) => {
+  return await client.get<IProductReview>(`/product/review/${id}`);
+};
+
 export const getRecommandProducts = async () => {
   return await client.get<IProduct[]>(`/product/recommand?limit=8`);
 };
@@ -94,6 +98,26 @@ export const postProductQuestion = async (data: IProductQuestion) => {
   return await client.post<IProductQuestion>(`/product/question`, data);
 };
 
+export const putProductReview = async ({
+  id,
+  data,
+}: {
+  id: number;
+  data: IReview;
+}) => {
+  return await client.put<IReview>(`/product/review/${id}`, data);
+};
+
 export const deleteProductReview = async (id: number) => {
   return await client.delete(`/product/review/${id}`);
+};
+
+export const deleteProductReviewImage = async ({
+  id,
+  url,
+}: {
+  id: number;
+  url: string;
+}) => {
+  return await client.delete(`/product/reviewImage/${id}`, { data: { url } });
 };

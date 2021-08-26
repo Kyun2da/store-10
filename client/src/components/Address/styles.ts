@@ -11,7 +11,7 @@ export const AddressItem = styled.li`
   padding: 1.2rem;
   border-radius: 1.2rem;
   border: 0.1rem solid ${({ theme }) => theme.color['border-gray']};
-  &.default-address {
+  &.selected-address {
     border: 0.1rem solid ${({ theme }) => theme.color.primary};
   }
 `;
@@ -25,14 +25,24 @@ export const AddressItemHeader = styled.header`
 export const AddressName = styled.span`
   ${({ theme }) => theme.fontWeight.xl};
   ${({ theme }) => theme.fontSize.m};
+  margin-right: auto;
 `;
 
 export const DefaultAddress = styled.span`
+  border-radius: 1.2rem;
+  border: 0.1rem solid ${({ theme }) => theme.color.label};
+  color: ${({ theme }) => theme.color.label};
+  padding: 0.4rem 0.6rem;
+  ${({ theme }) => theme.fontSize.s};
+`;
+
+export const SelectedAddress = styled.span`
   border-radius: 1.2rem;
   border: 0.1rem solid ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.primary};
   padding: 0.4rem 0.6rem;
   ${({ theme }) => theme.fontSize.s};
+  margin-left: 0.8rem;
 `;
 
 export const AddressInfoText = styled.span`
@@ -62,10 +72,14 @@ export const AddressItemFooter = styled.footer`
       margin-right: 0.8rem;
     }
 
-    &:last-child {
-      ${({ theme }) => theme.fontWeight.l};
-      margin-left: auto;
+    &:nth-child(2) {
+      margin-right: auto;
     }
+
+    /* &:last-child {
+      ${({ theme }) => theme.fontWeight.l};
+      //margin-left: auto;
+    } */
   }
 `;
 

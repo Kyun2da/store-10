@@ -49,6 +49,7 @@ const AddressModal = ({ toggleModal, selectAddress, address }: IProps) => {
       ) : (
         <Address
           setOpenForm={setOpenForm}
+          selectedAddress={address}
           selectAddress={selectAddress}
           toggleModal={toggleModal}
           setAddressToModify={setAddressToModify}

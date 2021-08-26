@@ -19,6 +19,8 @@ import {
   useDeleteBookmark,
   useGetBookmarkIds,
 } from '@/hooks/queries/bookmark';
+import { ShoppingCartModal } from '@/components/Shared/Modal';
+import useModal from '@/hooks/useModal';
 
 const ProductInfo = () => {
   const { id } = useParams().params;
@@ -29,14 +31,22 @@ const ProductInfo = () => {
   const user = useRecoilValue(userState);
   const { mutate: addMutate } = useAddBookmark();
   const { mutate: deleteMutate } = useDeleteBookmark();
+  const [openModal, toggleModal] = useModal(false);
 
   const [value, handleOnChnage, handleClickOnMinus, handleClickOnPlus] =
     useNumberInput(1);
   const onClickCart = () => {
-    cartMutate({
-      count: value,
-      productId: id,
-    });
+    cartMutate(
+      {
+        count: value,
+        productId: id,
+      },
+      {
+        onSuccess() {
+          toggleModal();
+        },
+      }
+    );
   };
 
   const { data: bookmarkIdList } = useGetBookmarkIds(!!user);
@@ -148,6 +158,7 @@ const ProductInfo = () => {
           </button>
         </S.ButtonArea>
       </S.ProductOrder>
+      {openModal && <ShoppingCartModal toggleModal={toggleModal} />}
     </S.ProductInfo>
   );
 };

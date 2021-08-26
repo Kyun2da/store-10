@@ -20,7 +20,6 @@ import { notify } from '@/components/Shared/Toastify';
 import usePagination from '@/hooks/usePagination';
 import { REVIEW_LIMIT } from '@/utils/constant/offsetLimit';
 import Thung from '@/components/Thung';
-import Spinner from '@/components/Shared/Spinner/Spinner';
 import { ResponseError } from '@/components/Shared/Error';
 import { ReviewSkeleton } from '@/components/Skeleton/ProductSkeleton/';
 

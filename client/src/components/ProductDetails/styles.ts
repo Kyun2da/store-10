@@ -417,10 +417,12 @@ export const RatingArea = styled.div`
   padding: 5rem;
   border-radius: 3rem;
   background-color: ${({ theme }) => theme.color.background};
+  box-shadow: ${({ theme }) => theme.boxShadow};
 
   .totalRates {
+    color: ${({ theme }) => theme.color.primary};
     ${({ theme }) => theme.fontSize.xxl};
-    ${({ theme }) => theme.fontWeight.l};
+    ${({ theme }) => theme.fontWeight.xl};
   }
 
   .ratings {
@@ -430,6 +432,14 @@ export const RatingArea = styled.div`
       transform: translate(50%, 50%) scale(2);
     }
   }
+
+  ${({ theme }) => theme.mediaScreen.tablet`
+    padding: 3.5rem;
+  `}
+
+  ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+    justify-content: center;
+  `}
 `;
 
 export const StarRates = styled.div`
@@ -453,10 +463,10 @@ export const UserReviewArea = styled.div`
 export const UserReview = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: 3rem;
   padding: 2rem;
   flex: 1;
-  background-color: ${({ theme }) => theme.color.background};
+  border-top: 1px solid ${({ theme }) => theme.color['border-gray']};
+  border-bottom: 1px solid ${({ theme }) => theme.color['border-gray']};
 
   & + & {
     margin-top: 3rem;
@@ -479,6 +489,7 @@ export const ReviewImages = styled.div`
   display: flex;
   gap: 2rem;
   margin: 2rem 0;
+  overflow-x: auto;
 
   img {
     width: 20rem;
@@ -490,17 +501,29 @@ export const ReviewImages = styled.div`
     &:hover {
       opacity: 0.75;
     }
+
+    ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+      width: 15rem;
+      height: 10rem;
+    `}
   }
 `;
 
 export const UserDescription = styled.div`
-  padding: 2rem 0;
+  margin-top: 1rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: ${({ theme }) => theme.color.body2};
 `;
 
 export const TopArea = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  button {
+    font-size: 1.4rem;
+  }
 `;
 
 export const PreparingWrapper = styled.div`

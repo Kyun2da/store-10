@@ -5,9 +5,8 @@ import ProductInfo from '@/components/ProductDetails/ProductInfo';
 
 const Detail = () => {
   return (
-    <S.Detail className="container">
+    <S.Detail>
       <ProductInfo />
-
       <ProductDetailTab />
     </S.Detail>
   );

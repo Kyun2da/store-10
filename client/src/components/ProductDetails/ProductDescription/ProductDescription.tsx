@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from '../styles';
 import { useParams } from '@/lib/Router';
 import Title from '@/components/Shared/Title';
@@ -7,10 +7,11 @@ import { useGetProductById } from '@/hooks/queries/product';
 import contentParser from '@/utils/contentParser';
 import { ResponseError } from '@/components/Shared/Error';
 import Spinner from '@/components/Shared/Spinner';
+import Image from '@/components/Shared/Image';
 
 const ProductDescription = () => {
   const { id } = useParams().params;
-
+  const [isLoaded, setIsLoaded] = useState(false);
   const { data, isLoading, error } = useGetProductById(id);
 
   if (error) {
@@ -24,6 +25,10 @@ const ProductDescription = () => {
       </S.LoadingWrapper>
     );
   }
+
+  const handleOnClickMoreButton = () => {
+    setIsLoaded(true);
+  };
 
   const { content } = data.details;
   const { details, essentials } = content;
@@ -45,13 +50,22 @@ const ProductDescription = () => {
         ))}
       </S.ProductTable>
 
-      {imageFiles.map((image) => {
-        return <img key={nanoid()} src={image} alt="상품 상세정보 이미지" />;
-      })}
-
-      {!imageFiles.length && (
+      {imageFiles.length > 0 ? (
+        <S.ProductImageDetails className={isLoaded ? 'open' : ''}>
+          {imageFiles.map((image) => {
+            return (
+              <Image key={nanoid()} src={image} alt="상품 상세정보 이미지" />
+            );
+          })}
+          {!isLoaded && (
+            <S.LoadMoreImageButton onClick={handleOnClickMoreButton}>
+              더보기
+            </S.LoadMoreImageButton>
+          )}
+        </S.ProductImageDetails>
+      ) : (
         <S.PreparingWrapper>
-          <img
+          <Image
             src="https://store-10.s3.ap-northeast-2.amazonaws.com/test/baemin_ddam.gif"
             alt="상품 준비중 이미지"
           />

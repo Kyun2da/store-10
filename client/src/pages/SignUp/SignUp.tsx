@@ -34,16 +34,14 @@ const SignUp = () => {
 
   const onClickEmailCheck = useCallback(async () => {
     if (!validateEmail(email)) {
-      notify('error', '올바른 이메일을 입력하세요.');
+      return notify('error', '올바른 이메일을 입력하세요.');
     }
     try {
       await postEmailCheck(email);
       setEmailCheck(true);
       notify('success', '사용할 수 있는 아이디입니다!');
     } catch (err) {
-      const { status } = err.response;
-      if (status === 409) notify('error', '이미 존재하는 아이디 입니다.');
-      else notify('error', '서버 에러입니다. 관리자에게 문의하세요.');
+      notify('error', '이미 존재하는 아이디 입니다.');
     }
   }, [email, setEmailCheck]);
 

@@ -31,7 +31,7 @@ const OrderAddress = ({
     if (data) {
       selectAddress(data);
     }
-  }, [data]);
+  }, [data, selectAddress]);
 
   useEffect(() => {
     const delivery_request_message =

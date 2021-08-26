@@ -3,7 +3,6 @@ import { getCategoryProducts } from '@/lib/api/product';
 import { IProduct } from '@/types';
 import React, { useEffect, useState } from 'react';
 import Card from '../Card';
-import CardWrapper from '../CardWrapper';
 import LoadingCards from '../Skeleton/LoadingCards';
 
 interface IProps {

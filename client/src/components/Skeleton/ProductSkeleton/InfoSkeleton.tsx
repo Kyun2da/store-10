@@ -2,7 +2,7 @@ import React from 'react';
 import { ProductInfo, ProductOrder } from '@/components/ProductDetails/styles';
 import * as S from '../styles';
 
-const ProductInfoSkeleton = () => {
+const InfoSkeleton = () => {
   return (
     <ProductInfo>
       <S.SkeletonThumbnail />
@@ -16,4 +16,4 @@ const ProductInfoSkeleton = () => {
   );
 };
 
-export default ProductInfoSkeleton;
+export default InfoSkeleton;

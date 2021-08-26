@@ -24,7 +24,8 @@ const ShoppingCartSummary = ({
       return (
         sum +
         (item.price -
-          calculateDiscount({ price: item.price, discount: item.discount }))
+          calculateDiscount({ price: item.price, discount: item.discount })) *
+          item.count
       );
     }
     return sum;

@@ -12,8 +12,13 @@ export const Main = styled.div`
     > div:first-child {
       max-width: ${({ theme }) => theme.media.pc}px;
       margin: 0 auto;
-      padding: 1rem 0;
+      padding: 3rem 0;
       width: 95%;
+    }
+    &:last-child{
+      > div:first-child {
+        padding-bottom: 5rem;
+      }
     }
     &:nth-child(2n) {
       background: ${({ theme }) => theme.color['background']};

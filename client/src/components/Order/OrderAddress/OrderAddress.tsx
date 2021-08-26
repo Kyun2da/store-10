@@ -12,22 +12,26 @@ interface IProps {
   >;
   updateDefaultAddress: boolean;
   setUpdateDefaultAddress: Dispatch<boolean>;
+  address: IAddress | null;
+  selectAddress: Dispatch<IAddress | null>;
 }
 const OrderAddress = ({
   setOrder,
   updateDefaultAddress,
   setUpdateDefaultAddress,
+  address,
+  selectAddress,
 }: IProps) => {
   const [requestMessage, setRequestMessage] = useState('');
   const [requestMessageInput, setRequestMessageInput] = useState('');
-  const [address, selectAddress] = useState<IAddress | null>(null);
+
   const { data, isLoading } = useGetDefaultAddress();
 
   useEffect(() => {
     if (data) {
       selectAddress(data);
     }
-  }, [data]);
+  }, [data, selectAddress]);
 
   useEffect(() => {
     const delivery_request_message =
@@ -55,13 +59,17 @@ const OrderAddress = ({
 
   const renderAddressInfo = () => {
     if (!address) {
-      return <div>empty</div>;
+      return (
+        <S.AddressEmpty>
+          배송지가 없습니다. 배송지를 추가해주세요!
+        </S.AddressEmpty>
+      );
     }
     return (
       <S.AddressInfo>
         <S.AddressNameText>
           {address.name}
-          {address.isDefault && (
+          {!!address.isDefault && (
             <S.DefaultAddress>기본 배송지</S.DefaultAddress>
           )}
         </S.AddressNameText>
@@ -99,9 +107,11 @@ const OrderAddress = ({
     <article>
       <S.OrderAddressHeader>
         <span>배송지</span>
-        <button onClick={() => toggleModal()}>변경</button>
+        <button onClick={() => toggleModal()}>
+          {address ? '변경' : '추가'}
+        </button>
       </S.OrderAddressHeader>
-      {isLoading || !data ? <div>Loading...</div> : renderAddressInfo()}
+      {isLoading ? <div>Loading...</div> : renderAddressInfo()}
 
       {isOpen && (
         <AddressModal

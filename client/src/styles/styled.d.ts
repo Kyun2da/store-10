@@ -39,6 +39,7 @@ declare module 'styled-components' {
       pc: number;
       tablet: number;
       phone: number;
+      headerSearch: number;
     };
     boxShadow: string;
   }

@@ -13,6 +13,7 @@ import { userState } from '@/recoil/user';
 import { notify } from '../Shared/Toastify';
 import { ShoppingCartModal } from '@/components/Shared/Modal';
 import useModal from '@/hooks/useModal';
+import Image from '@/components/Shared/Image';
 
 const BgColor = {
   Error: 'error',
@@ -111,43 +112,42 @@ const Card = ({
     addCart();
   }, [user, linkId, addcartMutate, toggleModal]);
 
+  const Buttons = () =>
+    !bottomDisplay || (
+      <S.BottomBar onClick={handleClick}>
+        <S.ButtonArea>
+          <HeartButton
+            className={`heart ${isHeartChecked ? 'checked' : ''}`}
+            onClick={heartBtnOnClick}
+          />
+        </S.ButtonArea>
+        <S.ButtonArea>
+          <ShoppingCart className={'cart'} onClick={cartBtnOnClick} />
+        </S.ButtonArea>
+      </S.BottomBar>
+    );
+
   return (
     <Link to={`/detail/${linkId}`}>
       <S.Card>
         <div>
           <S.Liner bgColor={bgColor} />
-          <S.ThumbnailWrapper>
-            {!checkBoxDisplay || (
-              <S.CardCheckbox
-                onChange={onChangeCheckbox}
-                checked={isChecked}
-                onClick={checkBoxOnClick}
-              />
-            )}
-            {discount ? <S.NameTag>{discount}%</S.NameTag> : ''}
-            <img src={src} alt="상품 섬네일 이미지" />
-            {!bottomDisplay || (
-              <S.BottomBar onClick={handleClick}>
-                <S.ButtonArea>
-                  <HeartButton
-                    witdh={24}
-                    height={24}
-                    fill={isHeartChecked ? 'red' : 'none'}
-                    onClick={heartBtnOnClick}
-                  />
-                </S.ButtonArea>
-                <S.ButtonArea>
-                  <ShoppingCart
-                    witdh={24}
-                    height={24}
-                    onClick={cartBtnOnClick}
-                  />
-                </S.ButtonArea>
-              </S.BottomBar>
-            )}
-            <p className="title">{title}</p>
-          </S.ThumbnailWrapper>
+          <div>
+            <S.ThumbnailWrapper>
+              {!checkBoxDisplay || (
+                <S.CardCheckbox
+                  onChange={onChangeCheckbox}
+                  checked={isChecked}
+                  onClick={checkBoxOnClick}
+                />
+              )}
+              {discount ? <S.NameTag>{discount}%</S.NameTag> : ''}
+              {!!src && <Image src={src} alt="상품 섬네일 이미지" />}
+            </S.ThumbnailWrapper>
+            <S.ProductTitle>{title}</S.ProductTitle>
+          </div>
         </div>
+        
         <S.ProductDetails>
           {!bottomDisplay ||
             (discount ? (
@@ -157,10 +157,14 @@ const Card = ({
                 </div>
                 <div className="price-tag discount">
                   {wonFormat(calculateDiscount({ price, discount }))}
+                  {Buttons()}
                 </div>
               </>
             ) : (
-              <div className="price-tag">{wonFormat(price)}</div>
+              <div className="price-tag">
+                {wonFormat(price)}
+                {Buttons()}
+              </div>
             ))}
         </S.ProductDetails>
         {openModal && <ShoppingCartModal toggleModal={toggleModal} />}

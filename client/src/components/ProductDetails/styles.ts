@@ -245,6 +245,54 @@ export const ProductTableRow = styled.div`
   }
 `;
 
+export const ProductImageDetails = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overflow: hidden;
+  height: 100rem;
+  margin-bottom: 5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    bottom: -2.5rem;
+    left: 0;
+    filter: blur(5rem);
+    background-color: #ededed;
+  }
+
+  &.open {
+    height: auto;
+
+    &::after {
+      content: none;
+    }
+  }
+`;
+
+export const LoadMoreImageButton = styled.button`
+  padding: 2rem 4rem;
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background-color: ${({ theme }) => theme.color.primary};
+  color: #ffffff;
+  border-radius: 2rem;
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  ${({ theme }) => theme.fontSize.l};
+  ${({ theme }) => theme.fontWeight.l};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.primary2};
+  }
+`;
+
 export const AlertArea = styled.div`
   position: relative;
   background-color: ${({ theme }) => theme.color.error};

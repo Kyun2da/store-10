@@ -90,9 +90,13 @@ export const SubCategory = styled.dl`
   transition: visibility 0.2s ease-in-out;
 
   dd {
-    margin: 0 1rem;
-    padding: 1rem 0;
+    padding: 1rem;
     width: 150px;
+
+    &:hover {
+      background: ${({ theme }) => theme.color['primary2']}66;
+      color: ${({ theme }) => theme.color['primary3']};
+    }
   }
 `;
 

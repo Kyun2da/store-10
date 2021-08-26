@@ -5,6 +5,7 @@ export const HEADER_HEIGHT = 6;
 const PC_RESOLUTION = 1050;
 const TABLET_RESOLUTION = 768;
 const PHONE_RESOLUTION = 425;
+const HEADER_SEARCH_RESOLUTION = 550;
 
 const customMediaQuery = (screen: number) => `@media (min-width: ${screen}px)`;
 
@@ -18,6 +19,7 @@ export const media = {
   pc: PC_RESOLUTION,
   tablet: TABLET_RESOLUTION,
   phone: PHONE_RESOLUTION,
+  headerSearch: HEADER_SEARCH_RESOLUTION,
 };
 
 const GlobalStyle = createGlobalStyle`

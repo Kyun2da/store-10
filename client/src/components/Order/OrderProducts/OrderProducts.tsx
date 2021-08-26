@@ -1,7 +1,8 @@
 import React from 'react';
 import * as S from './styles';
-import { wonFormat } from '@/utils/helper';
+import { calculateDiscount, wonFormat } from '@/utils/helper';
 import { IOrderProduct } from '@/types';
+import Image from '@/components/Shared/Image';
 
 interface IProps {
   products: IOrderProduct[];
@@ -17,14 +18,28 @@ const OrderProducts = ({ products }: IProps) => {
         {products.map((product) => (
           <S.OrderProductsItem key={product.id}>
             <S.ImgWrapper>
-              <img src={product.img} />
+              <Image src={product.img} alt="주문상품 이미지" />
             </S.ImgWrapper>
             <S.ItemInfo>
               <S.ItemInfoName>{product.title}</S.ItemInfoName>
-              <S.ItemInfoPrice>
-                {wonFormat(product.price)}
+              <S.ItemInoPriceWrapper>
+                <S.ItemInfoPrice
+                  className={product.discount ? 'strikethrough' : undefined}
+                >
+                  {wonFormat(+product.price)}
+                </S.ItemInfoPrice>
+                {!!product.discount && (
+                  <S.ItemInfoPrice className="discount">
+                    {wonFormat(
+                      calculateDiscount({
+                        price: +product.price,
+                        discount: product.discount,
+                      })
+                    )}
+                  </S.ItemInfoPrice>
+                )}
                 <S.ItemInfoCount> · {product.count}개</S.ItemInfoCount>
-              </S.ItemInfoPrice>
+              </S.ItemInoPriceWrapper>
             </S.ItemInfo>
           </S.OrderProductsItem>
         ))}

@@ -41,3 +41,8 @@ export const LinkContainer = styled.div`
     color: ${({ theme }) => theme.color.primary};
   }
 `;
+
+export const LogoImg = styled.img`
+  height: 3rem;
+  margin-right: 1rem;
+`;

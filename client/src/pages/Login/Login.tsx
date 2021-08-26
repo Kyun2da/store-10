@@ -15,6 +15,7 @@ import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 import useInput from '@/hooks/useInput';
+import { baepang } from '@/assets';
 
 const Login = () => {
   const GithubLogin = async () => {
@@ -66,13 +67,21 @@ const Login = () => {
     [error]
   );
 
+  const testLogin = async () => {
+    await normalLogin({
+      user_id: 'test123@gmail.com',
+      password: 'testlogin123@',
+    });
+    const user = await getCurrentUser();
+    setUser(user);
+  };
+
   useEffect(() => {
     if (
       Object.values(error).every((item) => item === false) &&
       email !== '' &&
       password !== ''
     ) {
-      console.log('발생');
       setDisabled(false);
     } else {
       setDisabled(true);
@@ -114,6 +123,10 @@ const Login = () => {
       <Button type="button" color="black" onClick={GithubLogin}>
         <S.GithubIcon fill="white" />
         GitHub 로그인
+      </Button>
+      <Button type="button" color="white" onClick={testLogin}>
+        <S.LogoImg src={baepang} />
+        데모 계정으로 로그인
       </Button>
       <S.LinkContainer>
         아이디가 없으신가요?

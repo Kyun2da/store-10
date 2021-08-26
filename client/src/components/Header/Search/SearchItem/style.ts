@@ -27,7 +27,7 @@ export const SearchItemWrapper = styled(CardWrapper)`
   }
   &:after {
     content: '';
-    grid-column: 1 / span 4;
+    grid-column: 1 / -1;
     height: 1rem;
   }
 `;

@@ -38,7 +38,6 @@ export const ModalWrapper = styled.div<IModalWrapperProps>`
   background-color: #fff;
   width: ${(props) => props.width || '65%'};
   height: ${(props) => props.height};
-  min-height: 55%;
 
   ${({ compact }) =>
     compact

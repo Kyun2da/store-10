@@ -34,9 +34,6 @@ export const useDeleteCart = () => {
 
 export const usePostCart = () => {
   const mutation = useMutation(postCart, {
-    onSuccess: () => {
-      notify('success', '성공! TODO: Toast');
-    },
     onError: () => {
       notify('error', '실패!');
     },

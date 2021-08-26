@@ -77,10 +77,19 @@ export const ItemInfoName = styled.span`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 `;
+export const ItemInoPriceWrapper = styled.div`
+  margin-top: 10px;
+`;
 export const ItemInfoPrice = styled.span`
   ${({ theme }) => theme.fontSize.s};
   color: ${({ theme }) => theme.color.label};
-  margin-top: 10px;
+  &.strikethrough {
+    text-decoration: line-through;
+  }
+  &.discount {
+    color: ${({ theme }) => theme.color['error']};
+    margin-left: 1.2rem;
+  }
 `;
 
 export const CloseButton = styled.button`

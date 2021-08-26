@@ -19,11 +19,13 @@ const ShoppingCartSummary = ({
     (sum, item) => sum + item.price * item.count,
     0
   );
-  console.log(checkedItems);
   const discount: number = checkedItems.reduce((sum, item) => {
     if (item.discount) {
       return (
-        sum + calculateDiscount({ price: item.price, discount: item.discount })
+        sum +
+        (item.price -
+          calculateDiscount({ price: item.price, discount: item.discount })) *
+          item.count
       );
     }
     return sum;

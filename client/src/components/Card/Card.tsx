@@ -11,6 +11,8 @@ import { usePostCart } from '@/hooks/queries/cart';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import { notify } from '../Shared/Toastify';
+import { ShoppingCartModal } from '@/components/Shared/Modal';
+import useModal from '@/hooks/useModal';
 
 const BgColor = {
   Error: 'error',
@@ -50,6 +52,7 @@ const Card = ({
   const { mutate: addMutate } = useAddBookmark();
   const { mutate: deleteMutate } = useDeleteBookmark();
   const { mutate: addcartMutate } = usePostCart();
+  const [openModal, toggleModal] = useModal(false);
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -90,11 +93,23 @@ const Card = ({
       notify('error', '로그인이 필요합니다!');
       return;
     }
-    addcartMutate({
-      count: 1,
-      productId: String(linkId),
-    });
-  }, [user, linkId, addcartMutate]);
+
+    const addCart = () => {
+      addcartMutate(
+        {
+          count: 1,
+          productId: String(linkId),
+        },
+        {
+          onSuccess() {
+            toggleModal();
+          },
+        }
+      );
+    };
+
+    addCart();
+  }, [user, linkId, addcartMutate, toggleModal]);
 
   return (
     <Link to={`/detail/${linkId}`}>
@@ -148,6 +163,7 @@ const Card = ({
               <div className="price-tag">{wonFormat(price)}</div>
             ))}
         </S.ProductDetails>
+        {openModal && <ShoppingCartModal toggleModal={toggleModal} />}
       </S.Card>
     </Link>
   );

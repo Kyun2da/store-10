@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Chip from '@/components/Shared/Chip';
 import Title from '@/components/Shared/Title';
 import Pagination from '@/components/Shared/Pagination';
@@ -14,10 +14,11 @@ import useModal from '@/hooks/useModal';
 import { RequestModal, ReviewModal } from '@/components/Shared/Modal';
 
 const OrderHistory = ({}) => {
+  const topRef = useRef<HTMLDivElement>(null);
   const [selectedPeriod, setSelectedPeriod] = useState<number | null>(null);
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const [orders, setOrders] = useState<IOrder[]>([]);
-  const [offset, handleOnClickPage] = usePagination(PAGE_LIMIT);
+  const [offset, handleOnClickPage] = usePagination(PAGE_LIMIT, topRef);
   const [isOpenReviewModal, toggleReviewModal] = useModal(false);
   const [isOpenQuestionModal, toggleQuestionModal] = useModal(false);
   const [seletedReview, setSelectedReview] = useState(0);
@@ -32,7 +33,7 @@ const OrderHistory = ({}) => {
     } else {
       setOrders(data || []);
     }
-    handleOnClickPage(0);
+    handleOnClickPage(0, true);
   }, [data, selectedStatus, handleOnClickPage]);
 
   const handleOnClickItemReview = (target: number) => {
@@ -93,7 +94,7 @@ const OrderHistory = ({}) => {
   };
 
   return (
-    <S.OrerHistory>
+    <S.OrerHistory ref={topRef} className="pagination-scroll-top">
       <S.OrderHistoryHeader>
         <S.OrderPeriodWrapper>
           <Title level={5}>조회 기간:</Title> {renderPeriodFilter()}

@@ -1,6 +1,6 @@
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
-import React from 'react';
+import React, { useRef } from 'react';
 import * as S from '../styles';
 import useModal from '@/hooks/useModal';
 import { RequestModal } from '@/components/Shared/Modal';
@@ -20,8 +20,9 @@ import { QUESTION_HEADER } from '@/utils/constant/CollapseHeaders';
 
 const ProductRequest = () => {
   const { id } = useParams().params;
+  const topRef = useRef<HTMLDivElement>(null);
   const [user] = useRecoilState(userState);
-  const [offset, handleOnClickPage] = usePagination(QUESTION_LIMIT);
+  const [offset, handleOnClickPage] = usePagination(QUESTION_LIMIT, topRef);
   const [isOpen, toggleModal] = useModal(false);
   const {
     data: questions,
@@ -47,7 +48,7 @@ const ProductRequest = () => {
   };
 
   return (
-    <S.PanelWrapper>
+    <S.PanelWrapper ref={topRef} className="pagination-scroll-top">
       <S.TopArea>
         <Title className="title" level={5}>
           상품문의 ({count.count})

@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
+export const HEADER_HEIGHT = 6;
 const PC_RESOLUTION = 1050;
 const TABLET_RESOLUTION = 768;
 const PHONE_RESOLUTION = 425;
@@ -57,6 +58,11 @@ const GlobalStyle = createGlobalStyle`
   .container {
     margin: 5rem auto;
     flex: 1;
+  }
+
+  .pagination-scroll-top {
+    padding-top: ${HEADER_HEIGHT}rem;
+    margin-top: ${-HEADER_HEIGHT}rem;
   }
 
   .pc_resolution {

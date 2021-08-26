@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import * as S from './styles';
 import MyPageAside from '@/components/MyPage/MyPageAside';
-import Address from '@/components/Address';
 import OrderHistory from '@/components/MyPage/OrderHistory';
 import { MY_PAGE_NAVIGATIONS } from '@/contstants';
 import { Redirect } from '@/lib/Router';

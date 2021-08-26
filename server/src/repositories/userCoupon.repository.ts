@@ -10,9 +10,15 @@ interface IUserCoupon {
 
 @EntityRepository(UserCoupon)
 class UserCouponRespository extends Repository<UserCoupon> {
-  async getUserCoupons(user_id: number) {
+  async getUserCoupons({
+    user_id,
+    is_valid,
+  }: {
+    user_id: number;
+    is_valid?: boolean;
+  }) {
     return await this.find({
-      where: { user_id },
+      where: { user_id, ...(is_valid ? { is_valid } : {}) },
     });
   }
 

@@ -37,6 +37,7 @@ class CartService {
         title: cart.product.title,
         price: cart.product.price,
         image: img?.url,
+        discount: cart.product.discount,
       };
     });
   }

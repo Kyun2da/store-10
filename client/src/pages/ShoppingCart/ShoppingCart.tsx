@@ -21,12 +21,6 @@ const ShoppingCart = () => {
     (item) =>
       !unCheckedList.find((uncheckedId) => item.productId === uncheckedId)
   );
-  const productCount = checkedItems.length;
-  const totalPrice = checkedItems.reduce(
-    (sum, item) => sum + item.price * item.count,
-    0
-  );
-
   const disabled = !shoppingCartItems.length;
 
   const removeFromCart = (ids: number[]) => {
@@ -47,21 +41,11 @@ const ShoppingCart = () => {
         disabled={disabled}
       />
       <S.ShoppingCartAside>
-        <ShoppingCartSummary
-          checkedItems={checkedItems}
-          productCount={productCount}
-          totalPrice={totalPrice}
-          disabled={disabled}
-        />
+        <ShoppingCartSummary checkedItems={checkedItems} disabled={disabled} />
       </S.ShoppingCartAside>
 
       <S.ShoppingCartFooter>
-        <ShoppingCartSummary
-          checkedItems={checkedItems}
-          productCount={productCount}
-          totalPrice={totalPrice}
-          disabled={disabled}
-        />
+        <ShoppingCartSummary checkedItems={checkedItems} disabled={disabled} />
       </S.ShoppingCartFooter>
     </S.ShoppingCart>
   );

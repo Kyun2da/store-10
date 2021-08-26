@@ -1,6 +1,6 @@
 import React, { Dispatch } from 'react';
 import * as S from './styles';
-import { MinusSVG, PlusSVG, CloseSVG } from '@/assets/svgs';
+import { CloseSVG } from '@/assets/svgs';
 import { wonFormat } from '@/utils/helper';
 import Checkbox from '@/components/Shared/Checkbox';
 import { ICart } from '@/types';
@@ -83,6 +83,7 @@ const ShoppingCartItem = ({
           value={item.count}
           handleClickOnMinus={onClickMinus}
           handleClickOnPlus={onClickPlus}
+          handleOnChnage={(e) => {}}
         />
         <span>{wonFormat(item.count * item.price)}</span>
       </S.TotalPrice>

@@ -9,6 +9,7 @@ export default [
     createdAt: '2021-09-09',
     image:
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+    discount: 0,
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ export default [
     createdAt: '2021-09-09',
     image:
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+    discount: 0,
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ export default [
     createdAt: '2021-09-09',
     image:
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+    discount: 0,
   },
   {
     id: 4,
@@ -42,6 +45,7 @@ export default [
     createdAt: '2021-09-09',
     image:
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+    discount: 0,
   },
   {
     id: 5,
@@ -53,6 +57,7 @@ export default [
     createdAt: '2021-09-09',
     image:
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+    discount: 0,
   },
   {
     id: 6,
@@ -64,5 +69,6 @@ export default [
     createdAt: '2021-09-09',
     image:
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+    discount: 0,
   },
 ];

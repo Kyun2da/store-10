@@ -8,7 +8,7 @@ import OrderCoupon from '@/components/Order/OrderCoupon';
 import OrderPayment from '@/components/Order/OrderPayment';
 import { useParams, Redirect } from '@/lib/Router';
 import { useGetOrder, useUpdateOrder } from '@/hooks/queries/order';
-import { IOrder } from '@/types';
+import { IAddress, IOrder } from '@/types';
 import { calculateDiscount } from '@/utils/helper';
 
 const Order = () => {
@@ -16,6 +16,7 @@ const Order = () => {
   const { data, isLoading, isError } = useGetOrder(+id);
   const { mutate } = useUpdateOrder();
   const [updateDefaultAddress, setUpdateDefaultAddress] = useState(false);
+  const [address, selectAddress] = useState<IAddress | null>(null);
   const [order, setOrder] = useState<Partial<IOrder>>({
     id: +id,
     status: 'paid',
@@ -68,6 +69,8 @@ const Order = () => {
           setOrder={setOrder}
           updateDefaultAddress={updateDefaultAddress}
           setUpdateDefaultAddress={setUpdateDefaultAddress}
+          address={address}
+          selectAddress={selectAddress}
         />
         <OrderProducts products={data?.products} />
         <OrderCoupon />
@@ -81,6 +84,7 @@ const Order = () => {
           discount={0}
           productCount={totalClount}
           updateOrder={updateOrder}
+          address={address}
           data={data}
         />
       </S.OrderAside>
@@ -93,6 +97,7 @@ const Order = () => {
           discount={0}
           productCount={totalClount}
           updateOrder={updateOrder}
+          address={address}
           data={data}
         />
       </S.OrderFooter>

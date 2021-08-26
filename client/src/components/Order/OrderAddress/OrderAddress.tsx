@@ -12,15 +12,19 @@ interface IProps {
   >;
   updateDefaultAddress: boolean;
   setUpdateDefaultAddress: Dispatch<boolean>;
+  address: IAddress | null;
+  selectAddress: Dispatch<IAddress>;
 }
 const OrderAddress = ({
   setOrder,
   updateDefaultAddress,
   setUpdateDefaultAddress,
+  address,
+  selectAddress,
 }: IProps) => {
   const [requestMessage, setRequestMessage] = useState('');
   const [requestMessageInput, setRequestMessageInput] = useState('');
-  const [address, selectAddress] = useState<IAddress | null>(null);
+
   const { data, isLoading } = useGetDefaultAddress();
 
   useEffect(() => {

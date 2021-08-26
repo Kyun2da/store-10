@@ -5,7 +5,7 @@ import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
 import Checkbox from '@/components/Shared/Checkbox';
 import { useDeleteCart } from '@/hooks/queries/cart';
-import { IOrder } from '@/types';
+import { IAddress, IOrder } from '@/types';
 
 interface IProps {
   totalPrice: number;
@@ -14,6 +14,7 @@ interface IProps {
   discount: number;
   productCount: number;
   data: IOrder | undefined;
+  address: IAddress | null;
   updateOrder: () => void;
 }
 
@@ -24,6 +25,7 @@ const OrderSummary = ({
   discount,
   productCount,
   data,
+  address,
   updateOrder,
 }: IProps) => {
   const [agree, setAgree] = useState(false);
@@ -87,7 +89,7 @@ const OrderSummary = ({
       </S.OrderSummary>
       <Button
         type="button"
-        disabled={!agree}
+        disabled={!agree || !address}
         color="primary"
         onClick={() => {
           updateOrder();

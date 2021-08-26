@@ -12,6 +12,7 @@ import React, { Dispatch, useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import Loading from '@/components/Shared/Loading';
 import * as S from './style';
+import { Close2, Edit, Trash } from '@/assets/svgs';
 
 const renderProducts = (
   isLoading: boolean,
@@ -112,33 +113,37 @@ const Bookmark = () => {
           isEdit ? (
             <S.EditButton
               type="button"
-              color="primary"
+              color="white"
               size="Small"
               onClick={() => {
                 toggleIsEdit(false);
               }}
             >
               편집
+              <Edit width="3rem" height="3rem" />
             </S.EditButton>
           ) : (
             <>
               <S.EditButton
                 type="button"
-                color="red"
+                color="white"
                 size="Small"
                 onClick={removeBookmarkItems}
+                className="red"
               >
                 삭제
+                <Trash width="3rem" height="3rem" />
               </S.EditButton>
               <S.EditButton
                 type="button"
-                color="primary"
+                color="white"
                 size="Small"
                 onClick={() => {
                   toggleIsEdit(true);
                 }}
               >
                 취소
+                <Close2 width="2.5rem" height="2.5rem" />
               </S.EditButton>
             </>
           )

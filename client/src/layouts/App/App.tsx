@@ -29,6 +29,7 @@ import Bookmark from '@/pages/Bookmark';
 import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 import { TermsOfUse, TermsOfPrivacy } from '@/pages/Terms';
 import Vendor from '@/pages/Vendor';
+import ThemeChanger from '@/components/ThemeChanger/ThemeChanger';
 
 const App = () => {
   const [theme, setTheme] = useState('light-mode');
@@ -75,9 +76,6 @@ const App = () => {
                 <Loading />
               ) : (
                 <S.RootWrapper>
-                  <S.ToggleButton onClick={toggleMode}>
-                    라이트/다크모드
-                  </S.ToggleButton>
                   <Header />
                   <Switch>
                     <Route path="/" component={Main} />
@@ -100,6 +98,7 @@ const App = () => {
                     <Route path="/*" component={NotFound} />
                   </Switch>
                   <Footer />
+                  <ThemeChanger toggleMode={toggleMode} currentTheme={theme} />
                 </S.RootWrapper>
               )}
             </ErrorBoundary>

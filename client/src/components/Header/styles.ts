@@ -1,3 +1,4 @@
+import { HEADER_HEIGHT } from '@/styles/globalStyle';
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.header`
@@ -5,13 +6,15 @@ export const HeaderWrapper = styled.header`
   background: ${({ theme }) => theme.color['background']};
   position: sticky;
   z-index: 500;
+
+  box-shadow: ${({ theme }) => theme.headerBoxShadow};
   top: 0;
-  border-bottom: 1px solid ${({ theme }) => theme.color['line']};
   ${({ theme }) => theme.fontSize.m}
 
   @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
     ${({ theme }) => theme.fontSize.s}
   }
+  
 
   svg {
     width: 2em;
@@ -30,7 +33,7 @@ export const Header = styled.div`
   background: ${({ theme }) => theme.color['background']};
   justify-content: space-between;
   align-items: center;
-  height: 8rem;
+  height: ${HEADER_HEIGHT}rem;
   width: 95%;
   max-width: 1050px;
   padding: 1rem 0;

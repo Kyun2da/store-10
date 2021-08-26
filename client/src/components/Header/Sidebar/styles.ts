@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const SideBar = styled.div`
   position: fixed;
-  z-index: 9;
+  z-index: 502;
   max-width: 300px;
   height: 100vh;
   width: 100%;
@@ -15,6 +15,17 @@ export const SideBar = styled.div`
     transform: translateX(0);
     + .backdorp {
       display: block;
+    }
+  }
+
+  svg {
+    width: 2em;
+    height: 2em;
+    stroke-width: 1.5px;
+    cursor: pointer;
+    stroke: ${({ theme }) => theme.color['text-color']};
+    &.filled {
+      fill: ${({ theme }) => theme.color['text-color']};
     }
   }
 `;
@@ -91,7 +102,7 @@ export const SubCategory = styled.dl`
 
   dd {
     padding: 1rem;
-    width: 150px;
+    min-width: 170px;
 
     &:hover {
       background: ${({ theme }) => theme.color['primary2']}66;
@@ -106,7 +117,7 @@ export const Backdrop = styled.div`
   background: ${({ theme }) => theme.color['label']}33;
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 501;
   width: 100vw;
   height: 100vh;
 `;

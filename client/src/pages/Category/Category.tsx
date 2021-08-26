@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from '@/lib/Router';
+import { useHistory, useParams } from '@/lib/Router';
 import * as S from './styles';
 import CategoryProducts from '@/components/CategoryProducts';
 import { CategoryList } from '@/recoil/category';
@@ -9,6 +9,7 @@ import { ISubCategory } from '@/types';
 const Category = () => {
   const { categoryId = '40' } = useParams().params;
   const categories = useRecoilValue(CategoryList);
+  const { historyPush } = useHistory();
 
   const sub: ISubCategory = {
     id: 0,
@@ -27,10 +28,25 @@ const Category = () => {
   });
 
   return (
-    <S.CategoryWrapper>
-      <S.CategoryHeader>{main?.title + ' > ' + sub.title}</S.CategoryHeader>
-      <CategoryProducts subCategoryId={+categoryId} />
-    </S.CategoryWrapper>
+    <>
+      <S.SubCategoriesWrap>
+        <S.SubCategoriesTitles>
+          {main?.subCategories.map((category) => (
+            <span
+              key={'categoryBreadCrumble' + category.id}
+              className={category.id == +categoryId ? 'selected' : ''}
+              onClick={() => historyPush(`/category/${category.id}`)}
+            >
+              {category.title}
+            </span>
+          ))}
+        </S.SubCategoriesTitles>
+      </S.SubCategoriesWrap>
+      <S.CategoryWrapper>
+        <S.CategoryHeader>{main?.title + ' > ' + sub.title}</S.CategoryHeader>
+        <CategoryProducts subCategoryId={+categoryId} />
+      </S.CategoryWrapper>
+    </>
   );
 };
 

@@ -4,7 +4,13 @@ import { IUserCoupon } from '@/types';
 import { notify } from '@/components/Shared/Toastify';
 
 export const useGetUserCoupons = () => {
-  return useQuery<IUserCoupon[], Error>('coupons', getUserCoupons);
+  return useQuery<IUserCoupon[], Error>('coupons', () => getUserCoupons());
+};
+
+export const useGetUserValidCoupons = () => {
+  return useQuery<IUserCoupon[], Error>(['coupons', 'valid'], () =>
+    getUserCoupons('valid')
+  );
 };
 
 export const useRegisterUserCoupon = () => {

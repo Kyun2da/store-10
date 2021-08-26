@@ -213,3 +213,12 @@ export interface IOrderUpdate {
   order: Partial<IOrder>;
   updateDefaultAddress?: boolean;
 }
+
+export interface IUserCoupon {
+  createdAt: string;
+  updatedAt: string;
+  id: number;
+  name: string;
+  amount: number;
+  is_valid: boolean;
+}

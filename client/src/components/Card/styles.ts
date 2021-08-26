@@ -15,7 +15,7 @@ export const Card = styled.li`
 
   /* Elevation1 */
 
-  box-shadow: 0px 2px 5px ${({ theme }) => theme.color['label']};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: 10px;
 
   &:hover {

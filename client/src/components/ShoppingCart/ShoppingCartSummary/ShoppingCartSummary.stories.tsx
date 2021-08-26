@@ -16,21 +16,7 @@ const Template: ComponentStory<typeof ShoppingCartSummary> = () => {
     (item) =>
       !unCheckedList.find((uncheckedId) => item.productId === uncheckedId)
   );
-
-  const productCount = checkedItems.length;
-  const totalPrice = checkedItems.reduce(
-    (sum, item) => sum + item.price * item.count,
-    0
-  );
-
-  return (
-    <ShoppingCartSummary
-      productCount={productCount}
-      totalPrice={totalPrice}
-      disabled={false}
-      checkedItems={checkedItems}
-    />
-  );
+  return <ShoppingCartSummary disabled={false} checkedItems={checkedItems} />;
 };
 
 export const Default = Template.bind({});

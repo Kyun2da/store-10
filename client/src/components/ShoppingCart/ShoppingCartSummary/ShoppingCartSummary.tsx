@@ -1,28 +1,34 @@
 import React, { useCallback } from 'react';
 import * as S from './styles';
-import { wonFormat } from '@/utils/helper';
+import { wonFormat, calculateDiscount } from '@/utils/helper';
 import Button from '@/components/Shared/Button';
 import { usePostOrder } from '@/hooks/queries/order';
 import { ICart } from '@/types';
 
 interface ISShoppingCartSummaryProps {
-  totalPrice: number;
-  deliveryFee?: number;
-  discount?: number;
-  productCount: number;
   disabled?: boolean;
   checkedItems: ICart[];
 }
 
 const ShoppingCartSummary = ({
-  totalPrice,
-  discount = 0,
-  productCount,
   disabled,
   checkedItems,
 }: ISShoppingCartSummaryProps) => {
-  // TODO: 배송비 동적으로..?
-  const deliveryFee = disabled ? 0 : 2500;
+  const productCount = checkedItems.length;
+  const totalPrice = checkedItems.reduce(
+    (sum, item) => sum + item.price * item.count,
+    0
+  );
+  console.log(checkedItems);
+  const discount: number = checkedItems.reduce((sum, item) => {
+    if (item.discount) {
+      return (
+        sum + calculateDiscount({ price: item.price, discount: item.discount })
+      );
+    }
+    return sum;
+  }, 0);
+  const deliveryFee = disabled || totalPrice >= 30000 ? 0 : 2500;
   const sum = totalPrice + deliveryFee - discount;
   const { mutate } = usePostOrder();
   const buyButtonOnClick = useCallback(() => {
@@ -51,8 +57,8 @@ const ShoppingCartSummary = ({
         </S.ShoppingCartSummaryRow>
         <S.ShoppingCartSummaryRow>
           <dt>총 할인금액</dt>
-          <dd>
-            {!!discount && '+ '}
+          <dd className={discount > 0 ? 'red' : undefined}>
+            {!!discount && '- '}
             {wonFormat(discount)}
           </dd>
         </S.ShoppingCartSummaryRow>

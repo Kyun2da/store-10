@@ -46,6 +46,7 @@ export interface ICart {
   title: string;
   price: number;
   image: string;
+  discount: number;
 }
 
 export interface IDetails {

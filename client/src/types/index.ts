@@ -209,7 +209,7 @@ export interface IOrder {
   updatedAt: string;
   payment_id?: number | null;
   userCoupon_id?: number | null;
-  coupon_discount?: number;
+  user_coupon_id?: number | null;
 }
 
 export interface IOrderUpdate {

@@ -5,18 +5,16 @@ import {
   useRegisterUserCoupon,
 } from '@/hooks/queries/coupon';
 import Coupon from '@/components/Shared/Coupon';
-import { IOrder, IUserCoupon } from '@/types';
+import { IUserCoupon } from '@/types';
 import { SelectedSVG, DownChevronSVG, UpChevronSVG } from '@/assets/svgs';
 import { Input } from '@/components/Shared/Input';
 import Button from '@/components/Shared/Button';
 interface IProps {
-  setOrder: Dispatch<
-    Partial<IOrder> | ((prev: Partial<IOrder>) => Partial<IOrder>)
-  >;
-  selectedCoupon: number | null;
+  setSelectedCoupon: Dispatch<IUserCoupon | null>;
+  selectedCoupon: IUserCoupon | null;
 }
 
-const OrderCoupon = ({ setOrder, selectedCoupon }: IProps) => {
+const OrderCoupon = ({ setSelectedCoupon, selectedCoupon }: IProps) => {
   const { data } = useGetUserValidCoupons();
   const { mutate, isLoading, error, reset } = useRegisterUserCoupon();
   const [inputValue, setInputValue] = useState('');
@@ -33,18 +31,10 @@ const OrderCoupon = ({ setOrder, selectedCoupon }: IProps) => {
     reset();
   };
   const selectCoupon = (coupon: IUserCoupon) => {
-    if (selectedCoupon === coupon.id) {
-      setOrder((prev) => ({
-        ...prev,
-        userCoupon_id: null,
-        coupon_discount: 0,
-      }));
+    if (selectedCoupon === coupon) {
+      setSelectedCoupon(null);
     } else {
-      setOrder((prev) => ({
-        ...prev,
-        userCoupon_id: coupon.id,
-        coupon_discount: coupon.amount,
-      }));
+      setSelectedCoupon(coupon);
     }
   };
   return (
@@ -85,7 +75,7 @@ const OrderCoupon = ({ setOrder, selectedCoupon }: IProps) => {
       </S.RegisterCouponWrapper>
       <S.CouponDisplay>
         {(data || []).map((coupon) => {
-          const isSelected = selectedCoupon === coupon.id;
+          const isSelected = selectedCoupon === coupon;
           return (
             <S.CouponWrapper
               className={isSelected ? 'selected' : undefined}

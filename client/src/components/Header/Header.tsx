@@ -16,12 +16,16 @@ export const Links = () => {
       <Link to={user ? '/mypage' : '/login'}>
         <UserSVG />
       </Link>
-      <Link to="/bookmark">
-        <HeartSVG />
-      </Link>
-      <Link to="/cart">
-        <CartSVG className="filled" />
-      </Link>
+      {user && (
+        <>
+          <Link to="/bookmark">
+            <HeartSVG />
+          </Link>
+          <Link to="/cart">
+            <CartSVG className="filled" />
+          </Link>
+        </>
+      )}
     </>
   );
 };
@@ -50,7 +54,7 @@ const Header = () => {
             </Link>
           </S.Menu>
           <S.SearchWrapper onClick={searchWrapToggle}>
-            <S.SearchText> 검색어를 입력해주세요. </S.SearchText>
+            <S.SearchText />
             <SearchSVG />
           </S.SearchWrapper>
           <S.StateUl>

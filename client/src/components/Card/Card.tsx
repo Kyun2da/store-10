@@ -126,6 +126,19 @@ const Card = ({
       </S.BottomBar>
     );
 
+  const onClickFilter = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      e.preventDefault();
+      if (isChecked && setCheckedList && checkedList) {
+        setCheckedList(checkedList.filter((chekcedId) => chekcedId !== linkId));
+      } else if (setCheckedList && checkedList) {
+        setCheckedList([...checkedList, linkId]);
+      }
+    },
+    [isChecked, checkedList, linkId, setCheckedList]
+  );
+
   return (
     <Link to={`/detail/${linkId}`}>
       <S.Card>
@@ -166,6 +179,7 @@ const Card = ({
             ))}
         </S.ProductDetails>
         {openModal && <ShoppingCartModal toggleModal={toggleModal} />}
+        {checkBoxDisplay && <S.Filter onClick={onClickFilter}></S.Filter>}
       </S.Card>
     </Link>
   );

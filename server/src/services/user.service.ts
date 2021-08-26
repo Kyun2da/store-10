@@ -45,12 +45,17 @@ class UserService {
     const couponIds = userCoupons.map((userCoupon) => userCoupon.coupon_id);
     const coupons = await couponRepo.getCouponsByIds(couponIds);
 
-    return coupons.map((coupon) => ({
-      ...coupon,
-      isValid: userCoupons.find(
-        (userCoupon) => userCoupon.coupon_id === coupon.id
-      ).is_valid,
-    }));
+    return userCoupons.map((userCoupon) => {
+      const coupon = coupons.find(
+        (coupon) => coupon.id === userCoupon.coupon_id
+      );
+      return {
+        ...userCoupon,
+        coupon_id: coupon.id,
+        name: coupon.name,
+        amount: coupon.amount,
+      };
+    });
   }
 
   async useCoupon({ id, user_id }) {

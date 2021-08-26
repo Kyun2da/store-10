@@ -26,3 +26,5 @@ export { default as MoonSVG } from '@/assets/svgs/moon.svg';
 export { default as SunSVG } from '@/assets/svgs/sun.svg';
 export { default as ArrowTopSVG } from '@/assets/svgs/arrow-top.svg';
 export { default as SelectedSVG } from '@/assets/svgs/selected.svg';
+export { default as DownChevronSVG } from '@/assets/svgs/down-chevron.svg';
+export { default as UpChevronSVG } from '@/assets/svgs/up-chevron.svg';

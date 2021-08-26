@@ -19,6 +19,9 @@ import { userState } from '@/recoil/user';
 import { notify } from '@/components/Shared/Toastify';
 import usePagination from '@/hooks/usePagination';
 import { REVIEW_LIMIT } from '@/utils/constant/offsetLimit';
+import Thung from '@/components/Thung';
+import Spinner from '@/components/Shared/Spinner/Spinner';
+import { ResponseError } from '@/components/Shared/Error';
 
 // 페이지 당 리뷰 노출 개수
 
@@ -40,11 +43,15 @@ const ProductReview = () => {
 
   // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
   if (error) {
-    return <div>{error.message}</div>;
+    return <ResponseError message={error.message} />;
   }
 
   if (isLoading || !reviews || !scores) {
-    return <div>loading</div>;
+    return (
+      <S.LoadingWrapper>
+        <Spinner />
+      </S.LoadingWrapper>
+    );
   }
 
   const { count, sum, ratings } = scores;
@@ -62,6 +69,8 @@ const ProductReview = () => {
     setSelectedImage(image);
     toggleImageModal();
   };
+
+  console.log(reviews);
 
   return (
     <S.PanelWrapper ref={topRef} className="pagination-scroll-top">
@@ -87,37 +96,44 @@ const ProductReview = () => {
       </S.RatingArea>
 
       <S.UserReviewArea>
-        {reviews.map((review) => {
-          return (
-            <S.UserReview data-review-id={review.id} key={review.id}>
-              <S.UserReviewTitles>
-                <Title className="username" level={5}>
-                  {review.name}
-                  <span style={{ fontWeight: 100 }}>님</span>
-                </Title>
-                <div className="rating-area">
-                  <RatingGetter rating={review.rating} uniqueId={nanoid()} />
-                  <p className="date">{dateFormat(review.createdAt)}</p>
-                </div>
-              </S.UserReviewTitles>
+        {!!reviews.length ? (
+          reviews.map((review) => {
+            return (
+              <S.UserReview data-review-id={review.id} key={review.id}>
+                <S.UserReviewTitles>
+                  <Title className="username" level={5}>
+                    {review.name}
+                    <span style={{ fontWeight: 100 }}>님</span>
+                  </Title>
+                  <div className="rating-area">
+                    <RatingGetter rating={review.rating} uniqueId={nanoid()} />
+                    <p className="date">{dateFormat(review.createdAt)}</p>
+                  </div>
+                </S.UserReviewTitles>
 
-              {review.url.length !== 0 && (
-                <S.ReviewImages>
-                  {review.url.map((image) => (
-                    <img
-                      onClick={() => handleOnClickImage(image)}
-                      key={nanoid()}
-                      src={image}
-                      alt="유저사진리뷰"
-                    />
-                  ))}
-                </S.ReviewImages>
-              )}
+                {review.url.length !== 0 && (
+                  <S.ReviewImages>
+                    {review.url.map((image) => (
+                      <img
+                        onClick={() => handleOnClickImage(image)}
+                        key={nanoid()}
+                        src={image}
+                        alt="유저사진리뷰"
+                      />
+                    ))}
+                  </S.ReviewImages>
+                )}
 
-              <S.UserDescription>{review.content}</S.UserDescription>
-            </S.UserReview>
-          );
-        })}
+                <S.UserDescription>{review.content}</S.UserDescription>
+              </S.UserReview>
+            );
+          })
+        ) : (
+          <Thung
+            title="아직 작성된 리뷰가 없어요..!"
+            className="thung-review"
+          />
+        )}
       </S.UserReviewArea>
 
       <Pagination

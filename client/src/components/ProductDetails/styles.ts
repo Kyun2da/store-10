@@ -220,6 +220,11 @@ export const PanelWrapper = styled.div`
       }
     }
   }
+
+  .thung-review {
+    max-width: 50%;
+    margin: auto;
+  }
 `;
 
 export const ProductTable = styled.div`
@@ -388,4 +393,11 @@ export const PreparingText = styled.p`
   font-family: 'BMDOHYEON';
   ${({ theme }) => theme.fontSize.l};
   ${({ theme }) => theme.fontWeight.l};
+`;
+
+export const LoadingWrapper = styled.div`
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

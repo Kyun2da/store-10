@@ -13,6 +13,7 @@ import { userState } from '@/recoil/user';
 import { notify } from '../Shared/Toastify';
 import { ShoppingCartModal } from '@/components/Shared/Modal';
 import useModal from '@/hooks/useModal';
+import Image from '@/components/Shared/Image';
 
 const BgColor = {
   Error: 'error',
@@ -141,11 +142,12 @@ const Card = ({
                 />
               )}
               {discount ? <S.NameTag>{discount}%</S.NameTag> : ''}
-              <img src={src} alt="상품 섬네일 이미지" />
+              {!!src && <Image src={src} alt="상품 섬네일 이미지" />}
             </S.ThumbnailWrapper>
             <S.ProductTitle>{title}</S.ProductTitle>
           </div>
         </div>
+        
         <S.ProductDetails>
           {!bottomDisplay ||
             (discount ? (

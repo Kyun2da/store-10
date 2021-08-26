@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './styles';
 import { calculateDiscount, wonFormat } from '@/utils/helper';
 import { IOrderProduct } from '@/types';
+import Image from '@/components/Shared/Image';
 
 interface IProps {
   products: IOrderProduct[];
@@ -17,7 +18,7 @@ const OrderProducts = ({ products }: IProps) => {
         {products.map((product) => (
           <S.OrderProductsItem key={product.id}>
             <S.ImgWrapper>
-              <img src={product.img} />
+              <Image src={product.img} alt="주문상품 이미지" />
             </S.ImgWrapper>
             <S.ItemInfo>
               <S.ItemInfoName>{product.title}</S.ItemInfoName>

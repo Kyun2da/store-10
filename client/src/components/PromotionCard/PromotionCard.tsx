@@ -1,6 +1,7 @@
 import { useHistory } from '@/lib/Router';
 import * as React from 'react';
 import * as S from './styles';
+import Image from '@/components/Shared/Image';
 
 const PromotionCard = () => {
   const { historyPush } = useHistory();
@@ -28,7 +29,7 @@ const PromotionCard = () => {
           key={'promotion_' + idx}
           onClick={() => cardClickHandler(item.title)}
         >
-          <img src={item.img} />
+          <Image src={item.img} alt="프로모션 배너 이미지" />
           <S.PromotionText>
             <S.PromotionTitle>{item.title}</S.PromotionTitle>
             <S.PromotionContent>

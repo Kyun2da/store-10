@@ -55,7 +55,11 @@ const OrderAddress = ({
 
   const renderAddressInfo = () => {
     if (!address) {
-      return <div>empty</div>;
+      return (
+        <S.AddressEmpty>
+          배송지가 없습니다. 배송지를 추가해주세요!
+        </S.AddressEmpty>
+      );
     }
     return (
       <S.AddressInfo>
@@ -99,9 +103,11 @@ const OrderAddress = ({
     <article>
       <S.OrderAddressHeader>
         <span>배송지</span>
-        <button onClick={() => toggleModal()}>변경</button>
+        <button onClick={() => toggleModal()}>
+          {address ? '변경' : '추가'}
+        </button>
       </S.OrderAddressHeader>
-      {isLoading || !data ? <div>Loading...</div> : renderAddressInfo()}
+      {isLoading ? <div>Loading...</div> : renderAddressInfo()}
 
       {isOpen && (
         <AddressModal

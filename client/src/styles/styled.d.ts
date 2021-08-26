@@ -41,6 +41,13 @@ declare module 'styled-components' {
       phone: number;
       headerSearch: number;
     };
+    mediaScreen: {
+      pc: (args: TemplateStringsArray) => FlattenSimpleInterpolation;
+      btw_pc_tab: (args: TemplateStringsArray) => FlattenSimpleInterpolation;
+      tablet: (args: TemplateStringsArray) => FlattenSimpleInterpolation;
+      btw_tab_mob: (args: TemplateStringsArray) => FlattenSimpleInterpolation;
+      phone: (args: TemplateStringsArray) => FlattenSimpleInterpolation;
+    };
     boxShadow: string;
   }
 }

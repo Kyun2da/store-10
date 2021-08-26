@@ -1,5 +1,5 @@
 import { css, DefaultTheme } from 'styled-components';
-import { media } from './globalStyle';
+import { media, mediaScreen } from './globalStyle';
 
 const fontSize = {
   xs: css`
@@ -65,6 +65,7 @@ export const lightMode: DefaultTheme = {
   fontSize,
   fontWeight,
   media,
+  mediaScreen,
   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.1)',
 };
 
@@ -90,6 +91,7 @@ export const darkMode: DefaultTheme = {
   fontSize,
   fontWeight,
   media,
+  mediaScreen,
   boxShadow:
     '0px 4px 4px rgba(255, 255, 255, 0.1), 0px 4px 20px rgba(255, 255, 255, 0.1)',
 };

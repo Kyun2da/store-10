@@ -23,6 +23,8 @@ const Order = () => {
     delivery_request_message: null,
     address_id: null,
     payment_id: 1,
+    userCoupon_id: null,
+    coupon_discount: 0,
   });
 
   const updateOrder = () => {
@@ -39,7 +41,7 @@ const Order = () => {
 
   const totalClount = data?.products?.length || 0;
 
-  const totalDiscount =
+  const totalProductsDiscount =
     data?.products.reduce((sum, product) => {
       return (
         sum +
@@ -73,15 +75,18 @@ const Order = () => {
           selectAddress={selectAddress}
         />
         <OrderProducts products={data?.products} />
-        <OrderCoupon />
+        <OrderCoupon
+          setOrder={setOrder}
+          selectedCoupon={order?.userCoupon_id || null}
+        />
         <OrderPayment setOrder={setOrder} order={order} />
       </S.Order>
       <S.OrderAside>
         <OrderSummary
           totalPrice={totalPrice}
-          totalDiscount={totalDiscount}
+          totalProductsDiscount={totalProductsDiscount}
           deliveryFee={2500}
-          discount={0}
+          couponDiscount={order.coupon_discount}
           productCount={totalClount}
           updateOrder={updateOrder}
           address={address}
@@ -92,9 +97,9 @@ const Order = () => {
       <S.OrderFooter>
         <OrderSummary
           totalPrice={totalPrice}
-          totalDiscount={totalDiscount}
+          totalProductsDiscount={totalProductsDiscount}
           deliveryFee={2500}
-          discount={0}
+          couponDiscount={order.coupon_discount}
           productCount={totalClount}
           updateOrder={updateOrder}
           address={address}

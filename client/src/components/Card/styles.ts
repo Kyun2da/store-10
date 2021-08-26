@@ -64,9 +64,16 @@ export const NameTag = styled.div`
   padding: 0.6rem;
   border-radius: 0.6rem;
   box-sizing: border-box;
-  ${({ theme }) => theme.fontSize.m}
   color: #fff;
+  ${({ theme }) => theme.fontSize.m};
   background-color: ${({ theme }) => theme.color.error};
+
+  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
+    ${({ theme }) => theme.fontSize.s}
+  }
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    ${({ theme }) => theme.fontSize.xs}
+  }
 `;
 
 export const ThumbnailWrapper = styled.div`
@@ -91,16 +98,17 @@ export const ThumbnailWrapper = styled.div`
   &:hover ${BottomBar} {
     display: flex;
   }
-  .title {
-    font-size: clamp(10px, 3vw, 1.2em);
-    ${({ theme }) => theme.fontWeight.s};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    margin: 0.8rem 0.8rem 0 0.8rem;
-  }
+`;
+
+export const ProductTitle = styled.p`
+  font-size: clamp(11px, 3vw, 1.6rem);
+  ${({ theme }) => theme.fontWeight.s};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin: 0.8rem 0.8rem 0 0.8rem;
 `;
 
 export const ButtonArea = styled.div`

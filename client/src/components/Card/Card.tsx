@@ -116,37 +116,39 @@ const Card = ({
       <S.Card>
         <div>
           <S.Liner bgColor={bgColor} />
-          <S.ThumbnailWrapper>
-            {!checkBoxDisplay || (
-              <S.CardCheckbox
-                onChange={onChangeCheckbox}
-                checked={isChecked}
-                onClick={checkBoxOnClick}
-              />
-            )}
-            {discount ? <S.NameTag>{discount}%</S.NameTag> : ''}
-            <img src={src} alt="상품 섬네일 이미지" />
-            {!bottomDisplay || (
-              <S.BottomBar onClick={handleClick}>
-                <S.ButtonArea>
-                  <HeartButton
-                    witdh={24}
-                    height={24}
-                    fill={isHeartChecked ? 'red' : 'none'}
-                    onClick={heartBtnOnClick}
-                  />
-                </S.ButtonArea>
-                <S.ButtonArea>
-                  <ShoppingCart
-                    witdh={24}
-                    height={24}
-                    onClick={cartBtnOnClick}
-                  />
-                </S.ButtonArea>
-              </S.BottomBar>
-            )}
-            <p className="title">{title}</p>
-          </S.ThumbnailWrapper>
+          <div>
+            <S.ThumbnailWrapper>
+              {!checkBoxDisplay || (
+                <S.CardCheckbox
+                  onChange={onChangeCheckbox}
+                  checked={isChecked}
+                  onClick={checkBoxOnClick}
+                />
+              )}
+              {discount ? <S.NameTag>{discount}%</S.NameTag> : ''}
+              <img src={src} alt="상품 섬네일 이미지" />
+              {!bottomDisplay || (
+                <S.BottomBar onClick={handleClick}>
+                  <S.ButtonArea>
+                    <HeartButton
+                      witdh={24}
+                      height={24}
+                      fill={isHeartChecked ? 'red' : 'none'}
+                      onClick={heartBtnOnClick}
+                    />
+                  </S.ButtonArea>
+                  <S.ButtonArea>
+                    <ShoppingCart
+                      witdh={24}
+                      height={24}
+                      onClick={cartBtnOnClick}
+                    />
+                  </S.ButtonArea>
+                </S.BottomBar>
+              )}
+            </S.ThumbnailWrapper>
+            <S.ProductTitle>{title}</S.ProductTitle>
+          </div>
         </div>
         <S.ProductDetails>
           {!bottomDisplay ||

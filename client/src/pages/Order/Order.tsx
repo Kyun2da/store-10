@@ -40,15 +40,15 @@ const Order = () => {
     ) || 0;
 
   const totalClount = data?.products?.length || 0;
-
   const totalProductsDiscount =
     data?.products.reduce((sum, product) => {
       return (
         sum +
-        calculateDiscount({
-          price: product.price,
-          discount: product.discount,
-        }) *
+        (product.price -
+          calculateDiscount({
+            price: product.price,
+            discount: product.discount,
+          })) *
           product.count
       );
     }, 0) || 0;

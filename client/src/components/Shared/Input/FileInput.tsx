@@ -45,6 +45,7 @@ const FileInput = ({
         <UploadSVG width={100} height={100} />
         <span className="helper-text">클릭하여 파일을 추가하세요!</span>
         <input
+          accept="image/*"
           ref={fileRef}
           type="file"
           hidden={hidden}

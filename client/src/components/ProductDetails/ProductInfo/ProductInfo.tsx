@@ -19,6 +19,8 @@ import {
   useDeleteBookmark,
   useGetBookmarkIds,
 } from '@/hooks/queries/bookmark';
+import { ResponseError } from '@/components/Shared/Error';
+import ProductInfoSkeleton from '@/components/Skeleton/ProductInfoSkeleton';
 import { ShoppingCartModal } from '@/components/Shared/Modal';
 import useModal from '@/hooks/useModal';
 
@@ -66,11 +68,11 @@ const ProductInfo = () => {
 
   // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
   if (error) {
-    return <div>{error.message}</div>;
+    return <ResponseError message={error.message} />;
   }
 
   if (isLoading || !data) {
-    return <div>loading</div>;
+    return <ProductInfoSkeleton />;
   }
 
   const { details, thumbnails } = data;

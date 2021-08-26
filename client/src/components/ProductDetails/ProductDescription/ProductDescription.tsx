@@ -5,6 +5,8 @@ import Title from '@/components/Shared/Title';
 import { nanoid } from 'nanoid';
 import { useGetProductById } from '@/hooks/queries/product';
 import contentParser from '@/utils/contentParser';
+import { ResponseError } from '@/components/Shared/Error';
+import Spinner from '@/components/Shared/Spinner';
 
 const ProductDescription = () => {
   const { id } = useParams().params;
@@ -12,11 +14,15 @@ const ProductDescription = () => {
   const { data, isLoading, error } = useGetProductById(id);
 
   if (error) {
-    return <div>{error.message}</div>;
+    return <ResponseError message={error.message} />;
   }
 
   if (isLoading || !data) {
-    return null;
+    return (
+      <S.LoadingWrapper>
+        <Spinner />
+      </S.LoadingWrapper>
+    );
   }
 
   const { content } = data.details;

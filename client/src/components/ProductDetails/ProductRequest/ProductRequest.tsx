@@ -17,6 +17,9 @@ import { userState } from '@/recoil/user';
 import { notify } from '@/components/Shared/Toastify';
 import { QUESTION_LIMIT } from '@/utils/constant/offsetLimit';
 import { QUESTION_HEADER } from '@/utils/constant/CollapseHeaders';
+import Spinner from '@/components/Shared/Spinner';
+import Thung from '@/components/Thung';
+import { ResponseError } from '@/components/Shared/Error';
 
 const ProductRequest = () => {
   const { id } = useParams().params;
@@ -32,11 +35,15 @@ const ProductRequest = () => {
   const { data: count } = useGetProductQuestionCount(id);
 
   if (isLoading || !questions || !count) {
-    return <div>loading...</div>;
+    return (
+      <S.LoadingWrapper>
+        <Spinner />
+      </S.LoadingWrapper>
+    );
   }
 
   if (error) {
-    return <div>error</div>;
+    return <ResponseError message={error.message} />;
   }
 
   const handleClickQuestionButton = () => {
@@ -63,11 +70,15 @@ const ProductRequest = () => {
         </Button>
       </S.TopArea>
 
-      <Collapse
-        headers={QUESTION_HEADER}
-        items={questions}
-        gaps="1fr 1fr 4fr 1fr 1fr 1fr"
-      />
+      {!!questions.length ? (
+        <Collapse
+          headers={QUESTION_HEADER}
+          items={questions}
+          gaps="1fr 1fr 4fr 1fr 1fr 1fr"
+        />
+      ) : (
+        <Thung title="아직 작성된 문의가 없어요..!" className="thung-review" />
+      )}
 
       <Pagination
         handleOnClickPage={handleOnClickPage}

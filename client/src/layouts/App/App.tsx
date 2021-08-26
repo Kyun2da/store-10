@@ -22,7 +22,7 @@ import Paid from '@/pages/Order/Paid';
 import Loading from '@/components/Shared/Loading';
 import { QueryErrorResetBoundary } from 'react-query';
 import { ErrorBoundary } from 'react-error-boundary';
-import Error from '@/components/Shared/Error';
+import { Error } from '@/components/Shared/Error';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import Bookmark from '@/pages/Bookmark';

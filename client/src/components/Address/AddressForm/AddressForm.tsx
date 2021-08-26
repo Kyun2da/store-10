@@ -34,7 +34,7 @@ const AddressForm = ({
     postcode: addressToModify ? addressToModify.postcode : '',
     address: addressToModify ? addressToModify.address : '',
     detailAddress: addressToModify ? addressToModify.detailAddress : '',
-    phone: addressToModify ? addressToModify.phone : '',
+    phone: addressToModify ? addressToModify.phone.slice(4) : '',
     isDefault: addressToModify ? addressToModify.isDefault : false,
   });
   const [errors, setErrors] = useState<Record<string, boolean>>({

@@ -70,8 +70,6 @@ const ProductReview = () => {
     toggleImageModal();
   };
 
-  console.log(reviews);
-
   return (
     <S.PanelWrapper ref={topRef} className="pagination-scroll-top">
       <S.TopArea>

@@ -83,7 +83,7 @@ const ProductInfo = () => {
   const realPrice = calculateDiscount({ price, discount });
 
   return (
-    <S.ProductInfo>
+    <S.ProductInfo className="container">
       <ProductThumbnails
         thumbDetails={thumbDetails}
         thumbOrigins={thumbOrigins}
@@ -133,7 +133,6 @@ const ProductInfo = () => {
           <span className="price-sum">{wonFormat(realPrice * value)}</span>
         </S.PriceBar>
 
-        {/* LINK 이동 및 버튼 클릭 핸들러 구현해야함 */}
         <S.ButtonArea>
           <button className="heart" onClick={heartBtnOnClick}>
             <HeartSVG

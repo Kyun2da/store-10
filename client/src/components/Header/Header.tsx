@@ -16,7 +16,7 @@ export const Links = () => {
       <Link to={user ? '/mypage' : '/login'}>
         <UserSVG />
       </Link>
-      {user || (
+      {user && (
         <>
           <Link to="/bookmark">
             <HeartSVG />

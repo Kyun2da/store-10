@@ -13,7 +13,7 @@ interface IProps {
   updateDefaultAddress: boolean;
   setUpdateDefaultAddress: Dispatch<boolean>;
   address: IAddress | null;
-  selectAddress: Dispatch<IAddress>;
+  selectAddress: Dispatch<IAddress | null>;
 }
 const OrderAddress = ({
   setOrder,

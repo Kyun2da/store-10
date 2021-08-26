@@ -5,7 +5,7 @@ import { useGetAddresses, useDeleteAddress } from '@/hooks/queries/address';
 import { IAddress } from '@/types';
 
 interface IAddresseProps {
-  selectAddress: Dispatch<IAddress>;
+  selectAddress: Dispatch<IAddress | null>;
   selectedAddress: IAddress | null;
   setAddressToModify: Dispatch<IAddress>;
   toggleModal: () => void;
@@ -35,6 +35,7 @@ const Address = ({
   const onClickDelete = (id?: number) => {
     if (confirm('정말 삭제하시겠습니까?') && id) {
       mutate(id);
+      if (selectedAddress?.id === id) selectAddress(null);
     }
   };
 

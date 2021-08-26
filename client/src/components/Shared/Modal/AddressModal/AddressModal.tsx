@@ -9,7 +9,7 @@ import * as S from './styles';
 
 interface IProps {
   toggleModal: () => void;
-  selectAddress: Dispatch<IAddress>;
+  selectAddress: Dispatch<IAddress | null>;
   address: IAddress | null;
 }
 

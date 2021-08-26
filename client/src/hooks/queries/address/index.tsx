@@ -22,7 +22,7 @@ export const usePostAddress = () => {
   const mutation = useMutation(postAddress, {
     onSuccess: () => {
       queryClient.invalidateQueries('address');
-      notify('success', '성공! TODO: Toast');
+      notify('success', '성공적으로 배송지를 추가하였습니다.');
     },
     onError: () => {
       notify('error', '실패!');
@@ -37,7 +37,7 @@ export const useUpdateAddress = () => {
   const mutation = useMutation(updateAddress, {
     onSuccess: () => {
       queryClient.invalidateQueries('address');
-      notify('success', '성공! TODO: Toast');
+      notify('success', '성공적으로 배송지를 변경하였습니다.');
     },
     onError: () => {
       notify('error', '실패!');
@@ -52,7 +52,7 @@ export const useDeleteAddress = () => {
   const mutation = useMutation(deleteAddress, {
     onSuccess: () => {
       queryClient.invalidateQueries('address');
-      notify('success', '성공! TODO: Toast');
+      notify('success', '성공적으로 배송지를 삭제하였습니다.');
     },
     onError: () => {
       notify('error', '실패!');

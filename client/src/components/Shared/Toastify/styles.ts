@@ -7,6 +7,7 @@ export const StyledToastContainer = styled(ToastContainer).attrs({
   bodyClassName: 'body',
 })`
   width: fit-content;
+  z-index: 9999999;
 
   .toast {
     border-radius: 10rem;

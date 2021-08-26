@@ -22,3 +22,6 @@ export { default as QuestionSVG } from '@/assets/svgs/question.svg';
 export { default as AnswerSVG } from '@/assets/svgs/answer.svg';
 export { default as LeftChevron } from '@/assets/svgs/left-chevron.svg';
 export { default as MoreButtonSVG } from '@/assets/svgs/more.svg';
+export { default as MoonSVG } from '@/assets/svgs/moon.svg';
+export { default as SunSVG } from '@/assets/svgs/sun.svg';
+export { default as ArrowTopSVG } from '@/assets/svgs/arrow-top.svg';

@@ -5,14 +5,16 @@ import { useGetAddresses, useDeleteAddress } from '@/hooks/queries/address';
 import { IAddress } from '@/types';
 
 interface IAddresseProps {
-  selectAddress: Dispatch<IAddress>;
+  selectAddress: Dispatch<IAddress | null>;
+  selectedAddress: IAddress | null;
   setAddressToModify: Dispatch<IAddress>;
   toggleModal: () => void;
   setOpenForm: Dispatch<boolean>;
 }
 
-const Addresse = ({
+const Address = ({
   selectAddress,
+  selectedAddress,
   toggleModal,
   setAddressToModify,
   setOpenForm,
@@ -33,6 +35,7 @@ const Addresse = ({
   const onClickDelete = (id?: number) => {
     if (confirm('정말 삭제하시겠습니까?') && id) {
       mutate(id);
+      if (selectedAddress?.id === id) selectAddress(null);
     }
   };
 
@@ -46,12 +49,20 @@ const Addresse = ({
         {data.map((address) => (
           <S.AddressItem
             key={address.id}
-            className={!!address.isDefault ? 'default-address' : undefined}
+            className={
+              address.id === selectedAddress?.id
+                ? 'selected-address'
+                : undefined
+            }
           >
             <S.AddressItemHeader>
               <S.AddressName>{address.name}</S.AddressName>
+
               {!!address.isDefault && (
                 <S.DefaultAddress>기본 배송지</S.DefaultAddress>
+              )}
+              {address.id === selectedAddress?.id && (
+                <S.SelectedAddress>선택된 배송지</S.SelectedAddress>
               )}
             </S.AddressItemHeader>
             <S.AddressInfo>
@@ -76,14 +87,16 @@ const Addresse = ({
               >
                 삭제
               </Button>
-              <Button
-                type="button"
-                color="primary"
-                size="Small"
-                onClick={onClickSelectAddress(address)}
-              >
-                선택
-              </Button>
+              {address.id !== selectedAddress?.id && (
+                <Button
+                  type="button"
+                  color="primary"
+                  size="Small"
+                  onClick={onClickSelectAddress(address)}
+                >
+                  선택
+                </Button>
+              )}
             </S.AddressItemFooter>
           </S.AddressItem>
         ))}
@@ -97,4 +110,4 @@ const Addresse = ({
   );
 };
 
-export default Addresse;
+export default Address;

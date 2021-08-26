@@ -4,24 +4,35 @@ import { wonFormat } from '@/utils/helper';
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
 import Checkbox from '@/components/Shared/Checkbox';
+import { useDeleteCart } from '@/hooks/queries/cart';
+import { IAddress, IOrder } from '@/types';
 
 interface IProps {
   totalPrice: number;
+  totalDiscount: number;
   deliveryFee: number;
   discount: number;
   productCount: number;
+  data: IOrder | undefined;
+  address: IAddress | null;
   updateOrder: () => void;
 }
 
 const OrderSummary = ({
   totalPrice,
+  totalDiscount,
   deliveryFee,
   discount,
   productCount,
+  data,
+  address,
   updateOrder,
 }: IProps) => {
   const [agree, setAgree] = useState(false);
-  const sum = totalPrice + deliveryFee - discount;
+  const discountCondition = 30000;
+  const discountDeliveryFee = totalPrice > discountCondition ? 2500 : 0;
+  const { mutate } = useDeleteCart();
+  const sum = totalPrice + deliveryFee - totalDiscount - discount - deliveryFee;
   return (
     <S.OrderSummaryWrapper>
       <S.OrderSummary>
@@ -30,12 +41,24 @@ const OrderSummary = ({
           <dt>총 상품금액</dt>
           <dd>{wonFormat(totalPrice)}</dd>
         </S.OrderSummaryRow>
+        {totalDiscount && (
+          <S.OrderSummaryRow>
+            <dt>총 상품 할인</dt>
+            <dd className="red">- {wonFormat(totalDiscount)}</dd>
+          </S.OrderSummaryRow>
+        )}
         <S.OrderSummaryRow>
           <dt>총 배송비</dt>
           <dd>
             {deliveryFee > 0 ? '+' : ''} {wonFormat(deliveryFee)}
           </dd>
         </S.OrderSummaryRow>
+        {totalPrice > discountCondition && (
+          <S.OrderSummaryRow>
+            <dt>배송비 할인</dt>
+            <dd className="red">- {wonFormat(discountDeliveryFee)}</dd>
+          </S.OrderSummaryRow>
+        )}
         <S.OrderSummaryRow>
           <dt>쿠폰 사용</dt>
           <dd className={discount > 0 ? 'red' : undefined}>
@@ -66,10 +89,12 @@ const OrderSummary = ({
       </S.OrderSummary>
       <Button
         type="button"
-        disabled={!agree}
+        disabled={!agree || !address}
         color="primary"
         onClick={() => {
           updateOrder();
+          const ids = data?.products.map((product) => product.id);
+          if (ids) mutate(ids);
         }}
       >
         {productCount}개 상품 구매하기

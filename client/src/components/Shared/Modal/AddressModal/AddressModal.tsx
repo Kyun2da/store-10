@@ -9,7 +9,7 @@ import * as S from './styles';
 
 interface IProps {
   toggleModal: () => void;
-  selectAddress: Dispatch<IAddress>;
+  selectAddress: Dispatch<IAddress | null>;
   address: IAddress | null;
 }
 
@@ -49,6 +49,7 @@ const AddressModal = ({ toggleModal, selectAddress, address }: IProps) => {
       ) : (
         <Address
           setOpenForm={setOpenForm}
+          selectedAddress={address}
           selectAddress={selectAddress}
           toggleModal={toggleModal}
           setAddressToModify={setAddressToModify}

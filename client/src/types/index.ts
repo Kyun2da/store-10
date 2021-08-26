@@ -186,6 +186,7 @@ export interface IOrderProduct {
   price: number;
   img: string;
   count: number;
+  discount: number;
 }
 
 export interface IOrderPost {

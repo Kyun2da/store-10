@@ -5,6 +5,8 @@ import { wonFormat } from '@/utils/helper';
 import Checkbox from '@/components/Shared/Checkbox';
 import { ICart } from '@/types';
 import { useHistory } from '@/lib/Router';
+import { DeleteConfirmModal } from '@/components/Shared/Modal';
+import useModal from '@/hooks/useModal';
 
 interface IShoppingCartItemProps {
   item: ICart;
@@ -23,6 +25,8 @@ const ShoppingCartItem = ({
   unCheckedList,
 }: IShoppingCartItemProps) => {
   const { historyPush } = useHistory();
+  const [modalOpen, toggleModal] = useModal(false);
+
   const onClickPlus = () => {
     setProductState(index, { count: item.count + 1 });
   };
@@ -48,8 +52,9 @@ const ShoppingCartItem = ({
     historyPush(`/detail/${item.productId}`);
   };
 
-  const onClickClose = () => {
+  const onClickRemove = () => {
     removeFromCart([item.productId]);
+    toggleModal();
   };
   const isUnCehcked = !!unCheckedList.find(
     (uncheckedId) => uncheckedId === item.productId
@@ -78,9 +83,15 @@ const ShoppingCartItem = ({
         <span>{wonFormat(item.count * item.price)}</span>
       </S.TotalPrice>
 
-      <S.CloseButton onClick={onClickClose}>
+      <S.CloseButton onClick={toggleModal}>
         <CloseSVG stroke="black" width={22} height={22} strokeWidth="0.2rem" />
       </S.CloseButton>
+      {modalOpen && (
+        <DeleteConfirmModal
+          toggleModal={toggleModal}
+          removeSelected={onClickRemove}
+        />
+      )}
     </S.ShoppingCartItem>
   );
 };

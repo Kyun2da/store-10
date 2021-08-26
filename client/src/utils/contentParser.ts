@@ -12,8 +12,6 @@ const contentParser = ({ details, essentials }: ParserProps) => {
   const jsoned_details = JSON.parse(details);
   const jsoned_essentials = JSON.parse(essentials);
 
-  console.log(jsoned_details);
-
   const images: string[] = jsoned_details.map(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (detail: any) => {

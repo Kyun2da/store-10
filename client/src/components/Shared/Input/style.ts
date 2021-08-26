@@ -138,19 +138,24 @@ export const ErrorText = styled.div<{ helperAlign: string | undefined }>`
 
 export const NumberInputArea = styled.div`
   display: flex;
-  border-top: 1px solid ${({ theme }) => theme.color.line};
-  border-bottom: 1px solid ${({ theme }) => theme.color.line};
+  background-color: ${({ theme }) => theme.color['off-white']};
+  border-radius: 2.5rem;
 `;
 
 export const AdjustButton = styled.button`
   width: 2.5rem;
-  border-left: 1px solid ${({ theme }) => theme.color.line};
-  border-right: 1px solid ${({ theme }) => theme.color.line};
+  height: 2.5rem;
+  border-radius: 2.5rem;
+  background-color: ${({ theme }) => theme.color.primary};
   ${({ theme }) => theme.fontSize.l};
-  color: ${({ theme }) => theme.color['text-color']};
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 export const NumberInput = styled.input`

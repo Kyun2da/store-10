@@ -59,6 +59,7 @@ export interface IDetails {
   stock: number;
   sub_category_id: number;
   title: string;
+  discount: number;
 }
 
 export interface IThumbnails {

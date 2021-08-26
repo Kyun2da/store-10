@@ -31,7 +31,7 @@ const ProductDelivery = () => {
         <S.AlertIcon>
           <AlertSVG />
         </S.AlertIcon>
-        <div>
+        <div className="alert-message-wrapper">
           <S.AlertMessage>
             단, 상품의 재고 상황, 배송량, 배송 지역에 따라 배송일이 추가로
             소요될 수 있는 점 양해 부탁드립니다.

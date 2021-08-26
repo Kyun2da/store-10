@@ -80,7 +80,8 @@ const Collapse = <T extends ICollapseItem>({
               }
             >
               {headers.map((header) => {
-                // TODO: 삼항연산자 depth가 너무 깊어 좀 풀고 싶은데 좋은 방법이 떠오르지 않는군뇨..
+                // TODO: 삼항연산자 depth가 너무 깊어 좀 풀고 싶은데 막상 좋은 방법이 떠오르지 않는군뇨..
+                // 나는야 주석도 업데이트 하는 씐박한 개발자
                 return (
                   <S.CollapseSubTitle key={header.value}>
                     {header.value === 'createdAt' ? (
@@ -97,6 +98,10 @@ const Collapse = <T extends ICollapseItem>({
                           대기중
                         </S.Status>
                       )
+                    ) : header.value === 'name' &&
+                      item.secret &&
+                      item.user_id !== user?.id ? (
+                      '비공개'
                     ) : (
                       item[header.value]
                     )}
@@ -119,20 +124,27 @@ const Collapse = <T extends ICollapseItem>({
                 </S.CollapseContent>
               ) : (
                 <S.CollapseContent ref={refs[idx]}>
-                  <S.CollapseDetails>
-                    <QuestionSVG />
-                    <p>{item.content}</p>
-                    {noSecret && dropdownItems && (
-                      <Dropdown selectedId={item.id} items={dropdownItems} />
-                    )}
-                  </S.CollapseDetails>
-                  <S.CollapseDetails>
-                    <AnswerSVG />
-                    <p>
-                      {item.answer ||
-                        '답변 대기중입니다... 조금만 기다려주세요!'}
-                    </p>
-                  </S.CollapseDetails>
+                  {!item.secret && (
+                    <>
+                      <S.CollapseDetails>
+                        <QuestionSVG />
+                        <p>{item.content}</p>
+                        {noSecret && dropdownItems && (
+                          <Dropdown
+                            selectedId={item.id}
+                            items={dropdownItems}
+                          />
+                        )}
+                      </S.CollapseDetails>
+                      <S.CollapseDetails>
+                        <AnswerSVG />
+                        <p>
+                          {item.answer ||
+                            '답변 대기중입니다... 조금만 기다려주세요!'}
+                        </p>
+                      </S.CollapseDetails>
+                    </>
+                  )}
                 </S.CollapseContent>
               )}
             </S.CollapsePanel>

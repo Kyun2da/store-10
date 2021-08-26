@@ -11,24 +11,21 @@ const ProductDetailTab = () => {
     <TabWrapper>
       <Tabs sticky>
         <Tab label="상세정보" index={0} />
-        <Tab label="배송안내" index={1} />
-        <Tab label="교환 및 반품안내" index={2} />
-        <Tab label="상품후기" index={3} />
-        <Tab label="상품문의" index={4} />
+        <Tab label="안내사항" index={1} />
+        <Tab label="상품후기" index={2} />
+        <Tab label="상품문의" index={3} />
       </Tabs>
       <TabPanel index={0}>
         <ProductDescription />
       </TabPanel>
       <TabPanel index={1}>
         <ProductDelivery />
-      </TabPanel>
-      <TabPanel index={2}>
         <ProductExchange />
       </TabPanel>
-      <TabPanel index={3}>
+      <TabPanel index={2}>
         <ProductReview />
       </TabPanel>
-      <TabPanel index={4}>
+      <TabPanel index={3}>
         <ProductRequest />
       </TabPanel>
     </TabWrapper>

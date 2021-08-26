@@ -87,6 +87,24 @@ export const ProductDetail = styled.div`
   display: flex;
   gap: 2rem;
 
+  .price {
+    ${({ theme }) => theme.fontSize.m};
+    ${({ theme }) => theme.fontWeight.m};
+
+    &.original {
+      text-decoration: line-through;
+    }
+
+    &.discount {
+      padding: 0 1rem;
+      border-radius: 1rem;
+      line-height: 1.8rem;
+      color: #fff;
+      background-color: ${({ theme }) => theme.color.error};
+      ${({ theme }) => theme.fontWeight.l};
+    }
+  }
+
   .detail-content {
     ${({ theme }) => theme.fontSize.m};
     ${({ theme }) => theme.fontWeight.m};
@@ -174,7 +192,13 @@ export const PanelWrapper = styled.div`
 
   ul {
     li.notice-item {
-      padding: 1rem 0;
+      margin-top: 1rem;
+      list-style-type: disc;
+      list-style-position: inside;
+      text-indent: -2.3rem;
+      padding: 1rem 1rem 1rem 4.5rem;
+      background-color: ${({ theme }) => theme.color.background};
+      border-radius: 2rem;
     }
   }
 
@@ -212,19 +236,26 @@ export const ProductTableRow = styled.div`
 `;
 
 export const AlertArea = styled.div`
+  position: relative;
   background-color: ${({ theme }) => theme.color.error};
   border-radius: 1rem;
   padding: 2rem;
-  margin-top: 3rem;
+  margin: 3rem 0;
   display: flex;
   align-items: center;
   gap: 3rem;
+
+  .alert-message-wrapper {
+    margin-left: 8rem;
+  }
 `;
 
 export const AlertIcon = styled.p`
-  width: 5rem;
-  height: 5rem;
+  position: absolute;
+  top: 2rem;
   svg {
+    width: 5rem;
+    height: 5rem;
     fill: #fff;
   }
 `;
@@ -235,6 +266,12 @@ export const AlertMessage = styled.p`
   & + & {
     margin-top: 1rem;
   }
+`;
+
+export const AlertSmallMessage = styled.p`
+  ${({ theme }) => theme.fontWeight.s};
+  color: #fff;
+  margin-top: 1rem;
 `;
 
 export const RatingArea = styled.div`

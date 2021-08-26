@@ -185,6 +185,11 @@ export const PanelWrapper = styled.div`
   flex-direction: column;
   color: ${({ theme }) => theme.color['text-color']};
 
+  &.pagination-scroll-top {
+    padding-top: 10.8rem;
+    margin-top: -10.8rem;
+  }
+
   .title {
     ${({ theme }) => theme.fontWeight.l};
     margin: 3rem 0;

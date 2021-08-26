@@ -1,7 +1,7 @@
 import { RatingGetter } from '@/components/Shared/Rating';
 import RatingChart from '@/components/Shared/RatingChart';
 import Title from '@/components/Shared/Title';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import * as S from '../styles';
 import Button from '@/components/Shared/Button';
 import useModal from '@/hooks/useModal';
@@ -24,7 +24,8 @@ import { REVIEW_LIMIT } from '@/utils/constant/offsetLimit';
 
 const ProductReview = () => {
   const { id } = useParams().params;
-  const [offset, handleOnClickPage] = usePagination(REVIEW_LIMIT);
+  const topRef = useRef<HTMLDivElement>(null);
+  const [offset, handleOnClickPage] = usePagination(REVIEW_LIMIT, topRef);
   const [selectedImage, setSelectedImage] = useState('');
   const [isReviewOpen, toggleReviewModal] = useModal(false);
   const [isImageOpen, toggleImageModal] = useModal(false);
@@ -63,7 +64,7 @@ const ProductReview = () => {
   };
 
   return (
-    <S.PanelWrapper>
+    <S.PanelWrapper ref={topRef} className="pagination-scroll-top">
       <S.TopArea>
         <Title className="title" level={5}>
           상품후기 ({count})

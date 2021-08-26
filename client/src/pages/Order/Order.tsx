@@ -9,6 +9,8 @@ import OrderPayment from '@/components/Order/OrderPayment';
 import { useParams, Redirect } from '@/lib/Router';
 import { useGetOrder, useUpdateOrder } from '@/hooks/queries/order';
 import { IOrder } from '@/types';
+import { items } from '@/utils/constant/notices';
+import { calculateDiscount } from '@/utils/helper';
 
 const Order = () => {
   const { id } = useParams().params;
@@ -37,6 +39,18 @@ const Order = () => {
 
   const totalClount = data?.products?.length || 0;
 
+  const totalDiscount =
+    data?.products.reduce((sum, product) => {
+      return (
+        sum +
+        calculateDiscount({
+          price: product.price,
+          discount: product.discount,
+        }) *
+          product.count
+      );
+    }, 0) || 0;
+
   if (isError || (data && data.status !== 'created')) {
     return <Redirect to="/notfound" />;
   }
@@ -63,6 +77,7 @@ const Order = () => {
       <S.OrderAside>
         <OrderSummary
           totalPrice={totalPrice}
+          totalDiscount={totalDiscount}
           deliveryFee={2500}
           discount={0}
           productCount={totalClount}
@@ -73,6 +88,7 @@ const Order = () => {
       <S.OrderFooter>
         <OrderSummary
           totalPrice={totalPrice}
+          totalDiscount={totalDiscount}
           deliveryFee={2500}
           discount={0}
           productCount={totalClount}

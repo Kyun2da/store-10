@@ -60,14 +60,25 @@ export const ItemInfoName = styled.span`
   ${({ theme }) => theme.fontSize.m};
 `;
 
+export const ItemInoPriceWrapper = styled.div`
+  margin-top: 10px;
+`;
+
 export const ItemInfoPrice = styled.span`
   ${({ theme }) => theme.fontSize.s};
   ${({ theme }) => theme.fontWeight.l}
-  color: ${({ theme }) => theme.color['text-color']};
   margin-top: 10px;
+
+  &.strikethrough {
+    text-decoration: line-through;
+  }
+  &.discount {
+    color: ${({ theme }) => theme.color['error']};
+    margin-left: 1.2rem;
+  }
 `;
 
 export const ItemInfoCount = styled.span`
   ${({ theme }) => theme.fontSize.s};
-  color: ${({ theme }) => theme.color.label};
+  color: gray;
 `;

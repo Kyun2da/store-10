@@ -7,6 +7,7 @@ import Checkbox from '@/components/Shared/Checkbox';
 
 interface IProps {
   totalPrice: number;
+  totalDiscount: number;
   deliveryFee: number;
   discount: number;
   productCount: number;
@@ -15,6 +16,7 @@ interface IProps {
 
 const OrderSummary = ({
   totalPrice,
+  totalDiscount,
   deliveryFee,
   discount,
   productCount,
@@ -23,7 +25,7 @@ const OrderSummary = ({
   const [agree, setAgree] = useState(false);
   const discountCondition = 30000;
   const discountDeliveryFee = totalPrice > discountCondition ? 2500 : 0;
-  const sum = totalPrice + deliveryFee - discount - deliveryFee;
+  const sum = totalPrice + deliveryFee - totalDiscount - discount - deliveryFee;
   return (
     <S.OrderSummaryWrapper>
       <S.OrderSummary>
@@ -32,6 +34,12 @@ const OrderSummary = ({
           <dt>총 상품금액</dt>
           <dd>{wonFormat(totalPrice)}</dd>
         </S.OrderSummaryRow>
+        {totalDiscount && (
+          <S.OrderSummaryRow>
+            <dt>총 상품 할인</dt>
+            <dd className="red">- {wonFormat(totalDiscount)}</dd>
+          </S.OrderSummaryRow>
+        )}
         <S.OrderSummaryRow>
           <dt>총 배송비</dt>
           <dd>

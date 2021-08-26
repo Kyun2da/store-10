@@ -30,22 +30,38 @@ export const PasswordContainer = styled.form`
   }
 `;
 
-export const NickNameContainer = styled.div`
+export const NickNameContainer = styled.form`
   display: flex;
-  padding: 2rem 0;
+  position: relative;
+  padding: 8rem;
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border-radius: 0.8rem;
+  margin-bottom: 4rem;
 
   .input-container {
     margin-right: 2rem;
   }
 `;
 
-export const NewPasswordContainer = styled.div`
+export const NewPasswordContainer = styled.form`
   display: flex;
+  position: relative;
   flex-direction: column;
   padding-top: 2rem;
-  border-top: 1px solid ${({ theme }) => theme.color.line};
+  padding: 8rem;
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border-radius: 0.8rem;
 
+  button,
   .input-container {
-    margin-top: 2rem;
+    margin-top: 4rem;
   }
+`;
+
+export const ContainerTitle = styled.p`
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 2rem;
+  margin: 2rem;
 `;

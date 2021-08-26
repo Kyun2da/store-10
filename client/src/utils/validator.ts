@@ -24,9 +24,23 @@ export const validateEmail = (email: string) => {
 };
 
 export const validatePassword = (password: string) => {
-  const regex =
-    /^(?=.*[A-Z])(?=.*[a-z])([^\s]){10,}|(?=.*[A-Z])(?=.*[0-9])([^\s]){10,}|(?=.*[A-Z])(?=.*[<>{}|;:.,~!?@#$%^=&*\”\\/])([^\s]){10,}|(?=.*[a-z])(?=.*[0-9])([^\s]){10,}|(?=.*[a-z])(?=.*[<>{}|;:.,~!?@#$%^=&*\”\\/])([^\s]){10,}|(?=.*[0-9])(?=.*[<>{}|;:.,~!?@#$%^=&*\”\\/])([^\s]){10,}$/;
-  return regex.test(password);
+  const num = password.search(/[0-9]/g);
+  const eng = password.search(/[a-z]/gi);
+  const spe = password.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+  if (password.length < 10 || password.length > 20) {
+    return false;
+  } else if (password.search(/\s/) != -1) {
+    return false;
+  } else if (
+    (num < 0 && eng < 0) ||
+    (eng < 0 && spe < 0) ||
+    (spe < 0 && num < 0)
+  ) {
+    return false;
+  } else {
+    return true;
+  }
 };
 
 export const validateRePassword = (password: string, rePassword: string) => {

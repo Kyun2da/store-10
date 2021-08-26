@@ -61,13 +61,13 @@ const ChangeUserInfo = () => {
 
   const rePasswordCheck = useCallback(
     ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-      if (validateRePassword(target.value, password)) {
+      if (validateRePassword(target.value, newPw)) {
         setError({ ...error, rePassword: false });
       } else {
         setError({ ...error, rePassword: true });
       }
     },
-    [password, error]
+    [newPw, error]
   );
 
   const onClickChangePassword = async () => {
@@ -90,15 +90,16 @@ const ChangeUserInfo = () => {
   };
 
   return (
-    <S.AuthContainer>
+    <>
       {user?.is_oauth || isPasswordAuth ? (
         <div>
           <S.NickNameContainer>
+            <S.ContainerTitle>이름 변경</S.ContainerTitle>
             <Input
               type="text"
               label="Outlined"
               name="nickname"
-              labelName="닉네임"
+              labelName="이름"
               value={nickname}
               onChange={onChangeNickName}
             />
@@ -107,11 +108,13 @@ const ChangeUserInfo = () => {
               color="primary"
               onClick={onClickChangeNickName}
             >
-              닉네임 변경
+              이름 변경
             </Button>
           </S.NickNameContainer>
           {!user?.is_oauth && (
             <S.NewPasswordContainer>
+              <S.ContainerTitle>비밀번호 변경</S.ContainerTitle>
+              <input hidden type="text" autoComplete="username" />
               <Input
                 type="password"
                 label="Outlined"
@@ -122,6 +125,7 @@ const ChangeUserInfo = () => {
                 error={error.password}
                 onBlur={(e) => errorCheck(e, validatePassword)}
                 helperText="10자 이상 영어 대문자, 소문자, 숫자, 특수문자 중 2종류를 조합해야합니다."
+                autoComplete="new-password"
               />
 
               <Input
@@ -134,6 +138,7 @@ const ChangeUserInfo = () => {
                 onBlur={rePasswordCheck}
                 error={error.rePassword}
                 helperText="비밀번호가 일치하지 않거나 비밀번호를 입력해야 합니다."
+                autoComplete="new-password"
               />
               <Button
                 type="button"
@@ -146,11 +151,12 @@ const ChangeUserInfo = () => {
           )}
         </div>
       ) : (
-        <>
+        <S.AuthContainer>
           <S.Information>
             회원정보 변경을 하려면 비밀번호 인증이 필요합니다.
           </S.Information>
           <S.PasswordContainer onSubmit={authPassword}>
+            <input hidden type="text" autoComplete="username" />
             <Input
               type="password"
               label="Outlined"
@@ -158,14 +164,15 @@ const ChangeUserInfo = () => {
               labelName="비밀번호"
               value={password}
               onChange={onChangePassword}
+              autoComplete="new-password"
             />
             <Button type="submit" color="primary">
               확인
             </Button>
           </S.PasswordContainer>
-        </>
+        </S.AuthContainer>
       )}
-    </S.AuthContainer>
+    </>
   );
 };
 

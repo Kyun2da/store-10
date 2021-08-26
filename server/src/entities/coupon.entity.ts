@@ -8,9 +8,6 @@ export class Coupon extends InitEntity {
   name: string;
 
   @Column()
-  type: string;
-
-  @Column()
   amount: number;
 
   @ManyToMany(() => User, (type) => type.id)

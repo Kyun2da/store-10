@@ -42,6 +42,7 @@ class OrderService {
         ).count,
         title: product.title,
         price: product.price,
+        discount: product.discount,
       })),
     };
   }

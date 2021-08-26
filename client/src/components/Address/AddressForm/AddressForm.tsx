@@ -34,7 +34,7 @@ const AddressForm = ({
     postcode: addressToModify ? addressToModify.postcode : '',
     address: addressToModify ? addressToModify.address : '',
     detailAddress: addressToModify ? addressToModify.detailAddress : '',
-    phone: addressToModify ? addressToModify.phone : '',
+    phone: addressToModify ? addressToModify.phone.slice(4) : '',
     isDefault: addressToModify ? addressToModify.isDefault : false,
   });
   const [errors, setErrors] = useState<Record<string, boolean>>({
@@ -120,13 +120,16 @@ const AddressForm = ({
       });
       setOpenForm(false);
       if (address?.id === addressToModify.id) {
-        selectAddress({ ...inputs });
+        selectAddress({ ...inputs, phone: `${phonePrefix}-${inputs.phone}` });
+      } else if (address?.isDefault && !addressToModify.isDefault) {
+        selectAddress({ ...address, isDefault: false });
       }
     } else {
       postMutation.mutate({
         ...inputs,
         phone: `${phonePrefix}-${inputs.phone}`,
       });
+
       toggleModal();
     }
   };

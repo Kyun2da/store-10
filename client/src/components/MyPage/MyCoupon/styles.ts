@@ -12,3 +12,14 @@ export const CouponDisplay = styled.section`
     margin-bottom: 3rem;
   }
 `;
+
+export const RegisterCoupon = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.color['border-gray']};
+  padding: 3rem 0;
+  display: flex;
+  button {
+    flex-grow: 0;
+    margin-left: 1.2rem;
+    width: 10rem;
+  }
+`;

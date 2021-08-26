@@ -6,9 +6,11 @@ class AddressService {
     const addressRepo = AddressRepository();
     const defaultAddress = await addressRepo.getDefaultAddress(userId);
     if (defaultAddress) return snakeToCamelObjKey(defaultAddress);
+    const recentAddress = await addressRepo.getRecentAddress(userId);
 
-    const recnetAddress = await addressRepo.getRecentAddress(userId);
-    return snakeToCamelObjKey(recnetAddress);
+    if (recentAddress) return snakeToCamelObjKey(recentAddress);
+
+    return null;
   }
 
   async getAddresses(userId) {

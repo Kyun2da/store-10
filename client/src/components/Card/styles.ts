@@ -39,19 +39,12 @@ export const CardCheckbox = styled(Checkbox)`
 `;
 
 export const BottomBar = styled.div`
-  display: none;
-  z-index: 100;
-  justify-content: space-between;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
-  position: absolute;
-  padding: 1rem;
-  box-sizing: border-box;
-  bottom: 0;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.75);
-
+  gap: 0.6rem;
   svg {
-    color: #111 !important;
+    stroke: ${({ theme }) => theme.color['text-color']};
   }
 `;
 
@@ -64,9 +57,16 @@ export const NameTag = styled.div`
   padding: 0.6rem;
   border-radius: 0.6rem;
   box-sizing: border-box;
-  ${({ theme }) => theme.fontSize.m}
   color: #fff;
+  ${({ theme }) => theme.fontSize.m};
   background-color: ${({ theme }) => theme.color.error};
+
+  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
+    ${({ theme }) => theme.fontSize.s}
+  }
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    ${({ theme }) => theme.fontSize.xs}
+  }
 `;
 
 export const ThumbnailWrapper = styled.div`
@@ -87,25 +87,36 @@ export const ThumbnailWrapper = styled.div`
       transform: scale(1.012);
     }
   }
+`;
 
-  &:hover ${BottomBar} {
-    display: flex;
-  }
-  .title {
-    font-size: clamp(10px, 3vw, 1.2em);
-    ${({ theme }) => theme.fontWeight.s};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    margin: 0.8rem 0.8rem 0 0.8rem;
-  }
+export const ProductTitle = styled.p`
+  font-size: clamp(11px, 2.5vw, 1.6rem);
+  ${({ theme }) => theme.fontWeight.s};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin: 0.8rem;
 `;
 
 export const ButtonArea = styled.div`
   svg {
     cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    stroke: ${({ theme }) => theme.color['text-color']};
+    width: 1.5em !important;
+    height: 1.5em !important;
+
+    &.cart {
+      fill: ${({ theme }) => theme.color['text-color']};
+    }
+
+    &.heart.checked {
+      fill: ${({ theme }) => theme.color.error};
+      stroke: ${({ theme }) => theme.color.error};
+      transform: scale(1.07);
+    }
   }
   &:hover {
     opacity: 0.75;
@@ -114,22 +125,35 @@ export const ButtonArea = styled.div`
 
 export const ProductDetails = styled.div`
   cursor: pointer;
+  position: relative;
   ${({ theme }) => theme.fontSize.m};
 
   .price-tag {
     ${({ theme }) => theme.fontWeight.l};
-    font-size: clamp(10px, 3vw, 1em);
+    font-size: clamp(10px, 2.6vw, 1em);
+    white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 0.5rem 0.8rem 0.8rem 0.8rem;
 
     &.strikethrough {
       margin: 0.5rem 0.8rem 0 0.8rem;
-      font-size: clamp(10px, 3vw, 0.9em);
+      font-size: clamp(10px, 2.3vw, 0.9em);
       text-decoration: line-through;
       color: ${({ theme }) => theme.color['text-color']}55;
     }
     &.discount {
-      font-size: clamp(10px, 3.5vw, 1em);
       color: ${({ theme }) => theme.color['error']};
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.phone}px) {
+    .price-tag {
+      ${({ theme }) => theme.fontSize.s};
+    }
+    &.strikethrough {
+      ${({ theme }) => theme.fontSize.xs};
     }
   }
 `;

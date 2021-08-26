@@ -70,3 +70,10 @@ export const DefaultAddress = styled.span`
   ${({ theme }) => theme.fontSize.xs};
   margin-left: 1.2rem;
 `;
+
+export const AddressEmpty = styled.div`
+  font-family: 'BMDOHYEON';
+  text-align: center;
+  font-size: 2rem;
+  padding: 2rem;
+`;

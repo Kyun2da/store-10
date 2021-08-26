@@ -1,5 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
+import { validateImage } from '@/utils/validator';
+import { notify } from '@/components/Shared/Toastify';
 
 export type CustomFile = Record<string, File>;
 
@@ -22,6 +24,12 @@ const useFileInput = () => {
 
       for (let i = 0; i < (files?.length ?? 0); i++) {
         const file = files[i];
+        const ext = file.type;
+
+        if (!validateImage.test(ext)) {
+          return notify('error', '이미지 형식의 파일만 업로드 가능해요..!');
+        }
+
         const values = Object.values(imgFiles).length;
 
         if (values + (additional ?? 0) === 3) {

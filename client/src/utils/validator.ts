@@ -82,6 +82,7 @@ export const validatePhone = (
 
   return value;
 };
+
 export const validateReview = ({
   content,
   rating,
@@ -125,3 +126,5 @@ export const validateQuestion = ({
   if (!content || !title) return false;
   return true;
 };
+
+export const validateImage = new RegExp(/^image\//);

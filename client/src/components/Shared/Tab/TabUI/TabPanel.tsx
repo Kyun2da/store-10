@@ -10,8 +10,10 @@ interface TabPanelProps {
 const TabPanel = ({ children, index }: TabPanelProps) => {
   const { value } = useContext(Context);
 
+  if (value !== index) return null;
+
   return (
-    <S.TabPanel className={value === index ? 'active' : ''} data-index={index}>
+    <S.TabPanel className="pagination-scroll-top" data-index={index}>
       {children}
     </S.TabPanel>
   );

@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Error from './Error';
 
 export default {
-  title: '컴포넌트/공통/에러창',
+  title: '컴포넌트/공통/에러/에러창(공통)',
   component: Error,
 } as ComponentMeta<typeof Error>;
 

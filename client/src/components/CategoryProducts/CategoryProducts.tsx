@@ -1,7 +1,10 @@
+import { useGetBookmarkIds } from '@/hooks/queries/bookmark';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getCategoryProducts } from '@/lib/api/product';
+import { userState } from '@/recoil/user';
 import { IProduct } from '@/types';
 import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import Card from '../Card';
 import LoadingCards from '../Skeleton/LoadingCards';
 
@@ -11,6 +14,17 @@ interface IProps {
 
 const CategoryProducts = ({ subCategoryId }: IProps) => {
   const [start, setStart] = useState(0);
+  const [user] = useRecoilState(userState);
+  const { data: bookmarkIdList, remove: removeBookmark } = useGetBookmarkIds(
+    !!user
+  );
+
+  useEffect(() => {
+    if (!user) {
+      removeBookmark();
+    }
+  }, [user, removeBookmark]);
+
   const { ref, inView, isLoading, isFetching, data, fetchNextPage, remove } =
     useInfiniteScroll<IProduct[]>({
       key: ['category', subCategoryId],
@@ -59,6 +73,7 @@ const CategoryProducts = ({ subCategoryId }: IProps) => {
           src={item.productImage[0].url}
           price={item.price}
           title={item.title}
+          bookmarkList={bookmarkIdList}
         />
       ));
   };

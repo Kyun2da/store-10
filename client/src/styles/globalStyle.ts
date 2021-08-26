@@ -68,6 +68,21 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
   }
 
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+ 
+  ::-webkit-scrollbar-thumb {
+    background: #666; 
+    border-radius: 1rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #ddd; 
+    border-radius: 1rem;
+  }
+
   html, body {
     font-size: 10px;
     font-family: 'Noto Sans KR', sans-serif;

@@ -6,6 +6,7 @@ declare module 'styled-components' {
     color: {
       'text-color': string;
       'body': string;
+      'body2': string;
       'footer': string;
       'label': string;
       'placeholder': string;

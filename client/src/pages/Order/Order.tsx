@@ -9,7 +9,6 @@ import OrderPayment from '@/components/Order/OrderPayment';
 import { useParams, Redirect } from '@/lib/Router';
 import { useGetOrder, useUpdateOrder } from '@/hooks/queries/order';
 import { IOrder } from '@/types';
-import { items } from '@/utils/constant/notices';
 import { calculateDiscount } from '@/utils/helper';
 
 const Order = () => {
@@ -82,6 +81,7 @@ const Order = () => {
           discount={0}
           productCount={totalClount}
           updateOrder={updateOrder}
+          data={data}
         />
       </S.OrderAside>
 
@@ -93,6 +93,7 @@ const Order = () => {
           discount={0}
           productCount={totalClount}
           updateOrder={updateOrder}
+          data={data}
         />
       </S.OrderFooter>
     </S.OrderContainer>

@@ -4,6 +4,8 @@ import { wonFormat } from '@/utils/helper';
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
 import Checkbox from '@/components/Shared/Checkbox';
+import { useDeleteCart } from '@/hooks/queries/cart';
+import { IOrder } from '@/types';
 
 interface IProps {
   totalPrice: number;
@@ -11,6 +13,7 @@ interface IProps {
   deliveryFee: number;
   discount: number;
   productCount: number;
+  data: IOrder | undefined;
   updateOrder: () => void;
 }
 
@@ -20,11 +23,13 @@ const OrderSummary = ({
   deliveryFee,
   discount,
   productCount,
+  data,
   updateOrder,
 }: IProps) => {
   const [agree, setAgree] = useState(false);
   const discountCondition = 30000;
   const discountDeliveryFee = totalPrice > discountCondition ? 2500 : 0;
+  const { mutate } = useDeleteCart();
   const sum = totalPrice + deliveryFee - totalDiscount - discount - deliveryFee;
   return (
     <S.OrderSummaryWrapper>
@@ -86,6 +91,8 @@ const OrderSummary = ({
         color="primary"
         onClick={() => {
           updateOrder();
+          const ids = data?.products.map((product) => product.id);
+          if (ids) mutate(ids);
         }}
       >
         {productCount}개 상품 구매하기

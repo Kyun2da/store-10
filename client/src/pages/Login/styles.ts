@@ -36,6 +36,8 @@ export const LinkContainer = styled.div`
 
   a {
     padding: 0 2rem;
-    border-right: 1px solid gray;
+    margin-left: 2rem;
+    border-left: 1px solid gray;
+    color: ${({ theme }) => theme.color.primary};
   }
 `;

@@ -1,8 +1,11 @@
 import { ISearchData } from '@/types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as S from './style';
 import { useCallback } from 'react';
 import Card from '@/components/Card';
+import { useRecoilState } from 'recoil';
+import { useGetBookmarkIds } from '@/hooks/queries/bookmark';
+import { userState } from '@/recoil/user';
 
 type Prop = {
   searchValue: string;
@@ -15,6 +18,14 @@ type Prop = {
 const SearchItem = ({ ...props }: Prop) => {
   const { searchValue, toggleOpen, addRecentSearch, recentItems, searchData } =
     props;
+  const [user] = useRecoilState(userState);
+  const { data: bookmarkIdList, remove } = useGetBookmarkIds(!!user);
+
+  useEffect(() => {
+    if (!user) {
+      remove();
+    }
+  }, [user, remove]);
 
   const selectItem = useCallback(() => {
     toggleOpen();
@@ -31,6 +42,7 @@ const SearchItem = ({ ...props }: Prop) => {
           src={product.image}
           price={product.price}
           title={product.title}
+          bookmarkList={bookmarkIdList}
         />
       </div>
     ));

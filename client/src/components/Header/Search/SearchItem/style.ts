@@ -22,9 +22,6 @@ export const SearchItemWrapper = styled(CardWrapper)`
   margin-bottom: 2rem;
   padding: 0.5rem;
   overflow: scroll;
-  > div {
-    max-height: 320px;
-  }
   &:after {
     content: '';
     grid-column: 1 / -1;

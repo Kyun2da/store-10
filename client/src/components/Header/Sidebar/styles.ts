@@ -100,6 +100,10 @@ export const SubCategory = styled.dl`
   visibility: hidden;
   transition: visibility 0.2s ease-in-out;
 
+  &.none {
+    display: none;
+  }
+
   dd {
     padding: 1rem;
     min-width: 170px;

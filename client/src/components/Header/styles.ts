@@ -30,14 +30,11 @@ export const Header = styled.div`
   background: ${({ theme }) => theme.color['background']};
   justify-content: space-between;
   align-items: center;
-  height: 60px;
+  height: 8rem;
   width: 95%;
   max-width: 1050px;
   padding: 1rem 0;
   margin: 0 auto;
-  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
-    grid-template-columns: 0.8fr 1fr;
-  }
 `;
 
 export const Menu = styled.div`
@@ -75,24 +72,48 @@ export const StateUl = styled.div`
       margin: 0 0.5rem;
     }
   }
-
-  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
-    display: none;
-  }
 `;
 
 export const SearchWrapper = styled.div`
-  border-radius: 0.4em;
+  display: flex;
+  justify-content: flex-end;
   cursor: pointer;
+  position: relative;
+  max-width: 400px;
+  width: 36%;
+  min-width: 50px;
+
+  svg {
+    margin: 0 0.5rem 0.3rem 0;
+  }
+  @media (max-width: 549px) {
+    width: 100%;
+  }
+`;
+
+export const SearchText = styled.div`
+  border-radius: 0.4em;
   border: 1px solid ${({ theme }) => theme.color['line']};
   color: ${({ theme }) => theme.color['placeholder']};
-  max-width: 400px;
-  width: 70%;
-  min-width: 200px;
+  position: absolute;
+  width: 100%;
   display: flex;
+  transform: translateY(-4px);
   align-items: center;
   justify-content: space-between;
   padding: 0.2em 0.6em 0.3em 0.8em;
-`;
+  height: 4.5rem;
+  &:before {
+    content: '검색어를 입력해주세요.';
+  }
 
-export const SearchText = styled.div``;
+  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
+    height: 3.5rem;
+    &:before {
+      content: '검색';
+    }
+  }
+  @media (max-width: ${({ theme }) => theme.media.headerSearch - 1}px) {
+    display: none;
+  }
+`;

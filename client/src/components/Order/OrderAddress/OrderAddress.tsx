@@ -69,7 +69,7 @@ const OrderAddress = ({
       <S.AddressInfo>
         <S.AddressNameText>
           {address.name}
-          {address.isDefault && (
+          {!!address.isDefault && (
             <S.DefaultAddress>기본 배송지</S.DefaultAddress>
           )}
         </S.AddressNameText>

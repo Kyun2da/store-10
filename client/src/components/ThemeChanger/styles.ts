@@ -31,7 +31,6 @@ export const ThemeButton = styled.button`
   color: ${({ theme }) => theme.color['text-color']};
   ${({ theme }) => theme.fontSize.s};
   padding: 0.5rem;
-  padding-right: 0.8rem;
   border-radius: 9999px;
   --transform-translate-x: 0;
   --transform-translate-y: 0;
@@ -49,10 +48,16 @@ export const ThemeButton = styled.button`
   align-items: center;
 
   span {
-    padding: 0 0.3rem;
-    @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
+    padding: 0 0.5rem 0 0.5rem;
+
+    /* 아래처럼 쓸 수 있는데 더 편한 방식으로 선택해서 사용하면 될 거 같아요 */
+    /* @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
       display: none;
-    }
+    } */
+
+    ${({ theme }) => theme.mediaScreen.tablet`
+      display: none;
+    `}
   }
 `;
 

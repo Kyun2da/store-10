@@ -5,7 +5,7 @@ import {
   UserReviewArea,
   UserReviewTitles,
 } from '@/components/ProductDetails/styles';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import * as S from './styles';
 import Title from '@/components/Shared/Title';
 import { RatingGetter } from '@/components/Shared/Rating';
@@ -28,7 +28,8 @@ import { Link } from '@/lib/Router';
 import Dropdown from '@/components/Shared/Dropdown';
 
 const MyReviews = () => {
-  const [offset, handleOnClickPage] = usePagination(REVIEW_LIMIT);
+  const topRef = useRef<HTMLDivElement>(null);
+  const [offset, handleOnClickPage] = usePagination(REVIEW_LIMIT, topRef);
   const { data, isLoading, error } = useGetProductReviewsByUser(offset);
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedReview, setSelectedReview] = useState(0);
@@ -78,7 +79,7 @@ const MyReviews = () => {
   const { reviews, count } = data;
 
   return (
-    <S.MyReviews>
+    <S.MyReviews ref={topRef} className="pagination-scroll-top">
       <UserReviewArea>
         {reviews.map((review) => {
           return (

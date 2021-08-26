@@ -1,5 +1,5 @@
 import { PanelWrapper } from '@/components/ProductDetails/styles';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import * as S from './styles';
 import Collapse from '@/components/Shared/Collapse';
 import Pagination from '@/components/Shared/Pagination';
@@ -16,7 +16,8 @@ import { RequestUpdateModal } from '@/components/Shared/Modal';
 import { notify } from '@/components/Shared/Toastify';
 
 const MyQuestions = () => {
-  const [offset, handleOnClickPage] = usePagination(QUESTION_LIMIT);
+  const topRef = useRef<HTMLDivElement>(null);
+  const [offset, handleOnClickPage] = usePagination(QUESTION_LIMIT, topRef);
   const [isOpenRemoveModal, toggleRemoveModal] = useModal(false);
   const [isOpenUpdateModal, toggleUpdateModal] = useModal(false);
   const [seletedQuestion, setSelectedQuestion] = useState(0);
@@ -70,7 +71,7 @@ const MyQuestions = () => {
   ];
 
   return (
-    <S.MyQuestions>
+    <S.MyQuestions ref={topRef} className="pagination-scroll-top">
       <PanelWrapper>
         <Collapse
           headers={MY_QUESTION_HEADER}

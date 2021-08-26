@@ -27,8 +27,6 @@ const OrderItemList = ({
   clickOnReviewListener,
   clickOnQuestionListener,
 }: IProps) => {
-  console.log(items);
-
   return (
     <div>
       <S.OrderItemListHeader>

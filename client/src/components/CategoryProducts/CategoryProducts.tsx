@@ -4,6 +4,7 @@ import { IProduct } from '@/types';
 import React, { useEffect, useState } from 'react';
 import Card from '../Card';
 import CardWrapper from '../CardWrapper';
+import LoadingCards from '../Skeleton/LoadingCards';
 
 interface IProps {
   subCategoryId: number;
@@ -11,17 +12,16 @@ interface IProps {
 
 const CategoryProducts = ({ subCategoryId }: IProps) => {
   const [start, setStart] = useState(0);
-  const { ref, inView, data, fetchNextPage, remove } = useInfiniteScroll<
-    IProduct[]
-  >({
-    key: ['category', subCategoryId],
-    fetchingFunction: getCategoryProducts,
-    fetchParams: {
-      start,
-      subCateogry: subCategoryId,
-      orderType: 'createdAt',
-    },
-  });
+  const { ref, inView, isLoading, isFetching, data, fetchNextPage, remove } =
+    useInfiniteScroll<IProduct[]>({
+      key: ['category', subCategoryId],
+      fetchingFunction: getCategoryProducts,
+      fetchParams: {
+        start,
+        subCateogry: subCategoryId,
+        orderType: 'createdAt',
+      },
+    });
 
   useEffect(() => {
     if (start != 0) {
@@ -36,6 +36,7 @@ const CategoryProducts = ({ subCategoryId }: IProps) => {
   useEffect(() => {
     if (inView && data?.pages[data.pages.length - 1].length == 20)
       setStart(start + 20);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
@@ -47,10 +48,8 @@ const CategoryProducts = ({ subCategoryId }: IProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subCategoryId]);
 
-  if (!data) return <div>nodata</div>;
-
   const renderCard = () => {
-    return data.pages
+    return data?.pages
       .flat()
       .map((item) => (
         <Card
@@ -67,7 +66,11 @@ const CategoryProducts = ({ subCategoryId }: IProps) => {
 
   return (
     <>
-      <CardWrapper>{renderCard()}</CardWrapper>
+      <LoadingCards
+        skeletonNum={20}
+        showSkeleton={isLoading || isFetching}
+        component={renderCard()}
+      />
       <div ref={ref}></div>
     </>
   );

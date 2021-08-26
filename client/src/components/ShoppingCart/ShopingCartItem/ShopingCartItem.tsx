@@ -1,7 +1,7 @@
 import React, { Dispatch } from 'react';
 import * as S from './styles';
 import { CloseSVG } from '@/assets/svgs';
-import { wonFormat } from '@/utils/helper';
+import { wonFormat, calculateDiscount } from '@/utils/helper';
 import Checkbox from '@/components/Shared/Checkbox';
 import { ICart } from '@/types';
 import { useHistory } from '@/lib/Router';
@@ -73,7 +73,23 @@ const ShoppingCartItem = ({
         >
           {item.title}
         </S.ItemInfoName>
-        <S.ItemInfoPrice>{wonFormat(+item.price)}</S.ItemInfoPrice>
+        <S.ItemInoPriceWrapper>
+          <S.ItemInfoPrice
+            className={item.discount ? 'strikethrough' : undefined}
+          >
+            {wonFormat(+item.price)}
+          </S.ItemInfoPrice>
+          {!!item.discount && (
+            <S.ItemInfoPrice className="discount">
+              {wonFormat(
+                calculateDiscount({
+                  price: +item.price,
+                  discount: item.discount,
+                })
+              )}
+            </S.ItemInfoPrice>
+          )}
+        </S.ItemInoPriceWrapper>
       </S.ItemInfo>
       <S.TotalPrice>
         <NumberInput
@@ -83,6 +99,7 @@ const ShoppingCartItem = ({
           value={item.count}
           handleClickOnMinus={onClickMinus}
           handleClickOnPlus={onClickPlus}
+          // TODO: props optional로 하던지, hanleOnChange 사용하도록
           handleOnChnage={(e) => {}}
         />
         <span>{wonFormat(item.count * item.price)}</span>

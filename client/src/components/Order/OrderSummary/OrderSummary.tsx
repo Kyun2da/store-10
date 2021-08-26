@@ -21,7 +21,8 @@ const OrderSummary = ({
   updateOrder,
 }: IProps) => {
   const [agree, setAgree] = useState(false);
-  const sum = totalPrice + deliveryFee - discount;
+  const discountDeliveryFee = totalPrice > 50000 ? 2500 : 0;
+  const sum = totalPrice + deliveryFee - discount - deliveryFee;
   return (
     <S.OrderSummaryWrapper>
       <S.OrderSummary>
@@ -36,6 +37,12 @@ const OrderSummary = ({
             {deliveryFee > 0 ? '+' : ''} {wonFormat(deliveryFee)}
           </dd>
         </S.OrderSummaryRow>
+        {totalPrice > 50000 && (
+          <S.OrderSummaryRow>
+            <dt>배송비 할인</dt>
+            <dd className="red">- {wonFormat(discountDeliveryFee)}</dd>
+          </S.OrderSummaryRow>
+        )}
         <S.OrderSummaryRow>
           <dt>쿠폰 사용</dt>
           <dd className={discount > 0 ? 'red' : undefined}>

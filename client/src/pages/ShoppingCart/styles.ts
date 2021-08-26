@@ -4,7 +4,6 @@ export const ShoppingCart = styled.div`
   max-width: ${({ theme }) => theme.media.pc}px;
   display: flex;
   width: 100%;
-  padding-top: 6rem;
   @media (max-width: ${({ theme }) => theme.media.tablet}px) {
     flex-direction: column;
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './styles';
 import { wonFormat, dateFormat } from '@/utils/helper';
 import { ORDER_STATUS } from '@/contstants';
+import { Link } from '@/lib/Router';
 
 interface IProps {
   date: string;
@@ -14,9 +15,20 @@ interface IProps {
     count: number;
     img: string;
   }[];
+  clickOnReviewListener: (target: number) => void;
+  clickOnQuestionListener: (target: number) => void;
 }
 
-const OrderItemList = ({ date, items, status, deliveredAt }: IProps) => {
+const OrderItemList = ({
+  date,
+  items,
+  status,
+  deliveredAt,
+  clickOnReviewListener,
+  clickOnQuestionListener,
+}: IProps) => {
+  console.log(items);
+
   return (
     <div>
       <S.OrderItemListHeader>
@@ -31,6 +43,13 @@ const OrderItemList = ({ date, items, status, deliveredAt }: IProps) => {
             </S.OrderItemInfoSubStatus>
           )}
         </S.OrderItemInfoStatusWrapper>
+        <S.OrderItemActions>
+          <Link to={`/detail/${items[0].id}`}>
+            <S.OrderDeliveryButton type="button" color="white">
+              상품이동
+            </S.OrderDeliveryButton>
+          </Link>
+        </S.OrderItemActions>
         <S.OrderItemActions>
           <S.OrderDeliveryButton type="button" color="white">
             배송조회
@@ -52,10 +71,18 @@ const OrderItemList = ({ date, items, status, deliveredAt }: IProps) => {
               </S.OrderItemInfoBody>
             </S.OrderItemInfo>
             <S.OrderItemActions>
-              <S.OrderActionsButton type="button" color="white">
+              <S.OrderActionsButton
+                type="button"
+                color="white"
+                onClick={() => clickOnQuestionListener(item.id)}
+              >
                 문의하기
               </S.OrderActionsButton>
-              <S.OrderActionsButton type="button" color="white">
+              <S.OrderActionsButton
+                type="button"
+                color="white"
+                onClick={() => clickOnReviewListener(item.id)}
+              >
                 리뷰하기
               </S.OrderActionsButton>
             </S.OrderItemActions>

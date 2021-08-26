@@ -9,14 +9,19 @@ import { useGetOrders } from '@/hooks/queries/order';
 import usePagination from '@/hooks/usePagination';
 import { IOrder } from '@/types';
 import Thung from '@/components/Thung';
-
-const PAGE_LIMIT = 4;
+import { PAGE_LIMIT } from '@/utils/constant/offsetLimit';
+import useModal from '@/hooks/useModal';
+import { RequestModal, ReviewModal } from '@/components/Shared/Modal';
 
 const OrderHistory = ({}) => {
   const [selectedPeriod, setSelectedPeriod] = useState<number | null>(null);
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const [orders, setOrders] = useState<IOrder[]>([]);
   const [offset, handleOnClickPage] = usePagination(PAGE_LIMIT);
+  const [isOpenReviewModal, toggleReviewModal] = useModal(false);
+  const [isOpenQuestionModal, toggleQuestionModal] = useModal(false);
+  const [seletedReview, setSelectedReview] = useState(0);
+  const [selectedQuestion, setSelectedQuestion] = useState(0);
   const { data } = useGetOrders(selectedPeriod);
 
   useEffect(() => {
@@ -30,6 +35,16 @@ const OrderHistory = ({}) => {
     handleOnClickPage(0);
   }, [data, selectedStatus, handleOnClickPage]);
 
+  const handleOnClickItemReview = (target: number) => {
+    setSelectedReview(target);
+    toggleReviewModal();
+  };
+
+  const handleOnClickItemQuestion = (target: number) => {
+    setSelectedQuestion(target);
+    toggleQuestionModal();
+  };
+
   const renderOrderItemList = () => {
     const ordersOnPage = orders.slice(offset, offset + PAGE_LIMIT);
     return ordersOnPage.map((order) => (
@@ -39,6 +54,8 @@ const OrderHistory = ({}) => {
           items={order.products}
           status={order.status}
           deliveredAt={order.deliveredAt}
+          clickOnReviewListener={handleOnClickItemReview}
+          clickOnQuestionListener={handleOnClickItemQuestion}
         />
       </S.OrderHistoryBody>
     ));
@@ -94,6 +111,16 @@ const OrderHistory = ({}) => {
         handleOnClickPage={handleOnClickPage}
         count={Math.ceil(orders.length / PAGE_LIMIT)}
       />
+
+      {isOpenReviewModal && (
+        <ReviewModal selected={seletedReview} toggleModal={toggleReviewModal} />
+      )}
+      {isOpenQuestionModal && (
+        <RequestModal
+          selected={selectedQuestion}
+          toggleModal={toggleQuestionModal}
+        />
+      )}
     </S.OrerHistory>
   );
 };

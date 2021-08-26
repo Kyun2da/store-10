@@ -14,9 +14,10 @@ import { validateQuestion } from '@/utils/validator';
 
 interface RequestModalProps {
   toggleModal: () => void;
+  selected?: number;
 }
 
-const RequestModal = ({ toggleModal }: RequestModalProps) => {
+const RequestModal = ({ toggleModal, selected }: RequestModalProps) => {
   const { id } = useParams().params;
   const [category, setCategory] = useState('상품');
   const [title, setTitle] = useState('');
@@ -39,7 +40,7 @@ const RequestModal = ({ toggleModal }: RequestModalProps) => {
     if (!isPass) return;
 
     const question = {
-      product_id: id,
+      product_id: id ?? selected,
       category,
       title,
       content,

@@ -34,7 +34,7 @@ const MyCoupon = () => {
           value={inputValue}
           onChange={onChangeInput}
           error={!!error}
-          helperText="유요한 쿠폰이 아닙니다."
+          helperText="유효한 쿠폰이 아닙니다."
         />
         <Button
           type="button"

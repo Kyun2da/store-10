@@ -247,6 +247,7 @@ export const PanelWrapper = styled.div`
   ul {
     li.notice-item {
       margin-top: 1rem;
+      line-height: 2.2rem;
       list-style-type: disc;
       list-style-position: inside;
       text-indent: -2.3rem;
@@ -263,8 +264,20 @@ export const PanelWrapper = styled.div`
       border-bottom: 1px solid ${({ theme }) => theme.color.line};
 
       th {
-        ${({ theme }) => theme.fontWeight.l}
+        ${({ theme }) => theme.fontWeight.l};
         text-align: left;
+        padding: 1.5rem 0;
+        min-width: 7rem;
+
+        &.mobile-only {
+          ${({ theme }) => theme.mediaScreen.phone`
+            display: flex;
+            flex-direction: column;
+          `}
+        }
+      }
+
+      td {
         padding: 1.5rem 0;
       }
     }
@@ -354,16 +367,26 @@ export const AlertArea = styled.div`
 
   .alert-message-wrapper {
     margin-left: 8rem;
+
+    ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+      margin-left: 4.5rem;
+    `}
   }
 `;
 
 export const AlertIcon = styled.p`
   position: absolute;
   top: 2rem;
+
   svg {
     width: 5rem;
     height: 5rem;
     fill: #fff;
+
+    ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+      width: 3rem;
+      height: 3rem;
+    `}
   }
 `;
 
@@ -377,6 +400,7 @@ export const AlertMessage = styled.p`
 
 export const AlertSmallMessage = styled.p`
   ${({ theme }) => theme.fontWeight.s};
+  line-height: 1.8rem;
   color: #fff;
   margin-top: 1rem;
 `;

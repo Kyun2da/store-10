@@ -353,6 +353,12 @@ export const LoadMoreImageButton = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.color.primary2};
   }
+
+  ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+    padding: 1.5rem 2rem;
+    font-size: 1.7rem;
+    border-radius: 1.5rem;
+  `}
 `;
 
 export const AlertArea = styled.div`

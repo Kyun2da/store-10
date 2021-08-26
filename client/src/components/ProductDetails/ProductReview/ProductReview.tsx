@@ -22,6 +22,7 @@ import { REVIEW_LIMIT } from '@/utils/constant/offsetLimit';
 import Thung from '@/components/Thung';
 import Spinner from '@/components/Shared/Spinner/Spinner';
 import { ResponseError } from '@/components/Shared/Error';
+import { ReviewSkeleton } from '@/components/Skeleton/ProductSkeleton/';
 
 // 페이지 당 리뷰 노출 개수
 
@@ -47,11 +48,7 @@ const ProductReview = () => {
   }
 
   if (isLoading || !reviews || !scores) {
-    return (
-      <S.LoadingWrapper>
-        <Spinner />
-      </S.LoadingWrapper>
-    );
+    return <ReviewSkeleton />;
   }
 
   const { count, sum, ratings } = scores;

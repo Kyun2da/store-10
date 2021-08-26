@@ -114,16 +114,18 @@ const ProductInfo = () => {
 
         <S.OrderBar>
           <p className="product-name">{title}</p>
-          <NumberInput
-            type="number"
-            name="price-count"
-            min={1}
-            handleOnChnage={handleOnChnage}
-            value={value}
-            handleClickOnMinus={handleClickOnMinus}
-            handleClickOnPlus={handleClickOnPlus}
-          />
-          <p className="price">{wonFormat(realPrice)}</p>
+          <div className="small-wrapper">
+            <NumberInput
+              type="number"
+              name="price-count"
+              min={1}
+              handleOnChnage={handleOnChnage}
+              value={value}
+              handleClickOnMinus={handleClickOnMinus}
+              handleClickOnPlus={handleClickOnPlus}
+            />
+            <p className="price">{wonFormat(realPrice)}</p>
+          </div>
         </S.OrderBar>
 
         <S.Divider />

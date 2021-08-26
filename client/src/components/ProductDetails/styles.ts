@@ -11,6 +11,11 @@ export const ProductInfo = styled.div`
   gap: 3rem;
   color: ${({ theme }) => theme.color['text-color']};
   margin-bottom: 5rem;
+
+  ${({ theme }) =>
+    theme.mediaScreen.tablet`
+      flex-direction: column;
+    `}
 `;
 
 export const ProductThumbnailArea = styled.div`
@@ -19,6 +24,16 @@ export const ProductThumbnailArea = styled.div`
   gap: 2rem;
   flex-direction: column;
   position: relative;
+
+  ${({ theme }) =>
+    theme.mediaScreen.btw_pc_tab`
+      width: 50%;
+    `}
+
+  ${({ theme }) =>
+    theme.mediaScreen.tablet`
+      width: 100%;
+    `}
 `;
 
 export const ProductThumbnail = styled.img`
@@ -45,6 +60,11 @@ export const ProductPreviewThumbnail = styled.img`
   &:hover {
     opacity: 1;
   }
+
+  ${({ theme }) =>
+    theme.mediaScreen.btw_pc_tab`
+      max-width: 15rem;
+    `}
 `;
 
 export const ProductLenseSelector = styled.div`
@@ -75,6 +95,16 @@ export const ProductOrder = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 3rem;
+
+  ${({ theme }) =>
+    theme.mediaScreen.btw_pc_tab`
+      width: 50%;
+    `}
+
+  ${({ theme }) =>
+    theme.mediaScreen.tablet`
+      width: 100%;
+    `}
 `;
 
 export const ProductDetailArea = styled.div`
@@ -113,14 +143,26 @@ export const ProductDetail = styled.div`
 
 export const OrderBar = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 2rem;
   padding: 2rem;
   background-color: ${({ theme }) => theme.color.background};
 
   .product-name {
+    flex: 1;
+    line-height: 2.2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     ${({ theme }) => theme.fontSize.m};
     ${({ theme }) => theme.fontWeight.s};
+  }
+
+  .small-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   .price {
@@ -152,6 +194,7 @@ export const ButtonArea = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 2rem;
+  z-index: 10;
 
   button {
     padding: 1.5rem 3rem;
@@ -177,6 +220,12 @@ export const ButtonArea = styled.div`
     &:hover {
       opacity: 0.75;
     }
+
+    ${({ theme }) =>
+      theme.mediaScreen.btw_pc_tab`
+        padding: 1.5rem 2.5rem;  
+        font-size: 1.8rem;
+    `}
   }
 `;
 

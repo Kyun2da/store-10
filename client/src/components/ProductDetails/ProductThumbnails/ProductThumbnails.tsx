@@ -76,9 +76,13 @@ const ProductThumbnails = ({
         onMouseLeave={() => setIsLensed(false)}
       />
       {isLensed && (
-        <S.ProductLenseSelector ref={lenser}></S.ProductLenseSelector>
+        <S.ProductLenseSelector
+          className="on_tablet_resolution"
+          ref={lenser}
+        ></S.ProductLenseSelector>
       )}
       <S.ProductThumbnailLense
+        className="on_tablet_resolution"
         ref={zoomedImg}
         imgset={originImg.url}
         show={isLensed}

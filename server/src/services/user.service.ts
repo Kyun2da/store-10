@@ -94,11 +94,11 @@ class UserService {
     if (!coupon) {
       return null;
     }
-    console.log(coupon.serial_number);
+
     const isAlreadyRegistered = await userCouponRepo.getUserCoupon({
       serial_number: coupon.serial_number,
     });
-    console.log(isAlreadyRegistered);
+
     if (isAlreadyRegistered) {
       return null;
     }

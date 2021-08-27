@@ -24,7 +24,11 @@ const AddressModal = ({ toggleModal, selectAddress, address }: IProps) => {
   };
 
   return (
-    <ModalLayout width="40rem" height="65rem" toggleModal={toggleModal}>
+    <S.AddressModalLayout
+      width="40rem"
+      height="65rem"
+      toggleModal={toggleModal}
+    >
       <S.AddressModalHeader>
         {openForm ? (
           <button onClick={() => setOpenForm(false)}>
@@ -55,7 +59,7 @@ const AddressModal = ({ toggleModal, selectAddress, address }: IProps) => {
           setAddressToModify={setAddressToModify}
         />
       )}
-    </ModalLayout>
+    </S.AddressModalLayout>
   );
 };
 

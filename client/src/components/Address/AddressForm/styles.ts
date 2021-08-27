@@ -25,7 +25,14 @@ export const DefaultAddrssCheckbox = styled(Checkbox)`
   margin-right: auto;
 `;
 
-export const DuamPostWrapper = styled(ModalLayout)``;
+export const DuamPostWrapper = styled(ModalLayout)`
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    > div {
+      padding: 1.6rem;
+      width: 100%;
+    }
+  }
+`;
 
 export const FormRow = styled.div`
   display: flex;
@@ -52,10 +59,10 @@ export const FormRow = styled.div`
 `;
 
 export const FormRowName = styled.span`
-  flex: 0 0 8rem;
+  flex: 0 0 6rem;
   color: ${({ theme }) => theme.color['text-color']};
-  ${({ theme }) => theme.fontWeight.m};
-  ${({ theme }) => theme.fontSize.m};
+  ${({ theme }) => theme.fontWeight.l};
+  ${({ theme }) => theme.fontSize.s};
 `;
 
 export const FormFooter = styled.footer`

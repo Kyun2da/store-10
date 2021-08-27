@@ -11,4 +11,12 @@ export const SearchHeader = styled.div`
   ${({ theme }) => theme.fontSize.xl}
   color: ${({ theme }) => theme.color['text-color']};
   margin: 2rem 0;
+
+  @media (max-width: ${({ theme }) => theme.media.tablet}px) {
+    ${({ theme }) => theme.fontSize.l}
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.phone}px) {
+    ${({ theme }) => theme.fontSize.m}
+  }
 `;

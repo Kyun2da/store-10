@@ -10,7 +10,7 @@ export const CategoryWrapper = styled.div`
 export const CategoryHeader = styled.div`
   font-family: BMDOHYEON;
   color: ${({ theme }) => theme.color['text-color']};
-  margin: 3rem 0 2rem;
+  margin: 3rem 0 1rem;
   ${({ theme }) => theme.fontSize.xl}
   @media(max-width: ${({ theme }) => theme.media.tablet}px) {
     ${({ theme }) => theme.fontSize.l}

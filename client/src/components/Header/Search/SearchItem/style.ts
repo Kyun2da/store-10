@@ -1,14 +1,17 @@
 import { CardWrapper } from '@/components/CardWrapper/styles';
 import styled from 'styled-components';
+import Thung from '@/components/Thung';
 
-export const SearchItemsInfo = styled.div``;
+export const SearchItemContainer = styled.div`
+  max-height: 60vh;
+  overflow: scroll;
+`;
 
 export const RecentTitle = styled.div`
   margin: 0.5rem 0;
   padding: 0.5rem 0;
   font-size: ${({ theme }) => theme.fontSize.m};
   color: ${({ theme }) => theme.color.label};
-
   min-height: calc(-50vh + 80px);
 `;
 
@@ -17,11 +20,8 @@ export const SearchItem = styled.div`
 `;
 
 export const SearchItemWrapper = styled(CardWrapper)`
-  min-height: 60vh;
-  max-height: 60vh;
   margin-bottom: 2rem;
   padding: 0.5rem;
-  overflow: scroll;
   &:after {
     content: '';
     grid-column: 1 / -1;
@@ -41,9 +41,30 @@ export const SearchItemList = styled.li`
 `;
 
 export const RecentSearchUl = styled.ul`
-  li {
-    color: ${({ theme }) => theme.color['text-color']};
-    margin: 0.6rem 0;
-    cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const RecentSearchItem = styled.li`
+  padding: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 0 0 2px #999;
+  color: ${({ theme }) => theme.color['text-color']};
+  margin: 0 0.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-left: 1rem;
+    stroke-width: 3px !important;
+    width: 1em !important;
+    height: 1em !important;
   }
+`;
+
+export const EmptyData = styled(Thung)`
+  max-width: 40rem;
+  width: 90%;
+  margin: 0 auto;
 `;

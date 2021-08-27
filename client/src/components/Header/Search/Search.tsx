@@ -13,7 +13,7 @@ type IProps = {
 
 const Search = ({ toggleOpen }: IProps) => {
   const [searchValue, setSearchValue] = useState('');
-  const [recentItems, setRecentItems] = useRecentSearch();
+  const [recentItems, setRecentItems, removeRecentItem] = useRecentSearch();
   const [searchData, setSearchDatas] = useState<ISearchData[]>([]);
   const { historyPush } = useHistory();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -80,6 +80,7 @@ const Search = ({ toggleOpen }: IProps) => {
           </S.SearchInputWrap>
           <SearchItem
             addRecentSearch={setRecentItems}
+            removeRecentSearch={removeRecentItem}
             toggleOpen={toggleOpen}
             searchValue={searchValue}
             recentItems={recentItems}

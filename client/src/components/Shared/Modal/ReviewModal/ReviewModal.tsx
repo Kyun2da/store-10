@@ -77,14 +77,18 @@ const ReviewModal = ({ toggleModal, selected }: ReviewModalProps) => {
       <S.ModalBody>
         <Form onSubmit={handleOnSubmit} gap={3}>
           <div className="input-wrapper">
-            <Title level={5}>별점 매기기</Title>
+            <Title className="sub-title" level={5}>
+              별점 매기기
+            </Title>
             <RatingSetter
               helpertext="별점을 매겨주세요!"
               error={ratingError}
               handleOnRating={handleOnRating}
             />
           </div>
-          <Title level={5}>사진 업로드 (최대 3장)</Title>
+          <Title className="sub-title" level={5}>
+            사진 업로드 (최대 3장)
+          </Title>
 
           <div className="input-wrapper">
             <FileInput
@@ -100,7 +104,9 @@ const ReviewModal = ({ toggleModal, selected }: ReviewModalProps) => {
           </div>
 
           <div className="input-wrapper">
-            <Title level={5}>리뷰 남기기</Title>
+            <Title className="sub-title" level={5}>
+              리뷰 남기기
+            </Title>
             <Textarea
               placeholder="다른 구매자와 판매자에게 도움이 될 수 있도록 자세하고 솔직하게 리뷰 작성 부탁드려요!"
               resize="vertical"

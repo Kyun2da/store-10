@@ -31,6 +31,16 @@ export const ModalBody = styled.div`
         font-size: 1.35rem;
       `}
     }
+
+    &.custom-input {
+      input {
+        background-color: ${({ theme }) => theme.color.background};
+
+        ${({ theme }) => theme.mediaScreen.phone`
+          font-size: 1.45rem;
+        `}
+      }
+    }
   }
 
   input {
@@ -39,6 +49,12 @@ export const ModalBody = styled.div`
     }
   }
   overflow-y: auto;
+
+  .sub-title {
+    ${({ theme }) => theme.mediaScreen.phone`
+      font-size: 1.5rem;
+    `}
+  }
 
   ::-webkit-scrollbar {
     display: none;
@@ -72,6 +88,11 @@ export const CheckboxWrapper = styled.div`
   color: ${({ theme }) => theme.color.placeholder};
   ${({ theme }) => theme.fontWeight.m};
   gap: 2rem;
+
+  ${({ theme }) => theme.mediaScreen.phone`
+    gap: 1rem;
+    font-size: 1.45rem;  
+  `}
 `;
 
 export const DeleteModalHeader = styled.div`

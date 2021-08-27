@@ -37,11 +37,14 @@ class UserService {
     return null;
   }
 
-  async getCoupons(user_id: number) {
+  async getCoupons(user_id: number, is_valid?: boolean) {
     const userCouponRepo = UserCouponRepository();
     const couponRepo = CouponRepository();
 
-    const userCoupons = await userCouponRepo.getUserCoupons(user_id);
+    const userCoupons = await userCouponRepo.getUserCoupons({
+      user_id,
+      is_valid,
+    });
     const couponIds = userCoupons.map((userCoupon) => userCoupon.coupon_id);
     const coupons = await couponRepo.getCouponsByIds(couponIds);
 

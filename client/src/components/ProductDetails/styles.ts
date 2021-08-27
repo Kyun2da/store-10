@@ -495,8 +495,8 @@ export const UserReviewTitles = styled.div`
 export const ReviewImages = styled.div`
   display: flex;
   gap: 2rem;
-  margin: 2rem 0;
   overflow-x: auto;
+  margin: 2rem 0;
 
   img {
     width: 20rem;
@@ -513,6 +513,10 @@ export const ReviewImages = styled.div`
       width: 15rem;
       height: 10rem;
     `}
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
   }
 `;
 

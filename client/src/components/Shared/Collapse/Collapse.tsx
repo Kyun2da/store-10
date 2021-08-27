@@ -153,7 +153,7 @@ const Collapse = <T extends ICollapseItem>({
                 </S.CollapseContent>
               ) : (
                 <S.CollapseContent ref={refs[idx]}>
-                  {!item.secret && (
+                  {(!item.secret || user?.id === item.user_id) && (
                     <>
                       <S.CollapseDetails>
                         <p className="question">

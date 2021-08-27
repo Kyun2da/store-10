@@ -47,6 +47,7 @@ export const lightMode: DefaultTheme = {
   name: 'light-mode',
   color: {
     'text-color': '#1e2222',
+    'reverse-text-color': '#fcfcfc',
     'body': 'white',
     'body2': '#fafafa',
     'footer': '#fbfbfb',
@@ -76,6 +77,7 @@ export const darkMode: DefaultTheme = {
   name: 'dark-mode',
   color: {
     'text-color': '#fcfcfc',
+    'reverse-text-color': '#1e2222',
     'body': '#3c3e3e',
     'body2': '#353535',
     'footer': '#252525',

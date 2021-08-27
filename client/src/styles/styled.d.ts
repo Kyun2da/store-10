@@ -5,6 +5,7 @@ declare module 'styled-components' {
     name: string;
     color: {
       'text-color': string;
+      'reverse-text-color': string;
       'body': string;
       'body2': string;
       'footer': string;

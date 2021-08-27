@@ -28,6 +28,11 @@ export const LoginForm = styled.form`
     height: 5rem;
   }
 
+  button.white {
+    color: ${({ theme }) => theme.color['text-color']};
+    background-color: ${({ theme }) => theme.color['reverse-text-color']};
+  }
+
   @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
     width: 260px;
     button {
@@ -56,6 +61,7 @@ export const LinkContainer = styled.div`
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
+  color: ${({ theme }) => theme.color['text-color']};
 
   a {
     padding: 0 2rem;

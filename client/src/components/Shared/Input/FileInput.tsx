@@ -39,8 +39,6 @@ const FileInput = ({
     target.value = '';
   };
 
-  console.log(imgFiles, !!imgFiles.length);
-
   return (
     <>
       <S.FileInputButton onClick={handleClickOnFileInput}>

@@ -36,7 +36,7 @@ const DeliveryModal = ({ toggleModal, id }: IProps) => {
         );
       }, 3000);
     }
-  }, [imgeLoaded, mutate, id]);
+  }, [imgeLoaded, mutate, id, queryClient]);
 
   return (
     <ModalLayout width="32rem" height="30rem" toggleModal={toggleModal}>

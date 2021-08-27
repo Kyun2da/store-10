@@ -1,7 +1,6 @@
 import Card from '@/components/Card';
 import CardWrapper from '@/components/CardWrapper';
 import { notify } from '@/components/Shared/Toastify';
-import Thung from '@/components/Thung';
 import { useDeleteDetailBookmark } from '@/hooks/queries/bookmark';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getDetailBookmarkProducts } from '@/lib/api/bookmark/getDetailBookmarkProducts';
@@ -97,6 +96,19 @@ const Bookmark = () => {
     setIsEdit(val);
   };
 
+  const isAllchecked =
+    !isEdit && checkedList.length === data?.pages.flat().length;
+
+  const onChangeAllCheck = () => {
+    console.log(isAllchecked);
+    if (isAllchecked) {
+      setCheckedList([]);
+    } else {
+      if (data)
+        setCheckedList(data?.pages.flat().map((item) => item.productId));
+    }
+  };
+
   const removeBookmarkItems = useCallback(() => {
     if (checkedList.length === 0) {
       notify('error', '삭제할 상품을 한개 이상 선택해주세요!');
@@ -132,6 +144,11 @@ const Bookmark = () => {
             </S.EditButton>
           ) : (
             <>
+              <S.AllCheckBox
+                onChange={onChangeAllCheck}
+                checked={isAllchecked}
+                label={'전체 선택'}
+              />
               <S.EditButton
                 type="button"
                 color="white"
@@ -172,7 +189,7 @@ const Bookmark = () => {
             <div ref={ref}></div>
           </>
         ) : (
-          <Thung title="찜한 상품이 없습니다! 맘에 드는 상품을 찜해보세요." />
+          <S.BookmarkThung title="찜한 상품이 없습니다! 맘에 드는 상품을 찜해보세요." />
         )}
       </S.CardContainer>
       {modalOpen && (

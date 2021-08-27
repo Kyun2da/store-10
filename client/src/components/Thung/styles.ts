@@ -8,4 +8,5 @@ export const ThungContainer = styled.div`
 
 export const Description = styled.p`
   ${({ theme }) => theme.fontSize.l};
+  color: ${({ theme }) => theme.color['text-color']};
 `;

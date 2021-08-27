@@ -7,6 +7,7 @@ export const BookmarkContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 1050px;
+  width: 100%;
   margin: 5rem auto;
 `;
 

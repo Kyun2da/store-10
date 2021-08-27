@@ -20,6 +20,19 @@ export const ModalBody = styled.div`
   flex-direction: column;
   flex: 1;
   ${({ theme }) => theme.fontSize.m};
+
+  .input-wrapper {
+    position: relative;
+
+    .error-text {
+      bottom: -2.5rem;
+
+      ${({ theme }) => theme.mediaScreen.phone`
+        font-size: 1.35rem;
+      `}
+    }
+  }
+
   input {
     &:not(:first-child) {
       margin-top: 1.2rem;

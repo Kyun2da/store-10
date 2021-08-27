@@ -28,6 +28,7 @@ export const ModalInner = styled.div`
   flex-direction: column;
   height: 50%;
   overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 export const ModalWrapper = styled.div<IModalWrapperProps>`

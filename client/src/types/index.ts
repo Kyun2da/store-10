@@ -38,6 +38,10 @@ export interface IProduct {
   productImage: IProductImage[];
 }
 
+export interface IOrderCheck {
+  ordered: boolean;
+}
+
 export interface ICart {
   id: number;
   count: number;

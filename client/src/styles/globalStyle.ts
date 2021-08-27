@@ -12,12 +12,6 @@ const HEADER_SEARCH_RESOLUTION = 550;
 const customMediaQuery = (screen: number) =>
   `@media screen and (max-width: ${screen}px)`;
 
-const screen = {
-  pc: customMediaQuery(PC_RESOLUTION), // 1050px 해상도 위에서만 디스플레이
-  tablet: customMediaQuery(TABLET_RESOLUTION), // 768px 해상도 위에서만 디스플레이
-  phone: customMediaQuery(PHONE_RESOLUTION), // 425px 해상도 위에서만 디스플레이
-};
-
 export const mediaScreen = {
   // 1050px 해상도 위에서만 디스플레이
   pc: (args: TemplateStringsArray) => css`
@@ -125,7 +119,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     flex: 1;
 
-    ${screen.tablet} {
+    ${customMediaQuery(TABLET_RESOLUTION)} {
       max-width: ${TABLET_RESOLUTION}px;
       margin: 4rem auto;
       padding: 0 2rem;
@@ -150,9 +144,23 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  // BTW_PC&TAB 해상도에서만 display: none
+  .on_btw_pc_tab_resolution {
+    ${customMediaQuery(BTW_PC_AND_TAB_RESOLUTION)} {
+      display: none;
+    }
+  }
+
   // tablet 해상도에서부터 display: none
   .on_tablet_resolution {
     ${customMediaQuery(TABLET_RESOLUTION)} {
+      display: none;
+    }
+  }
+
+  // BTW_TAB&MOB 해상도에서만 display: none
+  .on_btw_tab_mob_resolution {
+    ${customMediaQuery(BTW_TAB_AND_MOBILE_RESOLUTION)} {
       display: none;
     }
   }

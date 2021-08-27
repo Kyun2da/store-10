@@ -7,6 +7,7 @@ declare module 'styled-components' {
       'text-color': string;
       'body': string;
       'body2': string;
+      'body3': string;
       'footer': string;
       'label': string;
       'placeholder': string;
@@ -16,6 +17,7 @@ declare module 'styled-components' {
       'primary': string;
       'primary2': string;
       'primary3': string;
+      'lock': string;
       'new': string;
       'best': string;
       'error': string;

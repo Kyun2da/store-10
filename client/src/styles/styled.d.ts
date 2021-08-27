@@ -21,6 +21,7 @@ declare module 'styled-components' {
       'best': string;
       'error': string;
       'border-gray': string;
+      'hover': string;
     };
     fontSize: {
       xs: FlattenSimpleInterpolation;

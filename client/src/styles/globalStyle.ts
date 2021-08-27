@@ -69,18 +69,18 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::-webkit-scrollbar {
-    background-color: #fff;
+    background-color: #f5f5f5;
     width: 1.6rem;
   }
 
   ::-webkit-scrollbar-track {
-    background-color: #fff;
+    background-color: #f5f5f5;
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: #babac0;
     border-radius: 1.6rem;
-    border: 0.4rem solid #fff;
+    border: 0.4rem solid #f5f5f5;
 
     &:hover {
       background-color:#a0a0a5;
@@ -89,7 +89,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-button {
-    display:none;
+    display: none;
   }
 
   html, body {

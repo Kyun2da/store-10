@@ -10,11 +10,14 @@ import { useParams, Redirect } from '@/lib/Router';
 import { useGetOrder, useUpdateOrder } from '@/hooks/queries/order';
 import { IAddress, IOrder, IUserCoupon } from '@/types';
 import { calculateDiscount } from '@/utils/helper';
+import { useHistory } from '@/lib/Router';
+import { useQueryClient } from 'react-query';
 
 const Order = () => {
   const { id } = useParams().params;
   const { data, isLoading, isError } = useGetOrder(+id);
   const { mutate } = useUpdateOrder();
+  const { historyPush } = useHistory();
   const [selectedCoupon, setSelectedCoupon] = useState<IUserCoupon | null>(
     null
   );
@@ -27,13 +30,21 @@ const Order = () => {
     address_id: null,
     payment_id: 1,
   });
-
+  const queryClient = useQueryClient();
   const updateOrder = () => {
     if (typeof order === 'object') {
-      mutate({
-        order: { ...order, user_coupon_id: selectedCoupon?.id || null },
-        updateDefaultAddress,
-      });
+      mutate(
+        {
+          order: { ...order, user_coupon_id: selectedCoupon?.id || null },
+          updateDefaultAddress,
+        },
+        {
+          onSuccess(data) {
+            queryClient.removeQueries(['order', +data.id]);
+            historyPush(`/order/${order.id}/paid`);
+          },
+        }
+      );
     }
   };
 

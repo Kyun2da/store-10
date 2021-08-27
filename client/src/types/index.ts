@@ -208,7 +208,7 @@ export interface IOrder {
   address_id?: number | null;
   user_id: number;
   delivery_request_message?: string | null;
-  deliveredAt?: string;
+  deliveredAt?: string | Date;
   createdAt: string;
   updatedAt: string;
   payment_id?: number | null;

@@ -19,8 +19,7 @@ export const Label = styled.label<IInputLabel>`
   ${({ label, error }) => {
     if (label === 'Standard' || label === 'Outlined') {
       return css`
-        color: ${({ theme }) =>
-          error ? theme.color.error : theme.color.placeholder};
+        color: ${({ theme }) => (error ? theme.color.error : theme.color.line)};
       `;
     } else if (label === 'Filled') {
       return css`
@@ -75,7 +74,7 @@ export const Input = styled.input<IInput>`
         border: ${({ theme }) =>
           error ? `1px solid ${theme.color.error}` : '1px solid #c1c5c5'};
         border-radius: 10px;
-        background-color: white;
+        background-color: ${({ theme }) => theme.color['reverse-text-color']};
         &:focus {
           border: ${({ theme }) =>
             error ? `2px solid ${theme.color.error}` : '1px solid #2ac1bc'};

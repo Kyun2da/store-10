@@ -21,7 +21,7 @@ export const calculateDiscount = ({
   return _price - Math.floor((_price * (discount / 100)) / 10) * 10;
 };
 
-export const dateFormat = (date: string, seperator = '-') => {
+export const dateFormat = (date: string | Date, seperator = '-') => {
   if (seperator === '-') {
     return dayjs(date).format('YYYY-MM-DD');
   } else if (seperator === '.') {

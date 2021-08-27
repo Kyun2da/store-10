@@ -11,12 +11,13 @@ export const ShoppingCartSummaryWrapper = styled.div`
   position: sticky;
   position: -webkit-sticky;
   top: 8.5rem;
+  background-color: ${({ theme }) => theme.color.body};
 `;
 
 export const ShoppingCartSummary = styled.dl`
+  background-color: ${({ theme }) => theme.color.body};
   border: 1px solid ${({ theme }) => theme.color.body};
   border-radius: 0.8rem;
-  background: ${({ theme }) => theme.color['off-white']};
   padding: 1rem 2rem;
   box-shadow: ${({ theme }) => theme.boxShadow};
   overflow: hidden;
@@ -28,6 +29,7 @@ export const ShoppingCartSummaryRow = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 2rem 0;
+  color: ${({ theme }) => theme.color['text-color']};
   dt {
     ${({ theme }) => theme.fontSize.m}
     ${({ theme }) => theme.fontWeight.m}

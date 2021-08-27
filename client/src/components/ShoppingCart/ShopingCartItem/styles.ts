@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NumberInput } from '@/components/Shared/Input';
 
 export const ShoppingCartItem = styled.li`
   position: relative;
@@ -10,7 +11,7 @@ export const ShoppingCartItem = styled.li`
   align-items: center;
   width: 100%;
   padding: 0 1rem;
-  background: ${({ theme }) => theme.color['off-white']};
+  background-color: ${({ theme }) => theme.color.body};
   &:not(:first-child) {
     margin-top: 1rem;
   }
@@ -33,6 +34,11 @@ export const ImgWrapper = styled.div`
   :hover {
     cursor: pointer;
   }
+
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob}px) {
+    height: 6rem;
+    flex: 0 0 6rem;
+  }
 `;
 
 export const ItemInfo = styled.div`
@@ -48,37 +54,39 @@ export const ItemInfo = styled.div`
 `;
 
 export const TotalPrice = styled.div`
+  padding-top: 1.2rem;
+  padding-right: 1rem;
   flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media (max-width: ${({ theme }) => theme.media.tablet + 200}px) {
-    justify-content: center;
-    flex-direction: column;
-  }
-  @media (max-width: ${({ theme }) => theme.media.tablet}px) {
-    justify-content: space-between;
-    flex-direction: row;
-  }
-  @media (max-width: ${({ theme }) => theme.media.phone}px) {
-    justify-content: center;
-    flex-direction: column;
-  }
   > span {
+    color: ${({ theme }) => theme.color['text-color']};
+    ${({ theme }) => theme.fontWeight.l};
     ${({ theme }) => theme.fontSize.m};
+    @media (max-width: ${({ theme }) => theme.media.phone}px) {
+      ${({ theme }) => theme.fontSize.s};
+    }
   }
 `;
 
 export const ItemInfoName = styled.span`
   ${({ theme }) => theme.fontSize.m};
+  color: ${({ theme }) => theme.color['text-color']};
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  width: 90%;
+  line-height: 2rem;
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob}px) {
+    ${({ theme }) => theme.fontSize.s};
+    line-height: 1.6rem;
+  }
 `;
 export const ItemInoPriceWrapper = styled.div`
-  margin-top: 10px;
+  margin-top: 0.8rem;
 `;
 export const ItemInfoPrice = styled.span`
   ${({ theme }) => theme.fontSize.s};
@@ -100,5 +108,28 @@ export const CloseButton = styled.button`
   height: 4rem;
   &:hover {
     opacity: 0.4;
+  }
+  svg {
+    stroke: ${({ theme }) => theme.color['text-color']};
+  }
+`;
+
+export const ItemInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const PriceNumberInput = styled(NumberInput)`
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob}px) {
+    button {
+      width: 1.7rem;
+      height: 1.7rem;
+      ${({ theme }) => theme.fontSize.s};
+    }
+    input {
+      ${({ theme }) => theme.fontSize.s};
+      width: 2rem;
+      padding: 0;
+    }
   }
 `;

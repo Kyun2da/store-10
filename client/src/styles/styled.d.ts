@@ -5,6 +5,7 @@ declare module 'styled-components' {
     name: string;
     color: {
       'text-color': string;
+      'reverse-text-color': string;
       'body': string;
       'body2': string;
       'body3': string;
@@ -22,6 +23,7 @@ declare module 'styled-components' {
       'best': string;
       'error': string;
       'border-gray': string;
+      'hover': string;
     };
     fontSize: {
       xs: FlattenSimpleInterpolation;
@@ -40,9 +42,13 @@ declare module 'styled-components' {
     };
     media: {
       pc: number;
+      btw_pc_tab: number;
       tablet: number;
+      btw_tab_mob: number;
       phone: number;
       headerSearch: number;
+      btw_pc_tab: number;
+      btw_tab_mob: number;
     };
     mediaScreen: {
       pc: (args: TemplateStringsArray) => FlattenSimpleInterpolation;

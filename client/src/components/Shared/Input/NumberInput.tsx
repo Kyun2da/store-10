@@ -12,6 +12,7 @@ interface IInput {
   handleOnChnage: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleClickOnMinus: () => void;
   handleClickOnPlus: () => void;
+  className?: string;
 }
 
 const NumberInput = ({
@@ -24,9 +25,10 @@ const NumberInput = ({
   handleOnChnage,
   handleClickOnMinus,
   handleClickOnPlus,
+  className,
 }: IInput) => {
   return (
-    <S.NumberInputArea>
+    <S.NumberInputArea className={className}>
       <S.AdjustButton onClick={handleClickOnMinus}>-</S.AdjustButton>
       <S.NumberInput
         onChange={(e) => handleOnChnage(e)}

@@ -198,6 +198,10 @@ export const Textarea = styled.textarea<ITextarea>`
   &::-webkit-input-placeholder {
     font-family: 'Noto Sans', sans-serif;
   }
+
+  ${({ theme }) => theme.mediaScreen.tablet`
+      height: 10rem;
+  `}
 `;
 
 export const FileInputButton = styled.div`
@@ -226,6 +230,11 @@ export const FileInputButton = styled.div`
     ${({ theme }) => theme.mediaScreen.tablet`
       width: 7rem;
       height: 7rem;
+    `}
+
+    ${({ theme }) => theme.mediaScreen.phone`
+      width: 4.5rem;
+      height: 4.5rem;
     `}
   }
 `;

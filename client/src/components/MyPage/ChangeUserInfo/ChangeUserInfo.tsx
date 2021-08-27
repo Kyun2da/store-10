@@ -93,13 +93,18 @@ const ChangeUserInfo = () => {
     <>
       {user?.is_oauth || isPasswordAuth ? (
         <div>
-          <S.NickNameContainer>
+          <S.NickNameContainer
+            onSubmit={(e: React.FormEvent) => {
+              e.preventDefault();
+            }}
+          >
             <S.ContainerTitle>이름 변경</S.ContainerTitle>
             <Input
               type="text"
               label="Outlined"
               name="nickname"
               labelName="이름"
+              maxLength={8}
               value={nickname}
               onChange={onChangeNickName}
             />
@@ -112,7 +117,11 @@ const ChangeUserInfo = () => {
             </Button>
           </S.NickNameContainer>
           {!user?.is_oauth && (
-            <S.NewPasswordContainer>
+            <S.NewPasswordContainer
+              onSubmit={(e: React.FormEvent) => {
+                e.preventDefault();
+              }}
+            >
               <S.ContainerTitle>비밀번호 변경</S.ContainerTitle>
               <input hidden type="text" autoComplete="username" />
               <Input

@@ -9,7 +9,7 @@ import {
   validatePassword,
   validateRePassword,
 } from '@/utils/validator';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { postEmailCheck } from '@/lib/api/user/postEmailCheck';
 import * as S from './styles';
 import { CheckSVG } from '@/assets/svgs';
@@ -21,16 +21,33 @@ import { userState } from '@/recoil/user';
 import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 
 const SignUp = () => {
+  const [disabled, setDisabled] = useState(true);
   const [error, setError] = useState({
     email: false,
     password: false,
     rePassword: false,
     name: false,
-    initialError: true,
   });
 
   const [emailCheck, setEmailCheck] = useState(false);
   const [email, , onChangeEmail] = useInput('');
+  const [password, , onChangePassword] = useInput('');
+  const [user, setUser] = useRecoilState(userState);
+  const { historyPush } = useHistory();
+  const [rePassword, , onChangeRePassword] = useInput('');
+  const [name, , onChangeName] = useInput('');
+
+  useEffect(() => {
+    if (
+      Object.values(error).every((item) => item === false) &&
+      email !== '' &&
+      password !== '' &&
+      name !== '' &&
+      rePassword !== ''
+    ) {
+      setDisabled(false);
+    }
+  }, [error, email, password, name, rePassword]);
 
   const onClickEmailCheck = useCallback(async () => {
     if (!validateEmail(email)) {
@@ -60,8 +77,6 @@ const SignUp = () => {
     [error]
   );
 
-  const [password, , onChangePassword] = useInput('');
-
   const rePasswordCheck = useCallback(
     ({ target }: React.ChangeEvent<HTMLInputElement>) => {
       if (validateRePassword(target.value, password)) {
@@ -73,9 +88,6 @@ const SignUp = () => {
     [password, error]
   );
 
-  const [user, setUser] = useRecoilState(userState);
-
-  const { historyPush } = useHistory();
   const formSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
@@ -159,6 +171,8 @@ const SignUp = () => {
           labelName="비밀번호 재입력"
           onBlur={rePasswordCheck}
           error={error.rePassword}
+          value={rePassword}
+          onChange={onChangeRePassword}
           helperText="비밀번호가 일치하지 않거나 비밀번호를 입력해야 합니다."
           placeholder="비밀번호를 한번 더 입력해주세요."
         />
@@ -168,11 +182,13 @@ const SignUp = () => {
           label="Outlined"
           onBlur={(e) => errorCheck(e, validateName)}
           error={error.name}
+          value={name}
+          onChange={onChangeName}
           labelName="이름"
           helperText="이름을 입력해주세요."
           placeholder="이름을 입력해주세요."
         />
-        <Button type="submit" color="primary">
+        <Button type="submit" color="primary" disabled={disabled}>
           회원가입
         </Button>
       </S.FormContainer>

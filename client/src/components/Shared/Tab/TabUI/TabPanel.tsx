@@ -13,7 +13,7 @@ const TabPanel = ({ children, index }: TabPanelProps) => {
   if (value !== index) return null;
 
   return (
-    <S.TabPanel className="pagination-scroll-top" data-index={index}>
+    <S.TabPanel className="pagination-scroll-top container" data-index={index}>
       {children}
     </S.TabPanel>
   );

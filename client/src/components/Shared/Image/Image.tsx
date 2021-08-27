@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import * as S from './styles';
 
 const LAZY_LOAD_IMAGE = 'LAZY_LOAD_IMAGE';
 
@@ -33,7 +34,7 @@ const Image = ({ src, alt }: IImage) => {
   }, []);
 
   return (
-    <img
+    <S.Image
       ref={imgRef}
       src={
         isLoad

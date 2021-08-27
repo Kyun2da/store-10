@@ -20,8 +20,8 @@ import { notify } from '@/components/Shared/Toastify';
 import usePagination from '@/hooks/usePagination';
 import { REVIEW_LIMIT } from '@/utils/constant/offsetLimit';
 import Thung from '@/components/Thung';
-import Spinner from '@/components/Shared/Spinner/Spinner';
 import { ResponseError } from '@/components/Shared/Error';
+import { ReviewSkeleton } from '@/components/Skeleton/ProductSkeleton/';
 
 // 페이지 당 리뷰 노출 개수
 
@@ -47,11 +47,7 @@ const ProductReview = () => {
   }
 
   if (isLoading || !reviews || !scores) {
-    return (
-      <S.LoadingWrapper>
-        <Spinner />
-      </S.LoadingWrapper>
-    );
+    return <ReviewSkeleton />;
   }
 
   const { count, sum, ratings } = scores;
@@ -85,12 +81,19 @@ const ProductReview = () => {
           작성하기
         </Button>
       </S.TopArea>
+
       <S.RatingArea>
-        <S.StarRates>
-          <span className="totalRates">{rating}</span>
-          <RatingGetter rating={rating} uniqueId="totalRating" />
-        </S.StarRates>
-        <RatingChart total={count} ratings={ratings} />
+        {!!reviews.length ? (
+          <>
+            <S.StarRates>
+              <span className="totalRates">{rating}</span>
+              <RatingGetter rating={rating} uniqueId="totalRating" />
+            </S.StarRates>
+            <RatingChart total={count} ratings={ratings} />
+          </>
+        ) : (
+          <S.NoDataText>아직 매겨진 별점이 없네요..!</S.NoDataText>
+        )}
       </S.RatingArea>
 
       <S.UserReviewArea>

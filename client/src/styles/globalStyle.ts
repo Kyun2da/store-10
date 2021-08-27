@@ -1,18 +1,54 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 import reset from 'styled-reset';
 
 export const HEADER_HEIGHT = 6;
 const PC_RESOLUTION = 1050;
+const BTW_PC_AND_TAB_RESOLUTION = 900;
 const TABLET_RESOLUTION = 768;
+const BTW_TAB_AND_MOBILE_RESOLUTION = 595;
 const PHONE_RESOLUTION = 425;
 const HEADER_SEARCH_RESOLUTION = 550;
 
-const customMediaQuery = (screen: number) => `@media (min-width: ${screen}px)`;
+const customMediaQuery = (screen: number) =>
+  `@media screen and (max-width: ${screen}px)`;
 
-const mediaScreen = {
+const screen = {
   pc: customMediaQuery(PC_RESOLUTION), // 1050px 해상도 위에서만 디스플레이
   tablet: customMediaQuery(TABLET_RESOLUTION), // 768px 해상도 위에서만 디스플레이
   phone: customMediaQuery(PHONE_RESOLUTION), // 425px 해상도 위에서만 디스플레이
+};
+
+export const mediaScreen = {
+  // 1050px 해상도 위에서만 디스플레이
+  pc: (args: TemplateStringsArray) => css`
+    ${customMediaQuery(PC_RESOLUTION)} {
+      ${css(args)};
+    }
+  `,
+  // 900px 해상도 위에서만 디스플레이
+  btw_pc_tab: (args: TemplateStringsArray) => css`
+    ${customMediaQuery(BTW_PC_AND_TAB_RESOLUTION)} {
+      ${css(args)};
+    }
+  `,
+  // 768px 해상도 위에서만 디스플레이
+  tablet: (args: TemplateStringsArray) => css`
+    ${customMediaQuery(TABLET_RESOLUTION)} {
+      ${css(args)};
+    }
+  `,
+  // 595px 해상도 위에서만 디스플레이
+  btw_tab_mob: (args: TemplateStringsArray) => css`
+    ${customMediaQuery(BTW_TAB_AND_MOBILE_RESOLUTION)} {
+      ${css(args)};
+    }
+  `,
+  // 425px 해상도 위에서만 디스플레이
+  phone: (args: TemplateStringsArray) => css`
+    ${customMediaQuery(PHONE_RESOLUTION)} {
+      ${css(args)};
+    }
+  `,
 };
 
 export const media = {
@@ -30,6 +66,21 @@ const GlobalStyle = createGlobalStyle`
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+ 
+  ::-webkit-scrollbar-thumb {
+    background: #666; 
+    border-radius: 1rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #ddd; 
+    border-radius: 1rem;
   }
 
   html, body {
@@ -60,7 +111,21 @@ const GlobalStyle = createGlobalStyle`
   .container {
     max-width: ${PC_RESOLUTION}px;
     margin: 5rem auto;
+    padding: 0 3rem;
+    box-sizing: content-box;
     flex: 1;
+
+    ${screen.tablet} {
+      max-width: ${TABLET_RESOLUTION}px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    ${customMediaQuery(PHONE_RESOLUTION)} {
+      max-width: ${PHONE_RESOLUTION}px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
   }
 
   .pagination-scroll-top {
@@ -68,24 +133,24 @@ const GlobalStyle = createGlobalStyle`
     margin-top: ${-HEADER_HEIGHT}rem;
   }
 
-  .pc_resolution {
-    display: none;
-    ${mediaScreen.pc} {
-      display: block;
+  // pc 해상도에서만 display: none
+  .on_pc_resolution {
+    ${customMediaQuery(PC_RESOLUTION)} {
+      display: none;
     }
   }
 
-  .tablet_resolution {
-    display: none;
-    ${mediaScreen.tablet} {
-      display: block;
+  // tablet 해상도에서부터 display: none
+  .on_tablet_resolution {
+    ${customMediaQuery(TABLET_RESOLUTION)} {
+      display: none;
     }
   }
 
-  .phone_resolution {
-    display: none;
-    ${mediaScreen.phone} {
-      display: block;
+  // phone 해상도에서부터 display: none
+  .on_phone_resolution {
+    ${customMediaQuery(PHONE_RESOLUTION)} {
+      display: none;
     }
   }
 

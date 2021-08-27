@@ -11,6 +11,11 @@ export const ProductInfo = styled.div`
   gap: 3rem;
   color: ${({ theme }) => theme.color['text-color']};
   margin-bottom: 5rem;
+
+  ${({ theme }) =>
+    theme.mediaScreen.tablet`
+      flex-direction: column;
+    `}
 `;
 
 export const ProductThumbnailArea = styled.div`
@@ -19,6 +24,16 @@ export const ProductThumbnailArea = styled.div`
   gap: 2rem;
   flex-direction: column;
   position: relative;
+
+  ${({ theme }) =>
+    theme.mediaScreen.btw_pc_tab`
+      width: 50%;
+    `}
+
+  ${({ theme }) =>
+    theme.mediaScreen.tablet`
+      width: 100%;
+    `}
 `;
 
 export const ProductThumbnail = styled.img`
@@ -45,6 +60,11 @@ export const ProductPreviewThumbnail = styled.img`
   &:hover {
     opacity: 1;
   }
+
+  ${({ theme }) =>
+    theme.mediaScreen.btw_pc_tab`
+      max-width: 15rem;
+    `}
 `;
 
 export const ProductLenseSelector = styled.div`
@@ -75,6 +95,16 @@ export const ProductOrder = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 3rem;
+
+  ${({ theme }) =>
+    theme.mediaScreen.btw_pc_tab`
+      width: 50%;
+    `}
+
+  ${({ theme }) =>
+    theme.mediaScreen.tablet`
+      width: 100%;
+    `}
 `;
 
 export const ProductDetailArea = styled.div`
@@ -113,14 +143,26 @@ export const ProductDetail = styled.div`
 
 export const OrderBar = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 2rem;
   padding: 2rem;
   background-color: ${({ theme }) => theme.color.background};
 
   .product-name {
+    flex: 1;
+    line-height: 2.2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     ${({ theme }) => theme.fontSize.m};
     ${({ theme }) => theme.fontWeight.s};
+  }
+
+  .small-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   .price {
@@ -152,6 +194,7 @@ export const ButtonArea = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 2rem;
+  z-index: 10;
 
   button {
     padding: 1.5rem 3rem;
@@ -177,6 +220,12 @@ export const ButtonArea = styled.div`
     &:hover {
       opacity: 0.75;
     }
+
+    ${({ theme }) =>
+      theme.mediaScreen.btw_pc_tab`
+        padding: 1.5rem 2.5rem;  
+        font-size: 1.8rem;
+    `}
   }
 `;
 
@@ -198,6 +247,7 @@ export const PanelWrapper = styled.div`
   ul {
     li.notice-item {
       margin-top: 1rem;
+      line-height: 2.2rem;
       list-style-type: disc;
       list-style-position: inside;
       text-indent: -2.3rem;
@@ -214,8 +264,20 @@ export const PanelWrapper = styled.div`
       border-bottom: 1px solid ${({ theme }) => theme.color.line};
 
       th {
-        ${({ theme }) => theme.fontWeight.l}
+        ${({ theme }) => theme.fontWeight.l};
         text-align: left;
+        padding: 1.5rem 0;
+        min-width: 7rem;
+
+        &.mobile-only {
+          ${({ theme }) => theme.mediaScreen.phone`
+            display: flex;
+            flex-direction: column;
+          `}
+        }
+      }
+
+      td {
         padding: 1.5rem 0;
       }
     }
@@ -291,6 +353,12 @@ export const LoadMoreImageButton = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.color.primary2};
   }
+
+  ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+    padding: 1.5rem 2rem;
+    font-size: 1.7rem;
+    border-radius: 1.5rem;
+  `}
 `;
 
 export const AlertArea = styled.div`
@@ -305,16 +373,26 @@ export const AlertArea = styled.div`
 
   .alert-message-wrapper {
     margin-left: 8rem;
+
+    ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+      margin-left: 4.5rem;
+    `}
   }
 `;
 
 export const AlertIcon = styled.p`
   position: absolute;
   top: 2rem;
+
   svg {
     width: 5rem;
     height: 5rem;
     fill: #fff;
+
+    ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+      width: 3rem;
+      height: 3rem;
+    `}
   }
 `;
 
@@ -328,6 +406,7 @@ export const AlertMessage = styled.p`
 
 export const AlertSmallMessage = styled.p`
   ${({ theme }) => theme.fontWeight.s};
+  line-height: 1.8rem;
   color: #fff;
   margin-top: 1rem;
 `;
@@ -338,10 +417,12 @@ export const RatingArea = styled.div`
   padding: 5rem;
   border-radius: 3rem;
   background-color: ${({ theme }) => theme.color.background};
+  box-shadow: ${({ theme }) => theme.boxShadow};
 
   .totalRates {
+    color: ${({ theme }) => theme.color.primary};
     ${({ theme }) => theme.fontSize.xxl};
-    ${({ theme }) => theme.fontWeight.l};
+    ${({ theme }) => theme.fontWeight.xl};
   }
 
   .ratings {
@@ -351,6 +432,16 @@ export const RatingArea = styled.div`
       transform: translate(50%, 50%) scale(2);
     }
   }
+
+  ${({ theme }) => theme.mediaScreen.tablet`
+    padding: 3.5rem;
+  `}
+
+  ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
+  `}
 `;
 
 export const StarRates = styled.div`
@@ -359,6 +450,11 @@ export const StarRates = styled.div`
   gap: 3rem;
   align-items: center;
   justify-content: center;
+
+  ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 3rem;
+  `}
 `;
 
 export const UserReviewArea = styled.div`
@@ -374,10 +470,10 @@ export const UserReviewArea = styled.div`
 export const UserReview = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: 3rem;
   padding: 2rem;
   flex: 1;
-  background-color: ${({ theme }) => theme.color.background};
+  border-top: 1px solid ${({ theme }) => theme.color['border-gray']};
+  border-bottom: 1px solid ${({ theme }) => theme.color['border-gray']};
 
   & + & {
     margin-top: 3rem;
@@ -400,6 +496,7 @@ export const ReviewImages = styled.div`
   display: flex;
   gap: 2rem;
   margin: 2rem 0;
+  overflow-x: auto;
 
   img {
     width: 20rem;
@@ -411,17 +508,29 @@ export const ReviewImages = styled.div`
     &:hover {
       opacity: 0.75;
     }
+
+    ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+      width: 15rem;
+      height: 10rem;
+    `}
   }
 `;
 
 export const UserDescription = styled.div`
-  padding: 2rem 0;
+  margin-top: 1rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: ${({ theme }) => theme.color.body2};
 `;
 
 export const TopArea = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  button {
+    font-size: 1.4rem;
+  }
 `;
 
 export const PreparingWrapper = styled.div`
@@ -441,6 +550,18 @@ export const PreparingText = styled.p`
   font-family: 'BMDOHYEON';
   ${({ theme }) => theme.fontSize.l};
   ${({ theme }) => theme.fontWeight.l};
+`;
+
+export const NoDataText = styled(PreparingText)`
+  height: 10rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${({ theme }) => theme.mediaScreen.phone`
+    font-size: 1.75rem;
+  `}
 `;
 
 export const LoadingWrapper = styled.div`

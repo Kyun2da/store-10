@@ -20,7 +20,10 @@ const ProductExchange = () => {
       <table className="custom-table">
         <tbody>
           <tr>
-            <th>교환/반품배송비 </th>
+            <th className="mobile-only">
+              <span>교환/반품</span>
+              <span>배송비</span>
+            </th>
             <td>5,000원 (단순변심의 경우)</td>
           </tr>
           <tr>

@@ -20,7 +20,7 @@ import {
   useGetBookmarkIds,
 } from '@/hooks/queries/bookmark';
 import { ResponseError } from '@/components/Shared/Error';
-import ProductInfoSkeleton from '@/components/Skeleton/ProductInfoSkeleton';
+import { InfoSkeleton } from '@/components/Skeleton/ProductSkeleton';
 import { ShoppingCartModal } from '@/components/Shared/Modal';
 import useModal from '@/hooks/useModal';
 
@@ -72,7 +72,7 @@ const ProductInfo = () => {
   }
 
   if (isLoading || !data) {
-    return <ProductInfoSkeleton />;
+    return <InfoSkeleton />;
   }
 
   const { details, thumbnails } = data;
@@ -114,16 +114,18 @@ const ProductInfo = () => {
 
         <S.OrderBar>
           <p className="product-name">{title}</p>
-          <NumberInput
-            type="number"
-            name="price-count"
-            min={1}
-            handleOnChnage={handleOnChnage}
-            value={value}
-            handleClickOnMinus={handleClickOnMinus}
-            handleClickOnPlus={handleClickOnPlus}
-          />
-          <p className="price">{wonFormat(realPrice)}</p>
+          <div className="small-wrapper">
+            <NumberInput
+              type="number"
+              name="price-count"
+              min={1}
+              handleOnChnage={handleOnChnage}
+              value={value}
+              handleClickOnMinus={handleClickOnMinus}
+              handleClickOnPlus={handleClickOnPlus}
+            />
+            <p className="price">{wonFormat(realPrice)}</p>
+          </div>
         </S.OrderBar>
 
         <S.Divider />

@@ -7,6 +7,10 @@ interface IChartBar {
 export const RatingChart = styled.div`
   display: flex;
   gap: 1rem;
+
+  ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+    height: 12rem;
+  `}
 `;
 
 export const ChartBar = styled.div<IChartBar>`

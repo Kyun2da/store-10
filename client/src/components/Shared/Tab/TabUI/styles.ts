@@ -21,12 +21,15 @@ export const NavWrapper = styled.nav<TabTitleAreaProps>`
 export const TabTitleArea = styled.div`
   padding: auto;
   width: 100%;
-  max-width: 1050px;
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: ${({ theme }) => theme.color['text-color']};
+
+  &.container {
+    margin: auto;
+  }
 `;
 
 export const TabTitle = styled.span`
@@ -45,13 +48,16 @@ export const TabTitle = styled.span`
     ${({ theme }) => theme.fontWeight.l};
     background-color: ${({ theme }) => theme.color.body};
   }
+
+  ${({ theme }) =>
+    theme.mediaScreen.phone`
+      font-size :1.4rem;
+      padding: 1.5rem 1rem;
+    `}
 `;
 
 export const TabPanel = styled.div`
-  margin: auto;
-  margin-bottom: 5rem;
-  width: 100%;
-  max-width: ${({ theme }) => theme.media.pc}px;
+  width: 88vw;
   ${({ theme }) => theme.fontSize.m}
   ${({ theme }) => theme.fontWeight.s}
 

@@ -24,6 +24,11 @@ export const ModalBody = styled.div`
       margin-top: 1.2rem;
     }
   }
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ModalButtonArea = styled.div`

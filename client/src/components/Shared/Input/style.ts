@@ -222,6 +222,11 @@ export const FileInputButton = styled.div`
 
   svg {
     fill: #adadad;
+
+    ${({ theme }) => theme.mediaScreen.tablet`
+      width: 7rem;
+      height: 7rem;
+    `}
   }
 `;
 
@@ -232,8 +237,8 @@ export const PreviewWrapper = styled.div`
 
   img {
     object-fit: cover;
-    width: 20rem;
-    height: 15rem;
+    width: 100%;
+    height: 100%;
     border-radius: 2rem;
   }
 `;
@@ -251,6 +256,14 @@ export const TextareaWrapper = styled.div`
 
 export const ImageWrapper = styled.div`
   position: relative;
+  width: 20rem;
+  height: 15rem;
+  max-width: 30%;
+
+  ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+    width: 30%;
+    height: 10rem;
+  `}
 `;
 
 export const CloseButton = styled.button`

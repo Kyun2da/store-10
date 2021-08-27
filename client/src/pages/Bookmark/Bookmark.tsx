@@ -100,7 +100,6 @@ const Bookmark = () => {
     !isEdit && checkedList.length === data?.pages.flat().length;
 
   const onChangeAllCheck = () => {
-    console.log(isAllchecked);
     if (isAllchecked) {
       setCheckedList([]);
     } else {

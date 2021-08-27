@@ -69,18 +69,27 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::-webkit-scrollbar {
-    width: 0.5rem;
-    height: 0.5rem;
-  }
- 
-  ::-webkit-scrollbar-thumb {
-    background: #666; 
-    border-radius: 1rem;
+    background-color: #fff;
+    width: 1.6rem;
   }
 
   ::-webkit-scrollbar-track {
-    background: #ddd; 
-    border-radius: 1rem;
+    background-color: #fff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 1.6rem;
+    border: 0.4rem solid #fff;
+
+    &:hover {
+      background-color:#a0a0a5;
+      border: 0.4rem solid #f4f4f4
+    }
+  }
+
+  ::-webkit-scrollbar-button {
+    display:none;
   }
 
   html, body {
@@ -112,7 +121,8 @@ const GlobalStyle = createGlobalStyle`
     max-width: ${PC_RESOLUTION}px;
     margin: 5rem auto;
     padding: 0 3rem;
-    box-sizing: content-box;
+    width: 100%;
+    box-sizing: border-box;
     flex: 1;
 
     ${screen.tablet} {

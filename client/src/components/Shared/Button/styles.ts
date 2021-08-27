@@ -66,14 +66,14 @@ export const Button = styled.button<IButtonProps>`
       `;
     } else if (color === 'white') {
       return css`
-        color: black;
+        color: ${({ theme }) => theme.color['text-color']};
         border: 1px solid black;
-        background-color: white;
+        background-color: ${({ theme }) => theme.color['reverse-text-color']};
         &:hover {
-          background-color: #ececec;
+          background-color: ${({ theme }) => theme.color.hover};
         }
         &:active {
-          background-color: #ececec;
+          background-color: ${({ theme }) => theme.color.hover};
         }
       `;
     } else if (color === 'red') {

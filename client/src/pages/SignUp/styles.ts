@@ -7,9 +7,38 @@ export const SignUpContainer = styled.div`
   flex-direction: column;
   text-align: center;
   margin: auto;
+  padding-top: 5rem;
 
   h2 {
     margin-bottom: 5rem;
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    width: 260px;
+
+    h2 {
+      ${({ theme }) => theme.fontSize.l}
+    }
+
+    button {
+      height: 3rem;
+      ${({ theme }) => theme.fontSize.s}
+      margin-bottom: 1rem;
+    }
+
+    input {
+      ${({ theme }) => theme.fontSize.s}
+      height: 3rem;
+    }
+
+    label {
+      ${({ theme }) => theme.fontSize.xs}
+      line-height: 0.5rem;
+
+      &.focusing {
+        transform: translate(6px, -12px) scale(0.75);
+      }
+    }
   }
 `;
 

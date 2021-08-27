@@ -47,6 +47,7 @@ export const lightMode: DefaultTheme = {
   name: 'light-mode',
   color: {
     'text-color': '#1e2222',
+    'reverse-text-color': '#fcfcfc',
     'body': 'white',
     'body2': '#fafafa',
     'footer': '#fbfbfb',
@@ -62,6 +63,7 @@ export const lightMode: DefaultTheme = {
     'best': '#FF0033',
     'error': '#f45452',
     'border-gray': 'rgb(238, 238, 238)',
+    'hover': '#ececec',
   },
   fontSize,
   fontWeight,
@@ -76,6 +78,7 @@ export const darkMode: DefaultTheme = {
   name: 'dark-mode',
   color: {
     'text-color': '#fcfcfc',
+    'reverse-text-color': '#1e2222',
     'body': '#3c3e3e',
     'body2': '#353535',
     'footer': '#252525',
@@ -91,6 +94,7 @@ export const darkMode: DefaultTheme = {
     'best': '#FF0033',
     'error': '#f45452',
     'border-gray': '#5d5d5d',
+    'hover': 'black',
   },
   fontSize,
   fontWeight,

@@ -14,7 +14,9 @@ const customMediaQuery = (screen: number) =>
 
 const screen = {
   pc: customMediaQuery(PC_RESOLUTION), // 1050px 해상도 위에서만 디스플레이
+  btw_pc_tab: customMediaQuery(BTW_PC_AND_TAB_RESOLUTION), // 900px 해상도 위에서만 디스플레이
   tablet: customMediaQuery(TABLET_RESOLUTION), // 768px 해상도 위에서만 디스플레이
+  btw_tab_mob: customMediaQuery(BTW_TAB_AND_MOBILE_RESOLUTION), // 595px 해상도 위에서만 디스플레이
   phone: customMediaQuery(PHONE_RESOLUTION), // 425px 해상도 위에서만 디스플레이
 };
 
@@ -53,7 +55,9 @@ export const mediaScreen = {
 
 export const media = {
   pc: PC_RESOLUTION,
+  btw_pc_tab: BTW_PC_AND_TAB_RESOLUTION,
   tablet: TABLET_RESOLUTION,
+  btw_tab_mob: BTW_TAB_AND_MOBILE_RESOLUTION,
   phone: PHONE_RESOLUTION,
   headerSearch: HEADER_SEARCH_RESOLUTION,
 };

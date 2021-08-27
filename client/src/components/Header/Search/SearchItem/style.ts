@@ -21,7 +21,7 @@ export const SearchItem = styled.div`
 
 export const SearchItemWrapper = styled(CardWrapper)`
   margin-bottom: 2rem;
-  padding: 0.5rem;
+  padding: 0.3rem;
   &:after {
     content: '';
     grid-column: 1 / -1;

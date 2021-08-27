@@ -438,7 +438,9 @@ export const RatingArea = styled.div`
   `}
 
   ${({ theme }) => theme.mediaScreen.btw_tab_mob`
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
   `}
 `;
 
@@ -448,6 +450,11 @@ export const StarRates = styled.div`
   gap: 3rem;
   align-items: center;
   justify-content: center;
+
+  ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 3rem;
+  `}
 `;
 
 export const UserReviewArea = styled.div`
@@ -543,6 +550,18 @@ export const PreparingText = styled.p`
   font-family: 'BMDOHYEON';
   ${({ theme }) => theme.fontSize.l};
   ${({ theme }) => theme.fontWeight.l};
+`;
+
+export const NoDataText = styled(PreparingText)`
+  height: 10rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${({ theme }) => theme.mediaScreen.phone`
+    font-size: 1.75rem;
+  `}
 `;
 
 export const LoadingWrapper = styled.div`

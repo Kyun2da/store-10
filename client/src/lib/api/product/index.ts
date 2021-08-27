@@ -53,7 +53,9 @@ export const getProductSelectedQuestion = async (id: number) => {
 };
 
 export const getRecommandProducts = async () => {
-  return await client.get<IProduct[]>(`/product/recommand?limit=${MAIN_IMAGE_LIMIT}`);
+  return await client.get<IProduct[]>(
+    `/product/recommand?limit=${MAIN_IMAGE_LIMIT}`
+  );
 };
 
 export const getRecentProducts = async () => {
@@ -61,7 +63,9 @@ export const getRecentProducts = async () => {
 };
 
 export const getBestProducts = async () => {
-  return await client.get<IProduct[]>(`/product/best?limit=${MAIN_IMAGE_LIMIT}`);
+  return await client.get<IProduct[]>(
+    `/product/best?limit=${MAIN_IMAGE_LIMIT}`
+  );
 };
 
 export const getElasticProducts = async (searchString: string) => {
@@ -88,10 +92,10 @@ export const getCategoryProducts = async ({
     orderType: 'createdAt',
   },
 }) => {
-  return await client.get<
-    IProduct[]
-  >(`/product/category?subCategoryId=${pageParam.subCateogry}&start=${pageParam.start}&
-  orderType=${pageParam.orderType}`);
+  console.log(pageParam);
+  return await client.get<IProduct[]>(
+    `/product/category?subCategoryId=${pageParam.subCateogry}&start=${pageParam.start}&orderType=${pageParam.orderType}`
+  );
 };
 
 export const postProductReview = async (data: IReview) => {

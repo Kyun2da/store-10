@@ -42,10 +42,7 @@ class ProductRepository extends Repository<Product> {
     });
   }
 
-  getProductsByTitle({
-    searchText,
-    start,
-  }: Record<string, string>) {
+  getProductsByTitle({ searchText, start }: Record<string, string>) {
     return this.createQueryBuilder('product')
       .orderBy('product.createdAt', 'DESC')
       .limit(20)
@@ -99,8 +96,9 @@ class ProductRepository extends Repository<Product> {
     start,
     orderType,
   }: ICategoryProductParams) {
+    const [type, order] = orderType.split(' ');
     return this.createQueryBuilder('product')
-      .orderBy('product.' + orderType, 'DESC')
+      .orderBy('product.' + type, order == 'DESC' ? 'DESC' : 'ASC')
       .limit(20)
       .offset(start)
       .innerJoinAndSelect('product.productImage', 'productImage')

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 export const CategoryWrapper = styled.div`
   max-width: ${({ theme }) => theme.media.pc}px;
   width: 95%;
-  max-width: 1050px;
   margin: 0 auto;
 `;
 
@@ -46,9 +45,11 @@ export const SubCategoriesTitles = styled.div`
   span {
     margin-right: 1rem;
     cursor: pointer;
+    color: ${({ theme }) => theme.color['text-color']};
 
     &.selected {
       color: ${({ theme }) => theme.color.primary};
+      ${({ theme }) => theme.fontWeight.xl};
     }
 
     &:after {
@@ -56,8 +57,12 @@ export const SubCategoriesTitles = styled.div`
       color: ${({ theme }) => theme.color['text-color']};
       margin-left: 1rem;
     }
-    &:last-child::after {
-      display: none;
+
+    &:nth-last-child(2)::after,
+    &:nth-last-child(1)::after,
+    &:first-child::after {
+      content: '';
+      margin: 0;
     }
   }
 `;
@@ -71,4 +76,40 @@ export const SubCategoriesWrap = styled.div`
   z-index: 500;
   ${({ theme }) => theme.fontSize.m};
   width: 100%;
+
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    ${({ theme }) => theme.fontSize.s};
+  }
+`;
+
+export const VerticalScroll = styled.span`
+  position: sticky;
+  display: flex;
+  padding: 1px;
+  align-items: center;
+  margin: 0;
+  padding: 0 1rem;
+  cursor: pointer;
+  background: ${({ theme }) => theme.color.background};
+
+  svg {
+    width: 1rem;
+    stroke-width: 50px;
+    fill: ${({ theme }) => theme.color['text-color']};
+    stroke: ${({ theme }) => theme.color['text-color']};
+  }
+
+  &.left {
+    left: 0;
+    padding-top: 2px;
+  }
+
+  &.right {
+    right: -1px;
+    margin-left: auto;
+
+    svg {
+      transform: rotateY(180deg);
+    }
+  }
 `;

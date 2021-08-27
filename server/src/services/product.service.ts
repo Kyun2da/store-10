@@ -237,7 +237,7 @@ class ProductService {
   async getCategoryProducts({
     subCategoryId,
     start = 0,
-    orderType = 'createdAt',
+    orderType,
   }: ICategoryProductParams) {
     const getCategoryProducts = await ProductRepository().getCategoryProducts({
       subCategoryId,

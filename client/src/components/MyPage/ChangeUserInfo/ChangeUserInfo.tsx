@@ -104,6 +104,7 @@ const ChangeUserInfo = () => {
               label="Outlined"
               name="nickname"
               labelName="이름"
+              maxLength={8}
               value={nickname}
               onChange={onChangeNickName}
             />

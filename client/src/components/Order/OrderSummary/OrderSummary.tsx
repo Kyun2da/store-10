@@ -18,6 +18,8 @@ interface IProps {
   couponDiscount?: number;
 }
 
+const DELIVERY_DISCOUNT_CONDITION = 30000;
+
 const OrderSummary = ({
   totalPrice,
   totalProductsDiscount,
@@ -29,8 +31,8 @@ const OrderSummary = ({
   couponDiscount,
 }: IProps) => {
   const [agree, setAgree] = useState(false);
-  const discountCondition = 30000;
-  const discountDeliveryFee = totalPrice > discountCondition ? 2500 : 0;
+  const discountDeliveryFee =
+    totalPrice > DELIVERY_DISCOUNT_CONDITION ? 2500 : 0;
   const { mutate } = useDeleteCart();
   const couponDiscountAmount =
     totalPrice -
@@ -44,7 +46,7 @@ const OrderSummary = ({
     deliveryFee -
     totalProductsDiscount -
     couponDiscountAmount -
-    deliveryFee;
+    discountDeliveryFee;
   return (
     <S.OrderSummaryWrapper>
       <S.OrderSummary>
@@ -65,7 +67,7 @@ const OrderSummary = ({
             {deliveryFee > 0 ? '+' : ''} {wonFormat(deliveryFee)}
           </dd>
         </S.OrderSummaryRow>
-        {totalPrice > discountCondition && (
+        {totalPrice > DELIVERY_DISCOUNT_CONDITION && (
           <S.OrderSummaryRow>
             <dt>배송비 할인</dt>
             <dd className="red">- {wonFormat(discountDeliveryFee)}</dd>

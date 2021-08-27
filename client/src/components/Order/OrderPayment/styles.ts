@@ -17,7 +17,8 @@ export const Payment = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${({ theme }) => theme.color['off-white']};
+  background: ${({ theme }) => theme.color['body']};
+  color: ${({ theme }) => theme.color['text-color']};
   ${({ theme }) => theme.fontWeight.xl};
   ${({ theme }) => theme.fontSize.xl};
   box-shadow: ${({ theme }) => theme.boxShadow};

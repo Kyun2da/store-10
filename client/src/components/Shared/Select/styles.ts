@@ -9,6 +9,8 @@ export const Select = styled.div`
     appearance: none;
     border: 1px solid ${({ theme }) => theme.color['border-gray']};
     border-radius: 0.8rem;
+    background-color: ${({ theme }) => theme.color['background']};
+    color: ${({ theme }) => theme.color['text-color']};
   }
   &:after {
     content: '▼';

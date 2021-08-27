@@ -41,6 +41,8 @@ declare module 'styled-components' {
       tablet: number;
       phone: number;
       headerSearch: number;
+      btw_pc_tab: number;
+      btw_tab_mob: number;
     };
     mediaScreen: {
       pc: (args: TemplateStringsArray) => FlattenSimpleInterpolation;

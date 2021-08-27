@@ -74,7 +74,7 @@ const OrderCoupon = ({ setSelectedCoupon, selectedCoupon }: IProps) => {
         </S.RegisterCoupon>
       </S.RegisterCouponWrapper>
       <S.CouponDisplay>
-        {(data || []).map((coupon) => {
+        {/* {(data || []).map((coupon) => {
           const isSelected = selectedCoupon === coupon;
           return (
             <S.CouponWrapper
@@ -90,7 +90,7 @@ const OrderCoupon = ({ setSelectedCoupon, selectedCoupon }: IProps) => {
               />
             </S.CouponWrapper>
           );
-        })}
+        })} */}
       </S.CouponDisplay>
     </S.OrderCoupon>
   );

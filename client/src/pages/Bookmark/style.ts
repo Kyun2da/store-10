@@ -3,13 +3,14 @@ import Title from '@/components/Shared/Title';
 import Button from '@/components/Shared/Button';
 import Checkbox from '@/components/Shared/Checkbox';
 import Thung from '@/components/Thung';
+import { Close2 } from '@/assets/svgs';
 
 export const BookmarkContainer = styled.div`
   max-width: ${({ theme }) => theme.media.pc}px;
   display: flex;
   flex-direction: column;
   max-width: 1050px;
-  width: 100%;
+  width: 95%;
   margin: 5rem auto;
 `;
 
@@ -52,13 +53,19 @@ export const AllCheckBox = styled(Checkbox)`
   font-family: Arial, Helvetica, sans-serif;
   padding: 0.5rem 1rem;
   border-radius: 4px;
+  color: ${({ theme }) => theme.color['text-color']};
+  background-color: ${({ theme }) => theme.color['reverse-text-color']};
 
   &:hover {
-    background-color: #ececec;
+    background-color: ${({ theme }) => theme.color.hover};
   }
 `;
 
 export const BookmarkThung = styled(Thung)`
   width: 40rem;
   margin: auto;
+`;
+
+export const BookmarkClose = styled(Close2)`
+  fill: ${({ theme }) => theme.color['text-color']};
 `;

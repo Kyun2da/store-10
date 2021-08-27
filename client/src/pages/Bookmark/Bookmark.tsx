@@ -168,7 +168,7 @@ const Bookmark = () => {
                 }}
               >
                 취소
-                <Close2 width="2.5rem" height="2.5rem" />
+                <S.BookmarkClose width="2.5rem" height="2.5rem" />
               </S.EditButton>
             </>
           )

@@ -93,10 +93,10 @@ const OrderSummary = ({
           />
           <S.OrderAgreementWrapper>
             <S.OrderAgreement>
-              · 본인은 만 14세 이상이며, 주문 내용을 확인하였습니다.
+              ·본인은 만 14세 이상이며, 주문 내용을 확인하였습니다.
             </S.OrderAgreement>
             <S.OrderAgreement>
-              · 사실, 개인정보를 수집 및 이용하는 법을 모릅니다.
+              ·사실, 개인정보를 수집 및 이용하는 법을 모릅니다.
             </S.OrderAgreement>
           </S.OrderAgreementWrapper>
         </S.OrderSummaryFooter>

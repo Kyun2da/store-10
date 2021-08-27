@@ -18,6 +18,7 @@ export const OrderAddressHeader = styled(OrderInfoHeader)`
 
 export const AddressInfo = styled.div`
   padding: 1.2rem 0;
+  color: ${({ theme }) => theme.color['text-color']};
 `;
 
 const AddressInfoText = css`
@@ -59,6 +60,7 @@ export const AddressInput = styled(Input)`
   input {
     border: 1px solid ${({ theme }) => theme.color['border-gray']};
     ${({ theme }) => theme.fontSize.m};
+    color: ${({ theme }) => theme.color['text-color']};
   }
 `;
 

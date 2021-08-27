@@ -6,6 +6,7 @@ import CouponRepository from '@/repositories/coupon.repository';
 import jwtService from './jwt.service';
 
 interface ICouponJWT {
+  serial_number: string;
   coupon_id: number;
   iat: number;
 }
@@ -16,12 +17,13 @@ class UserService {
     const isUser = await userRepo.findUserById(user.user_id);
     const _user = isUser ? { ...isUser, ...user } : user;
     const createdUser = await userRepo.createUser(_user);
-
     const userCouponRepo = UserCouponRepository();
+
     await userCouponRepo.createUserCoupon({
       user_id: createdUser.id,
       coupon_id: 1,
       is_valid: true,
+      serial_number: `1-${new Date().getTime()}`,
     });
 
     return createdUser;
@@ -92,6 +94,14 @@ class UserService {
     if (!coupon) {
       return null;
     }
+    console.log(coupon.serial_number);
+    const isAlreadyRegistered = await userCouponRepo.getUserCoupon({
+      serial_number: coupon.serial_number,
+    });
+    console.log(isAlreadyRegistered);
+    if (isAlreadyRegistered) {
+      return null;
+    }
 
     const isCouponExist = await couponRepo.getCoupon(coupon.coupon_id);
     if (!isCouponExist) {
@@ -102,6 +112,7 @@ class UserService {
       user_id,
       coupon_id: coupon.coupon_id,
       is_valid: true,
+      serial_number: coupon.serial_number,
     });
   }
 }

@@ -15,7 +15,16 @@ class UserService {
     const userRepo = UserRepository();
     const isUser = await userRepo.findUserById(user.user_id);
     const _user = isUser ? { ...isUser, ...user } : user;
-    return await userRepo.createUser(_user);
+    const createdUser = await userRepo.createUser(_user);
+
+    const userCouponRepo = UserCouponRepository();
+    await userCouponRepo.createUserCoupon({
+      user_id: createdUser.id,
+      coupon_id: 1,
+      is_valid: true,
+    });
+
+    return createdUser;
   }
 
   async changeNickName(user: User, newNickName: string) {

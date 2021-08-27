@@ -7,6 +7,7 @@ export const Checkbox = styled.label`
   user-select: none;
   align-items: center;
   ${({ theme }) => theme.fontSize.m};
+  color: ${({ theme }) => theme.color['text-color']};
 
   input {
     position: absolute;

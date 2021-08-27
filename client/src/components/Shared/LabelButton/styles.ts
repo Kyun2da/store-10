@@ -6,7 +6,7 @@ export const LabelButton = styled.button`
   border: none;
   outline: none;
   ${({ theme }) => theme.fontSize.m};
-
+  color: ${({ theme }) => theme.color['text-color']};
   &:hover {
     opacity: ${({ disabled }) => (disabled ? 'none' : '0.4')};
   }

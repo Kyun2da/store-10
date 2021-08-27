@@ -11,7 +11,8 @@ export const ShoppingCartItem = styled.li`
   align-items: center;
   width: 100%;
   padding: 0 1rem;
-  background: ${({ theme }) => theme.color['off-white']};
+  /* background: ${({ theme }) => theme.color['off-white']}; */
+  background-color: ${({ theme }) => theme.color.body};
   &:not(:first-child) {
     margin-top: 1rem;
   }
@@ -61,6 +62,7 @@ export const TotalPrice = styled.div`
   justify-content: space-between;
   align-items: center;
   > span {
+    color: ${({ theme }) => theme.color['text-color']};
     ${({ theme }) => theme.fontWeight.l};
     ${({ theme }) => theme.fontSize.m};
     @media (max-width: ${({ theme }) => theme.media.phone}px) {
@@ -71,6 +73,7 @@ export const TotalPrice = styled.div`
 
 export const ItemInfoName = styled.span`
   ${({ theme }) => theme.fontSize.m};
+  color: ${({ theme }) => theme.color['text-color']};
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -106,6 +109,9 @@ export const CloseButton = styled.button`
   height: 4rem;
   &:hover {
     opacity: 0.4;
+  }
+  svg {
+    stroke: ${({ theme }) => theme.color['text-color']};
   }
 `;
 

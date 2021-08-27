@@ -48,7 +48,9 @@ const Textarea = ({
         onFocus={onFocus}
         {...attributes}
       />
-      {error && <S.ErrorMessage>{helpertext}</S.ErrorMessage>}
+      {error && (
+        <S.ErrorMessage className="error-text">{helpertext}</S.ErrorMessage>
+      )}
     </S.TextareaWrapper>
   );
 };

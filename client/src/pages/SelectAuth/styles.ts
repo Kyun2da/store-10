@@ -1,3 +1,4 @@
+import { GitHubSVG } from '@/assets/svgs';
 import styled from 'styled-components';
 
 export const SelectAuthContainer = styled.div`
@@ -8,14 +9,49 @@ export const SelectAuthContainer = styled.div`
   margin: auto;
 
   h3,
-  h4,
-  h5,
+  p,
   button {
     margin-bottom: 2rem;
   }
 
   button {
     height: 6rem;
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
+    width: 260px;
+
+    h3 {
+      ${({ theme }) => theme.fontSize.l}
+    }
+
+    button {
+      height: 3rem;
+      ${({ theme }) => theme.fontSize.s}
+      margin-bottom: 1rem;
+    }
+
+    input {
+      ${({ theme }) => theme.fontSize.s}
+      height: 3rem;
+    }
+  }
+`;
+
+export const Welcome = styled.p`
+  font-size: 3rem;
+  color: ${({ theme }) => theme.color['text-color']};
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
+    ${({ theme }) => theme.fontSize.m}
+  }
+`;
+
+export const Info = styled.p`
+  font-size: 2rem;
+  color: ${({ theme }) => theme.color['text-color']};
+
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
+    ${({ theme }) => theme.fontSize.xs}
   }
 `;
 
@@ -26,5 +62,17 @@ export const BackLoginContainer = styled.div`
   a {
     margin-left: 1rem;
     color: ${({ theme }) => theme.color['text-color']};
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
+    ${({ theme }) => theme.fontSize.xs}
+  }
+`;
+
+export const GithubIcon = styled(GitHubSVG)`
+  margin-right: 1rem;
+
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
+    width: 2rem;
   }
 `;

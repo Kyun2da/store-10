@@ -25,12 +25,5 @@ export const useGetOrders = (year: number | null) => {
 };
 
 export const useUpdateOrder = () => {
-  const queryClient = useQueryClient();
-  const { historyPush } = useHistory();
-  return useMutation(updateOrder, {
-    onSuccess(data) {
-      queryClient.removeQueries(['order', +data.id]);
-      historyPush(`/order/${data.id}/paid`);
-    },
-  });
+  return useMutation(updateOrder, {});
 };

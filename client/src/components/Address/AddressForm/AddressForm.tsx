@@ -121,7 +121,7 @@ const AddressForm = ({
       setOpenForm(false);
       if (address?.id === addressToModify.id) {
         selectAddress({ ...inputs, phone: `${phonePrefix}-${inputs.phone}` });
-      } else if (address?.isDefault && !addressToModify.isDefault) {
+      } else if (address?.isDefault && inputs.isDefault) {
         selectAddress({ ...address, isDefault: false });
       }
     } else {
@@ -129,7 +129,7 @@ const AddressForm = ({
         ...inputs,
         phone: `${phonePrefix}-${inputs.phone}`,
       });
-
+      selectAddress({ ...inputs, phone: `${phonePrefix}-${inputs.phone}` });
       toggleModal();
     }
   };

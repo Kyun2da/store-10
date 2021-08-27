@@ -20,6 +20,39 @@ export const ApprovalContainer = styled.div`
   button {
     margin: 0 2rem;
   }
+
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
+    width: 260px;
+
+    h2 {
+      ${({ theme }) => theme.fontSize.l}
+    }
+
+    button {
+      height: 3rem;
+      ${({ theme }) => theme.fontSize.s}
+      margin-bottom: 1rem;
+    }
+
+    input {
+      ${({ theme }) => theme.fontSize.s}
+      height: 3rem;
+    }
+
+    label {
+      ${({ theme }) => theme.fontSize.xs}
+    }
+
+    span {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    button.white {
+      color: ${({ theme }) => theme.color['text-color']};
+      background-color: ${({ theme }) => theme.color['reverse-text-color']};
+    }
+  }
 `;
 
 export const ApprovalCheckBox = styled(Checkbox)`
@@ -27,7 +60,7 @@ export const ApprovalCheckBox = styled(Checkbox)`
 `;
 
 export const ApprovalBox = styled.div`
-  color: ${({ theme }) => theme.color['text-color']};
+  color: black;
   text-align: initial;
   margin-bottom: 2rem;
   padding: 1rem 2rem;

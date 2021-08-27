@@ -6,6 +6,7 @@ import Title from '@/components/Shared/Title';
 import Checkbox from '@/components/Shared/Checkbox';
 import { useDeleteCart } from '@/hooks/queries/cart';
 import { IAddress, IOrder } from '@/types';
+import { DELIVERY_DISCOUNT_CONDITION } from '@/contstants';
 
 interface IProps {
   totalPrice: number;
@@ -29,8 +30,8 @@ const OrderSummary = ({
   couponDiscount,
 }: IProps) => {
   const [agree, setAgree] = useState(false);
-  const discountCondition = 30000;
-  const discountDeliveryFee = totalPrice > discountCondition ? 2500 : 0;
+  const discountDeliveryFee =
+    totalPrice > DELIVERY_DISCOUNT_CONDITION ? 2500 : 0;
   const { mutate } = useDeleteCart();
   const couponDiscountAmount =
     totalPrice -
@@ -44,7 +45,7 @@ const OrderSummary = ({
     deliveryFee -
     totalProductsDiscount -
     couponDiscountAmount -
-    deliveryFee;
+    discountDeliveryFee;
   return (
     <S.OrderSummaryWrapper>
       <S.OrderSummary>
@@ -53,7 +54,7 @@ const OrderSummary = ({
           <dt>총 상품금액</dt>
           <dd>{wonFormat(totalPrice)}</dd>
         </S.OrderSummaryRow>
-        {totalProductsDiscount && (
+        {!!totalProductsDiscount && (
           <S.OrderSummaryRow>
             <dt>총 상품 할인</dt>
             <dd className="red">- {wonFormat(totalProductsDiscount)}</dd>
@@ -65,7 +66,7 @@ const OrderSummary = ({
             {deliveryFee > 0 ? '+' : ''} {wonFormat(deliveryFee)}
           </dd>
         </S.OrderSummaryRow>
-        {totalPrice > discountCondition && (
+        {totalPrice > DELIVERY_DISCOUNT_CONDITION && (
           <S.OrderSummaryRow>
             <dt>배송비 할인</dt>
             <dd className="red">- {wonFormat(discountDeliveryFee)}</dd>

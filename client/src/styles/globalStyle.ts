@@ -47,7 +47,9 @@ export const mediaScreen = {
 
 export const media = {
   pc: PC_RESOLUTION,
+  btw_pc_tab: BTW_PC_AND_TAB_RESOLUTION,
   tablet: TABLET_RESOLUTION,
+  btw_tab_mob: BTW_TAB_AND_MOBILE_RESOLUTION,
   phone: PHONE_RESOLUTION,
   headerSearch: HEADER_SEARCH_RESOLUTION,
 };

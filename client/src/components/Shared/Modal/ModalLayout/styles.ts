@@ -41,6 +41,7 @@ export const ModalWrapper = styled.div<IModalWrapperProps>`
   width: ${(props) => props.width || '65%'};
   height: ${(props) => props.height};
   max-height: 96%;
+  background-color: ${({ theme }) => theme.color.body};
 
   ${({ theme }) => theme.mediaScreen.tablet`
     width: 85%;
@@ -100,5 +101,9 @@ export const ModalCloseButton = styled.button`
 
   &:hover {
     opacity: 0.75;
+  }
+
+  svg {
+    stroke: ${({ theme }) => theme.color['text-color']};
   }
 `;

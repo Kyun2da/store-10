@@ -8,6 +8,7 @@ export const ModalWrapper = styled(ModalLayout)`
 export const ModalHeader = styled.div`
   ${({ theme }) => theme.fontSize.l};
   ${({ theme }) => theme.fontWeight.l};
+  color: ${({ theme }) => theme.color['text-color']};
 `;
 
 export const ModalDivider = styled.div`

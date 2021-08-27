@@ -8,13 +8,16 @@ import OrderCoupon from '@/components/Order/OrderCoupon';
 import OrderPayment from '@/components/Order/OrderPayment';
 import { useParams, Redirect } from '@/lib/Router';
 import { useGetOrder, useUpdateOrder } from '@/hooks/queries/order';
-import { IAddress, IOrder } from '@/types';
+import { IAddress, IOrder, IUserCoupon } from '@/types';
 import { calculateDiscount } from '@/utils/helper';
 
 const Order = () => {
   const { id } = useParams().params;
   const { data, isLoading, isError } = useGetOrder(+id);
   const { mutate } = useUpdateOrder();
+  const [selectedCoupon, setSelectedCoupon] = useState<IUserCoupon | null>(
+    null
+  );
   const [updateDefaultAddress, setUpdateDefaultAddress] = useState(false);
   const [address, selectAddress] = useState<IAddress | null>(null);
   const [order, setOrder] = useState<Partial<IOrder>>({
@@ -27,7 +30,10 @@ const Order = () => {
 
   const updateOrder = () => {
     if (typeof order === 'object') {
-      mutate({ order, updateDefaultAddress });
+      mutate({
+        order: { ...order, user_coupon_id: selectedCoupon?.id || null },
+        updateDefaultAddress,
+      });
     }
   };
 
@@ -38,15 +44,15 @@ const Order = () => {
     ) || 0;
 
   const totalClount = data?.products?.length || 0;
-
-  const totalDiscount =
+  const totalProductsDiscount =
     data?.products.reduce((sum, product) => {
       return (
         sum +
-        calculateDiscount({
-          price: product.price,
-          discount: product.discount,
-        }) *
+        (product.price -
+          calculateDiscount({
+            price: product.price,
+            discount: product.discount,
+          })) *
           product.count
       );
     }, 0) || 0;
@@ -73,15 +79,18 @@ const Order = () => {
           selectAddress={selectAddress}
         />
         <OrderProducts products={data?.products} />
-        <OrderCoupon />
+        <OrderCoupon
+          selectedCoupon={selectedCoupon}
+          setSelectedCoupon={setSelectedCoupon}
+        />
         <OrderPayment setOrder={setOrder} order={order} />
       </S.Order>
       <S.OrderAside>
         <OrderSummary
           totalPrice={totalPrice}
-          totalDiscount={totalDiscount}
+          totalProductsDiscount={totalProductsDiscount}
           deliveryFee={2500}
-          discount={0}
+          couponDiscount={selectedCoupon?.amount || 0}
           productCount={totalClount}
           updateOrder={updateOrder}
           address={address}
@@ -92,9 +101,9 @@ const Order = () => {
       <S.OrderFooter>
         <OrderSummary
           totalPrice={totalPrice}
-          totalDiscount={totalDiscount}
+          totalProductsDiscount={totalProductsDiscount}
           deliveryFee={2500}
-          discount={0}
+          couponDiscount={selectedCoupon?.amount || 0}
           productCount={totalClount}
           updateOrder={updateOrder}
           address={address}

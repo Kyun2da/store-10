@@ -6,6 +6,7 @@ import CouponRepository from '@/repositories/coupon.repository';
 import jwtService from './jwt.service';
 
 interface ICouponJWT {
+  serial_number: string;
   coupon_id: number;
   iat: number;
 }
@@ -15,7 +16,17 @@ class UserService {
     const userRepo = UserRepository();
     const isUser = await userRepo.findUserById(user.user_id);
     const _user = isUser ? { ...isUser, ...user } : user;
-    return await userRepo.createUser(_user);
+    const createdUser = await userRepo.createUser(_user);
+    const userCouponRepo = UserCouponRepository();
+
+    await userCouponRepo.createUserCoupon({
+      user_id: createdUser.id,
+      coupon_id: 1,
+      is_valid: true,
+      serial_number: `1-${new Date().getTime()}`,
+    });
+
+    return createdUser;
   }
 
   async changeNickName(user: User, newNickName: string) {
@@ -37,11 +48,14 @@ class UserService {
     return null;
   }
 
-  async getCoupons(user_id: number) {
+  async getCoupons(user_id: number, is_valid?: boolean) {
     const userCouponRepo = UserCouponRepository();
     const couponRepo = CouponRepository();
 
-    const userCoupons = await userCouponRepo.getUserCoupons(user_id);
+    const userCoupons = await userCouponRepo.getUserCoupons({
+      user_id,
+      is_valid,
+    });
     const couponIds = userCoupons.map((userCoupon) => userCoupon.coupon_id);
     const coupons = await couponRepo.getCouponsByIds(couponIds);
 
@@ -81,6 +95,14 @@ class UserService {
       return null;
     }
 
+    const isAlreadyRegistered = await userCouponRepo.getUserCoupon({
+      serial_number: coupon.serial_number,
+    });
+
+    if (isAlreadyRegistered) {
+      return null;
+    }
+
     const isCouponExist = await couponRepo.getCoupon(coupon.coupon_id);
     if (!isCouponExist) {
       return null;
@@ -90,6 +112,7 @@ class UserService {
       user_id,
       coupon_id: coupon.coupon_id,
       is_valid: true,
+      serial_number: coupon.serial_number,
     });
   }
 }

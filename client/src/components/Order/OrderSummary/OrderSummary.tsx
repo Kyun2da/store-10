@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as S from './styles';
-import { wonFormat } from '@/utils/helper';
+import { wonFormat, calculateDiscount } from '@/utils/helper';
 import Button from '@/components/Shared/Button';
 import Title from '@/components/Shared/Title';
 import Checkbox from '@/components/Shared/Checkbox';
@@ -9,30 +9,42 @@ import { IAddress, IOrder } from '@/types';
 
 interface IProps {
   totalPrice: number;
-  totalDiscount: number;
+  totalProductsDiscount: number;
   deliveryFee: number;
-  discount: number;
   productCount: number;
   data: IOrder | undefined;
   address: IAddress | null;
   updateOrder: () => void;
+  couponDiscount?: number;
 }
 
 const OrderSummary = ({
   totalPrice,
-  totalDiscount,
+  totalProductsDiscount,
   deliveryFee,
-  discount,
   productCount,
   data,
   address,
   updateOrder,
+  couponDiscount,
 }: IProps) => {
   const [agree, setAgree] = useState(false);
   const discountCondition = 30000;
   const discountDeliveryFee = totalPrice > discountCondition ? 2500 : 0;
   const { mutate } = useDeleteCart();
-  const sum = totalPrice + deliveryFee - totalDiscount - discount - deliveryFee;
+  const couponDiscountAmount =
+    totalPrice -
+    calculateDiscount({
+      price: totalPrice,
+      discount: couponDiscount || 0,
+    });
+
+  const sum =
+    totalPrice +
+    deliveryFee -
+    totalProductsDiscount -
+    couponDiscountAmount -
+    deliveryFee;
   return (
     <S.OrderSummaryWrapper>
       <S.OrderSummary>
@@ -41,10 +53,10 @@ const OrderSummary = ({
           <dt>총 상품금액</dt>
           <dd>{wonFormat(totalPrice)}</dd>
         </S.OrderSummaryRow>
-        {totalDiscount && (
+        {totalProductsDiscount && (
           <S.OrderSummaryRow>
             <dt>총 상품 할인</dt>
-            <dd className="red">- {wonFormat(totalDiscount)}</dd>
+            <dd className="red">- {wonFormat(totalProductsDiscount)}</dd>
           </S.OrderSummaryRow>
         )}
         <S.OrderSummaryRow>
@@ -61,8 +73,9 @@ const OrderSummary = ({
         )}
         <S.OrderSummaryRow>
           <dt>쿠폰 사용</dt>
-          <dd className={discount > 0 ? 'red' : undefined}>
-            {discount > 0 ? '-' : ''} {wonFormat(discount)}
+          <dd className={couponDiscountAmount > 0 ? 'red' : undefined}>
+            {couponDiscountAmount > 0 ? '-' : ''}{' '}
+            {wonFormat(couponDiscountAmount)}
           </dd>
         </S.OrderSummaryRow>
         <S.Divider />

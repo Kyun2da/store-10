@@ -68,4 +68,7 @@ export class Order extends InitEntity {
 
   @Column({ nullable: true })
   payment_id: number;
+
+  @Column({ nullable: true })
+  user_coupon_id: number;
 }

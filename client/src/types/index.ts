@@ -208,6 +208,8 @@ export interface IOrder {
   createdAt: string;
   updatedAt: string;
   payment_id?: number | null;
+  userCoupon_id?: number | null;
+  user_coupon_id?: number | null;
 }
 
 export interface IOrderUpdate {

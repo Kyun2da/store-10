@@ -10,7 +10,10 @@ class AdminService {
       return null;
     }
 
-    return jwtService.generateCoupon({ coupon_id: coupon.id });
+    return jwtService.generateCoupon({
+      coupon_id: coupon.id,
+      serial_number: `${coupon.id}-${new Date().getTime()}`,
+    });
   }
 }
 

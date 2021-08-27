@@ -70,6 +70,8 @@ export const lightMode: DefaultTheme = {
   media,
   mediaScreen,
   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.1)',
+  headerBoxShadow:
+    '0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 4px rgba(0, 0, 0, 0.1)',
 };
 
 export const darkMode: DefaultTheme = {
@@ -100,4 +102,6 @@ export const darkMode: DefaultTheme = {
   mediaScreen,
   boxShadow:
     '0px 4px 4px rgba(30, 30, 30, 0.7), 0px 4px 20px rgba(30, 30, 30, 0.7)',
+  headerBoxShadow:
+    '0px 4px 4px rgba(200, 200, 200, 0.1), 0px 4px 4px rgba(200, 200, 200, 0.1)',
 };

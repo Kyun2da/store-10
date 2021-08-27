@@ -1,3 +1,4 @@
+import { HEADER_HEIGHT } from '@/styles/globalStyle';
 import styled from 'styled-components';
 
 interface TabTitleAreaProps {
@@ -15,7 +16,7 @@ export const NavWrapper = styled.nav<TabTitleAreaProps>`
   background-color: ${({ theme }) => theme.color.background};
   position: ${({ sticky }) => (sticky ? 'sticky' : 'relative')};
   z-index: 50;
-  top: 8rem; // 헤더 높이만큼 되어야 합니다 (추후 헤더 디자인 수정시 반영되어야 함)
+  top: ${HEADER_HEIGHT}rem; // 헤더 높이만큼 되어야 합니다 (추후 헤더 디자인 수정시 반영되어야 함)
 `;
 
 export const TabTitleArea = styled.div`

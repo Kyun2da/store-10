@@ -1,6 +1,7 @@
 import OrderRepository from '@/repositories/order.repository';
 import OrderProductRepository from '@/repositories/orderProduct.repository';
 import AddressRepository from '@/repositories/address.repository';
+import userService from './user.service';
 
 class OrderService {
   async createOrder({
@@ -83,6 +84,16 @@ class OrderService {
         is_default: updateDefaultAddress,
         id: order.address_id,
       });
+    }
+
+    if (order.user_coupon_id) {
+      const useCouponSuccess = await userService.useCoupon({
+        id: order.user_coupon_id,
+        user_id,
+      });
+      if (!useCouponSuccess) {
+        return null;
+      }
     }
 
     const orderRepo = OrderRepository();

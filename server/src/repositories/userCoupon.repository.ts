@@ -6,13 +6,20 @@ interface IUserCoupon {
   user_id: number;
   coupon_id: number;
   is_valid: boolean;
+  serial_number: string;
 }
 
 @EntityRepository(UserCoupon)
 class UserCouponRespository extends Repository<UserCoupon> {
-  async getUserCoupons(user_id: number) {
+  async getUserCoupons({
+    user_id,
+    is_valid,
+  }: {
+    user_id: number;
+    is_valid?: boolean;
+  }) {
     return await this.find({
-      where: { user_id },
+      where: { user_id, ...(is_valid ? { is_valid } : {}) },
     });
   }
 
@@ -20,11 +27,10 @@ class UserCouponRespository extends Repository<UserCoupon> {
     return await this.update({ id, user_id }, { is_valid });
   }
 
-  async getUserCoupon({ id, user_id }: Partial<IUserCoupon>) {
+  async getUserCoupon(userCoupon: Partial<IUserCoupon>) {
     return await this.findOne({
       where: {
-        user_id,
-        id,
+        ...userCoupon,
       },
     });
   }

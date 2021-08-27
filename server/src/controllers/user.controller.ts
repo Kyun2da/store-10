@@ -10,7 +10,7 @@ class UserController {
     const data = req.body;
 
     const refreshToken = jwtService.refresh();
-    const { user_id, name, id, is_oauth } = await UserRepository().createUser({
+    const { user_id, name, id, is_oauth } = await userService.createUser({
       ...data,
       refreshToken,
     });
@@ -71,8 +71,9 @@ class UserController {
   }
 
   async getCoupons(req: Request, res: Response) {
+    const is_valid = req.query.is_valid;
     const user_id = req.user?.id;
-    const result = await userService.getCoupons(user_id);
+    const result = await userService.getCoupons(user_id, !!is_valid);
 
     ApiResponse(
       res,

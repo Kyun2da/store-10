@@ -15,11 +15,6 @@ export const Checkbox = styled.label`
     height: 0;
     &:checked ~ span {
       background: ${({ theme }) => theme.color.primary};
-      svg {
-        path {
-          stroke: ${({ theme }) => theme.color['off-white']};
-        }
-      }
     }
   }
 
@@ -35,7 +30,7 @@ export const Checkbox = styled.label`
     margin-right: 6px;
     svg {
       path {
-        stroke: ${({ theme }) => theme.color.primary};
+        stroke: ${({ theme }) => theme.color['off-white']};
         stroke-width: 3px;
       }
     }

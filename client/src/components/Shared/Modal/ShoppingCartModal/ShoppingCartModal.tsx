@@ -11,7 +11,7 @@ const ShoppingCartModal = ({ toggleModal }: IProps) => {
   return (
     <S.ShooppingCartModal
       width="37.5rem"
-      height="25rem"
+      height="27rem"
       toggleModal={toggleModal}
     >
       <S.ShooppingCartModalHeader>

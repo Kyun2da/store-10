@@ -17,9 +17,9 @@ import { userState } from '@/recoil/user';
 import { notify } from '@/components/Shared/Toastify';
 import { QUESTION_LIMIT } from '@/utils/constant/offsetLimit';
 import { QUESTION_HEADER } from '@/utils/constant/CollapseHeaders';
-import Spinner from '@/components/Shared/Spinner';
 import Thung from '@/components/Thung';
 import { ResponseError } from '@/components/Shared/Error';
+import { ReviewSkeleton } from '@/components/Skeleton/ProductSkeleton';
 
 const ProductRequest = () => {
   const { id } = useParams().params;
@@ -35,11 +35,7 @@ const ProductRequest = () => {
   const { data: count } = useGetProductQuestionCount(id);
 
   if (isLoading || !questions || !count) {
-    return (
-      <S.LoadingWrapper>
-        <Spinner />
-      </S.LoadingWrapper>
-    );
+    return <ReviewSkeleton />;
   }
 
   if (error) {

@@ -25,6 +25,10 @@ const useNumberInput = (initalValue?: number) => {
         return notify('error', '1보다 작은 값은 입력하실 수 없어요!');
       }
 
+      if (+value % 1 !== 0) {
+        return notify('error', '소수점은 입력하실 수 없어요!');
+      }
+
       if (+value > 100) {
         return notify('error', '100보다 큰 값은 입력하실 수 없어요!');
       }

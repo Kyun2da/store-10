@@ -61,9 +61,23 @@ const Collapse = <T extends ICollapseItem>({
 
   return (
     <S.Collapse>
-      <S.CollapseHeader gaps={gaps} length={headers.length}>
+      <S.CollapseHeader
+        className="review_collapse"
+        gaps={gaps}
+        length={headers.length}
+      >
         {headers.map((header) => (
-          <p key={header.value}>{header.name}</p>
+          <p
+            key={header.value}
+            className={
+              (header.name === '답변' ? 'answer' : '') +
+              (header.name === '작성자' || header.name === '작성일'
+                ? 'on_btw_tab_mob_resolution'
+                : '')
+            }
+          >
+            {header.name}
+          </p>
         ))}
       </S.CollapseHeader>
       <S.CollapseBody>
@@ -74,34 +88,49 @@ const Collapse = <T extends ICollapseItem>({
               length={headers.length}
               onClick={() => handleClickOnItem(item.id, idx)}
               className={
-                !noSecret && item.secret && item.user_id !== user?.id
+                'review_collapse ' +
+                (isActive[idx] === `collapse-item-${item.id}` ? 'active' : '') +
+                (!noSecret && item.secret && item.user_id !== user?.id
                   ? 'lock'
-                  : ''
+                  : '')
               }
             >
               {headers.map((header) => {
                 // TODO: 삼항연산자 depth가 너무 깊어 좀 풀고 싶은데 막상 좋은 방법이 떠오르지 않는군뇨..
                 // 나는야 주석도 업데이트 하는 씐박한 개발자
                 return (
-                  <S.CollapseSubTitle key={header.value}>
+                  <S.CollapseSubTitle
+                    key={header.value}
+                    className={
+                      header.name === '작성자' || header.name === '작성일'
+                        ? 'on_btw_tab_mob_resolution'
+                        : ''
+                    }
+                  >
                     {header.value === 'createdAt' ? (
-                      dateFormat(item[header.value])
+                      dateFormat(item[header.value], 'abs')
                     ) : header.value === 'answer' ? (
                       item[header.value] ? (
                         <S.Status>
                           <S.StatusPoint className="completed" />
-                          완료
+                          <span className="on_tablet_resolution">완료</span>
                         </S.Status>
                       ) : (
                         <S.Status>
                           <S.StatusPoint className="pending" />
-                          대기중
+                          <span className="on_tablet_resolution">대기중</span>
                         </S.Status>
                       )
                     ) : header.value === 'name' &&
                       item.secret &&
                       item.user_id !== user?.id ? (
                       '비공개'
+                    ) : header.value === 'category' ? (
+                      <div className="category">
+                        <p className={item[header.value]}>
+                          {item[header.value]}
+                        </p>
+                      </div>
                     ) : (
                       item[header.value]
                     )}
@@ -127,8 +156,10 @@ const Collapse = <T extends ICollapseItem>({
                   {!item.secret && (
                     <>
                       <S.CollapseDetails>
-                        <QuestionSVG />
-                        <p>{item.content}</p>
+                        <p className="question">
+                          <span>Q. </span>
+                          {item.content}
+                        </p>
                         {noSecret && dropdownItems && (
                           <Dropdown
                             selectedId={item.id}
@@ -137,8 +168,7 @@ const Collapse = <T extends ICollapseItem>({
                         )}
                       </S.CollapseDetails>
                       <S.CollapseDetails>
-                        <AnswerSVG />
-                        <p>
+                        <p className="answer">
                           {item.answer ||
                             '답변 대기중입니다... 조금만 기다려주세요!'}
                         </p>

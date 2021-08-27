@@ -8,6 +8,7 @@ export const ModalWrapper = styled(ModalLayout)`
 export const ModalHeader = styled.div`
   ${({ theme }) => theme.fontSize.l};
   ${({ theme }) => theme.fontWeight.l};
+  color: ${({ theme }) => theme.color['text-color']};
 `;
 
 export const ModalDivider = styled.div`
@@ -19,6 +20,19 @@ export const ModalBody = styled.div`
   flex-direction: column;
   flex: 1;
   ${({ theme }) => theme.fontSize.m};
+
+  .input-wrapper {
+    position: relative;
+
+    .error-text {
+      bottom: -2.5rem;
+
+      ${({ theme }) => theme.mediaScreen.phone`
+        font-size: 1.35rem;
+      `}
+    }
+  }
+
   input {
     &:not(:first-child) {
       margin-top: 1.2rem;

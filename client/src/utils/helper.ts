@@ -26,6 +26,8 @@ export const dateFormat = (date: string | Date, seperator = '-') => {
     return dayjs(date).format('YYYY-MM-DD');
   } else if (seperator === '.') {
     return dayjs(date).format('YYYY.MM.DD');
+  } else if (seperator === 'abs') {
+    return dayjs(date).format('MM.DD');
   }
 };
 

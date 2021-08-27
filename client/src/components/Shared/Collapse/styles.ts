@@ -29,6 +29,18 @@ export const CollapseHeader = styled.div<ICollapse>`
   ${({ theme }) => theme.fontWeight.m};
   color: #fff;
   padding: 2rem;
+
+  &.review_collapse {
+    ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+      grid-template-columns: 1fr 1fr 3fr 1fr;
+    `}
+  }
+
+  .answer {
+    ${({ theme }) => theme.mediaScreen.tablet`
+      text-align: center;
+    `}
+  }
 `;
 
 export const CollapseBody = styled.div`
@@ -44,7 +56,6 @@ export const CollaspeRow = styled.div<ICollapse>`
   gap: 1rem;
   grid-template-columns: ${({ length, gaps }) =>
     gaps ? gaps : `repeat(${length}, 1fr)`};
-  border-bottom: 1px solid ${({ theme }) => theme.color.line};
   padding: 2rem;
   color: ${({ theme }) => theme.color['text-color']};
   cursor: pointer;
@@ -57,8 +68,8 @@ export const CollaspeRow = styled.div<ICollapse>`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #eee;
-    opacity: 0.9;
+    background-color: ${({ theme }) => theme.color.lock};
+    opacity: 0.95;
   }
 
   &:last-child {
@@ -69,12 +80,44 @@ export const CollaspeRow = styled.div<ICollapse>`
     background-color: ${({ theme }) => theme.color.background};
     opacity: 0.85;
   }
+
+  &.active {
+    background-color: ${({ theme }) => theme.color.background};
+  }
+
+  &.review_collapse {
+    ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+      grid-template-columns: 1fr 1fr 3fr 1fr;
+    `}
+  }
 `;
 
 export const CollapseSubTitle = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  line-height: 2.2rem;
+
+  .category {
+    display: flex;
+
+    p {
+      border-radius: 1rem;
+      color: #fff;
+      ${({ theme }) => theme.fontWeight.l};
+      padding: 0.2rem 0.7rem;
+
+      &.상품 {
+        background-color: #c3c0f3;
+      }
+      &.환불 {
+        background-color: #b9d58c;
+      }
+      &.택배 {
+        background-color: #e6d267;
+      }
+    }
+  }
 `;
 
 export const CollapsePanel = styled.div<ICollapsePanel>`
@@ -85,10 +128,16 @@ export const CollapsePanel = styled.div<ICollapsePanel>`
   background-color: ${({ theme }) => theme.color.background};
   overflow: hidden;
   transition: height 0.25s ease-in-out;
+  border-top: 1px solid ${({ theme }) => theme.color.line};
+
+  &:last-child {
+    border: none !important;
+  }
 
   &.active {
     height: ${({ height }) => height ?? 0}px;
     border-bottom: 1px solid ${({ theme }) => theme.color.line};
+    border-top: 1px dashed ${({ theme }) => theme.color.line} !important;
   }
 `;
 
@@ -102,6 +151,7 @@ export const CollapseContent = styled.div`
 export const CollapseDetails = styled.div`
   display: flex;
   align-items: flex-start;
+  line-height: 2rem;
   gap: 2rem;
   color: ${({ theme }) => theme.color['text-color']};
 
@@ -111,6 +161,20 @@ export const CollapseDetails = styled.div`
 
   p {
     flex: 1;
+
+    &.question {
+      ${({ theme }) => theme.fontWeight.l};
+    }
+    &.answer {
+      background-color: ${({ theme }) => theme.color.body3};
+      padding: 2rem;
+      border-radius: 1.5rem;
+    }
+
+    span {
+      ${({ theme }) => theme.fontWeight.xl};
+      ${({ theme }) => theme.fontSize.xl};
+    }
   }
 
   pre {
@@ -124,8 +188,13 @@ export const CollapseDetails = styled.div`
 
 export const Status = styled.div`
   display: flex;
+  height: 100%;
   gap: 0.5rem;
   align-items: center;
+
+  ${({ theme }) => theme.mediaScreen.tablet`
+    justify-content: center;
+  `}
 `;
 
 export const StatusPoint = styled.span`

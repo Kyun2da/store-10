@@ -58,7 +58,7 @@ export const TabTitle = styled.span`
 `;
 
 export const TabPanel = styled.div`
-  width: 88vw;
+  width: 100%;
   ${({ theme }) => theme.fontSize.m}
   ${({ theme }) => theme.fontWeight.s}
 

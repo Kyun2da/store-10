@@ -107,7 +107,9 @@ const Input = ({
         {...attributes}
       />
       {error ? (
-        <S.ErrorText helperAlign={helperAlign}>{helperText}</S.ErrorText>
+        <S.ErrorText className="error-text" helperAlign={helperAlign}>
+          {helperText}
+        </S.ErrorText>
       ) : null}
     </S.InputContainer>
   );

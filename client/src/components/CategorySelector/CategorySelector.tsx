@@ -41,8 +41,8 @@ const CategorySelector = ({ setCategory, selected }: ICategorySelector) => {
           'each-category' + (categoryId === 'category-gift' ? ' selected' : '')
         }
       >
-        <GiftSVG width={60} height={60} />
-        <span className="category-text">상품관련</span>
+        <GiftSVG width={40} height={40} />
+        <span className="category-text on_phone_resolution">상품관련</span>
       </S.Category>
 
       <S.Category
@@ -53,8 +53,8 @@ const CategorySelector = ({ setCategory, selected }: ICategorySelector) => {
           (categoryId === 'category-package' ? ' selected' : '')
         }
       >
-        <PackageSVG width={60} height={60} />
-        <span className="category-text">택배관련</span>
+        <PackageSVG width={40} height={40} />
+        <span className="category-text on_phone_resolution">택배관련</span>
       </S.Category>
 
       <S.Category
@@ -65,8 +65,8 @@ const CategorySelector = ({ setCategory, selected }: ICategorySelector) => {
           (categoryId === 'category-exchange' ? ' selected' : '')
         }
       >
-        <ExchageSVG width={60} height={60} />
-        <span className="category-text">환불관련</span>
+        <ExchageSVG width={40} height={40} />
+        <span className="category-text on_phone_resolution">환불관련</span>
       </S.Category>
     </S.CategorySelector>
   );

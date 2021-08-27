@@ -114,7 +114,7 @@ const RequestModal = ({ toggleModal, selected }: RequestModalProps) => {
             />
           </div>
 
-          <div className="input-wrapper">
+          <div style={{ marginTop: '2rem' }} className="input-wrapper">
             <Title level={5}>문의 남기기</Title>
             <Textarea
               name="request-content"

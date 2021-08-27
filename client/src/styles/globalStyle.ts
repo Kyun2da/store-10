@@ -12,14 +12,6 @@ const HEADER_SEARCH_RESOLUTION = 550;
 const customMediaQuery = (screen: number) =>
   `@media screen and (max-width: ${screen}px)`;
 
-const screen = {
-  pc: customMediaQuery(PC_RESOLUTION), // 1050px 해상도 위에서만 디스플레이
-  btw_pc_tab: customMediaQuery(BTW_PC_AND_TAB_RESOLUTION), // 900px 해상도 위에서만 디스플레이
-  tablet: customMediaQuery(TABLET_RESOLUTION), // 768px 해상도 위에서만 디스플레이
-  btw_tab_mob: customMediaQuery(BTW_TAB_AND_MOBILE_RESOLUTION), // 595px 해상도 위에서만 디스플레이
-  phone: customMediaQuery(PHONE_RESOLUTION), // 425px 해상도 위에서만 디스플레이
-};
-
 export const mediaScreen = {
   // 1050px 해상도 위에서만 디스플레이
   pc: (args: TemplateStringsArray) => css`
@@ -73,18 +65,27 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::-webkit-scrollbar {
-    width: 0.5rem;
-    height: 0.5rem;
-  }
- 
-  ::-webkit-scrollbar-thumb {
-    background: #666; 
-    border-radius: 1rem;
+    background-color: #f5f5f5;
+    width: 1.6rem;
   }
 
   ::-webkit-scrollbar-track {
-    background: #ddd; 
-    border-radius: 1rem;
+    background-color: #f5f5f5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 1.6rem;
+    border: 0.4rem solid #f5f5f5;
+
+    &:hover {
+      background-color:#a0a0a5;
+      border: 0.4rem solid #f4f4f4
+    }
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
   }
 
   html, body {
@@ -116,10 +117,11 @@ const GlobalStyle = createGlobalStyle`
     max-width: ${PC_RESOLUTION}px;
     margin: 5rem auto;
     padding: 0 3rem;
-    box-sizing: content-box;
+    width: 100%;
+    box-sizing: border-box;
     flex: 1;
 
-    ${screen.tablet} {
+    ${customMediaQuery(TABLET_RESOLUTION)} {
       max-width: ${TABLET_RESOLUTION}px;
       margin: 4rem auto;
       padding: 0 2rem;
@@ -144,9 +146,23 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  // BTW_PC&TAB 해상도에서만 display: none
+  .on_btw_pc_tab_resolution {
+    ${customMediaQuery(BTW_PC_AND_TAB_RESOLUTION)} {
+      display: none;
+    }
+  }
+
   // tablet 해상도에서부터 display: none
   .on_tablet_resolution {
     ${customMediaQuery(TABLET_RESOLUTION)} {
+      display: none;
+    }
+  }
+
+  // BTW_TAB&MOB 해상도에서만 display: none
+  .on_btw_tab_mob_resolution {
+    ${customMediaQuery(BTW_TAB_AND_MOBILE_RESOLUTION)} {
       display: none;
     }
   }

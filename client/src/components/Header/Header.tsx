@@ -40,8 +40,8 @@ const Header = () => {
 
   return (
     <>
+      <Sidebar isOpen={sideBarIsOpen} setIsOpen={setSideBarIsOpen} />
       <S.HeaderWrapper>
-        <Sidebar isOpen={sideBarIsOpen} setIsOpen={setSideBarIsOpen} />
         <S.Header>
           <S.Menu>
             <S.MenuButton onClick={() => setSideBarIsOpen(!sideBarIsOpen)}>

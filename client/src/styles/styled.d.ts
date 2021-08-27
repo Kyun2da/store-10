@@ -50,5 +50,6 @@ declare module 'styled-components' {
       phone: (args: TemplateStringsArray) => FlattenSimpleInterpolation;
     };
     boxShadow: string;
+    headerBoxShadow: string;
   }
 }

@@ -35,7 +35,7 @@ const Sidebar = ({ ...props }: Props) => {
     categories.map((main: ICategory) => (
       <li data-main_category_id={main.id} key={'mainCategory_' + main.id}>
         <div>{main.title}</div>
-        <S.SubCategory>
+        <S.SubCategory className={isOpen ? '' : 'none'}>
           {main.subCategories.map((sub) => (
             <dd
               onClick={() => categoryRouterPush(sub.id)}
@@ -47,7 +47,7 @@ const Sidebar = ({ ...props }: Props) => {
         </S.SubCategory>
       </li>
     ));
-    
+
   return (
     <>
       <S.SideBar className={isOpen ? 'active' : ''}>

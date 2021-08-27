@@ -1,7 +1,7 @@
 import { createGlobalStyle, css } from 'styled-components';
 import reset from 'styled-reset';
 
-export const HEADER_HEIGHT = 6;
+export const HEADER_HEIGHT = 8;
 const PC_RESOLUTION = 1050;
 const BTW_PC_AND_TAB_RESOLUTION = 900;
 const TABLET_RESOLUTION = 768;

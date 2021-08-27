@@ -26,18 +26,25 @@ export const ModalInner = styled.div`
   flex: 1;
   gap: 2rem;
   flex-direction: column;
-  height: 100%;
+  height: 50%;
+  overflow-y: auto;
 `;
 
 export const ModalWrapper = styled.div<IModalWrapperProps>`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   box-sizing: border-box;
   border-radius: 3rem;
   padding: 3rem;
   background-color: #fff;
   width: ${(props) => props.width || '65%'};
   height: ${(props) => props.height};
+  max-height: 96%;
+
+  ${({ theme }) => theme.mediaScreen.tablet`
+    width: 85%;
+  `}
 
   ${({ compact }) =>
     compact

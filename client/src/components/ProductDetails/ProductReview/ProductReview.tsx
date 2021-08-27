@@ -81,12 +81,19 @@ const ProductReview = () => {
           작성하기
         </Button>
       </S.TopArea>
+
       <S.RatingArea>
-        <S.StarRates>
-          <span className="totalRates">{rating}</span>
-          <RatingGetter rating={rating} uniqueId="totalRating" />
-        </S.StarRates>
-        <RatingChart total={count} ratings={ratings} />
+        {!!reviews.length ? (
+          <>
+            <S.StarRates>
+              <span className="totalRates">{rating}</span>
+              <RatingGetter rating={rating} uniqueId="totalRating" />
+            </S.StarRates>
+            <RatingChart total={count} ratings={ratings} />
+          </>
+        ) : (
+          <S.NoDataText>아직 매겨진 별점이 없네요..!</S.NoDataText>
+        )}
       </S.RatingArea>
 
       <S.UserReviewArea>

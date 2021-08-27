@@ -9,11 +9,13 @@ const SvgSize = {
 export const ThemeChangerWrapper = styled.div`
   display: flex;
   position: fixed;
+  z-index: 100;
   bottom: 0px;
   right: 0px;
   padding-right: 1.5rem;
   padding-bottom: 1.5rem;
   user-select: none;
+  font-family: 'Noto Sans', sans-serif;
 `;
 
 export const ThemeButtonSVG = styled.svg`
@@ -29,6 +31,7 @@ export const ThemeButton = styled.button`
   color: ${({ theme }) => theme.color['text-color']};
   ${({ theme }) => theme.fontSize.s};
   padding: 0.5rem;
+  padding-right: 0.8rem;
   border-radius: 9999px;
   --transform-translate-x: 0;
   --transform-translate-y: 0;
@@ -44,7 +47,6 @@ export const ThemeButton = styled.button`
   cursor: pointer;
   display: flex;
   align-items: center;
-  z-index: 100;
 
   span {
     padding: 0 0.3rem;
@@ -78,7 +80,6 @@ export const ScrollButton = styled.button`
   margin-left: 0.5rem;
   margin-top: auto;
   margin-bottom: auto;
-  z-index: 100;
 `;
 
 export const MoonSvg = styled(MoonSVG)`
@@ -96,7 +97,8 @@ export const SunSvg = styled(SunSVG)`
   margin-top: auto;
   margin-bottom: auto;
   margin-right: 0px;
-  ${SvgSize}
+  padding: 0.3rem;
+  ${SvgSize};
 `;
 
 export const ArrowSvg = styled(ArrowTopSVG)`

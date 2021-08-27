@@ -20,12 +20,12 @@ const ThemeChanger = ({ ...props }: Props) => {
       {currentTheme === 'light-mode' ? (
         <S.ThemeButton title="change to darkmode" onClick={toggleMode}>
           <S.MoonSvg />
-          <span>다크 모드로 보기</span>
+          <span>다크모드</span>
         </S.ThemeButton>
       ) : (
         <S.ThemeButton title="change to lightmode" onClick={toggleMode}>
           <S.SunSvg />
-          <span>라이트 모드로 보기</span>
+          <span>라이트모드</span>
         </S.ThemeButton>
       )}
       <S.ScrollButton title="top page" onClick={scrollToTop}>

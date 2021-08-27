@@ -28,3 +28,6 @@ export { default as ArrowTopSVG } from '@/assets/svgs/arrow-top.svg';
 export { default as SelectedSVG } from '@/assets/svgs/selected.svg';
 export { default as DownChevronSVG } from '@/assets/svgs/down-chevron.svg';
 export { default as UpChevronSVG } from '@/assets/svgs/up-chevron.svg';
+export { default as Edit } from '@/assets/svgs/edit.svg';
+export { default as Trash } from '@/assets/svgs/trash.svg';
+export { default as Close2 } from '@/assets/svgs/close2.svg';

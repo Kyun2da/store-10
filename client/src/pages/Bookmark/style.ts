@@ -25,10 +25,15 @@ export const ButtonContainer = styled.div`
 `;
 
 export const EditButton = styled(Button)`
-  width: 6rem;
+  width: 8.5rem;
   margin-left: 1rem;
   margin-bottom: 2rem;
-
+  border: none;
+  line-height: inherit;
+  justify-content: space-between;
   ${({ theme }) => theme.fontSize.m};
-  ${({ theme }) => theme.fontWeight.m};
+
+  &.red {
+    color: ${({ theme }) => theme.color.error};
+  }
 `;

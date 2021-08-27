@@ -4,6 +4,7 @@ import { BG_COLOR } from './Card';
 
 export const Card = styled.li`
   display: flex;
+  position: relative;
   justify-content: space-between;
   height: 100%;
   flex-direction: column;
@@ -156,4 +157,13 @@ export const ProductDetails = styled.div`
       ${({ theme }) => theme.fontSize.xs};
     }
   }
+`;
+
+export const Filter = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 150;
 `;

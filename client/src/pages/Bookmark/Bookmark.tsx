@@ -12,6 +12,9 @@ import React, { Dispatch, useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import Loading from '@/components/Shared/Loading';
 import * as S from './style';
+import { Close2, Edit, Trash } from '@/assets/svgs';
+import { DeleteConfirmModal } from '@/components/Shared/Modal';
+import useModal from '@/hooks/useModal';
 
 const renderProducts = (
   isLoading: boolean,
@@ -45,6 +48,7 @@ const Bookmark = () => {
   const { mutate } = useDeleteDetailBookmark();
   const [user] = useRecoilState(userState);
   const [checkedList, setCheckedList] = useState<number[]>([]);
+  const [modalOpen, toggleModal] = useModal(false);
 
   const [start, setStart] = useState(0);
 
@@ -57,6 +61,12 @@ const Bookmark = () => {
         orderType: 'createdAt',
       },
     });
+
+  const onClickRemove = () => {
+    mutate(checkedList);
+    toggleModal();
+    setCheckedList([]);
+  };
 
   // unmount 됬을 때 데이터 초기화
   useEffect(() => {
@@ -91,10 +101,9 @@ const Bookmark = () => {
     if (checkedList.length === 0) {
       notify('error', '삭제할 상품을 한개 이상 선택해주세요!');
     } else {
-      mutate(checkedList);
-      setCheckedList([]);
+      toggleModal();
     }
-  }, [checkedList, mutate]);
+  }, [toggleModal, checkedList.length]);
 
   if (!user) return <Redirect to="/login" />;
 
@@ -112,33 +121,37 @@ const Bookmark = () => {
           isEdit ? (
             <S.EditButton
               type="button"
-              color="primary"
+              color="white"
               size="Small"
               onClick={() => {
                 toggleIsEdit(false);
               }}
             >
               편집
+              <Edit width="3rem" height="3rem" />
             </S.EditButton>
           ) : (
             <>
               <S.EditButton
                 type="button"
-                color="red"
+                color="white"
                 size="Small"
                 onClick={removeBookmarkItems}
+                className="red"
               >
                 삭제
+                <Trash width="3rem" height="3rem" />
               </S.EditButton>
               <S.EditButton
                 type="button"
-                color="primary"
+                color="white"
                 size="Small"
                 onClick={() => {
                   toggleIsEdit(true);
                 }}
               >
                 취소
+                <Close2 width="2.5rem" height="2.5rem" />
               </S.EditButton>
             </>
           )
@@ -162,6 +175,12 @@ const Bookmark = () => {
           <Thung title="찜한 상품이 없습니다! 맘에 드는 상품을 찜해보세요." />
         )}
       </S.CardContainer>
+      {modalOpen && (
+        <DeleteConfirmModal
+          toggleModal={toggleModal}
+          removeSelected={onClickRemove}
+        />
+      )}
     </S.BookmarkContainer>
   );
 };

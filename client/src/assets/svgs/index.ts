@@ -25,3 +25,6 @@ export { default as MoreButtonSVG } from '@/assets/svgs/more.svg';
 export { default as MoonSVG } from '@/assets/svgs/moon.svg';
 export { default as SunSVG } from '@/assets/svgs/sun.svg';
 export { default as ArrowTopSVG } from '@/assets/svgs/arrow-top.svg';
+export { default as Edit } from '@/assets/svgs/edit.svg';
+export { default as Trash } from '@/assets/svgs/trash.svg';
+export { default as Close2 } from '@/assets/svgs/close2.svg';

@@ -51,6 +51,7 @@ const OrderHistory = ({}) => {
     return ordersOnPage.map((order) => (
       <S.OrderHistoryBody key={order.id}>
         <OrderItemList
+          orderId={order.id}
           date={order.createdAt}
           items={order.products}
           status={order.status}

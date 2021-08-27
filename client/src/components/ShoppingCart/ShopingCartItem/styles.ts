@@ -11,7 +11,6 @@ export const ShoppingCartItem = styled.li`
   align-items: center;
   width: 100%;
   padding: 0 1rem;
-  /* background: ${({ theme }) => theme.color['off-white']}; */
   background-color: ${({ theme }) => theme.color.body};
   &:not(:first-child) {
     margin-top: 1rem;

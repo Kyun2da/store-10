@@ -156,9 +156,9 @@ const SignUp = () => {
           type="password"
           name="rePassword"
           label="Outlined"
+          labelName="비밀번호 재입력"
           onBlur={rePasswordCheck}
           error={error.rePassword}
-          labelName="비밀번호 재입력"
           helperText="비밀번호가 일치하지 않거나 비밀번호를 입력해야 합니다."
           placeholder="비밀번호를 한번 더 입력해주세요."
         />

@@ -66,7 +66,7 @@ const Input = ({
       setFocus((value) => !value);
     }
   };
-  const isLabelFocusing = String(value).length > 0;
+  const isLabelFocusing = value && String(value).length > 0;
 
   return (
     <S.InputContainer

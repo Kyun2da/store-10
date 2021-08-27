@@ -12,6 +12,7 @@ interface IInput {
   handleOnChnage: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleClickOnMinus: () => void;
   handleClickOnPlus: () => void;
+  className?: string;
 }
 
 const NumberInput = ({
@@ -24,9 +25,10 @@ const NumberInput = ({
   handleOnChnage,
   handleClickOnMinus,
   handleClickOnPlus,
+  className,
 }: IInput) => {
   return (
-    <S.NumberInputArea>
+    <S.NumberInputArea className={className}>
       <S.AdjustButton onClick={handleClickOnMinus}>-</S.AdjustButton>
       <S.NumberInput
         // TODO: 지금은 콘솔에러 땜에 readOnly 먹여놨는데 이러면 타이핑으로 직접 수량 입력이 불가합니다

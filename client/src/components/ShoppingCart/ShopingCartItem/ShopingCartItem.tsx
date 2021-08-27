@@ -74,36 +74,38 @@ const ShoppingCartItem = ({
           {item.title}
         </S.ItemInfoName>
         <S.ItemInoPriceWrapper>
-          <S.ItemInfoPrice
-            className={item.discount ? 'strikethrough' : undefined}
-          >
-            {wonFormat(+item.price)}
-          </S.ItemInfoPrice>
-          {!!item.discount && (
-            <S.ItemInfoPrice className="discount">
-              {wonFormat(
-                calculateDiscount({
-                  price: +item.price,
-                  discount: item.discount,
-                })
-              )}
+          <div>
+            <S.ItemInfoPrice
+              className={item.discount ? 'strikethrough' : undefined}
+            >
+              {wonFormat(+item.price)}
             </S.ItemInfoPrice>
-          )}
+            {!!item.discount && (
+              <S.ItemInfoPrice className="discount">
+                {wonFormat(
+                  calculateDiscount({
+                    price: +item.price,
+                    discount: item.discount,
+                  })
+                )}
+              </S.ItemInfoPrice>
+            )}
+          </div>
+          <S.TotalPrice>
+            <S.PriceNumberInput
+              type="number"
+              name="price-count"
+              min={1}
+              value={item.count}
+              handleClickOnMinus={onClickMinus}
+              handleClickOnPlus={onClickPlus}
+              // TODO: props optional로 하던지, hanleOnChange 사용하도록
+              handleOnChnage={(e) => {}}
+            />
+            <span>{wonFormat(item.count * item.price)}</span>
+          </S.TotalPrice>
         </S.ItemInoPriceWrapper>
       </S.ItemInfo>
-      <S.TotalPrice>
-        <NumberInput
-          type="number"
-          name="price-count"
-          min={1}
-          value={item.count}
-          handleClickOnMinus={onClickMinus}
-          handleClickOnPlus={onClickPlus}
-          // TODO: props optional로 하던지, hanleOnChange 사용하도록
-          handleOnChnage={(e) => {}}
-        />
-        <span>{wonFormat(item.count * item.price)}</span>
-      </S.TotalPrice>
 
       <S.CloseButton onClick={toggleModal}>
         <CloseSVG stroke="black" width={22} height={22} strokeWidth="0.2rem" />

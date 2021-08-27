@@ -39,6 +39,8 @@ const FileInput = ({
     target.value = '';
   };
 
+  console.log(imgFiles, !!imgFiles.length);
+
   return (
     <>
       <S.FileInputButton onClick={handleClickOnFileInput}>
@@ -56,9 +58,9 @@ const FileInput = ({
         />
       </S.FileInputButton>
 
-      <S.PreviewWrapper>
-        {!!S3Previews &&
-          S3Previews.map((preview) => (
+      {(!!S3Previews?.length || !!Object.keys(imgFiles).length) && (
+        <S.PreviewWrapper>
+          {S3Previews?.map((preview) => (
             <S.ImageWrapper key={preview}>
               <img src={preview} alt="미리보기 이미지" />
               <S.CloseButton
@@ -70,18 +72,19 @@ const FileInput = ({
               </S.CloseButton>
             </S.ImageWrapper>
           ))}
-        {Object.entries(imgFiles).map((files) => {
-          const [hash, file] = files;
-          return (
-            <S.ImageWrapper key={hash}>
-              <img src={URL.createObjectURL(file)} alt="미리보기 이미지" />
-              <S.CloseButton onClick={(e) => removeSeletedPreview(e, hash)}>
-                <CloseSVG />
-              </S.CloseButton>
-            </S.ImageWrapper>
-          );
-        })}
-      </S.PreviewWrapper>
+          {Object.entries(imgFiles).map((files) => {
+            const [hash, file] = files;
+            return (
+              <S.ImageWrapper key={hash}>
+                <img src={URL.createObjectURL(file)} alt="미리보기 이미지" />
+                <S.CloseButton onClick={(e) => removeSeletedPreview(e, hash)}>
+                  <CloseSVG />
+                </S.CloseButton>
+              </S.ImageWrapper>
+            );
+          })}
+        </S.PreviewWrapper>
+      )}
 
       {isError && (
         <S.ErrorMessage>3장 이상의 사진은 업로드 할 수 없어요!</S.ErrorMessage>

@@ -6,6 +6,7 @@ import Title from '@/components/Shared/Title';
 import Checkbox from '@/components/Shared/Checkbox';
 import { useDeleteCart } from '@/hooks/queries/cart';
 import { IAddress, IOrder } from '@/types';
+import { DELIVERY_DISCOUNT_CONDITION } from '@/contstants';
 
 interface IProps {
   totalPrice: number;
@@ -17,8 +18,6 @@ interface IProps {
   updateOrder: () => void;
   couponDiscount?: number;
 }
-
-const DELIVERY_DISCOUNT_CONDITION = 30000;
 
 const OrderSummary = ({
   totalPrice,

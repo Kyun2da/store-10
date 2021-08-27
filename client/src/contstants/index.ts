@@ -127,3 +127,5 @@ export const KOREAN_PHONE_PREFIX: string[] = [
   '012',
   '059',
 ];
+
+export const DELIVERY_DISCOUNT_CONDITION = 30000;

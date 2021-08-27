@@ -55,7 +55,7 @@ const OrderSummary = ({
           <dt>총 상품금액</dt>
           <dd>{wonFormat(totalPrice)}</dd>
         </S.OrderSummaryRow>
-        {totalProductsDiscount && (
+        {!!totalProductsDiscount && (
           <S.OrderSummaryRow>
             <dt>총 상품 할인</dt>
             <dd className="red">- {wonFormat(totalProductsDiscount)}</dd>

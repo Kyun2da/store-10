@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 
-//최근 검색어 5개 가져오기
 const useRecentSearch = (): [
   string[],
   (value: string) => void,

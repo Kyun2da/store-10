@@ -14,7 +14,6 @@ export const HeaderWrapper = styled.header`
   @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
     ${({ theme }) => theme.fontSize.s}
   }
-  
 
   svg {
     width: 2em;
@@ -60,6 +59,12 @@ export const Logo = styled.div`
   color: ${({ theme }) => theme.color['text-color']};
   justify-self: center;
   margin-left: 1rem;
+
+  img {
+    @media (max-width: ${({ theme }) => theme.media.phone}px) {
+      width: 100px;
+    }
+  }
 `;
 
 export const StateUl = styled.div`

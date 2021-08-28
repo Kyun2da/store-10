@@ -9,6 +9,10 @@ import { IUserCoupon } from '@/types';
 import { SelectedSVG, DownChevronSVG, UpChevronSVG } from '@/assets/svgs';
 import { Input } from '@/components/Shared/Input';
 import Button from '@/components/Shared/Button';
+import LabelButton from '@/components/Shared/LabelButton';
+import useModal from '@/hooks/useModal';
+import CouponModal from '@/components/Shared/Modal/CouponModal';
+
 interface IProps {
   setSelectedCoupon: Dispatch<IUserCoupon | null>;
   selectedCoupon: IUserCoupon | null;
@@ -19,6 +23,7 @@ const OrderCoupon = ({ setSelectedCoupon, selectedCoupon }: IProps) => {
   const { mutate, isLoading, error, reset } = useRegisterUserCoupon();
   const [inputValue, setInputValue] = useState('');
   const [collapsed, setCollapsed] = useState(true);
+  const [openModal, toggleModal] = useModal(false);
   const registerCoupon = () => {
     mutate(inputValue, {
       onSuccess() {
@@ -30,17 +35,14 @@ const OrderCoupon = ({ setSelectedCoupon, selectedCoupon }: IProps) => {
     setInputValue(e.currentTarget.value);
     reset();
   };
-  const selectCoupon = (coupon: IUserCoupon) => {
-    if (selectedCoupon === coupon) {
-      setSelectedCoupon(null);
-    } else {
-      setSelectedCoupon(coupon);
-    }
-  };
+
   return (
     <S.OrderCoupon>
       <S.OrderCouponHeader>
         <span>쿠폰</span>
+        <LabelButton onClick={toggleModal} disabled={!!!(data || []).length}>
+          {!!(data || []).length ? '선택' : '사용 가능한 쿠폰이 없습니다 '}
+        </LabelButton>
       </S.OrderCouponHeader>
       <S.RegisterCouponWrapper>
         <S.CollapsibleWrapper onClick={() => setCollapsed(!collapsed)}>
@@ -73,25 +75,23 @@ const OrderCoupon = ({ setSelectedCoupon, selectedCoupon }: IProps) => {
           </Button>
         </S.RegisterCoupon>
       </S.RegisterCouponWrapper>
-      <S.CouponDisplay>
-        {/* {(data || []).map((coupon) => {
-          const isSelected = selectedCoupon === coupon;
-          return (
-            <S.CouponWrapper
-              className={isSelected ? 'selected' : undefined}
-              onClick={() => selectCoupon(coupon)}
-              key={coupon.id}
-            >
-              {isSelected && <SelectedSVG width={120} height={120} />}
-              <Coupon
-                name={coupon.name}
-                amount={coupon.amount}
-                isValid={coupon.is_valid}
-              />
-            </S.CouponWrapper>
-          );
-        })} */}
-      </S.CouponDisplay>
+      {selectedCoupon && (
+        <S.CouponWrapper>
+          <Coupon
+            name={selectedCoupon.name}
+            amount={selectedCoupon.amount}
+            isValid={selectedCoupon.is_valid}
+          />
+        </S.CouponWrapper>
+      )}
+      {openModal && (
+        <CouponModal
+          toggleModal={toggleModal}
+          coupons={data}
+          setSelectedCoupon={setSelectedCoupon}
+          selectedCoupon={selectedCoupon}
+        />
+      )}
     </S.OrderCoupon>
   );
 };

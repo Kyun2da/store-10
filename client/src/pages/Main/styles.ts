@@ -34,7 +34,7 @@ export const Main = styled.div`
       }
     }
     &:nth-child(2n) {
-      background: ${({ theme }) => theme.color['background']};
+      background: ${({ theme }) => theme.color.body2};
     }
   }
 `;

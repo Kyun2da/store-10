@@ -18,7 +18,7 @@ export const MyPageContainer = styled.div`
 
 export const MyPageTitle = styled(Title)`
   font-family: BMDOHYEON;
-  background: ${({ theme }) => theme.color.body};
+  background-color: ${({ theme }) => theme.color.background};
   padding: 1rem 0;
   border-radius: 1rem;
   box-shadow: ${({ theme }) => theme.boxShadow};

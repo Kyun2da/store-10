@@ -7,7 +7,7 @@ export const AddressList = styled.ul`
 
 export const AddressItem = styled.li`
   margin-top: 1.2rem;
-  background: ${({ theme }) => theme.color['off-white']};
+  background: ${({ theme }) => theme.color['body']};
   padding: 1.2rem;
   border-radius: 1.2rem;
   border: 0.1rem solid ${({ theme }) => theme.color['border-gray']};
@@ -26,6 +26,7 @@ export const AddressName = styled.span`
   ${({ theme }) => theme.fontWeight.xl};
   ${({ theme }) => theme.fontSize.m};
   margin-right: auto;
+  color: ${({ theme }) => theme.color['text-color']};
 `;
 
 export const DefaultAddress = styled.span`
@@ -49,6 +50,7 @@ export const AddressInfoText = styled.span`
   padding: 0.4rem 0;
   ${({ theme }) => theme.fontWeight.l};
   ${({ theme }) => theme.fontSize.m};
+  color: ${({ theme }) => theme.color['text-color']};
   display: block;
 `;
 
@@ -75,11 +77,6 @@ export const AddressItemFooter = styled.footer`
     &:nth-child(2) {
       margin-right: auto;
     }
-
-    /* &:last-child {
-      ${({ theme }) => theme.fontWeight.l};
-      //margin-left: auto;
-    } */
   }
 `;
 

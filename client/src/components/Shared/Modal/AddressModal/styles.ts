@@ -6,6 +6,16 @@ import {
   ModalBody,
   ModalButtonArea,
 } from '../styles';
+import ModalLayout from '../ModalLayout';
+
+export const AddressModalLayout = styled(ModalLayout)`
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    > div {
+      padding: 1.6rem;
+      width: 100%;
+    }
+  }
+`;
 
 export const AddressModalHeader = styled(ModalHeader)`
   border: none;

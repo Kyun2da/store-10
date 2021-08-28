@@ -16,10 +16,10 @@ export const OrderSummaryWrapper = styled.section`
 export const OrderSummary = styled.dl`
   border: 1px solid ${({ theme }) => theme.color['border-gray']};
   border-radius: 0.8rem;
-  background: ${({ theme }) => theme.color['off-white']};
+  background: ${({ theme }) => theme.color['body']};
+  color: ${({ theme }) => theme.color['text-color']};
   padding: 1rem 2rem;
   overflow: hidden;
-
   h5 {
     padding-bottom: 1rem;
   }
@@ -63,6 +63,7 @@ export const Divider = styled.div`
 
 export const OrderSummaryFooter = styled.footer`
   padding: 2rem 0;
+  line-height: 1.6rem;
 `;
 
 export const OrderAgreementWrapper = styled.div`

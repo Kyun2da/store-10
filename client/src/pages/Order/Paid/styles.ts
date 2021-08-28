@@ -14,6 +14,7 @@ export const DoneMessage = styled.span`
   margin-top: 1.2rem;
   ${({ theme }) => theme.fontSize.xl};
   ${({ theme }) => theme.fontWeight.xl};
+  color: ${({ theme }) => theme.color['text-color']};
 `;
 
 export const SubMessage = styled.span`

@@ -92,7 +92,6 @@ export const getCategoryProducts = async ({
     orderType: 'createdAt',
   },
 }) => {
-  console.log(pageParam);
   return await client.get<IProduct[]>(
     `/product/category?subCategoryId=${pageParam.subCateogry}&start=${pageParam.start}&orderType=${pageParam.orderType}`
   );

@@ -4,12 +4,16 @@ import ShoppingCartList from '@/components/ShoppingCart/ShoppingCartList';
 import ShoppingCartSummary from '@/components/ShoppingCart/ShoppingCartSummary';
 import { ICart } from '@/types';
 import { useGetCarts, useDeleteCart } from '@/hooks/queries/cart';
+import { useRecoilValue } from 'recoil';
+import { userState } from '@/recoil/user';
+import { Redirect } from '@/lib/Router';
 
 const ShoppingCart = () => {
   const { data } = useGetCarts();
   const { mutate } = useDeleteCart();
   const [unCheckedList, setUnCheckedList] = useState<number[]>([]);
   const [shoppingCartItems, setShoppingCartItems] = useState<ICart[]>([]);
+  const user = useRecoilValue(userState);
 
   useEffect(() => {
     if (data) {
@@ -28,6 +32,8 @@ const ShoppingCart = () => {
     setShoppingCartItems(shoppingCartItems.filter(checkNotRemovedItems));
     mutate(ids);
   };
+
+  if (!user) return <Redirect to="/" />;
 
   return (
     <S.ShoppingCart className="container">

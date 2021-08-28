@@ -20,6 +20,8 @@ export const OrderItemInfo = styled.div`
   flex: 3;
   padding: 2rem;
   border-right: 1px solid ${({ theme }) => theme.color['border-gray']};
+  display: flex;
+  align-items: center;
 `;
 
 export const OrderItemInfoHeader = styled.header`
@@ -47,7 +49,6 @@ export const OrderItemInfoSubStatus = styled.span`
 `;
 
 export const OrderItemInfoBody = styled.div`
-  margin-top: 2.4rem;
   display: flex;
 `;
 
@@ -61,12 +62,18 @@ export const OrderItemInfoDescription = styled.section`
 export const OrderItemName = styled.span`
   ${({ theme }) => theme.fontWeight.xl};
   ${({ theme }) => theme.fontSize.l};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 `;
 
 export const OrderItemPrice = styled.span`
   ${({ theme }) => theme.fontWeight.m};
   ${({ theme }) => theme.fontSize.m};
   color: ${({ theme }) => theme.color.label};
+  padding-top: 0.8rem;
 `;
 
 export const OrderItemActions = styled.div`

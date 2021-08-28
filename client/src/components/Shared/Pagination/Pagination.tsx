@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import * as S from './styles';
 
 interface IPagination {
   count: number;
   handleOnClickPage: (idx: number) => void;
+  offset?: number;
 }
 
-const Pagination = ({ count, handleOnClickPage }: IPagination) => {
+const Pagination = ({ count, handleOnClickPage, offset }: IPagination) => {
   const pages = new Array(count).fill('');
   const [selected, setSelected] = useState(0);
+
+  useEffect(() => {
+    if (offset === 0) {
+      setSelected(0);
+    }
+  }, [offset]);
 
   const handleOnClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLDivElement;

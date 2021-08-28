@@ -8,9 +8,9 @@ import { useQueryClient } from 'react-query';
 
 interface IProps {
   toggleModal: () => void;
-  id: number;
+  selectedOrderId: number;
 }
-const DeliveryModal = ({ toggleModal, id }: IProps) => {
+const DeliveryModal = ({ toggleModal, selectedOrderId }: IProps) => {
   const [imgeLoaded, setImgeLoaded] = useState(false);
   const [delivered, setDelivered] = useState(false);
   const { mutate, isLoading } = useUpdateOrder();
@@ -22,7 +22,7 @@ const DeliveryModal = ({ toggleModal, id }: IProps) => {
         mutate(
           {
             order: {
-              id,
+              id: selectedOrderId,
               status: 'delivered',
               deliveredAt: new Date(),
             },
@@ -36,7 +36,7 @@ const DeliveryModal = ({ toggleModal, id }: IProps) => {
         );
       }, 3000);
     }
-  }, [imgeLoaded, mutate, id, queryClient]);
+  }, [imgeLoaded, mutate, selectedOrderId, queryClient]);
 
   return (
     <ModalLayout width="32rem" height="30rem" toggleModal={toggleModal}>

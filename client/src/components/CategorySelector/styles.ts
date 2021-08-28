@@ -17,7 +17,7 @@ export const Category = styled.div`
   opacity: 0.35;
 
   &#category-gift {
-    background-color: #c3c0f3;
+    background-color: #a39dff;
   }
 
   &#category-package {

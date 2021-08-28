@@ -1,5 +1,6 @@
 import { Order } from '@/entities/order.entity';
 import { OrderProduct } from '@/entities/orderProduct.entity';
+import { Product } from '@/entities/product.entity';
 import addMonth from '@/utils/addMonth';
 import {
   EntityRepository,
@@ -59,6 +60,14 @@ class OrderRepository extends Repository<Order> {
       where: { id, user_id },
       relations: ['products', 'products.productImage'],
     });
+  }
+
+  async getOrderByProductId(product_id: string, user_id: number) {
+    return this.createQueryBuilder('order')
+      .leftJoinAndSelect('order.products', 'product')
+      .where(`order.user_id=${user_id}`)
+      .andWhere(`product.id=${product_id}`)
+      .getOne();
   }
 
   async getOrders({ user_id, year }: { user_id: number; year?: string }) {

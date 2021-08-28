@@ -11,4 +11,8 @@ export const Form = styled.form<IForm>`
     flex-direction: column;
     gap: 1.5rem;
   }
+
+  ${({ theme }) => theme.mediaScreen.phone`
+    gap: 1.5rem;
+  `}
 `;

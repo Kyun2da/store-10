@@ -108,7 +108,7 @@ export const CollapseSubTitle = styled.div`
       padding: 0.2rem 0.7rem;
 
       &.상품 {
-        background-color: #c3c0f3;
+        background-color: #a39dff;
       }
       &.환불 {
         background-color: #b9d58c;

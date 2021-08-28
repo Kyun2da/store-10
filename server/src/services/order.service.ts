@@ -48,6 +48,11 @@ class OrderService {
     };
   }
 
+  async getOrderByProductId(product_id: string, user_id: number) {
+    const orderRepo = OrderRepository();
+    return await orderRepo.getOrderByProductId(product_id, user_id);
+  }
+
   async getOrders({ user_id, year }) {
     const orderRepo = OrderRepository();
     const orders = await orderRepo.getOrders({ user_id, year });

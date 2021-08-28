@@ -7,7 +7,11 @@ const router = Router();
 
 router.patch('/', authJWT, wrapAsync(OrderController.updateOrder));
 router.post('/', authJWT, wrapAsync(OrderController.createOrder));
-router.get('/:id', authJWT, wrapAsync(OrderController.getOrder));
 router.get('/', authJWT, wrapAsync(OrderController.getOrders));
-
+router.get('/:id', authJWT, wrapAsync(OrderController.getOrder));
+router.get(
+  '/product/:product_id',
+  authJWT,
+  wrapAsync(OrderController.getOrderByProductId)
+);
 export default router;

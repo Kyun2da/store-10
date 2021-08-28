@@ -84,21 +84,27 @@ const RequestModal = ({ toggleModal, selected }: RequestModalProps) => {
       <S.ModalBody>
         <Form onSubmit={handleOnSubmit} gap={2}>
           <div className="input-wrapper">
-            <Title level={5}>문의 유형</Title>
+            <Title className="sub-title" level={5}>
+              문의 유형
+            </Title>
             <CategorySelector setCategory={setCategory} />
           </div>
           <div className="input-wrapper">
-            <Title level={5}>비공개 여부</Title>
+            <Title className="sub-title" level={5}>
+              비공개 여부
+            </Title>
             <S.CheckboxWrapper>
               <Checkbox checked={secret} onChange={handleOnChangeSecret} />
               {secret
-                ? '관리자와 작성자만 열람 가능합니다.'
+                ? '관리자/작성자만 열람 가능합니다.'
                 : '모든 사람이 열람 가능합니다.'}
             </S.CheckboxWrapper>
           </div>
 
-          <div className="input-wrapper">
-            <Title level={5}>문의 제목 (최대 50자)</Title>
+          <div className="input-wrapper custom-input">
+            <Title className="sub-title" level={5}>
+              문의 제목 (최대 50자)
+            </Title>
             <Input
               fullWidth
               maxLength={50}
@@ -115,7 +121,9 @@ const RequestModal = ({ toggleModal, selected }: RequestModalProps) => {
           </div>
 
           <div style={{ marginTop: '2rem' }} className="input-wrapper">
-            <Title level={5}>문의 남기기</Title>
+            <Title className="sub-title" level={5}>
+              문의 남기기
+            </Title>
             <Textarea
               name="request-content"
               resize="vertical"

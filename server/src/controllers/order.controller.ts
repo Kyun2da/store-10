@@ -38,6 +38,19 @@ class OrderController {
     }
   }
 
+  async getOrderByProductId(req: Request, res: Response) {
+    const { product_id } = req.params;
+    const user_id = req.user.id;
+
+    const result = await OrderService.getOrderByProductId(product_id, user_id);
+
+    if (result) {
+      ApiResponse(res, HttpStatusCode.OK, '조회성공', { ordered: true });
+    } else {
+      ApiResponse(res, HttpStatusCode.OK, '조회성공', { ordered: false });
+    }
+  }
+
   async getOrders(req: Request, res: Response) {
     const { month_ago, year } = req.query;
     const userId = req.user?.id;

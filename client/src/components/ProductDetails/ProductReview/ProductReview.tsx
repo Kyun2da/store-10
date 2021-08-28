@@ -22,6 +22,7 @@ import { REVIEW_LIMIT } from '@/utils/constant/offsetLimit';
 import Thung from '@/components/Thung';
 import { ResponseError } from '@/components/Shared/Error';
 import { ReviewSkeleton } from '@/components/Skeleton/ProductSkeleton/';
+import { getOrderByProductId } from '@/lib/api/order';
 
 // 페이지 당 리뷰 노출 개수
 
@@ -53,9 +54,14 @@ const ProductReview = () => {
   const { count, sum, ratings } = scores;
   const rating = calculateRating({ sum, count });
 
-  const handleClickReviewButton = () => {
+  const handleClickReviewButton = async () => {
     if (!user) {
       return notify('error', '로그인 후 작성 가능합니다.');
+    }
+
+    const { ordered } = await getOrderByProductId(+id);
+    if (!ordered) {
+      return notify('error', '리뷰는 상품 구매 후 작성 가능해요!');
     }
 
     toggleReviewModal();

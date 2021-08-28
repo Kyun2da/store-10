@@ -43,7 +43,6 @@ export const Input = styled.input<IInput>`
   padding: 1rem;
   color: ${({ theme }) => theme.color['text-color']};
   font-size: 1.8rem;
-  background-color: transparent;
   outline: none;
   border: none;
   width: 100%;
@@ -183,6 +182,10 @@ export const Textarea = styled.textarea<ITextarea>`
   border-top-right-radius: 2rem;
   border-bottom-left-radius: 2rem;
   resize: ${({ resize }) => resize};
+  color: ${({ theme }) => theme.color['text-color']};
+  background-color: ${({ theme }) => theme.color.background};
+  ${({ theme }) => theme.fontSize.m};
+  overflow: hidden;
 
   &.error-focus:focus {
     outline: none;
@@ -199,6 +202,7 @@ export const Textarea = styled.textarea<ITextarea>`
   }
 
   ${({ theme }) => theme.mediaScreen.tablet`
+      font-size: 1.25rem;
       height: 10rem;
   `}
 `;
@@ -206,7 +210,7 @@ export const Textarea = styled.textarea<ITextarea>`
 export const FileInputButton = styled.div`
   border-radius: 2rem;
   padding: 2rem;
-  background-color: #ededed;
+  background-color: ${({ theme }) => theme.color.background};
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -214,6 +218,12 @@ export const FileInputButton = styled.div`
   align-items: center;
   border: 1px dashed #aaa;
   cursor: pointer;
+
+  ${({ theme }) => theme.mediaScreen.phone`
+    gap: 1rem;
+    padding: 1rem;
+    font-size: 1.4rem;
+  `}
 
   .helper-text {
     color: #adadad;
@@ -239,7 +249,6 @@ export const FileInputButton = styled.div`
 `;
 
 export const PreviewWrapper = styled.div`
-  margin-top: 2rem;
   display: flex;
   gap: 2rem;
 

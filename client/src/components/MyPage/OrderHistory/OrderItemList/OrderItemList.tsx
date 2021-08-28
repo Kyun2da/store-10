@@ -3,7 +3,6 @@ import * as S from './styles';
 import { wonFormat, dateFormat } from '@/utils/helper';
 import { ORDER_STATUS } from '@/contstants';
 import { Link } from '@/lib/Router';
-import useModal from '@/hooks/useModal';
 
 interface IProps {
   date: string;
@@ -31,7 +30,7 @@ const OrderItemList = ({
   clickOnDeliveryListener,
 }: IProps) => {
   return (
-    <div>
+    <S.OrderItemListContainer>
       <S.OrderItemListHeader>
         {dateFormat(date, '.')} 주문
       </S.OrderItemListHeader>
@@ -44,7 +43,7 @@ const OrderItemList = ({
             </S.OrderItemInfoSubStatus>
           )}
         </S.OrderItemInfoStatusWrapper>
-        <S.OrderItemActions>
+        <S.OrderDeliveryWrapper>
           {
             // TODO: 임시 상태 처리 중
             status === 'paid' && (
@@ -57,7 +56,7 @@ const OrderItemList = ({
               </S.OrderDeliveryButton>
             )
           }
-        </S.OrderItemActions>
+        </S.OrderDeliveryWrapper>
       </S.OrderItemInfoHeader>
       <S.OrderItemList>
         {items.map((item) => (
@@ -74,11 +73,10 @@ const OrderItemList = ({
               </S.OrderItemInfoBody>
             </S.OrderItemInfo>
             <S.OrderItemActions>
-              <Link to={`/detail/${item.id}`}>
-                <S.OrderActionsButton type="button" color="white">
-                  상품이동
-                </S.OrderActionsButton>
-              </Link>
+              <S.OrderActionsButton type="button" color="white">
+                <Link to={`/detail/${item.id}`}>상품이동</Link>
+              </S.OrderActionsButton>
+
               <S.OrderActionsButton
                 type="button"
                 color="white"
@@ -99,7 +97,7 @@ const OrderItemList = ({
           </S.OrderItem>
         ))}
       </S.OrderItemList>
-    </div>
+    </S.OrderItemListContainer>
   );
 };
 

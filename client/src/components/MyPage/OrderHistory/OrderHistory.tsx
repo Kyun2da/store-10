@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Chip from '@/components/Shared/Chip';
-import Title from '@/components/Shared/Title';
 import Pagination from '@/components/Shared/Pagination';
 import * as S from './styles';
 import { ORDER_STATUS_DATA, PERIOD_FILTER } from '@/contstants';
@@ -93,7 +92,11 @@ const OrderHistory = ({}) => {
         data?.filter((order) => order.status === status.value)?.length || 0;
       return (
         <S.OrderStatusWrapper key={status.value}>
-          <S.OrderStatusName>{status.name}</S.OrderStatusName>
+          <S.OrderStatusName
+            onClick={() => setSelectedStatus(isSelected ? null : status.value)}
+          >
+            {status.name}
+          </S.OrderStatusName>
           <S.OrderStatus
             isSelected={isSelected}
             onClick={() => setSelectedStatus(isSelected ? null : status.value)}
@@ -109,16 +112,17 @@ const OrderHistory = ({}) => {
     <S.OrerHistory ref={topRef} className="pagination-scroll-top">
       <S.OrderHistoryHeader>
         <S.OrderPeriodWrapper>
-          <Title level={5}>조회 기간:</Title> {renderPeriodFilter()}
+          {/* <Title level={5}>조회 기간</Title> */}
+          {renderPeriodFilter()}
         </S.OrderPeriodWrapper>
         <S.OrderStatusContainer>
           {renderOrderStatuList()}
         </S.OrderStatusContainer>
       </S.OrderHistoryHeader>
-      <S.OrderHistoryBody>
+      <div>
         {!!data?.length && renderOrderItemList()}
         {data && !orders.length && <Thung title="" />}
-      </S.OrderHistoryBody>
+      </div>
 
       <Pagination
         handleOnClickPage={handleOnClickPage}

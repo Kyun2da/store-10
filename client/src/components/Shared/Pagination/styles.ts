@@ -15,7 +15,8 @@ export const EachPage = styled.div`
   ${({ theme }) => theme.fontSize.m};
   ${({ theme }) => theme.fontWeight.s};
   padding: 1rem;
-  cursor: pointer;
+  color: ${({ theme }) => theme.color['text-color']};
+  color: [];
 
   &.selected {
     background-color: ${({ theme }) => theme.color.primary};

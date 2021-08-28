@@ -68,7 +68,7 @@ export const ORDER_STATUS_DATA = [
   },
   {
     value: 'preparing',
-    name: '상품준비중',
+    name: '배송준비',
     count: 0,
   },
   {

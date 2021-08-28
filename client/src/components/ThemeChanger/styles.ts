@@ -30,7 +30,7 @@ export const MissionButton = styled.button`
     theme.name == 'light-mode' ? 'white' : 'rgb(51, 54, 56)'};
   color: ${({ theme }) => theme.color['text-color']};
   font-size: 0.75rem;
-  padding: 0.4rem 0.5rem;
+  padding: 0.4rem 1rem 0.4rem 0.7rem;
   border-radius: 9999px;
   --transform-translate-x: 0;
   --transform-translate-y: 0;

@@ -75,7 +75,7 @@ const Category = () => {
           </S.VerticalScroll>
         </S.SubCategoriesTitles>
       </S.SubCategoriesWrap>
-      <S.CategoryWrapper>
+      <S.CategoryWrapper className="container">
         <S.CategoryHeader>{main?.title + ' > ' + sub.title}</S.CategoryHeader>
         <CategoryProducts subCategoryId={+categoryId} />
       </S.CategoryWrapper>

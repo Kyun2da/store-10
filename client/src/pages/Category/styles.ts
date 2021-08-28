@@ -1,11 +1,7 @@
 import { HEADER_HEIGHT } from '@/styles/globalStyle';
 import styled from 'styled-components';
 
-export const CategoryWrapper = styled.div`
-  max-width: ${({ theme }) => theme.media.pc}px;
-  width: 95%;
-  margin: 0 auto;
-`;
+export const CategoryWrapper = styled.div``;
 
 export const CategoryHeader = styled.div`
   font-family: BMDOHYEON;
@@ -34,6 +30,7 @@ export const SubCategoriesTitles = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: flex-start;
+  line-height: 2rem;
 
   & {
     -ms-overflow-style: none;

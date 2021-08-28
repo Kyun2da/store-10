@@ -125,8 +125,8 @@ const Bookmark = () => {
   if (!data) return <div>nodata</div>;
 
   return (
-    <S.BookmarkContainer>
-      <S.BookmarkTitle level={3}>찜 목록</S.BookmarkTitle>
+    <S.BookmarkContainer className="container">
+      <S.BookmarkTitle level={4}>찜 목록</S.BookmarkTitle>
       <S.ButtonContainer>
         {data?.pages[0].length ? (
           isEdit ? (

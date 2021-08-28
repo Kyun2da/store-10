@@ -6,17 +6,13 @@ import Thung from '@/components/Thung';
 import { Close2 } from '@/assets/svgs';
 
 export const BookmarkContainer = styled.div`
-  max-width: ${({ theme }) => theme.media.pc}px;
   display: flex;
   flex-direction: column;
-  max-width: 1050px;
-  width: 95%;
-  margin: 5rem auto;
 `;
 
 export const BookmarkTitle = styled(Title)`
-  margin-bottom: 5rem;
-  text-align: center;
+  ${({ theme }) => theme.fontSize.l};
+  font-family: 'BMDOHYEON', sans-serif;
 `;
 
 export const CardContainer = styled.div`

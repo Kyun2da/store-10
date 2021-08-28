@@ -4,7 +4,8 @@ import ModalLayout from '../ModalLayout';
 export const CouponModal = styled.div`
   width: 100%;
   max-height: 45rem;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   &::-webkit-scrollbar {
     width: 0;
     height: 0;
@@ -46,6 +47,12 @@ export const CouponModalLayout = styled(ModalLayout)`
       > button {
         display: none;
       }
+    }
+  }
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    > div {
+      width: 100%;
+      padding: 1.2rem;
     }
   }
 `;

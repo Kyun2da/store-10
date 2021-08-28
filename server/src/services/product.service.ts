@@ -103,12 +103,14 @@ class ProductService {
 
     const points = [1, 2, 3, 4, 5];
     const rates = ratings.map((rating) => rating.rating);
-    const stars = points.map((point, idx) => {
-      const isExist = rates.includes(point);
-      return isExist ? ratings[idx] : { rating: point, count: '0' };
-    });
+    const stars = points
+      .map((point) => {
+        const isExist = rates.includes(point);
+        if (!isExist) return { rating: point, count: '0' };
+      })
+      .filter(Boolean);
 
-    return stars;
+    return [...ratings, ...stars];
   }
 
   async getProductReviewById(review_id: string) {

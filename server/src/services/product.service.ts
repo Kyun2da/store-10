@@ -99,7 +99,16 @@ class ProductService {
 
   async getProductReviewRatingCount(id: string) {
     const productReviewRepo = ProductReviewRepository();
-    return await productReviewRepo.findProductRatingCountById(id);
+    const ratings = await productReviewRepo.findProductRatingCountById(id);
+
+    const points = [1, 2, 3, 4, 5];
+    const rates = ratings.map((rating) => rating.rating);
+    const stars = points.map((point, idx) => {
+      const isExist = rates.includes(point);
+      return isExist ? ratings[idx] : { rating: point, count: '0' };
+    });
+
+    return stars;
   }
 
   async getProductReviewById(review_id: string) {

@@ -1,8 +1,8 @@
 export const MY_PAGE_NAVIGATIONS = [
-  { value: 'orderHistroy', name: '주문 내역' },
+  { value: 'orderHistroy', name: '주문내역' },
   { value: 'coupon', name: '쿠폰' },
-  { value: 'inqurey', name: '상품 문의' },
-  { value: 'review', name: '상품 후기' },
+  { value: 'inqurey', name: '상품문의' },
+  { value: 'review', name: '상품후기' },
   { value: 'changeUserInfo', name: '회원정보 변경' },
 ];
 

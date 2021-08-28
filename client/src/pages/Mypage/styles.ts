@@ -23,6 +23,8 @@ export const MyPageTitle = styled(Title)`
   border-radius: 1rem;
   box-shadow: ${({ theme }) => theme.boxShadow};
   padding: 1.5rem;
+  line-height: 5rem;
+  padding-bottom: 0.5rem;
 
   ${({ theme }) => theme.mediaScreen.phone`
     font-size: 3.2rem;

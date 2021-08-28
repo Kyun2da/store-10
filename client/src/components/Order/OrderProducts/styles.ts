@@ -26,7 +26,8 @@ export const OrderProductsItem = styled.li`
   align-items: center;
   width: 100%;
   padding: 0 1rem;
-  background: ${({ theme }) => theme.color['off-white']};
+  background: ${({ theme }) => theme.color['body']};
+  color: ${({ theme }) => theme.color['text-color']};
   &:not(:first-child) {
     margin-top: 1rem;
   }

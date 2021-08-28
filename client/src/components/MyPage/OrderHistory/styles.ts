@@ -5,7 +5,7 @@ interface IOrderStatus {
 }
 
 export const Container = css`
-  background-color: ${({ theme }) => theme.color['off-white']};
+  background-color: ${({ theme }) => theme.color['body']};
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: 0.8rem;
   padding: 3.6rem;
@@ -22,11 +22,12 @@ export const OrderPeriodWrapper = styled.div`
   span {
     ${({ theme }) => theme.fontSize.m};
     ${({ theme }) => theme.fontWeight.m};
+    color: ${({ theme }) => theme.color['text-color']};
     margin-left: 1rem;
     &.selected {
       background-color: ${({ theme }) => theme.color.primary};
-      color: ${({ theme }) => theme.color['off-white']};
       border: 1px solid ${({ theme }) => theme.color.primary};
+      color: ${({ theme }) => theme.color['off-white']};
     }
   }
 `;
@@ -49,6 +50,7 @@ export const OrderStatusName = styled.span`
   display: block;
   ${({ theme }) => theme.fontWeight.l};
   ${({ theme }) => theme.fontSize.s};
+  color: ${({ theme }) => theme.color['text-color']};
   padding: 0.8rem;
 `;
 
@@ -61,7 +63,6 @@ export const OrderStatus = styled.div<IOrderStatus>`
   align-items: center;
   ${({ theme }) => theme.fontWeight.l};
   ${({ theme }) => theme.fontSize.m};
-
   ${(props) =>
     props.isSelected
       ? css`
@@ -70,7 +71,7 @@ export const OrderStatus = styled.div<IOrderStatus>`
         `
       : css`
           background-color: ${({ theme }) => theme.color.label};
-          color: ${({ theme }) => theme.color['off-white']};
+          color: ${({ theme }) => theme.color['reverse-text-color']};
         `}
 `;
 

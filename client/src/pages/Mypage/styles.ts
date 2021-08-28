@@ -34,7 +34,7 @@ export const MyPagePointBackground = styled.div`
 
 export const MyPageBody = styled.div`
   flex: 1;
-  background: ${({ theme }) => theme.color.body};
+  background: ${({ theme }) => theme.color.background};
   padding: 3.2rem;
   h1 {
     ${({ theme }) => theme.fontSize.xxl};

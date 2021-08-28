@@ -67,7 +67,7 @@ const ProductInfo = () => {
       addMutate(Number(id));
       if (!missionList.bookmark) {
         setMissionList('bookmark', true);
-        return notify('success', '상품 찜하기 미션 성공!');
+        return notify('dark', '상품 찜하기 미션 성공!');
       }
     }
   }, [

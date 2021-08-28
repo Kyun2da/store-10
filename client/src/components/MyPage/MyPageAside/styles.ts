@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const MyPageAside = styled.aside`
   font-family: BMDOHYEON;
+  z-index: 100;
 
   ${({ theme }) => theme.mediaScreen.btw_pc_tab`
     position: sticky;

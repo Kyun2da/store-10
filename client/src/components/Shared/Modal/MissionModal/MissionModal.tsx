@@ -2,9 +2,10 @@ import { HeartSVG, UserSVG } from '@/assets/svgs';
 import useMission from '@/hooks/useMission';
 import { MissionListKeys } from '@/types';
 import React from 'react';
-import Title from '../../Title';
+import Title from '@/components/Shared/Title';
 import ProgressBar from './ProgressBar';
 import * as S from './styles';
+import useGlobalTheme from '@/hooks/useGlobalTheme';
 
 interface IProps {
   toggleModal: () => void;
@@ -16,6 +17,8 @@ const MissionTemplate = {
 };
 
 const MissionModal = ({ toggleModal }: IProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, __, themeString] = useGlobalTheme();
   const [missionList] = useMission();
   console.log(missionList);
 
@@ -34,19 +37,21 @@ const MissionModal = ({ toggleModal }: IProps) => {
 
   return (
     <S.MissionLayout width="80%" height="80%" toggleModal={toggleModal}>
-      <Title level={2}>도전, 배민팡 미션!</Title>
+      <Title className="title" level={2}>
+        도전, 배민팡 미션!
+      </Title>
       <S.SubTitle>미션을 해결하고 쿠폰을 받아가세요.</S.SubTitle>
       <S.MissionStatus>
-        <div>
-          <div>미션 달성률 {missionCompleteStatus}%</div>
-          <div>
+        <div className="current-status">
+          <Title level={5}>미션 달성률 {missionCompleteStatus}%</Title>
+          <div className={'recent-status ' + themeString}>
             최근 달성 미션 :
             {recentMission ? MissionTemplate[recentMission] : '없음'}
           </div>
         </div>
-        <ProgressBar width={300} height={300} percent={missionCompleteStatus} />
+        <ProgressBar percent={missionCompleteStatus} />
       </S.MissionStatus>
-      <S.MissionList>
+      <S.MissionList className={themeString}>
         <S.Mission className={isCompleteClassName(missionList.login)}>
           <UserSVG />
           {MissionTemplate.login}

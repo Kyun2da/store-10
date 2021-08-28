@@ -28,7 +28,8 @@ export const HeaderWrapper = styled.header`
 `;
 
 export const Header = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
   background: ${({ theme }) => theme.color['background']};
   justify-content: space-between;
   align-items: center;
@@ -84,6 +85,7 @@ export const StateUl = styled.div`
 
 export const SearchWrapper = styled.div`
   display: flex;
+  justify-self: center;
   justify-content: flex-end;
   cursor: pointer;
   position: relative;

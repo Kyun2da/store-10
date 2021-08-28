@@ -42,10 +42,16 @@ export const Top = styled.div`
 export const IconsWrapper = styled.div`
   display: flex;
   gap: 0.5rem;
+
+  button {
+    color: ${({ theme }) => theme.color['text-color']};
+  }
+
   a {
     height: 2.5rem;
     display: none;
   }
+
   @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
     a {
       display: block;

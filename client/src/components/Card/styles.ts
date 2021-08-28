@@ -91,7 +91,7 @@ export const ThumbnailWrapper = styled.div`
 `;
 
 export const ProductTitle = styled.p`
-  font-size: clamp(11px, 2.5vw, 1.6rem);
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
   ${({ theme }) => theme.fontWeight.s};
   overflow: hidden;
   text-overflow: ellipsis;

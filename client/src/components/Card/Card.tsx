@@ -17,13 +17,14 @@ import Image from '@/components/Shared/Image';
 import useMission from '@/hooks/useMission';
 
 const BgColor = {
-  Error: 'error',
   Primary: 'primary',
+  Recommand: 'recommand',
   New: 'new',
   Best: 'best',
 } as const;
 
 export type BG_COLOR = typeof BgColor[keyof typeof BgColor];
+
 interface CardProps {
   bgColor: BG_COLOR; // category 식으로 리스트화 (enum 등..) 필요
   linkId: number;
@@ -158,7 +159,6 @@ const Card = ({
     <Link to={`/detail/${linkId}`}>
       <S.Card>
         <div>
-          <S.Liner bgColor={bgColor} />
           <div>
             <S.ThumbnailWrapper>
               {!checkBoxDisplay || (
@@ -196,6 +196,8 @@ const Card = ({
         </S.ProductDetails>
         {openModal && <ShoppingCartModal toggleModal={toggleModal} />}
         {checkBoxDisplay && <S.Filter onClick={onClickFilter}></S.Filter>}
+
+        <S.Liner bgColor={bgColor} />
       </S.Card>
     </Link>
   );

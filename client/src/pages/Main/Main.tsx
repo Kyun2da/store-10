@@ -41,6 +41,8 @@ const Main = () => {
     if (isLoading || !data) {
       return <div></div>;
     }
+    console.log(bgColor);
+
     return data.map((product: IProduct) => (
       <Card
         key={product.id}
@@ -77,7 +79,7 @@ const Main = () => {
               showSkeleton={
                 recommandQuery.isLoading || recommandQuery.isFetching
               }
-              component={renderProducts(recommandQuery)}
+              component={renderProducts(recommandQuery, 'recommand')}
             />
           </div>
         </section>

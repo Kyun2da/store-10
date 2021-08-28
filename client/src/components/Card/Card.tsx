@@ -157,8 +157,8 @@ const Card = ({
 
   return (
     <Link to={`/detail/${linkId}`}>
-      <S.Card>
-        <div>
+      <S.CardWrapper>
+        <S.Card>
           <div>
             <S.ThumbnailWrapper>
               {!checkBoxDisplay || (
@@ -173,32 +173,31 @@ const Card = ({
             </S.ThumbnailWrapper>
             <S.ProductTitle>{title}</S.ProductTitle>
           </div>
-        </div>
 
-        <S.ProductDetails>
-          {!bottomDisplay ||
-            (discount ? (
-              <>
-                <div className="price-tag strikethrough">
+          <S.ProductDetails>
+            {!bottomDisplay ||
+              (discount ? (
+                <>
+                  <div className="price-tag strikethrough">
+                    {wonFormat(price)}
+                  </div>
+                  <div className="price-tag discount">
+                    {wonFormat(calculateDiscount({ price, discount }))}
+                    {Buttons()}
+                  </div>
+                </>
+              ) : (
+                <div className="price-tag">
                   {wonFormat(price)}
-                </div>
-                <div className="price-tag discount">
-                  {wonFormat(calculateDiscount({ price, discount }))}
                   {Buttons()}
                 </div>
-              </>
-            ) : (
-              <div className="price-tag">
-                {wonFormat(price)}
-                {Buttons()}
-              </div>
-            ))}
-        </S.ProductDetails>
-        {openModal && <ShoppingCartModal toggleModal={toggleModal} />}
-        {checkBoxDisplay && <S.Filter onClick={onClickFilter}></S.Filter>}
-
+              ))}
+          </S.ProductDetails>
+          {openModal && <ShoppingCartModal toggleModal={toggleModal} />}
+          {checkBoxDisplay && <S.Filter onClick={onClickFilter}></S.Filter>}
+        </S.Card>
         <S.Liner bgColor={bgColor} />
-      </S.Card>
+      </S.CardWrapper>
     </Link>
   );
 };

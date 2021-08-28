@@ -2,6 +2,23 @@ import styled from 'styled-components';
 import Checkbox from '../Shared/Checkbox';
 import { BG_COLOR } from './Card';
 
+interface LinerProps {
+  bgColor: BG_COLOR;
+}
+
+export const CardWrapper = styled.div`
+  height: 100%;
+  transition: transform 0.12s ease-in;
+
+  /* Elevation1 */
+
+  box-shadow: ${({ theme }) => theme.boxShadow};
+
+  &:hover {
+    transform: translateY(-0.5rem);
+  }
+`;
+
 export const Card = styled.li`
   display: flex;
   position: relative;
@@ -11,24 +28,13 @@ export const Card = styled.li`
   color: ${({ theme }) => theme.color['text-color']};
   background: ${({ theme }) => theme.color['background']};
   overflow: hidden;
-  border-radius: 0.5rem;
-  transition: transform 0.12s ease-in;
-
-  /* Elevation1 */
-
-  box-shadow: ${({ theme }) => theme.boxShadow};
-  border-radius: 10px;
-
-  &:hover {
-    transform: translateY(-0.5rem);
-  }
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
 `;
 
-interface LinerProps {
-  bgColor: BG_COLOR;
-}
-
 export const Liner = styled.div<LinerProps>`
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
   background-color: ${({ theme, bgColor }) => theme.color[bgColor]};
   height: 0.5rem;
 `;

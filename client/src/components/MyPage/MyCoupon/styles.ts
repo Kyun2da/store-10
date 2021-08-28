@@ -5,8 +5,17 @@ export const MyCoupon = styled.div`
   flex-direction: column;
 `;
 
+export const CouponSection = styled.section`
+  display: flex;
+  flex-direction: column;
+
+  .sub-title {
+    margin: 1.5rem 0;
+  }
+`;
+
 export const CouponDisplay = styled.section`
-  margin-top: 3rem;
+  margin-top: 2rem;
 
   .title {
     margin-bottom: 3rem;

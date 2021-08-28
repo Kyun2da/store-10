@@ -11,6 +11,9 @@ export const Pagination = styled.div`
 export const EachPage = styled.div`
   border-radius: 0.5rem;
   background-color: ${({ theme }) => theme.color.background};
+  color: ${({ theme }) => theme.color['text-color']};
+  ${({ theme }) => theme.fontSize.m};
+  ${({ theme }) => theme.fontWeight.s};
   padding: 1rem;
   cursor: pointer;
 

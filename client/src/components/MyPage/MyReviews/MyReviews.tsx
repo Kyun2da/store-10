@@ -1,4 +1,5 @@
 import {
+  PanelWrapper,
   ReviewImages,
   UserDescription,
   UserReview,
@@ -26,6 +27,7 @@ import {
 import useModal from '@/hooks/useModal';
 import { Link } from '@/lib/Router';
 import Dropdown from '@/components/Shared/Dropdown';
+import Thung from '@/components/Thung';
 
 const MyReviews = () => {
   const topRef = useRef<HTMLDivElement>(null);
@@ -80,79 +82,99 @@ const MyReviews = () => {
 
   return (
     <S.MyReviews ref={topRef} className="pagination-scroll-top">
-      <UserReviewArea>
-        {reviews.map((review) => {
-          return (
-            <S.MyReviewsItem key={review.id}>
-              <S.ThumbnailArea>
-                <S.ProductThumbnail
-                  src={review.productImage_url}
-                  alt="상품 섬네일"
-                />
-                <Link to={`/detail/${review.product_id}`}>
-                  <S.LinkButton>이동</S.LinkButton>
-                </Link>
-              </S.ThumbnailArea>
-              <UserReview data-review-id={review.id}>
-                <UserReviewTitles>
-                  <S.ReviewTitleArea>
-                    <Title className="username" level={5}>
-                      {review.name}
-                      <span style={{ fontWeight: 100 }}>님</span>
-                    </Title>
-                    <Dropdown selectedId={review.id} items={dropdownItems} />
-                  </S.ReviewTitleArea>
-                  <div className="rating-area">
-                    <RatingGetter rating={review.rating} uniqueId={nanoid()} />
-                    <p className="date">{dateFormat(review.createdAt)}</p>
-                  </div>
-                </UserReviewTitles>
+      <Title level={5}>내 리뷰</Title>
 
-                {review.url.length !== 0 && (
-                  <ReviewImages>
-                    {review.url.map((image) => (
-                      <img
-                        onClick={() => handleOnClickImage(image)}
-                        key={nanoid()}
-                        src={image}
-                        alt="유저사진리뷰"
+      <PanelWrapper>
+        <UserReviewArea>
+          {!!reviews.length ? (
+            reviews.map((review) => {
+              return (
+                <S.MyReviewsItem key={review.id}>
+                  <S.Title>리뷰번호: #{review.id}</S.Title>
+                  <div className="review-wrapper">
+                    <S.ThumbnailArea>
+                      <S.ProductThumbnail
+                        src={review.productImage_url}
+                        alt="상품 섬네일"
                       />
-                    ))}
-                  </ReviewImages>
-                )}
+                      <Link to={`/detail/${review.product_id}`}>
+                        <S.LinkButton>이동</S.LinkButton>
+                      </Link>
+                    </S.ThumbnailArea>
+                    <UserReview data-review-id={review.id}>
+                      <UserReviewTitles>
+                        <S.ReviewTitleArea>
+                          <Title className="username" level={5}>
+                            {review.name}
+                            <span style={{ fontWeight: 100 }}>님</span>
+                          </Title>
+                          <Dropdown
+                            selectedId={review.id}
+                            items={dropdownItems}
+                          />
+                        </S.ReviewTitleArea>
+                        <div className="rating-area">
+                          <RatingGetter
+                            rating={review.rating}
+                            uniqueId={nanoid()}
+                          />
+                          <p className="date">{dateFormat(review.createdAt)}</p>
+                        </div>
+                      </UserReviewTitles>
 
-                <UserDescription>{review.content}</UserDescription>
-              </UserReview>
-            </S.MyReviewsItem>
-          );
-        })}
-      </UserReviewArea>
+                      {review.url.length !== 0 && (
+                        <ReviewImages>
+                          {review.url.map((image) => (
+                            <img
+                              onClick={() => handleOnClickImage(image)}
+                              key={nanoid()}
+                              src={image}
+                              alt="유저사진리뷰"
+                            />
+                          ))}
+                        </ReviewImages>
+                      )}
 
-      <Pagination
-        handleOnClickPage={handleOnClickPage}
-        count={Math.ceil(count / REVIEW_LIMIT)}
-      />
+                      <UserDescription>{review.content}</UserDescription>
+                    </UserReview>
+                  </div>
+                </S.MyReviewsItem>
+              );
+            })
+          ) : (
+            <Thung
+              title="아직 작성된 리뷰가 없어요..!"
+              className="thung-review"
+            />
+          )}
+        </UserReviewArea>
 
-      {isImageOpen && (
-        <ReviewImageModal
-          selectedImage={selectedImage}
-          toggleModal={toggleImageModal}
+        <Pagination
+          handleOnClickPage={handleOnClickPage}
+          count={Math.ceil(count / REVIEW_LIMIT)}
         />
-      )}
 
-      {isOpen && (
-        <DeleteConfirmModal
-          removeSelected={removeSelectedReview}
-          toggleModal={toggleModal}
-        />
-      )}
+        {isImageOpen && (
+          <ReviewImageModal
+            selectedImage={selectedImage}
+            toggleModal={toggleImageModal}
+          />
+        )}
 
-      {isUpdateModalOpen && (
-        <ReviewUpdateModal
-          selected={selectedReview}
-          toggleModal={toggleUpdateModal}
-        />
-      )}
+        {isOpen && (
+          <DeleteConfirmModal
+            removeSelected={removeSelectedReview}
+            toggleModal={toggleModal}
+          />
+        )}
+
+        {isUpdateModalOpen && (
+          <ReviewUpdateModal
+            selected={selectedReview}
+            toggleModal={toggleUpdateModal}
+          />
+        )}
+      </PanelWrapper>
     </S.MyReviews>
   );
 };

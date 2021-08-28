@@ -53,6 +53,7 @@ declare module 'styled-components' {
       btw_pc_tab: (args: TemplateStringsArray) => FlattenSimpleInterpolation;
       tablet: (args: TemplateStringsArray) => FlattenSimpleInterpolation;
       btw_tab_mob: (args: TemplateStringsArray) => FlattenSimpleInterpolation;
+      mphone: (args: TemplateStringsArray) => FlattenSimpleInterpolation;
       phone: (args: TemplateStringsArray) => FlattenSimpleInterpolation;
     };
     boxShadow: string;

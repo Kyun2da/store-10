@@ -14,6 +14,8 @@ import { MY_QUESTION_HEADER } from '@/utils/constant/CollapseHeaders';
 import { QUESTION_LIMIT } from '@/utils/constant/offsetLimit';
 import { RequestUpdateModal } from '@/components/Shared/Modal';
 import { notify } from '@/components/Shared/Toastify';
+import Thung from '@/components/Thung';
+import Title from '@/components/Shared/Title';
 
 const MyQuestions = () => {
   const topRef = useRef<HTMLDivElement>(null);
@@ -72,34 +74,42 @@ const MyQuestions = () => {
 
   return (
     <S.MyQuestions ref={topRef} className="pagination-scroll-top">
+      <Title level={5}>내 문의</Title>
       <PanelWrapper>
-        <Collapse
-          headers={MY_QUESTION_HEADER}
-          items={questions}
-          noSecret={true}
-          dropdownItems={dropdownItems}
-          gaps="1fr 1fr 3fr 1fr 1fr"
-        />
+        {!!questions.length ? (
+          <Collapse
+            headers={MY_QUESTION_HEADER}
+            items={questions}
+            noSecret={true}
+            dropdownItems={dropdownItems}
+            gaps="1fr 1fr 3fr 1fr 1fr"
+          />
+        ) : (
+          <Thung
+            title="아직 작성된 문의가 없어요..!"
+            className="thung-review"
+          />
+        )}
 
         <Pagination
           handleOnClickPage={handleOnClickPage}
           count={Math.ceil(count / QUESTION_LIMIT)}
         />
+
+        {isOpenRemoveModal && (
+          <DeleteConfirmModal
+            removeSelected={handleRemoveOnQuestion}
+            toggleModal={toggleRemoveModal}
+          />
+        )}
+
+        {isOpenUpdateModal && (
+          <RequestUpdateModal
+            selected={seletedQuestion}
+            toggleModal={toggleUpdateModal}
+          />
+        )}
       </PanelWrapper>
-
-      {isOpenRemoveModal && (
-        <DeleteConfirmModal
-          removeSelected={handleRemoveOnQuestion}
-          toggleModal={toggleRemoveModal}
-        />
-      )}
-
-      {isOpenUpdateModal && (
-        <RequestUpdateModal
-          selected={seletedQuestion}
-          toggleModal={toggleUpdateModal}
-        />
-      )}
     </S.MyQuestions>
   );
 };

@@ -44,11 +44,7 @@ export const ModalWrapper = styled.div<IModalWrapperProps>`
   max-height: 96%;
   background-color: ${({ theme }) => theme.color.body};
 
-  ${({ theme }) => theme.mediaScreen.tablet`
-    width: 85%;
-  `}
-
-  ${({ compact }) =>
+  ${({ compact, theme }) =>
     compact
       ? css`
           padding: 0;
@@ -64,7 +60,9 @@ export const ModalWrapper = styled.div<IModalWrapperProps>`
             }
           }
         `
-      : css``}
+      : theme.mediaScreen.tablet`
+      width: 85%;
+    `}
 
   ${({ fullWidth }) =>
     fullWidth

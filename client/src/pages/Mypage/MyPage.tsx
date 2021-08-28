@@ -36,16 +36,14 @@ const MyPage = () => {
     <>
       <S.MyPagePointBackground />
       <S.MyPageContainer className="container">
-        <S.Mypage>
+        <S.MyPageTitle level={3}>{contentName}</S.MyPageTitle>
+        <S.MyPage>
           <MyPageAside
             contentValue={contentValue}
             setContentValue={setContentValue}
           />
-          <S.MyPageBody>
-            <S.MyPageTitle level={1}>{contentName}</S.MyPageTitle>
-            {renderBody(contentValue)}
-          </S.MyPageBody>
-        </S.Mypage>
+          <S.MyPageBody>{renderBody(contentValue)}</S.MyPageBody>
+        </S.MyPage>
       </S.MyPageContainer>
     </>
   );

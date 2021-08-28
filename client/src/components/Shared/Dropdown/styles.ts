@@ -12,6 +12,9 @@ export const DropdownButton = styled.div`
     outline: none;
     border: none;
   }
+
+  ${({ theme }) => theme.fontSize.m};
+  ${({ theme }) => theme.fontWeight.s};
 `;
 
 export const DropDown = styled.div`

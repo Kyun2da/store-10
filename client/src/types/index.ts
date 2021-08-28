@@ -229,3 +229,10 @@ export interface IUserCoupon {
   amount: number;
   is_valid: boolean;
 }
+
+export interface IMissionList {
+  login?: boolean;
+  bookmark?: boolean;
+}
+
+export type MissionListKeys = keyof IMissionList;

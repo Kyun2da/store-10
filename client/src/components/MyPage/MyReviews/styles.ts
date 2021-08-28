@@ -1,27 +1,62 @@
-import { ReviewImages } from '@/components/ProductDetails/styles';
+import { ReviewImages, UserReview } from '@/components/ProductDetails/styles';
 import styled from 'styled-components';
+
+export const Title = styled.h1`
+  ${({ theme }) => theme.fontSize.m};
+`;
 
 export const MyReviews = styled.div`
   display: flex;
   flex-direction: column;
-  ${({ theme }) => theme.fontSize.m};
-  ${({ theme }) => theme.fontWeight.s};
   color: ${({ theme }) => theme.color['text-color']};
+
+  &.pagination-scroll-top {
+    ${({ theme }) => theme.mediaScreen.btw_pc_tab`
+      padding-top: 23rem;
+      margin-top: -23rem;
+    `};
+
+    ${({ theme }) => theme.mediaScreen.tablet`
+      padding-top: 21rem;
+      margin-top: -21rem;
+    `};
+  }
 `;
 
-export const MyReviewsItem = styled.div`
+export const MyReviewsItem = styled.section`
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
+  flex-direction: column;
 
   & + & {
     margin-top: 3rem;
   }
 
+  .review-wrapper {
+    display: flex;
+    gap: 2rem;
+
+    ${({ theme }) => theme.mediaScreen.mphone`
+      flex-direction: column;
+    `}
+  }
+
   ${ReviewImages} {
     img {
-      width: 15rem;
-      height: 10rem;
+      width: 100%;
+      max-width: 15rem;
+      max-height: 10rem;
     }
+  }
+
+  ${UserReview} {
+    overflow-x: auto;
+
+    ${({ theme }) => theme.mediaScreen.mphone`
+      border-top: none;
+      padding-left: 0;
+      padding-right: 0;
+    `}
   }
 `;
 
@@ -29,6 +64,10 @@ export const ThumbnailArea = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  ${({ theme }) => theme.mediaScreen.mphone`
+    flex-direction: row;
+  `}
 `;
 
 export const ProductThumbnail = styled.img`
@@ -40,6 +79,7 @@ export const ProductThumbnail = styled.img`
 
 export const LinkButton = styled.button`
   padding: 1rem;
+  min-width: 10rem;
   width: 100%;
   color: #fff;
   border-radius: 2rem;

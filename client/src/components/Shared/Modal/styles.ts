@@ -113,6 +113,7 @@ export const DeleteModalButton = styled.button`
   padding: 2rem 0;
   width: 50%;
   cursor: pointer;
+  color: ${({ theme }) => theme.color['text-color']};
   ${({ theme }) => theme.fontSize.m};
   ${({ theme }) => theme.fontWeight.m};
 

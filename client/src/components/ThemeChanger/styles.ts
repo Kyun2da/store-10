@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MoonSVG, SunSVG, ArrowTopSVG } from '@/assets/svgs';
+import { MoonSVG, SunSVG, ArrowTopSVG, Target } from '@/assets/svgs';
 
 const SvgSize = {
   width: '3rem',
@@ -21,6 +21,39 @@ export const ThemeChangerWrapper = styled.div`
 export const ThemeButtonSVG = styled.svg`
   width: 1rem;
   height: 1rem;
+`;
+
+export const MissionButton = styled.button`
+  box-shadow: rgb(0 0 0 / 15%) 0px 2px 2px 0px;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  background-color: ${({ theme }) =>
+    theme.name == 'light-mode' ? 'white' : 'rgb(51, 54, 56)'};
+  color: ${({ theme }) => theme.color['text-color']};
+  font-size: 0.75rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 9999px;
+  --transform-translate-x: 0;
+  --transform-translate-y: 0;
+  --transform-rotate: 0;
+  --transform-skew-x: 0;
+  --transform-skew-y: 0;
+  --transform-scale-x: 1;
+  --transform-scale-y: 1;
+  transform: translateX(var(--transform-translate-x))
+    translateY(var(--transform-translate-y)) rotate(var(--transform-rotate))
+    skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y))
+    scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+  cursor: pointer;
+  ${({ theme }) => theme.fontSize.s};
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  margin-top: auto;
+  margin-bottom: auto;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.hover};
+  }
 `;
 
 export const ThemeButton = styled.button`
@@ -46,6 +79,7 @@ export const ThemeButton = styled.button`
   cursor: pointer;
   display: flex;
   align-items: center;
+  margin-left: 0.5rem;
 
   span {
     padding: 0 0.5rem 0 0.5rem;
@@ -58,6 +92,10 @@ export const ThemeButton = styled.button`
     ${({ theme }) => theme.mediaScreen.tablet`
       display: none;
     `}
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.hover};
   }
 `;
 
@@ -85,6 +123,10 @@ export const ScrollButton = styled.button`
   margin-left: 0.5rem;
   margin-top: auto;
   margin-bottom: auto;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.hover};
+  }
 `;
 
 export const MoonSvg = styled(MoonSVG)`
@@ -107,5 +149,9 @@ export const SunSvg = styled(SunSVG)`
 `;
 
 export const ArrowSvg = styled(ArrowTopSVG)`
+  ${SvgSize}
+`;
+
+export const TargetSvg = styled(Target)`
   ${SvgSize}
 `;

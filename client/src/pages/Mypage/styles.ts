@@ -25,10 +25,16 @@ export const MyPageTitle = styled(Title)`
   padding: 1.5rem;
   line-height: 5rem;
   padding-bottom: 0.5rem;
+  display: flex;
+  gap: 1rem;
 
   ${({ theme }) => theme.mediaScreen.phone`
     font-size: 3.2rem;
   `}
+
+  svg {
+    fill: ${({ theme }) => theme.color['text-color']};
+  }
 `;
 
 export const MyPagePointBackground = styled.div`

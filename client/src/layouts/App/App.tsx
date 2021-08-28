@@ -30,10 +30,15 @@ import { TermsOfUse, TermsOfPrivacy } from '@/pages/Terms';
 import Vendor from '@/pages/Vendor';
 import ThemeChanger from '@/components/ThemeChanger/ThemeChanger';
 import useGlobalTheme from '@/hooks/useGlobalTheme';
+import useModal from '@/hooks/useModal';
+import MissionModal from '@/components/Shared/Modal/MissionModal';
+import useMission from '@/hooks/useMission';
+import { notify } from '@/components/Shared/Toastify';
 
 const App = () => {
   const [themeMode, toggleMode, themeString] = useGlobalTheme();
-
+  const [isOpenMissionModal, toggleMissionModal] = useModal(false);
+  const [missionList, setMissionList] = useMission();
   const [user, setUser] = useRecoilState(userState);
   const [loading, setLoading] = useState(true);
   const getInitialUser = useCallback(async () => {
@@ -50,8 +55,12 @@ const App = () => {
   useEffect(() => {
     if (user) {
       setLoading(false);
+      if (!missionList.login && !user.is_oauth) {
+        setMissionList('login', true);
+        return notify('success', '일반 회원으로 로그인 미션 성공!');
+      }
     }
-  }, [user]);
+  }, [user, missionList.login, setMissionList]);
 
   useEffect(() => {
     getInitialUser();
@@ -97,7 +106,11 @@ const App = () => {
                   <ThemeChanger
                     toggleMode={toggleMode}
                     currentTheme={themeString}
+                    toggleMissionModal={toggleMissionModal}
                   />
+                  {isOpenMissionModal && (
+                    <MissionModal toggleModal={toggleMissionModal} />
+                  )}
                 </S.RootWrapper>
               )}
             </ErrorBoundary>

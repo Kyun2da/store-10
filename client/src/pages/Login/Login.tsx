@@ -22,7 +22,6 @@ const Login = () => {
     const { githubUrl } = await githubLogin();
     window.location.href = githubUrl;
   };
-
   const [error, setError] = useState({
     email: false,
     password: false,

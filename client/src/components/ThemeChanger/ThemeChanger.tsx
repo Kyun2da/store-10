@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react';
 import * as S from './styles';
-
 interface Props {
   toggleMode: () => void;
   currentTheme: string;
+  toggleMissionModal: () => void;
 }
 
 const ThemeChanger = ({ ...props }: Props) => {
-  const { toggleMode, currentTheme } = props;
+  const { toggleMode, currentTheme, toggleMissionModal } = props;
   const scrollToTop = useCallback(() => {
     window.scrollTo({
       top: 0,
@@ -17,6 +17,10 @@ const ThemeChanger = ({ ...props }: Props) => {
 
   return (
     <S.ThemeChangerWrapper>
+      <S.MissionButton onClick={toggleMissionModal}>
+        <S.TargetSvg />
+        미션 달성 현황
+      </S.MissionButton>
       {currentTheme === 'light-mode' ? (
         <S.ThemeButton title="change to darkmode" onClick={toggleMode}>
           <S.MoonSvg />

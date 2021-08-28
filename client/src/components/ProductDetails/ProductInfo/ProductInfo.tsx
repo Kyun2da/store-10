@@ -23,6 +23,7 @@ import { ResponseError } from '@/components/Shared/Error';
 import { InfoSkeleton } from '@/components/Skeleton/ProductSkeleton';
 import { ShoppingCartModal } from '@/components/Shared/Modal';
 import useModal from '@/hooks/useModal';
+import useMission from '@/hooks/useMission';
 
 const ProductInfo = () => {
   const { id } = useParams().params;
@@ -34,6 +35,7 @@ const ProductInfo = () => {
   const { mutate: addMutate } = useAddBookmark();
   const { mutate: deleteMutate } = useDeleteBookmark();
   const [openModal, toggleModal] = useModal(false);
+  const [missionList, setMissionList] = useMission();
 
   const [value, handleOnChnage, handleClickOnMinus, handleClickOnPlus] =
     useNumberInput(1);
@@ -63,8 +65,20 @@ const ProductInfo = () => {
       deleteMutate([Number(id)]);
     } else {
       addMutate(Number(id));
+      if (!missionList.bookmark) {
+        setMissionList('bookmark', true);
+        return notify('success', '상품 찜하기 미션 성공!');
+      }
     }
-  }, [addMutate, deleteMutate, isHeartChecked, id, user]);
+  }, [
+    addMutate,
+    deleteMutate,
+    isHeartChecked,
+    id,
+    user,
+    missionList,
+    setMissionList,
+  ]);
 
   // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
   if (error) {

@@ -5,7 +5,7 @@ const client = axios.create({
 });
 
 client.defaults.baseURL =
-  process.env.SERVER_API_HOST || 'http://localhost:3000/api';
+  process.env.SERVER_API_HOST || `https://${window.location.host}`;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const throwError = (e: any) => {

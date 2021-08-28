@@ -7,7 +7,6 @@ import Footer from '@/components/Footer';
 import ShoppingCart from '@/pages/ShoppingCart';
 import MyPage from '@/pages/Mypage';
 import { ThemeProvider } from 'styled-components';
-import { lightMode, darkMode } from '@/styles/theme';
 import * as S from './styles';
 import Login from '@/pages/Login';
 import NotFound from '@/components/NotFound';
@@ -30,13 +29,10 @@ import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 import { TermsOfUse, TermsOfPrivacy } from '@/pages/Terms';
 import Vendor from '@/pages/Vendor';
 import ThemeChanger from '@/components/ThemeChanger/ThemeChanger';
+import useGlobalTheme from '@/hooks/useGlobalTheme';
 
 const App = () => {
-  const [theme, setTheme] = useState('light-mode');
-  const themeMode = theme === 'light-mode' ? lightMode : darkMode;
-
-  const toggleMode = () =>
-    setTheme(theme === 'light-mode' ? 'dark-mode' : 'light-mode');
+  const [themeMode, toggleMode, themeString] = useGlobalTheme();
 
   const [user, setUser] = useRecoilState(userState);
   const [loading, setLoading] = useState(true);
@@ -98,7 +94,10 @@ const App = () => {
                     <Route path="/*" component={NotFound} />
                   </Switch>
                   <Footer />
-                  <ThemeChanger toggleMode={toggleMode} currentTheme={theme} />
+                  <ThemeChanger
+                    toggleMode={toggleMode}
+                    currentTheme={themeString}
+                  />
                 </S.RootWrapper>
               )}
             </ErrorBoundary>

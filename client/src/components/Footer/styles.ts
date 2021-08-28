@@ -27,15 +27,6 @@ export const Footer = styled.div`
   }
 `;
 
-export const FooterTabs = styled.div`
-  max-width: ${({ theme }) => theme.media.pc}px;
-  margin: 0 auto;
-  width: 95%;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 2rem;
-`;
-
 export const FooterTab = styled.div`
   padding-bottom: 2rem;
   z-index: 100;
@@ -43,6 +34,29 @@ export const FooterTab = styled.div`
   & + & {
     border-left: 1px solid ${({ theme }) => theme.color.line};
     padding-left: 2rem;
+  }
+`;
+
+export const FooterTabs = styled.div`
+  max-width: ${({ theme }) => theme.media.pc}px;
+  margin: 0 auto;
+  width: 95%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 2rem;
+  ${({ theme }) => theme.fontSize.s};
+
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob}px) {
+    > ${FooterTab} {
+      grid-column: 1 / span 3;
+      padding: 0;
+      padding-left: 0;
+      border: none;
+
+      &:last-child {
+        margin-bottom: 3rem;
+      }
+    }
   }
 `;
 
@@ -100,5 +114,32 @@ export const FooterBottom = styled.div`
   padding: 2rem 0;
   p {
     color: ${({ theme }) => theme.color['text-color']};
+    &:nth-child(2) {
+      min-width: 305px;
+    }
+  }
+  @media (max-width: ${({ theme }) => theme.media.btw_pc_tab}px) {
+    ${({ theme }) => theme.fontSize.s};
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    p {
+      &:nth-child(2) {
+        min-width: auto;
+      }
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob}px) {
+    ${({ theme }) => theme.fontSize.s};
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    p {
+      &:nth-child(2) {
+        min-width: auto;
+      }
+    }
   }
 `;

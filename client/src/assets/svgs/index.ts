@@ -31,3 +31,7 @@ export { default as UpChevronSVG } from '@/assets/svgs/up-chevron.svg';
 export { default as Edit } from '@/assets/svgs/edit.svg';
 export { default as Trash } from '@/assets/svgs/trash.svg';
 export { default as Close2 } from '@/assets/svgs/close2.svg';
+export { default as CouponSVG } from '@/assets/svgs/coupon.svg';
+export { default as HistorySVG } from '@/assets/svgs/history.svg';
+export { default as RatingSVG } from '@/assets/svgs/rating.svg';
+export { default as InquerySVG } from '@/assets/svgs/contract.svg';

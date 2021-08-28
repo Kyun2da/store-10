@@ -9,6 +9,11 @@ export const MyPageContainer = styled.div`
   height: 100%;
   min-height: 90vh;
   padding-bottom: 2rem;
+  &.container {
+    @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
+      padding: 0;
+    }
+  }
 `;
 
 export const Mypage = styled.div`
@@ -23,6 +28,9 @@ export const Mypage = styled.div`
 export const MyPageTitle = styled(Title)`
   font-family: BMDOHYEON;
   padding-bottom: 2rem;
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
+    padding-left: 2rem;
+  }
 `;
 
 export const MyPagePointBackground = styled.div`
@@ -38,5 +46,8 @@ export const MyPageBody = styled.div`
   padding: 3.2rem;
   h1 {
     ${({ theme }) => theme.fontSize.xxl};
+  }
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
+    padding: 3.2rem 0;
   }
 `;

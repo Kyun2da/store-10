@@ -12,7 +12,7 @@ const useGlobalTheme = (): [DefaultTheme, () => void, string] => {
 
   const themeMode = theme === THEME_MODE.light ? lightMode : darkMode;
   const toggleMode = () => {
-    const _theme = theme === '' ? '' : THEME_MODE.light;
+    const _theme = theme === '' ? THEME_MODE.dark : THEME_MODE.light;
 
     setTheme(_theme);
     localStorage.setItem('Theme', _theme);

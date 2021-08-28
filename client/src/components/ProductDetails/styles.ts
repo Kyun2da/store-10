@@ -490,6 +490,11 @@ export const UserReviewTitles = styled.div`
     align-items: center;
     gap: 3rem;
   }
+
+  .date {
+    ${({ theme }) => theme.fontSize.m};
+    ${({ theme }) => theme.fontWeight.s};
+  }
 `;
 
 export const ReviewImages = styled.div`
@@ -525,6 +530,8 @@ export const UserDescription = styled.div`
   padding: 2rem;
   border-radius: 1rem;
   background-color: ${({ theme }) => theme.color.body2};
+  ${({ theme }) => theme.fontSize.m};
+  ${({ theme }) => theme.fontWeight.s};
 `;
 
 export const TopArea = styled.div`

@@ -63,7 +63,7 @@ const Main = () => {
       <S.Main>
         <section>
           <div>
-            <h1 className="product-title">새로 나왔어요!</h1>
+            <h1 className="product-title new">새로 나왔어요!</h1>
             <LoadingCards
               skeletonNum={4}
               showSkeleton={recentQuery.isLoading || recentQuery.isFetching}
@@ -73,7 +73,7 @@ const Main = () => {
         </section>
         <section>
           <div>
-            <h1 className="product-title">이거는 어때요?</h1>
+            <h1 className="product-title recommand">이거는 어때요?</h1>
             <LoadingCards
               skeletonNum={4}
               showSkeleton={
@@ -91,7 +91,7 @@ const Main = () => {
         </section>
         <section>
           <div>
-            <h1 className="product-title">제일 잘 나가요!</h1>
+            <h1 className="product-title best">제일 잘 나가요!</h1>
             <LoadingCards
               skeletonNum={4}
               showSkeleton={bestQuery.isLoading || bestQuery.isFetching}

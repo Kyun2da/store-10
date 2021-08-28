@@ -36,3 +36,4 @@ export { default as HistorySVG } from '@/assets/svgs/history.svg';
 export { default as RatingSVG } from '@/assets/svgs/rating.svg';
 export { default as InquerySVG } from '@/assets/svgs/contract.svg';
 export { default as LogoutSVG } from '@/assets/svgs/logout.svg';
+export { default as Target } from '@/assets/svgs/target.svg';

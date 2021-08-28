@@ -152,9 +152,9 @@ const ProductInfo = () => {
         <S.ButtonArea>
           <button className="heart" onClick={heartBtnOnClick}>
             <HeartSVG
+              className={isHeartChecked ? 'checked' : ''}
               width={25}
               height={25}
-              fill={isHeartChecked ? 'red' : 'none'}
             />
           </button>
           <button onClick={onClickCart} className="cart">

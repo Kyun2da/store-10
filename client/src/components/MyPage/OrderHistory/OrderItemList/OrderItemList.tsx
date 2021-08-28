@@ -31,7 +31,7 @@ const OrderItemList = ({
   clickOnDeliveryListener,
 }: IProps) => {
   return (
-    <div>
+    <S.OrderItemListContainer>
       <S.OrderItemListHeader>
         {dateFormat(date, '.')} 주문
       </S.OrderItemListHeader>
@@ -99,7 +99,7 @@ const OrderItemList = ({
           </S.OrderItem>
         ))}
       </S.OrderItemList>
-    </div>
+    </S.OrderItemListContainer>
   );
 };
 

@@ -106,3 +106,7 @@ export const OrderDeliveryButton = styled(Button)`
     color: ${({ theme }) => theme.color['off-white']};
   }
 `;
+
+export const OrderItemListContainer = styled.div`
+  color: ${({ theme }) => theme.color['text-color']};
+`;

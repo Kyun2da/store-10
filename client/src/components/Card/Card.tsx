@@ -14,6 +14,7 @@ import { notify } from '../Shared/Toastify';
 import { ShoppingCartModal } from '@/components/Shared/Modal';
 import useModal from '@/hooks/useModal';
 import Image from '@/components/Shared/Image';
+import useMission from '@/hooks/useMission';
 
 const BgColor = {
   Error: 'error',
@@ -54,6 +55,7 @@ const Card = ({
   const { mutate: deleteMutate } = useDeleteBookmark();
   const { mutate: addcartMutate } = usePostCart();
   const [openModal, toggleModal] = useModal(false);
+  const [missionList, setMissionList] = useMission();
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -86,8 +88,20 @@ const Card = ({
       deleteMutate([linkId]);
     } else {
       addMutate(linkId);
+      if (!missionList.bookmark) {
+        setMissionList('bookmark', true);
+        return notify('success', '상품 찜하기 미션 성공!');
+      }
     }
-  }, [addMutate, deleteMutate, isHeartChecked, linkId, user]);
+  }, [
+    addMutate,
+    deleteMutate,
+    isHeartChecked,
+    linkId,
+    user,
+    missionList,
+    setMissionList,
+  ]);
 
   const cartBtnOnClick = useCallback(() => {
     if (!user) {
@@ -160,7 +174,7 @@ const Card = ({
             <S.ProductTitle>{title}</S.ProductTitle>
           </div>
         </div>
-        
+
         <S.ProductDetails>
           {!bottomDisplay ||
             (discount ? (

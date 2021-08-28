@@ -31,3 +31,4 @@ export { default as UpChevronSVG } from '@/assets/svgs/up-chevron.svg';
 export { default as Edit } from '@/assets/svgs/edit.svg';
 export { default as Trash } from '@/assets/svgs/trash.svg';
 export { default as Close2 } from '@/assets/svgs/close2.svg';
+export { default as Target } from '@/assets/svgs/target.svg';

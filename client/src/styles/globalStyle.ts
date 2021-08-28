@@ -6,6 +6,7 @@ const PC_RESOLUTION = 1050;
 const BTW_PC_AND_TAB_RESOLUTION = 900;
 const TABLET_RESOLUTION = 768;
 const BTW_TAB_AND_MOBILE_RESOLUTION = 595;
+const MIDIUM_PHONE_RESOLUTION = 480;
 const PHONE_RESOLUTION = 425;
 const HEADER_SEARCH_RESOLUTION = 550;
 
@@ -34,6 +35,12 @@ export const mediaScreen = {
   // 595px 해상도 위에서만 디스플레이
   btw_tab_mob: (args: TemplateStringsArray) => css`
     ${customMediaQuery(BTW_TAB_AND_MOBILE_RESOLUTION)} {
+      ${css(args)};
+    }
+  `,
+  // 480px 해상도 위에서만 디스플레이
+  mphone: (args: TemplateStringsArray) => css`
+    ${customMediaQuery(MIDIUM_PHONE_RESOLUTION)} {
       ${css(args)};
     }
   `,
@@ -163,6 +170,13 @@ const GlobalStyle = createGlobalStyle`
   // BTW_TAB&MOB 해상도에서만 display: none
   .on_btw_tab_mob_resolution {
     ${customMediaQuery(BTW_TAB_AND_MOBILE_RESOLUTION)} {
+      display: none;
+    }
+  }
+
+  // 480px 해상도에서만 display: none;
+  .on_mphone_resolution {
+    ${customMediaQuery(MIDIUM_PHONE_RESOLUTION)} {
       display: none;
     }
   }

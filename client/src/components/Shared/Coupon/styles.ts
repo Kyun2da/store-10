@@ -8,10 +8,11 @@ export const Coupon = styled.div`
   display: flex;
   overflow: hidden;
   border-radius: 1rem;
-  border: 1px solid ${({ theme }) => theme.color.line};
+  border: 1px solid ${({ theme }) => theme.color.background};
   background-color: ${({ theme }) => theme.color['off-white']};
-  width: 50rem;
-  height: 20rem;
+  max-width: 50rem;
+  max-height: 20rem;
+  width: 100%;
 
   & + & {
     margin-top: 3rem;
@@ -60,9 +61,15 @@ export const CouponHeader = styled.div<ValidCoupon>`
     ${({ theme }) => theme.fontSize.l};
     ${({ theme }) => theme.fontWeight.xl};
     color: ${({ isValid, theme }) => (isValid ? theme.color.primary3 : '#999')};
+
+    ${({ theme }) => theme.mediaScreen.phone`
+      font-size: 1.85rem;
+    `}
   }
 
   .usable {
+    max-width: 10rem;
+    text-align: center;
     border-radius: 1.5rem;
     background-color: ${({ isValid, theme }) =>
       isValid ? theme.color.primary3 : '#999'};
@@ -71,12 +78,23 @@ export const CouponHeader = styled.div<ValidCoupon>`
     ${({ theme }) => theme.fontSize.s};
     ${({ theme }) => theme.fontWeight.m};
   }
+
+  ${({ theme }) => theme.mediaScreen.mphone`
+    flex-direction: column;
+    gap: 1rem;
+  `}
 `;
 
 export const CouponDetail = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+
+  ${({ theme }) => theme.mediaScreen.mphone`
+    flex-direction: column-reverse;
+    gap: 1rem;
+    align-items: flex-start;
+  `}
 `;
 
 export const Discount = styled.p<ValidCoupon>`
@@ -86,8 +104,16 @@ export const Discount = styled.p<ValidCoupon>`
   font-family: 'BMDOHYEON', sans-serif;
   color: ${({ isValid, theme }) => (isValid ? theme.color.primary3 : '#999')};
 
+  ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+    font-size: 6rem;
+  `}
+
   span {
     font-size: 4rem;
+
+    ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+      font-size: 3rem;
+    `}
   }
 `;
 

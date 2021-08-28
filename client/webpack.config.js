@@ -60,7 +60,10 @@ module.exports = (env) => {
     },
     plugins: [
       new ForkTsCheckerWebpackPlugin({ async: false }),
-      new HtmlWebpackPlugin({ template: './src/index.html' }),
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        favicon: 'src/assets/favicon.ico',
+      }),
       new webpack.HotModuleReplacementPlugin(),
       new CleanWebpackPlugin(),
       new dotenv({

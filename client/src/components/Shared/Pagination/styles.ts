@@ -12,7 +12,8 @@ export const EachPage = styled.div`
   border-radius: 0.5rem;
   background-color: ${({ theme }) => theme.color.background};
   padding: 1rem;
-  cursor: pointer;
+  color: ${({ theme }) => theme.color['text-color']};
+  color: [];
 
   &.selected {
     background-color: ${({ theme }) => theme.color.primary};

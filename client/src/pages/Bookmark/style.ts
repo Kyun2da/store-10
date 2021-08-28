@@ -13,6 +13,7 @@ export const BookmarkContainer = styled.div`
 export const BookmarkTitle = styled(Title)`
   ${({ theme }) => theme.fontSize.l};
   font-family: 'BMDOHYEON', sans-serif;
+  margin-bottom: 1rem;
 `;
 
 export const CardContainer = styled.div`
@@ -25,35 +26,45 @@ export const ButtonContainer = styled.div`
 `;
 
 export const EditButton = styled(Button)`
-  width: 8.5rem;
   margin-left: 1rem;
   margin-bottom: 2rem;
   border: none;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
   line-height: inherit;
   justify-content: space-between;
   ${({ theme }) => theme.fontSize.m};
+  background-color: ${({ theme }) => theme.color.body3};
 
+  svg.edit {
+    fill: ${({ theme }) => theme.color['text-color']};
+  }
   &.red {
     color: ${({ theme }) => theme.color.error};
   }
 `;
 
 export const AllCheckBox = styled(Checkbox)`
-  width: 12rem;
   margin-left: 1rem;
   margin-bottom: 2rem;
   border: none;
   line-height: inherit;
+  border-radius: 1rem;
   justify-content: space-between;
   ${({ theme }) => theme.fontSize.m};
   font-family: Arial, Helvetica, sans-serif;
   padding: 0.5rem 1rem;
-  border-radius: 4px;
   color: ${({ theme }) => theme.color['text-color']};
-  background-color: ${({ theme }) => theme.color['reverse-text-color']};
+  background-color: ${({ theme }) => theme.color.body3};
 
   &:hover {
     background-color: ${({ theme }) => theme.color.hover};
+  }
+
+  span {
+    width: 2rem;
+    height: 2rem;
   }
 `;
 

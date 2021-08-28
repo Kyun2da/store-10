@@ -139,14 +139,14 @@ const Bookmark = () => {
               }}
             >
               편집
-              <Edit width="3rem" height="3rem" />
+              <Edit className="edit" width="2rem" height="2rem" />
             </S.EditButton>
           ) : (
             <>
               <S.AllCheckBox
                 onChange={onChangeAllCheck}
                 checked={isAllchecked}
-                label={'전체 선택'}
+                label="전체선택"
               />
               <S.EditButton
                 type="button"
@@ -156,7 +156,7 @@ const Bookmark = () => {
                 className="red"
               >
                 삭제
-                <Trash width="3rem" height="3rem" />
+                <Trash width="2rem" height="2rem" />
               </S.EditButton>
               <S.EditButton
                 type="button"
@@ -167,7 +167,7 @@ const Bookmark = () => {
                 }}
               >
                 취소
-                <S.BookmarkClose width="2.5rem" height="2.5rem" />
+                <S.BookmarkClose width="1.5rem" height="1.5rem" />
               </S.EditButton>
             </>
           )

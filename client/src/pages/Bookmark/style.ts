@@ -69,8 +69,9 @@ export const AllCheckBox = styled(Checkbox)`
 `;
 
 export const BookmarkThung = styled(Thung)`
-  width: 40rem;
-  margin: auto;
+  max-width: 80%;
+  width: 35rem;
+  margin: 3rem auto;
 `;
 
 export const BookmarkClose = styled(Close2)`

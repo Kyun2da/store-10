@@ -76,7 +76,10 @@ const Category = () => {
         </S.SubCategoriesTitles>
       </S.SubCategoriesWrap>
       <S.CategoryWrapper className="container">
-        <S.CategoryHeader>{main?.title + ' > ' + sub.title}</S.CategoryHeader>
+        <S.CategoryHeader>
+          <span className="main-title">{main?.title}</span>
+          <span className="sub-title">{sub.title}</span>
+        </S.CategoryHeader>
         <CategoryProducts subCategoryId={+categoryId} />
       </S.CategoryWrapper>
     </>

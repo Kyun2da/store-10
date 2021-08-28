@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 interface IChartBar {
   count?: number;
@@ -11,6 +11,10 @@ export const RatingChart = styled.div`
   ${({ theme }) => theme.mediaScreen.btw_tab_mob`
     height: 12rem;
   `}
+
+  .rotated {
+    transform: translateY(-50%) rotate(-90deg);
+  }
 `;
 
 export const ChartBar = styled.div<IChartBar>`
@@ -27,21 +31,16 @@ export const ChartBar = styled.div<IChartBar>`
     border-radius: 1rem;
     background-color: #ededed;
 
-    ::after {
-      content: '';
+    .bar-guage {
       position: absolute;
       bottom: 0;
       width: 100%;
       border-radius: 1rem;
-      height: ${({ count }) => (count ? count * 100 : 0)}%;
-      background-color: #aaa;
+      background-color: ${({ theme }) => theme.color.primary};
+      animation: ${({ count }) => moveup(count)} 2s ease-in-out forwards;
     }
 
     &:hover {
-      &::after {
-        background-color: ${({ theme }) => theme.color.primary};
-      }
-
       & ~ .hover-text {
         position: absolute;
         display: flex;
@@ -61,5 +60,23 @@ export const ChartBar = styled.div<IChartBar>`
     color: #fff;
     border-radius: 1rem;
     transform: translateY(-100%);
+  }
+
+  @keyframes height-progress {
+    0% {
+      height: 0%;
+    }
+    100% {
+      height: ${({ count }) => (count ? count * 100 : 0)}%;
+    }
+  }
+`;
+
+const moveup = (percent?: number) => keyframes`
+  0% {
+    height: 0%;
+  }
+  100% {
+    height: ${percent ? 100 * percent : 0}%;
   }
 `;

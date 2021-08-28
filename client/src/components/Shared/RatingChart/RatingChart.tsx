@@ -18,7 +18,9 @@ const RatingChart = ({ ratings, total }: IRatingChart) => {
         const { count, rating } = rates;
         return (
           <S.ChartBar key={nanoid()} count={calculateRatio({ total, count })}>
-            <div className="bar"></div>
+            <div className="bar">
+              <div className="bar-guage"></div>
+            </div>
             <div className="text">{rating}점</div>
             <span className="hover-text">{count}명</span>
           </S.ChartBar>

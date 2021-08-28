@@ -115,10 +115,10 @@ const OrderHistory = ({}) => {
           {renderOrderStatuList()}
         </S.OrderStatusContainer>
       </S.OrderHistoryHeader>
-      <S.OrderHistoryBody>
+      <div>
         {!!data?.length && renderOrderItemList()}
         {data && !orders.length && <Thung title="" />}
-      </S.OrderHistoryBody>
+      </div>
 
       <Pagination
         handleOnClickPage={handleOnClickPage}

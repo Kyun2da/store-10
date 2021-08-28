@@ -8,7 +8,7 @@ export const Coupon = styled.div`
   display: flex;
   overflow: hidden;
   border-radius: 1rem;
-  border: 1px solid ${({ theme }) => theme.color.background};
+  border: 1px solid ${({ theme }) => theme.color.body3};
   background-color: ${({ theme }) => theme.color['off-white']};
   max-width: 50rem;
   max-height: 20rem;

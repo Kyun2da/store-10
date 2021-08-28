@@ -4,13 +4,11 @@ import { wonFormat, dateFormat } from '@/utils/helper';
 import { ORDER_STATUS } from '@/contstants';
 import { Link } from '@/lib/Router';
 import useModal from '@/hooks/useModal';
-import DeliveryModal from '@/components/Shared/Modal/DeliveryModal';
 
 interface IProps {
   date: string;
   status: string;
   deliveredAt?: string | Date;
-  orderId: number;
   items: {
     id: number;
     title: string;
@@ -20,6 +18,7 @@ interface IProps {
   }[];
   clickOnReviewListener: (target: number) => void;
   clickOnQuestionListener: (target: number) => void;
+  clickOnDeliveryListener: () => void;
 }
 
 const OrderItemList = ({
@@ -29,9 +28,8 @@ const OrderItemList = ({
   deliveredAt,
   clickOnReviewListener,
   clickOnQuestionListener,
-  orderId,
+  clickOnDeliveryListener,
 }: IProps) => {
-  const [openModal, toggleModal] = useModal(false);
   return (
     <div>
       <S.OrderItemListHeader>
@@ -53,7 +51,7 @@ const OrderItemList = ({
               <S.OrderDeliveryButton
                 type="button"
                 color="white"
-                onClick={toggleModal}
+                onClick={clickOnDeliveryListener}
               >
                 배송조회
               </S.OrderDeliveryButton>
@@ -101,7 +99,6 @@ const OrderItemList = ({
           </S.OrderItem>
         ))}
       </S.OrderItemList>
-      {openModal && <DeliveryModal id={orderId} toggleModal={toggleModal} />}
     </div>
   );
 };

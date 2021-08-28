@@ -12,6 +12,7 @@ import Thung from '@/components/Thung';
 import { PAGE_LIMIT } from '@/utils/constant/offsetLimit';
 import useModal from '@/hooks/useModal';
 import { RequestModal, ReviewModal } from '@/components/Shared/Modal';
+import DeliveryModal from '@/components/Shared/Modal/DeliveryModal';
 
 const OrderHistory = ({}) => {
   const topRef = useRef<HTMLDivElement>(null);
@@ -21,8 +22,10 @@ const OrderHistory = ({}) => {
   const [offset, handleOnClickPage] = usePagination(PAGE_LIMIT, topRef);
   const [isOpenReviewModal, toggleReviewModal] = useModal(false);
   const [isOpenQuestionModal, toggleQuestionModal] = useModal(false);
+  const [isOpenDeliveryModal, toggleDeliveryModal] = useModal(false);
   const [seletedReview, setSelectedReview] = useState(0);
   const [selectedQuestion, setSelectedQuestion] = useState(0);
+  const [selectedOrderId, setSelectedOrderId] = useState(0);
   const { data } = useGetOrders(selectedPeriod);
 
   useEffect(() => {
@@ -33,8 +36,11 @@ const OrderHistory = ({}) => {
     } else {
       setOrders(data || []);
     }
-    handleOnClickPage(0, true);
   }, [data, selectedStatus, handleOnClickPage]);
+
+  useEffect(() => {
+    handleOnClickPage(0, true);
+  }, [selectedStatus, handleOnClickPage]);
 
   const handleOnClickItemReview = (target: number) => {
     setSelectedReview(target);
@@ -46,18 +52,23 @@ const OrderHistory = ({}) => {
     toggleQuestionModal();
   };
 
+  const handleOnClieItemDelivery = (target: number) => () => {
+    setSelectedOrderId(target);
+    toggleDeliveryModal();
+  };
+
   const renderOrderItemList = () => {
     const ordersOnPage = orders.slice(offset, offset + PAGE_LIMIT);
     return ordersOnPage.map((order) => (
       <S.OrderHistoryBody key={order.id}>
         <OrderItemList
-          orderId={order.id}
           date={order.createdAt}
           items={order.products}
           status={order.status}
           deliveredAt={order.deliveredAt}
           clickOnReviewListener={handleOnClickItemReview}
           clickOnQuestionListener={handleOnClickItemQuestion}
+          clickOnDeliveryListener={handleOnClieItemDelivery(order.id)}
         />
       </S.OrderHistoryBody>
     ));
@@ -112,6 +123,7 @@ const OrderHistory = ({}) => {
       <Pagination
         handleOnClickPage={handleOnClickPage}
         count={Math.ceil(orders.length / PAGE_LIMIT)}
+        offset={offset}
       />
 
       {isOpenReviewModal && (
@@ -121,6 +133,12 @@ const OrderHistory = ({}) => {
         <RequestModal
           selected={selectedQuestion}
           toggleModal={toggleQuestionModal}
+        />
+      )}
+      {isOpenDeliveryModal && (
+        <DeliveryModal
+          selectedOrderId={selectedOrderId}
+          toggleModal={toggleDeliveryModal}
         />
       )}
     </S.OrerHistory>

@@ -7,10 +7,12 @@ export const CardWrapper = styled.ul`
   gap: 2rem;
   padding-bottom: 2rem;
   grid-template-columns: repeat(4, calc((100% - 6rem) / 4));
-  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
+
+  ${({ theme }) => theme.mediaScreen.tablet`
     grid-template-columns: repeat(3, calc((100% - 4rem) / 3));
-  }
-  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+  `}
+
+  ${({ theme }) => theme.mediaScreen.mphone`
     grid-template-columns: repeat(2, calc((100% - 2rem) / 2));
-  }
+  `}
 `;

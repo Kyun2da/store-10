@@ -8,12 +8,20 @@ export const OrderItemListHeader = styled.header`
   padding-bottom: 2rem;
   ${({ theme }) => theme.fontWeight.l};
   ${({ theme }) => theme.fontSize.m};
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    padding-top: 1.2rem;
+    padding-left: 1.2rem;
+    padding-bottom: 0rem;
+  }
 `;
 
 export const OrderItem = styled.li`
   margin-top: 1.2rem;
   border: 1px solid ${({ theme }) => theme.color['border-gray']};
   display: flex;
+  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
+    flex-direction: column;
+  }
 `;
 
 export const OrderItemInfo = styled.div`
@@ -24,9 +32,12 @@ export const OrderItemInfo = styled.div`
   align-items: center;
 `;
 
-export const OrderItemInfoHeader = styled.header`
+export const OrderItemInfoHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    margin-top: 1.2rem;
+  }
 `;
 
 export const OrderItemInfoStatusWrapper = styled.div`
@@ -39,6 +50,11 @@ export const OrderItemInfoStatusWrapper = styled.div`
 export const OrderItemInfoStatus = styled.span`
   ${({ theme }) => theme.fontWeight.xl};
   ${({ theme }) => theme.fontSize.l};
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    ${({ theme }) => theme.fontWeight.l};
+    ${({ theme }) => theme.fontSize.m};
+    padding-left: 1.2rem;
+  }
 `;
 
 export const OrderItemInfoSubStatus = styled.span`
@@ -46,6 +62,10 @@ export const OrderItemInfoSubStatus = styled.span`
   ${({ theme }) => theme.fontWeight.l};
   ${({ theme }) => theme.fontSize.m};
   color: ${({ theme }) => theme.color.label};
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    ${({ theme }) => theme.fontWeight.l};
+    ${({ theme }) => theme.fontSize.s};
+  }
 `;
 
 export const OrderItemInfoBody = styled.div`
@@ -67,6 +87,10 @@ export const OrderItemName = styled.span`
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    ${({ theme }) => theme.fontWeight.l};
+    ${({ theme }) => theme.fontSize.m};
+  }
 `;
 
 export const OrderItemPrice = styled.span`
@@ -74,6 +98,10 @@ export const OrderItemPrice = styled.span`
   ${({ theme }) => theme.fontSize.m};
   color: ${({ theme }) => theme.color.label};
   padding-top: 0.8rem;
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    ${({ theme }) => theme.fontWeight.m};
+    ${({ theme }) => theme.fontSize.s};
+  }
 `;
 
 export const OrderItemActions = styled.div`
@@ -83,6 +111,21 @@ export const OrderItemActions = styled.div`
   justify-content: center;
   padding: 2rem 0.8rem;
   gap: 0.8rem;
+  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
+    flex-direction: row;
+  }
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    ${({ theme }) => theme.fontWeight.m};
+    ${({ theme }) => theme.fontSize.s};
+    justify-content: start;
+  }
+`;
+
+export const OrderDeliveryWrapper = styled.div`
+  flex: 1;
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
+    flex: none;
+  }
 `;
 
 export const OrderActionsButton = styled(Button)`
@@ -90,7 +133,14 @@ export const OrderActionsButton = styled(Button)`
   border: 1px solid ${({ theme }) => theme.color['border-gray']};
   ${({ theme }) => theme.fontWeight.l};
   ${({ theme }) => theme.fontSize.m};
+  flex: 1;
   width: 100%;
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    ${({ theme }) => theme.fontWeight.m};
+    ${({ theme }) => theme.fontSize.s};
+    width: auto;
+    flex: 0 0 auto;
+  }
 `;
 
 export const OrderDeliveryButton = styled(Button)`
@@ -104,6 +154,15 @@ export const OrderDeliveryButton = styled(Button)`
   &:hover {
     background-color: ${({ theme }) => theme.color.primary};
     color: ${({ theme }) => theme.color['off-white']};
+  }
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
+    ${({ theme }) => theme.fontWeight.l};
+    ${({ theme }) => theme.fontSize.s};
+    width: auto;
+    flex: 0 0 auto;
+  }
+  @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
+    margin-right: 1.2rem;
   }
 `;
 

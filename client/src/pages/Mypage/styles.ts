@@ -7,11 +7,6 @@ export const MyPageContainer = styled.div`
   flex-direction: column;
   width: 100%;
   padding-bottom: 2rem;
-  &.container {
-    @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
-      padding: 0;
-    }
-  }
   gap: 2rem;
   margin-top: 8.5rem;
 `;

@@ -6,6 +6,8 @@ import {
   DeliverySVG,
   LocationSVG,
   FilterSVG,
+  SearchSVG,
+  MenuSVG,
 } from '@/assets/svgs';
 import useMission from '@/hooks/useMission';
 import { MissionListKeys } from '@/types';
@@ -91,6 +93,14 @@ const MissionModal = ({ toggleModal }: IProps) => {
         >
           <FilterSVG className="fill" />
           {MissionTemplate.orderHistoryFilter}
+        </S.Mission>
+        <S.Mission className={isCompleteClassName(missionList.search)}>
+          <SearchSVG className="fill" />
+          {MissionTemplate.search}
+        </S.Mission>
+        <S.Mission className={isCompleteClassName(missionList.category)}>
+          <MenuSVG className="fill" />
+          {MissionTemplate.category}
         </S.Mission>
       </S.MissionList>
     </S.MissionLayout>

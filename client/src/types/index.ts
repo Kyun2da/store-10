@@ -238,6 +238,8 @@ export interface IMissionList {
   checkDelivery?: boolean;
   changeAddress?: boolean;
   orderHistoryFilter?: boolean;
+  search?: boolean;
+  category?: boolean;
 }
 
 export type MissionListKeys = keyof IMissionList;

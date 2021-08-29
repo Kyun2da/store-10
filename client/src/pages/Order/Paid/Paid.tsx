@@ -13,7 +13,7 @@ const Paid = () => {
     return <Redirect to="/notfound" />;
   }
   return (
-    <S.OrderPaid>
+    <S.OrderPaid className="container">
       <img
         src={`https://store-10.s3.ap-northeast-2.amazonaws.com/test/success.gif?${new Date().getTime()}`}
       />

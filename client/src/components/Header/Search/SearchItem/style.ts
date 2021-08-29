@@ -14,7 +14,7 @@ export const SearchItemContainer = styled.div`
 `;
 
 export const RecentTitle = styled.div`
-  margin: 0.5rem 0;
+  margin: 1.5rem 0;
   padding: 0.5rem 0;
   font-size: ${({ theme }) => theme.fontSize.m};
   color: ${({ theme }) => theme.color.label};

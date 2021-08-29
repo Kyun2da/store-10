@@ -12,11 +12,15 @@ export const Vendor = styled.div`
 
 export const VendorList = styled.section`
   width: 100%;
+  max-width: 45rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 3rem;
-
+  gap: 1em;
+  padding: 1.5em;
+  ${({ theme }) => theme.fontSize.l};
+  @media (max-width: ${({ theme }) => theme.media.tablet}px) {
+    ${({ theme }) => theme.fontSize.m};
+  }
   & + & {
     border-top: 1px solid ${({ theme }) => theme.color.line};
   }
@@ -25,12 +29,18 @@ export const VendorList = styled.section`
 export const VendorListItem = styled.div`
   display: flex;
   flex-direction: column;
-  ${({ theme }) => theme.fontSize.m};
+  color: ${({ theme }) => theme.color['text-color']};
+  font-size: 0.9em;
   ${({ theme }) => theme.fontWeight.s};
+
+  &.info {
+    font-size: 0.7em;
+  }
 `;
 
 export const OuterLink = styled.a`
+  word-break: break-all;
   color: ${({ theme }) => theme.color.primary3};
-  ${({ theme }) => theme.fontSize.m};
+  font-size: 0.7em;
   ${({ theme }) => theme.fontWeight.l};
 `;

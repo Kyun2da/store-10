@@ -46,17 +46,6 @@ export const IconsWrapper = styled.div`
   button {
     color: ${({ theme }) => theme.color['text-color']};
   }
-
-  a {
-    height: 2.5rem;
-    display: none;
-  }
-
-  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
-    a {
-      display: block;
-    }
-  }
 `;
 
 export const Contents = styled.div``;
@@ -88,6 +77,14 @@ export const Categories = styled.ul`
         visibility: visible;
         transition-delay: 0.2s;
       }
+      @media (max-width: ${({ theme }) => theme.media.btw_tab_mob}px) {
+        background: transparent;
+        > dl {
+          max-height: 100vh;
+          margin-top: 1rem;
+          transition-delay: 0;
+        }
+      }
     }
   }
 `;
@@ -104,24 +101,44 @@ export const SubCategory = styled.dl`
   border-left: 1px solid ${({ theme }) => theme.color['line']};
   transform: translateX(100%);
   visibility: hidden;
-  transition: visibility 0.2s ease-in-out;
+  transition: visibility 0.5s ease-in-out;
 
   &.none {
     display: none;
   }
 
   dd {
-    padding: 1rem;
     min-width: 170px;
+    padding: 1rem;
 
     &:hover {
       background: ${({ theme }) => theme.color['primary2']}66;
       color: ${({ theme }) => theme.color['primary3']};
     }
   }
-`;
 
-export const Bottom = styled.div``;
+  //모바일 변경
+  @media (max-width: ${({ theme }) => theme.media.btw_tab_mob}px) {
+    position: initial;
+    transform: none;
+    padding-top: 0;
+    max-height: 0;
+    height: auto;
+    white-space: nowrap;
+    transition: all 0.5s ease-in-out;
+    border-left: none;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+
+    dd {
+      padding: none;
+      width: 100%;
+    }
+  }
+`;
 
 export const Backdrop = styled.div`
   background: ${({ theme }) => theme.color['label']}33;

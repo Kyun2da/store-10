@@ -31,6 +31,7 @@ export const Payment = styled.button`
   cursor: pointer;
   &.selected {
     border: 3px solid ${({ theme }) => theme.color.primary};
+    margin: -3px;
   }
 
   @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {

@@ -16,12 +16,9 @@ import { userState } from '@/recoil/user';
 import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 import useInput from '@/hooks/useInput';
 import { baepang } from '@/assets';
+import Spinner from '@/components/Shared/Spinner';
 
 const Login = () => {
-  const GithubLogin = async () => {
-    const { githubUrl } = await githubLogin();
-    window.location.href = githubUrl;
-  };
   const [error, setError] = useState({
     email: false,
     password: false,
@@ -30,6 +27,13 @@ const Login = () => {
   const [email, , onChangeEmail] = useInput('');
   const [password, , onChangePassword] = useInput('');
   const [disabled, setDisabled] = useState(true);
+  const [isLoading, setLoading] = useState(false);
+
+  const GithubLogin = async () => {
+    setLoading(true);
+    const { githubUrl } = await githubLogin();
+    window.location.href = githubUrl;
+  };
 
   const [user, setUser] = useRecoilState(userState);
   const onSubmit = async (e: React.FormEvent) => {
@@ -124,8 +128,14 @@ const Login = () => {
         로그인
       </Button>
       <Button type="button" color="black" onClick={GithubLogin}>
-        <S.GithubIcon fill="white" />
-        GitHub 로그인
+        {isLoading ? (
+          <Spinner width={20} height={20} />
+        ) : (
+          <>
+            <S.GithubIcon fill="white" />
+            GitHub 로그인
+          </>
+        )}
       </Button>
       <Button type="button" color="white" onClick={testLogin}>
         <S.LogoImg src={baepang} />

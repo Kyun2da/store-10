@@ -1,8 +1,19 @@
 import React from 'react';
 import * as S from './styles';
 
-const Spinner = () => {
-  return <S.SpinnerContainer className="loader"></S.SpinnerContainer>;
+export interface ISpinner {
+  width?: number;
+  height?: number;
+}
+
+const Spinner = ({ width, height }: ISpinner) => {
+  return (
+    <S.SpinnerContainer
+      width={width}
+      height={height}
+      className="loader"
+    ></S.SpinnerContainer>
+  );
 };
 
 export default Spinner;

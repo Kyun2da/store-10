@@ -19,7 +19,7 @@ const SelectAuth = () => {
   if (user) return <Redirect to="/" />;
 
   return (
-    <S.SelectAuthContainer>
+    <S.SelectAuthContainer className="container">
       <Title level={3}>회원가입</Title>
       <S.Welcome>{SITE_TITLE}에 오신것을 환영합니다.</S.Welcome>
       <S.Info>회원가입하신 후 쿠폰 및 다양한 혜택을 이용해보세요.</S.Info>

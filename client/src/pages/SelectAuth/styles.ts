@@ -4,9 +4,9 @@ import styled from 'styled-components';
 export const SelectAuthContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 500px;
+  justify-content: center;
+  max-width: 50rem;
   text-align: center;
-  margin: auto;
 
   h3,
   p,
@@ -19,21 +19,21 @@ export const SelectAuthContainer = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
-    width: 260px;
+    max-width: 40rem;
 
     h3 {
-      ${({ theme }) => theme.fontSize.l}
+      ${({ theme }) => theme.fontSize.xl}
     }
 
     button {
-      height: 3rem;
-      ${({ theme }) => theme.fontSize.s}
+      height: 4.5rem;
+      ${({ theme }) => theme.fontSize.m}
       margin-bottom: 1rem;
     }
 
     input {
-      ${({ theme }) => theme.fontSize.s}
-      height: 3rem;
+      height: 4.5rem;
+      ${({ theme }) => theme.fontSize.m}
     }
   }
 `;
@@ -51,7 +51,7 @@ export const Info = styled.p`
   color: ${({ theme }) => theme.color['text-color']};
 
   @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
-    ${({ theme }) => theme.fontSize.xs}
+    ${({ theme }) => theme.fontSize.s}
   }
 `;
 
@@ -65,7 +65,7 @@ export const BackLoginContainer = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
-    ${({ theme }) => theme.fontSize.xs}
+    ${({ theme }) => theme.fontSize.m}
   }
 `;
 

@@ -15,6 +15,7 @@ export const LoginForm = styled.form`
   flex-direction: column;
   text-align: center;
   max-width: 46rem;
+  justify-content: center;
 
   button,
   .input-container {

@@ -51,7 +51,4 @@ export const CollapsibleWrapper = styled.div`
 export const CouponWrapper = styled.div`
   width: 100%;
   margin-top: 2.4rem;
-  > div {
-    margin: 0 auto;
-  }
 `;

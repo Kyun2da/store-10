@@ -4,6 +4,7 @@ import Button from '@/components/Shared/Button';
 import { IUserCoupon } from '@/types';
 import { SelectedSVG } from '@/assets/svgs';
 import Coupon from '@/components/Shared/Coupon';
+import Title from '../../Title';
 
 interface IProps {
   toggleModal: () => void;
@@ -32,6 +33,7 @@ const CouponModal = ({
 
   return (
     <S.CouponModalLayout toggleModal={toggleModal}>
+      <Title level={4}>보유 쿠폰</Title>
       <S.CouponModal>
         {(coupons?.slice(0) || []).map((coupon) => {
           const isSelected = selectedCoupon === coupon;
@@ -60,7 +62,7 @@ const CouponModal = ({
         >
           선택
         </Button>
-        <Button type="button" color="primary" onClick={close}>
+        <Button type="button" color="white" onClick={close}>
           취소
         </Button>
       </S.CouponModalFooter>

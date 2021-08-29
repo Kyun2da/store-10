@@ -90,7 +90,7 @@ const Login = () => {
   if (user) return <Redirect to="/" />;
 
   return (
-    <S.LoginForm onSubmit={onSubmit}>
+    <S.LoginForm className="container" onSubmit={onSubmit}>
       <S.LoginTitle level={4}>회원 로그인</S.LoginTitle>
       <Input
         className=" validate-input"

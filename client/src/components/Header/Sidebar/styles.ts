@@ -82,7 +82,7 @@ export const Categories = styled.ul`
         > dl {
           max-height: 100vh;
           margin-top: 1rem;
-          transition-delay: none;
+          transition-delay: 0;
         }
       }
     }
@@ -125,13 +125,13 @@ export const SubCategory = styled.dl`
     max-height: 0;
     height: auto;
     white-space: nowrap;
-    transform-origin: top;
     transition: all 0.5s ease-in-out;
     border-left: none;
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
-    border: 1px solid;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
 
     dd {
       padding: none;

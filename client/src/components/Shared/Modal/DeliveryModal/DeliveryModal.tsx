@@ -57,7 +57,7 @@ const DeliveryModal = ({ toggleModal, selectedOrderId }: IProps) => {
             onLoad={() => {
               setImgeLoaded(true);
             }}
-            src="https://store-10.s3.ap-northeast-2.amazonaws.com/test/deliver.gif"
+            src={`https://store-10.s3.ap-northeast-2.amazonaws.com/test/deliver.gif?${new Date().getTime()}`}
           />
         </S.Wrapper>
       )}

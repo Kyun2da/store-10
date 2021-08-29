@@ -36,6 +36,11 @@ export const CouponWrapper = styled.div`
       z-index: 1;
     }
   }
+
+  .selected-coupon {
+    border: none;
+    border-radius: unset;
+  }
 `;
 
 export const CouponModalLayout = styled(ModalLayout)`

@@ -45,6 +45,7 @@ const CouponModal = ({
             >
               {isSelected && <SelectedSVG width={120} height={120} />}
               <Coupon
+                className={isSelected ? 'selected-coupon' : ''}
                 name={coupon.name}
                 amount={coupon.amount}
                 isValid={coupon.is_valid}

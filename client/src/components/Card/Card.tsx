@@ -17,13 +17,14 @@ import Image from '@/components/Shared/Image';
 import useMission from '@/hooks/useMission';
 
 const BgColor = {
-  Error: 'error',
   Primary: 'primary',
+  Recommand: 'recommand',
   New: 'new',
   Best: 'best',
 } as const;
 
 export type BG_COLOR = typeof BgColor[keyof typeof BgColor];
+
 interface CardProps {
   bgColor: BG_COLOR; // category 식으로 리스트화 (enum 등..) 필요
   linkId: number;
@@ -90,7 +91,7 @@ const Card = ({
       addMutate(linkId);
       if (!missionList.bookmark) {
         setMissionList('bookmark', true);
-        return notify('success', '상품 찜하기 미션 성공!');
+        return notify('dark', '상품 찜하기 미션 성공!');
       }
     }
   }, [
@@ -156,9 +157,8 @@ const Card = ({
 
   return (
     <Link to={`/detail/${linkId}`}>
-      <S.Card>
-        <div>
-          <S.Liner bgColor={bgColor} />
+      <S.CardWrapper>
+        <S.Card>
           <div>
             <S.ThumbnailWrapper>
               {!checkBoxDisplay || (
@@ -173,30 +173,31 @@ const Card = ({
             </S.ThumbnailWrapper>
             <S.ProductTitle>{title}</S.ProductTitle>
           </div>
-        </div>
 
-        <S.ProductDetails>
-          {!bottomDisplay ||
-            (discount ? (
-              <>
-                <div className="price-tag strikethrough">
+          <S.ProductDetails>
+            {!bottomDisplay ||
+              (discount ? (
+                <>
+                  <div className="price-tag strikethrough">
+                    {wonFormat(price)}
+                  </div>
+                  <div className="price-tag discount">
+                    {wonFormat(calculateDiscount({ price, discount }))}
+                    {Buttons()}
+                  </div>
+                </>
+              ) : (
+                <div className="price-tag">
                   {wonFormat(price)}
-                </div>
-                <div className="price-tag discount">
-                  {wonFormat(calculateDiscount({ price, discount }))}
                   {Buttons()}
                 </div>
-              </>
-            ) : (
-              <div className="price-tag">
-                {wonFormat(price)}
-                {Buttons()}
-              </div>
-            ))}
-        </S.ProductDetails>
-        {openModal && <ShoppingCartModal toggleModal={toggleModal} />}
-        {checkBoxDisplay && <S.Filter onClick={onClickFilter}></S.Filter>}
-      </S.Card>
+              ))}
+          </S.ProductDetails>
+          {openModal && <ShoppingCartModal toggleModal={toggleModal} />}
+          {checkBoxDisplay && <S.Filter onClick={onClickFilter}></S.Filter>}
+        </S.Card>
+        <S.Liner bgColor={bgColor} />
+      </S.CardWrapper>
     </Link>
   );
 };

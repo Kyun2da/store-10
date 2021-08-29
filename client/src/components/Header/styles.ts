@@ -58,7 +58,7 @@ export const MenuButton = styled.button`
 export const Logo = styled.div`
   color: ${({ theme }) => theme.color['text-color']};
   justify-self: center;
-  margin-left: 1rem;
+  margin-left: 2rem;
 
   img {
     @media (max-width: ${({ theme }) => theme.media.phone}px) {

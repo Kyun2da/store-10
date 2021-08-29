@@ -5,6 +5,8 @@ export const ProgressBarContainer = styled.svg<ProgressProps>`
   border-radius: 7px;
   color: #35495e;
   overflow: initial;
+  width: ${({ width }) => (width ? width : '100%')};
+  height: ${({ height }) => (height ? height : '100%')};
 
   .progress-container {
     stroke: #eee;

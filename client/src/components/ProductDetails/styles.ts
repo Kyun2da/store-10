@@ -60,11 +60,6 @@ export const ProductPreviewThumbnail = styled.img`
   &:hover {
     opacity: 1;
   }
-
-  ${({ theme }) =>
-    theme.mediaScreen.btw_pc_tab`
-      max-width: 15rem;
-    `}
 `;
 
 export const ProductLenseSelector = styled.div`
@@ -211,6 +206,11 @@ export const ButtonArea = styled.div`
     svg {
       stroke: ${({ theme }) => theme.color['text-color']};
       color: ${({ theme }) => theme.color['text-color']};
+
+      &.checked {
+        stroke: ${({ theme }) => theme.color.error};
+        fill: ${({ theme }) => theme.color.error};
+      }
     }
 
     &.cart svg {
@@ -478,6 +478,11 @@ export const UserReview = styled.div`
   & + & {
     margin-top: 3rem;
   }
+
+  ${({ theme }) => theme.mediaScreen.mphone`
+    padding-left: 0;
+    padding-right: 0;
+  `}
 `;
 
 export const UserReviewTitles = styled.div`
@@ -561,6 +566,10 @@ export const PreparingText = styled.p`
   font-family: 'BMDOHYEON';
   ${({ theme }) => theme.fontSize.l};
   ${({ theme }) => theme.fontWeight.l};
+
+  ${({ theme }) => theme.mediaScreen.mphone`
+    font-size: 1.7rem;
+  `};
 `;
 
 export const NoDataText = styled(PreparingText)`

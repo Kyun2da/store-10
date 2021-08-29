@@ -41,6 +41,8 @@ const Main = () => {
     if (isLoading || !data) {
       return <div></div>;
     }
+    console.log(bgColor);
+
     return data.map((product: IProduct) => (
       <Card
         key={product.id}
@@ -61,7 +63,7 @@ const Main = () => {
       <S.Main>
         <section>
           <div>
-            <h1 className="product-title">새로 나왔어요!</h1>
+            <h1 className="product-title new">새로 나왔어요!</h1>
             <LoadingCards
               skeletonNum={4}
               showSkeleton={recentQuery.isLoading || recentQuery.isFetching}
@@ -71,13 +73,13 @@ const Main = () => {
         </section>
         <section>
           <div>
-            <h1 className="product-title">이거는 어때요?</h1>
+            <h1 className="product-title recommand">이거는 어때요?</h1>
             <LoadingCards
               skeletonNum={4}
               showSkeleton={
                 recommandQuery.isLoading || recommandQuery.isFetching
               }
-              component={renderProducts(recommandQuery)}
+              component={renderProducts(recommandQuery, 'recommand')}
             />
           </div>
         </section>
@@ -89,7 +91,7 @@ const Main = () => {
         </section>
         <section>
           <div>
-            <h1 className="product-title">제일 잘 나가요!</h1>
+            <h1 className="product-title best">제일 잘 나가요!</h1>
             <LoadingCards
               skeletonNum={4}
               showSkeleton={bestQuery.isLoading || bestQuery.isFetching}

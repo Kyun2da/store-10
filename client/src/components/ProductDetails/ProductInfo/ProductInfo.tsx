@@ -67,7 +67,7 @@ const ProductInfo = () => {
       addMutate(Number(id));
       if (!missionList.bookmark) {
         setMissionList('bookmark', true);
-        return notify('success', '상품 찜하기 미션 성공!');
+        return notify('dark', '상품 찜하기 미션 성공!');
       }
     }
   }, [
@@ -152,9 +152,9 @@ const ProductInfo = () => {
         <S.ButtonArea>
           <button className="heart" onClick={heartBtnOnClick}>
             <HeartSVG
+              className={isHeartChecked ? 'checked' : ''}
               width={25}
               height={25}
-              fill={isHeartChecked ? 'red' : 'none'}
             />
           </button>
           <button onClick={onClickCart} className="cart">

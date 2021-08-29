@@ -21,6 +21,7 @@ declare module 'styled-components' {
       'lock': string;
       'new': string;
       'best': string;
+      'recommand': string;
       'error': string;
       'border-gray': string;
       'hover': string;

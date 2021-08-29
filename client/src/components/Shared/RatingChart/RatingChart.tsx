@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import * as S from './styles';
 import { IRating } from '@/types';
 import { nanoid } from 'nanoid';
@@ -10,15 +10,17 @@ interface IRatingChart {
 }
 
 const RatingChart = ({ ratings, total }: IRatingChart) => {
-  ratings.sort((a, b) => b.rating - a.rating);
+  const stars = useMemo(() => sortRating(ratings), [ratings]);
 
   return (
     <S.RatingChart>
-      {ratings.map((rates) => {
-        const { count, rating } = rates;
+      {stars.map((star) => {
+        const { count, rating } = star;
         return (
           <S.ChartBar key={nanoid()} count={calculateRatio({ total, count })}>
-            <div className="bar"></div>
+            <div className="bar">
+              <div className="bar-guage"></div>
+            </div>
             <div className="text">{rating}점</div>
             <span className="hover-text">{count}명</span>
           </S.ChartBar>
@@ -28,4 +30,8 @@ const RatingChart = ({ ratings, total }: IRatingChart) => {
   );
 };
 
-export default RatingChart;
+export default React.memo(RatingChart);
+
+const sortRating = (ratings: IRating[]) => {
+  return ratings.sort((a, b) => b.rating - a.rating);
+};

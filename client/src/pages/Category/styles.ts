@@ -1,23 +1,35 @@
 import { HEADER_HEIGHT } from '@/styles/globalStyle';
 import styled from 'styled-components';
 
-export const CategoryWrapper = styled.div`
-  max-width: ${({ theme }) => theme.media.pc}px;
-  width: 95%;
-  margin: 0 auto;
-`;
+export const CategoryWrapper = styled.div``;
 
 export const CategoryHeader = styled.div`
   font-family: BMDOHYEON;
   color: ${({ theme }) => theme.color['text-color']};
-  margin: 3rem 0 1rem;
-  ${({ theme }) => theme.fontSize.xl}
-  @media(max-width: ${({ theme }) => theme.media.tablet}px) {
-    ${({ theme }) => theme.fontSize.l}
+  margin: 0 0 2rem;
+  ${({ theme }) => theme.fontSize.l};
+
+  span {
+    padding: 1.2rem 2rem 1rem 1rem;
+    padding-right: 2rem;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
   }
-  @media (max-width: ${({ theme }) => theme.media.phone}px) {
-    ${({ theme }) => theme.fontSize.m}
+  .main-title {
+    position: relative;
+    background-color: ${({ theme }) => theme.color.body2};
   }
+
+  .sub-title {
+    margin-left: -3rem;
+    padding-left: 4rem;
+    transform: translateX(-2rem);
+    background-color: ${({ theme }) => theme.color.body3};
+  }
+
+  ${({ theme }) => theme.mediaScreen.mphone`
+    font-size: 1.7rem;
+  `}
 `;
 
 export const CardLoader = styled.div`
@@ -34,6 +46,7 @@ export const SubCategoriesTitles = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: flex-start;
+  line-height: 2rem;
 
   & {
     -ms-overflow-style: none;

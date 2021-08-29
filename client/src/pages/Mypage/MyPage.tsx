@@ -10,6 +10,7 @@ import MyReviews from '@/components/MyPage/MyReviews';
 import MyQuestions from '@/components/MyPage/MyQuestions';
 import MyCoupon from '@/components/MyPage/MyCoupon';
 import ChangeUserInfo from '@/components/MyPage/ChangeUserInfo';
+import { CouponSVG, HistorySVG, InquerySVG, RatingSVG } from '@/assets/svgs';
 
 const renderBody = (contentValue: string) => {
   // TODO: router Switch 사용 고민
@@ -36,7 +37,13 @@ const MyPage = () => {
     <>
       <S.MyPagePointBackground />
       <S.MyPageContainer className="container">
-        <S.MyPageTitle level={3}>{contentName}</S.MyPageTitle>
+        <S.MyPageTitle level={3}>
+          {contentName === '주문내역' && <HistorySVG width={40} height={40} />}
+          {contentName === '쿠폰' && <CouponSVG width={40} height={40} />}
+          {contentName === '상품문의' && <InquerySVG width={40} height={40} />}
+          {contentName === '상품후기' && <RatingSVG width={40} height={40} />}
+          {contentName}
+        </S.MyPageTitle>
         <S.MyPage>
           <MyPageAside
             contentValue={contentValue}

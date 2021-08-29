@@ -18,15 +18,23 @@ export const MyPageContainer = styled.div`
 
 export const MyPageTitle = styled(Title)`
   font-family: BMDOHYEON;
-  background: ${({ theme }) => theme.color.body};
+  background-color: ${({ theme }) => theme.color.background};
   padding: 1rem 0;
   border-radius: 1rem;
   box-shadow: ${({ theme }) => theme.boxShadow};
   padding: 1.5rem;
+  line-height: 5rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  gap: 1rem;
 
   ${({ theme }) => theme.mediaScreen.phone`
     font-size: 3.2rem;
   `}
+
+  svg {
+    fill: ${({ theme }) => theme.color['text-color']};
+  }
 `;
 
 export const MyPagePointBackground = styled.div`

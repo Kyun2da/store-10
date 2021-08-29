@@ -10,9 +10,9 @@ const notify = (type: Type, message: string) => {
       toast.info(message);
       break;
     case 'success':
-      toast(
+      toast.success(
         <S.ImageContainer>
-          <div>🎉 {message}</div>
+          <div>😁 {message}</div>
         </S.ImageContainer>
       );
       break;
@@ -20,9 +20,9 @@ const notify = (type: Type, message: string) => {
       toast.warning(message);
       break;
     case 'error':
-      toast(
+      toast.error(
         <S.ImageContainer>
-          <div>❗️ {message}</div>
+          <div>😫 {message}</div>
         </S.ImageContainer>
       );
       break;
@@ -30,7 +30,11 @@ const notify = (type: Type, message: string) => {
       toast(message);
       break;
     case 'dark':
-      toast.dark(message);
+      toast.dark(
+        <S.ImageContainer>
+          <div>🎉 {message}</div>
+        </S.ImageContainer>
+      );
       break;
     default:
       toast(message);

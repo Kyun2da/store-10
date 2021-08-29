@@ -2,13 +2,12 @@ import React from 'react';
 import * as S from './styles';
 
 export interface ProgressProps {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   percent: number;
 }
 
 const ProgressBar = ({ width, height, percent }: ProgressProps) => {
-  console.log(percent);
   return (
     <S.ProgressBarContainer
       width={width}

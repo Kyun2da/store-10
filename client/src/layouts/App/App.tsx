@@ -57,7 +57,7 @@ const App = () => {
       setLoading(false);
       if (!missionList.login && !user.is_oauth) {
         setMissionList('login', true);
-        return notify('success', '일반 회원으로 로그인 미션 성공!');
+        return notify('dark', '일반 회원으로 로그인 미션 성공!');
       }
     }
   }, [user, missionList.login, setMissionList]);

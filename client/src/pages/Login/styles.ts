@@ -6,7 +6,7 @@ export const LoginTitle = styled(Title)`
   margin-bottom: 4rem;
 
   @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
-    ${({ theme }) => theme.fontSize.l}
+    ${({ theme }) => theme.fontSize.xl}
   }
 `;
 
@@ -28,6 +28,10 @@ export const LoginForm = styled.form`
 
   button {
     height: 5rem;
+
+    ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+      font-size: 1.65rem;
+    `}
   }
 
   button.white {

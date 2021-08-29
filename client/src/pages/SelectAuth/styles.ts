@@ -8,10 +8,13 @@ export const SelectAuthContainer = styled.div`
   max-width: 50rem;
   text-align: center;
 
-  h3,
   p,
   button {
     margin-bottom: 2rem;
+  }
+
+  h3 {
+    margin-bottom: 5rem;
   }
 
   button {

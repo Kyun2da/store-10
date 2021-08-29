@@ -91,7 +91,7 @@ const Login = () => {
 
   return (
     <S.LoginForm className="container" onSubmit={onSubmit}>
-      <S.LoginTitle level={4}>회원 로그인</S.LoginTitle>
+      <S.LoginTitle level={3}>회원 로그인</S.LoginTitle>
       <Input
         className=" validate-input"
         type="text"

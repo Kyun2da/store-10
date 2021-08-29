@@ -7,7 +7,7 @@ export const ApprovalContainer = styled.div`
   flex-direction: column;
   text-align: center;
 
-  h2 {
+  h3 {
     margin-bottom: 2rem;
   }
 
@@ -20,8 +20,8 @@ export const ApprovalContainer = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
-    h2 {
-      ${({ theme }) => theme.fontSize.l}
+    h3 {
+      ${({ theme }) => theme.fontSize.xl}
     }
 
     button {

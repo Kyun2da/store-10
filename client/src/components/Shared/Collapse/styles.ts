@@ -35,6 +35,14 @@ export const CollapseHeader = styled.div<ICollapse>`
       grid-template-columns: 1fr 1fr 3fr 1fr;
     `}
   }
+  &.notice_collapse {
+    @media (max-width: ${({ theme }) => theme.media.btw_tab_mob}px) {
+      grid-template-columns: 3.1rem 3fr 9rem;
+      p:last-child {
+        display: none;
+      }
+    }
+  }
 
   .answer {
     ${({ theme }) => theme.mediaScreen.tablet`
@@ -89,6 +97,14 @@ export const CollaspeRow = styled.div<ICollapse>`
     ${({ theme }) => theme.mediaScreen.btw_tab_mob`
       grid-template-columns: 1fr 1fr 3fr 1fr;
     `}
+  }
+  &.notice_collapse {
+    @media (max-width: ${({ theme }) => theme.media.btw_tab_mob}px) {
+      grid-template-columns: 3.1rem 3fr 9rem;
+      div:last-child {
+        display: none;
+      }
+    }
   }
 `;
 

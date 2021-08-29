@@ -28,9 +28,9 @@ export const HeaderWrapper = styled.header`
 `;
 
 export const Header = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 105px 1fr 105px;
   background: ${({ theme }) => theme.color['background']};
-  justify-content: space-between;
   align-items: center;
   height: ${HEADER_HEIGHT}rem;
   width: 95%;
@@ -61,6 +61,9 @@ export const Logo = styled.div`
   margin-left: 2rem;
 
   img {
+    @media (max-width: ${({ theme }) => theme.media.tablet}px) {
+      width: 130px;
+    }
     @media (max-width: ${({ theme }) => theme.media.phone}px) {
       width: 100px;
     }
@@ -72,7 +75,6 @@ export const StateUl = styled.div`
   margin: 0;
   padding: 0;
   align-items: center;
-  justify-self: flex-end;
 
   a {
     text-decoration: none;
@@ -84,11 +86,13 @@ export const StateUl = styled.div`
 
 export const SearchWrapper = styled.div`
   display: flex;
+  justify-self: center;
+  margin: 0 auto;
   justify-content: flex-end;
   cursor: pointer;
   position: relative;
   max-width: 400px;
-  width: 36%;
+  width: 45%;
   min-width: 50px;
 
   svg {

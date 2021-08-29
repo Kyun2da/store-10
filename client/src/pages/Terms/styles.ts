@@ -11,6 +11,7 @@ export const Terms = styled.div`
 `;
 
 export const TextWrapper = styled.pre`
+  color: ${({ theme }) => theme.color['text-color']};
   margin-top: 3rem;
   white-space: pre-wrap;
   ${({ theme }) => theme.fontSize.m};

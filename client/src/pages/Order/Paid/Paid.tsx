@@ -14,7 +14,9 @@ const Paid = () => {
   }
   return (
     <S.OrderPaid>
-      <img src="https://store-10.s3.ap-northeast-2.amazonaws.com/test/success.gif" />
+      <img
+        src={`https://store-10.s3.ap-northeast-2.amazonaws.com/test/success.gif?${new Date().getTime()}`}
+      />
       <S.DoneMessage>주문이 완료 되었습니다 :)</S.DoneMessage>
       <S.SubMessage>
         주문 내역에 대한 상세사항을 메일로 받으실거에요!

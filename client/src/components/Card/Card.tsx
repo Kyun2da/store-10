@@ -89,20 +89,9 @@ const Card = ({
       deleteMutate([linkId]);
     } else {
       addMutate(linkId);
-      if (!missionList.bookmark) {
-        setMissionList('bookmark', true);
-        return notify('dark', '상품 찜하기 미션 성공!');
-      }
+      setMissionList('bookmark', true);
     }
-  }, [
-    addMutate,
-    deleteMutate,
-    isHeartChecked,
-    linkId,
-    user,
-    missionList,
-    setMissionList,
-  ]);
+  }, [addMutate, deleteMutate, isHeartChecked, linkId, user, setMissionList]);
 
   const cartBtnOnClick = useCallback(() => {
     if (!user) {

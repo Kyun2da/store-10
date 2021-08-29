@@ -62,7 +62,7 @@ const Collapse = <T extends ICollapseItem>({
   return (
     <S.Collapse>
       <S.CollapseHeader
-        className="review_collapse"
+        className={forNotice ? 'notice_collapse' : 'review_collapse'}
         gaps={gaps}
         length={headers.length}
       >
@@ -71,7 +71,8 @@ const Collapse = <T extends ICollapseItem>({
             key={header.value}
             className={
               (header.name === '답변' ? 'answer' : '') +
-              (header.name === '작성자' || header.name === '작성일'
+              ((header.name === '작성자' || header.name === '작성일') &&
+              !forNotice
                 ? 'on_btw_tab_mob_resolution'
                 : '')
             }
@@ -88,7 +89,7 @@ const Collapse = <T extends ICollapseItem>({
               length={headers.length}
               onClick={() => handleClickOnItem(item.id, idx)}
               className={
-                'review_collapse ' +
+                (forNotice ? 'notice_collapse ' : 'review_collapse ') +
                 (isActive[idx] === `collapse-item-${item.id}` ? 'active' : '') +
                 (!noSecret && item.secret && item.user_id !== user?.id
                   ? 'lock'
@@ -98,19 +99,14 @@ const Collapse = <T extends ICollapseItem>({
               {headers.map((header) => {
                 // TODO: 삼항연산자 depth가 너무 깊어 좀 풀고 싶은데 막상 좋은 방법이 떠오르지 않는군뇨..
                 // 나는야 주석도 업데이트 하는 씐박한 개발자
-                return (
-                  <S.CollapseSubTitle
-                    key={header.value}
-                    className={
-                      header.name === '작성자' || header.name === '작성일'
-                        ? 'on_btw_tab_mob_resolution'
-                        : ''
-                    }
-                  >
-                    {header.value === 'createdAt' ? (
-                      dateFormat(item[header.value], 'abs')
-                    ) : header.value === 'answer' ? (
-                      item[header.value] ? (
+                // 짜잔 요렇게 하는건 오떠신가요
+                const headerTitle = (value: string) => {
+                  switch (value) {
+                    case 'createdAt':
+                      return dateFormat(item[value], 'abs');
+
+                    case 'answer':
+                      return item[value] ? (
                         <S.Status>
                           <S.StatusPoint className="completed" />
                           <span className="on_tablet_resolution">완료</span>
@@ -120,20 +116,36 @@ const Collapse = <T extends ICollapseItem>({
                           <S.StatusPoint className="pending" />
                           <span className="on_tablet_resolution">대기중</span>
                         </S.Status>
-                      )
-                    ) : header.value === 'name' &&
+                      );
+
+                    case value == 'name' &&
                       item.secret &&
-                      item.user_id !== user?.id ? (
-                      '비공개'
-                    ) : header.value === 'category' ? (
-                      <div className="category">
-                        <p className={item[header.value]}>
-                          {item[header.value]}
-                        </p>
-                      </div>
-                    ) : (
-                      item[header.value]
-                    )}
+                      item.user_id !== user?.id:
+                      return '비공개';
+
+                    case 'category':
+                      return (
+                        <div className="category">
+                          <p className={item[value]}>{item[value]}</p>
+                        </div>
+                      );
+
+                    default:
+                      return item[value];
+                  }
+                };
+
+                return (
+                  <S.CollapseSubTitle
+                    key={header.value}
+                    className={
+                      (header.name === '작성자' || header.name === '작성일') &&
+                      !forNotice
+                        ? 'on_btw_tab_mob_resolution'
+                        : ''
+                    }
+                  >
+                    {headerTitle(header.value)}
                   </S.CollapseSubTitle>
                 );
               })}

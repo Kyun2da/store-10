@@ -15,7 +15,7 @@ const Notice = () => {
         forNotice
         headers={NOTICE_HEADER}
         items={items}
-        gaps="1fr 3fr 1fr 1fr"
+        gaps="3.1rem 3fr 1fr 1fr"
       ></Collapse>
     </S.Notice>
   );

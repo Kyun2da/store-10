@@ -65,12 +65,15 @@ export const SearchBackDrop = styled.div`
 
 export const SearchInputWrap = styled.div`
   position: relative;
-
+  
   svg {
     position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+  }
+  input {
+    background-color: ${({ theme }) => theme.color.background};
   }
 `;
 

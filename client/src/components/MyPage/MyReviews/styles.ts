@@ -1,4 +1,8 @@
-import { ReviewImages, UserReview } from '@/components/ProductDetails/styles';
+import {
+  ReviewImages,
+  UserReview,
+  UserReviewArea,
+} from '@/components/ProductDetails/styles';
 import styled from 'styled-components';
 
 export const Title = styled.h1`
@@ -20,6 +24,10 @@ export const MyReviews = styled.div`
       padding-top: 21rem;
       margin-top: -21rem;
     `};
+  }
+
+  ${UserReviewArea} {
+    margin-top: 3rem;
   }
 `;
 

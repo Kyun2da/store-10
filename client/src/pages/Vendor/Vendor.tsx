@@ -91,7 +91,7 @@ const Vendor = () => {
       </S.VendorList>
 
       <S.VendorList>
-        <S.VendorListItem>
+        <S.VendorListItem className="info">
           <span>판매처에 따라 보유하고 있는 상품이 다를 수 있습니다.</span>
           <span>구매를 원하는 상품은 각 판매처에 문의 후 방문해 주세요.</span>
         </S.VendorListItem>

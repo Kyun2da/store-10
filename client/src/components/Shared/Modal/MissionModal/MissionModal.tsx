@@ -6,23 +6,22 @@ import Title from '@/components/Shared/Title';
 import ProgressBar from './ProgressBar';
 import * as S from './styles';
 import useGlobalTheme from '@/hooks/useGlobalTheme';
+import { MISSIONS } from '@/contstants';
 
 interface IProps {
   toggleModal: () => void;
 }
 
 const MissionTemplate = {
-  login: '일반 회원으로 로그인 하기',
-  bookmark: '상품 찜하기',
+  ...MISSIONS,
 };
 
 const MissionModal = ({ toggleModal }: IProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, __, themeString] = useGlobalTheme();
   const [missionList] = useMission();
-  console.log(missionList);
 
-  const totalMissionLength = 2; // 추가한 미션 개수만큼 개수를 추가해주시면 됩니다.
+  const totalMissionLength = Object.keys(MISSIONS).length; // 추가한 미션 개수만큼 개수를 추가해주시면 됩니다.
   const missionCompleteStatus = Math.floor(
     (Object.keys(missionList).length / totalMissionLength) * 100
   );

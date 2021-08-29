@@ -5,6 +5,7 @@ import {
   MoneySVG,
   DeliverySVG,
   LocationSVG,
+  FilterSVG,
 } from '@/assets/svgs';
 import useMission from '@/hooks/useMission';
 import { MissionListKeys } from '@/types';
@@ -81,9 +82,15 @@ const MissionModal = ({ toggleModal }: IProps) => {
           <DeliverySVG className="fill" />
           {MissionTemplate.checkDelivery}
         </S.Mission>
-        <S.Mission className={isCompleteClassName(missionList.checkDelivery)}>
+        <S.Mission className={isCompleteClassName(missionList.changeAddress)}>
           <LocationSVG className="fill" />
           {MissionTemplate.changeAddress}
+        </S.Mission>
+        <S.Mission
+          className={isCompleteClassName(missionList.orderHistoryFilter)}
+        >
+          <FilterSVG className="fill" />
+          {MissionTemplate.orderHistoryFilter}
         </S.Mission>
       </S.MissionList>
     </S.MissionLayout>

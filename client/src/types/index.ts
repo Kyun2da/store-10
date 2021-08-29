@@ -237,6 +237,7 @@ export interface IMissionList {
   addCart?: boolean;
   checkDelivery?: boolean;
   changeAddress?: boolean;
+  orderHistoryFilter?: boolean;
 }
 
 export type MissionListKeys = keyof IMissionList;

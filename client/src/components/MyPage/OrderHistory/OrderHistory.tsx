@@ -41,7 +41,10 @@ const OrderHistory = ({}) => {
 
   useEffect(() => {
     handleOnClickPage(0, true);
-  }, [selectedStatus, handleOnClickPage]);
+    if (selectedStatus) {
+      setMissionList('orderHistoryFilter', true);
+    }
+  }, [selectedStatus, handleOnClickPage, setMissionList]);
 
   const handleOnClickItemReview = (target: number) => {
     setSelectedReview(target);

@@ -33,7 +33,7 @@ const CouponModal = ({
 
   return (
     <S.CouponModalLayout toggleModal={toggleModal}>
-      <Title level={4}>보유 쿠폰</Title>
+      <Title level={4}>보유 쿠폰 ({coupons?.length ?? 0})</Title>
       <S.CouponModal>
         {(coupons?.slice(0) || []).map((coupon) => {
           const isSelected = selectedCoupon === coupon;

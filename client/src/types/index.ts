@@ -236,6 +236,7 @@ export interface IMissionList {
   pay?: boolean;
   addCart?: boolean;
   checkDelivery?: boolean;
+  changeAddress?: boolean;
 }
 
 export type MissionListKeys = keyof IMissionList;

@@ -136,4 +136,5 @@ export const MISSIONS = {
   pay: '주문 완료하기',
   addCart: '장바구니에 상품 추가하기',
   checkDelivery: '주문 완료된 상품 배송조회',
+  changeAddress: '배송지 수정하기',
 };

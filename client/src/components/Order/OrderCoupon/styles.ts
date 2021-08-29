@@ -21,6 +21,7 @@ export const RegisterCoupon = styled.div`
   display: flex;
   padding: 1.2rem;
   overflow: hidden;
+  padding-bottom: 3rem;
   button {
     flex-grow: 0;
     margin-left: 1.2rem;

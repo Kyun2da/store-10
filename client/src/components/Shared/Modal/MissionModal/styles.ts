@@ -77,9 +77,11 @@ export const Mission = styled.li`
 
   &.complete {
     color: ${({ theme }) => theme.color.primary};
-
     svg {
       stroke: ${({ theme }) => theme.color.primary};
+      &.fill {
+        fill: ${({ theme }) => theme.color.primary};
+      }
     }
   }
 `;

@@ -40,6 +40,7 @@ const ProductInfo = () => {
   const [value, handleOnChnage, handleClickOnMinus, handleClickOnPlus] =
     useNumberInput(1);
   const onClickCart = () => {
+    setMissionList('addCart', true);
     cartMutate(
       {
         count: value,

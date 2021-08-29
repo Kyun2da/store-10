@@ -134,4 +134,5 @@ export const MISSIONS = {
   login: '일반 회원으로 로그인 하기',
   bookmark: '상품 찜하기',
   pay: '주문 완료하기',
+  addCart: '장바구니에 상품 추가하기',
 };

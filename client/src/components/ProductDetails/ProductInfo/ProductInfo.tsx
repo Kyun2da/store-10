@@ -67,15 +67,7 @@ const ProductInfo = () => {
       addMutate(Number(id));
       setMissionList('bookmark', true);
     }
-  }, [
-    addMutate,
-    deleteMutate,
-    isHeartChecked,
-    id,
-    user,
-    missionList,
-    setMissionList,
-  ]);
+  }, [addMutate, deleteMutate, isHeartChecked, id, user, setMissionList]);
 
   // 이 부분에 대한 공통 화면도 만들 수 있다면 좋을 거 같네요~
   if (error) {

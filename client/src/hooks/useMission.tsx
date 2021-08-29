@@ -16,7 +16,7 @@ const useMission = (): [
       const newMissionList = { ...missionList, [keys]: values };
       localStorage.setItem('mission', JSON.stringify(newMissionList));
       localStorage.setItem('recentMission', keys);
-      notify('success', `${MISSIONS[keys]} 미션 성공!`);
+      notify('dark', `${MISSIONS[keys]} 미션 성공!`);
     }
   };
 

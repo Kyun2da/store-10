@@ -75,7 +75,7 @@ const ProductInfo = () => {
   }
 
   if (isLoading || !data) {
-    return <InfoSkeleton />;
+    return <InfoSkeleton className="container" />;
   }
 
   const { details, thumbnails } = data;

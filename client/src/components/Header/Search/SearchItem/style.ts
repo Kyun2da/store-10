@@ -4,7 +4,13 @@ import Thung from '@/components/Thung';
 
 export const SearchItemContainer = styled.div`
   max-height: 60vh;
-  overflow: scroll;
+  overflow-y: scroll;
+  & {
+    -ms-overflow-style: none;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const RecentTitle = styled.div`

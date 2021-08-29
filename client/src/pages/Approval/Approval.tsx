@@ -62,7 +62,7 @@ const Approval = () => {
   if (user) return <Redirect to="/" />;
 
   return (
-    <S.ApprovalContainer>
+    <S.ApprovalContainer className="container">
       <Title level={2}>약관 동의</Title>
       <S.ApprovalCheckBox
         onChange={handleAllChecked}

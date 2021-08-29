@@ -36,12 +36,18 @@ export const MissionList = styled.ul`
     color: #dfdfdf;
     svg {
       stroke: #dfdfdf;
+      &.fill {
+        fill: #dfdfdf;
+      }
     }
   }
   &.dark-mode {
     color: #7b7b7b;
     svg {
       stroke: #7b7b7b;
+      &.fill {
+        fill: #7b7b7b;
+      }
     }
   }
 

@@ -235,6 +235,7 @@ export interface IMissionList {
   bookmark?: boolean;
   pay?: boolean;
   addCart?: boolean;
+  checkDelivery?: boolean;
 }
 
 export type MissionListKeys = keyof IMissionList;

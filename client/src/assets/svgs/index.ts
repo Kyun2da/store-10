@@ -38,3 +38,4 @@ export { default as InquerySVG } from '@/assets/svgs/contract.svg';
 export { default as LogoutSVG } from '@/assets/svgs/logout.svg';
 export { default as Target } from '@/assets/svgs/target.svg';
 export { default as MoneySVG } from '@/assets/svgs/money.svg';
+export { default as DeliverySVG } from '@/assets/svgs/delivery.svg';

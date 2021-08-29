@@ -12,6 +12,7 @@ export const ShooppingCartModalHeader = styled.header`
   text-align: center;
   ${({ theme }) => theme.fontWeight.l};
   ${({ theme }) => theme.fontSize.m};
+  color: ${({ theme }) => theme.color['text-color']};
 `;
 
 export const ShooppingCartModalBody = styled.body`

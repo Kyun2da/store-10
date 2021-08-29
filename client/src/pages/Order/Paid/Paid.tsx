@@ -10,15 +10,16 @@ const Paid = () => {
   const { historyPush } = useHistory();
   const { data, isError } = useGetOrder(+id);
   const [_, setMission] = useMission();
-  if (isError || (data && data.status !== 'paid')) {
-    return <Redirect to="/notfound" />;
-  }
 
   useEffect(() => {
     if (data?.status === 'paid') {
       setMission('pay', true);
     }
-  }, [data]);
+  }, [data, setMission]);
+
+  if (isError || (data && data.status !== 'paid')) {
+    return <Redirect to="/notfound" />;
+  }
   return (
     <S.OrderPaid className="container">
       <img

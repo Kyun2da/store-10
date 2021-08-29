@@ -7,7 +7,7 @@ const Search = () => {
   const { search } = useParams().params;
 
   return (
-    <S.SearchWrapper>
+    <S.SearchWrapper className="container">
       <S.SearchHeader>{`"${decodeURI(
         search
       )}"의 검색 결과 입니다.`}</S.SearchHeader>

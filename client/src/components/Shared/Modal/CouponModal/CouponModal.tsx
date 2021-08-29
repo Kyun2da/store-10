@@ -4,7 +4,7 @@ import Button from '@/components/Shared/Button';
 import { IUserCoupon } from '@/types';
 import { SelectedSVG } from '@/assets/svgs';
 import Coupon from '@/components/Shared/Coupon';
-import Title from '../../Title';
+import Title from '@/components/Shared/Title';
 
 interface IProps {
   toggleModal: () => void;

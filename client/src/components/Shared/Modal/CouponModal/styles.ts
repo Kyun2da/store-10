@@ -19,6 +19,7 @@ export const CouponModal = styled.div`
 export const CouponWrapper = styled.div`
   position: relative;
   cursor: pointer;
+  width: 100%;
 
   &.selected {
     border: 1rem solid ${({ theme }) => theme.color.primary};
@@ -39,12 +40,18 @@ export const CouponWrapper = styled.div`
 
 export const CouponModalLayout = styled(ModalLayout)`
   > div {
+    max-height: 80%;
     max-width: 62rem;
     > div {
       > button {
         display: none;
       }
     }
+  }
+  h4 {
+    ${({ theme }) => theme.mediaScreen.mphone`
+      font-size: 2.25rem;
+    `}
   }
   @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
     > div {

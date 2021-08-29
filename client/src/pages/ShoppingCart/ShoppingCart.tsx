@@ -7,6 +7,7 @@ import { useGetCarts, useDeleteCart } from '@/hooks/queries/cart';
 import { useRecoilValue } from 'recoil';
 import { userState } from '@/recoil/user';
 import { Redirect } from '@/lib/Router';
+import Title from '@/components/Shared/Title';
 
 const ShoppingCart = () => {
   const { data } = useGetCarts();
@@ -37,22 +38,33 @@ const ShoppingCart = () => {
 
   return (
     <S.ShoppingCart className="container">
-      <ShoppingCartList
-        shoppingCartItems={shoppingCartItems}
-        checkedItems={checkedItems}
-        setShoppingCartItems={setShoppingCartItems}
-        setUnCheckedList={setUnCheckedList}
-        unCheckedList={unCheckedList}
-        removeFromCart={removeFromCart}
-        disabled={disabled}
-      />
-      <S.ShoppingCartAside>
-        <ShoppingCartSummary checkedItems={checkedItems} disabled={disabled} />
-      </S.ShoppingCartAside>
+      <Title className="title" level={3}>
+        장바구니
+      </Title>
+      <div className="cart-wrapper">
+        <ShoppingCartList
+          shoppingCartItems={shoppingCartItems}
+          checkedItems={checkedItems}
+          setShoppingCartItems={setShoppingCartItems}
+          setUnCheckedList={setUnCheckedList}
+          unCheckedList={unCheckedList}
+          removeFromCart={removeFromCart}
+          disabled={disabled}
+        />
+        <S.ShoppingCartAside>
+          <ShoppingCartSummary
+            checkedItems={checkedItems}
+            disabled={disabled}
+          />
+        </S.ShoppingCartAside>
 
-      <S.ShoppingCartFooter>
-        <ShoppingCartSummary checkedItems={checkedItems} disabled={disabled} />
-      </S.ShoppingCartFooter>
+        <S.ShoppingCartFooter>
+          <ShoppingCartSummary
+            checkedItems={checkedItems}
+            disabled={disabled}
+          />
+        </S.ShoppingCartFooter>
+      </div>
     </S.ShoppingCart>
   );
 };

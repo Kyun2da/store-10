@@ -1,32 +1,34 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { ProgressProps } from './ProgressBar';
 
-export const ProgressBarContainer = styled.svg<ProgressProps>`
-  border-radius: 7px;
-  color: #35495e;
-  overflow: initial;
-  width: ${({ width }) => (width ? width : '100%')};
-  height: ${({ height }) => (height ? height : '100%')};
+export const ChartBar = styled.div<ProgressProps>`
+  position: relative;
+  width: 100%;
 
-  .progress-container {
-    stroke: #eee;
-  }
-  .progress-content {
-    stroke: ${({ theme }) => theme.color.primary};
-  }
+  .bar {
+    position: relative;
+    width: 100%;
+    height: 2rem;
+    border-radius: 1rem;
+    background-color: #ededed;
 
-  .progress-content > line {
-    stroke-dasharray: 100%;
-    stroke-dashoffset: ${(props) => `${props.percent}%` || '0%'};
-    animation: svg-progress 2s ease-out;
-  }
-
-  @keyframes svg-progress {
-    0% {
-      stroke-dashoffset: 100%;
+    .bar-guage {
+      position: absolute;
+      bottom: 0;
+      height: 100%;
+      border-radius: 1rem;
+      background-color: ${({ theme }) => theme.color.primary};
+      animation: ${({ percent }) => moveright(percent)} 1.5s ease-in-out
+        forwards;
     }
-    100% {
-      stroke-dashoffset: ${(props) => `${props.percent}%` || '0%'};
-    }
+  }
+`;
+
+const moveright = (percent?: number) => keyframes`
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: ${percent ?? 0}%;
   }
 `;

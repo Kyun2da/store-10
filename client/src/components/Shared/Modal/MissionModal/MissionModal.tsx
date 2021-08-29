@@ -48,7 +48,10 @@ const MissionModal = ({ toggleModal }: IProps) => {
             {recentMission ? MissionTemplate[recentMission] : '없음'}
           </div>
         </div>
-        <ProgressBar percent={missionCompleteStatus} />
+        <ProgressBar
+          className="percent-guage"
+          percent={missionCompleteStatus}
+        />
       </S.MissionStatus>
       <S.MissionList className={themeString}>
         <S.Mission className={isCompleteClassName(missionList.login)}>

@@ -7,11 +7,6 @@ export const MyPageContainer = styled.div`
   flex-direction: column;
   width: 100%;
   padding-bottom: 2rem;
-  &.container {
-    @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
-      padding: 0;
-    }
-  }
   gap: 2rem;
   margin-top: 8.5rem;
 `;
@@ -46,8 +41,7 @@ export const MyPagePointBackground = styled.div`
 
 export const MyPageBody = styled.div`
   flex: 1;
-  background: ${({ theme }) => theme.color.background};
-  padding: 3.2rem;
+
   h1 {
     ${({ theme }) => theme.fontSize.xxl};
   }

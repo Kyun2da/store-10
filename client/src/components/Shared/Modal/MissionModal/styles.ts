@@ -103,6 +103,20 @@ export const MissionStatus = styled.div`
     `}
   }
 
+  .percent-guage {
+    width: 50%;
+
+    ${({ theme }) => theme.mediaScreen.tablet`
+      width: 100%;
+      margin-top: 3rem;
+    `}
+    .bar {
+      ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+        height: 1.5rem;
+      `}
+    }
+  }
+
   .recent-status {
     margin-top: 1rem;
     ${({ theme }) => theme.fontSize.m};

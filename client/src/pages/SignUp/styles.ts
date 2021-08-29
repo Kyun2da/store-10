@@ -1,43 +1,26 @@
 import styled from 'styled-components';
 
 export const SignUpContainer = styled.div`
-  width: 420px;
-  margin: 0 auto;
+  max-width: 45rem;
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin: auto;
   padding-top: 5rem;
 
-  h2 {
+  h3 {
     margin-bottom: 5rem;
   }
 
   @media (max-width: ${({ theme }) => theme.media.phone - 1}px) {
-    width: 260px;
-
-    h2 {
-      ${({ theme }) => theme.fontSize.l}
+    h3 {
+      ${({ theme }) => theme.fontSize.xl}
     }
 
     button {
-      height: 3rem;
-      ${({ theme }) => theme.fontSize.s}
       margin-bottom: 1rem;
     }
 
     input {
-      ${({ theme }) => theme.fontSize.s}
-      height: 3rem;
-    }
-
-    label {
-      ${({ theme }) => theme.fontSize.xs}
-      line-height: 0.5rem;
-
-      &.focusing {
-        transform: translate(6px, -12px) scale(0.75);
-      }
     }
   }
 `;

@@ -3,29 +3,27 @@ import ModalLayout from '../ModalLayout';
 
 export const CouponModal = styled.div`
   width: 100%;
-  max-height: 45rem;
   overflow-y: auto;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+
   &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-  &:hover {
-    &::-webkit-scrollbar {
-      width: 1.2rem;
-      height: 1.2rem;
-    }
+    display: none;
   }
 `;
 
 export const CouponWrapper = styled.div`
   position: relative;
-  border-radius: 2rem;
-  margin-top: 2rem;
-  display: inline-block;
   cursor: pointer;
+
   &.selected {
     border: 1rem solid ${({ theme }) => theme.color.primary};
+    margin: -1rem;
+    border-radius: 1rem;
     > div {
       opacity: 0.4;
     }
@@ -41,8 +39,7 @@ export const CouponWrapper = styled.div`
 
 export const CouponModalLayout = styled(ModalLayout)`
   > div {
-    max-width: 52rem;
-    padding-right: 0;
+    max-width: 62rem;
     > div {
       > button {
         display: none;

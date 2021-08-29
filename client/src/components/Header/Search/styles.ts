@@ -40,10 +40,6 @@ export const SearchWrapper = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.color['line']};
   ${({ theme }) => theme.fontSize.m}
 
-  @media (max-width: ${({ theme }) => theme.media.tablet - 1}px) {
-    ${({ theme }) => theme.fontSize.s}
-  }
-
   svg {
     width: 2em;
     height: 2em;
@@ -65,7 +61,9 @@ export const SearchBackDrop = styled.div`
 
 export const SearchInputWrap = styled.div`
   position: relative;
-  
+  display: flex;
+  width: 100%;
+
   svg {
     position: absolute;
     right: 0;

@@ -21,6 +21,7 @@ export const RegisterCoupon = styled.div`
   display: flex;
   padding: 1.2rem;
   overflow: hidden;
+  padding-bottom: 3rem;
   button {
     flex-grow: 0;
     margin-left: 1.2rem;
@@ -50,7 +51,4 @@ export const CollapsibleWrapper = styled.div`
 export const CouponWrapper = styled.div`
   width: 100%;
   margin-top: 2.4rem;
-  > div {
-    margin: 0 auto;
-  }
 `;

@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: ${({ theme }) => theme.color['text-color']};
   svg {
     padding-top: 2rem;
   }

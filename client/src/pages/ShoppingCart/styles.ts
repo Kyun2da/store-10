@@ -1,28 +1,36 @@
 import styled from 'styled-components';
 
 export const ShoppingCart = styled.div`
-  max-width: ${({ theme }) => theme.media.pc}px;
   display: flex;
-  width: 100%;
-  @media (max-width: ${({ theme }) => theme.media.btw_pc_tab}px) {
-    flex-direction: column;
+  flex-direction: column;
+
+  .title {
+    margin-bottom: 3rem;
+
+    ${({ theme }) => theme.mediaScreen.phone`
+      font-size: 2.75rem;
+    `}
   }
-  > div {
-    flex: 1;
+  .cart-wrapper {
+    display: flex;
+    gap: 2rem;
+
+    ${({ theme }) => theme.mediaScreen.btw_pc_tab`
+      flex-direction: column;  
+    `}
   }
 `;
 
 export const ShoppingCartAside = styled.aside`
   position: relative;
   flex: 0 1 38.5rem;
-  padding-right: 2rem;
   @media (max-width: ${({ theme }) => theme.media.btw_pc_tab}px) {
     display: none;
   }
 `;
 
 export const ShoppingCartFooter = styled.footer`
-  padding: 0 2rem 2rem 2rem;
+  padding: 0 0 2rem 0;
   div {
     margin-top: 0;
   }

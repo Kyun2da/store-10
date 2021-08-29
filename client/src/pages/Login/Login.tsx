@@ -16,12 +16,9 @@ import { userState } from '@/recoil/user';
 import { getCurrentUser } from '@/lib/api/user/getCurrentUser';
 import useInput from '@/hooks/useInput';
 import { baepang } from '@/assets';
+import Spinner from '@/components/Shared/Spinner';
 
 const Login = () => {
-  const GithubLogin = async () => {
-    const { githubUrl } = await githubLogin();
-    window.location.href = githubUrl;
-  };
   const [error, setError] = useState({
     email: false,
     password: false,
@@ -30,6 +27,13 @@ const Login = () => {
   const [email, , onChangeEmail] = useInput('');
   const [password, , onChangePassword] = useInput('');
   const [disabled, setDisabled] = useState(true);
+  const [isLoading, setLoading] = useState(false);
+
+  const GithubLogin = async () => {
+    setLoading(true);
+    const { githubUrl } = await githubLogin();
+    window.location.href = githubUrl;
+  };
 
   const [user, setUser] = useRecoilState(userState);
   const onSubmit = async (e: React.FormEvent) => {
@@ -90,13 +94,15 @@ const Login = () => {
   if (user) return <Redirect to="/" />;
 
   return (
-    <S.LoginForm onSubmit={onSubmit}>
-      <S.LoginTitle level={4}>회원 로그인</S.LoginTitle>
+    <S.LoginForm className="container" onSubmit={onSubmit}>
+      <S.LoginTitle level={3}>회원 로그인</S.LoginTitle>
       <Input
+        className=" validate-input"
         type="text"
-        label="Standard"
+        label="Outlined"
         name="email"
-        placeholder="아이디"
+        labelName="아이디"
+        placeholder="아이디를 입력하세요"
         value={email}
         onChange={onChangeEmail}
         error={error.email}
@@ -105,10 +111,12 @@ const Login = () => {
         autoComplete="username"
       />
       <Input
+        className=" validate-input"
         type="password"
-        label="Standard"
+        label="Outlined"
         name="password"
-        placeholder="비밀번호"
+        labelName="비밀번호"
+        placeholder="비밀번호를 입력하세요"
         value={password}
         onChange={onChangePassword}
         error={error.password}
@@ -120,8 +128,14 @@ const Login = () => {
         로그인
       </Button>
       <Button type="button" color="black" onClick={GithubLogin}>
-        <S.GithubIcon fill="white" />
-        GitHub 로그인
+        {isLoading ? (
+          <Spinner width={20} height={20} />
+        ) : (
+          <>
+            <S.GithubIcon fill="white" />
+            GitHub 로그인
+          </>
+        )}
       </Button>
       <Button type="button" color="white" onClick={testLogin}>
         <S.LogoImg src={baepang} />

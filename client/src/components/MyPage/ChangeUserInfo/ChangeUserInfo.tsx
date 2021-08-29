@@ -99,22 +99,24 @@ const ChangeUserInfo = () => {
             }}
           >
             <S.ContainerTitle>이름 변경</S.ContainerTitle>
-            <Input
-              type="text"
-              label="Outlined"
-              name="nickname"
-              labelName="이름"
-              maxLength={8}
-              value={nickname}
-              onChange={onChangeNickName}
-            />
-            <Button
-              type="button"
-              color="primary"
-              onClick={onClickChangeNickName}
-            >
-              이름 변경
-            </Button>
+            <div className="input-wrapper">
+              <Input
+                type="text"
+                label="Outlined"
+                name="nickname"
+                labelName="이름"
+                maxLength={8}
+                value={nickname}
+                onChange={onChangeNickName}
+              />
+              <Button
+                type="button"
+                color="primary"
+                onClick={onClickChangeNickName}
+              >
+                이름 변경
+              </Button>
+            </div>
           </S.NickNameContainer>
           {!user?.is_oauth && (
             <S.NewPasswordContainer

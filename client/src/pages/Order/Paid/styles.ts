@@ -33,7 +33,7 @@ export const HiddenMessage = styled.span`
 `;
 
 export const ButtonWrapper = styled.div`
-  width: 36rem;
+  width: 30rem;
   button {
     margin: 0 auto;
   }

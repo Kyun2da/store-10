@@ -4,7 +4,6 @@ export const AuthContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 10rem;
   text-align: center;
   padding: 8rem;
   box-shadow: ${({ theme }) => theme.boxShadow};
@@ -14,10 +13,23 @@ export const AuthContainer = styled.div`
   .input-container {
     margin-bottom: 2rem;
   }
+
+  ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+    padding: 5rem;  
+  `};
+
+  ${({ theme }) => theme.mediaScreen.phone`
+    padding: 1.5rem;  
+  `}
+
+  button {
+    min-width: 8rem;
+  }
 `;
 
 export const Information = styled.p`
   font-size: 2rem;
+  color: ${({ theme }) => theme.color['text-color']};
 `;
 
 export const PasswordContainer = styled.form`
@@ -38,9 +50,27 @@ export const NickNameContainer = styled.form`
   border-radius: 0.8rem;
   margin-bottom: 4rem;
 
-  .input-container {
-    margin-right: 2rem;
+  button {
+    min-width: 13rem;
   }
+
+  .input-wrapper {
+    margin-top: 4rem;
+    display: flex;
+    gap: 2rem;
+
+    ${({ theme }) => theme.mediaScreen.mphone`
+      margin-top: 5.5rem;
+    `}
+  }
+
+  ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+    padding: 5rem;  
+  `};
+
+  ${({ theme }) => theme.mediaScreen.phone`
+    padding: 1.5rem;  
+  `}
 `;
 
 export const NewPasswordContainer = styled.form`
@@ -56,6 +86,14 @@ export const NewPasswordContainer = styled.form`
   .input-container {
     margin-top: 4rem;
   }
+
+  ${({ theme }) => theme.mediaScreen.btw_tab_mob`
+    padding: 5rem;  
+  `};
+
+  ${({ theme }) => theme.mediaScreen.phone`
+    padding: 1.5rem;  
+  `}
 `;
 
 export const ContainerTitle = styled.p`
@@ -64,4 +102,5 @@ export const ContainerTitle = styled.p`
   left: 0;
   font-size: 2rem;
   margin: 2rem;
+  color: ${({ theme }) => theme.color['text-color']};
 `;

@@ -2,14 +2,12 @@ import Checkbox from '@/components/Shared/Checkbox';
 import styled from 'styled-components';
 
 export const ApprovalContainer = styled.div`
-  max-width: ${({ theme }) => theme.media.pc}px;
   display: flex;
-  width: 60rem;
+  max-width: 60rem;
   flex-direction: column;
   text-align: center;
-  margin: 4rem auto;
 
-  h2 {
+  h3 {
     margin-bottom: 2rem;
   }
 
@@ -22,25 +20,22 @@ export const ApprovalContainer = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.media.btw_tab_mob - 1}px) {
-    width: 260px;
-
-    h2 {
-      ${({ theme }) => theme.fontSize.l}
+    h3 {
+      ${({ theme }) => theme.fontSize.xl}
     }
 
     button {
-      height: 3rem;
-      ${({ theme }) => theme.fontSize.s}
+      ${({ theme }) => theme.fontSize.m}
       margin-bottom: 1rem;
     }
 
     input {
-      ${({ theme }) => theme.fontSize.s}
+      ${({ theme }) => theme.fontSize.m}
       height: 3rem;
     }
 
     label {
-      ${({ theme }) => theme.fontSize.xs}
+      ${({ theme }) => theme.fontSize.s}
     }
 
     span {
@@ -60,7 +55,7 @@ export const ApprovalCheckBox = styled(Checkbox)`
 `;
 
 export const ApprovalBox = styled.div`
-  color: black;
+  color: ${({ theme }) => theme.color['text-color']};
   text-align: initial;
   margin-bottom: 2rem;
   padding: 1rem 2rem;

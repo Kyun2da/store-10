@@ -7,11 +7,10 @@ export const ShoppingCartHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid ${({ theme }) => theme.color.body};
-  padding: 0 2rem;
 `;
 
 export const ShoppingCartList = styled.ul`
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 0;
 `;
 
 export const CartThung = styled(Thung)`

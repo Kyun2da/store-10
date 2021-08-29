@@ -122,8 +122,8 @@ const SignUp = () => {
   if (user) return <Redirect to="/" />;
 
   return (
-    <S.SignUpContainer>
-      <Title level={2}>회원가입</Title>
+    <S.SignUpContainer className="container">
+      <Title level={3}>회원가입</Title>
       <S.FormContainer onSubmit={formSubmit}>
         <S.EmailContainer>
           <Input

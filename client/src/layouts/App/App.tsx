@@ -55,10 +55,7 @@ const App = () => {
   useEffect(() => {
     if (user) {
       setLoading(false);
-      if (!missionList.login && !user.is_oauth) {
-        setMissionList('login', true);
-        return notify('dark', '일반 회원으로 로그인 미션 성공!');
-      }
+      setMissionList('login', true);
     }
   }, [user, missionList.login, setMissionList]);
 

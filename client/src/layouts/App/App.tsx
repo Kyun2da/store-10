@@ -55,7 +55,9 @@ const App = () => {
   useEffect(() => {
     if (user) {
       setLoading(false);
-      setMissionList('login', true);
+      if(!user.is_oauth && user.id !== 36) {
+        setMissionList('login', true);
+      }
     }
   }, [user, missionList.login, setMissionList]);
 

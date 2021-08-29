@@ -233,6 +233,7 @@ export interface IUserCoupon {
 export interface IMissionList {
   login?: boolean;
   bookmark?: boolean;
+  pay?: boolean;
 }
 
 export type MissionListKeys = keyof IMissionList;

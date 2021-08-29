@@ -133,4 +133,5 @@ export const DELIVERY_DISCOUNT_CONDITION = 30000;
 export const MISSIONS = {
   login: '일반 회원으로 로그인 하기',
   bookmark: '상품 찜하기',
+  pay: '주문 완료하기',
 };

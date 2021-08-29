@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as S from './styles';
 import { useParams, useHistory, Redirect } from '@/lib/Router';
 import { useGetOrder } from '@/hooks/queries/order';
 import Button from '@/components/Shared/Button';
+import useMission from '@/hooks/useMission';
 
 const Paid = () => {
   const { id } = useParams().params;
   const { historyPush } = useHistory();
   const { data, isError } = useGetOrder(+id);
-
+  const [_, setMission] = useMission();
   if (isError || (data && data.status !== 'paid')) {
     return <Redirect to="/notfound" />;
   }
+
+  useEffect(() => {
+    if (data?.status === 'paid') {
+      setMission('pay', true);
+    }
+  }, [data]);
   return (
     <S.OrderPaid className="container">
       <img

@@ -27,7 +27,7 @@ const Coupon = ({ name, amount, isValid }: ICoupon) => {
           <Logo width={100} />
           <S.Discount isValid={isValid}>
             {amount}
-            <span> %</span>
+            <span>%</span>
           </S.Discount>
         </S.CouponDetail>
       </S.CouponBody>

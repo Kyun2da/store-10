@@ -55,7 +55,7 @@ export const ApprovalCheckBox = styled(Checkbox)`
 `;
 
 export const ApprovalBox = styled.div`
-  color: black;
+  color: ${({ theme }) => theme.color['text-color']};
   text-align: initial;
   margin-bottom: 2rem;
   padding: 1rem 2rem;

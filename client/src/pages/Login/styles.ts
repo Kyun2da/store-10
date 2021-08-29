@@ -21,6 +21,10 @@ export const LoginForm = styled.form`
 
   button,
   .input-container {
+    margin-top: 2rem;
+  }
+
+  .validate-input {
     margin-bottom: 2rem;
   }
 

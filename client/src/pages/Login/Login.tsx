@@ -93,10 +93,12 @@ const Login = () => {
     <S.LoginForm onSubmit={onSubmit}>
       <S.LoginTitle level={4}>회원 로그인</S.LoginTitle>
       <Input
+        className=" validate-input"
         type="text"
-        label="Standard"
+        label="Outlined"
         name="email"
-        placeholder="아이디"
+        labelName="아이디"
+        placeholder="아이디를 입력하세요"
         value={email}
         onChange={onChangeEmail}
         error={error.email}
@@ -105,10 +107,12 @@ const Login = () => {
         autoComplete="username"
       />
       <Input
+        className=" validate-input"
         type="password"
-        label="Standard"
+        label="Outlined"
         name="password"
-        placeholder="비밀번호"
+        labelName="비밀번호"
+        placeholder="비밀번호를 입력하세요"
         value={password}
         onChange={onChangePassword}
         error={error.password}

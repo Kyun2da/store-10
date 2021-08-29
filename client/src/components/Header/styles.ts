@@ -29,7 +29,7 @@ export const HeaderWrapper = styled.header`
 
 export const Header = styled.div`
   display: grid;
-  grid-template-columns: 105px 1fr 105px;
+  grid-template-columns: 20rem 1fr 14rem;
   background: ${({ theme }) => theme.color['background']};
   align-items: center;
   height: ${HEADER_HEIGHT}rem;
@@ -37,6 +37,10 @@ export const Header = styled.div`
   max-width: 1050px;
   padding: 1rem 0;
   margin: 0 auto;
+
+  ${({ theme }) => theme.mediaScreen.mphone`
+    grid-template-columns: 1fr 1fr 1fr;
+  `}
 `;
 
 export const Menu = styled.div`
@@ -72,6 +76,7 @@ export const Logo = styled.div`
 
 export const StateUl = styled.div`
   display: flex;
+  justify-content: flex-end;
   margin: 0;
   padding: 0;
   align-items: center;
@@ -80,6 +85,15 @@ export const StateUl = styled.div`
     text-decoration: none;
     svg {
       margin: 0 0.5rem;
+    }
+  }
+
+  .search-icon {
+    margin: 0 0.5rem;
+    display: none;
+
+    @media (max-width: 549px) {
+      display: block;
     }
   }
 `;
@@ -91,8 +105,8 @@ export const SearchWrapper = styled.div`
   justify-content: flex-end;
   cursor: pointer;
   position: relative;
-  max-width: 400px;
-  width: 45%;
+  max-width: 40rem;
+  width: 85%;
   min-width: 50px;
 
   svg {
@@ -100,6 +114,10 @@ export const SearchWrapper = styled.div`
   }
   @media (max-width: 549px) {
     width: 100%;
+
+    svg {
+      display: none;
+    }
   }
 `;
 

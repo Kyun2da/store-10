@@ -9,10 +9,15 @@ import { useRecoilState } from 'recoil';
 import { userState } from '@/recoil/user';
 import Logo from '@/components/Shared/Logo';
 
-export const Links = () => {
+interface ILinks {
+  children?: React.ReactElement;
+}
+
+export const Links = ({ children }: ILinks) => {
   const [user] = useRecoilState(userState);
   return (
     <>
+      {children}
       <Link to={user ? '/mypage' : '/login'}>
         <UserSVG />
       </Link>
@@ -42,7 +47,7 @@ const Header = () => {
     <>
       <Sidebar isOpen={sideBarIsOpen} setIsOpen={setSideBarIsOpen} />
       <S.HeaderWrapper>
-        <S.Header>
+        <S.Header className="container">
           <S.Menu>
             <S.MenuButton onClick={() => setSideBarIsOpen(!sideBarIsOpen)}>
               <MenuSVG />
@@ -58,7 +63,9 @@ const Header = () => {
             <SearchSVG />
           </S.SearchWrapper>
           <S.StateUl>
-            <Links />
+            <Links>
+              <SearchSVG className="search-icon" onClick={searchWrapToggle} />
+            </Links>
           </S.StateUl>
         </S.Header>
       </S.HeaderWrapper>

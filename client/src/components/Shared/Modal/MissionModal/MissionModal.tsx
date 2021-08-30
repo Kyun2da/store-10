@@ -95,7 +95,7 @@ const MissionModal = ({ toggleModal }: IProps) => {
           {MissionTemplate.orderHistoryFilter}
         </S.Mission>
         <S.Mission className={isCompleteClassName(missionList.search)}>
-          <SearchSVG className="fill" />
+          <SearchSVG />
           {MissionTemplate.search}
         </S.Mission>
         <S.Mission className={isCompleteClassName(missionList.category)}>

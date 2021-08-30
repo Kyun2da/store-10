@@ -1,4 +1,12 @@
-import { HeartSVG, UserSVG } from '@/assets/svgs';
+import {
+  HeartSVG,
+  UserSVG,
+  CartSVG,
+  MoneySVG,
+  DeliverySVG,
+  LocationSVG,
+  FilterSVG,
+} from '@/assets/svgs';
 import useMission from '@/hooks/useMission';
 import { MissionListKeys } from '@/types';
 import React from 'react';
@@ -61,6 +69,28 @@ const MissionModal = ({ toggleModal }: IProps) => {
         <S.Mission className={isCompleteClassName(missionList.bookmark)}>
           <HeartSVG />
           {MissionTemplate.bookmark}
+        </S.Mission>
+        <S.Mission className={isCompleteClassName(missionList.addCart)}>
+          <CartSVG className="fill" />
+          {MissionTemplate.addCart}
+        </S.Mission>
+        <S.Mission className={isCompleteClassName(missionList.pay)}>
+          <MoneySVG className="fill" />
+          {MissionTemplate.pay}
+        </S.Mission>
+        <S.Mission className={isCompleteClassName(missionList.checkDelivery)}>
+          <DeliverySVG className="fill" />
+          {MissionTemplate.checkDelivery}
+        </S.Mission>
+        <S.Mission className={isCompleteClassName(missionList.changeAddress)}>
+          <LocationSVG className="fill" />
+          {MissionTemplate.changeAddress}
+        </S.Mission>
+        <S.Mission
+          className={isCompleteClassName(missionList.orderHistoryFilter)}
+        >
+          <FilterSVG className="fill" />
+          {MissionTemplate.orderHistoryFilter}
         </S.Mission>
       </S.MissionList>
     </S.MissionLayout>

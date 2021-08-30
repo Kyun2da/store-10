@@ -36,12 +36,18 @@ export const MissionList = styled.ul`
     color: #dfdfdf;
     svg {
       stroke: #dfdfdf;
+      &.fill {
+        fill: #dfdfdf;
+      }
     }
   }
   &.dark-mode {
     color: #7b7b7b;
     svg {
       stroke: #7b7b7b;
+      &.fill {
+        fill: #7b7b7b;
+      }
     }
   }
 
@@ -77,9 +83,11 @@ export const Mission = styled.li`
 
   &.complete {
     color: ${({ theme }) => theme.color.primary};
-
     svg {
       stroke: ${({ theme }) => theme.color.primary};
+      &.fill {
+        fill: ${({ theme }) => theme.color.primary};
+      }
     }
   }
 `;

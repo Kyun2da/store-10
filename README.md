@@ -1,6 +1,6 @@
 # Team : 슑과잌붸흐벤
 
-![image 1 (1)](/Users/admin/Downloads/image 1 (1).png)
+![image 1 (1)](https://user-images.githubusercontent.com/50328132/131279807-ca7067ba-1af5-4c44-ae1b-30c3a38595ba.png)
 
 지금 만나보세요!
 

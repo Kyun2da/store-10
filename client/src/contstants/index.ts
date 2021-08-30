@@ -138,4 +138,6 @@ export const MISSIONS = {
   checkDelivery: '주문 완료된 상품 배송조회',
   changeAddress: '배송지 수정하기',
   orderHistoryFilter: '주문내역 필터 사용하기',
+  search: '검색 하기',
+  category: '카테고리 이동하기',
 };
